@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://biochemtools.com/sitemap.xml
