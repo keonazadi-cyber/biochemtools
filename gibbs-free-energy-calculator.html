@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gibbs Free Energy Calculator: Is the Reaction Spontaneous? (Shows Every Step) — Free</title>
+<meta name="description" content="Free Gibbs free energy calculator that shows every step. Compute ΔG from ΔH, ΔS, and temperature, or from ΔG°′ and the reaction quotient Q, and find out whether a reaction is spontaneous. Includes the temperature where spontaneity flips. For biochemistry and the MCAT.">
+<meta name="keywords" content="gibbs free energy calculator, is reaction spontaneous, delta G calculator, delta H delta S, reaction quotient Q, spontaneity calculator">
+<link rel="canonical" href="https://biochemtools.com/gibbs-free-energy-calculator.html">
+<meta property="og:title" content="Gibbs Free Energy Calculator — Spontaneous or Not, Step by Step">
+<meta property="og:description" content="Compute ΔG from ΔH/ΔS/T or from ΔG°′ and Q, with the full worked steps and a spontaneity verdict. Free.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate Gibbs free energy and determine spontaneity","step":[
+{"@type":"HowToStep","name":"Use the equation","text":"ΔG = ΔH − TΔS, with temperature T in kelvin and ΔS converted to kJ/mol·K."},
+{"@type":"HowToStep","name":"Interpret the sign","text":"ΔG < 0 means spontaneous (exergonic); ΔG > 0 means non-spontaneous (endergonic); ΔG = 0 means equilibrium."},
+{"@type":"HowToStep","name":"Find the crossover","text":"The temperature where spontaneity flips is T = ΔH / ΔS."}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--spon:#5dcaa5;--non:#e24b4a;--accent:#378add}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}
+ h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}
+ header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ .modes{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+ .modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.88rem}
+ .modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ input[type=number]{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .verdict{text-align:center;padding:1.25rem;border-radius:12px;margin:1rem 0}
+ .verdict .dg{font-size:2.2rem;font-weight:600}
+ .verdict .lab{font-size:1.1rem;margin-top:.25rem}
+ .spon{background:rgba(93,202,165,.12);color:var(--spon)}
+ .non{background:rgba(226,75,74,.12);color:var(--non)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.92rem;line-height:1.9;white-space:pre-wrap}
+ .cross{background:rgba(55,138,221,.1);border-left:3px solid var(--accent);padding:.7rem 1rem;border-radius:0 8px 8px 0;margin-top:1rem;font-size:.9rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}
+ .note{color:var(--muted);font-size:.85rem}
+ a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <h1>Gibbs Free Energy Calculator</h1>
+ <p>Find ΔG and whether a reaction is spontaneous — from enthalpy and entropy, or from standard free energy and the reaction quotient. Every step is shown.</p>
+</header>
+<main>
+ <div class="card">
+  <div class="modes" id="modes">
+   <button data-m="hs" class="on">From ΔH, ΔS, T</button>
+   <button data-m="q">From ΔG°′ and Q</button>
+  </div>
+  <div id="hsFields">
+   <div class="fields">
+    <div><label>ΔH — enthalpy (kJ/mol)</label><input id="dh" type="number" step="any" value="-40"></div>
+    <div><label>ΔS — entropy (J/mol·K)</label><input id="ds" type="number" step="any" value="-100"></div>
+    <div><label>Temperature</label><input id="temp" type="number" step="any" value="25"></div>
+    <div><label>Temp units</label>
+     <select id="tunit" style="width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px">
+      <option value="C">°C</option><option value="K">K</option></select></div>
+   </div>
+  </div>
+  <div id="qFields" style="display:none">
+   <div class="fields">
+    <div><label>ΔG°′ — standard free energy (kJ/mol)</label><input id="dg0" type="number" step="any" value="-30.5"></div>
+    <div><label>Q — reaction quotient</label><input id="q" type="number" step="any" value="0.01"></div>
+    <div><label>Temperature</label><input id="qtemp" type="number" step="any" value="37"></div>
+    <div><label>Temp units</label>
+     <select id="qtunit" style="width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px">
+      <option value="C">°C</option><option value="K">K</option></select></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="verdict" id="verdict"><div class="dg" id="dgval">—</div><div class="lab" id="dglab"></div></div>
+  <div class="work" id="work"></div>
+  <div id="cross"></div>
+ </div>
+
+ <h2>How to tell if a reaction is spontaneous</h2>
+ <p class="note">Spontaneity is set by the sign of ΔG, not by ΔH or ΔS alone. Use ΔG = ΔH − TΔS (with T in kelvin and ΔS converted from J to kJ). If ΔG is negative the reaction is spontaneous (exergonic) and releases free energy; if positive it is non-spontaneous (endergonic) and needs an input of energy; if zero the system is at equilibrium. Because temperature multiplies the entropy term, some reactions switch spontaneity at a crossover temperature of T = ΔH / ΔS. In biochemistry, the actual ΔG also depends on concentrations through ΔG = ΔG°′ + RT ln Q, which is why a reaction with a positive ΔG°′ can still run forward when products are kept low.</p>
+ <p class="note">Constants: R = 8.314 J/mol·K = 0.008314 kJ/mol·K. 0 °C = 273.15 K. Standard biochemical conditions use ΔG°′ (pH 7).</p>
+ <p class="note">Related tools: <a href="/enzyme-kinetics-simulator.html">Enzyme kinetics simulator</a> · <a href="/henderson-hasselbalch-buffer-calculator.html">Buffer calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const R=0.008314; // kJ/mol·K
+let mode="hs";
+const $=id=>document.getElementById(id);
+const toK=(t,u)=>u==="K"?t:t+273.15;
+function show(dg,detail,cross){
+ const v=$("verdict");
+ const spon=dg<0;
+ v.className="verdict "+(Math.abs(dg)<1e-9?"":(spon?"spon":"non"));
+ $("dgval").textContent=(dg>=0?"+":"")+dg.toFixed(2)+" kJ/mol";
+ $("dglab").textContent=Math.abs(dg)<1e-9?"At equilibrium (ΔG = 0)":(spon?"Spontaneous — exergonic (ΔG < 0)":"Non-spontaneous — endergonic (ΔG > 0)");
+ $("work").textContent=detail;
+ $("cross").innerHTML=cross||"";
+}
+function calc(){
+ if(mode==="hs"){
+  const dh=+$("dh").value, ds=+$("ds").value, T=toK(+$("temp").value,$("tunit").value);
+  const dsk=ds/1000;
+  const dg=dh-T*dsk;
+  let w=`ΔG = ΔH − TΔS\n`;
+  w+=`T = ${(+$("temp").value)}°${$("tunit").value==="C"?"C = "+T.toFixed(2)+" K":"K"}\n`;
+  w+=`ΔS = ${ds} J/mol·K = ${dsk} kJ/mol·K\n`;
+  w+=`ΔG = (${dh}) − (${T.toFixed(2)})(${dsk})\n`;
+  w+=`ΔG = ${dh} − (${(T*dsk).toFixed(2)}) = ${dg.toFixed(2)} kJ/mol`;
+  let cross="";
+  if(ds!==0){const Tc=dh/dsk; if(Tc>0){const Tcc=Tc-273.15;
+   cross=`<div class="cross">Crossover temperature T = ΔH/ΔS = ${dh}/${dsk} = <b>${Tc.toFixed(1)} K (${Tcc.toFixed(1)} °C)</b>. ${dh<0&&ds<0?"Below this temperature the reaction is spontaneous; above it, non-spontaneous.":dh>0&&ds>0?"Above this temperature the reaction becomes spontaneous; below it, non-spontaneous.":"Sign of ΔH and ΔS means spontaneity does not flip with temperature in the physical range."}</div>`;}}
+  show(dg,w,cross);
+ } else {
+  const dg0=+$("dg0").value, q=+$("q").value, T=toK(+$("qtemp").value,$("qtunit").value);
+  if(q<=0){show(NaN,"Q must be greater than 0.","");$("dgval").textContent="—";$("dglab").textContent="Enter Q > 0";return;}
+  const rtlnq=R*T*Math.log(q);
+  const dg=dg0+rtlnq;
+  let w=`ΔG = ΔG°′ + RT ln Q\n`;
+  w+=`R = 0.008314 kJ/mol·K,  T = ${T.toFixed(2)} K\n`;
+  w+=`RT ln Q = (0.008314)(${T.toFixed(2)}) ln(${q})\n`;
+  w+=`        = ${(R*T).toFixed(4)} × (${Math.log(q).toFixed(4)}) = ${rtlnq.toFixed(2)} kJ/mol\n`;
+  w+=`ΔG = ${dg0} + (${rtlnq.toFixed(2)}) = ${dg.toFixed(2)} kJ/mol`;
+  show(dg,w,"");
+ }
+}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ mode=b.dataset.m;$("hsFields").style.display=mode==="hs"?"block":"none";$("qFields").style.display=mode==="q"?"block":"none";calc();});
+["dh","ds","temp","tunit","dg0","q","qtemp","qtunit"].forEach(id=>{const el=$(id);el.addEventListener("input",calc);el.addEventListener("change",calc);});
+calc();
+</script>
+</body>
+</html>

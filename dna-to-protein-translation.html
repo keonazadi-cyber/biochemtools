@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA to Protein Translation Tool — Transcription + Translation, Step by Step (Free)</title>
+<meta name="description" content="Free DNA to protein translation tool that shows every step: transcribe DNA to mRNA, split into codons, and translate to the amino acid sequence with start and stop codons highlighted. Includes the full codon table. For biochemistry, genetics, and the MCAT.">
+<meta name="keywords" content="dna to protein, translate dna to protein, codon table, mrna to amino acid, transcription translation tool, reading frame translator">
+<link rel="canonical" href="https://biochemtools.com/dna-to-protein-translation.html">
+<meta property="og:title" content="DNA to Protein Translation Tool — Step by Step">
+<meta property="og:description" content="Transcribe and translate any DNA sequence with codons and start/stop highlighted, plus the full codon table. Free.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to translate a DNA sequence into a protein","step":[
+{"@type":"HowToStep","name":"Transcribe","text":"Convert the DNA coding strand to mRNA by replacing every T with U."},
+{"@type":"HowToStep","name":"Split into codons","text":"Read the mRNA in groups of three bases (codons), starting from the chosen reading frame."},
+{"@type":"HowToStep","name":"Translate","text":"Use the codon table to convert each codon to an amino acid; AUG starts and UAA, UAG, or UGA stop translation."}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--dna:#378add;--rna:#5dcaa5;--start:#5dcaa5;--stop:#e24b4a;--accent:#7f77dd}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}
+ h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}
+ header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:760px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;letter-spacing:.1em;padding:.75rem;border-radius:10px;font-family:monospace;resize:vertical;min-height:60px}
+ .ex{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+ .ex button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.35rem .8rem;border-radius:99px;cursor:pointer;font-size:.82rem;font-family:monospace}
+ .frames{display:flex;gap:.5rem;margin:.5rem 0}
+ .frames button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.4rem .9rem;border-radius:99px;cursor:pointer;font-size:.85rem}
+ .frames button.on{border-color:var(--accent);color:var(--accent)}
+ .seqrow{margin:1rem 0}
+ .seqlbl{font-size:.8rem;color:var(--muted);margin-bottom:.2rem}
+ .seq{font-family:monospace;font-size:1.05rem;letter-spacing:.12em;word-break:break-all;line-height:2}
+ .seq.dna{color:var(--dna)}.seq.rna{color:var(--rna)}
+ .codon{display:inline-block;padding:0 .15em;border-radius:4px}
+ .codon.start{background:rgba(93,202,165,.25);color:var(--start)}
+ .codon.stop{background:rgba(226,75,74,.25);color:var(--stop)}
+ .prot{font-family:monospace;font-size:1.1rem;letter-spacing:.05em;word-break:break-all;line-height:2.2}
+ .aa{display:inline-block;padding:.05em .35em;margin:.1em;border-radius:5px;background:var(--bg);border:1px solid var(--line)}
+ .aa small{color:var(--muted);font-size:.7em}
+ .metric{display:inline-block;background:var(--bg);border-radius:8px;padding:.5rem 1rem;margin-right:.5rem;font-size:.9rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}
+ .note{color:var(--muted);font-size:.85rem}
+ a{color:var(--dna)}
+ table{width:100%;border-collapse:collapse;font-size:.82rem;font-family:monospace;margin-top:.5rem}
+ td{padding:.25rem .4rem;border-bottom:1px solid var(--line)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <h1>DNA → Protein Translation Tool</h1>
+ <p>Paste a DNA coding strand and watch the central dogma happen step by step: transcription to mRNA, splitting into codons, and translation to protein — with the start and stop codons highlighted.</p>
+</header>
+<main>
+ <div class="card">
+  <label for="seq">DNA coding strand (5′ → 3′)</label>
+  <textarea id="seq" spellcheck="false">ATGGCCTTACATTGA</textarea>
+  <div class="ex">
+   <button data-s="ATGGCCTTACATTGA">ATG·GCC·TTA·CAT·TGA</button>
+   <button data-s="ATGTTTCCCAAAGGGTAA">start→stop example</button>
+   <button data-s="TTACGGATGAAACGTTAG">find the ORF</button>
+  </div>
+  <label style="margin-top:1rem">Reading frame</label>
+  <div class="frames" id="frames">
+   <button data-f="0" class="on">Frame 1</button>
+   <button data-f="1">Frame 2</button>
+   <button data-f="2">Frame 3</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="seqrow"><div class="seqlbl">1. DNA coding strand (your input)</div><div class="seq dna" id="dna"></div></div>
+  <div class="seqrow"><div class="seqlbl">2. mRNA (transcription: every T → U)</div><div class="seq rna" id="mrna"></div></div>
+  <div class="seqrow"><div class="seqlbl">3. Codons (read in threes; <span style="color:var(--start)">start</span> / <span style="color:var(--stop)">stop</span> highlighted)</div><div class="seq rna" id="codons"></div></div>
+  <div class="seqrow"><div class="seqlbl">4. Protein (translation)</div><div class="prot" id="protein"></div></div>
+  <div style="margin-top:1rem">
+   <span class="metric">Length: <b id="mlen">0</b> aa</span>
+   <span class="metric">Start: <b id="mstart">—</b></span>
+   <span class="metric">Stop: <b id="mstop">—</b></span>
+  </div>
+ </div>
+
+ <h2>How to translate DNA to protein by hand</h2>
+ <p class="note">First transcribe: the mRNA has the same sequence as the DNA coding strand, except every thymine (T) becomes uracil (U). Then read the mRNA in non-overlapping groups of three bases called codons. Translation begins at the first start codon (AUG, which codes for methionine) and continues until a stop codon (UAA, UAG, or UGA), which codes for no amino acid and ends the protein. Each codon maps to one amino acid via the genetic code below. The reading frame matters — shifting the start by one base changes every codon downstream.</p>
+ <p class="note">Note: this tool reads the coding (sense) strand in the 5′→3′ direction and uses the standard genetic code. It translates the full sequence in the chosen frame; in real cells, ribosomes begin at the first AUG.</p>
+ <h2>The genetic code (mRNA codons)</h2>
+ <table id="codetable"></table>
+ <p class="note" style="margin-top:1.5rem">Related tools: <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="/quiz.html">Amino acid quiz</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const CODE={
+ UUU:["Phe","F"],UUC:["Phe","F"],UUA:["Leu","L"],UUG:["Leu","L"],
+ CUU:["Leu","L"],CUC:["Leu","L"],CUA:["Leu","L"],CUG:["Leu","L"],
+ AUU:["Ile","I"],AUC:["Ile","I"],AUA:["Ile","I"],AUG:["Met","M"],
+ GUU:["Val","V"],GUC:["Val","V"],GUA:["Val","V"],GUG:["Val","V"],
+ UCU:["Ser","S"],UCC:["Ser","S"],UCA:["Ser","S"],UCG:["Ser","S"],
+ CCU:["Pro","P"],CCC:["Pro","P"],CCA:["Pro","P"],CCG:["Pro","P"],
+ ACU:["Thr","T"],ACC:["Thr","T"],ACA:["Thr","T"],ACG:["Thr","T"],
+ GCU:["Ala","A"],GCC:["Ala","A"],GCA:["Ala","A"],GCG:["Ala","A"],
+ UAU:["Tyr","Y"],UAC:["Tyr","Y"],UAA:["Stop","*"],UAG:["Stop","*"],
+ CAU:["His","H"],CAC:["His","H"],CAA:["Gln","Q"],CAG:["Gln","Q"],
+ AAU:["Asn","N"],AAC:["Asn","N"],AAA:["Lys","K"],AAG:["Lys","K"],
+ GAU:["Asp","D"],GAC:["Asp","D"],GAA:["Glu","E"],GAG:["Glu","E"],
+ UGU:["Cys","C"],UGC:["Cys","C"],UGA:["Stop","*"],UGG:["Trp","W"],
+ CGU:["Arg","R"],CGC:["Arg","R"],CGA:["Arg","R"],CGG:["Arg","R"],
+ AGU:["Ser","S"],AGC:["Ser","S"],AGA:["Arg","R"],AGG:["Arg","R"],
+ GGU:["Gly","G"],GGC:["Gly","G"],GGA:["Gly","G"],GGG:["Gly","G"]};
+let frame=0;
+const $=id=>document.getElementById(id);
+function clean(s){return s.toUpperCase().replace(/[^ACGT]/g,"");}
+function render(){
+ const dna=clean($("seq").value);
+ const mrna=dna.replace(/T/g,"U");
+ $("dna").textContent=dna||"—";
+ $("mrna").textContent=mrna||"—";
+ const seq=mrna.slice(frame);
+ let codonsHTML="",protHTML="",len=0,startIdx="—",stopIdx="—",started=false,stopped=false;
+ for(let i=0;i+3<=seq.length;i+=3){
+  const c=seq.substr(i,3), info=CODE[c];
+  let cls="";
+  if(c==="AUG"){cls="start";if(startIdx==="—")startIdx="codon "+(i/3+1);}
+  if(info&&info[0]==="Stop"){cls="stop";if(stopIdx==="—"&&!stopped){stopIdx="codon "+(i/3+1);stopped=true;}}
+  codonsHTML+=`<span class="codon ${cls}">${c}</span> `;
+  if(info){
+   if(info[0]==="Stop"){protHTML+=`<span class="aa" style="border-color:var(--stop);color:var(--stop)">Stop</span>`;}
+   else {protHTML+=`<span class="aa">${info[0]} <small>${info[1]}</small></span>`;len++;}
+  }
+ }
+ $("codons").innerHTML=codonsHTML||"—";
+ $("protein").innerHTML=protHTML||"—";
+ $("mlen").textContent=len;
+ $("mstart").textContent=startIdx;
+ $("mstop").textContent=stopIdx;
+}
+function buildTable(){
+ const bases=["U","C","A","G"];let rows="";
+ for(const a of bases){let cells="";
+  for(const c of bases){let inner="";
+   for(const b of bases){const cod=a+c+b;const info=CODE[cod];inner+=`${cod}=${info[1]==="*"?"Stop":info[0]}  `;}
+   cells+=`<td>${inner}</td>`;}
+  rows+=`<tr>${cells}</tr>`;}
+ $("codetable").innerHTML=rows;
+}
+document.querySelectorAll("#frames button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#frames button").forEach(x=>x.classList.remove("on"));b.classList.add("on");frame=+b.dataset.f;render();});
+document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{$("seq").value=b.dataset.s;render();});
+$("seq").addEventListener("input",render);
+buildTable();render();
+</script>
+</body>
+</html>
