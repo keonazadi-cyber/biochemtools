@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henderson-Hasselbalch Buffer Calculator (Shows Every Step) — Free Biochem Tool</title>
+<meta name="description" content="Free Henderson-Hasselbalch buffer calculator that shows every step. Enter pKa, target pH, concentration, and volume to get the exact amount of acid and conjugate base to mix, plus the full worked calculation. For biochemistry and chemistry.">
+<meta name="keywords" content="henderson hasselbalch calculator, buffer calculator, how to make a buffer at a given pH, conjugate base acid ratio, buffer preparation calculator, pKa pH ratio">
+<link rel="canonical" href="https://example.com/henderson-hasselbalch-buffer-calculator">
+<meta property="og:title" content="Henderson-Hasselbalch Buffer Calculator — Shows Every Step">
+<meta property="og:description" content="Get the exact acid/conjugate-base amounts for any buffer, with the full worked Henderson-Hasselbalch calculation. Free.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to prepare a buffer at a target pH using Henderson-Hasselbalch","step":[
+{"@type":"HowToStep","name":"Find the ratio","text":"ratio [A-]/[HA] = 10^(pH - pKa)."},
+{"@type":"HowToStep","name":"Split the total concentration","text":"fraction A- = ratio/(1+ratio); fraction HA = 1/(1+ratio)."},
+{"@type":"HowToStep","name":"Scale to your volume","text":"moles = concentration x volume for each form; multiply by molar mass for grams."}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--a:#5dcaa5;--ha:#e0a93b;--accent:#378add;--warn:#e24b4a}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}
+ h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}
+ header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ input[type=number]{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .buffers{display:flex;gap:.5rem;flex-wrap:wrap;margin:.25rem 0 1rem}
+ .buffers button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.4rem .85rem;border-radius:99px;cursor:pointer;font-size:.85rem}
+ .buffers button.on{border-color:var(--accent);color:var(--accent)}
+ .bars{margin:1rem 0}
+ .bar{height:34px;border-radius:8px;display:flex;overflow:hidden;border:1px solid var(--line)}
+ .bar .fa{background:rgba(93,202,165,.35)}.bar .fha{background:rgba(224,169,59,.35)}
+ .barlbl{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-bottom:.3rem}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}
+ .metric .lbl{color:var(--muted);font-size:.8rem}
+ .metric .val{font-size:1.5rem;font-weight:600;margin-top:.2rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ .warn{background:rgba(226,75,74,.12);border-left:3px solid var(--warn);padding:.7rem 1rem;border-radius:0 8px 8px 0;margin-top:1rem;font-size:.9rem}
+ .ok{background:rgba(93,202,165,.12);border-left:3px solid var(--a);padding:.7rem 1rem;border-radius:0 8px 8px 0;margin-top:1rem;font-size:.9rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}
+ .note{color:var(--muted);font-size:.85rem}
+ a{color:var(--accent)}
+ button.share{margin-top:.5rem;background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:8px;cursor:pointer}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <h1>Henderson-Hasselbalch Buffer Calculator</h1>
+ <p>Pick a buffer, set your target pH, concentration, and volume — get the exact amount of weak acid and conjugate base to mix, with every step of the Henderson-Hasselbalch math shown.</p>
+</header>
+<main>
+ <div class="card">
+  <label>Common buffers (sets pKa) — or enter your own below</label>
+  <div class="buffers" id="buffers">
+   <button data-pka="4.76" data-n="Acetate">Acetate (4.76)</button>
+   <button data-pka="7.21" data-n="Phosphate" class="on">Phosphate (7.21)</button>
+   <button data-pka="8.06" data-n="Tris">Tris (8.06)</button>
+   <button data-pka="7.48" data-n="HEPES">HEPES (7.48)</button>
+   <button data-pka="6.35" data-n="Bicarbonate">Bicarbonate (6.35)</button>
+   <button data-pka="9.25" data-n="Ammonium">Ammonium (9.25)</button>
+  </div>
+  <div class="fields">
+   <div><label>pKa</label><input id="pka" type="number" step="0.01" value="7.21"></div>
+   <div><label>Target pH</label><input id="ph" type="number" step="0.01" value="7.40"></div>
+   <div><label>Total buffer concentration (M)</label><input id="conc" type="number" step="0.01" value="0.10"></div>
+   <div><label>Final volume (mL)</label><input id="vol" type="number" step="1" value="500"></div>
+  </div>
+  <button class="share" id="share">Copy shareable link</button>
+ </div>
+
+ <div class="card">
+  <div class="bars">
+   <div class="barlbl"><span style="color:var(--a)">Conjugate base [A⁻]: <b id="pctA">—</b></span><span style="color:var(--ha)">Weak acid [HA]: <b id="pctHA">—</b></span></div>
+   <div class="bar"><div class="fa" id="fa" style="width:50%"></div><div class="fha" id="fha" style="width:50%"></div></div>
+  </div>
+  <div class="grid">
+   <div class="metric"><div class="lbl">Conjugate base [A⁻] needed</div><div class="val" id="molA" style="color:var(--a)">—</div></div>
+   <div class="metric"><div class="lbl">Weak acid [HA] needed</div><div class="val" id="molHA" style="color:var(--ha)">—</div></div>
+  </div>
+  <div class="work" id="work"></div>
+  <div id="range"></div>
+ </div>
+
+ <h2>How to make a buffer at a target pH by hand</h2>
+ <p class="note">The Henderson-Hasselbalch equation is pH = pKa + log([A⁻]/[HA]). Rearrange for the ratio you need: [A⁻]/[HA] = 10^(pH − pKa). Split your total concentration into the two forms using fraction A⁻ = ratio/(1+ratio) and fraction HA = 1/(1+ratio), then multiply each concentration by the volume (in liters) to get moles — and by the molar mass for grams. A buffer works best within about pKa ± 1; outside that range it has little capacity, so pick a buffer whose pKa is close to your target pH.</p>
+ <p class="note">pKa values shown are standard 25 °C textbook values; some sources differ by a few hundredths, and phosphate/bicarbonate shift with temperature and ionic strength (blood bicarbonate is often quoted as 6.1).</p>
+ <p class="note">Related tools: <a href="https://example.com/peptide-charge-calculator">Peptide charge &amp; pI calculator</a> · <a href="https://example.com/enzyme-kinetics-simulator">Enzyme kinetics simulator</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const $=id=>document.getElementById(id);
+function calc(){
+ const pka=+$("pka").value, pH=+$("ph").value, C=+$("conc").value, Vml=+$("vol").value, V=Vml/1000;
+ const ratio=Math.pow(10,pH-pka);
+ const fA=ratio/(1+ratio), fHA=1/(1+ratio);
+ const cA=fA*C, cHA=fHA*C, mA=cA*V, mHA=cHA*V;
+ $("pctA").textContent=(fA*100).toFixed(0)+"%";
+ $("pctHA").textContent=(fHA*100).toFixed(0)+"%";
+ $("fa").style.width=(fA*100)+"%";$("fha").style.width=(fHA*100)+"%";
+ $("molA").textContent=(mA*1000).toFixed(1)+" mmol";
+ $("molHA").textContent=(mHA*1000).toFixed(1)+" mmol";
+ let w=`Henderson-Hasselbalch:  pH = pKa + log([A⁻]/[HA])\n`;
+ w+=`Ratio [A⁻]/[HA] = 10^(pH − pKa) = 10^(${pH} − ${pka}) = ${ratio.toFixed(3)}\n`;
+ w+=`Fraction A⁻  = ratio/(1+ratio) = ${(fA).toFixed(3)}  → [A⁻]  = ${cA.toFixed(4)} M\n`;
+ w+=`Fraction HA  = 1/(1+ratio)     = ${(fHA).toFixed(3)}  → [HA]  = ${cHA.toFixed(4)} M\n`;
+ w+=`Moles in ${Vml} mL:  A⁻ = ${cA.toFixed(4)}×${V} = ${(mA*1000).toFixed(1)} mmol;  HA = ${(mHA*1000).toFixed(1)} mmol`;
+ $("work").textContent=w;
+ const d=Math.abs(pH-pka);
+ $("range").innerHTML=d>1
+  ? `<div class="warn">Target pH is ${d.toFixed(2)} units from the pKa — outside the effective buffering range (pKa ± 1). This buffer will have weak capacity here. Pick a buffer with a pKa closer to ${pH}.</div>`
+  : `<div class="ok">Target pH is within pKa ± 1 — this buffer has good capacity here.</div>`;
+}
+document.querySelectorAll("#buffers button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#buffers button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ $("pka").value=b.dataset.pka;calc();});
+["pka","ph","conc","vol"].forEach(id=>$(id).addEventListener("input",calc));
+$("share").onclick=()=>{const p=new URLSearchParams({pka:$("pka").value,ph:$("ph").value,conc:$("conc").value,vol:$("vol").value});const u=location.origin+location.pathname+"?"+p;navigator.clipboard&&navigator.clipboard.writeText(u);$("share").textContent="Link copied";setTimeout(()=>$("share").textContent="Copy shareable link",1500);};
+(function(){const p=new URLSearchParams(location.search);["pka","ph","conc","vol"].forEach(id=>{if(p.get(id))$(id).value=p.get(id);});calc();})();
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peptide Charge & pI Calculator (Shows Every Step) — Free Biochem Tool</title>
+<meta name="description" content="Free peptide isoelectric point (pI) and net charge calculator that shows every step. Enter an amino acid sequence, see net charge at any pH, the pI, a titration curve, and the full Henderson-Hasselbalch breakdown. Built for biochemistry and pre-med.">
+<meta name="keywords" content="pI calculator, isoelectric point calculator, peptide net charge, amino acid charge at pH, henderson hasselbalch peptide, biochemistry calculator">
+<link rel="canonical" href="https://example.com/peptide-charge-calculator">
+<meta property="og:title" content="Peptide Charge & pI Calculator — Shows Every Step">
+<meta property="og:description" content="Net charge at any pH, isoelectric point, titration curve, and the full worked steps. Free.">
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--pos:#378add;--neg:#e24b4a;--accent:#5dcaa5}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}
+ h1{font-size:1.85rem;font-weight:600;margin:0 0 .5rem}
+ header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{display:block;color:var(--muted);font-size:.9rem;margin-bottom:.4rem}
+ input[type=text]{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.2rem;letter-spacing:.15em;padding:.85rem;border-radius:10px;font-family:monospace}
+ .ex{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+ .ex button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.35rem .8rem;border-radius:99px;cursor:pointer;font-size:.85rem;font-family:monospace}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0}
+ .metric{background:var(--bg);border-radius:12px;padding:1rem;text-align:center}
+ .metric .lbl{color:var(--muted);font-size:.85rem}
+ .metric .val{font-size:2rem;font-weight:600;margin-top:.2rem}
+ .slider-row{display:flex;align-items:center;gap:1rem;margin:.5rem 0 1rem}
+ input[type=range]{flex:1}
+ table{width:100%;border-collapse:collapse;font-size:.92rem}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}
+ th{color:var(--muted);font-weight:500}
+ .chg-pos{color:var(--pos);font-weight:600}
+ .chg-neg{color:var(--neg);font-weight:600}
+ canvas{width:100%;height:220px}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}
+ .note{color:var(--muted);font-size:.85rem}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <h1>Peptide Charge &amp; pI Calculator</h1>
+ <p>Enter an amino acid sequence. See its net charge at any pH, its isoelectric point, a live titration curve — and the full step-by-step work, so you learn the method, not just the answer.</p>
+</header>
+<main>
+ <div class="card">
+  <label for="seq">Amino acid sequence (one-letter codes)</label>
+  <input id="seq" type="text" value="DKHEYR" spellcheck="false">
+  <div class="ex">
+   <button data-s="DKHEYR">DKHEYR</button>
+   <button data-s="GAVLI">GAVLI (no charged side chains)</button>
+   <button data-s="KKKRRR">KKKRRR (very basic)</button>
+   <button data-s="DDEE">DDEE (very acidic)</button>
+  </div>
+  <p id="warn" class="note" style="color:var(--neg);display:none"></p>
+ </div>
+
+ <div class="card">
+  <div class="slider-row">
+   <label style="margin:0">pH</label>
+   <input id="ph" type="range" min="0" max="14" step="0.1" value="7.0">
+   <span id="phval" style="font-weight:600;min-width:2.5em">7.0</span>
+  </div>
+  <div class="grid">
+   <div class="metric"><div class="lbl">Net charge at this pH</div><div class="val" id="netchg">0.0</div></div>
+   <div class="metric"><div class="lbl">Isoelectric point (pI)</div><div class="val" id="pi" style="color:var(--accent)">7.0</div></div>
+  </div>
+  <canvas id="curve" width="700" height="220"></canvas>
+  <p class="note">The curve is net charge vs pH. The pI is where it crosses zero (dashed line). Your selected pH is the vertical marker.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Step-by-step: every ionizable group</h2>
+  <p class="note">Each group's charge comes from Henderson-Hasselbalch. Bases (N-terminus, His, Lys, Arg) are positive when protonated; acids (C-terminus, Asp, Glu, Cys, Tyr) are negative when deprotonated.</p>
+  <table id="work"><thead><tr><th>Group</th><th>Type</th><th>pKa</th><th>Charge at pH <span id="phlabel">7.0</span></th></tr></thead><tbody></tbody></table>
+ </div>
+
+ <h2>How to calculate the pI of a peptide by hand</h2>
+ <p class="note">List every ionizable group (the N-terminus, the C-terminus, and any charged side chains). At a given pH, each positive group contributes +1/(1+10^(pH−pKa)) and each negative group contributes −1/(1+10^(pKa−pH)). The net charge is the sum. The pI is the pH where that sum equals zero — you can find it by averaging the two pKa values that bracket the neutral species. This tool does all of that live so you can check your hand calculations.</p>
+ <p class="note">pKa values used (standard textbook set): N-terminus 9.0, C-terminus 3.1; Asp 3.9, Glu 4.1, His 6.0, Cys 8.3, Tyr 10.5, Lys 10.5, Arg 12.5. Different textbooks use slightly different values — yours may vary by a few tenths.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const SC={D:{pka:3.9,t:"acid",n:"Asp (D)"},E:{pka:4.1,t:"acid",n:"Glu (E)"},C:{pka:8.3,t:"acid",n:"Cys (C)"},Y:{pka:10.5,t:"acid",n:"Tyr (Y)"},H:{pka:6.0,t:"base",n:"His (H)"},K:{pka:10.5,t:"base",n:"Lys (K)"},R:{pka:12.5,t:"base",n:"Arg (R)"}};
+const VALID="ACDEFGHIKLMNPQRSTVWY";
+function groups(seq){
+ const g=[{n:"N-terminus (α-amino)",pka:9.0,t:"base"}];
+ for(const ch of seq){if(SC[ch])g.push({n:SC[ch].n,pka:SC[ch].pka,t:SC[ch].t});}
+ g.push({n:"C-terminus (α-carboxyl)",pka:3.1,t:"acid"});
+ return g;
+}
+function gCharge(grp,pH){return grp.t==="base"?1/(1+Math.pow(10,pH-grp.pka)):-1/(1+Math.pow(10,grp.pka-pH));}
+function net(g,pH){return g.reduce((s,x)=>s+gCharge(x,pH),0);}
+function pI(g){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;if(net(g,m)>0)lo=m;else hi=m;}return (lo+hi)/2;}
+let G=[];
+function parse(){
+ let raw=document.getElementById("seq").value.toUpperCase().replace(/[^A-Z]/g,"");
+ const bad=[...raw].filter(c=>!VALID.includes(c));
+ const seq=[...raw].filter(c=>VALID.includes(c)).join("");
+ const w=document.getElementById("warn");
+ if(bad.length){w.style.display="block";w.textContent="Ignored invalid letters: "+[...new Set(bad)].join(", ");}else w.style.display="none";
+ G=groups(seq);
+ update();drawCurve();
+}
+function update(){
+ const pH=parseFloat(document.getElementById("ph").value);
+ document.getElementById("phval").textContent=pH.toFixed(1);
+ document.getElementById("phlabel").textContent=pH.toFixed(1);
+ const nc=net(G,pH);
+ const el=document.getElementById("netchg");
+ el.textContent=(nc>=0?"+":"")+nc.toFixed(2);
+ el.style.color=nc>0.05?"var(--pos)":nc<-0.05?"var(--neg)":"var(--txt)";
+ document.getElementById("pi").textContent=pI(G).toFixed(2);
+ const tb=document.querySelector("#work tbody");tb.innerHTML="";
+ G.forEach(grp=>{const q=gCharge(grp,pH);const cls=q>0?"chg-pos":q<0?"chg-neg":"";
+  tb.innerHTML+=`<tr><td>${grp.n}</td><td>${grp.t}</td><td>${grp.pka.toFixed(1)}</td><td class="${cls}">${(q>=0?"+":"")+q.toFixed(2)}</td></tr>`;});
+ tb.innerHTML+=`<tr><td colspan="3" style="text-align:right;font-weight:600">Net charge</td><td style="font-weight:600">${(nc>=0?"+":"")+nc.toFixed(2)}</td></tr>`;
+ drawMarker(pH);
+}
+let cv,ctx,W,H;
+function drawCurve(){
+ cv=document.getElementById("curve");ctx=cv.getContext("2d");W=cv.width;H=cv.height;
+ update();
+}
+function x2px(pH){return 40+(pH/14)*(W-60);}
+function chg2py(c,maxC){return H/2-(c/maxC)*(H/2-20);}
+function drawMarker(curPH){
+ ctx.clearRect(0,0,W,H);
+ let maxC=1;for(let p=0;p<=14;p+=0.2)maxC=Math.max(maxC,Math.abs(net(G,p)));
+ // zero line
+ ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(40,H/2);ctx.lineTo(W-20,H/2);ctx.stroke();
+ // pI dashed
+ const pi=pI(G);ctx.strokeStyle="#5dcaa5";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x2px(pi),10);ctx.lineTo(x2px(pi),H-20);ctx.stroke();ctx.setLineDash([]);
+ // curve
+ ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+ for(let p=0;p<=14;p+=0.1){const px=x2px(p),py=chg2py(net(G,p),maxC);p===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}
+ ctx.stroke();
+ // current pH marker
+ ctx.strokeStyle="#9aa0aa";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x2px(curPH),10);ctx.lineTo(x2px(curPH),H-20);ctx.stroke();
+ // labels
+ ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";
+ ctx.fillText("pH 0",36,H-6);ctx.fillText("7",x2px(7)-4,H-6);ctx.fillText("14",W-30,H-6);
+ ctx.fillStyle="#5dcaa5";ctx.fillText("pI "+pi.toFixed(1),x2px(pi)+4,18);
+}
+document.getElementById("seq").addEventListener("input",parse);
+document.getElementById("ph").addEventListener("input",update);
+document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{document.getElementById("seq").value=b.dataset.s;parse();});
+parse();
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glycolysis Pathway Explorer: All 10 Steps with Live ATP/NADH Tally (Free) — Biochem &amp; MCAT</title>
+<meta name="description" content="Step through all 10 reactions of glycolysis with a live ATP and NADH tally, every enzyme, and the three regulated irreversible steps highlighted. Free interactive study tool for biochemistry and the MCAT.">
+<meta name="keywords" content="glycolysis steps, glycolysis enzymes, glycolysis ATP NADH net, glycolysis regulated steps, glycolysis pathway diagram, hexokinase PFK pyruvate kinase">
+<link rel="canonical" href="https://example.com/glycolysis-pathway-explorer">
+<meta property="og:title" content="Glycolysis Pathway Explorer — 10 Steps, Live Energy Tally">
+<meta property="og:description" content="Walk through glycolysis step by step with a running ATP/NADH count and the regulated steps highlighted. Free.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the net ATP and NADH yield of glycolysis?","acceptedAnswer":{"@type":"Answer","text":"Per glucose, glycolysis nets 2 ATP (4 produced minus 2 invested) and 2 NADH, ending in 2 pyruvate."}},
+{"@type":"Question","name":"What are the three regulated steps of glycolysis?","acceptedAnswer":{"@type":"Answer","text":"The irreversible, regulated steps are catalyzed by hexokinase (step 1), phosphofructokinase-1 (step 3, the committed step), and pyruvate kinase (step 10)."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--invest:#e24b4a;--payoff:#5dcaa5;--reg:#e0a93b;--accent:#378add}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}
+ h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}
+ header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:760px;margin:0 auto;padding:1rem}
+ .tally{position:sticky;top:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1rem 0;z-index:5}
+ .tally .lbl{color:var(--muted);font-size:.75rem;text-align:center}
+ .tally .val{font-size:1.5rem;font-weight:600;text-align:center}
+ .controls{display:flex;gap:.5rem;justify-content:center;margin:1rem 0}
+ .controls button{background:var(--bg);border:1px solid var(--line);color:var(--txt);padding:.55rem 1.2rem;border-radius:8px;cursor:pointer}
+ .controls button.primary{background:var(--accent);color:#04223d;border:0;font-weight:600}
+ .step{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin:.6rem 0;opacity:.45;transition:.25s}
+ .step.active{opacity:1;border-left-color:var(--accent)}
+ .step.done{opacity:.85}
+ .step.invest{border-left-color:var(--invest)}
+ .step.payoff{border-left-color:var(--payoff)}
+ .step .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+ .step .rx{font-weight:600;font-size:1.05rem}
+ .step .enz{color:var(--accent);font-size:.9rem}
+ .step .meta{font-size:.85rem;color:var(--muted);margin-top:.3rem}
+ .pill{font-size:.72rem;padding:.12rem .55rem;border-radius:99px;margin-left:.4rem}
+ .pill.reg{background:rgba(224,169,59,.2);color:var(--reg)}
+ .pill.irr{background:rgba(226,75,74,.18);color:var(--invest)}
+ .energy{font-weight:600}
+ .e-atp-out{color:var(--invest)}.e-atp-in{color:var(--payoff)}.e-nadh{color:var(--reg)}
+ .phaselbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:1.5rem 0 .25rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}
+ .note{color:var(--muted);font-size:.85rem}
+ a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <h1>Glycolysis Pathway Explorer</h1>
+ <p>Walk through all 10 reactions of glycolysis one at a time. The ATP and NADH tally updates as you go, every enzyme is named, and the three regulated, irreversible steps are flagged — so the net yield finally makes sense.</p>
+</header>
+<main>
+ <div class="tally">
+  <div><div class="lbl">Step</div><div class="val" id="tStep">0 / 10</div></div>
+  <div><div class="lbl">Net ATP</div><div class="val" id="tATP" style="color:var(--payoff)">0</div></div>
+  <div><div class="lbl">NADH</div><div class="val" id="tNADH" style="color:var(--reg)">0</div></div>
+  <div><div class="lbl">Pyruvate</div><div class="val" id="tPyr">0</div></div>
+ </div>
+ <div class="controls">
+  <button id="reset">Reset</button>
+  <button id="back">◀ Back</button>
+  <button class="primary" id="next">Next step ▶</button>
+  <button id="all">Show all</button>
+ </div>
+ <div id="steps"></div>
+
+ <h2>Glycolysis: net yield and the three regulated steps</h2>
+ <p class="note">Per molecule of glucose, glycolysis invests 2 ATP in the early "investment phase" (hexokinase and PFK-1), then the "payoff phase" runs twice — once for each three-carbon sugar — producing 4 ATP and 2 NADH. Net: <b>2 ATP, 2 NADH, and 2 pyruvate.</b> The three irreversible, regulated steps are hexokinase (step 1), phosphofructokinase-1 (step 3, the committed step and main control point), and pyruvate kinase (step 10).</p>
+ <p class="note">Model note: standard textbook glycolysis (Lehninger). NADH yield is shown per glucose (the GAPDH step runs twice). Some courses track GTP vs. ATP separately in later metabolism — here all substrate-level phosphorylations are counted as ATP.</p>
+ <p class="note">Related tools: <a href="https://example.com/enzyme-kinetics-simulator">Enzyme kinetics simulator</a> · <a href="https://example.com/henderson-hasselbalch-buffer-calculator">Buffer calculator</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const STEPS=[
+ {ph:"invest",rx:"Glucose → Glucose-6-phosphate",enz:"Hexokinase",atp:-1,nadh:0,reg:true,irr:true,note:"Traps glucose in the cell. Uses 1 ATP."},
+ {ph:"invest",rx:"G6P → Fructose-6-phosphate",enz:"Phosphoglucose isomerase",atp:0,nadh:0,note:"Aldose → ketose isomerization. Reversible."},
+ {ph:"invest",rx:"F6P → Fructose-1,6-bisphosphate",enz:"Phosphofructokinase-1 (PFK-1)",atp:-1,nadh:0,reg:true,irr:true,note:"The committed step and main regulatory point. Uses 1 ATP."},
+ {ph:"invest",rx:"F1,6BP → DHAP + GAP",enz:"Aldolase",atp:0,nadh:0,note:"Splits the 6-carbon sugar into two 3-carbon sugars."},
+ {ph:"invest",rx:"DHAP ⇌ GAP",enz:"Triose phosphate isomerase",atp:0,nadh:0,note:"DHAP is converted to GAP so both halves continue. Payoff phase now runs ×2."},
+ {ph:"payoff",rx:"GAP → 1,3-Bisphosphoglycerate",enz:"GAPDH",atp:0,nadh:2,note:"Oxidation + phosphorylation. Produces NADH (×2 = 2 NADH per glucose)."},
+ {ph:"payoff",rx:"1,3-BPG → 3-Phosphoglycerate",enz:"Phosphoglycerate kinase",atp:2,nadh:0,note:"First substrate-level phosphorylation (×2 = +2 ATP)."},
+ {ph:"payoff",rx:"3-PG → 2-Phosphoglycerate",enz:"Phosphoglycerate mutase",atp:0,nadh:0,note:"Moves the phosphate. Reversible."},
+ {ph:"payoff",rx:"2-PG → Phosphoenolpyruvate (PEP)",enz:"Enolase",atp:0,nadh:0,note:"Dehydration creates a high-energy enol phosphate."},
+ {ph:"payoff",rx:"PEP → Pyruvate",enz:"Pyruvate kinase",atp:2,nadh:0,reg:true,irr:true,pyr:2,note:"Second substrate-level phosphorylation (×2 = +2 ATP). Irreversible, regulated."}
+];
+const $=id=>document.getElementById(id);
+let cur=0;
+function build(){
+ const c=$("steps");c.innerHTML="";
+ let lastPh="";
+ STEPS.forEach((s,i)=>{
+  if(s.ph!==lastPh){const l=document.createElement("div");l.className="phaselbl";l.textContent=s.ph==="invest"?"Energy investment phase":"Energy payoff phase (runs ×2 per glucose)";c.appendChild(l);lastPh=s.ph;}
+  const d=document.createElement("div");d.className="step "+s.ph;d.id="s"+i;
+  let energy="";
+  if(s.atp<0)energy+=`<span class="energy e-atp-out">${s.atp} ATP</span> `;
+  if(s.atp>0)energy+=`<span class="energy e-atp-in">+${s.atp} ATP</span> `;
+  if(s.nadh>0)energy+=`<span class="energy e-nadh">+${s.nadh} NADH</span> `;
+  if(!energy)energy='<span class="note">no ATP/NADH change</span>';
+  d.innerHTML=`<div class="top"><span class="rx">${i+1}. ${s.rx}${s.irr?'<span class="pill irr">irreversible</span>':''}${s.reg?'<span class="pill reg">regulated</span>':''}</span></div>
+   <div class="enz">${s.enz}</div><div class="meta">${s.note}</div><div style="margin-top:.4rem">${energy}</div>`;
+  c.appendChild(d);
+ });
+ sync();
+}
+function sync(){
+ let atp=0,nadh=0,pyr=0;
+ STEPS.forEach((s,i)=>{
+  const el=$("s"+i);el.classList.remove("active","done");
+  if(i<cur){el.classList.add("done");atp+=s.atp;nadh+=s.nadh;pyr+=s.pyr||0;}
+  else if(i===cur){el.classList.add("active");}
+ });
+ $("tStep").textContent=cur+" / 10";
+ $("tATP").textContent=(atp>0?"+":"")+atp;
+ $("tNADH").textContent=nadh;$("tPyr").textContent=pyr;
+}
+$("next").onclick=()=>{if(cur<10){cur++;sync();const el=$("s"+(cur-1));el&&el.scrollIntoView({behavior:"smooth",block:"center"});}};
+$("back").onclick=()=>{if(cur>0){cur--;sync();}};
+$("reset").onclick=()=>{cur=0;sync();window.scrollTo({top:0,behavior:"smooth"});};
+$("all").onclick=()=>{cur=10;sync();};
+build();
+</script>
+</body>
+</html>

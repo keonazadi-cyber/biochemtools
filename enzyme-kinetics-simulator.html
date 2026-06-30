@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enzyme Kinetics Simulator: Michaelis-Menten &amp; Lineweaver-Burk with Inhibition (Free, Shows Work)</title>
+<meta name="description" content="Free interactive enzyme kinetics simulator. See Michaelis-Menten and Lineweaver-Burk plots update live, compare competitive, noncompetitive, and uncompetitive inhibition, and view the full worked steps for apparent Km and Vmax. Built for biochemistry and MCAT.">
+<meta name="keywords" content="enzyme kinetics simulator, michaelis menten calculator, lineweaver burk plot, competitive vs noncompetitive inhibition, apparent Km Vmax, enzyme inhibition graph">
+<link rel="canonical" href="https://example.com/enzyme-kinetics-simulator">
+<meta property="og:title" content="Enzyme Kinetics Simulator — Inhibition, Shown Step by Step">
+<meta property="og:description" content="Michaelis-Menten + Lineweaver-Burk live, with competitive/noncompetitive/uncompetitive inhibition and the full worked math. Free.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to find apparent Km and Vmax under enzyme inhibition","step":[
+{"@type":"HowToStep","name":"Pick inhibition type","text":"Competitive raises apparent Km; uncompetitive lowers both Km and Vmax; noncompetitive lowers Vmax only."},
+{"@type":"HowToStep","name":"Compute the factors","text":"alpha = 1 + [I]/Ki affects Km; alpha-prime = 1 + [I]/Ki affects Vmax, depending on inhibition type."},
+{"@type":"HowToStep","name":"Apply the equation","text":"v = Vmax[S] / (alpha*Km + alpha-prime*[S]); apparent Vmax = Vmax/alpha-prime and apparent Km = (alpha/alpha-prime)*Km."}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--base:#5dcaa5;--inh:#7f77dd;--accent:#378add}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}
+ h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}
+ header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:760px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.88rem}
+ .row{display:flex;align-items:center;gap:.75rem;margin:.6rem 0}
+ .row input[type=range]{flex:1}
+ .row .v{font-weight:600;min-width:5.5em;text-align:right}
+ .types{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}
+ .types button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.45rem .9rem;border-radius:99px;cursor:pointer;font-size:.88rem}
+ .types button.on{border-color:var(--accent);color:var(--accent)}
+ .plots{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ @media(max-width:640px){.plots{grid-template-columns:1fr}}
+ .plot h3{font-size:.95rem;margin:.2rem 0;font-weight:500}
+ canvas{width:100%;height:230px;background:var(--bg);border-radius:10px}
+ .legend{font-size:.8rem;color:var(--muted);margin-top:.3rem}
+ .sw{color:var(--base)}.si{color:var(--inh)}
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:.8rem;text-align:center}
+ .metric .lbl{color:var(--muted);font-size:.78rem}
+ .metric .val{font-size:1.4rem;font-weight:600;margin-top:.2rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.8;white-space:pre-wrap}
+ .teach{background:rgba(55,138,221,.1);border-left:3px solid var(--accent);padding:.8rem 1rem;border-radius:0 8px 8px 0;margin-top:1rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}
+ .note{color:var(--muted);font-size:.85rem}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+ a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+ <h1>Enzyme Kinetics Simulator</h1>
+ <p>Michaelis-Menten and Lineweaver-Burk plots, live. Switch between competitive, noncompetitive, and uncompetitive inhibition and watch exactly how each one moves Km and Vmax — with every step shown, so you can answer it on the exam without the tool.</p>
+</header>
+<main>
+ <div class="card">
+  <div class="row"><label style="min-width:7em">V<sub>max</sub> (µM/min)</label><input id="vmax" type="range" min="10" max="200" step="5" value="100"><span class="v" id="vmaxv">100</span></div>
+  <div class="row"><label style="min-width:7em">K<sub>m</sub> (µM)</label><input id="km" type="range" min="5" max="100" step="1" value="25"><span class="v" id="kmv">25</span></div>
+  <div class="row"><label style="min-width:7em">[S] (µM)</label><input id="s" type="range" min="1" max="200" step="1" value="25"><span class="v" id="sv">25</span></div>
+  <label>Inhibition type</label>
+  <div class="types" id="types">
+   <button data-t="none" class="on">None</button>
+   <button data-t="competitive">Competitive</button>
+   <button data-t="noncompetitive">Noncompetitive</button>
+   <button data-t="uncompetitive">Uncompetitive</button>
+  </div>
+  <div id="inhrow" style="display:none">
+   <div class="row"><label style="min-width:7em">[I] (µM)</label><input id="i" type="range" min="0" max="200" step="5" value="50"><span class="v" id="iv">50</span></div>
+   <div class="row"><label style="min-width:7em">K<sub>i</sub> (µM)</label><input id="ki" type="range" min="5" max="200" step="5" value="50"><span class="v" id="kiv">50</span></div>
+  </div>
+  <button id="share" style="margin-top:.5rem;background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:8px;cursor:pointer">Copy shareable link</button>
+ </div>
+
+ <div class="card">
+  <div class="plots">
+   <div class="plot"><h3>Michaelis-Menten (v vs [S])</h3><canvas id="mm" width="360" height="230"></canvas><div class="legend"><span class="sw">— no inhibitor</span> &nbsp; <span class="si">— with inhibitor</span></div></div>
+   <div class="plot"><h3>Lineweaver-Burk (1/v vs 1/[S])</h3><canvas id="lb" width="360" height="230"></canvas><div class="legend">Double-reciprocal — intercepts reveal the type</div></div>
+  </div>
+  <div class="grid">
+   <div class="metric"><div class="lbl">v at this [S]</div><div class="val" id="vnow">—</div></div>
+   <div class="metric"><div class="lbl">Apparent K<sub>m</sub></div><div class="val" id="kmapp">—</div></div>
+   <div class="metric"><div class="lbl">Apparent V<sub>max</sub></div><div class="val" id="vmaxapp">—</div></div>
+  </div>
+  <div class="work" id="work"></div>
+  <div class="teach" id="teach"></div>
+ </div>
+
+ <h2>How to solve enzyme inhibition problems by hand</h2>
+ <p class="note">Start from the Michaelis-Menten equation, v = V<sub>max</sub>[S] / (K<sub>m</sub> + [S]). Inhibitors change it through two factors: α = 1 + [I]/K<sub>i</sub> (binds free enzyme, scales K<sub>m</sub>) and α′ = 1 + [I]/K<sub>i</sub> (binds the ES complex, scales V<sub>max</sub>). The general form is v = V<sub>max</sub>[S] / (αK<sub>m</sub> + α′[S]), giving apparent V<sub>max</sub> = V<sub>max</sub>/α′ and apparent K<sub>m</sub> = (α/α′)K<sub>m</sub>.</p>
+ <ul class="note">
+  <li><b>Competitive:</b> α &gt; 1, α′ = 1 → K<sub>m</sub> rises, V<sub>max</sub> unchanged. Lines meet on the y-axis in Lineweaver-Burk.</li>
+  <li><b>Uncompetitive:</b> α = 1, α′ &gt; 1 → both K<sub>m</sub> and V<sub>max</sub> fall by the same factor. Parallel Lineweaver-Burk lines.</li>
+  <li><b>Noncompetitive (pure):</b> α = α′ &gt; 1 → V<sub>max</sub> falls, K<sub>m</sub> unchanged. Lines meet on the x-axis.</li>
+ </ul>
+ <p class="note">Model note: this uses the standard generalized mixed-inhibition framework (Lehninger / Voet). "Pure noncompetitive" assumes equal affinity for E and ES (K<sub>i</sub> = K<sub>i</sub>′); some textbooks treat noncompetitive as a special case of mixed inhibition.</p>
+ <p class="note">Related tool: <a href="https://example.com/peptide-charge-calculator">Peptide charge &amp; pI calculator</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+let type="none";
+const $=id=>document.getElementById(id);
+function factors(){
+ const I=+$("i").value, Ki=+$("ki").value, r=I/Ki;
+ if(type==="none")return {a:1,ap:1};
+ if(type==="competitive")return {a:1+r,ap:1};
+ if(type==="uncompetitive")return {a:1,ap:1+r};
+ return {a:1+r,ap:1+r}; // noncompetitive
+}
+const vel=(S,Vmax,Km,a,ap)=>Vmax*S/(a*Km+ap*S);
+function read(){return {Vmax:+$("vmax").value,Km:+$("km").value,S:+$("s").value};}
+function compute(){
+ const {Vmax,Km,S}=read(), f=factors();
+ const KmApp=(f.a/f.ap)*Km, VmaxApp=Vmax/f.ap;
+ const v=vel(S,Vmax,Km,f.a,f.ap);
+ return {Vmax,Km,S,f,KmApp,VmaxApp,v};
+}
+function plotMM(c){
+ const {Vmax,Km}=read(), f=factors(), ctx=c.getContext("2d"),W=c.width,H=c.height,P=34;
+ ctx.clearRect(0,0,W,H);
+ const Smax=Math.max(200, Km*8);
+ const X=s=>P+(s/Smax)*(W-P-10), Y=v=>H-P-(v/Vmax)*(H-P-12);
+ ctx.strokeStyle="#2a2e38";ctx.beginPath();ctx.moveTo(P,12);ctx.lineTo(P,H-P);ctx.lineTo(W-10,H-P);ctx.stroke();
+ ctx.fillStyle="#9aa0aa";ctx.font="11px sans-serif";ctx.fillText("[S]",W-26,H-P+18);ctx.fillText("v",P-22,18);
+ // baseline
+ ctx.strokeStyle="#5dcaa5";ctx.lineWidth=2;ctx.setLineDash(type==="none"?[]:[5,4]);ctx.beginPath();
+ for(let s=0;s<=Smax;s+=Smax/120){const x=X(s),y=Y(vel(s,Vmax,Km,1,1));s===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();
+ // inhibited
+ if(type!=="none"){ctx.strokeStyle="#7f77dd";ctx.setLineDash([]);ctx.beginPath();
+  for(let s=0;s<=Smax;s+=Smax/120){const x=X(s),y=Y(vel(s,Vmax,Km,f.a,f.ap));s===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
+ ctx.setLineDash([]);
+ // current [S] point
+ const S=+$("s").value;const yv=vel(S,Vmax,Km,f.a,f.ap);
+ ctx.fillStyle="#378add";ctx.beginPath();ctx.arc(X(S),Y(yv),4,0,7);ctx.fill();
+}
+function plotLB(c){
+ const {Vmax,Km}=read(), f=factors(), ctx=c.getContext("2d"),W=c.width,H=c.height;
+ ctx.clearRect(0,0,W,H);
+ const KmApp=(f.a/f.ap)*Km, VmaxApp=Vmax/f.ap;
+ // axis ranges
+ const xMax=2/Km, xMin=-1.2/Math.min(Km,KmApp);
+ const yMax=Math.max(2/VmaxApp, 2/Vmax)*1.6, yMin=-yMax*0.15;
+ const ox=W*0.42, // origin x position (leave room for negative x)
+       X=ix=>ox+(ix/xMax)*(W-ox-12),
+       Y=iy=>H-22-((iy-yMin)/(yMax-yMin))*(H-34);
+ // axes
+ ctx.strokeStyle="#2a2e38";ctx.beginPath();ctx.moveTo(X(xMin),Y(0));ctx.lineTo(X(xMax),Y(0));ctx.moveTo(X(0),Y(yMin));ctx.lineTo(X(0),Y(yMax));ctx.stroke();
+ ctx.fillStyle="#9aa0aa";ctx.font="11px sans-serif";ctx.fillText("1/[S]",W-40,Y(0)-6);ctx.fillText("1/v",X(0)+6,16);
+ const line=(slope,b,col)=>{ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();
+  const y1=slope*xMin+b,y2=slope*xMax+b;ctx.moveTo(X(xMin),Y(y1));ctx.lineTo(X(xMax),Y(y2));ctx.stroke();};
+ line(Km/Vmax,1/Vmax,"#5dcaa5");
+ if(type!=="none")line(KmApp/VmaxApp,1/VmaxApp,"#7f77dd");
+}
+function render(){
+ const d=compute();
+ $("vmaxv").textContent=d.Vmax;$("kmv").textContent=d.Km;$("sv").textContent=d.S;
+ $("iv").textContent=$("i").value;$("kiv").textContent=$("ki").value;
+ $("vnow").textContent=d.v.toFixed(1);
+ $("kmapp").textContent=d.KmApp.toFixed(1);
+ $("vmaxapp").textContent=d.VmaxApp.toFixed(1);
+ plotMM($("mm"));plotLB($("lb"));
+ const f=d.f;
+ let w=`Michaelis-Menten:  v = Vmax·[S] / (α·Km + α′·[S])\n`;
+ w+=`α  = 1 + [I]/Ki = ${type==="none"||type==="uncompetitive"?"1.00":(1+ (+$("i").value)/(+$("ki").value)).toFixed(2)}   (scales Km)\n`;
+ w+=`α′ = 1 + [I]/Ki = ${type==="none"||type==="competitive"?"1.00":(1+ (+$("i").value)/(+$("ki").value)).toFixed(2)}   (scales Vmax)\n`;
+ w+=`Apparent Km   = (α/α′)·Km = (${f.a.toFixed(2)}/${f.ap.toFixed(2)})·${d.Km} = ${d.KmApp.toFixed(1)} µM\n`;
+ w+=`Apparent Vmax = Vmax/α′   = ${d.Vmax}/${f.ap.toFixed(2)} = ${d.VmaxApp.toFixed(1)} µM/min\n`;
+ w+=`v at [S]=${d.S}: ${d.Vmax}·${d.S} / (${f.a.toFixed(2)}·${d.Km} + ${f.ap.toFixed(2)}·${d.S}) = ${d.v.toFixed(1)} µM/min`;
+ $("work").textContent=w;
+ const T={none:"No inhibitor. This is your baseline Michaelis-Menten curve.",
+  competitive:"Competitive: the inhibitor competes for the active site, so apparent Km rises but Vmax is unchanged (enough substrate still outcompetes it). In Lineweaver-Burk the lines share the same y-intercept.",
+  noncompetitive:"Noncompetitive: the inhibitor binds away from the active site and lowers Vmax, while Km stays the same. In Lineweaver-Burk the lines share the same x-intercept.",
+  uncompetitive:"Uncompetitive: the inhibitor binds only the ES complex, lowering both Km and Vmax by the same factor. In Lineweaver-Burk the lines are parallel."};
+ $("teach").textContent=T[type];
+}
+function setType(t){type=t;[...document.querySelectorAll("#types button")].forEach(b=>b.classList.toggle("on",b.dataset.t===t));$("inhrow").style.display=t==="none"?"none":"block";render();}
+document.querySelectorAll("#types button").forEach(b=>b.onclick=()=>setType(b.dataset.t));
+["vmax","km","s","i","ki"].forEach(id=>$(id).addEventListener("input",render));
+$("share").onclick=()=>{const p=new URLSearchParams({vmax:$("vmax").value,km:$("km").value,s:$("s").value,type,i:$("i").value,ki:$("ki").value});const u=location.origin+location.pathname+"?"+p;navigator.clipboard&&navigator.clipboard.writeText(u);$("share").textContent="Link copied";setTimeout(()=>$("share").textContent="Copy shareable link",1500);};
+(function init(){const p=new URLSearchParams(location.search);if(p.get("vmax")){["vmax","km","s","i","ki"].forEach(id=>{if(p.get(id))$(id).value=p.get(id);});if(p.get("type"))type=p.get("type");}setType(type);})();
+</script>
+</body>
+</html>
