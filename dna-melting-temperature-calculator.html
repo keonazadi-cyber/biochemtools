@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA Melting Temperature (Tm) &amp; GC Content Calculator + Reverse Complement — Free</title>
+<meta name="description" content="Free DNA melting temperature calculator. Paste a primer or sequence to get its Tm, GC content, length, base composition, and reverse complement instantly, with the formula and every step shown. For PCR, molecular biology, and biochemistry.">
+<meta name="keywords" content="dna melting temperature calculator, primer tm, gc content calculator, reverse complement, oligo tm, pcr primer tm">
+<link rel="canonical" href="https://biochemtools.com/dna-melting-temperature-calculator.html">
+<meta property="og:title" content="DNA Melting Temperature (Tm) &amp; GC Calculator + Reverse Complement">
+<meta property="og:description" content="Paste a primer, get Tm, GC%, and the reverse complement instantly, with the work shown. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate the melting temperature of a DNA primer","step":[{"@type":"HowToStep","name":"Count the bases","text":"Count how many A, T, G, and C bases are in the sequence."},{"@type":"HowToStep","name":"Pick the formula","text":"For short primers (14 bases or fewer) use Tm = 2(A+T) + 4(G+C); for longer sequences use Tm = 64.9 + 41(G+C−16.4)/length."},{"@type":"HowToStep","name":"Compute GC content","text":"GC% = (G+C) / total length × 100."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--a:#e24b4a;--t:#e0a93b;--g:#5dcaa5;--c:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;letter-spacing:.1em;padding:.75rem;border-radius:10px;font-family:monospace;min-height:60px;resize:vertical}
+ .ex{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}.ex button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.35rem .8rem;border-radius:99px;cursor:pointer;font-size:.8rem;font-family:monospace}
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.78rem}.metric .val{font-size:1.6rem;font-weight:600;margin-top:.2rem}
+ .comp{display:flex;height:26px;border-radius:6px;overflow:hidden;margin:.5rem 0}
+ .comp span{display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#0f1115;font-weight:600}
+ .rc{font-family:monospace;font-size:1.05rem;letter-spacing:.1em;word-break:break-all;background:var(--bg);padding:.75rem;border-radius:8px}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>DNA Melting Temperature &amp; GC Calculator</h1><p>Paste a primer or DNA sequence to get its melting temperature (T<sub>m</sub>), GC content, base composition, and reverse complement instantly — with the formula shown.</p></header>
+<main>
+ <div class="card">
+  <label for="seq">DNA sequence (5′ → 3′)</label>
+  <textarea id="seq" spellcheck="false">GCGGTCCTAAGCTTGGATCC</textarea>
+  <div class="ex">
+   <button data-s="GCGGTCCTAAGCTTGGATCC">20-mer primer</button>
+   <button data-s="ATGCAT">short (Wallace)</button>
+   <button data-s="AAAATTTTAAAATTTT">AT-rich</button>
+   <button data-s="GCGCGCGCGCGC">GC-rich</button>
+  </div>
+ </div>
+ <div class="card">
+  <div class="grid">
+   <div class="metric"><div class="lbl">Melting temp T<sub>m</sub></div><div class="val" id="tm" style="color:var(--out)">—</div></div>
+   <div class="metric"><div class="lbl">GC content</div><div class="val" id="gc">—</div></div>
+   <div class="metric"><div class="lbl">Length</div><div class="val" id="len">—</div></div>
+  </div>
+  <label>Base composition</label>
+  <div class="comp" id="comp"></div>
+  <label style="margin-top:1rem">Reverse complement (3′ → 5′ becomes 5′ → 3′)</label>
+  <div class="rc" id="rc">—</div>
+  <div class="work" id="work" style="margin-top:1rem"></div>
+ </div>
+ <h2>How to calculate primer Tm and GC content</h2>
+ <p class="note">The melting temperature is the temperature at which half the DNA strands separate — critical for setting PCR annealing temperatures. For short primers (14 bases or fewer) the simple Wallace rule works well: T<sub>m</sub> = 2 × (A + T) + 4 × (G + C), because G-C pairs have three hydrogen bonds and A-T pairs only two. For longer sequences use T<sub>m</sub> = 64.9 + 41 × (G + C − 16.4) / N, where N is the length. GC content is just (G + C) / N × 100. The reverse complement is what you get by pairing each base (A↔T, G↔C) and reading the new strand 5′→3′ — the sequence of the opposite strand, and the basis for designing a reverse primer.</p>
+ <p class="note">Method note: these are the standard teaching formulas (basic and salt-independent). Real primer design tools also account for salt and oligo concentration using nearest-neighbor thermodynamics, which shifts T<sub>m</sub> by a few degrees.</p>
+ <p class="note">Related tools: <a href="/dna-to-protein-translation.html">DNA → protein translation</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const $=id=>document.getElementById(id);
+const COMP={A:"T",T:"A",G:"C",C:"G"};
+const COL={A:"var(--a)",T:"var(--t)",G:"var(--g)",C:"var(--c)"};
+function calc(){
+ const seq=$("seq").value.toUpperCase().replace(/[^ACGT]/g,"");
+ const n=seq.length;
+ const cnt={A:0,T:0,G:0,C:0};for(const ch of seq)cnt[ch]++;
+ const gc=cnt.G+cnt.C, at=cnt.A+cnt.T;
+ if(n===0){$("tm").textContent="—";$("gc").textContent="—";$("len").textContent="0";$("comp").innerHTML="";$("rc").textContent="—";$("work").textContent="";return;}
+ const gcPct=gc/n*100;
+ let tm,formula;
+ if(n<=14){tm=2*at+4*gc;formula=`Wallace rule (≤14 nt):\nTm = 2×(A+T) + 4×(G+C)\nTm = 2×${at} + 4×${gc} = ${tm.toFixed(0)} °C`;}
+ else {tm=64.9+41*(gc-16.4)/n;formula=`Long-sequence formula (>14 nt):\nTm = 64.9 + 41×(G+C−16.4)/N\nTm = 64.9 + 41×(${gc}−16.4)/${n} = ${tm.toFixed(1)} °C`;}
+ $("tm").textContent=tm.toFixed(n<=14?0:1)+" °C";
+ $("gc").textContent=gcPct.toFixed(1)+"%";
+ $("len").textContent=n+" nt";
+ $("comp").innerHTML=["A","T","G","C"].map(b=>{const pct=cnt[b]/n*100;return pct>0?`<span style="width:${pct}%;background:${COL[b]}">${b} ${cnt[b]}</span>`:"";}).join("");
+ const rc=seq.split("").reverse().map(b=>COMP[b]).join("");
+ $("rc").textContent=rc;
+ $("work").textContent=`Counts: A=${cnt.A}  T=${cnt.T}  G=${cnt.G}  C=${cnt.C}   (N=${n})\nGC% = (G+C)/N = (${gc})/${n} = ${gcPct.toFixed(1)}%\n\n${formula}`;
+}
+document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{$("seq").value=b.dataset.s;calc();});
+$("seq").addEventListener("input",calc);
+calc();
+</script>
+</body>
+</html>
