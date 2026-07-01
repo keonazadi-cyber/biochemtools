@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beer-Lambert Law Calculator: Absorbance ↔ Concentration (Shows Every Step) — Free</title>
+<meta name="description" content="Free Beer-Lambert law calculator (A = εbc). Solve for absorbance, molar absorptivity, path length, or concentration, convert between absorbance and %transmittance, and see every step. For biochemistry and chemistry labs.">
+<meta name="keywords" content="beer lambert law calculator, absorbance to concentration, molar absorptivity calculator, A=ebc, transmittance to absorbance, spectrophotometry calculator">
+<link rel="canonical" href="https://biochemtools.com/beer-lambert-calculator.html">
+<meta property="og:title" content="Beer-Lambert Law Calculator — Absorbance ↔ Concentration">
+<meta property="og:description" content="Solve A = εbc for any variable and convert absorbance and %transmittance, with every step shown. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use the Beer-Lambert law to find concentration","step":[{"@type":"HowToStep","name":"Write the law","text":"A = εbc, where A is absorbance, ε is molar absorptivity, b is path length, and c is concentration."},{"@type":"HowToStep","name":"Solve for concentration","text":"Rearrange to c = A / (εb)."},{"@type":"HowToStep","name":"Convert transmittance","text":"If you have %transmittance, first convert with A = −log10(T), where T is the fraction transmitted."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem .9rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}input:disabled{opacity:.5}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}.out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.92rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+ .conv{display:flex;gap:1rem;align-items:end}
+</style>
+</head>
+<body>
+<header><h1>Beer-Lambert Law Calculator</h1><p>Solve A = εbc for any variable, and convert between absorbance and %transmittance — with every step shown.</p></header>
+<main>
+ <div class="card">
+  <label>Solve for</label>
+  <div class="modes" id="modes">
+   <button data-s="c" class="on">Concentration c</button>
+   <button data-s="A">Absorbance A</button>
+   <button data-s="e">Molar absorptivity ε</button>
+   <button data-s="b">Path length b</button>
+  </div>
+  <div class="fields">
+   <div><label>A — absorbance (unitless)</label><input id="A" type="number" step="any" value="0.6"></div>
+   <div><label>ε — molar absorptivity (M⁻¹cm⁻¹)</label><input id="e" type="number" step="any" value="6000"></div>
+   <div><label>b — path length (cm)</label><input id="b" type="number" step="any" value="1"></div>
+   <div><label>c — concentration (M)</label><input id="c" type="number" step="any" value=""></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem" id="outlbl">Concentration c</div><div class="v" id="outval">—</div></div>
+  <div class="work" id="work"></div>
+ </div>
+ <div class="card">
+  <label style="margin-bottom:.6rem">Absorbance ↔ %Transmittance converter</label>
+  <div class="conv">
+   <div style="flex:1"><label>Absorbance A</label><input id="cA" type="number" step="any" value="0.6"></div>
+   <div style="flex:1"><label>%Transmittance</label><input id="cT" type="number" step="any" value="25.1"></div>
+  </div>
+  <div class="work" id="twork" style="margin-top:1rem"></div>
+ </div>
+ <h2>How to find concentration from absorbance</h2>
+ <p class="note">The Beer-Lambert law says absorbance is directly proportional to concentration: A = εbc. Here A is the measured absorbance, ε (epsilon) is the molar absorptivity — a constant for a given substance and wavelength — b is the path length of the cuvette (almost always 1 cm), and c is the molar concentration. To find an unknown concentration, rearrange to c = A / (εb). If your instrument reports %transmittance instead of absorbance, convert first with A = −log₁₀(T), where T is the fraction of light transmitted (%T divided by 100). The law holds best at low absorbance (roughly A &lt; 1); above that, readings deviate from linearity.</p>
+ <p class="note">Related tools: <a href="/dilution-calculator.html">Dilution calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+let solveFor="c";const $=id=>document.getElementById(id);
+const LBL={A:"Absorbance A",e:"Molar absorptivity ε (M⁻¹cm⁻¹)",b:"Path length b (cm)",c:"Concentration c (M)"};
+const U={A:"",e:" M⁻¹cm⁻¹",b:" cm",c:" M"};
+function fmt(x){if(!isFinite(x))return"—";if(x!==0&&Math.abs(x)<0.001)return x.toExponential(3);return(Math.abs(x)>=100?x.toFixed(1):x.toFixed(4).replace(/\.?0+$/,""));}
+function calc(){
+ ["A","e","b","c"].forEach(k=>$(k).disabled=(k===solveFor));
+ const A=+$("A").value,e=+$("e").value,b=+$("b").value,c=+$("c").value;let val,work;
+ if(solveFor==="c"){val=A/(e*b);work=`c = A / (ε × b) = ${A} / (${e} × ${b}) = ${fmt(val)} M`;}
+ else if(solveFor==="A"){val=e*b*c;work=`A = ε × b × c = ${e} × ${b} × ${c} = ${fmt(val)}`;}
+ else if(solveFor==="e"){val=A/(b*c);work=`ε = A / (b × c) = ${A} / (${b} × ${c}) = ${fmt(val)} M⁻¹cm⁻¹`;}
+ else {val=A/(e*c);work=`b = A / (ε × c) = ${A} / (${e} × ${c}) = ${fmt(val)} cm`;}
+ $("outlbl").textContent=LBL[solveFor];$("outval").textContent=isFinite(val)?fmt(val)+U[solveFor]:"—";
+ if(isFinite(val))$(solveFor).value=+val.toPrecision(5);
+ $("work").textContent=work;
+}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");solveFor=b.dataset.s;calc();});
+["A","e","b","c"].forEach(id=>$(id).addEventListener("input",calc));
+// converter
+function fromA(){const A=+$("cA").value;const T=Math.pow(10,-A)*100;$("cT").value=+T.toFixed(2);$("twork").textContent=`%T = 100 × 10^(−A) = 100 × 10^(−${A}) = ${T.toFixed(2)}%`;}
+function fromT(){const T=+$("cT").value;const A=-Math.log10(T/100);$("cA").value=+A.toFixed(3);$("twork").textContent=`A = −log₁₀(T) = −log₁₀(${(T/100)}) = ${A.toFixed(3)}`;}
+$("cA").addEventListener("input",fromA);$("cT").addEventListener("input",fromT);
+calc();fromA();
+</script>
+</body>
+</html>

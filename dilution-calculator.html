@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dilution Calculator (C1V1 = C2V2) — Shows Every Step | Free Lab Tool</title>
+<meta name="description" content="Free dilution calculator using C1V1 = C2V2. Solve for any variable, see exactly how much stock and solvent to mix, with every step shown. For biochemistry, chemistry, and lab prep.">
+<meta name="keywords" content="dilution calculator, c1v1 calculator, c1v1=c2v2, how to dilute a solution, stock solution dilution, serial dilution">
+<link rel="canonical" href="https://biochemtools.com/dilution-calculator.html">
+<meta property="og:title" content="Dilution Calculator (C1V1 = C2V2) — Shows Every Step">
+<meta property="og:description" content="Solve any variable in C1V1 = C2V2 and see how much stock and solvent to mix. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to dilute a solution with C1V1 = C2V2","step":[{"@type":"HowToStep","name":"Set up the equation","text":"C1V1 = C2V2, where C1 and V1 are the stock concentration and volume, C2 and V2 are the final concentration and volume."},{"@type":"HowToStep","name":"Solve for the unknown","text":"Rearrange for the variable you need, e.g. V1 = C2V2 / C1."},{"@type":"HowToStep","name":"Add solvent","text":"Measure V1 of stock, then add solvent up to V2. The solvent to add is V2 minus V1."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:620px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+ .modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem .9rem;border-radius:99px;cursor:pointer;font-size:.85rem}
+ .modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ input:disabled{opacity:.5}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}
+ .out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.92rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Dilution Calculator (C₁V₁ = C₂V₂)</h1><p>Solve for any variable, and see exactly how much stock solution and solvent to mix — with every step shown.</p></header>
+<main>
+ <div class="card">
+  <label>Solve for</label>
+  <div class="modes" id="modes">
+   <button data-s="V1" class="on">Stock volume V₁</button>
+   <button data-s="C2">Final conc. C₂</button>
+   <button data-s="V2">Final volume V₂</button>
+   <button data-s="C1">Stock conc. C₁</button>
+  </div>
+  <div class="fields">
+   <div><label>C₁ — stock concentration (M)</label><input id="C1" type="number" step="any" value="10"></div>
+   <div><label>V₁ — stock volume (mL)</label><input id="V1" type="number" step="any" value=""></div>
+   <div><label>C₂ — final concentration (M)</label><input id="C2" type="number" step="any" value="1"></div>
+   <div><label>V₂ — final volume (mL)</label><input id="V2" type="number" step="any" value="100"></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem" id="outlbl">Stock volume V₁</div><div class="v" id="outval">—</div></div>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to dilute a solution step by step</h2>
+ <p class="note">Every dilution obeys C₁V₁ = C₂V₂, because the amount of solute stays the same — you are only adding solvent. C₁ and V₁ are the concentration and volume of the concentrated stock you start with; C₂ and V₂ are the concentration and volume you want to end up with. Rearrange for whatever you are missing (for example, V₁ = C₂V₂ / C₁), measure that much stock, then add solvent until the total volume reaches V₂. The amount of solvent to add is simply V₂ − V₁.</p>
+ <p class="note">Units just need to match on both sides — use the same concentration unit for C₁ and C₂, and the same volume unit for V₁ and V₂.</p>
+ <p class="note">Related tools: <a href="/henderson-hasselbalch-buffer-calculator.html">Buffer calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+let solveFor="V1";const $=id=>document.getElementById(id);
+const LBL={C1:"Stock concentration C₁ (M)",V1:"Stock volume V₁ (mL)",C2:"Final concentration C₂ (M)",V2:"Final volume V₂ (mL)"};
+function calc(){
+ ["C1","V1","C2","V2"].forEach(k=>$(k).disabled=(k===solveFor));
+ const C1=+$("C1").value,V1=+$("V1").value,C2=+$("C2").value,V2=+$("V2").value;
+ let val,work;
+ if(solveFor==="V1"){val=C2*V2/C1;work=`V₁ = C₂V₂ / C₁ = (${C2} × ${V2}) / ${C1} = ${fmt(val)} mL\n`;if(isFinite(val)&&V2)work+=`Solvent to add = V₂ − V₁ = ${V2} − ${fmt(val)} = ${fmt(V2-val)} mL`;}
+ else if(solveFor==="C2"){val=C1*V1/V2;work=`C₂ = C₁V₁ / V₂ = (${C1} × ${V1}) / ${V2} = ${fmt(val)} M`;}
+ else if(solveFor==="V2"){val=C1*V1/C2;work=`V₂ = C₁V₁ / C₂ = (${C1} × ${V1}) / ${C2} = ${fmt(val)} mL`;}
+ else {val=C2*V2/V1;work=`C₁ = C₂V₂ / V₁ = (${C2} × ${V2}) / ${V1} = ${fmt(val)} M`;}
+ $("outlbl").textContent=LBL[solveFor];
+ $("outval").textContent=isFinite(val)?fmt(val)+(solveFor[0]==="C"?" M":" mL"):"—";
+ if(isFinite(val))$(solveFor).value=+val.toFixed(4);
+ $("work").textContent=work;
+}
+function fmt(x){return isFinite(x)?(Math.abs(x)>=100?x.toFixed(1):x.toFixed(3).replace(/\.?0+$/,"")):"—";}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");solveFor=b.dataset.s;calc();});
+["C1","V1","C2","V2"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>

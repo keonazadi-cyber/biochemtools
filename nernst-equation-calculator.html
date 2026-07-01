@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nernst Equation Calculator (Shows Every Step) — Cell Potential | Free</title>
+<meta name="description" content="Free Nernst equation calculator for cell potential. Enter E°, n, and Q to get the cell potential at any temperature, with the full worked steps and both the RT/nF and 0.0592/n forms shown. For biochemistry, chemistry, and the MCAT.">
+<meta name="keywords" content="nernst equation calculator, cell potential calculator, E = E0 - RT/nF lnQ, electrochemistry calculator, 0.0592/n, reaction quotient cell potential">
+<link rel="canonical" href="https://biochemtools.com/nernst-equation-calculator.html">
+<meta property="og:title" content="Nernst Equation Calculator — Cell Potential, Step by Step">
+<meta property="og:description" content="Compute cell potential from E°, n, and Q at any temperature, with the full worked steps. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use the Nernst equation to find cell potential","step":[{"@type":"HowToStep","name":"Write the equation","text":"E = E° − (RT/nF) ln Q, where n is electrons transferred and Q is the reaction quotient."},{"@type":"HowToStep","name":"Use the 25°C shortcut","text":"At 298 K this simplifies to E = E° − (0.0592/n) log Q."},{"@type":"HowToStep","name":"Interpret","text":"A positive E means the reaction is spontaneous as written under those conditions."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--pos:#5dcaa5;--neg:#e24b4a;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .out{text-align:center;padding:1.25rem;border-radius:12px;margin:1rem 0}.out .v{font-size:2.1rem;font-weight:600}.out .l{font-size:1rem;margin-top:.25rem}
+ .pos{background:rgba(93,202,165,.12);color:var(--pos)}.neg{background:rgba(226,75,74,.12);color:var(--neg)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Nernst Equation Calculator</h1><p>Find the cell potential under non-standard conditions from E°, the electrons transferred, and the reaction quotient — with every step shown.</p></header>
+<main>
+ <div class="card">
+  <div class="fields">
+   <div><label>E° — standard cell potential (V)</label><input id="e0" type="number" step="any" value="1.10"></div>
+   <div><label>n — electrons transferred</label><input id="n" type="number" step="any" value="2"></div>
+   <div><label>Q — reaction quotient</label><input id="q" type="number" step="any" value="0.001"></div>
+   <div><label>Temperature (K)</label><input id="T" type="number" step="any" value="298.15"></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="out" id="out"><div class="v" id="eval">—</div><div class="l" id="elab"></div></div>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to use the Nernst equation</h2>
+ <p class="note">The Nernst equation adjusts a cell's standard potential for real, non-standard concentrations: E = E° − (RT/nF) ln Q. Here E° is the standard cell potential, R = 8.314 J/mol·K, T is temperature in kelvin, n is the number of electrons transferred, F = 96485 C/mol is Faraday's constant, and Q is the reaction quotient. At 25 °C (298 K) the RT/F term collapses to a constant, giving the common shortcut E = E° − (0.0592/n) log₁₀ Q. A positive E means the reaction is spontaneous as written under those conditions; at equilibrium Q equals K and E = 0.</p>
+ <p class="note">Constants: R = 8.314 J/mol·K, F = 96485 C/mol. The 0.0592 factor is RT·ln(10)/F evaluated at 298 K, so it is only exact at 25 °C.</p>
+ <p class="note">Related tools: <a href="/gibbs-free-energy-calculator.html">Gibbs free energy calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const R=8.314,F=96485;const $=id=>document.getElementById(id);
+function calc(){
+ const e0=+$("e0").value,n=+$("n").value,q=+$("q").value,T=+$("T").value;
+ if(q<=0||n<=0){$("eval").textContent="—";$("elab").textContent="Q and n must be greater than 0";$("work").textContent="";return;}
+ const lnQ=Math.log(q);
+ const E=e0-(R*T/(n*F))*lnQ;
+ const out=$("out");out.className="out "+(E>=0?"pos":"neg");
+ $("eval").textContent=(E>=0?"+":"")+E.toFixed(4)+" V";
+ $("elab").textContent=E>0?"Spontaneous as written (E > 0)":E<0?"Non-spontaneous as written (E < 0)":"At equilibrium (E = 0)";
+ let w=`E = E° − (RT / nF) · ln Q\n`;
+ w+=`RT/nF = (8.314 × ${T}) / (${n} × 96485) = ${(R*T/(n*F)).toExponential(3)} V\n`;
+ w+=`ln Q = ln(${q}) = ${lnQ.toFixed(4)}\n`;
+ w+=`E = ${e0} − (${(R*T/(n*F)).toExponential(3)})(${lnQ.toFixed(4)}) = ${E.toFixed(4)} V\n`;
+ if(Math.abs(T-298.15)<1){const simp=e0-(0.0592/n)*Math.log10(q);
+  w+=`\n25 °C shortcut:  E = E° − (0.0592/n) log Q\n`;
+  w+=`E = ${e0} − (0.0592/${n})(${Math.log10(q).toFixed(4)}) = ${simp.toFixed(4)} V`;}
+ $("work").textContent=w;
+}
+["e0","n","q","T"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
