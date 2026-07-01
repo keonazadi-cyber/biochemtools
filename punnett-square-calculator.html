@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punnett Square Calculator: Monohybrid &amp; Dihybrid Crosses with Ratios — Free</title>
+<meta name="description" content="Free Punnett square calculator. Enter two parent genotypes and instantly get the full square, gametes, and genotype and phenotype ratios for monohybrid and dihybrid crosses. For genetics, biology, and the MCAT.">
+<meta name="keywords" content="punnett square calculator, dihybrid cross calculator, monohybrid cross, genotype ratio, phenotype ratio, 9:3:3:1">
+<link rel="canonical" href="https://biochemtools.com/punnett-square-calculator.html">
+<meta property="og:title" content="Punnett Square Calculator — Monohybrid &amp; Dihybrid">
+<meta property="og:description" content="Enter two genotypes, get the full Punnett square plus genotype and phenotype ratios. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to do a Punnett square","step":[{"@type":"HowToStep","name":"List the gametes","text":"Write the possible gametes each parent can make by picking one allele from each gene."},{"@type":"HowToStep","name":"Fill the grid","text":"Combine each row gamete with each column gamete to get every offspring genotype."},{"@type":"HowToStep","name":"Count ratios","text":"Tally the genotypes, and group by phenotype (dominant if any capital allele is present)."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.2rem;padding:.6rem;border-radius:8px;font-family:monospace;text-align:center;letter-spacing:.1em}
+ .cross{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:end}
+ .cross .x{font-size:1.5rem;color:var(--muted);padding-bottom:.5rem}
+ .ex{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;justify-content:center}.ex button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.35rem .8rem;border-radius:99px;cursor:pointer;font-size:.8rem;font-family:monospace}
+ table.pun{border-collapse:collapse;margin:1rem auto;font-family:monospace}
+ table.pun td,table.pun th{border:1px solid var(--line);padding:.5rem;text-align:center;min-width:44px;font-size:.95rem}
+ table.pun th{background:var(--bg);color:var(--accent)}
+ table.pun td{background:rgba(93,202,165,.06)}
+ .ratios{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+ .rbox{background:var(--bg);border-radius:10px;padding:1rem}.rbox h4{margin:0 0 .5rem;font-size:.9rem;color:var(--muted);font-weight:500}
+ .row{display:flex;justify-content:space-between;font-family:monospace;font-size:.9rem;padding:.15rem 0}
+ .err{color:#e24b4a;font-size:.85rem;text-align:center}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Punnett Square Calculator</h1><p>Enter two parent genotypes and get the full Punnett square, the gametes, and the genotype and phenotype ratios — for monohybrid and dihybrid crosses.</p></header>
+<main>
+ <div class="card">
+  <div class="cross">
+   <div><label>Parent 1 genotype</label><input id="p1" value="AaBb" spellcheck="false"></div>
+   <div class="x">×</div>
+   <div><label>Parent 2 genotype</label><input id="p2" value="AaBb" spellcheck="false"></div>
+  </div>
+  <div class="ex">
+   <button data-a="Aa" data-b="Aa">Aa × Aa</button>
+   <button data-a="AaBb" data-b="AaBb">AaBb × AaBb</button>
+   <button data-a="Aa" data-b="aa">Aa × aa (test cross)</button>
+   <button data-a="AABb" data-b="Aabb">AABb × Aabb</button>
+  </div>
+  <p class="err" id="err"></p>
+ </div>
+ <div class="card">
+  <div id="square" style="overflow-x:auto"></div>
+  <div class="ratios">
+   <div class="rbox"><h4>Genotype ratio</h4><div id="geno"></div></div>
+   <div class="rbox"><h4>Phenotype ratio</h4><div id="pheno"></div></div>
+  </div>
+ </div>
+ <h2>How a Punnett square works</h2>
+ <p class="note">Each parent passes one allele per gene to each offspring, so the first step is to list the possible gametes — every combination of one allele from each gene. A heterozygote for two genes (AaBb) makes four gametes: AB, Ab, aB, ab. Put one parent's gametes across the top and the other's down the side, then fill each box by combining that row and column. Counting the boxes gives the genotype ratio; grouping boxes that show the same trait (dominant if at least one capital allele is present for that gene) gives the phenotype ratio — which is where the classic 3:1 monohybrid and 9:3:3:1 dihybrid ratios come from.</p>
+ <p class="note">Assumes complete dominance and independent assortment; uppercase letters are dominant alleles, lowercase recessive. Works for one or two genes.</p>
+ <p class="note">Related tools: <a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const $=id=>document.getElementById(id);
+function genes(g){
+ // split genotype into gene pairs by letter (case-insensitive grouping)
+ const letters=g.replace(/[^A-Za-z]/g,"");
+ if(letters.length%2!==0)throw "Each gene needs 2 alleles (e.g. Aa or AaBb).";
+ const pairs=[];for(let i=0;i<letters.length;i+=2)pairs.push([letters[i],letters[i+1]]);
+ // validate each pair is same letter
+ for(const p of pairs){if(p[0].toLowerCase()!==p[1].toLowerCase())throw "Alleles in a gene must match letters (e.g. Aa, not Ab).";}
+ return pairs;
+}
+function gametes(pairs){
+ let combos=[""];
+ for(const [a,b] of pairs){const opts=[...new Set([a,b])];const next=[];for(const c of combos)for(const o of opts)next.push(c+o);combos=next;}
+ return combos;
+}
+function canon(alleles){
+ // group into genes by letter, sort each gene uppercase-first
+ const byLetter={};
+ for(const al of alleles){const k=al.toLowerCase();(byLetter[k]=byLetter[k]||[]).push(al);}
+ const keys=Object.keys(byLetter).sort();
+ return keys.map(k=>byLetter[k].sort((x,y)=>(x===x.toUpperCase()?0:1)-(y===y.toUpperCase()?0:1)).join("")).join("");
+}
+function pheno(genotype,nGenes){
+ // for each gene, dominant if any uppercase
+ const byLetter={};for(const al of genotype.replace(/[^A-Za-z]/g,""))(byLetter[al.toLowerCase()]=byLetter[al.toLowerCase()]||[]).push(al);
+ return Object.keys(byLetter).sort().map(k=>{const has=byLetter[k].some(x=>x===x.toUpperCase());return has?k.toUpperCase()+"_":k+k;}).join("");
+}
+function gcd(a,b){return b?gcd(b,a%b):a;}
+function ratio(counts){
+ const vals=Object.values(counts);let g=vals[0];for(const v of vals)g=gcd(g,v);
+ return Object.entries(counts).map(([k,v])=>[k,v/g,v]).sort((a,b)=>b[2]-a[2]);
+}
+function run(){
+ try{
+  const g1=genes($("p1").value),g2=genes($("p2").value);
+  if(g1.length!==g2.length)throw "Both parents must have the same number of genes.";
+  $("err").textContent="";
+  const n=g1.length;
+  const ga1=gametes(g1),ga2=gametes(g2);
+  // build table
+  let html='<table class="pun"><tr><th></th>'+ga2.map(g=>`<th>${g}</th>`).join("")+"</tr>";
+  const geno={},phe={};
+  for(const r of ga1){html+=`<tr><th>${r}</th>`;
+   for(const c of ga2){const gt=canon((r+c).split(""));html+=`<td>${gt}</td>`;geno[gt]=(geno[gt]||0)+1;const ph=pheno(gt,n);phe[ph]=(phe[ph]||0)+1;}
+   html+="</tr>";}
+  html+="</table>";
+  $("square").innerHTML=html;
+  $("geno").innerHTML=ratio(geno).map(([k,r,c])=>`<div class="row"><span>${k}</span><span>${r} <span style="color:var(--muted)">(${c}/${ga1.length*ga2.length})</span></span></div>`).join("");
+  $("pheno").innerHTML=ratio(phe).map(([k,r,c])=>`<div class="row"><span>${k}</span><span>${r} <span style="color:var(--muted)">(${c}/${ga1.length*ga2.length})</span></span></div>`).join("");
+ }catch(e){$("err").textContent=e;}
+}
+document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{$("p1").value=b.dataset.a;$("p2").value=b.dataset.b;run();});
+["p1","p2"].forEach(id=>$(id).addEventListener("input",run));
+run();
+</script>
+</body>
+</html>

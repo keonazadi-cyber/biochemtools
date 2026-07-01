@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pH Calculator: Strong &amp; Weak Acids and Bases (Shows Every Step) — Free</title>
+<meta name="description" content="Free pH calculator for strong and weak acids and bases. Enter concentration and pKa to get pH, pOH, [H+], and [OH−], solved exactly with every step shown. For chemistry and biochemistry.">
+<meta name="keywords" content="ph calculator, ph of weak acid, calculate ph, poh calculator, weak acid ph, strong base ph, hydrogen ion concentration">
+<link rel="canonical" href="https://biochemtools.com/ph-calculator.html">
+<meta property="og:title" content="pH Calculator — Strong &amp; Weak Acids and Bases, Step by Step">
+<meta property="og:description" content="pH, pOH, [H+], and [OH−] for any acid or base, solved exactly with the work shown. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate the pH of a weak acid","step":[{"@type":"HowToStep","name":"Write the equilibrium","text":"Ka = [H+][A−]/[HA], and Ka = 10^(−pKa)."},{"@type":"HowToStep","name":"Solve for [H+]","text":"Solve Ka = x²/(C−x) for x = [H+], either by the approximation x ≈ √(Ka·C) or the exact quadratic."},{"@type":"HowToStep","name":"Take the log","text":"pH = −log10[H+]."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--acid:#e24b4a;--base:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem .9rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .phbig{text-align:center;margin:1rem 0}.phbig .v{font-size:2.6rem;font-weight:600;color:var(--out)}
+ .scale{height:14px;border-radius:99px;background:linear-gradient(90deg,#e24b4a,#e0a93b,#5dcaa5,#378add,#7f77dd);position:relative;margin:.5rem 0 1.5rem}
+ .scale .mark{position:absolute;top:-5px;width:3px;height:24px;background:#fff;border-radius:2px;transform:translateX(-50%)}
+ .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1rem 0}.metric{background:var(--bg);border-radius:8px;padding:.7rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.72rem}.metric .val{font-size:1.05rem;font-weight:600;margin-top:.2rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>pH Calculator</h1><p>Find pH, pOH, [H⁺], and [OH⁻] for strong or weak acids and bases — solved exactly, with every step shown.</p></header>
+<main>
+ <div class="card">
+  <div class="modes" id="modes">
+   <button data-m="sa" class="on">Strong acid</button>
+   <button data-m="wa">Weak acid</button>
+   <button data-m="sb">Strong base</button>
+   <button data-m="wb">Weak base</button>
+  </div>
+  <div class="fields">
+   <div><label>Concentration (M)</label><input id="C" type="number" step="any" value="0.1"></div>
+   <div id="kwrap"><label id="klbl">pKa</label><input id="pk" type="number" step="any" value="4.76"></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="phbig"><div style="color:var(--muted);font-size:.85rem">pH</div><div class="v" id="ph">—</div></div>
+  <div class="scale"><div class="mark" id="mark" style="left:50%"></div></div>
+  <div class="grid">
+   <div class="metric"><div class="lbl">pH</div><div class="val" id="mph">—</div></div>
+   <div class="metric"><div class="lbl">pOH</div><div class="val" id="mpoh">—</div></div>
+   <div class="metric"><div class="lbl">[H⁺] (M)</div><div class="val" id="mh">—</div></div>
+   <div class="metric"><div class="lbl">[OH⁻] (M)</div><div class="val" id="moh">—</div></div>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to calculate pH</h2>
+ <p class="note">For a strong acid, it fully dissociates, so [H⁺] equals the concentration and pH = −log[H⁺]. For a strong base, [OH⁻] equals the concentration, pOH = −log[OH⁻], and pH = 14 − pOH. Weak acids only partly dissociate: set up Ka = x²/(C − x) where x = [H⁺] and Ka = 10^(−pKa), then solve — the shortcut x ≈ √(Ka·C) works when dissociation is small, and the exact quadratic works always. Weak bases work the same way with Kb and [OH⁻]. This tool solves the exact quadratic so it stays accurate even for concentrated or fairly strong weak acids where the approximation breaks down.</p>
+ <p class="note">Assumes 25 °C (K_w = 1×10⁻¹⁴) and a monoprotic acid or base. pKa and pKb relate by pKa + pKb = 14 for a conjugate pair.</p>
+ <p class="note">Related tools: <a href="/henderson-hasselbalch-buffer-calculator.html">Buffer calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+let mode="sa";const $=id=>document.getElementById(id);
+function setKvis(){const weak=(mode==="wa"||mode==="wb");$("kwrap").style.display=weak?"block":"none";$("klbl").textContent=mode==="wb"?"pKb":"pKa";}
+function calc(){
+ const C=+$("C").value;let H,OH,work;
+ if(C<=0){$("ph").textContent="—";return;}
+ if(mode==="sa"){H=C;work=`Strong acid — fully dissociates.\n[H⁺] = C = ${C} M\npH = −log[H⁺] = −log(${C}) = ${(-Math.log10(C)).toFixed(2)}`;}
+ else if(mode==="sb"){OH=C;work=`Strong base — fully dissociates.\n[OH⁻] = C = ${C} M\npOH = −log(${C}) = ${(-Math.log10(C)).toFixed(2)}\npH = 14 − pOH = ${(14+Math.log10(C)).toFixed(2)}`;}
+ else if(mode==="wa"){const Ka=Math.pow(10,-(+$("pk").value));H=(-Ka+Math.sqrt(Ka*Ka+4*Ka*C))/2;const approx=Math.sqrt(Ka*C);
+  work=`Weak acid.  Ka = 10^(−pKa) = 10^(−${+$("pk").value}) = ${Ka.toExponential(2)}\nKa = x²/(C − x),  solve for x = [H⁺]:\nx = (−Ka + √(Ka² + 4·Ka·C))/2 = ${H.toExponential(3)} M\n(approx √(Ka·C) = ${approx.toExponential(3)})\npH = −log[H⁺] = ${(-Math.log10(H)).toFixed(2)}`;}
+ else {const Kb=Math.pow(10,-(+$("pk").value));OH=(-Kb+Math.sqrt(Kb*Kb+4*Kb*C))/2;
+  work=`Weak base.  Kb = 10^(−pKb) = ${Kb.toExponential(2)}\nKb = x²/(C − x),  solve for x = [OH⁻]:\nx = ${OH.toExponential(3)} M\npOH = −log[OH⁻] = ${(-Math.log10(OH)).toFixed(2)}\npH = 14 − pOH = ${(14+Math.log10(OH)).toFixed(2)}`;}
+ if(H===undefined)H=1e-14/OH; if(OH===undefined)OH=1e-14/H;
+ const pH=-Math.log10(H),pOH=-Math.log10(OH);
+ $("ph").textContent=pH.toFixed(2);
+ $("mph").textContent=pH.toFixed(2);$("mpoh").textContent=pOH.toFixed(2);
+ $("mh").textContent=H.toExponential(2);$("moh").textContent=OH.toExponential(2);
+ $("mark").style.left=Math.max(0,Math.min(100,pH/14*100))+"%";
+ $("work").textContent=work;
+}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");mode=b.dataset.m;setKvis();calc();});
+["C","pk"].forEach(id=>$(id).addEventListener("input",calc));
+setKvis();calc();
+</script>
+</body>
+</html>

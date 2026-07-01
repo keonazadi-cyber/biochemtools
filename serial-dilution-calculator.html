@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serial Dilution Calculator: Full Series + How to Prepare Each Tube (Free)</title>
+<meta name="description" content="Free serial dilution calculator. Enter your stock concentration, dilution factor, and number of tubes to get the concentration at every step plus exactly how much sample and diluent to add per tube. For biology, chemistry, and microbiology labs.">
+<meta name="keywords" content="serial dilution calculator, dilution series, tenfold dilution, how to make a serial dilution, dilution factor, dilution table">
+<link rel="canonical" href="https://biochemtools.com/serial-dilution-calculator.html">
+<meta property="og:title" content="Serial Dilution Calculator — Full Series + Prep Steps">
+<meta property="og:description" content="Get the concentration at every dilution step plus how much sample and diluent per tube. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to make a serial dilution","step":[{"@type":"HowToStep","name":"Set the dilution factor","text":"Decide a fold per step, e.g. 10-fold means 1 part sample to 9 parts diluent."},{"@type":"HowToStep","name":"Transfer and mix","text":"Move a fixed volume from each tube into the next tube of diluent, mixing between steps."},{"@type":"HowToStep","name":"Track concentration","text":"Each tube's concentration is the stock divided by the dilution factor raised to the tube number."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+ @media(min-width:560px){.fields{grid-template-columns:repeat(4,1fr)}}
+ table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:.5rem}
+ th,td{text-align:left;padding:.5rem .5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ td.c{font-family:monospace;color:var(--out)}
+ .prep{background:var(--bg);border-radius:10px;padding:1rem;margin-top:1rem;font-size:.9rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Serial Dilution Calculator</h1><p>Get the concentration at every step of your dilution series — plus exactly how much sample and diluent to add per tube.</p></header>
+<main>
+ <div class="card">
+  <div class="fields">
+   <div><label>Stock concentration</label><input id="stock" type="number" step="any" value="1000000"></div>
+   <div><label>Dilution factor (fold)</label><input id="factor" type="number" step="any" value="10"></div>
+   <div><label>Number of tubes</label><input id="tubes" type="number" step="1" value="6"></div>
+   <div><label>Volume per tube (µL)</label><input id="vol" type="number" step="any" value="1000"></div>
+  </div>
+ </div>
+ <div class="card">
+  <table><thead><tr><th>Tube</th><th>Total dilution</th><th>Concentration</th></tr></thead><tbody id="rows"></tbody></table>
+  <div class="prep" id="prep"></div>
+ </div>
+ <h2>How to make a serial dilution</h2>
+ <p class="note">A serial dilution is a stepwise dilution where each tube is diluted from the one before it by the same factor, letting you span many orders of magnitude with small, accurate steps. For a 10-fold series you move 1 part sample into 9 parts diluent at each step. The concentration in tube n is the stock divided by the dilution factor raised to the n — so a 10-fold series starting at 1,000,000 gives 100,000 then 10,000 then 1,000, and so on. To prepare each tube, add the transfer volume of sample to the diluent volume: for a chosen final volume V and factor F, transfer V/F of sample into V − V/F of diluent, mixing well before moving to the next tube.</p>
+ <p class="note">Concentration units carry through unchanged — use cells/mL, M, µg/mL, whatever your stock is in.</p>
+ <p class="note">Related tools: <a href="/dilution-calculator.html">Single dilution (C₁V₁)</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const $=id=>document.getElementById(id);
+function fmt(x){if(!isFinite(x))return"—";if(x!==0&&(Math.abs(x)>=1e5||Math.abs(x)<1e-3))return x.toExponential(3);return(+x.toPrecision(6)).toString();}
+function calc(){
+ const stock=+$("stock").value,F=+$("factor").value,N=Math.max(1,Math.min(20,Math.floor(+$("tubes").value))),V=+$("vol").value;
+ if(F<=1||stock<=0){$("rows").innerHTML="";$("prep").textContent="Dilution factor must be > 1.";return;}
+ let rows="";
+ for(let n=1;n<=N;n++){const conc=stock/Math.pow(F,n);rows+=`<tr><td>${n}</td><td>1 : ${fmt(Math.pow(F,n))}</td><td class="c">${fmt(conc)}</td></tr>`;}
+ $("rows").innerHTML=rows;
+ const transfer=V/F, diluent=V-transfer;
+ $("prep").innerHTML=`<b>Per tube (${V} µL final, ${F}-fold):</b><br>Add <b style="color:var(--out)">${fmt(transfer)} µL</b> of sample from the previous tube into <b style="color:var(--out)">${fmt(diluent)} µL</b> of diluent, mix, then repeat.<br><span class="note">Tube 1 takes ${fmt(transfer)} µL of the original stock.</span>`;
+}
+["stock","factor","tubes","vol"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
