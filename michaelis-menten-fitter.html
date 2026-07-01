@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michaelis-Menten Fitter: Paste Data, Get Km &amp; Vmax Instantly (Free) — Enzyme Kinetics</title>
+<meta name="description" content="Free Michaelis-Menten fitter. Paste your enzyme kinetics data (substrate concentration and velocity) and instantly get Km, Vmax, R², and a fitted curve through your points. Shows the Lineweaver-Burk regression steps. For biochemistry labs and the MCAT.">
+<meta name="keywords" content="michaelis menten fit, find Km and Vmax from data, enzyme kinetics data, lineweaver burk regression, km vmax calculator from data, enzyme lab curve fit">
+<link rel="canonical" href="https://biochemtools.com/michaelis-menten-fitter.html">
+<meta property="og:title" content="Michaelis-Menten Fitter — Paste Data, Get Km &amp; Vmax">
+<meta property="og:description" content="Paste enzyme kinetics data and instantly get Km, Vmax, R², and a fitted curve. Free, shows the work.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to find Km and Vmax from enzyme kinetics data","step":[{"@type":"HowToStep","name":"Linearize","text":"Take reciprocals: plot 1/v against 1/[S] (a Lineweaver-Burk plot), which is a straight line."},{"@type":"HowToStep","name":"Fit a line","text":"Do a linear regression: slope = Km/Vmax, y-intercept = 1/Vmax."},{"@type":"HowToStep","name":"Solve","text":"Vmax = 1/intercept and Km = slope × Vmax."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--fit:#7f77dd;--data:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.8rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1rem;padding:.75rem;border-radius:10px;font-family:monospace;min-height:150px;resize:vertical}
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.8rem}.metric .val{font-size:1.7rem;font-weight:600;margin-top:.2rem;color:var(--fit)}
+ canvas{width:100%;height:280px;background:var(--bg);border-radius:10px}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap;margin-top:1rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+ .warn{color:#e24b4a;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Michaelis-Menten Fitter</h1><p>Paste your enzyme kinetics data and instantly get K<sub>m</sub>, V<sub>max</sub>, and R² with a fitted curve drawn through your points — the Lineweaver-Burk regression, done for you and shown step by step.</p></header>
+<main>
+ <div class="card">
+  <label>Your data — one point per line: <b>[S]</b> then <b>v</b> (space, comma, or tab separated)</label>
+  <textarea id="data" spellcheck="false">0.5  21
+1    34
+2    49
+4    67
+8    79
+16   90</textarea>
+  <p class="note" id="parsed"></p>
+ </div>
+ <div class="card">
+  <div class="grid">
+   <div class="metric"><div class="lbl">V<sub>max</sub></div><div class="val" id="vmax">—</div></div>
+   <div class="metric"><div class="lbl">K<sub>m</sub></div><div class="val" id="km">—</div></div>
+   <div class="metric"><div class="lbl">R² (fit quality)</div><div class="val" id="r2" style="color:var(--data)">—</div></div>
+  </div>
+  <canvas id="plot" width="700" height="280"></canvas>
+  <p class="note"><span style="color:var(--data)">●</span> your data &nbsp; <span style="color:var(--fit)">—</span> fitted Michaelis-Menten curve. Dashed lines mark V<sub>max</sub> and K<sub>m</sub> (where v = ½V<sub>max</sub>).</p>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to find Km and Vmax from data</h2>
+ <p class="note">Raw enzyme data is a curve, which is hard to fit by eye — so the classic trick is to linearize it. Taking reciprocals of the Michaelis-Menten equation gives 1/v = (K<sub>m</sub>/V<sub>max</sub>)(1/[S]) + 1/V<sub>max</sub>, which is a straight line (the Lineweaver-Burk plot). Fit a line to your reciprocal points: the y-intercept is 1/V<sub>max</sub>, so V<sub>max</sub> = 1/intercept, and the slope is K<sub>m</sub>/V<sub>max</sub>, so K<sub>m</sub> = slope × V<sub>max</sub>. This tool does that regression for you and draws the resulting curve back over your original data so you can see how well it fits.</p>
+ <p class="note">Method note: this uses the Lineweaver-Burk (double-reciprocal) linear fit, which is the standard textbook approach and shows its work clearly. It weights low-[S] points more heavily; for a publication you would use nonlinear regression, but for coursework and checking a lab this matches what you're taught.</p>
+ <p class="note">Related tools: <a href="/enzyme-kinetics-simulator.html">Enzyme kinetics simulator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const $=id=>document.getElementById(id);
+function parse(){
+ const rows=$("data").value.trim().split("\n").map(l=>l.trim()).filter(Boolean);
+ const pts=[];
+ for(const r of rows){const m=r.split(/[\s,\t]+/).map(Number);if(m.length>=2&&isFinite(m[0])&&isFinite(m[1])&&m[0]>0&&m[1]>0)pts.push({s:m[0],v:m[1]});}
+ return pts;
+}
+function fit(){
+ const pts=parse();
+ if(pts.length<2){$("parsed").innerHTML='<span class="warn">Enter at least 2 valid data points ([S] > 0, v > 0).</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
+ $("parsed").textContent=pts.length+" points read.";
+ // Lineweaver-Burk linear regression: x=1/S, y=1/v
+ const n=pts.length;let sx=0,sy=0,sxy=0,sx2=0;
+ const X=pts.map(p=>1/p.s),Y=pts.map(p=>1/p.v);
+ for(let i=0;i<n;i++){sx+=X[i];sy+=Y[i];sxy+=X[i]*Y[i];sx2+=X[i]*X[i];}
+ const m=(n*sxy-sx*sy)/(n*sx2-sx*sx);
+ const b=(sy-m*sx)/n;
+ const Vmax=1/b, Km=m*Vmax;
+ // R^2 on the linear fit
+ const ymean=sy/n;let ssr=0,sst=0;for(let i=0;i<n;i++){const yp=m*X[i]+b;ssr+=(Y[i]-yp)**2;sst+=(Y[i]-ymean)**2;}
+ const r2=1-ssr/sst;
+ $("vmax").textContent=Vmax.toFixed(1);$("km").textContent=Km.toFixed(2);$("r2").textContent=r2.toFixed(4);
+ let w=`Lineweaver-Burk fit:  1/v = (Km/Vmax)(1/[S]) + 1/Vmax\n`;
+ w+=`Linear regression of 1/v vs 1/[S] (${n} points):\n`;
+ w+=`  slope     = Km/Vmax = ${m.toFixed(4)}\n`;
+ w+=`  intercept = 1/Vmax  = ${b.toFixed(5)}\n`;
+ w+=`Vmax = 1/intercept = 1/${b.toFixed(5)} = ${Vmax.toFixed(2)}\n`;
+ w+=`Km   = slope × Vmax = ${m.toFixed(4)} × ${Vmax.toFixed(2)} = ${Km.toFixed(3)}\n`;
+ w+=`R² (linear fit) = ${r2.toFixed(4)}`;
+ $("work").textContent=w;
+ draw(pts,{Vmax,Km});
+}
+function draw(pts,f){
+ const c=$("plot"),ctx=c.getContext("2d"),W=c.width,H=c.height,P=42;
+ ctx.clearRect(0,0,W,H);
+ const Smax=Math.max(...pts.map(p=>p.s),1)*1.1;
+ const Vtop=Math.max(...pts.map(p=>p.v), f?f.Vmax:1)*1.1;
+ const X=s=>P+(s/Smax)*(W-P-14), Y=v=>H-P-(v/Vtop)*(H-P-14);
+ // axes
+ ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";ctx.fillText("[S]",W-32,H-P+20);ctx.fillText("v",P-26,20);
+ if(f){
+  // Vmax asymptote
+  ctx.strokeStyle="#4a4560";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(P,Y(f.Vmax));ctx.lineTo(W-14,Y(f.Vmax));ctx.stroke();
+  ctx.fillStyle="#7f77dd";ctx.fillText("Vmax "+f.Vmax.toFixed(0),W-90,Y(f.Vmax)-6);
+  // Km marker
+  if(f.Km<=Smax){ctx.beginPath();ctx.moveTo(X(f.Km),H-P);ctx.lineTo(X(f.Km),Y(f.Vmax/2));ctx.lineTo(P,Y(f.Vmax/2));ctx.stroke();ctx.fillText("Km "+f.Km.toFixed(1),X(f.Km)+4,H-P-6);}
+  ctx.setLineDash([]);
+  // fitted curve
+  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+  for(let s=0;s<=Smax;s+=Smax/160){const v=f.Vmax*s/(f.Km+s);const x=X(s),y=Y(v);s===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();
+ }
+ // data points
+ ctx.fillStyle="#5dcaa5";pts.forEach(p=>{ctx.beginPath();ctx.arc(X(p.s),Y(p.v),4.5,0,7);ctx.fill();});
+}
+$("data").addEventListener("input",fit);
+fit();
+</script>
+</body>
+</html>
