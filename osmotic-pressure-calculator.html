@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osmotic Pressure &amp; Osmolarity Calculator (π = iMRT, with Tonicity) — Free</title>
+<meta name="description" content="Free osmotic pressure and osmolarity calculator using π = iMRT (the van't Hoff equation). Enter concentration, van't Hoff factor, and temperature to get osmolarity and osmotic pressure, plus how it compares to blood. For biology, physiology, and the MCAT.">
+<meta name="keywords" content="osmotic pressure calculator, osmolarity calculator, van't hoff factor, iMRT, tonicity, isotonic hypertonic hypotonic">
+<link rel="canonical" href="https://biochemtools.com/osmotic-pressure-calculator.html">
+<meta property="og:title" content="Osmotic Pressure &amp; Osmolarity Calculator (π = iMRT)">
+<meta property="og:description" content="Osmolarity and osmotic pressure from concentration, van't Hoff factor, and temperature, with a tonicity check. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate osmotic pressure","step":[{"@type":"HowToStep","name":"Find osmolarity","text":"Multiply molarity by the van't Hoff factor i (particles per formula unit): osmolarity = i × M."},{"@type":"HowToStep","name":"Apply van't Hoff","text":"Osmotic pressure π = iMRT, with R = 0.08206 L·atm/mol·K and T in kelvin."},{"@type":"HowToStep","name":"Compare to blood","text":"Blood plasma is about 0.30 Osm (≈7.6 atm); higher is hypertonic, lower is hypotonic."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input,select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0}.metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.8rem}.metric .val{font-size:1.6rem;font-weight:600;margin-top:.2rem;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ .ton{text-align:center;padding:1rem;border-radius:10px;margin-top:1rem;font-weight:600}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Osmotic Pressure &amp; Osmolarity Calculator</h1><p>Get osmolarity and osmotic pressure from concentration with the van't Hoff equation π = iMRT — plus whether your solution is hypertonic, isotonic, or hypotonic to blood.</p></header>
+<main>
+ <div class="card">
+  <div class="fields">
+   <div><label>Molarity (M)</label><input id="M" type="number" step="any" value="0.15"></div>
+   <div><label>Solute (sets i)</label>
+    <select id="solute">
+     <option value="2">NaCl (i = 2)</option>
+     <option value="1">Glucose (i = 1)</option>
+     <option value="3">CaCl₂ (i = 3)</option>
+     <option value="2b">KCl (i = 2)</option>
+     <option value="custom">Custom i…</option>
+    </select></div>
+   <div><label>Temperature (°C)</label><input id="T" type="number" step="any" value="37"></div>
+  </div>
+  <div id="iwrap" style="display:none;margin-top:1rem"><label>Custom van't Hoff factor i</label><input id="icustom" type="number" step="any" value="1"></div>
+ </div>
+ <div class="card">
+  <div class="grid">
+   <div class="metric"><div class="lbl">Osmolarity</div><div class="val" id="osm">—</div></div>
+   <div class="metric"><div class="lbl">Osmotic pressure π</div><div class="val" id="pi">—</div></div>
+  </div>
+  <div class="work" id="work"></div>
+  <div id="ton"></div>
+ </div>
+ <h2>How to calculate osmotic pressure</h2>
+ <p class="note">Osmotic pressure is the pressure needed to stop water from flowing into a solution across a membrane, and it depends on the number of dissolved particles, not what they are. First find osmolarity by multiplying the molarity by the van't Hoff factor i — the number of particles each formula unit splits into (glucose stays as 1, NaCl splits into Na⁺ and Cl⁻ for 2, CaCl₂ into 3). Then the van't Hoff equation gives the pressure: π = iMRT, with R = 0.08206 L·atm/mol·K and temperature in kelvin. Comparing to blood plasma (about 0.30 Osm, roughly 7.6 atm at body temperature) tells you the tonicity: a more concentrated solution is hypertonic and pulls water out of cells, a less concentrated one is hypotonic and pushes water in.</p>
+ <p class="note">Assumes ideal, fully dissociating solutes. Real solutions deviate slightly (the osmotic coefficient), so measured values run a bit lower than the ideal i.</p>
+ <p class="note">Related tools: <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const R=0.08206;const $=id=>document.getElementById(id);
+function getI(){const v=$("solute").value;if(v==="custom")return +$("icustom").value;return parseFloat(v);}
+function calc(){
+ $("iwrap").style.display=$("solute").value==="custom"?"block":"none";
+ const M=+$("M").value,i=getI(),Tc=+$("T").value,T=Tc+273.15;
+ const osm=i*M, pi=i*M*R*T;
+ $("osm").textContent=(+osm.toPrecision(4))+" Osm";
+ $("pi").textContent=(+pi.toPrecision(4))+" atm";
+ $("work").textContent=`Osmolarity = i × M = ${i} × ${M} = ${(+osm.toPrecision(4))} Osm\nπ = iMRT = ${i} × ${M} × 0.08206 × ${T.toFixed(2)} K\nπ = ${(+pi.toPrecision(4))} atm`;
+ const bloodOsm=0.30;let label,col;
+ if(osm>bloodOsm*1.05){label="Hypertonic to blood — water leaves cells (they shrink)";col="226,75,74";}
+ else if(osm<bloodOsm*0.95){label="Hypotonic to blood — water enters cells (they swell)";col="55,138,221";}
+ else {label="Isotonic with blood (~0.30 Osm) — no net water movement";col="93,202,165";}
+ $("ton").innerHTML=`<div class="ton" style="background:rgba(${col},.12);color:rgb(${col})">${label}</div>`;
+}
+["M","solute","T","icustom"].forEach(id=>$(id).addEventListener("input",calc));
+$("solute").addEventListener("change",calc);
+calc();
+</script>
+</body>
+</html>

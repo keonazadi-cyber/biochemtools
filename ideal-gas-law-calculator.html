@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ideal Gas Law Calculator (PV = nRT) — Solve Any Variable, Shows Steps | Free</title>
+<meta name="description" content="Free ideal gas law calculator. Solve PV = nRT for pressure, volume, moles, or temperature, with the right R value and every step shown. For chemistry and biology.">
+<meta name="keywords" content="ideal gas law calculator, PV=nRT, solve for pressure volume moles temperature, gas law calculator, R constant">
+<link rel="canonical" href="https://biochemtools.com/ideal-gas-law-calculator.html">
+<meta property="og:title" content="Ideal Gas Law Calculator (PV = nRT)">
+<meta property="og:description" content="Solve PV = nRT for any variable with the work shown. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use the ideal gas law","step":[{"@type":"HowToStep","name":"Write PV = nRT","text":"P is pressure, V volume, n moles, R the gas constant, T temperature in kelvin."},{"@type":"HowToStep","name":"Pick R","text":"Use R = 0.08206 L·atm/mol·K when pressure is in atm and volume in liters."},{"@type":"HowToStep","name":"Rearrange","text":"Solve for the unknown, for example P = nRT/V."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}input:disabled{opacity:.5}
+ .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}.out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Ideal Gas Law Calculator</h1><p>Solve PV = nRT for pressure, volume, moles, or temperature — with the right gas constant and every step shown.</p></header>
+<main>
+ <div class="card">
+  <label>Solve for</label>
+  <div class="modes" id="modes">
+   <button data-s="P" class="on">Pressure P</button><button data-s="V">Volume V</button>
+   <button data-s="n">Moles n</button><button data-s="T">Temperature T</button>
+  </div>
+  <div class="fields">
+   <div><label>P — pressure (atm)</label><input id="P" type="number" step="any" value=""></div>
+   <div><label>V — volume (L)</label><input id="V" type="number" step="any" value="22.4"></div>
+   <div><label>n — moles (mol)</label><input id="n" type="number" step="any" value="1"></div>
+   <div><label>T — temperature (K)</label><input id="T" type="number" step="any" value="273.15"></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem" id="outlbl">Pressure P</div><div class="v" id="outval">—</div></div>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to use PV = nRT</h2>
+ <p class="note">The ideal gas law ties together the pressure, volume, amount, and temperature of a gas: PV = nRT. R is the gas constant; use R = 0.08206 L·atm/mol·K when pressure is in atmospheres and volume in liters, and always put temperature in kelvin (K = °C + 273.15). Rearrange for whatever you need — P = nRT/V, V = nRT/P, n = PV/RT, or T = PV/nR. As a sanity check, one mole of an ideal gas at standard temperature and pressure (273.15 K, 1 atm) occupies 22.4 L.</p>
+ <p class="note">Uses R = 0.08206 L·atm/mol·K. For SI units (Pa, m³) use R = 8.314 J/mol·K instead.</p>
+ <p class="note">Related tools: <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const R=0.08206;let solveFor="P";const $=id=>document.getElementById(id);
+const LBL={P:"Pressure P (atm)",V:"Volume V (L)",n:"Moles n (mol)",T:"Temperature T (K)"};
+const U={P:" atm",V:" L",n:" mol",T:" K"};
+function fmt(x){return isFinite(x)?(+x.toPrecision(5)).toString():"—";}
+function calc(){
+ ["P","V","n","T"].forEach(k=>$(k).disabled=(k===solveFor));
+ const P=+$("P").value,V=+$("V").value,n=+$("n").value,T=+$("T").value;let val,work;
+ if(solveFor==="P"){val=n*R*T/V;work=`P = nRT / V = (${n} × 0.08206 × ${T}) / ${V} = ${fmt(val)} atm`;}
+ else if(solveFor==="V"){val=n*R*T/P;work=`V = nRT / P = (${n} × 0.08206 × ${T}) / ${P} = ${fmt(val)} L`;}
+ else if(solveFor==="n"){val=P*V/(R*T);work=`n = PV / RT = (${P} × ${V}) / (0.08206 × ${T}) = ${fmt(val)} mol`;}
+ else {val=P*V/(n*R);work=`T = PV / nR = (${P} × ${V}) / (${n} × 0.08206) = ${fmt(val)} K`;}
+ $("outlbl").textContent=LBL[solveFor];$("outval").textContent=isFinite(val)?fmt(val)+U[solveFor]:"—";
+ if(isFinite(val))$(solveFor).value=+val.toPrecision(5);
+ $("work").textContent=work;
+}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");solveFor=b.dataset.s;calc();});
+["P","V","n","T"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>

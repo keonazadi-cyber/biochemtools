@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amino Acid Titration Curve Generator (with pKa Regions &amp; pI) — Free</title>
+<meta name="description" content="Free amino acid titration curve generator. Pick an amino acid and see its full titration curve with the buffering regions at each pKa and the isoelectric point (pI) marked, plus the worked pI. For biochemistry and the MCAT.">
+<meta name="keywords" content="amino acid titration curve, titration curve pKa, isoelectric point, buffering region, glycine titration curve, pI calculation">
+<link rel="canonical" href="https://biochemtools.com/amino-acid-titration-curve.html">
+<meta property="og:title" content="Amino Acid Titration Curve Generator (pKa &amp; pI)">
+<meta property="og:description" content="Pick an amino acid, see its titration curve with buffering regions and the pI marked. Free.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to read an amino acid titration curve","step":[{"@type":"HowToStep","name":"Find the flat regions","text":"Flat, shallow parts of the curve are buffering regions, centered on each pKa (the half-equivalence points)."},{"@type":"HowToStep","name":"Find the steep jumps","text":"Steep parts are equivalence points, where a proton has been fully removed."},{"@type":"HowToStep","name":"Locate the pI","text":"The isoelectric point is the average of the two pKa values on either side of the neutral, zwitterionic species."}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--curve:#7f77dd;--pi:#5dcaa5;--pka:#e0a93b;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ canvas{width:100%;height:320px;background:var(--bg);border-radius:10px;margin-top:.5rem}
+ .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:.9rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.8rem}.metric .val{font-size:1.4rem;font-weight:600;margin-top:.2rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><h1>Amino Acid Titration Curve</h1><p>Pick an amino acid and see its full titration curve — with each buffering region and the isoelectric point (pI) marked, and the pI worked out.</p></header>
+<main>
+ <div class="card">
+  <label for="aa">Amino acid</label>
+  <select id="aa">
+   <option value="Gly">Glycine (Gly) — no ionizable side chain</option>
+   <option value="Ala">Alanine (Ala) — no ionizable side chain</option>
+   <option value="Asp">Aspartate (Asp) — acidic side chain</option>
+   <option value="Glu">Glutamate (Glu) — acidic side chain</option>
+   <option value="His">Histidine (His) — basic side chain</option>
+   <option value="Lys">Lysine (Lys) — basic side chain</option>
+   <option value="Arg">Arginine (Arg) — basic side chain</option>
+   <option value="Cys">Cysteine (Cys) — thiol side chain</option>
+   <option value="Tyr">Tyrosine (Tyr) — phenol side chain</option>
+  </select>
+  <canvas id="plot" width="700" height="320"></canvas>
+  <p class="note"><span style="color:var(--curve)">—</span> titration curve &nbsp; <span style="color:var(--pka)">– –</span> pKa (buffering region) &nbsp; <span style="color:var(--pi)">– –</span> pI</p>
+ </div>
+ <div class="card">
+  <div class="grid">
+   <div class="metric"><div class="lbl">Isoelectric point (pI)</div><div class="val" id="pi" style="color:var(--pi)">—</div></div>
+   <div class="metric"><div class="lbl">pKa values</div><div class="val" id="pkas" style="font-size:1.1rem">—</div></div>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to read an amino acid titration curve</h2>
+ <p class="note">As you add base, you strip protons off the amino acid one group at a time. The flat, gently sloped stretches are buffering regions, each centered on a pKa — that is the half-equivalence point, where the group is half protonated and resists pH change best. The steep vertical jumps are equivalence points, where a proton has been fully removed. The isoelectric point (pI), where the molecule carries no net charge, sits at the midpoint of the two pKa values flanking the neutral zwitterion: for a simple amino acid like glycine that is just (pKa₁ + pKa₂)/2, and for one with an ionizable side chain you average the two pKas around the net-zero species.</p>
+ <p class="note">pKa values are standard textbook values (Lehninger); sources vary by a few hundredths.</p>
+ <p class="note">Related tools: <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="/">all biochem tools</a>.</p>
+</main>
+<footer>Free biochem study tool · share it with your study group</footer>
+<script>
+const AA={
+ Gly:[{pka:2.34,t:"a"},{pka:9.60,t:"b"}],
+ Ala:[{pka:2.34,t:"a"},{pka:9.69,t:"b"}],
+ Asp:[{pka:1.88,t:"a"},{pka:3.65,t:"a"},{pka:9.60,t:"b"}],
+ Glu:[{pka:2.19,t:"a"},{pka:4.25,t:"a"},{pka:9.67,t:"b"}],
+ His:[{pka:1.82,t:"a"},{pka:6.00,t:"b"},{pka:9.17,t:"b"}],
+ Lys:[{pka:2.18,t:"a"},{pka:8.95,t:"b"},{pka:10.53,t:"b"}],
+ Arg:[{pka:2.17,t:"a"},{pka:9.04,t:"b"},{pka:12.48,t:"b"}],
+ Cys:[{pka:1.96,t:"a"},{pka:8.18,t:"a"},{pka:10.28,t:"b"}],
+ Tyr:[{pka:2.20,t:"a"},{pka:9.11,t:"b"},{pka:10.07,t:"a"}]};
+const $=id=>document.getElementById(id);
+function gcharge(g,pH){return g.t==="b"?1/(1+Math.pow(10,pH-g.pka)):-1/(1+Math.pow(10,g.pka-pH));}
+function net(gs,pH){return gs.reduce((s,g)=>s+gcharge(g,pH),0);}
+function pI(gs){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(gs,m)>0?lo=m:hi=m;}return (lo+hi)/2;}
+function equiv(gs,pH){return gs.reduce((s,g)=>s+1/(1+Math.pow(10,g.pka-pH)),0);}
+function draw(){
+ const gs=AA[$("aa").value];const n=gs.length;
+ const c=$("plot"),ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
+ ctx.clearRect(0,0,W,H);
+ const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
+ // axes
+ ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";
+ for(let p=0;p<=14;p+=2){ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1c1f27";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
+ ctx.fillText("pH",6,18);ctx.fillText("equivalents of OH⁻ →",W-160,H-14);
+ // pKa lines
+ gs.forEach(g=>{ctx.strokeStyle="#e0a93b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e0a93b";ctx.fillText("pKa "+g.pka.toFixed(1),W-92,Y(g.pka)-4);});
+ // pI line
+ const pi=pI(gs);ctx.strokeStyle="#5dcaa5";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle="#5dcaa5";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
+ // curve: x=equiv(pH), y=pH
+ ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();let first=true;
+ for(let pH=0;pH<=14;pH+=0.05){const x=X(equiv(gs,pH)),y=Y(pH);if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);}
+ ctx.stroke();
+ $("pi").textContent=pi.toFixed(2);
+ $("pkas").textContent=gs.map(g=>g.pka.toFixed(2)).join(", ");
+ // find the two pKas flanking net-zero for pI explanation
+ const sorted=gs.map(g=>g.pka).sort((a,b)=>a-b);
+ let below=sorted.filter(p=>p<pi).slice(-1)[0], above=sorted.filter(p=>p>pi)[0];
+ $("work").textContent=`pKa values: ${sorted.map(p=>p.toFixed(2)).join(", ")}\nThe neutral (net-zero) species sits between pKa ${below?.toFixed(2)} and pKa ${above?.toFixed(2)}.\npI = (${below?.toFixed(2)} + ${above?.toFixed(2)}) / 2 = ${pi.toFixed(2)}`;
+}
+$("aa").addEventListener("change",draw);
+draw();
+</script>
+</body>
+</html>
