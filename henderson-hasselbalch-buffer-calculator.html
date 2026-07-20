@@ -15,6 +15,13 @@
 {"@type":"HowToStep","name":"Split the total concentration","text":"fraction A- = ratio/(1+ratio); fraction HA = 1/(1+ratio)."},
 {"@type":"HowToStep","name":"Scale to your volume","text":"moles = concentration x volume for each form; multiply by molar mass for grams."}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why does buffering capacity fail outside pKa ± 1?","acceptedAnswer":{"@type":"Answer","text":"Outside that range, one form of the buffer (the acid or the conjugate base) vastly outnumbers the other. Since buffering works by the minority form absorbing added acid or base, a buffer with almost none of one form left has very little capacity to resist a pH change — added acid or base swings the pH quickly instead of being absorbed."}},
+{"@type":"Question","name":"Why is phosphate buffer used for physiological pH instead of acetate?","acceptedAnswer":{"@type":"Answer","text":"Phosphate's pKa (about 7.21) sits close to physiological pH (7.4), well within the effective pKa ± 1 range. Acetate's pKa (about 4.76) is over 2.5 pH units away from 7.4 — far outside its buffering range — so it would have almost no capacity to resist pH changes at physiological pH even though it's a perfectly good buffer near its own pKa."}},
+{"@type":"Question","name":"Do I need to know the volume to find the acid/base ratio?","acceptedAnswer":{"@type":"Answer","text":"No — the ratio [A⁻]/[HA] = 10^(pH − pKa) and the fractions of each form depend only on pH and pKa. Concentration and volume are only needed for the last step, converting those fractions into actual moles or grams to weigh out."}},
+{"@type":"Question","name":"What buffers the blood at pH 7.4 in the body?","acceptedAnswer":{"@type":"Answer","text":"The bicarbonate buffer system (H2CO3/HCO3−) is the primary one, even though its pKa (often quoted around 6.1, lower than the phosphate value here) looks further from 7.4 than phosphate's. It works physiologically because it's an open system — CO2 is constantly exhaled by the lungs, which shifts the equilibrium and effectively extends its buffering range beyond what a closed-system pKa ± 1 rule would predict."}}]}
+</script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--a:#5dcaa5;--ha:#e0a93b;--accent:#378add;--warn:#e24b4a}
  *{box-sizing:border-box}
@@ -91,6 +98,42 @@
  <p class="note">The Henderson-Hasselbalch equation is pH = pKa + log([A⁻]/[HA]). Rearrange for the ratio you need: [A⁻]/[HA] = 10^(pH − pKa). Split your total concentration into the two forms using fraction A⁻ = ratio/(1+ratio) and fraction HA = 1/(1+ratio), then multiply each concentration by the volume (in liters) to get moles — and by the molar mass for grams. A buffer works best within about pKa ± 1; outside that range it has little capacity, so pick a buffer whose pKa is close to your target pH.</p>
  <p class="note">pKa values shown are standard 25 °C textbook values; some sources differ by a few hundredths, and phosphate/bicarbonate shift with temperature and ionic strength (blood bicarbonate is often quoted as 6.1).</p>
  <p class="note">Related tools: <a href="https://biochemtools.com/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="https://biochemtools.com/enzyme-kinetics-simulator.html">Enzyme kinetics simulator</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example 1: phosphate buffer at pH 7.40 (the default)</h2>
+  <p class="note">Phosphate buffer, pKa 7.21, target pH 7.40, 0.10 M total concentration, 500 mL final volume.</p>
+  <div class="work">Ratio [A⁻]/[HA] = 10^(pH − pKa) = 10^(7.40 − 7.21) = 10^0.19 = 1.549
+
+Fraction A⁻ = ratio/(1+ratio) = 1.549/2.549 = 0.608 → [A⁻] = 0.608 × 0.10 = 0.0608 M
+Fraction HA = 1/(1+ratio)     = 1/2.549     = 0.392 → [HA] = 0.392 × 0.10 = 0.0392 M
+
+Moles in 500 mL: A⁻ = 0.0608 × 0.5 L = 30.4 mmol
+                 HA = 0.0392 × 0.5 L = 19.6 mmol
+
+|pH − pKa| = 0.19 < 1 → within effective buffering range</div>
+  <p class="note">This matches the calculator's default output exactly: 30.4 mmol of conjugate base and 19.6 mmol of the weak acid form, dissolved together in 500 mL.</p>
+
+  <h2>Worked example 2: what happens when the pKa is a bad match</h2>
+  <p class="note">Same target pH (7.40) and concentration (0.10 M), but using acetate buffer (pKa 4.76) instead of phosphate.</p>
+  <div class="work">Ratio [A⁻]/[HA] = 10^(7.40 − 4.76) = 10^2.64 = 436.5
+
+Fraction A⁻ = 436.5/437.5 = 0.9977  (99.77%)
+Fraction HA = 1/437.5     = 0.0023  (0.23%)
+
+Moles in 500 mL: A⁻ = 49.89 mmol
+                 HA = 0.114 mmol
+
+|pH − pKa| = 2.64 &gt; 1 → outside the effective buffering range</div>
+  <p class="note">Almost all of the acetate is in its conjugate-base form (99.77%) with barely any weak acid left (0.23%) — there isn't enough of the minority form to absorb much added acid before the pH swings. This is the numeric reason acetate is a poor choice for buffering at pH 7.40, even though it works well near its own pKa of 4.76.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why does buffering capacity fail outside pKa ± 1?</b><br>Outside that range, one form vastly outnumbers the other. Buffering works by the minority form absorbing added acid or base — with almost none of it left, added acid or base swings the pH quickly instead of being absorbed, as shown in example 2 above.</p>
+  <p class="note"><b>Why phosphate instead of acetate for physiological pH?</b><br>Phosphate's pKa (~7.21) sits close to 7.4, within pKa ± 1. Acetate's pKa (~4.76) is over 2.5 units away — far outside its range — so it has almost no capacity to resist pH changes at 7.4 even though it's a fine buffer near its own pKa.</p>
+  <p class="note"><b>Do I need the volume to find the acid/base ratio?</b><br>No — the ratio and fractions depend only on pH and pKa. Concentration and volume are only needed for the last step: converting those fractions into actual moles or grams.</p>
+  <p class="note"><b>What buffers blood at pH 7.4?</b><br>The bicarbonate system (H₂CO₃/HCO₃⁻), even though its pKa (~6.1) looks further from 7.4 than phosphate's. It works because it's an open system — CO₂ is constantly exhaled, shifting the equilibrium and extending its effective buffering range beyond the simple closed-system pKa ± 1 rule.</p>
+ </div>
 </main>
 <nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 20 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Buffer calculator</span><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a></div></div></nav>
 <footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>

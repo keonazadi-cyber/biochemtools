@@ -113,9 +113,27 @@ method throughout:
       including the common misconception about mixing two solutions vs.
       diluting with pure solvent. 288→649 words.
 
-9 of 20 tool pages now have deepened content. Remaining 11: enzyme-kinetics-
-simulator, henderson-hasselbalch-buffer-calculator, glycolysis-pathway-
-explorer, quiz, dna-to-protein-translation, nernst-equation-calculator,
+9 of 20 tool pages now have deepened content.
+
+### 2026-07-20 — Content depth pass, batch 3 (3 more done)
+- [x] enzyme-kinetics-simulator.html — side-by-side competitive vs.
+      noncompetitive worked example at identical inhibitor concentration
+      (r=1), showing why they diverge (Km(app) 50 vs 25, Vmax(app) 100 vs
+      50, v 33.33 vs 25.00), 4 FAQs (already had HowTo schema; added new
+      FAQPage schema). 390→754 words.
+- [x] henderson-hasselbalch-buffer-calculator.html — default phosphate
+      buffer at pH 7.40 (30.4/19.6 mmol) + a contrasting "bad pKa match"
+      example (acetate at the same target pH, 99.77%/0.23% split,
+      demonstrating numerically why it fails), 4 FAQs. 319→789 words.
+- [x] glycolysis-pathway-explorer.html — cumulative step-by-step ATP/NADH
+      tally table (verified against the page's own STEPS array), reaching
+      the same +2 ATP/2 NADH/2 pyruvate the live tool shows on "Show all".
+      This page already had a 2-question FAQPage schema with no matching
+      visible content — expanded to 4 questions AND added a visible FAQ
+      section so the schema now matches on-page content. 279→629 words.
+
+12 of 20 tool pages now have deepened content. Remaining 8: quiz,
+dna-to-protein-translation, nernst-equation-calculator,
 dna-melting-temperature-calculator, molarity-molar-mass-calculator,
 punnett-square-calculator, amino-acid-titration-curve,
 ideal-gas-law-calculator.
