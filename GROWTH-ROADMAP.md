@@ -80,6 +80,22 @@ Pushed (commit — see git log after this entry). Progress:
 - [x] hardy-weinberg-calculator.html — two contrasting worked examples
       (one population in equilibrium, χ²=0; one that fails, χ²=20.0 vs
       critical 3.84), 4 FAQs. 325→760 words.
-- [ ] beer-lambert-calculator.html — next up
-- [ ] osmotic-pressure-calculator.html
-- [ ] serial-dilution-calculator.html
+- [x] beer-lambert-calculator.html — unknown-concentration example (default
+      values, c=1.00e-4 M) + a real NADH-at-340nm assay example (A=0.311,
+      the classic LDH-assay wavelength) + absorbance/%T round-trip,
+      4 FAQs. 277→683 words.
+- [x] osmotic-pressure-calculator.html — 0.15 M NaCl at 37°C (default,
+      π=7.635 atm, exactly isotonic — that's why it's the default) + 0.05 M
+      CaCl₂ at 25°C (hypotonic contrast, π=3.670 atm), 4 FAQs. 328→705 words.
+- [x] serial-dilution-calculator.html — the default 6-tube 10-fold series
+      table + a real microbiology use case (diluting 1e9 CFU/mL down to a
+      countable 30-300 colony plate), 4 FAQs. 289→696 words.
+
+**Batch 1 complete: all 6 of the currently-indexed pages now have deepened
+content.** Every number in every example was computed independently in
+Python, then cross-checked against the live tool in a local browser before
+publishing — zero unverified numbers went out. Next up: extend the same
+treatment to the remaining 14 not-yet-indexed tool pages (lower priority
+since they have no visibility yet to reinforce, but worth doing once the
+indexed set is solid), or move to priority #3 (Cloudflare Analytics,
+blocked on Keon) to get real usage data before deciding what's next.
