@@ -10,6 +10,13 @@
 <meta property="og:title" content="Hardy-Weinberg Calculator — Frequencies + Equilibrium Test">
 <meta property="og:description" content="Allele and genotype frequencies from p or from counts, plus a chi-square equilibrium test. Free, shows the work.">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use the Hardy-Weinberg equation","step":[{"@type":"HowToStep","name":"Allele frequencies","text":"p + q = 1, where p and q are the frequencies of the two alleles."},{"@type":"HowToStep","name":"Genotype frequencies","text":"p² + 2pq + q² = 1, giving the expected homozygous dominant, heterozygous, and homozygous recessive proportions."},{"@type":"HowToStep","name":"From counts","text":"p = (2×AA + Aa) / (2N); then compare observed counts to expected with a chi-square test."}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does it mean if a population is not in Hardy-Weinberg equilibrium?","acceptedAnswer":{"@type":"Answer","text":"It means at least one of the five HWE assumptions is being violated: no mutation, random mating, no migration (gene flow), no natural selection, and infinite population size (no genetic drift). A significant chi-square result tells you evolution is likely acting on that locus, but not which assumption is broken."}},
+{"@type":"Question","name":"Why is the chi-square critical value 3.84?","acceptedAnswer":{"@type":"Answer","text":"That's the critical value for 1 degree of freedom at the standard α = 0.05 significance level. Degrees of freedom here is (number of genotype classes − 1) − (number of parameters estimated from the data) = (3 − 1) − 1 = 1, since p is estimated from the same data being tested."}},
+{"@type":"Question","name":"How do you find allele frequency when only the recessive phenotype is visible?","acceptedAnswer":{"@type":"Answer","text":"If the recessive phenotype frequency in the population is known (call it the observed proportion of aa individuals), that equals q² under HWE. Take the square root to get q, then p = 1 − q. This is the standard exam trick for traits where heterozygotes and homozygous dominants look identical."}},
+{"@type":"Question","name":"Does Hardy-Weinberg work with more than two alleles?","acceptedAnswer":{"@type":"Answer","text":"Yes, the same logic extends: with alleles at frequencies p, q, r (summing to 1), the genotype frequencies are the terms of (p+q+r)², e.g. p² + q² + r² + 2pq + 2pr + 2qr. This calculator covers the standard two-allele case taught in most intro courses."}}]}
+</script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--yes:#5dcaa5;--no:#e24b4a}
  *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
@@ -63,6 +70,46 @@
  <h2>How the Hardy-Weinberg equation works</h2>
  <p class="note">Hardy-Weinberg describes a population that is <i>not</i> evolving. With two alleles, their frequencies add to one: p + q = 1. The genotype frequencies then follow p² + 2pq + q² = 1, where p² is the homozygous dominant fraction, 2pq is the heterozygous fraction, and q² is the homozygous recessive fraction. A common exam move is to start from the recessive phenotype: if q² is known, then q = √(q²), p = 1 − q, and you can predict every genotype. When you have real counts, calculate the allele frequencies as p = (2 × AA + Aa) / (2N), compare the observed genotype counts to the expected ones, and use a chi-square test (critical value 3.84 for 1 degree of freedom at α = 0.05) to decide whether the population departs from equilibrium.</p>
  <p class="note">Related tools: <a href="/dna-to-protein-translation.html">DNA → protein translation</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example 1: a population in equilibrium</h2>
+  <p class="note">A sample of 500 individuals is genotyped: 320 AA, 160 Aa, 20 aa.</p>
+  <div class="work">N = 320 + 160 + 20 = 500
+p = (2×AA + Aa)/(2N) = (2×320 + 160)/1000 = 800/1000 = 0.800
+q = 1 − p = 0.200
+
+Expected counts (p², 2pq, q² × N):
+  AA: 0.800² × 500     = 320.0
+  Aa: 2×0.8×0.2 × 500  = 160.0
+  aa: 0.200² × 500     = 20.0
+
+χ² = Σ(O−E)²/E = 0² /320 + 0² /160 + 0² /20 = 0.000  (df=1, critical 3.84)
+0.000 &lt; 3.84 → consistent with Hardy-Weinberg equilibrium</div>
+  <p class="note">The observed counts land exactly on the expected values here, so χ² is zero — a clean textbook case of a population at equilibrium.</p>
+
+  <h2>Worked example 2: a population that fails the test</h2>
+  <p class="note">Same sample size, different counts: 300 AA, 150 Aa, 50 aa.</p>
+  <div class="work">N = 300 + 150 + 50 = 500
+p = (2×300 + 150)/1000 = 750/1000 = 0.750
+q = 1 − p = 0.250
+
+Expected counts:
+  AA: 0.750² × 500 = 281.2
+  Aa: 2×0.75×0.25 × 500 = 187.5
+  aa: 0.250² × 500 = 31.2
+
+χ² = (300−281.2)²/281.2 + (150−187.5)²/187.5 + (50−31.2)²/31.2 = 20.0  (df=1, critical 3.84)
+20.0 &gt; 3.84 → departs from Hardy-Weinberg equilibrium</div>
+  <p class="note">Same allele-frequency math, but here there are too many homozygotes and too few heterozygotes relative to what HWE predicts — a pattern consistent with inbreeding, assortative mating, or a Wahlund effect (population substructure), not necessarily selection.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>What does it mean if a population isn't in equilibrium?</b><br>At least one of the five HWE assumptions is violated: no mutation, random mating, no migration, no selection, infinite population size (no drift). A significant χ² says evolution is likely acting, not which assumption broke.</p>
+  <p class="note"><b>Why is the chi-square critical value 3.84?</b><br>That's the critical value for 1 degree of freedom at α = 0.05. Degrees of freedom = (genotype classes − 1) − (parameters estimated from the data) = (3 − 1) − 1 = 1, since p itself is estimated from the same counts being tested.</p>
+  <p class="note"><b>How do you find allele frequency from only the recessive phenotype?</b><br>If the recessive phenotype's frequency in the population is known, that equals q² under HWE — take the square root to get q, then p = 1 − q. Standard trick when heterozygotes and homozygous dominants look identical.</p>
+  <p class="note"><b>Does this work with more than two alleles?</b><br>Yes — with frequencies p, q, r (summing to 1), genotype frequencies are the terms of (p+q+r)². This calculator covers the standard two-allele case taught in most intro courses.</p>
+ </div>
 </main>
 <nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 20 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a></div></div></nav>
 <footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
