@@ -132,8 +132,24 @@ method throughout:
       visible content — expanded to 4 questions AND added a visible FAQ
       section so the schema now matches on-page content. 279→629 words.
 
-12 of 20 tool pages now have deepened content. Remaining 8: quiz,
-dna-to-protein-translation, nernst-equation-calculator,
-dna-melting-temperature-calculator, molarity-molar-mass-calculator,
-punnett-square-calculator, amino-acid-titration-curve,
-ideal-gas-law-calculator.
+12 of 20 tool pages now have deepened content.
+
+### 2026-07-20 — Content depth pass, batch 4 (3 more done)
+- [x] nernst-equation-calculator.html — default Daniell cell example
+      (E=1.1887V, verified full RT/nF form against the 0.0592/n shortcut)
+      + a concentration-cell example (E°=0 but E=+0.0887V from
+      concentration difference alone, tied to resting membrane potential),
+      4 FAQs. 277→734 words.
+- [x] ideal-gas-law-calculator.html — STP sanity check (1 mol, 22.4 L →
+      1.0007 atm, confirms the textbook number) + a body-temperature
+      volume example (0.5 mol at 37°C → 12.725 L, explicitly contrasted
+      against the common "just halve 22.4 L" mistake), 4 FAQs. 272→652
+      words.
+- [x] molarity-molar-mass-calculator.html — default glucose example
+      (180.16 g/mol, 22.520 g) + a Ca(OH)2 example exercising the
+      parenthesis/multiplier parser (74.09 g/mol, 1.482 g), 4 FAQs
+      including a hydration-vs-anhydrous gotcha. 278→666 words.
+
+15 of 20 tool pages now have deepened content. Remaining 5: quiz,
+dna-to-protein-translation, dna-melting-temperature-calculator,
+punnett-square-calculator, amino-acid-titration-curve.
