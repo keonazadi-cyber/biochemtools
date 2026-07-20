@@ -94,8 +94,28 @@ Pushed (commit — see git log after this entry). Progress:
 **Batch 1 complete: all 6 of the currently-indexed pages now have deepened
 content.** Every number in every example was computed independently in
 Python, then cross-checked against the live tool in a local browser before
-publishing — zero unverified numbers went out. Next up: extend the same
-treatment to the remaining 14 not-yet-indexed tool pages (lower priority
-since they have no visibility yet to reinforce, but worth doing once the
-indexed set is solid), or move to priority #3 (Cloudflare Analytics,
-blocked on Keon) to get real usage data before deciding what's next.
+publishing — zero unverified numbers went out.
+
+### 2026-07-20 — Content depth pass, batch 2 (3 more done, not-yet-indexed)
+Moved on to 3 of the remaining 14 not-yet-indexed pages, same verified
+method throughout:
+- [x] ph-calculator.html — strong acid default (pH 1.00) + weak acid
+      (acetic acid, pKa 4.76, pH 2.88) + a third example specifically
+      chosen to show where the √(Ka·C) approximation breaks down (0.21 pH
+      unit error at 61.8% dissociation), 4 FAQs. 284→737 words.
+- [x] gibbs-free-energy-calculator.html — default ΔH/ΔS/T example
+      (ΔG=−10.19 kJ/mol, crossover 400 K) + ATP hydrolysis in a cell
+      (ΔG°′=−30.5 kJ/mol default, actual ΔG=−42.37 kJ/mol via RT ln Q, a
+      real illustration of why "unfavorable" ΔG°′ reactions still run in
+      vivo), 4 FAQs. 321→792 words.
+- [x] dilution-calculator.html — default C1V1=C2V2 example (V1=10 mL) + a
+      real NaOH titration-prep example (V1=40 mL from 5 M stock), 4 FAQs
+      including the common misconception about mixing two solutions vs.
+      diluting with pure solvent. 288→649 words.
+
+9 of 20 tool pages now have deepened content. Remaining 11: enzyme-kinetics-
+simulator, henderson-hasselbalch-buffer-calculator, glycolysis-pathway-
+explorer, quiz, dna-to-protein-translation, nernst-equation-calculator,
+dna-melting-temperature-calculator, molarity-molar-mass-calculator,
+punnett-square-calculator, amino-acid-titration-curve,
+ideal-gas-law-calculator.
