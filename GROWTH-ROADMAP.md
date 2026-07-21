@@ -261,9 +261,11 @@ sidebar. Quiz page now shows best score + current streak on completion.
 This is the actual growth lever: MCAT/pre-med prep spans months, so
 turning one-time visitors into daily habit users multiplies
 pageviews-per-user far more than any SEO or layout change could.
-**Next step here (not yet done):** extend visible streak/progress UI to
-individual tool pages too, not just the homepage — right now it only
-shows on index.html.
+**[DONE 2026-07-21, commit 89788ef]** Extended the streak badge to every
+tool page (small top bar, not just the homepage sidebar) — this was the
+real gap, since most traffic lands directly on a tool page from search
+and never touches the homepage. Verified no conflict with pages that
+have their own sticky elements (glycolysis's sticky ATP/NADH tally).
 
 **3. Affiliate research (this entry, no site changes).** Real programs
 found, worth pursuing once there's real traffic:
