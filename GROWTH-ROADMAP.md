@@ -48,14 +48,32 @@ no social preview image, no ads.txt (not urgent yet).
    (e.g. AdSense) is actually signed up for. Five-minute task, don't do it
    before there's a publisher ID to put in it.
 
-## Which pages are indexed right now (as of 2026-07-20 check)
+## Which pages are indexed right now
 
-Google was showing 7 of 21 pages in search results (up from 2 on
+**2026-07-21 Search Console check (data dated 7/9/26, via Page indexing
+report):** 21 of ~24 known pages indexed — a real jump from the earlier
+2026-07-20 spot-check (7/21 pages showing in search results). The 3
+"not indexed" are all flagged "Page with redirect" and are all the same
+homepage under non-canonical URLs: `http://biochemtools.com/`,
+`http://www.biochemtools.com/`, `https://www.biochemtools.com/`.
+Verified via curl: each does one clean 301 straight to the canonical
+`https://biochemtools.com/`, no chains, no loops. This is correct,
+intended behavior, not a bug — and is almost certainly what the
+original "pages not indexed due to redirect" Search Console email (the
+thing that kicked off this whole project) was actually about. Nothing
+to fix. GSC data lags ~1-2 weeks behind the live site, so it doesn't
+yet reflect the newest work (2 physiology tools, daily question, cheat
+sheet, share buttons, related-link fixes) — worth another check in a
+couple weeks once the crawler catches up.
+
+**Prior 2026-07-20 spot-check (superseded by the above):** Google was
+showing 7 of 21 pages in manual search results (up from 2 on
 2026-07-04): index, peptide-charge-calculator, osmotic-pressure-calculator,
 serial-dilution-calculator, michaelis-menten-fitter,
-hardy-weinberg-calculator, beer-lambert-calculator. These are the pages
-prioritized first for the content-depth pass, since they already have some
-visibility to reinforce.
+hardy-weinberg-calculator, beer-lambert-calculator. This was a
+different, narrower metric (visible in search results for specific
+queries) than the GSC "indexed" count above, so the two aren't directly
+comparable — but the trend is the same direction.
 
 ## Notes Log
 
