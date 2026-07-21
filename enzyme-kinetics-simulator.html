@@ -208,5 +208,6 @@ document.querySelectorAll("#types button").forEach(b=>b.onclick=()=>setType(b.da
 $("share").onclick=()=>{const p=new URLSearchParams({vmax:$("vmax").value,km:$("km").value,s:$("s").value,type,i:$("i").value,ki:$("ki").value});const u=location.origin+location.pathname+"?"+p;navigator.clipboard&&navigator.clipboard.writeText(u);$("share").textContent="Link copied";setTimeout(()=>$("share").textContent="Copy shareable link",1500);};
 (function init(){const p=new URLSearchParams(location.search);if(p.get("vmax")){["vmax","km","s","i","ki"].forEach(id=>{if(p.get(id))$(id).value=p.get(id);});if(p.get("type"))type=p.get("type");}setType(type);})();
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
