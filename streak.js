@@ -2,9 +2,10 @@
 "use strict";
 var TOOL_COUNT = 22;
 
-// --- Affiliate links: OFF by default. See "How to go live" in GROWTH-ROADMAP.md. ---
-var AFFILIATE_LIVE = false;
-var AMAZON_TAG = "your-amazon-tag-20";
+// --- Affiliate links: each program activates independently once you have a real tracked link/tag. ---
+var AMAZON_LIVE = true;
+var AMAZON_TAG = "biochemtools20";
+var GOLDSTANDARD_LIVE = false;
 var GOLDSTANDARD_URL = "https://www.mcat-prep.com/goldstandard-affiliate/";
 var VISITS_KEY = "bct_visits";
 var QUIZ_KEY = "bct_quiz_dates";
@@ -189,13 +190,19 @@ function renderShareButton(){
 
 function renderRecommended(){
  var el = document.getElementById("recommended-slot");
- if (!el || !AFFILIATE_LIVE) return;
- var amazonHref = "https://www.amazon.com/s?k=mcat+prep+books&tag=" + encodeURIComponent(AMAZON_TAG);
+ if (!el || (!AMAZON_LIVE && !GOLDSTANDARD_LIVE)) return;
+ var links = "";
+ if (AMAZON_LIVE){
+  var amazonHref = "https://www.amazon.com/s?k=mcat+prep+books&tag=" + encodeURIComponent(AMAZON_TAG);
+  links += "<a href=\"" + amazonHref + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem;margin-bottom:.4rem\">MCAT prep books on Amazon &rarr;</a>";
+ }
+ if (GOLDSTANDARD_LIVE){
+  links += "<a href=\"" + GOLDSTANDARD_URL + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem;margin-bottom:.4rem\">Gold Standard MCAT prep course &rarr;</a>";
+ }
  el.style.cssText = "background:var(--card,#1a1d24);border:1px solid var(--line,#2a2e38);border-radius:14px;padding:1.25rem";
  el.innerHTML =
   "<h4 style=\"margin:0 0 .5rem;font-size:.8rem;color:var(--muted,#9aa0aa);text-transform:uppercase;letter-spacing:.06em;font-weight:500\">Study resources we recommend</h4>" +
-  "<a href=\"" + amazonHref + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem;margin-bottom:.4rem\">MCAT prep books on Amazon &rarr;</a>" +
-  "<a href=\"" + GOLDSTANDARD_URL + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem\">Gold Standard MCAT prep course &rarr;</a>" +
+  links +
   "<p style=\"color:var(--muted,#9aa0aa);font-size:.72rem;margin:.7rem 0 0\">As an affiliate, we may earn a commission on qualifying purchases through these links, at no extra cost to you. We only recommend resources we'd actually tell a friend to use.</p>";
 }
 
