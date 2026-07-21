@@ -644,5 +644,29 @@ unique targets, 0 broken). Real findings fixed:
 - Added BreadcrumbList schema to both guides for rich-snippet
   breadcrumbs
 
-**Guide 3 still queued:** Michaelis-Menten vs. Lineweaver-Burk, when
-to use each — ties to the enzyme kinetics tools.
+**Guide 3 [DONE, commit 7b8339d]:** michaelis-menten-vs-lineweaver-
+burk.html. Ties both enzyme kinetics tools together — the fitter
+(uses LB regression to extract Km/Vmax from data) and the simulator
+(uses LB to diagnose inhibition type). Reused exact numbers from both
+live tools (the fitter's 6-point dataset regression, the simulator's
+r=1 competitive/noncompetitive example) rather than inventing new
+ones, so the guide and the tools always agree. Caught the same
+missing-closing-brace JSON-LD bug as guide 2, in all 3 FAQ entries
+this time — the json.loads validation pass is now clearly worth
+running on every single guide, not just spot-checking.
+
+**All 3 planned guides now done.** Linked from their respective tool
+pages, from each other where relevant, from the homepage's "Study
+guides" sidebar card, and in sitemap.xml. Site-wide sweep after
+shipping guide 3: 0 HTML errors, 0 invalid JSON-LD, 0 broken internal
+links across 31 pages / 30 unique link targets.
+
+**Next real decision point:** the guides are built and internally
+solid, but there's still no organic traffic (per Keon's Cloudflare
+check earlier this session). The content is in place for long-tail
+SEO to eventually work, but that takes weeks-to-months to show up in
+search even in the best case, and only works at all if these pages get
+crawled/indexed — worth a Search Console check in a couple weeks to
+see if they're indexed and whether any of the 3 pick up impressions.
+No further content is queued; the honest next move is to wait for that
+signal rather than write a 4th guide speculatively.
