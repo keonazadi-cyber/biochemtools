@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATP Yield Calculator — ATP per Glucose, Free</title>
+<meta name="description" content="Free ATP yield calculator. See total ATP per glucose from glycolysis, the TCA cycle, and oxidative phosphorylation — why textbooks say 30, 32, 36, or 38.">
+<meta name="keywords" content="atp yield per glucose, how many atp from glucose, cellular respiration atp calculator, 36 or 38 atp, 30 or 32 atp glucose, oxidative phosphorylation atp yield">
+<link rel="canonical" href="https://biochemtools.com/atp-yield-calculator.html">
+<meta property="og:title" content="ATP Yield Calculator — Why the Number Isn't Fixed">
+<meta property="og:description" content="Total ATP per glucose from glycolysis, the TCA cycle, and oxidative phosphorylation — with every step shown. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/atp-yield-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/atp-yield-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate total ATP yield per glucose","step":[
+{"@type":"HowToStep","name":"Count substrate-level ATP","text":"2 ATP from glycolysis + 2 GTP from the TCA cycle (2 turns) = 4 ATP made directly, no oxygen or electron transport chain needed."},
+{"@type":"HowToStep","name":"Count NADH and FADH2 produced","text":"Glycolysis: 2 NADH (cytosolic). Pyruvate dehydrogenase: 2 NADH. TCA cycle (2 turns): 6 NADH + 2 FADH2. Total: 10 NADH, 2 FADH2."},
+{"@type":"HowToStep","name":"Apply the P/O ratio","text":"Multiply mitochondrial NADH and FADH2 by their ATP yield per molecule (classic: 3 and 2; modern: 2.5 and 1.5), then add the cytosolic NADH using whichever shuttle applies."},
+{"@type":"HowToStep","name":"Add it all up","text":"Total ATP = substrate-level ATP + oxidative phosphorylation ATP from all NADH and FADH2."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is the answer 36, 38, 30, or 32 ATP per glucose?","acceptedAnswer":{"@type":"Answer","text":"All four are defensible depending on which convention your course uses. 36 or 38 come from the older, simpler P/O ratios (3 ATP per NADH, 2 per FADH2); 30 or 32 come from more accurate modern measurements (2.5 per NADH, 1.5 per FADH2). Within each pair, the lower number assumes the glycerol-3-phosphate shuttle for cytosolic NADH and the higher number assumes the malate-aspartate shuttle. Check which convention your professor or textbook uses before an exam."}},
+{"@type":"Question","name":"Why does the cytosolic NADH from glycolysis need a shuttle at all?","acceptedAnswer":{"@type":"Answer","text":"NADH itself cannot cross the inner mitochondrial membrane. To get its electrons into the electron transport chain, a shuttle system transfers just the electrons across, regenerating NADH (malate-aspartate shuttle) or FADH2 (glycerol-3-phosphate shuttle) on the mitochondrial side — which is exactly why those 2 cytosolic NADH end up worth a different amount of ATP depending on which shuttle is used."}},
+{"@type":"Question","name":"Why isn't the P/O ratio a clean whole number like 3 or 2?","acceptedAnswer":{"@type":"Answer","text":"ATP synthase requires roughly 4 protons to make 1 ATP (3 to turn the rotor, 1 to import phosphate), and measured proton-pumping stoichiometry per NADH or FADH2 oxidized doesn't divide evenly by 4. The modern 2.5 and 1.5 values come from that more precise proton accounting; the classic 3 and 2 values are the older, simplified textbook approximation."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<header><h1>ATP Yield Calculator</h1><p>How many ATP does one glucose actually make? It depends which convention you use — this tool shows all four answers (30, 32, 36, or 38) and exactly why they differ, not just one memorized number.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-top:0">P/O ratio convention</label>
+  <div class="modes" id="conv">
+   <button data-v="modern" class="on">Modern (2.5 / 1.5)</button>
+   <button data-v="classic">Classic (3.0 / 2.0)</button>
+  </div>
+  <label>Cytosolic NADH shuttle</label>
+  <div class="modes" id="shuttle">
+   <button data-v="malate" class="on">Malate-aspartate (liver, heart, kidney)</button>
+   <button data-v="g3p">Glycerol-3-phosphate (muscle, brain)</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Total ATP per glucose</div><div class="v" id="total" aria-live="polite">—</div></div>
+  <div style="overflow-x:auto">
+  <table>
+   <thead><tr><th>Stage</th><th>NADH</th><th>FADH₂</th><th>Substrate-level</th></tr></thead>
+   <tbody>
+    <tr><td>Glycolysis</td><td>2 (cytosolic)</td><td>—</td><td>2 ATP</td></tr>
+    <tr><td>Pyruvate dehydrogenase (×2)</td><td>2</td><td>—</td><td>—</td></tr>
+    <tr><td>Citric acid cycle (×2 turns)</td><td>6</td><td>2</td><td>2 GTP</td></tr>
+    <tr style="font-weight:600"><td>Total</td><td id="totNadh">10</td><td id="totFadh2">2</td><td id="totSub">4</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How the total is actually built</h2>
+ <p class="note">Every glucose makes 4 ATP directly (substrate-level phosphorylation: 2 from glycolysis, 2 from the TCA cycle's GTP) with no oxygen required. Everything else comes from oxidative phosphorylation: the 10 NADH and 2 FADH₂ produced along the way feed electrons into the electron transport chain, and the proton gradient that creates drives ATP synthase. How much ATP each NADH or FADH₂ is "worth" — the P/O ratio — is where the textbook disagreement comes from.</p>
+ <p class="note">2 of those 10 NADH are made in the cytosol during glycolysis, but NADH itself can't cross the inner mitochondrial membrane. A shuttle system moves the electrons across instead, and depending on which shuttle a tissue uses, those 2 NADH end up worth either a full NADH's worth of ATP (malate-aspartate shuttle) or only a FADH₂'s worth (glycerol-3-phosphate shuttle) — which is the second source of disagreement.</p>
+ <p class="note">Related tools: <a href="/glycolysis-pathway-explorer.html">Glycolysis pathway explorer</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: modern accounting, malate-aspartate shuttle (the default)</h2>
+  <div class="work">Substrate-level ATP: 2 (glycolysis) + 2 (TCA GTP) = 4 ATP
+
+Mitochondrial NADH: 8 (2 from pyruvate dehydrogenase + 6 from the TCA cycle)
+  8 × 2.5 ATP/NADH = 20 ATP
+
+FADH2: 2 (from the TCA cycle)
+  2 × 1.5 ATP/FADH2 = 3 ATP
+
+Cytosolic NADH: 2 (from glycolysis), malate-aspartate shuttle → full NADH value
+  2 × 2.5 ATP/NADH = 5 ATP
+
+Total = 4 + 20 + 3 + 5 = 32 ATP</div>
+  <p class="note">Switch the shuttle to glycerol-3-phosphate and those 2 cytosolic NADH drop to 1.5 ATP each instead of 2.5 — total falls to 30 ATP. Switch to classic P/O ratios (3.0/2.0) and the same two shuttle choices give 38 or 36 ATP instead. All four are "correct" — they're just different, equally real conventions.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> Using classic P/O ratios (NADH = 3, FADH₂ = 2) and the glycerol-3-phosphate shuttle, what's the total ATP yield?</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Substrate-level: 4 ATP
+Mitochondrial NADH: 8 × 3 = 24 ATP
+FADH2: 2 × 2 = 4 ATP
+Cytosolic NADH (G3P shuttle → FADH2-equivalent): 2 × 2 = 4 ATP
+
+Total = 4 + 24 + 4 + 4 = 36 ATP</div></details>
+  <p class="note"><b>2.</b> A muscle cell uses the glycerol-3-phosphate shuttle and modern P/O ratios. If glycolysis were somehow blocked entirely (no glucose breakdown past that point), how much of the 30 ATP total would be lost — and why is it more than just the 2 substrate-level ATP from glycolysis itself?</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Blocking glycolysis loses: the 2 substrate-level ATP AND the 2 cytosolic NADH (worth 2 × 1.5 = 3 ATP via the G3P shuttle)
+
+Total lost = 2 + 3 = 5 ATP out of 30 (not just 2)
+
+Glycolysis contributes ATP two ways — directly (substrate-level) and indirectly (its NADH feeds oxidative phosphorylation) — so losing it costs more than just its own direct ATP.</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Is the answer 36, 38, 30, or 32 ATP?</b><br>All four are defensible depending on convention. 36/38 use the older P/O ratios (3 and 2); 30/32 use modern measured values (2.5 and 1.5). Within each pair, the shuttle for cytosolic NADH picks the lower or higher number. Check which convention your course uses.</p>
+  <p class="note"><b>Why does cytosolic NADH need a shuttle?</b><br>NADH can't cross the inner mitochondrial membrane. A shuttle moves the electrons across instead, regenerating NADH (malate-aspartate) or FADH₂ (glycerol-3-phosphate) on the mitochondrial side — which is exactly why those 2 NADH end up worth a different amount depending on the shuttle.</p>
+  <p class="note"><b>Why isn't the P/O ratio a whole number?</b><br>ATP synthase needs roughly 4 protons per ATP, and the measured protons pumped per NADH or FADH₂ oxidized doesn't divide evenly by 4. The modern 2.5/1.5 values come from that more precise accounting; 3/2 is the older simplified approximation.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 23 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">ATP yield calculator</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+let conv="modern", shuttle="malate";
+const $=id=>document.getElementById(id);
+const MITO_NADH=8, TCA_FADH2=2, GLYC_NADH=2, SUBSTRATE=4;
+function calc(){
+ const nadhRatio = conv==="modern" ? 2.5 : 3.0;
+ const fadh2Ratio = conv==="modern" ? 1.5 : 2.0;
+ const glycRatio = shuttle==="malate" ? nadhRatio : fadh2Ratio;
+ const mitoAtp = MITO_NADH*nadhRatio;
+ const fadh2Atp = TCA_FADH2*fadh2Ratio;
+ const glycAtp = GLYC_NADH*glycRatio;
+ const total = SUBSTRATE + mitoAtp + fadh2Atp + glycAtp;
+ $("total").textContent = (total%1===0?total:total.toFixed(1))+" ATP";
+ const shuttleName = shuttle==="malate" ? "malate-aspartate shuttle" : "glycerol-3-phosphate shuttle";
+ let w = `Substrate-level ATP: 2 (glycolysis) + 2 (TCA GTP) = ${SUBSTRATE} ATP\n\n`;
+ w += `Mitochondrial NADH: ${MITO_NADH} × ${nadhRatio} ATP/NADH = ${mitoAtp} ATP\n`;
+ w += `FADH2: ${TCA_FADH2} × ${fadh2Ratio} ATP/FADH2 = ${fadh2Atp} ATP\n`;
+ w += `Cytosolic NADH: ${GLYC_NADH} × ${glycRatio} ATP/NADH (${shuttleName}) = ${glycAtp} ATP\n\n`;
+ w += `Total = ${SUBSTRATE} + ${mitoAtp} + ${fadh2Atp} + ${glycAtp} = ${(total%1===0?total:total.toFixed(1))} ATP`;
+ $("work").textContent = w;
+}
+document.querySelectorAll("#conv button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#conv button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ conv=b.dataset.v;calc();});
+document.querySelectorAll("#shuttle button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#shuttle button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ shuttle=b.dataset.v;calc();});
+calc();
+</script>
+</body>
+</html>
