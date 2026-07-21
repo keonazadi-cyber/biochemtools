@@ -531,3 +531,37 @@ encoded in the URL, `rel="noopener sponsored"`, no Gold Standard
 placeholder shown. When Gold Standard is signed up: fill in the real
 `GOLDSTANDARD_URL` from their dashboard and flip `GOLDSTANDARD_LIVE`
 to `true` — same pattern, independent of Amazon.
+
+### 2026-07-21 — visual polish pass + affiliate card rolled out sitewide (commits 83cd28b, 4b8811d)
+Keon asked to make the landing page and other pages "prettier and more
+appealing," and to get the affiliate link more visible across the
+site.
+
+**Homepage redesign [DONE, commit 83cd28b].** Added a subtle radial
+gradient glow behind the hero, bolder H1, real shadows on every tool
+card and sidebar card (was flat border-only before) with a stronger
+lift-and-glow on hover, category-colored dot markers on each section
+heading (matching each section's existing card accent color), restyled
+"Why these are different" as a proper card instead of bare text, and
+matching shadow/hover treatment on the search bar and daily-question
+callout. Moved the affiliate recommendations card up in the sidebar —
+now second, right after the streak widget, above the fold — per Keon's
+explicit ask to make it more visible.
+
+**Sitewide polish + affiliate rollout [DONE, commit 4b8811d].** The
+`.card{}` rule was byte-identical across all 21 tool pages + daily
+question (confirmed via grep before touching anything), so scripted
+the same shadow/hover treatment onto all of them in one pass rather
+than hand-editing each file. Also added `#recommended-slot` to all 21
+tool pages + daily-question.html (previously only the homepage + quiz
+page had it) — since `AMAZON_LIVE` is already true, the Amazon
+Associates card now shows on every page site-wide automatically, no
+separate activation step.
+
+Verified: HTML well-formedness across all files (0 issues), exactly
+one `#recommended-slot` per page, spot-checked rendering + zero
+console errors on ph-calculator and glycolysis-pathway-explorer (most
+complex interactive layout on the site). Confirmed live on production
+(biochemtools.com) via direct curl + a hard-reloaded browser check on
+cardiac-output-calculator.html — card shadow and affiliate link both
+present with the correct tag.
