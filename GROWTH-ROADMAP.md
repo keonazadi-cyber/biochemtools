@@ -517,3 +517,17 @@ both links resolve with `rel="noopener sponsored"`.
 2. Once approved, open `streak.js`, replace `AMAZON_TAG` with the real Associates tag (looks like `something-20`) and `GOLDSTANDARD_URL` with the real tracked referral link from the Gold Standard dashboard.
 3. Flip `AFFILIATE_LIVE` to `true`.
 4. Commit and push — the card goes live on the homepage and quiz page automatically, no other changes needed.
+
+### 2026-07-21 — Amazon Associates live (commit 3b7d0a1)
+Keon signed up for Amazon Associates same day (Store ID `biochemtools20`
+— note the signup form rejected the hyphenated `biochemtools-20`,
+alphanumeric only). Refactored the single `AFFILIATE_LIVE` flag into
+per-program flags (`AMAZON_LIVE`, `GOLDSTANDARD_LIVE`) so Amazon could
+go live on its own without the disclosure line implying Gold Standard
+was tracked when it isn't yet — Gold Standard signup still pending.
+`AMAZON_LIVE = true`, `AMAZON_TAG = "biochemtools20"`. Verified live on
+homepage sidebar + quiz page: exactly one link renders, correct tag
+encoded in the URL, `rel="noopener sponsored"`, no Gold Standard
+placeholder shown. When Gold Standard is signed up: fill in the real
+`GOLDSTANDARD_URL` from their dashboard and flip `GOLDSTANDARD_LIVE`
+to `true` — same pattern, independent of Amazon.
