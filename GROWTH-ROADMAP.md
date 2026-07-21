@@ -193,8 +193,14 @@ went out unchecked.
 ## What's left overall (as of 2026-07-21)
 
 1. Content-depth pass: **DONE** (20/20 pages).
-2. Cloudflare Web Analytics: still needs Keon to flip it on (one click,
-   his login) — the next real data unlock.
+2. **[DONE 2026-07-21]** Cloudflare Web Analytics. The zone's "Enable
+   Globally" auto-inject option doesn't work here since DNS is
+   intentionally unproxied (DNS-only, for GitHub Pages cert reasons) —
+   Cloudflare's edge never sees the traffic to auto-inject a beacon.
+   Used "Enable with JS Snippet installation" instead to get a manual
+   token, added the beacon script to all 24 pages (commit 0e7edd9). Give
+   it a few days of traffic, then check Cloudflare dashboard → Web
+   Analytics for real page-view/visit data per URL.
 3. og:image (proper 1200×630 social preview): still not started, needs
    its own small image pipeline (the Pinterest pins are the wrong aspect
    ratio to reuse).
