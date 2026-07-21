@@ -357,3 +357,26 @@ home-screen audit. All genuine, none manufactured:
 **Also checked and passed, for the record:** no duplicate element IDs
 anywhere, no `target="_blank"` link missing `rel="noopener"`, no
 duplicate titles/descriptions across pages, sitemap XML valid.
+
+### 2026-07-21 — growth features, round 2 (Keon: "we can do them all")
+Four growth ideas approved. Sequencing: daily question → practice
+problem banks → fill Physiology gap → cheat-sheet PDF.
+
+**1. [DONE, commit 442d67a] Daily Question feature.** New
+`daily-question.html`: one multiple-choice question a day, same for
+everyone (deterministic by calendar date via a day-index formula, no
+server needed), 30-question bank spanning every category on the site.
+Answer once/day, get an explanation either way. Tracked via a new
+`recordDailyQuestion` in streak.js, linked from the homepage (featured
+callout card) and every tool page's footer nav, own og-image, added to
+sitemap. This is meant to be a stronger retention lever than the streak
+alone — the streak only rewards not breaking a habit, this gives a new
+reason to open the site each day. Caught and fixed a real bug before
+shipping: the page's own script ran before deferred streak.js had
+executed, so the streak line rendered blank on load — fixed by
+deferring that specific render call to DOMContentLoaded.
+
+**2. [IN PROGRESS] Practice problem banks per tool.** Adding 3-4
+additional solved practice problems per tool page (on top of the
+existing 1-2 worked examples), same verify-in-Python-before-publishing
+method as the original content pass. See progress below.
