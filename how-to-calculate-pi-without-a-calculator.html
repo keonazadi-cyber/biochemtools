@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Calculate pI Without a Calculator</title>
+<meta name="description" content="The exact method to find a peptide's isoelectric point (pI) by hand, no calculator needed — 4 fully worked examples, from 2 ionizable groups to 8.">
+<meta name="keywords" content="how to calculate pI, isoelectric point by hand, pI calculation method, MCAT pI, peptide isoelectric point, calculate pI without calculator">
+<link rel="canonical" href="https://biochemtools.com/how-to-calculate-pi-without-a-calculator.html">
+<meta property="og:title" content="How to Calculate pI Without a Calculator — Step by Step">
+<meta property="og:description" content="The exact hand method for a peptide's isoelectric point, with 4 fully worked examples from simple to complex. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/peptide-charge-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/peptide-charge-calculator.png">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate the isoelectric point (pI) of a peptide without a calculator","step":[
+{"@type":"HowToStep","name":"List every ionizable group","text":"Write down the N-terminus, the C-terminus, and every charged side chain, each with its pKa and whether it's an acid (loses a proton as pH rises) or a base (loses a proton as pH rises but starts positive)."},
+{"@type":"HowToStep","name":"Sort by pKa","text":"Order every group's pKa from lowest to highest. This gives you the sequence in which groups lose their proton as pH increases from 0 to 14."},
+{"@type":"HowToStep","name":"Find the neutral bracket","text":"Walking up the sorted pKa list, track the running net charge. Find the two consecutive pKa values where the net charge crosses from positive to negative (or sits at exactly zero between them)."},
+{"@type":"HowToStep","name":"Average the two bracketing pKa values","text":"pI = (pKa(low) + pKa(high)) / 2, using the two pKa values that bracket the zero-charge region found in the previous step."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Do I always just average two pKa values to find pI?","acceptedAnswer":{"@type":"Answer","text":"Yes, but the key skill is picking the right two. You need the two pKa values that bracket the region where net charge is zero — not just the two closest to neutral pH, and not always the middle two in the sorted list. Track the running charge as you move up the sorted pKa list and stop at the pair where it crosses zero."}},
+{"@type":"Question","name":"What if a peptide has an even number of acidic and basic groups?","acceptedAnswer":{"@type":"Answer","text":"The averaging method still works the same way — sort every group by pKa, track the running charge, and average the two pKa values where it crosses zero. The number of acidic vs basic groups doesn't change the method, only where the crossing happens to land."}},
+{"@type":"Question","name":"Why does this method only give an approximation for large proteins?","acceptedAnswer":{"@type":"Answer","text":"The bracketing method assumes each transition is a clean step, which is accurate when the bracketing pKa values are reasonably far apart. In a folded protein, dozens of groups with pKa values close together interact and shift each other, so the simple average becomes less precise — that's when you'd sum every group's exact Henderson-Hasselbalch charge and solve numerically instead, which is what the calculator does."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--pos:#378add;--neg:#e24b4a;--accent:#5dcaa5;--accent2:#378add;--head:#7f77dd}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+ header{text-align:center;padding:2.75rem 1rem 1.25rem;max-width:700px;margin:0 auto}
+ h1{font-size:1.9rem;font-weight:700;margin:0 0 .6rem;letter-spacing:-.01em}
+ header p{color:var(--muted);font-size:1.05rem;margin:0}
+ main{max-width:700px;margin:0 auto;padding:0 1rem 1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22)}
+ .quick{background:linear-gradient(135deg,rgba(93,202,165,.12),rgba(127,119,221,.1));border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.5rem;margin:1.5rem 0}
+ .quick .lbl{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.5rem}
+ .quick p{margin:0;font-size:1rem}
+ h2{font-size:1.35rem;margin:2.3rem 0 .75rem}
+ h3{font-size:1.05rem;margin:1.5rem 0 .5rem}
+ p{margin:0 0 1rem}
+ .note{color:var(--muted);font-size:.9rem}
+ ol.steps{padding-left:1.3rem;margin:0 0 1rem}
+ ol.steps li{margin-bottom:.7rem}
+ table{width:100%;border-collapse:collapse;font-size:.92rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}
+ th{color:var(--muted);font-weight:500}
+ .chg-pos{color:var(--pos);font-weight:600}
+ .chg-neg{color:var(--neg);font-weight:600}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.9;white-space:pre-wrap}
+ .cta{display:block;background:var(--accent);color:#06231c;text-decoration:none;text-align:center;font-weight:700;padding:.9rem 1.5rem;border-radius:10px;margin:1.5rem 0;box-shadow:0 4px 16px rgba(93,202,165,.25);transition:transform .15s,box-shadow .15s}
+ .cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(93,202,165,.35)}
+ a{color:var(--accent2)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<header>
+ <h1>How to Calculate pI Without a Calculator</h1>
+ <p>The exact hand method for finding a peptide's isoelectric point — four fully worked examples, from a simple 2-group case to a real 8-group peptide.</p>
+</header>
+<main>
+
+ <div class="quick">
+  <div class="lbl">Quick answer</div>
+  <p>Find the two ionizable groups whose pKa values bracket where the net charge crosses zero, then average those two pKa values: <b>pI = (pKa₁ + pKa₂) / 2</b>. The hard part isn't the math — it's correctly identifying <i>which</i> two groups bracket the crossing. That's what this guide teaches.</p>
+ </div>
+
+ <h2>Why "just average the two middle pKa's" gets students in trouble</h2>
+ <p>Most textbooks show one example — usually a simple amino acid with three groups — and the trick "average the two closest pKa's" works fine there. The problem is that rule is really a shortcut for a more general method, and it stops working the moment you have more than three ionizable groups, or a lopsided mix of acidic and basic side chains. Applying it blindly is the single most common way students get pI wrong on exams.</p>
+ <p>The actual method always works, for two groups or twenty:</p>
+
+ <ol class="steps">
+  <li><b>List every ionizable group</b> — the N-terminus, the C-terminus, and every charged side chain — with its pKa and whether it's an acid or a base.</li>
+  <li><b>Sort every group by pKa</b>, low to high. This is the order groups lose a proton as pH rises from 0 to 14.</li>
+  <li><b>Walk up the sorted list and track the running net charge.</b> Start at very low pH (every base is +1, every acid is 0) and subtract 1 each time you pass a group's pKa, tracking the sign as you go.</li>
+  <li><b>Find where the running charge crosses zero</b>, and average the two pKa values on either side of that crossing. That average is the pI.</li>
+ </ol>
+
+ <p class="note">This works because near its own pKa, a group is roughly half-charged — so directly between two consecutive pKa values, the net charge is at its most stable (flattest) point, and for two groups that's almost exactly zero at the midpoint. This guide uses the same pKa table as the <a href="/peptide-charge-calculator.html">peptide charge calculator</a>: N-terminus 9.0, C-terminus 3.1, Asp 3.9, Glu 4.1, His 6.0, Cys 8.3, Tyr 10.5, Lys 10.5, Arg 12.5.</p>
+
+ <div class="card">
+  <h3 style="margin-top:0">Example 1: the simplest case — 2 groups (dipeptide Gly-Ala)</h3>
+  <p class="note">No charged side chains, so the only two ionizable groups are the termini.</p>
+  <div class="work">Groups: N-terminus (base, pKa 9.0), C-terminus (acid, pKa 3.1)
+
+Below pH 3.1:  N-term +1, C-term  0   →  net = +1
+3.1 to 9.0:    N-term +1, C-term -1   →  net =  0
+Above pH 9.0:  N-term  0, C-term -1   →  net = -1</div>
+  <p>The net charge sits at zero for the entire stretch between the two pKa values — so the crossing is bracketed by 3.1 and 9.0.</p>
+  <div class="work">pI = (3.1 + 9.0) / 2 = <b>6.05</b></div>
+ </div>
+
+ <div class="card">
+  <h3 style="margin-top:0">Example 2: adding one basic side chain (Gly-Lys)</h3>
+  <p class="note">Now there are three groups: two bases and one acid.</p>
+  <div class="work">Groups: N-terminus (base, 9.0), Lys side chain (base, 10.5), C-terminus (acid, 3.1)
+
+Below pH 3.1:   +1 +1 +0  →  net = +2
+3.1 to 9.0:     +1 +1 -1  →  net = +1
+9.0 to 10.5:     0 +1 -1  →  net =  0
+Above pH 10.5:   0  0 -1  →  net = -1</div>
+  <p>This time the zero-charge region sits between 9.0 and 10.5 — <b>not</b> between the two lowest pKa's, and not a simple "middle value" pick. You have to actually track the running charge to see this.</p>
+  <div class="work">pI = (9.0 + 10.5) / 2 = <b>9.75</b></div>
+ </div>
+
+ <div class="card">
+  <h3 style="margin-top:0">Example 3: three basic groups (Lys-Arg)</h3>
+  <p class="note">This is where "average the two middle values" breaks completely — there's no middle when three of four groups are bases.</p>
+  <div class="work">Groups: N-terminus (base, 9.0), Lys (base, 10.5), Arg (base, 12.5), C-terminus (acid, 3.1)
+
+Below pH 3.1:   +1 +1 +1 +0  →  net = +3
+3.1 to 9.0:     +1 +1 +1 -1  →  net = +2
+9.0 to 10.5:     0 +1 +1 -1  →  net = +1
+10.5 to 12.5:    0  0 +1 -1  →  net =  0
+Above pH 12.5:   0  0  0 -1  →  net = -1</div>
+  <p>The crossing is bracketed by Lys (10.5) and Arg (12.5) — the two <i>highest</i> pKa's, not the middle ones.</p>
+  <div class="work">pI = (10.5 + 12.5) / 2 = <b>11.5</b>
+(11.51 solving the exact Henderson-Hasselbalch curve — see note below)</div>
+  <p class="note">The bracketing average (11.5) and the exact numeric solution (11.51) are this close because 10.5 and 12.5 are far enough apart that each group is essentially fully charged by the time the next one starts transitioning. When bracketing pKa's are close together, the two numbers can diverge by a few tenths — which is exactly why the <a href="/peptide-charge-calculator.html">calculator</a> solves the exact version rather than the hand-shortcut.</p>
+ </div>
+
+ <div class="card">
+  <h3 style="margin-top:0">Example 4: a real peptide with 8 groups (Asp-Lys-His-Glu-Tyr-Arg, "DKHEYR")</h3>
+  <p class="note">Eight ionizable groups is exactly where hand-tracking a running sum for every group gets tedious — this is the case the full formula (not just averaging) is actually for.</p>
+  <table>
+   <thead><tr><th>Group</th><th>pKa</th><th>Type</th><th>Charge at pH 7.0</th></tr></thead>
+   <tbody>
+    <tr><td>N-terminus</td><td>9.0</td><td>base</td><td class="chg-pos">+0.99</td></tr>
+    <tr><td>Asp (D)</td><td>3.9</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td>Lys (K)</td><td>10.5</td><td>base</td><td class="chg-pos">+1.00</td></tr>
+    <tr><td>His (H)</td><td>6.0</td><td>base</td><td class="chg-pos">+0.09</td></tr>
+    <tr><td>Glu (E)</td><td>4.1</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td>Tyr (Y)</td><td>10.5</td><td>acid</td><td>0.00</td></tr>
+    <tr><td>Arg (R)</td><td>12.5</td><td>base</td><td class="chg-pos">+1.00</td></tr>
+    <tr><td>C-terminus</td><td>3.1</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td colspan="3" style="text-align:right;font-weight:600">Net charge at pH 7.0</td><td style="font-weight:600">+0.08</td></tr>
+   </tbody>
+  </table>
+  <p>At this point, tracking a clean step-function bracket stops being practical — several groups (especially His, with a pKa right in the physiological range) are partially charged at the same time. The reliable move here is exactly what the peptide charge calculator does: sum every group's exact Henderson-Hasselbalch charge at a trial pH, and adjust the pH until that sum hits zero.</p>
+  <div class="work">Solving numerically: pI ≈ <b>7.49</b></div>
+  <a class="cta" href="/peptide-charge-calculator.html">Load DKHEYR in the calculator →</a>
+ </div>
+
+ <h2>Common mistakes</h2>
+ <p><b>Forgetting a terminus.</b> Every peptide has an N-terminus and a C-terminus in addition to any charged side chains — missing one shifts every answer.</p>
+ <p><b>Averaging the wrong two pKa's.</b> As Example 3 shows, the correct pair isn't always the two in the middle of the sorted list. Track the running charge; don't guess.</p>
+ <p><b>Mixing up acid and base direction.</b> A basic group is positively charged when protonated (low pH) and neutral when deprotonated (high pH). An acidic group is neutral when protonated (low pH) and negative when deprotonated (high pH). Getting this backwards flips your entire bracket.</p>
+ <p><b>Using the wrong pKa table.</b> Different textbooks report slightly different side-chain pKa values, which shifts the final answer by a few tenths of a pH unit. Always use whichever table your course specifies.</p>
+
+ <h2>Practice problems</h2>
+ <div class="card">
+  <p><b>1.</b> Find the pI of the dipeptide Asp-Asp (Asp-Asp, "DD").</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent2)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, 9.0), Asp (acid, 3.9), Asp (acid, 3.9), C-terminus (acid, 3.1)
+
+Below pH 3.1:   +1  0  0  0  →  net = +1
+3.1 to 3.9:     +1  0  0 -1  →  net =  0
+Above pH 3.9:   +1 -1 -1 -1  →  net = -2
+
+Bracket: C-terminus (3.1) and Asp (3.9)
+pI = (3.1 + 3.9) / 2 = 3.5
+(3.29 solving exactly — the two pKa's are close together, so like Example 3's caveat, the hand estimate and exact answer diverge slightly more here)</div></details>
+  <p><b>2.</b> Find the pI of the dipeptide Lys-Glu ("KE").</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, 9.0), Lys (base, 10.5), Glu (acid, 4.1), C-terminus (acid, 3.1)
+
+Below pH 3.1:   +1 +1  0  0  →  net = +2
+3.1 to 4.1:     +1 +1  0 -1  →  net = +1
+4.1 to 9.0:     +1 +1 -1 -1  →  net =  0
+9.0 to 10.5:     0 +1 -1 -1  →  net = -1
+
+Bracket: Glu (4.1) and N-terminus (9.0)
+pI = (4.1 + 9.0) / 2 = 6.55</div></details>
+ </div>
+
+ <h2>FAQ</h2>
+ <div class="card">
+  <p class="note"><b>Do I always just average two pKa values to find pI?</b><br>Yes — but the skill is picking the <i>right</i> two. You need the pair that brackets where net charge crosses zero, found by tracking the running charge up the sorted pKa list, not just the two pKa's numerically closest to 7.</p>
+  <p class="note"><b>What if there are more basic groups than acidic groups, or vice versa?</b><br>The method doesn't change — sort, track the running charge, average the bracketing pair. An imbalanced group count just shifts where that bracket ends up (see Example 3).</p>
+  <p class="note"><b>Why is this only an approximation for large proteins?</b><br>The bracketing method assumes each group's transition is a clean step, which holds well when the bracketing pKa's are reasonably far apart. In a folded protein, many groups with close-together pKa's interact and shift each other, so the simple average gets less precise — that's when summing every group's exact charge numerically (what the calculator does) matters more.</p>
+ </div>
+
+ <p class="note">Related: <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="/henderson-hasselbalch-buffer-calculator.html">Henderson-Hasselbalch buffer calculator</a> · <a href="/amino-acid-titration-curve.html">Amino acid titration curve</a> · <a href="/">all biochem tools</a>.</p>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 22 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
+<footer>Free biochem guide · part of biochemtools.com · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
