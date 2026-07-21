@@ -330,3 +330,30 @@ titration curve) had zero accessible fallback — a screen reader user
 would get total silence where a chart is. Added `role="img"` +
 descriptive `aria-label` to each, noting the exact values are also
 available in accessible text/tables on the same page.
+
+### 2026-07-21 — another "keep digging" round, all real findings
+Ran a full HTML well-formedness sweep (Python's html.parser, checking
+every open/close tag matches across all 24 pages) plus a mobile
+home-screen audit. All genuine, none manufactured:
+- **[DONE, commit 888246b]** `michaelis-menten-fitter.html` was missing
+  its closing `</main>` tag — the footer nav and analytics scripts were
+  nesting inside `<main>` instead of after it. Browsers silently
+  recover from this, but it's invalid HTML that could confuse crawler
+  DOM parsing and assistive tech. Only page on the whole site with a
+  structural tag mismatch (verified via the same script against all 24).
+- **[DONE, commit cb2104a]** Favicon was SVG-only (data URI) — Safari
+  has spotty support for that — and there was no apple-touch-icon at
+  all. That matters specifically for this site: MCAT prep runs for
+  months, so a student adding the site to their iPhone home screen is
+  exactly the kind of repeat-visit habit we're trying to build, and
+  without an apple-touch-icon that shortcut would show a generic
+  screenshot instead of a branded icon. Generated real favicon.png (32)
+  and apple-touch-icon.png (180) matching the existing brand mark.
+- **[DONE, commit 4a27a43]** Same gap on Android — no manifest.json, no
+  192/512 icons, no theme-color. Added all three so "Add to Home
+  Screen" on Android creates a real standalone-feeling icon instead of
+  a bare bookmark, and Chrome's address bar tints to match the site.
+
+**Also checked and passed, for the record:** no duplicate element IDs
+anywhere, no `target="_blank"` link missing `rel="noopener"`, no
+duplicate titles/descriptions across pages, sitemap XML valid.
