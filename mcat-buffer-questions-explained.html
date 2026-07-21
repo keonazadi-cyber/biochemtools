@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 3 MCAT Buffer Question Types, Explained</title>
+<meta name="description" content="The 3 buffer question types the MCAT actually asks — which buffer to pick, the acid/base ratio, and the strong-acid-addition problem — each fully worked.">
+<meta name="keywords" content="MCAT buffer questions, buffer pKa selection, henderson hasselbalch practice problems, adding strong acid to buffer, buffer capacity MCAT">
+<link rel="canonical" href="https://biochemtools.com/mcat-buffer-questions-explained.html">
+<meta property="og:title" content="The 3 MCAT Buffer Question Types, Explained">
+<meta property="og:description" content="Which buffer to pick, the acid/base ratio, and the strong-acid-addition problem — the 3 buffer question types MCAT actually asks, fully worked.">
+<meta property="og:image" content="https://biochemtools.com/og-images/henderson-hasselbalch-buffer-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/henderson-hasselbalch-buffer-calculator.png">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to solve the 3 MCAT buffer question types","step":[
+{"@type":"HowToStep","name":"Buffer selection","text":"Pick the buffer whose pKa is closest to the target pH, and confirm it's within pKa ± 1 of that target."},
+{"@type":"HowToStep","name":"Acid/base ratio","text":"Use [A-]/[HA] = 10^(pH - pKa) to find the exact ratio of conjugate base to weak acid at any pH."},
+{"@type":"HowToStep","name":"Strong acid/base addition","text":"Added strong acid converts conjugate base to weak acid mole-for-mole; added strong base converts weak acid to conjugate base mole-for-mole. Recompute the ratio with the new mole amounts, then reapply Henderson-Hasselbalch for the new pH."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why does adding acid to a buffer change moles of both forms, not just one?","acceptedAnswer":{"@type":"Answer","text":"Every mole of strong acid added reacts completely with one mole of conjugate base, converting it to the weak acid form. So conjugate base moles go down by exactly the moles of acid added, and weak acid moles go up by the same amount — both forms change, by the same quantity, in opposite directions."}},
+{"@type":"Question","name":"Do I use concentrations or moles for the strong-acid-addition problem?","acceptedAnswer":{"@type":"Answer","text":"Moles (or mmol) are safer, since the added strong acid or base is a fixed amount regardless of the buffer's volume. If the total volume doesn't change, the concentration ratio and the mole ratio give the same Henderson-Hasselbalch result anyway, since the volume cancels out of the ratio — but tracking moles avoids mistakes if volume does change."}},
+{"@type":"Question","name":"How much strong acid or base can a buffer absorb before it stops working?","acceptedAnswer":{"@type":"Answer","text":"Roughly until one form runs out. In practice, a buffer is considered to have good capacity as long as the resulting pH stays within about pKa ± 1 of its pKa — beyond that, small further additions cause much larger pH swings, the same way an unbuffered solution would behave."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--a:#5dcaa5;--ha:#e0a93b;--accent:#378add;--warn:#e24b4a}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+ header{text-align:center;padding:2.75rem 1rem 1.25rem;max-width:700px;margin:0 auto}
+ h1{font-size:1.9rem;font-weight:700;margin:0 0 .6rem;letter-spacing:-.01em}
+ header p{color:var(--muted);font-size:1.05rem;margin:0}
+ main{max-width:700px;margin:0 auto;padding:0 1rem 1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22)}
+ .quick{background:linear-gradient(135deg,rgba(93,202,165,.12),rgba(55,138,221,.1));border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.5rem;margin:1.5rem 0}
+ .quick .lbl{font-size:.75rem;color:var(--a);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.6rem}
+ .quick ol{margin:0;padding-left:1.2rem}
+ .quick li{margin-bottom:.4rem}
+ h2{font-size:1.35rem;margin:2.3rem 0 .75rem}
+ h3{font-size:1.05rem;margin:1.5rem 0 .5rem}
+ p{margin:0 0 1rem}
+ .note{color:var(--muted);font-size:.9rem}
+ table{width:100%;border-collapse:collapse;font-size:.92rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}
+ th{color:var(--muted);font-weight:500}
+ .ok{color:var(--a);font-weight:600}
+ .out{color:var(--warn)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.9;white-space:pre-wrap}
+ .cta{display:block;background:var(--accent);color:#06192e;text-decoration:none;text-align:center;font-weight:700;padding:.9rem 1.5rem;border-radius:10px;margin:1.5rem 0;box-shadow:0 4px 16px rgba(55,138,221,.25);transition:transform .15s,box-shadow .15s}
+ .cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(55,138,221,.35)}
+ a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<header>
+ <h1>The 3 MCAT Buffer Question Types, Explained</h1>
+ <p>Almost every buffer question on the MCAT is one of exactly three types. Learn to recognize which one you're looking at, and each becomes a mechanical calculation.</p>
+</header>
+<main>
+
+ <div class="quick">
+  <div class="lbl">The 3 types</div>
+  <ol>
+   <li><b>Buffer selection</b> — "which of these buffers works best at pH X?"</li>
+   <li><b>Acid/base ratio</b> — "what fraction of the buffer is in each form at pH X?"</li>
+   <li><b>Strong acid/base addition</b> — "you add this much HCl or NaOH — what's the new pH?"</li>
+  </ol>
+ </div>
+
+ <p>All three use the same equation — pH = pKa + log([A⁻]/[HA]) — but they ask for different things, and type 3 trips up far more students than the other two because it looks like a two-step problem when it's actually three.</p>
+
+ <h2>Type 1: Buffer selection</h2>
+ <p>You're given a target pH and a list of candidate buffers with their pKa values. The rule: pick the buffer whose pKa is closest to the target, and confirm it's within about pKa ± 1 — outside that range, a buffer has too little of one form left to resist a pH change.</p>
+ <div class="card">
+  <h3 style="margin-top:0">Worked example: best buffer for pH 9.0</h3>
+  <table>
+   <thead><tr><th>Buffer</th><th>pKa</th><th>|pH − pKa|</th><th>In range?</th></tr></thead>
+   <tbody>
+    <tr><td>Acetate</td><td>4.76</td><td>4.24</td><td class="out">No</td></tr>
+    <tr><td>Bicarbonate</td><td>6.35</td><td>2.65</td><td class="out">No</td></tr>
+    <tr><td>Phosphate</td><td>7.21</td><td>1.79</td><td class="out">No</td></tr>
+    <tr><td>HEPES</td><td>7.48</td><td>1.52</td><td class="out">No</td></tr>
+    <tr><td>Tris</td><td>8.06</td><td>0.94</td><td class="ok">Yes</td></tr>
+    <tr><td>Ammonium</td><td>9.25</td><td>0.25</td><td class="ok">Yes</td></tr>
+   </tbody>
+  </table>
+  <p>Two candidates fall within range, but ammonium's pKa (9.25) is closer to 9.0 than Tris's (8.06) — ammonium is the better choice.</p>
+ </div>
+
+ <h2>Type 2: Acid/base ratio</h2>
+ <p>Given a buffer's pKa and a target pH, find what fraction is conjugate base versus weak acid: ratio [A⁻]/[HA] = 10^(pH − pKa).</p>
+ <div class="card">
+  <h3 style="margin-top:0">Worked example: ammonium buffer at pH 9.0</h3>
+  <div class="work">Ratio [A⁻]/[HA] = 10^(9.0 − 9.25) = 10^(−0.25) = 0.562
+
+Fraction A⁻ = 0.562/1.562 = 0.360  (36.0%)
+Fraction HA = 1/1.562     = 0.640  (64.0%)</div>
+  <p>Ratio below 1 makes sense: the target pH (9.0) is below the pKa (9.25), so the weak acid form (NH₄⁺) dominates.</p>
+ </div>
+
+ <h2>Type 3: strong acid/base addition — the one that trips people up</h2>
+ <p>This is the type that looks straightforward but actually has three steps: figure out the starting moles of each form, apply the stoichiometry of the addition, <i>then</i> plug the new mole amounts into Henderson-Hasselbalch. Skipping straight to the equation with the original ratio is the single most common mistake on this question type.</p>
+ <p class="note">The key fact: strong acid reacts completely with the conjugate base (A⁻ + H⁺ → HA), and strong base reacts completely with the weak acid (HA + OH⁻ → A⁻ + H₂O). Every mole added shifts one mole from one form to the other.</p>
+
+ <div class="card">
+  <h3 style="margin-top:0">Worked example: adding strong acid</h3>
+  <p class="note">500 mL of 0.10 M acetate buffer (pKa 4.76), currently at pH 4.76 — meaning the two forms start equal. Add 10 mmol of HCl. Find the new pH.</p>
+  <div class="work">Step 1 — starting moles:
+Total buffer = 0.10 M × 500 mL = 50 mmol
+At pH = pKa, the two forms are equal: A⁻ = 25 mmol, HA = 25 mmol
+
+Step 2 — apply the stoichiometry of adding 10 mmol HCl:
+A⁻ + H⁺ → HA, so 10 mmol of A⁻ converts to HA
+New A⁻ = 25 − 10 = 15 mmol
+New HA = 25 + 10 = 35 mmol
+
+Step 3 — Henderson-Hasselbalch with the new amounts:
+pH = pKa + log(A⁻/HA) = 4.76 + log(15/35) = 4.76 + log(0.4286)
+pH = 4.76 + (−0.368) = <b>4.39</b></div>
+  <p>Notice the pH dropped by only 0.37 units even though a meaningful amount of strong acid was added — that's the buffer doing its job. Without any buffer present, that much HCl in 500 mL would drop the pH far more sharply.</p>
+ </div>
+
+ <div class="card">
+  <h3 style="margin-top:0">Worked example: adding strong base (the mirror case)</h3>
+  <p class="note">Same starting buffer (25 mmol A⁻, 25 mmol HA, pKa 4.76). This time add 8 mmol of NaOH instead.</p>
+  <div class="work">HA + OH⁻ → A⁻ + H₂O, so 8 mmol of HA converts to A⁻
+New A⁻ = 25 + 8 = 33 mmol
+New HA = 25 − 8 = 17 mmol
+
+pH = 4.76 + log(33/17) = 4.76 + log(1.941) = 4.76 + 0.288 = <b>5.05</b></div>
+  <p>Same mechanism, opposite direction: adding base raises the ratio (more conjugate base, less weak acid), which raises the pH.</p>
+  <a class="cta" href="/henderson-hasselbalch-buffer-calculator.html">Check any ratio instantly in the buffer calculator →</a>
+ </div>
+
+ <h2>Common mistakes</h2>
+ <p><b>Using concentrations from before the reaction with moles from after it.</b> Do the stoichiometry in moles (or mmol) first, then convert to concentration or plug straight into the pH ratio — don't mix the two.</p>
+ <p><b>Forgetting both forms change.</b> Added acid doesn't just create more HA — it also destroys an equal amount of A⁻. Track both.</p>
+ <p><b>Applying Henderson-Hasselbalch before doing the stoichiometry.</b> The equation needs the <i>post-reaction</i> mole amounts. Using the original ratio skips the step that makes this a "buffer" question instead of a plain ratio lookup.</p>
+
+ <h2>Practice problem</h2>
+ <div class="card">
+  <p><b>1.</b> You have 400 mL of a 0.20 M phosphate buffer (pKa 7.21), starting with equal amounts of both forms. You add 15 mmol of NaOH. What is the new pH?</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work" style="margin-top:.5rem">Total buffer = 0.20 M × 400 mL = 80 mmol
+Starting equal: A⁻ = 40 mmol, HA = 40 mmol
+
+Adding 15 mmol NaOH converts HA → A⁻:
+New A⁻ = 40 + 15 = 55 mmol
+New HA = 40 − 15 = 25 mmol
+
+pH = 7.21 + log(55/25) = 7.21 + log(2.2) = 7.21 + 0.342 = <b>7.55</b></div></details>
+ </div>
+
+ <h2>FAQ</h2>
+ <div class="card">
+  <p class="note"><b>Why does adding acid change moles of both forms, not just one?</b><br>Every mole of strong acid reacts completely with one mole of conjugate base, converting it to weak acid. Conjugate base goes down by exactly the moles added; weak acid goes up by the same amount.</p>
+  <p class="note"><b>Should I use concentrations or moles for the addition problem?</b><br>Moles are safer, since the added strong acid or base is a fixed amount regardless of volume. If total volume doesn't change, concentration and mole ratios give the same result anyway — but tracking moles avoids mistakes if volume changes too.</p>
+  <p class="note"><b>How much acid or base can a buffer absorb before it stops working well?</b><br>Roughly until the resulting pH drifts outside pKa ± 1 of the buffer's pKa. Past that point, further additions cause much larger pH swings, similar to an unbuffered solution.</p>
+ </div>
+
+ <p class="note">Related: <a href="/henderson-hasselbalch-buffer-calculator.html">Henderson-Hasselbalch buffer calculator</a> · <a href="/ph-calculator.html">pH calculator</a> · <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="/">all biochem tools</a>.</p>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 22 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
+<footer>Free biochem guide · part of biochemtools.com · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
