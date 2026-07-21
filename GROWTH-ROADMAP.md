@@ -376,7 +376,27 @@ shipping: the page's own script ran before deferred streak.js had
 executed, so the streak line rendered blank on load — fixed by
 deferring that specific render call to DOMContentLoaded.
 
-**2. [IN PROGRESS] Practice problem banks per tool.** Adding 3-4
-additional solved practice problems per tool page (on top of the
-existing 1-2 worked examples), same verify-in-Python-before-publishing
-method as the original content pass. See progress below.
+**2. [DONE, commits be19ddd/644d6f6/e0b9837] Practice problem banks.**
+2 additional solved practice problems added to all 19 tool pages (quiz
+excluded — it's already inherently practice-based), using native
+`<details>/<summary>` disclosure widgets (accessible by default, zero
+JS needed). Every number verified in Python before writing, several
+spot-checked directly against the live tools.
+
+**Bonus finds while doing this:** caught 4 pages
+(peptide-charge-calculator, dna-to-protein-translation,
+punnett-square-calculator, serial-dilution-calculator) using
+`class="work"` for monospace calculation blocks without ever defining
+a `.work{}` CSS rule — meaning those sections had been rendering with
+no background/padding/monospace font since they were first added
+earlier in the project. Also glycolysis-pathway-explorer was missing
+both `.card` and `.work`. Fixed all 5 by adding the standard rule to
+each page's stylesheet, verified via computed styles in-browser.
+
+**3. [NEXT] Fill the thin Physiology category.** Currently just one
+tool (osmotic pressure). Building 2 new tools: cardiac output and
+renal clearance calculators, to the same design/quality bar as the
+existing 20 (worked example, FAQ, practice problems, verified schema,
+og-image, added to nav/sitemap everywhere).
+
+**4. [NOT STARTED] Printable/shareable cheat-sheet PDF.**
