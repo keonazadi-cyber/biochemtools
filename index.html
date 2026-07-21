@@ -40,18 +40,43 @@
 {"@type":"ListItem","position":22,"url":"https://biochemtools.com/renal-clearance-calculator.html","name":"Renal clearance calculator"}]}
 </script>
 <style>
- :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--accent:#5dcaa5;--accent2:#378add;--head:#7f77dd;--amber:#e0a93b}
+ :root{--bg:#0f1115;--card:#1a1d24;--card2:#20232c;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--accent:#5dcaa5;--accent2:#378add;--head:#7f77dd;--amber:#e0a93b}
  *{box-sizing:border-box}
  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ a{color:inherit}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--txt);font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--head));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:var(--txt)}
+ .topnav-links .navcta{background:var(--accent);color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
 
  .hero-glow{position:relative;overflow:hidden}
- .hero-glow::before{content:"";position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:1000px;height:460px;background:radial-gradient(ellipse at center,rgba(93,202,165,.16),rgba(127,119,221,.07) 45%,transparent 72%);pointer-events:none;z-index:0}
- header{position:relative;z-index:1;text-align:center;padding:3.25rem 1rem 1.5rem;max-width:720px;margin:0 auto}
- h1{font-size:2.2rem;font-weight:700;margin:0 0 .6rem;letter-spacing:-.01em}
- header p{color:var(--muted);font-size:1.08rem;margin:0 0 1rem}
- .tag{display:inline-block;background:rgba(93,202,165,.12);border:1px solid rgba(93,202,165,.28);color:var(--accent);font-size:.85rem;padding:.35rem 1rem;border-radius:99px;margin-bottom:1.1rem;font-weight:500}
+ .hero-glow::before{content:"";position:absolute;top:-260px;left:50%;transform:translateX(-50%);width:1200px;height:520px;background:radial-gradient(ellipse at 35% 40%,rgba(93,202,165,.17),transparent 60%),radial-gradient(ellipse at 65% 55%,rgba(127,119,221,.14),transparent 62%),radial-gradient(ellipse at 50% 20%,rgba(55,138,221,.09),transparent 55%);pointer-events:none;z-index:0}
+ header{position:relative;z-index:1;text-align:center;padding:4rem 1rem 1.75rem;max-width:760px;margin:0 auto}
+ h1{font-size:2.6rem;font-weight:800;margin:0 0 .8rem;letter-spacing:-.02em;line-height:1.12}
+ header p{color:var(--muted);font-size:1.12rem;margin:0 0 1.5rem;max-width:600px;margin-left:auto;margin-right:auto}
+ .tag{display:inline-block;background:rgba(93,202,165,.12);border:1px solid rgba(93,202,165,.28);color:var(--accent);font-size:.85rem;padding:.35rem 1rem;border-radius:99px;margin-bottom:1.3rem;font-weight:500}
 
- .search-wrap{max-width:520px;margin:0 auto 1.5rem;padding:0 1rem;position:relative;z-index:1}
+ .stats{display:flex;justify-content:center;align-items:center;gap:1.1rem;margin:0 0 1.75rem;flex-wrap:wrap}
+ .stats .stat{font-size:.88rem;color:var(--muted)}
+ .stats .stat b{color:var(--txt);font-weight:700}
+ .stats .dot{width:3px;height:3px;border-radius:50%;background:var(--line)}
+
+ .hero-ctas{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.7rem}
+ .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s;cursor:pointer;border:0;font-family:inherit}
+ .btn-primary{background:linear-gradient(135deg,var(--accent),#4db894);color:#06231c;box-shadow:0 4px 16px rgba(93,202,165,.28)}
+ .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(93,202,165,.38)}
+ .btn-secondary{background:var(--card);color:var(--txt);border:1px solid var(--line)}
+ .btn-secondary:hover{border-color:var(--head);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.32)}
+ .hero-caption{color:var(--muted);font-size:.82rem;margin-bottom:2.1rem}
+
+ .search-wrap{max-width:480px;margin:0 auto 2rem;padding:0 1rem;position:relative;z-index:1}
  #search{width:100%;background:var(--card);border:1px solid var(--line);color:var(--txt);font-size:1rem;padding:.85rem 1.1rem;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.28);transition:border-color .15s,box-shadow .15s}
  #search::placeholder{color:var(--muted)}
  #search:focus{outline:none;border-color:var(--accent2);box-shadow:0 2px 18px rgba(55,138,221,.22)}
@@ -60,23 +85,26 @@
  .layout{max-width:1160px;margin:0 auto;padding:0 1rem 1rem;display:grid;grid-template-columns:820px 1fr;gap:2rem;align-items:start;position:relative;z-index:1}
  @media(max-width:1080px){.layout{grid-template-columns:1fr;max-width:820px}}
 
- .jumpnav{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:0 auto 2.5rem;max-width:820px;padding:0 1rem;position:relative;z-index:1}
+ .jumpnav{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:0 auto 2.75rem;max-width:820px;padding:0 1rem;position:relative;z-index:1}
  .jumpnav a{background:var(--card);border:1px solid var(--line);color:var(--muted);text-decoration:none;font-size:.82rem;padding:.45rem 1rem;border-radius:99px;transition:.15s}
  .jumpnav a:hover{border-color:var(--accent2);color:var(--txt);transform:translateY(-1px)}
 
  main{min-width:0}
- .section{margin:0 0 2.75rem;scroll-margin-top:1rem}
+ .section{margin:0 0 2.75rem;scroll-margin-top:5rem}
  .section h2{display:flex;align-items:center;gap:.55rem;font-size:1.1rem;font-weight:600;color:var(--head);text-transform:uppercase;letter-spacing:.08em;margin:0 0 1.1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
  .section h2::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--cat,var(--head));flex-shrink:0}
  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
  @media(max-width:640px){.grid{grid-template-columns:1fr}}
- a.tool{display:block;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--cat,var(--line));border-radius:14px;padding:1.4rem;text-decoration:none;color:var(--txt);box-shadow:0 1px 2px rgba(0,0,0,.22);transition:transform .18s,box-shadow .18s,border-color .18s}
- a.tool:hover{border-color:var(--accent2);border-left-color:var(--cat,var(--accent2));transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.38)}
+ a.tool{display:block;position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem 1.4rem 1.4rem;text-decoration:none;color:var(--txt);box-shadow:0 1px 2px rgba(0,0,0,.22);transition:transform .18s,box-shadow .18s,border-color .18s}
+ a.tool::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--cat,var(--line))}
+ a.tool:hover{border-color:var(--cat,var(--accent2));transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.38)}
+ .tool-icon{width:38px;height:38px;border-radius:10px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--cat,var(--muted));margin-bottom:.9rem}
+ .tool-icon svg{width:19px;height:19px}
  a.tool h3{margin:0 0 .4rem;font-size:1.15rem;font-weight:600}
  a.tool p{margin:0;color:var(--muted);font-size:.9rem}
  a.tool .q{display:block;margin-top:.7rem;color:var(--accent2);font-size:.82rem}
 
- aside{position:sticky;top:1.5rem;display:flex;flex-direction:column;gap:1rem}
+ aside{position:sticky;top:5rem;display:flex;flex-direction:column;gap:1rem}
  @media(max-width:1080px){aside{position:static;flex-direction:row;flex-wrap:wrap}}
  .side-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.25rem;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s,border-color .18s}
  .side-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.32)}
@@ -85,12 +113,25 @@
  #streak-widget:empty{display:none}
  #recommended-slot:empty{display:none}
 
- .why{margin:1.5rem 0 3.5rem;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.75rem;box-shadow:0 1px 2px rgba(0,0,0,.22)}
- .why h2{font-size:1.3rem;color:var(--txt);text-transform:none;letter-spacing:0;border:0;padding:0;margin:0 0 .6rem}
- .why p{color:var(--muted);margin:0}
- footer{text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem}
- .daily-cta{box-shadow:0 1px 2px rgba(0,0,0,.22);transition:transform .18s,box-shadow .18s}
- .daily-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+ .why{margin:2rem 0 3.5rem}
+ .why-head{text-align:center;max-width:520px;margin:0 auto 1.75rem}
+ .why-head h2{font-size:1.5rem;color:var(--txt);margin:0 0 .5rem;font-weight:700;letter-spacing:-.01em}
+ .why-head p{color:var(--muted);margin:0;font-size:.95rem}
+ .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+ @media(max-width:640px){.why-grid{grid-template-columns:1fr}}
+ .why-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s,transform .18s}
+ .why-card:hover{box-shadow:0 10px 24px rgba(0,0,0,.32);transform:translateY(-2px)}
+ .why-card .tool-icon{color:var(--accent)}
+ .why-card h3{margin:0 0 .4rem;font-size:1.02rem;font-weight:600}
+ .why-card p{margin:0;color:var(--muted);font-size:.88rem}
+
+ footer{border-top:1px solid var(--line);margin-top:1rem}
+ .footer-inner{max-width:1160px;margin:0 auto;padding:2.5rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+ .footer-brand{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+ .footer-tag{color:var(--muted);font-size:.85rem}
+ .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+ .footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .15s}
+ .footer-links a:hover{color:var(--txt)}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -99,22 +140,41 @@
 <link rel="manifest" href="/manifest.json">
 </head>
 <body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="#results">Browse tools</a>
+  </div>
+ </div>
+</div>
+
 <header class="hero-glow">
  <span class="tag">22 free tools · no signup · shows every step</span>
  <h1>Biochem tools that show their work</h1>
  <p>Most study sites give you an answer or a cheat sheet. These teach you the method — live, step by step — so you can do it yourself on the exam.</p>
+
+ <div class="stats">
+  <span class="stat"><b>22</b> tools</span>
+  <span class="dot"></span>
+  <span class="stat"><b>6</b> subjects</span>
+  <span class="dot"></span>
+  <span class="stat"><b>100%</b> free</span>
+  <span class="dot"></span>
+  <span class="stat">no account needed</span>
+ </div>
+
+ <div class="hero-ctas">
+  <a class="btn btn-primary" href="#results">Browse all tools ↓</a>
+  <a class="btn btn-secondary" href="/daily-question.html">Question of the day →</a>
+ </div>
+ <p class="hero-caption">Free forever · one new daily question · no account needed</p>
 </header>
 
 <div class="search-wrap">
  <input id="search" type="text" placeholder="Search tools… (e.g. &quot;pH&quot;, &quot;glycolysis&quot;, &quot;dilution&quot;)" autocomplete="off">
-</div>
-
-<div style="max-width:520px;margin:0 auto 1.5rem;padding:0 1rem">
- <a class="daily-cta" href="/daily-question.html" style="display:block;background:linear-gradient(135deg,rgba(93,202,165,.14),rgba(127,119,221,.14));border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem;text-decoration:none;color:var(--txt)">
-  <div style="font-size:.78rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.3rem">New · Daily</div>
-  <div style="font-weight:600;font-size:1.05rem">Biochem Question of the Day →</div>
-  <div style="color:var(--muted);font-size:.88rem;margin-top:.2rem">One free question, every day. Keep a streak, no signup.</div>
- </a>
 </div>
 
 <nav class="jumpnav">
@@ -129,50 +189,69 @@
 <div class="layout">
 <main id="results">
  <div class="section" id="biochemistry" style="--cat:var(--accent)"><h2>Biochemistry</h2><div class="grid">
-  <a class="tool" style="--cat:var(--accent)" href="peptide-charge-calculator.html"><h3>Peptide charge &amp; pI calculator</h3><p>Net charge at any pH, the isoelectric point, a titration curve, and the full Henderson-Hasselbalch breakdown for every ionizable group.</p><span class="q">"how to calculate the pI of a peptide" →</span></a>
-  <a class="tool" style="--cat:var(--accent)" href="enzyme-kinetics-simulator.html"><h3>Enzyme kinetics simulator</h3><p>Michaelis-Menten and Lineweaver-Burk plots, live, with competitive / noncompetitive / uncompetitive inhibition and the worked Km and Vmax.</p><span class="q">"competitive vs noncompetitive inhibition" →</span></a>
-  <a class="tool" style="--cat:var(--accent)" href="michaelis-menten-fitter.html"><h3>Michaelis-Menten fitter</h3><p>Paste your enzyme-lab data and instantly get Km, Vmax, and R² with a curve fitted through your points — the regression done for you.</p><span class="q">"find Km and Vmax from data" →</span></a>
-  <a class="tool" style="--cat:var(--accent)" href="amino-acid-titration-curve.html"><h3>Amino acid titration curve</h3><p>Pick an amino acid and see its full titration curve with every buffering region and the pI marked, and worked.</p><span class="q">"amino acid titration curve" →</span></a>
-  <a class="tool" style="--cat:var(--accent)" href="quiz.html"><h3>Amino acid quiz</h3><p>Drill all 20 amino acids — one-letter codes, three-letter codes, and class — with instant scoring and a reference table.</p><span class="q">"amino acid quiz" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="peptide-charge-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6l-6 10.5A2 2 0 0 0 5.7 21.5h12.6a2 2 0 0 0 1.7-3L14 8V2"/></svg></div><h3>Peptide charge &amp; pI calculator</h3><p>Net charge at any pH, the isoelectric point, a titration curve, and the full Henderson-Hasselbalch breakdown for every ionizable group.</p><span class="q">"how to calculate the pI of a peptide" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="enzyme-kinetics-simulator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6l-6 10.5A2 2 0 0 0 5.7 21.5h12.6a2 2 0 0 0 1.7-3L14 8V2"/></svg></div><h3>Enzyme kinetics simulator</h3><p>Michaelis-Menten and Lineweaver-Burk plots, live, with competitive / noncompetitive / uncompetitive inhibition and the worked Km and Vmax.</p><span class="q">"competitive vs noncompetitive inhibition" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="michaelis-menten-fitter.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6l-6 10.5A2 2 0 0 0 5.7 21.5h12.6a2 2 0 0 0 1.7-3L14 8V2"/></svg></div><h3>Michaelis-Menten fitter</h3><p>Paste your enzyme-lab data and instantly get Km, Vmax, and R² with a curve fitted through your points — the regression done for you.</p><span class="q">"find Km and Vmax from data" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="amino-acid-titration-curve.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6l-6 10.5A2 2 0 0 0 5.7 21.5h12.6a2 2 0 0 0 1.7-3L14 8V2"/></svg></div><h3>Amino acid titration curve</h3><p>Pick an amino acid and see its full titration curve with every buffering region and the pI marked, and worked.</p><span class="q">"amino acid titration curve" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="quiz.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6l-6 10.5A2 2 0 0 0 5.7 21.5h12.6a2 2 0 0 0 1.7-3L14 8V2"/></svg></div><h3>Amino acid quiz</h3><p>Drill all 20 amino acids — one-letter codes, three-letter codes, and class — with instant scoring and a reference table.</p><span class="q">"amino acid quiz" →</span></a>
  </div></div>
 
  <div class="section" id="molecular-biology" style="--cat:var(--accent2)"><h2>Molecular biology</h2><div class="grid">
-  <a class="tool" style="--cat:var(--accent2)" href="dna-to-protein-translation.html"><h3>DNA → protein translation</h3><p>Transcribe and translate any DNA sequence step by step — mRNA, codons, and protein with start/stop highlighted, plus the full codon table.</p><span class="q">"translate DNA to protein" →</span></a>
-  <a class="tool" style="--cat:var(--accent2)" href="dna-melting-temperature-calculator.html"><h3>DNA melting temp &amp; GC</h3><p>Paste a primer — get its Tm, GC content, base composition, and reverse complement instantly, with the formula shown.</p><span class="q">"primer melting temperature" →</span></a>
-  <a class="tool" style="--cat:var(--accent2)" href="glycolysis-pathway-explorer.html"><h3>Glycolysis pathway explorer</h3><p>Step through all 10 reactions with a live ATP/NADH tally, every enzyme named, and the three regulated steps highlighted.</p><span class="q">"glycolysis steps and net ATP" →</span></a>
+  <a class="tool" style="--cat:var(--accent2)" href="dna-to-protein-translation.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c0 4.5 10 4.5 10 9s-10 4.5-10 9M8 7.5h8M8 16.5h8"/></svg></div><h3>DNA → protein translation</h3><p>Transcribe and translate any DNA sequence step by step — mRNA, codons, and protein with start/stop highlighted, plus the full codon table.</p><span class="q">"translate DNA to protein" →</span></a>
+  <a class="tool" style="--cat:var(--accent2)" href="dna-melting-temperature-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c0 4.5 10 4.5 10 9s-10 4.5-10 9M8 7.5h8M8 16.5h8"/></svg></div><h3>DNA melting temp &amp; GC</h3><p>Paste a primer — get its Tm, GC content, base composition, and reverse complement instantly, with the formula shown.</p><span class="q">"primer melting temperature" →</span></a>
+  <a class="tool" style="--cat:var(--accent2)" href="glycolysis-pathway-explorer.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c0 4.5 10 4.5 10 9s-10 4.5-10 9M8 7.5h8M8 16.5h8"/></svg></div><h3>Glycolysis pathway explorer</h3><p>Step through all 10 reactions with a live ATP/NADH tally, every enzyme named, and the three regulated steps highlighted.</p><span class="q">"glycolysis steps and net ATP" →</span></a>
  </div></div>
 
  <div class="section" id="genetics" style="--cat:var(--amber)"><h2>Genetics</h2><div class="grid">
-  <a class="tool" style="--cat:var(--amber)" href="punnett-square-calculator.html"><h3>Punnett square solver</h3><p>Type two genotypes and get the full square plus genotype and phenotype ratios — monohybrid and dihybrid.</p><span class="q">"dihybrid cross calculator" →</span></a>
-  <a class="tool" style="--cat:var(--amber)" href="hardy-weinberg-calculator.html"><h3>Hardy-Weinberg calculator</h3><p>Allele and genotype frequencies from p or from counts, plus a chi-square equilibrium test — fully worked.</p><span class="q">"hardy weinberg calculator" →</span></a>
+  <a class="tool" style="--cat:var(--amber)" href="punnett-square-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3 3-3 6 0 8M12 2c3 3 3 6 0 8M12 22c-3-3-3-6 0-8M12 22c3-3 3-6 0-8"/></svg></div><h3>Punnett square solver</h3><p>Type two genotypes and get the full square plus genotype and phenotype ratios — monohybrid and dihybrid.</p><span class="q">"dihybrid cross calculator" →</span></a>
+  <a class="tool" style="--cat:var(--amber)" href="hardy-weinberg-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3 3-3 6 0 8M12 2c3 3 3 6 0 8M12 22c-3-3-3-6 0-8M12 22c3-3 3-6 0-8"/></svg></div><h3>Hardy-Weinberg calculator</h3><p>Allele and genotype frequencies from p or from counts, plus a chi-square equilibrium test — fully worked.</p><span class="q">"hardy weinberg calculator" →</span></a>
  </div></div>
 
  <div class="section" id="chemistry" style="--cat:var(--head)"><h2>Chemistry</h2><div class="grid">
-  <a class="tool" style="--cat:var(--head)" href="ph-calculator.html"><h3>pH calculator</h3><p>pH, pOH, [H⁺], and [OH⁻] for strong and weak acids and bases — solved exactly, with every step shown.</p><span class="q">"pH of a weak acid" →</span></a>
-  <a class="tool" style="--cat:var(--head)" href="henderson-hasselbalch-buffer-calculator.html"><h3>Buffer calculator</h3><p>Exact acid and conjugate-base amounts to hit any target pH, with the full worked math and a buffering-range check.</p><span class="q">"how to make a buffer at a given pH" →</span></a>
-  <a class="tool" style="--cat:var(--head)" href="gibbs-free-energy-calculator.html"><h3>Gibbs free energy</h3><p>Is the reaction spontaneous? Compute ΔG from ΔH/ΔS/T or from ΔG°′ and Q, with the crossover temperature.</p><span class="q">"is the reaction spontaneous" →</span></a>
-  <a class="tool" style="--cat:var(--head)" href="nernst-equation-calculator.html"><h3>Nernst equation</h3><p>Cell potential from E°, n, and Q at any temperature, with both the RT/nF and 0.0592/n forms shown.</p><span class="q">"nernst equation calculator" →</span></a>
-  <a class="tool" style="--cat:var(--head)" href="beer-lambert-calculator.html"><h3>Beer-Lambert calculator</h3><p>Absorbance ↔ concentration with A = εbc, plus an absorbance/%transmittance converter, fully worked.</p><span class="q">"absorbance to concentration" →</span></a>
-  <a class="tool" style="--cat:var(--head)" href="ideal-gas-law-calculator.html"><h3>Ideal gas law (PV = nRT)</h3><p>Solve for pressure, volume, moles, or temperature with the right gas constant and every step shown.</p><span class="q">"ideal gas law calculator" →</span></a>
+  <a class="tool" style="--cat:var(--head)" href="ph-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div><h3>pH calculator</h3><p>pH, pOH, [H⁺], and [OH⁻] for strong and weak acids and bases — solved exactly, with every step shown.</p><span class="q">"pH of a weak acid" →</span></a>
+  <a class="tool" style="--cat:var(--head)" href="henderson-hasselbalch-buffer-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div><h3>Buffer calculator</h3><p>Exact acid and conjugate-base amounts to hit any target pH, with the full worked math and a buffering-range check.</p><span class="q">"how to make a buffer at a given pH" →</span></a>
+  <a class="tool" style="--cat:var(--head)" href="gibbs-free-energy-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div><h3>Gibbs free energy</h3><p>Is the reaction spontaneous? Compute ΔG from ΔH/ΔS/T or from ΔG°′ and Q, with the crossover temperature.</p><span class="q">"is the reaction spontaneous" →</span></a>
+  <a class="tool" style="--cat:var(--head)" href="nernst-equation-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div><h3>Nernst equation</h3><p>Cell potential from E°, n, and Q at any temperature, with both the RT/nF and 0.0592/n forms shown.</p><span class="q">"nernst equation calculator" →</span></a>
+  <a class="tool" style="--cat:var(--head)" href="beer-lambert-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div><h3>Beer-Lambert calculator</h3><p>Absorbance ↔ concentration with A = εbc, plus an absorbance/%transmittance converter, fully worked.</p><span class="q">"absorbance to concentration" →</span></a>
+  <a class="tool" style="--cat:var(--head)" href="ideal-gas-law-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div><h3>Ideal gas law (PV = nRT)</h3><p>Solve for pressure, volume, moles, or temperature with the right gas constant and every step shown.</p><span class="q">"ideal gas law calculator" →</span></a>
  </div></div>
 
  <div class="section" id="solutions" style="--cat:var(--accent)"><h2>Solutions &amp; lab prep</h2><div class="grid">
-  <a class="tool" style="--cat:var(--accent)" href="molarity-molar-mass-calculator.html"><h3>Molar mass &amp; molarity</h3><p>Type any chemical formula for its molar mass, then get the exact grams to weigh for your target concentration and volume.</p><span class="q">"how many grams for a solution" →</span></a>
-  <a class="tool" style="--cat:var(--accent)" href="dilution-calculator.html"><h3>Dilution calculator (C₁V₁ = C₂V₂)</h3><p>Solve for any variable and see exactly how much stock and solvent to mix — with every step shown.</p><span class="q">"dilution calculator" →</span></a>
-  <a class="tool" style="--cat:var(--accent)" href="serial-dilution-calculator.html"><h3>Serial dilution calculator</h3><p>The concentration at every step of your series, plus exactly how much sample and diluent to add per tube.</p><span class="q">"serial dilution calculator" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="molarity-molar-mass-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 8.5 7 13a7 7 0 1 1-14 0c0-4.5 7-13 7-13z"/></svg></div><h3>Molar mass &amp; molarity</h3><p>Type any chemical formula for its molar mass, then get the exact grams to weigh for your target concentration and volume.</p><span class="q">"how many grams for a solution" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="dilution-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 8.5 7 13a7 7 0 1 1-14 0c0-4.5 7-13 7-13z"/></svg></div><h3>Dilution calculator (C₁V₁ = C₂V₂)</h3><p>Solve for any variable and see exactly how much stock and solvent to mix — with every step shown.</p><span class="q">"dilution calculator" →</span></a>
+  <a class="tool" style="--cat:var(--accent)" href="serial-dilution-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 8.5 7 13a7 7 0 1 1-14 0c0-4.5 7-13 7-13z"/></svg></div><h3>Serial dilution calculator</h3><p>The concentration at every step of your series, plus exactly how much sample and diluent to add per tube.</p><span class="q">"serial dilution calculator" →</span></a>
  </div></div>
 
  <div class="section" id="physiology" style="--cat:var(--accent2)"><h2>Physiology</h2><div class="grid">
-  <a class="tool" style="--cat:var(--accent2)" href="osmotic-pressure-calculator.html"><h3>Osmotic pressure &amp; tonicity</h3><p>Osmolarity and osmotic pressure from π = iMRT, plus whether it's hypertonic, isotonic, or hypotonic to blood.</p><span class="q">"osmotic pressure calculator" →</span></a>
-  <a class="tool" style="--cat:var(--accent2)" href="cardiac-output-calculator.html"><h3>Cardiac output calculator</h3><p>Solve CO two ways — HR × SV, or Fick's principle from oxygen consumption and the A-V O₂ difference — with every step shown.</p><span class="q">"cardiac output calculator" →</span></a>
-  <a class="tool" style="--cat:var(--accent2)" href="renal-clearance-calculator.html"><h3>Renal clearance calculator</h3><p>Find GFR or renal plasma flow from urine and plasma concentrations, plus filtration fraction, fully worked.</p><span class="q">"renal clearance calculator" →</span></a>
+  <a class="tool" style="--cat:var(--accent2)" href="osmotic-pressure-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div><h3>Osmotic pressure &amp; tonicity</h3><p>Osmolarity and osmotic pressure from π = iMRT, plus whether it's hypertonic, isotonic, or hypotonic to blood.</p><span class="q">"osmotic pressure calculator" →</span></a>
+  <a class="tool" style="--cat:var(--accent2)" href="cardiac-output-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div><h3>Cardiac output calculator</h3><p>Solve CO two ways — HR × SV, or Fick's principle from oxygen consumption and the A-V O₂ difference — with every step shown.</p><span class="q">"cardiac output calculator" →</span></a>
+  <a class="tool" style="--cat:var(--accent2)" href="renal-clearance-calculator.html"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div><h3>Renal clearance calculator</h3><p>Find GFR or renal plasma flow from urine and plasma concentrations, plus filtration fraction, fully worked.</p><span class="q">"renal clearance calculator" →</span></a>
  </div></div>
 
  <p id="noresults">No tools match that search. <a href="#" onclick="document.getElementById('search').value='';filterTools();return false" style="color:var(--accent2)">Clear search</a></p>
 
  <div class="why">
-  <h2>Why these are different</h2>
-  <p>A calculator gives you a number. A cheat sheet gives you facts to memorize. Neither teaches you the <i>method</i> — which is what you actually need when there's no calculator on the exam. Every tool here shows the work as you change the inputs, so the reasoning sticks. Free, fast, mobile-friendly, and shareable — built for biochem and the MCAT.</p>
+  <div class="why-head">
+   <h2>Why these are different</h2>
+   <p>A calculator gives you a number. A cheat sheet gives you facts to memorize. Neither teaches you the method — which is what you need when there's no calculator on the exam.</p>
+  </div>
+  <div class="why-grid">
+   <div class="why-card">
+    <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+    <h3>Shows the work</h3>
+    <p>Every tool walks through the actual method step by step as you change the inputs, not just a final number.</p>
+   </div>
+   <div class="why-card">
+    <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg></div>
+    <h3>Free, no signup</h3>
+    <p>No account, no paywall, no email capture. Open a tool and use it — that's the whole flow.</p>
+   </div>
+   <div class="why-card">
+    <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></div>
+    <h3>Built for MCAT</h3>
+    <p>Every formula, worked example, and practice problem is scoped to what pre-med and MCAT courses actually test.</p>
+   </div>
+  </div>
  </div>
 </main>
 
@@ -195,7 +274,20 @@
 </aside>
 </div>
 
-<footer>Free biochem study tools · made for students, by students · share with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<footer>
+ <div class="footer-inner">
+  <div class="footer-brand">
+   <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+   <span class="footer-tag">Free biochem study tools, made for students by students</span>
+  </div>
+  <div class="footer-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a href="/privacy.html">Privacy</a>
+   <a href="/contact.html">Contact</a>
+  </div>
+ </div>
+</footer>
 <script src="/streak.js" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
 <script>
