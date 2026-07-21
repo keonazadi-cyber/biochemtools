@@ -422,3 +422,37 @@ don't know that encoding. The rendered image confirmed every symbol
 overflow, no black-box glyphs.
 
 All 4 growth features from the "we can do them all" batch are now done.
+
+### 2026-07-21 — Share button + related-tool link cleanup (commits 25073f7, 942ffff)
+Keon asked "what else can we improve" — proposed 5 options (share
+buttons, contextual related-tool links, a fresh Search Console check,
+AdSense timing, affiliate pick), he approved the two that were pure
+code with no decision needed from him.
+
+**Share button [DONE, commit 25073f7].** Floating "Share" button added
+via streak.js on every tool page + homepage + daily question (skips
+about/privacy/contact/404). Native Web Share sheet on mobile, clipboard
+copy + toast on desktop, execCommand fallback for older browsers.
+Verified: renders with correct fixed positioning and brand color
+(9.68:1 text contrast, computed in Python before shipping), correctly
+absent on excluded pages, click-triggered copy actually resolves
+(confirmed via the toast firing "Link copied!").
+
+**Related-tool links [DONE, commit 942ffff].** Assumed this was a
+built-from-scratch task, but checking first found 18 of 21 pages
+already had a curated "Related tools" line (not just the generic
+footer sitenav) from earlier work. Real gaps found instead:
+peptide-charge-calculator.html and quiz.html had none;
+enzyme-kinetics-simulator.html, glycolysis-pathway-explorer.html, and
+henderson-hasselbalch-buffer-calculator.html used absolute
+https://biochemtools.com/... URLs instead of the site's relative-path
+convention; enzyme-kinetics-simulator.html linked to the unrelated
+peptide-charge-calculator (fixed to point to the actually-related
+michaelis-menten-fitter.html). All 21 tool pages now have a working,
+relevant related-tools line. Full site HTML well-formedness re-check
+passed (0 issues across all files) after the edits.
+
+**Still open, waiting on Keon:** fresh Search Console indexing check
+(baseline was 7/21 pages on 2026-07-20, a lot has shipped since),
+AdSense application timing, and the affiliate program pick (3
+candidates already researched, no decision made).
