@@ -176,7 +176,13 @@ function pick(btn,val,correct){
 document.getElementById("next").onclick=()=>{
  q++;
  if(q>=total){
-  document.getElementById("opts").innerHTML=`<div style="grid-column:1/3;text-align:center;padding:1rem"><div style="font-size:2.5rem;font-weight:600;color:var(--accent)">${score}/${total}</div><p style="color:var(--muted)">${score===total?"Perfect — you've got these down.":score>=7?"Solid. Run it again to lock in the misses.":"Keep going — repetition is the whole game."}</p></div>`;
+  let bestLine="";
+  if(window.BCT){
+   window.BCT.recordQuizCompletion(score,total);
+   const best=window.BCT.quizBest();
+   bestLine=`<p style="color:var(--muted);font-size:.85rem">Best score: ${best}/${total}${score>best?" — new best!":""} &middot; ${window.BCT.currentStreak()}-day streak</p>`;
+  }
+  document.getElementById("opts").innerHTML=`<div style="grid-column:1/3;text-align:center;padding:1rem"><div style="font-size:2.5rem;font-weight:600;color:var(--accent)">${score}/${total}</div><p style="color:var(--muted)">${score===total?"Perfect — you've got these down.":score>=7?"Solid. Run it again to lock in the misses.":"Keep going — repetition is the whole game."}</p>${bestLine}</div>`;
   document.getElementById("prompt").textContent="";document.getElementById("ask").textContent="Quiz complete";
   document.getElementById("fill").style.width="100%";
   const n=document.getElementById("next");n.textContent="Try again";n.onclick=()=>{location.reload()};
@@ -188,6 +194,7 @@ document.querySelectorAll(".mode").forEach(m=>m.onclick=()=>{
 });
 buildRef();start();
 </script>
+<script src="/streak.js" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
