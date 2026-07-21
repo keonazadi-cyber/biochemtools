@@ -236,3 +236,60 @@ either done or intentionally deferred (ads.txt, until there's an ad
 network to put in it).** Remaining work going forward is Keon's Pinterest
 cadence, watching Analytics once traffic accumulates, and eventually the
 AdSense application once there's enough traffic to make it worthwhile.
+
+### 2026-07-21 — "how do I actually get to $10k/mo" 3-part plan
+
+Reality check first: display-ad RPM in the study/edu niche runs roughly
+$5-15. To hit $10k/mo on ads alone requires ~700k-2M monthly pageviews —
+not realistic off 20 calculator pages even ranking well. Real leverage
+is (1) a reason to come back daily, (2) higher-yield monetization than
+banner ads, (3) an ad-ready layout for whenever there is enough traffic
+to apply. Did all three:
+
+**1. Landing page redesign (commit bfcb1a5).** Restructured index.html
+from a single centered column to content+sidebar (the sidebar has a
+reserved ad slot div, `#sidebar-ad-slot`, ready for whenever AdSense is
+live). Added live client-side search/filter, a jump-to-category nav,
+category-colored left borders on every tool card, and a homepage
+ItemList schema. No URLs changed.
+
+**2. Repeat-visit engagement system (commit 40b3ae8).** Added
+`streak.js` — a small localStorage-based tracker (no accounts, no
+server, no cookies) included on every page. Tracks daily visits, current
+streak, and which tools have been tried; renders into the homepage
+sidebar. Quiz page now shows best score + current streak on completion.
+This is the actual growth lever: MCAT/pre-med prep spans months, so
+turning one-time visitors into daily habit users multiplies
+pageviews-per-user far more than any SEO or layout change could.
+**Next step here (not yet done):** extend visible streak/progress UI to
+individual tool pages too, not just the homepage — right now it only
+shows on index.html.
+
+**3. Affiliate research (this entry, no site changes).** Real programs
+found, worth pursuing once there's real traffic:
+- **Gold Standard MCAT** — 10% commission on all sales, 60-day cookie,
+  paid out once $1000 in accrued sales. Most transparent terms found.
+  https://www.mcat-prep.com/goldstandard-affiliate/
+- **MCAT Self Prep** — affiliate program exists, $50 minimum payout,
+  30-day tracking window, commission % not fixed/disclosed publicly.
+- **Prep101** — affiliate program exists (info.prep101.com), commission
+  rate not publicly disclosed, worth applying directly to see terms.
+- **Blueprint MCAT / UWorld MCAT** — big, well-known brands; couldn't
+  find their affiliate terms via search (likely run through a network
+  like Impact or ShareASale rather than a public page) — worth emailing
+  them directly or checking those networks once there's traffic to show.
+- **Amazon Associates** — lowest friction to set up (just needs a live
+  site), covers MCAT prep books (Kaplan, Princeton Review, Examkrackers)
+  and general biochem textbooks. Commission on books is low (~4.5%) and
+  the cookie window is short (24 hrs), but zero relationship-building
+  required and instant approval process. Good "day one" option while
+  bigger affiliate deals get sorted out.
+
+**Recommended sequencing once there's traffic:** start with Amazon
+Associates (fastest to set up, matches the "textbook/study resource"
+intent students already have) + Gold Standard (best disclosed terms),
+add a tasteful "Recommended MCAT resources" section — NOT ads plastered
+everywhere, a few honest, contextual recommendations near relevant tools
+(e.g. an MCAT-prep-course mention near the quiz/study tools). Chase the
+bigger brand deals (Blueprint, UWorld) once there's a traffic number
+worth showing them.
