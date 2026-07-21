@@ -20,7 +20,7 @@ function save(key, arr){
  try { localStorage.setItem(key, JSON.stringify(arr.slice(-90))); } catch(e){}
 }
 
-var NON_TOOL_PAGES = ["index","about","privacy","contact","404"];
+var NON_TOOL_PAGES = ["index","about","privacy","contact","404","daily-question"];
 function isToolPage(){
  var p = location.pathname.replace(/^\//,"").replace(/\.html$/,"");
  return !!p && NON_TOOL_PAGES.indexOf(p) === -1;
@@ -69,6 +69,18 @@ function recordQuizCompletion(score, total){
 }
 function quizBest(){
  try { return parseInt(localStorage.getItem("bct_quiz_best") || "0", 10); } catch(e){ return 0; }
+}
+
+function recordDailyQuestion(correct){
+ var dates = load("bct_dq_dates");
+ var today = todayStr();
+ if (dates.indexOf(today) === -1) dates.push(today);
+ save("bct_dq_dates", dates);
+ if (correct){
+  var right = load("bct_dq_correct");
+  if (right.indexOf(today) === -1) right.push(today);
+  save("bct_dq_correct", right);
+ }
 }
 
 function renderStreakWidget(){
@@ -124,5 +136,5 @@ if (document.readyState === "loading"){
  renderAll();
 }
 
-window.BCT = { recordQuizCompletion: recordQuizCompletion, quizBest: quizBest, currentStreak: currentStreak, toolsTried: toolsTried };
+window.BCT = { recordQuizCompletion: recordQuizCompletion, quizBest: quizBest, currentStreak: currentStreak, toolsTried: toolsTried, recordDailyQuestion: recordDailyQuestion };
 })();
