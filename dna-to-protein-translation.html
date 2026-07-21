@@ -15,6 +15,13 @@
 {"@type":"HowToStep","name":"Split into codons","text":"Read the mRNA in groups of three bases (codons), starting from the chosen reading frame."},
 {"@type":"HowToStep","name":"Translate","text":"Use the codon table to convert each codon to an amino acid; AUG starts and UAA, UAG, or UGA stop translation."}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why does the translated protein sometimes include amino acids before the start codon?","acceptedAnswer":{"@type":"Answer","text":"This tool translates every codon in the chosen reading frame for teaching purposes, with AUG and stop codons highlighted for reference. A real ribosome only begins translating at the first AUG it encounters and ignores everything before it — so the actual biological protein is only the portion from the highlighted start codon onward."}},
+{"@type":"Question","name":"Why do different reading frames give completely different proteins from the same DNA?","acceptedAnswer":{"@type":"Answer","text":"Codons are read in non-overlapping groups of three, so shifting the starting point by even one base regroups every base into entirely different codons downstream. A sequence has three possible reading frames on each strand (six total counting both strands), and only one is usually the biologically real one for a given gene."}},
+{"@type":"Question","name":"Why is AUG both the start codon and the codon for methionine?","acceptedAnswer":{"@type":"Answer","text":"AUG does double duty: a special initiator tRNA recognizes it to kick off translation at the first AUG in the correct context, while any AUG appearing later in the same reading frame is read normally and just inserts a methionine into the middle of the growing protein chain like any other codon."}},
+{"@type":"Question","name":"What's the difference between the coding strand and the template strand?","acceptedAnswer":{"@type":"Answer","text":"The coding (sense) strand has the same sequence as the mRNA, except with T instead of U — which is what this tool expects as input. The template (antisense) strand is the one RNA polymerase actually reads to synthesize mRNA, and it's the reverse complement of the coding strand."}}]}
+</script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--dna:#378add;--rna:#5dcaa5;--start:#5dcaa5;--stop:#e24b4a;--accent:#7f77dd}
  *{box-sizing:border-box}
@@ -91,6 +98,39 @@
  <h2>The genetic code (mRNA codons)</h2>
  <table id="codetable"></table>
  <p class="note" style="margin-top:1.5rem">Related tools: <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="/quiz.html">Amino acid quiz</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example 1: the default sequence, frame 1</h2>
+  <p class="note">ATGGCCTTACATTGA — 15 bases, dividing evenly into 5 codons in frame 1.</p>
+  <div class="work">DNA:     ATG GCC TTA CAT TGA
+mRNA:    AUG GCC UUA CAU UGA
+Codons:  AUG(start) GCC UUA CAU UGA(stop)
+
+Translation: Met - Ala - Leu - His - Stop
+Length: 4 aa   Start: codon 1   Stop: codon 5</div>
+  <p class="note">The start codon falls right at the beginning here, so the full-frame translation and the "real" biological protein are the same thing: Met-Ala-Leu-His.</p>
+
+  <h2>Worked example 2: finding the real ORF inside a longer frame</h2>
+  <p class="note">TTACGGATGAAACGTTAG in frame 1 — the AUG isn't at the start this time, which is exactly the point of this example.</p>
+  <div class="work">DNA:     TTA CGG ATG AAA CGT TAG
+mRNA:    UUA CGG AUG AAA CGU UAG
+Codons:  UUA CGG AUG(start) AAA CGU UAG(stop)
+
+Full-frame translation shown by the tool: Leu - Arg - Met - Lys - Arg - Stop
+                                            (codon 1) (2)  (3, start) (4) (5) (6, stop)
+
+The actual biological protein (starting only at the highlighted AUG):
+  Met - Lys - Arg → 2 aa before the stop</div>
+  <p class="note">This tool shows every codon in the frame so you can see the whole picture, but a real ribosome ignores everything before the first AUG. Codons 1 and 2 (Leu, Arg) are shown for reference only — they're never actually part of the protein a cell would make from this reading frame.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why does the protein sometimes include amino acids before the start codon?</b><br>This tool translates the whole reading frame for reference, with AUG and stop codons flagged. A real ribosome only starts at the first AUG and ignores everything before it — see example 2 above.</p>
+  <p class="note"><b>Why do different reading frames give completely different proteins?</b><br>Codons are read in non-overlapping groups of three, so shifting the start by even one base regroups every downstream base into different codons. There are three reading frames per strand (six counting both strands), and usually only one is biologically real for a given gene.</p>
+  <p class="note"><b>Why is AUG both the start codon and the codon for methionine?</b><br>A special initiator tRNA recognizes the first AUG to kick off translation; any AUG appearing later in the frame is read normally and just inserts methionine into the middle of the chain like any other codon.</p>
+  <p class="note"><b>What's the difference between the coding strand and template strand?</b><br>The coding (sense) strand matches the mRNA sequence except T instead of U — what this tool expects as input. The template (antisense) strand is what RNA polymerase actually reads, and it's the reverse complement of the coding strand.</p>
+ </div>
 </main>
 <nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 20 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">DNA → protein translation</span><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a></div></div></nav>
 <footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>

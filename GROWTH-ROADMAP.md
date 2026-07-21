@@ -167,5 +167,41 @@ method throughout:
       restriction site, tying reverse-complement-equals-self to why
       restriction enzymes recognize palindromes, 4 FAQs. 341→692 words.
 
-18 of 20 tool pages now have deepened content. Remaining 2: quiz,
-dna-to-protein-translation.
+18 of 20 tool pages now have deepened content.
+
+### 2026-07-21 — Content depth pass COMPLETE (final 2 pages)
+- [x] dna-to-protein-translation.html — default sequence (frame 1, Met-
+      Ala-Leu-His-Stop) + a "find the ORF" example that explicitly
+      contrasts the tool's full-frame display against the real biological
+      protein (only from the highlighted AUG onward), 4 FAQs. 349→777
+      words.
+- [x] quiz.html — not a calculator, so instead of a numeric worked
+      example: a verified class-breakdown table (7 nonpolar/3 aromatic/5
+      polar/3 basic/2 acidic = 20, counted directly from the quiz's own
+      AA array) + a table of the 9 one-letter codes that don't match the
+      first letter of the name, with the reason for each (letter already
+      taken by another amino acid), 4 FAQs. Also added FAQPage schema —
+      this page had none before. 282→704 words.
+
+**ALL 20 of 20 tool pages now have deepened content.** The content-depth
+pass (priority #2 in the list above) is done. Every single number/example
+added across all 20 pages, in every batch, was independently computed
+(mostly in Python, matched against each page's own JS logic) and then
+verified against the live tool in a browser before publishing — nothing
+went out unchecked.
+
+## What's left overall (as of 2026-07-21)
+
+1. Content-depth pass: **DONE** (20/20 pages).
+2. Cloudflare Web Analytics: still needs Keon to flip it on (one click,
+   his login) — the next real data unlock.
+3. og:image (proper 1200×630 social preview): still not started, needs
+   its own small image pipeline (the Pinterest pins are the wrong aspect
+   ratio to reuse).
+4. ads.txt: still correctly deferred until an ad network is actually
+   signed up for.
+5. Pinterest: pins 04-06 due for posting, keep the ~2-3/week cadence.
+6. Once there's real traffic (via Search Console/Analytics), the next
+   growth lever is applying for AdSense/an ad network — the site is
+   trust-page-ready for that now (privacy policy, about, contact all
+   exist).
