@@ -20,9 +20,10 @@ function save(key, arr){
  try { localStorage.setItem(key, JSON.stringify(arr.slice(-90))); } catch(e){}
 }
 
+var NON_TOOL_PAGES = ["index","about","privacy","contact","404"];
 function isToolPage(){
  var p = location.pathname.replace(/^\//,"").replace(/\.html$/,"");
- return p && p !== "index" && p !== "about" && p !== "privacy" && p !== "contact";
+ return !!p && NON_TOOL_PAGES.indexOf(p) === -1;
 }
 
 function recordVisit(){
