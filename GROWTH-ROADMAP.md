@@ -474,3 +474,46 @@ passed (0 issues across all files) after the edits.
 (baseline was 7/21 pages on 2026-07-20, a lot has shipped since),
 AdSense application timing, and the affiliate program pick (3
 candidates already researched, no decision made).
+
+### 2026-07-21 — Search Console checked live, affiliate pick made and scaffolded
+
+**Search Console [DONE].** Logged into Keon's real GSC via his Chrome
+session (claude-in-chrome, already authenticated) and pulled the
+actual Page indexing report: 21 of ~24 known pages indexed, up from
+7/21 on 2026-07-20 — real progress. The 3 "not indexed" are flagged
+"Page with redirect," drilled into the report and got the exact URLs:
+`http://biochemtools.com/`, `http://www.biochemtools.com/`,
+`https://www.biochemtools.com/` — all non-canonical variants of the
+homepage. Verified via curl: each does one clean 301 straight to
+`https://biochemtools.com/`, no loops. This is correct, intended
+behavior, not a bug, and is almost certainly what the original
+"pages not indexed due to redirect" email (the thing that started
+this whole project) was actually about. Nothing to fix. GSC data was
+dated 7/9/26, so it doesn't yet reflect this session's newest work —
+worth another look in a couple weeks.
+
+**Affiliate pick [DECIDED].** Amazon Associates (instant approval,
+zero relationship-building, fits "textbook/study resource" intent)
++ Gold Standard MCAT (best disclosed terms of the MCAT-prep options:
+10% commission, 60-day cookie, clear $1000 payout threshold). Skipped
+MCAT Self Prep, Prep101, and Blueprint/UWorld — all either
+undisclosed terms or require a direct-contact application, not worth
+the effort pre-traffic.
+
+**Scaffold built [DONE, commit 2f4bc66].** Added a "Study resources we
+recommend" card, rendered via streak.js into any page with a
+`#recommended-slot` div — currently the homepage sidebar and the quiz
+page (matching the earlier "contextual, near quiz/study tools, not
+ads everywhere" plan). Ships OFF by default (`AFFILIATE_LIVE = false`
+at the top of streak.js) — verified via computed styles that the slot
+is `display:none` / 0-height on both pages in this state, i.e. zero
+visible change went live. Temporarily live-injected the real markup in
+a browser console (never touched the files) to confirm it renders
+correctly when on: right background/padding, correct disclosure copy,
+both links resolve with `rel="noopener sponsored"`.
+
+**What Keon needs to do:**
+1. Sign up for [Amazon Associates](https://affiliate-program.amazon.com/) and [Gold Standard MCAT's affiliate program](https://www.mcat-prep.com/goldstandard-affiliate/) — account creation and payout/tax info has to be done by him, not Claude.
+2. Once approved, open `streak.js`, replace `AMAZON_TAG` with the real Associates tag (looks like `something-20`) and `GOLDSTANDARD_URL` with the real tracked referral link from the Gold Standard dashboard.
+3. Flip `AFFILIATE_LIVE` to `true`.
+4. Commit and push — the card goes live on the homepage and quiz page automatically, no other changes needed.
