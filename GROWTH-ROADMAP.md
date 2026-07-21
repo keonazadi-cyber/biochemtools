@@ -404,6 +404,21 @@ TOOL_COUNT, daily-question.html and 404.html's "browse all tools" copy,
 new og-images generated, index.png regenerated since its baked-in text
 said "20". Full verification passed, both tools' math confirmed live.
 
-**4. [NEXT] Printable/shareable cheat-sheet PDF.** One clean "MCAT
-Biochem Formulas" reference sheet pulling the key formula from every
-tool on the site.
+**4. [DONE, commit 1779767] Printable/shareable cheat-sheet PDF.** One
+clean "Biochemtools MCAT Formula Sheet" (`downloads/biochemtools-mcat-
+formula-sheet.pdf`), built with reportlab as a true 2-column layout,
+light/print-friendly theme (deliberately not the site's dark theme,
+since this is meant to be printed), condensed formulas from all 22
+tools across all 6 categories, category-colored header bars matching
+the site's palette, footer with the file's own URL on every page.
+Linked from the homepage sidebar (new card, above "Study tip") and the
+About page. Verified: page count, text extraction, and a rendered PNG
+of the actual page — the PDF text-extraction pass initially looked
+alarming (Greek letters and arrows showed as garbled Latin characters
+like "S" for Σ and "fl" for ↓) but that's a red herring specific to how
+reportlab uses the Symbol font for those glyphs; naive text extractors
+don't know that encoding. The rendered image confirmed every symbol
+(α, χ, Σ, π, →, √, °, ±) displays correctly. Fits on one page, no
+overflow, no black-box glyphs.
+
+All 4 growth features from the "we can do them all" batch are now done.
