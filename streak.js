@@ -90,11 +90,37 @@ function renderStreakWidget(){
   "</div>";
 }
 
+function renderToolBadge(){
+ if (!isToolPage()) return;
+ if (document.getElementById("streak-widget")) return;
+ if (document.getElementById("tool-streak-badge")) return;
+ var streak = currentStreak();
+ var tried = Math.min(toolsTried(), TOOL_COUNT);
+ if (streak === 0 && tried === 0) return;
+ var bar = document.createElement("div");
+ bar.id = "tool-streak-badge";
+ bar.style.cssText = "text-align:center;padding:.5rem 1rem;font-size:.82rem;color:var(--muted,#9aa0aa);background:var(--card,#1a1d24);border-bottom:1px solid var(--line,#2a2e38)";
+ var parts = [];
+ if (streak > 0) parts.push("🔥 " + streak + "-day streak");
+ parts.push(tried + "/" + TOOL_COUNT + " tools tried");
+ bar.innerHTML = parts.join(" &nbsp;&middot;&nbsp; ");
+ if (document.body.firstChild){
+  document.body.insertBefore(bar, document.body.firstChild);
+ } else {
+  document.body.appendChild(bar);
+ }
+}
+
+function renderAll(){
+ renderStreakWidget();
+ renderToolBadge();
+}
+
 recordVisit();
 if (document.readyState === "loading"){
- document.addEventListener("DOMContentLoaded", renderStreakWidget);
+ document.addEventListener("DOMContentLoaded", renderAll);
 } else {
- renderStreakWidget();
+ renderAll();
 }
 
 window.BCT = { recordQuizCompletion: recordQuizCompletion, quizBest: quizBest, currentStreak: currentStreak, toolsTried: toolsTried };
