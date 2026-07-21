@@ -565,3 +565,38 @@ complex interactive layout on the site). Confirmed live on production
 (biochemtools.com) via direct curl + a hard-reloaded browser check on
 cardiac-output-calculator.html — card shadow and affiliate link both
 present with the correct tag.
+
+### 2026-07-21 — full premium homepage redesign (commit bff2ddc)
+Keon asked for a genuinely premium homepage, not just the incremental
+polish from earlier the same day. Real structural rebuild:
+- Sticky glass top nav (backdrop-blur), wordmark, Daily question/About
+  links, Browse-tools CTA
+- Multi-gradient mesh hero glow (was a single flat blob), bolder 2.6rem
+  headline
+- New stat row (22 tools · 6 subjects · 100% free · no account) + two
+  real CTA buttons, replacing the old standalone daily-question callout
+  card (its message folded into a caption line instead)
+- Hand-built inline SVG icon per category (flask/DNA helix/chromosome/
+  atom/droplet/EKG pulse), colored via the existing --cat variable —
+  zero external icon library or extra requests
+- Tool cards: switched from left-border accent to top accent bar +
+  icon chip (22 cards, injected via a scripted regex pass keyed off
+  each section's id, not hand-edited)
+- "Why these are different" rebuilt as a real 3-column feature grid
+  with icons instead of one paragraph in a box
+- Footer restructured: wordmark + tagline + organized link row
+
+Verified: HTML well-formedness, icon color/background correctness per
+category, 3-column why-grid confirmed via computed grid-template-
+columns, mobile check (nav collapses correctly, zero horizontal
+overflow), search filter + streak widget + affiliate slot + share
+button all still functional post-restructure, zero console errors,
+confirmed live on production after a hard reload (GitHub Pages took
+~15s to propagate this time).
+
+**Honest note for the next session:** the site itself is now in very
+good shape — the actual blocker on real revenue is traffic/backlinks,
+not more on-site polish. See the rating + growth-plan conversation
+logged the same day for the prioritized next-steps list (content/SEO,
+community distribution, retention deepening, monetization diversity)
+instead of more visual iteration.
