@@ -393,10 +393,17 @@ earlier in the project. Also glycolysis-pathway-explorer was missing
 both `.card` and `.work`. Fixed all 5 by adding the standard rule to
 each page's stylesheet, verified via computed styles in-browser.
 
-**3. [NEXT] Fill the thin Physiology category.** Currently just one
-tool (osmotic pressure). Building 2 new tools: cardiac output and
-renal clearance calculators, to the same design/quality bar as the
-existing 20 (worked example, FAQ, practice problems, verified schema,
-og-image, added to nav/sitemap everywhere).
+**3. [DONE, commit 559b624] Filled the thin Physiology category.**
+Added cardiac-output-calculator.html (HR×SV or Fick's principle, both
+methods verified to agree at the textbook 5 L/min resting value) and
+renal-clearance-calculator.html (Cx=UxV/Px + filtration fraction,
+verified against the standard 125 mL/min GFR / 20% FF). Site is now 22
+tools, not 20 — updated everywhere: all 20 original pages' sitenav,
+homepage (cards + hero + meta + ItemList schema), sitemap, streak.js
+TOOL_COUNT, daily-question.html and 404.html's "browse all tools" copy,
+new og-images generated, index.png regenerated since its baked-in text
+said "20". Full verification passed, both tools' math confirmed live.
 
-**4. [NOT STARTED] Printable/shareable cheat-sheet PDF.**
+**4. [NEXT] Printable/shareable cheat-sheet PDF.** One clean "MCAT
+Biochem Formulas" reference sheet pulling the key formula from every
+tool on the site.
