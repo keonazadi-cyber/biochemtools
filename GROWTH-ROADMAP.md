@@ -150,6 +150,22 @@ method throughout:
       parenthesis/multiplier parser (74.09 g/mol, 1.482 g), 4 FAQs
       including a hydration-vs-anhydrous gotcha. 278→666 words.
 
-15 of 20 tool pages now have deepened content. Remaining 5: quiz,
-dna-to-protein-translation, dna-melting-temperature-calculator,
-punnett-square-calculator, amino-acid-titration-curve.
+15 of 20 tool pages now have deepened content.
+
+### 2026-07-21 — Content depth pass, batch 5 (3 more done)
+- [x] punnett-square-calculator.html — default AaBb×AaBb dihybrid cross
+      (verified 9 genotype classes summing to 16, 9:3:3:1 phenotype) + a
+      test-cross example (Aa×aa, 1:1 split, tied to why test crosses are
+      used to reveal unknown genotypes), 4 FAQs. 287→690 words.
+- [x] amino-acid-titration-curve.html — glycine's simple 2-pKa average
+      (pI=5.97) + histidine's 3-pKa case showing you can't average all
+      three pKas, only the two that flank the neutral species (pI=7.59,
+      not the naive 3-pKa average of 5.66), 4 FAQs. 349→770 words.
+- [x] dna-melting-temperature-calculator.html — default 20-mer primer
+      (long-sequence formula, Tm=55.9°C) + a short palindromic primer
+      example (ATGCAT, Wallace rule, Tm=16°C) that's also the real NsiI
+      restriction site, tying reverse-complement-equals-self to why
+      restriction enzymes recognize palindromes, 4 FAQs. 341→692 words.
+
+18 of 20 tool pages now have deepened content. Remaining 2: quiz,
+dna-to-protein-translation.
