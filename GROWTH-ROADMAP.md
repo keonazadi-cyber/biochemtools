@@ -21,18 +21,15 @@ no social preview image, no ads.txt (not urgent yet).
 
 1. **[DONE 2026-07-20]** Privacy Policy, About, Contact pages + favicon +
    footer links site-wide. Unblocks ad-network application.
-2. **[IN PROGRESS]** Content depth — add a worked numeric example + FAQ
-   block to each tool page (270-390 words → 600-900 words). Highest
-   remaining ROI: helps both SEO and ad real estate without hurting UX.
-   Starting with the pages Google has already indexed (existing traction),
-   see Notes Log for which pages are done.
-3. **[BLOCKED ON KEON]** Turn on Cloudflare Web Analytics (free, cookieless,
-   one click in the Cloudflare dashboard since DNS is already there). Needed
-   to know which pages actually get used — currently flying blind beyond
-   Search Console query data.
-4. **[NOT STARTED]** Proper social preview image (og:image), 1200×630
-   landscape, one per tool or one site-wide. The 20 Pinterest pins are the
-   wrong aspect ratio (1000×1500 portrait) — this needs its own small image
+2. **[DONE 2026-07-21]** Content depth — worked numeric example + FAQ block
+   on all 20/20 tool pages (270-390 words → 600-900 words each).
+3. **[DONE 2026-07-21]** Cloudflare Web Analytics — manual JS snippet on
+   all 24 pages (the auto-inject "Enable Globally" option doesn't work
+   since DNS is unproxied; used "Enable with JS Snippet installation").
+4. **[DONE 2026-07-21]** Proper social preview image (og:image), 1200×630
+   landscape, one per tool + homepage (21 total), generated from each
+   page's own og:title/og:description so there's one source of truth.
+   og:image/twitter:card meta wired into all 21 pages. See commit 426c287.
    pipeline, not a reuse of the pin assets.
 5. **[NOT STARTED, LOW URGENCY]** ads.txt — add the day an ad network
    (e.g. AdSense) is actually signed up for. Five-minute task, don't do it
@@ -201,9 +198,7 @@ went out unchecked.
    token, added the beacon script to all 24 pages (commit 0e7edd9). Give
    it a few days of traffic, then check Cloudflare dashboard → Web
    Analytics for real page-view/visit data per URL.
-3. og:image (proper 1200×630 social preview): still not started, needs
-   its own small image pipeline (the Pinterest pins are the wrong aspect
-   ratio to reuse).
+3. og:image: **DONE** (see above, commit 426c287).
 4. ads.txt: still correctly deferred until an ad network is actually
    signed up for.
 5. Pinterest: pins 04-06 due for posting, keep the ~2-3/week cadence.
@@ -211,3 +206,20 @@ went out unchecked.
    growth lever is applying for AdSense/an ad network — the site is
    trust-page-ready for that now (privacy policy, about, contact all
    exist).
+
+### 2026-07-21 — og:image project complete
+Built a small PIL-based generator (script not checked into the repo,
+lived in scratchpad) producing a branded 1200×630 dark-theme image per
+tool page + homepage, with a category-colored accent pill, title, and
+description pulled directly from each page's own og:title/og:description
+meta tags (no separately-authored copy to drift out of sync). Images live
+in `og-images/` in the repo (~1MB total, 21 files, 40-55KB each). Wired
+og:image, og:image:width/height, and twitter:card (summary_large_image)
+into all 21 pages. About/privacy/contact were skipped (no og:title to
+source from, low share-likelihood).
+
+**With this, every item on the original growth-rating punch list is
+either done or intentionally deferred (ads.txt, until there's an ad
+network to put in it).** Remaining work going forward is Keon's Pinterest
+cadence, watching Analytics once traffic accumulates, and eventually the
+AdSense application once there's enough traffic to make it worthwhile.
