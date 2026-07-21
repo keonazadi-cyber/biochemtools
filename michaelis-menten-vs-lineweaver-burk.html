@@ -9,11 +9,11 @@
 <link rel="canonical" href="https://biochemtools.com/michaelis-menten-vs-lineweaver-burk.html">
 <meta property="og:title" content="Michaelis-Menten vs. Lineweaver-Burk: When to Use Each">
 <meta property="og:description" content="Same underlying equation, two very different plots. When each one is the right tool, with fully worked examples.">
-<meta property="og:image" content="https://biochemtools.com/og-images/enzyme-kinetics-simulator.png">
+<meta property="og:image" content="https://biochemtools.com/og-images/michaelis-menten-vs-lineweaver-burk.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://biochemtools.com/og-images/enzyme-kinetics-simulator.png">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/michaelis-menten-vs-lineweaver-burk.png">
 <meta property="og:type" content="article">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -110,6 +110,7 @@ R²   = 0.9992</div>
  <div class="card">
   <h3 style="margin-top:0">Worked example: same inhibitor concentration, two different mechanisms</h3>
   <p class="note">Baseline enzyme: Vmax = 100 µM/min, Km = 25 µM. Inhibitor present at a concentration equal to Ki (so the ratio r = [I]/Ki = 1) in both cases — only the inhibition <i>type</i> differs.</p>
+  <div style="overflow-x:auto">
   <table>
    <thead><tr><th></th><th>Km(app)</th><th>Vmax(app)</th><th>LB slope</th><th>LB y-int</th><th>LB x-int</th></tr></thead>
    <tbody>
@@ -118,6 +119,7 @@ R²   = 0.9992</div>
     <tr><td>Noncompetitive</td><td>25.0</td><td>50.0</td><td>0.500</td><td>0.0200</td><td>−0.040</td></tr>
    </tbody>
   </table>
+  </div>
   <p>Competitive inhibition keeps the exact same y-intercept as the baseline (0.0100 both times) — that shared intercept is the signature of competitive inhibition on sight. Noncompetitive inhibition instead keeps the exact same x-intercept (−0.040 both times), which is its signature instead. Both of those matches are easy to spot on a straight-line plot and essentially impossible to eyeball on the raw curved Michaelis-Menten plot.</p>
   <a class="cta" href="/enzyme-kinetics-simulator.html">See these lines drawn live in the enzyme kinetics simulator →</a>
  </div>

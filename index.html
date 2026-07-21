@@ -15,6 +15,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://biochemtools.com/og-images/index.png">
 <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Biochemtools","url":"https://biochemtools.com/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://biochemtools.com/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+</script>
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ItemList","itemListElement":[
 {"@type":"ListItem","position":1,"url":"https://biochemtools.com/peptide-charge-calculator.html","name":"Peptide charge & pI calculator"},
 {"@type":"ListItem","position":2,"url":"https://biochemtools.com/enzyme-kinetics-simulator.html","name":"Enzyme kinetics simulator"},
@@ -316,6 +319,10 @@ function filterTools(){
  document.getElementById('noresults').style.display=(!anyVisible && q)?'block':'none';
 }
 document.getElementById('search').addEventListener('input',filterTools);
+(function(){
+ const q=new URLSearchParams(location.search).get('q');
+ if(q){document.getElementById('search').value=q;filterTools();}
+})();
 </script>
 </body>
 </html>
