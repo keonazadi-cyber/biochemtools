@@ -313,8 +313,9 @@ phase rather than stop. Found two more genuine (not manufactured) gaps:
   prioritization; a page that claims "unchanged since June" gets
   recrawled less urgently than one that's honestly marked as updated.
 
-**Next candidate identified, not yet done:** zero ARIA attributes
-anywhere on the site. Sliders and live-updating result displays (pH,
-net charge, Tm, Km/Vmax, etc.) give screen reader users no feedback when
-values change — worth adding `aria-live="polite"` to each tool's primary
-result element.
+**[DONE, commit 6217b13]** Added `aria-live="polite"` to each tool
+page's single headline result element (20/20 pages) — pH, pI, Tm,
+Km/Vmax, ΔG, cell potential, etc. Screen readers now announce the answer
+as sliders/inputs change instead of giving zero feedback. Deliberately
+marked only the one primary metric per page, not every sub-value, to
+avoid over-announcing on every keystroke.
