@@ -5,7 +5,20 @@ between sessions. Update this file whenever a growth/monetization task is
 worked on — add a dated entry to the Notes Log at the bottom, and move items
 between Done / In Progress / Not Started as they change state.
 
-## Rating snapshot (2026-07-20)
+## Rating snapshot (2026-07-21, re-audit)
+
+**8.5/10 as an ad-revenue-ready asset** (up from 6.5/10 on 2026-07-20 —
+original punch list fully closed). Verified fresh: all 20 tool pages
+600-900 words, zero broken internal links, zero invalid JSON-LD, every
+page has exactly one H1, all canonicals correct, favicon/og:image/
+analytics on every page that needs them. New finding this pass (fixed
+same day): title tags and meta descriptions were running long (titles
+68-100 chars vs. Google's ~50-60 display limit, descriptions 162-268
+chars vs. ~155-160) — rewrote all 21 to fit, keeping og:title/
+og:description (used for the social preview images) untouched. What's
+keeping this from 9-10: no real traffic yet to prove any of it converts.
+
+## Rating snapshot (2026-07-20, original)
 
 **6.5/10 as an ad-revenue-ready asset → target 8.5/10.**
 
