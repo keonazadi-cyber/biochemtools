@@ -670,3 +670,41 @@ crawled/indexed — worth a Search Console check in a couple weeks to
 see if they're indexed and whether any of the 3 pick up impressions.
 No further content is queued; the honest next move is to wait for that
 signal rather than write a 4th guide speculatively.
+
+### 2026-07-21 — guide polish pass (commit a6188e6)
+Keon asked for more things to improve rather than more speculative
+content. Found and fixed real gaps:
+
+- **Dedicated OG images for all 3 guides.** They'd been reusing their
+  linked tool's social preview image, so a shared guide link showed a
+  different title in the image than in the actual link preview text.
+  Generated 3 new ones with the same PIL pipeline as the rest of the
+  site.
+- **More cross-links.** Guide 1 (pI) added to amino-acid-titration-
+  curve.html and quiz.html; guide 2 (buffers) added to ph-calculator.html
+  — topically relevant pages that weren't linking to the guides yet.
+- **WebSite + SearchAction schema on the homepage**, for a possible
+  Google sitelinks searchbox. Caught before shipping that the
+  SearchAction claimed a `?q=` URL parameter worked when the site never
+  actually read it — would have been non-functional structured data.
+  Implemented it for real instead: the homepage search box now reads
+  `?q=` on load and filters immediately, so this also means shareable
+  pre-filtered links to the tools now work (e.g. biochemtools.com/?q=glycolysis).
+- **Two real mobile overflow bugs**, found via actual browser testing
+  at 375px width (a static column-count heuristic threw several false
+  positives that turned out fine when tested for real): the 6-column
+  inhibition-comparison table on the new MM-vs-LB guide, and the
+  pre-existing 5-column amino acid reference table on quiz.html. Both
+  wrapped in `overflow-x:auto`, verified zero horizontal overflow after.
+
+**Investigated and deliberately left alone:** "pI" renders visually as
+"pl" in every system font tested (SF Pro Bold/Regular, Helvetica Neue,
+even italic) — confirmed via direct font rendering tests, not
+guessed. This is a universal sans-serif limitation, present site-wide
+everywhere "pI" appears, not something introduced this session.
+Resolved by context for anyone who knows the term; not worth a
+site-wide font change over a cosmetic edge case.
+
+Verified: HTML well-formedness + JSON-LD validity across all 31 pages,
+0 broken internal links across 30 unique targets, 0 mobile horizontal
+overflow on all 3 guides + quiz.html, confirmed live on production.
