@@ -708,3 +708,48 @@ site-wide font change over a cosmetic edge case.
 Verified: HTML well-formedness + JSON-LD validity across all 31 pages,
 0 broken internal links across 30 unique targets, 0 mobile horizontal
 overflow on all 3 guides + quiz.html, confirmed live on production.
+
+### 2026-07-21 — ATP Yield Calculator, tool #23 (commit 35dfea6)
+Keon: "keep improving... I'm not stopping until this is genuinely a
+necessity for premed students." Read that as a mandate to fill real
+content gaps, not just keep polishing/guide-writing on material
+already covered. Biggest gap identified: the site had glycolysis but
+nothing on total ATP yield — arguably the single most commonly tested
+AND most commonly confused intro-biochem fact (textbooks disagree
+between 36/38 and 30/32 ATP per glucose depending on convention, and
+most students memorize one number without knowing why it varies).
+
+Built atp-yield-calculator.html: two toggles (P/O ratio convention,
+cytosolic NADH shuttle), live breakdown table, full worked math for
+all 4 possible totals. Verified twice — independently in Python before
+writing anything, then again by driving the actual UI through all 4
+toggle combinations in-browser. Exact match both times (30/32/36/38).
+
+Full 22->23 ripple: streak.js TOOL_COUNT, homepage (hero tag, stats,
+meta description, og:description, new tool card, ItemList schema),
+sitemap.xml, dedicated og-image, sitenav + "All X tools" copy across
+all 25 other pages that reference it — done via a targeted script
+rather than 25 hand-edits. Caught and fixed a position-renumbering bug
+in the ItemList schema script before shipping (duplicate position 10)
+by regenerating the block from parsed JSON instead of patching by
+regex.
+
+Also hit and correctly diagnosed a false alarm: after deploying,
+localhost showed "9/22 tools tried" instead of "9/23" — traced to
+browser HTTP caching of streak.js in a tab reused across many earlier
+reloads this session, not a real bug. Confirmed via cache-busted
+fetch() that the server was serving TOOL_COUNT=23 correctly the whole
+time, then confirmed a fresh page load on production showed the
+correct "2/23" immediately. Worth remembering for future sessions:
+when a local test shows stale data right after a shared-JS-file edit,
+check via fetch()+cache-bust before assuming the fix didn't take.
+
+Verified: HTML well-formedness + JSON-LD validity across all 32 pages,
+0 broken internal links across 31 unique targets, 0 mobile overflow on
+new tool + homepage, confirmed live on production with fresh load.
+
+**Natural next step, not yet started:** a Citric Acid Cycle explorer
+(same step-through UX as the glycolysis tool) would directly complete
+the cellular respiration story this ATP calculator's math depends on —
+right now the calculator states TCA cycle yields without a dedicated
+tool teaching them the way glycolysis has one.
