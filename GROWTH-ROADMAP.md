@@ -319,3 +319,14 @@ Km/Vmax, ΔG, cell potential, etc. Screen readers now announce the answer
 as sliders/inputs change instead of giving zero feedback. Deliberately
 marked only the one primary metric per page, not every sub-value, to
 avoid over-announcing on every keystroke.
+
+**Checked and passed (no fix needed):** color contrast. Muted gray text
+on the dark background is 7.18:1 — well above the 4.5:1 WCAG AA minimum
+for normal text. Worth knowing this was actually verified, not assumed.
+
+**[DONE, commit 0a4f009]** The 5 canvas-drawn charts (peptide titration
+curve, enzyme kinetics x2 plots, Michaelis-Menten fit, amino acid
+titration curve) had zero accessible fallback — a screen reader user
+would get total silence where a chart is. Added `role="img"` +
+descriptive `aria-label` to each, noting the exact values are also
+available in accessible text/tables on the same page.
