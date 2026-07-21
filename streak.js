@@ -124,9 +124,68 @@ function renderToolBadge(){
  }
 }
 
+var SHARE_EXCLUDE = ["about","privacy","contact","404"];
+function shouldShowShare(){
+ var p = location.pathname.replace(/^\//,"").replace(/\.html$/,"") || "index";
+ return SHARE_EXCLUDE.indexOf(p) === -1;
+}
+
+function showToast(msg){
+ var t = document.getElementById("bct-toast");
+ if (!t){
+  t = document.createElement("div");
+  t.id = "bct-toast";
+  t.style.cssText = "position:fixed;bottom:5rem;right:1.25rem;background:var(--card,#1a1d24);color:var(--txt,#e8eaed);border:1px solid var(--line,#2a2e38);padding:.6rem 1rem;border-radius:8px;font-size:.85rem;z-index:41;box-shadow:0 2px 10px rgba(0,0,0,.35);opacity:0;transition:opacity .2s;pointer-events:none";
+  document.body.appendChild(t);
+ }
+ t.textContent = msg;
+ t.style.opacity = "1";
+ clearTimeout(t._hideTimer);
+ t._hideTimer = setTimeout(function(){ t.style.opacity = "0"; }, 1800);
+}
+
+function fallbackCopy(text){
+ var ta = document.createElement("textarea");
+ ta.value = text;
+ ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+ document.body.appendChild(ta);
+ ta.focus(); ta.select();
+ try { document.execCommand("copy"); showToast("Link copied!"); }
+ catch(e){ showToast("Couldn't copy — grab the URL from the address bar."); }
+ document.body.removeChild(ta);
+}
+
+function doShare(){
+ var url = location.href, title = document.title;
+ if (navigator.share){
+  navigator.share({title: title, url: url}).catch(function(){});
+  return;
+ }
+ if (navigator.clipboard && navigator.clipboard.writeText){
+  navigator.clipboard.writeText(url).then(function(){ showToast("Link copied!"); }).catch(function(){ fallbackCopy(url); });
+ } else {
+  fallbackCopy(url);
+ }
+}
+
+function renderShareButton(){
+ if (!shouldShowShare()) return;
+ if (document.getElementById("bct-share-btn")) return;
+ var btn = document.createElement("button");
+ btn.id = "bct-share-btn";
+ btn.type = "button";
+ btn.setAttribute("aria-label", "Share this page");
+ btn.title = "Share this page";
+ btn.style.cssText = "position:fixed;bottom:1.25rem;right:1.25rem;z-index:40;display:flex;align-items:center;gap:.4rem;background:#5dcaa5;color:#0b0d11;border:none;border-radius:99px;padding:.65rem 1.1rem;font-size:.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);font-family:inherit";
+ btn.innerHTML = "<span aria-hidden=\"true\">&#8599;</span> Share";
+ btn.addEventListener("click", doShare);
+ document.body.appendChild(btn);
+}
+
 function renderAll(){
  renderStreakWidget();
  renderToolBadge();
+ renderShareButton();
 }
 
 recordVisit();
