@@ -600,3 +600,49 @@ not more on-site polish. See the rating + growth-plan conversation
 logged the same day for the prioritized next-steps list (content/SEO,
 community distribution, retention deepening, monetization diversity)
 instead of more visual iteration.
+
+### 2026-07-21 — content strategy pivot: long-form guides + SEO audit (commits 0d8ca57, 5c9c96a, 4baadc1)
+Keon rejected Reddit/community outreach ("I've done enough of that").
+Real signal from Cloudflare Analytics: essentially zero external
+traffic so far, only Keon checking the site himself. Pivoted the
+"what's next" plan to something executable without any outreach from
+him: long-form guide content, since the site was 100% tool pages
+before this with nothing genuinely link-worthy or built for long-tail
+"how do I..." queries, which are far more winnable for a brand-new
+domain than competing for "X calculator" head terms.
+
+**Guide 1 [DONE, commit 0d8ca57]:** how-to-calculate-pi-without-a-
+calculator.html. 4 worked examples (2/3/4/8 ionizable groups) plus 2
+practice problems, every number independently verified in Python
+against the exact same charge/pI functions the peptide charge
+calculator uses. HowTo + FAQPage schema. Linked from the calculator,
+added to sitemap.
+
+**Guide 2 [DONE, commit 5c9c96a]:** mcat-buffer-questions-explained.html.
+Covers the 3 real buffer question archetypes (selection, ratio, strong
+acid/base addition) — the third type genuinely extends the buffer
+calculator rather than restating it, since the tool doesn't walk
+through the "add acid, find new pH" stoichiometry problem. All worked
+examples Python-verified. Caught a malformed JSON-LD block (missing
+closing brace) via the standard validation pass before shipping —
+exactly why that check runs on every page.
+
+**Site-wide SEO audit [DONE, commit 4baadc1].** Full pass across all
+30 pages: title/description length (with proper HTML-entity decoding
+this time — the naive raw-length check was flagging false positives
+on any title with `&amp;`), canonical correctness, duplicate title/
+description check, JSON-LD validity, broken internal link crawl (29
+unique targets, 0 broken). Real findings fixed:
+- renal-clearance-calculator.html meta description was 1 char over
+  the 160 limit
+- 25 decorative category icon SVGs on the homepage had no
+  aria-hidden, so screen readers would announce them as meaningless
+  unlabeled graphics
+- Both new guides were invisible from the homepage (only reachable
+  via their tool page or the sitemap) — added a "Study guides"
+  sidebar card
+- Added BreadcrumbList schema to both guides for rich-snippet
+  breadcrumbs
+
+**Guide 3 still queued:** Michaelis-Menten vs. Lineweaver-Burk, when
+to use each — ties to the enzyme kinetics tools.
