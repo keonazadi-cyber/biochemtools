@@ -70,6 +70,7 @@
  <h2>How to find Km and Vmax from data</h2>
  <p class="note">Raw enzyme data is a curve, which is hard to fit by eye — so the classic trick is to linearize it. Taking reciprocals of the Michaelis-Menten equation gives 1/v = (K<sub>m</sub>/V<sub>max</sub>)(1/[S]) + 1/V<sub>max</sub>, which is a straight line (the Lineweaver-Burk plot). Fit a line to your reciprocal points: the y-intercept is 1/V<sub>max</sub>, so V<sub>max</sub> = 1/intercept, and the slope is K<sub>m</sub>/V<sub>max</sub>, so K<sub>m</sub> = slope × V<sub>max</sub>. This tool does that regression for you and draws the resulting curve back over your original data so you can see how well it fits.</p>
  <p class="note">Method note: this uses the Lineweaver-Burk (double-reciprocal) linear fit, which is the standard textbook approach and shows its work clearly. It weights low-[S] points more heavily; for a publication you would use nonlinear regression, but for coursework and checking a lab this matches what you're taught.</p>
+ <p class="note">Curious why this fitter uses reciprocals instead of fitting the curve directly? See <a href="/michaelis-menten-vs-lineweaver-burk.html">Michaelis-Menten vs. Lineweaver-Burk: when to use each</a>.</p>
  <p class="note">Related tools: <a href="/enzyme-kinetics-simulator.html">Enzyme kinetics simulator</a> · <a href="/">all biochem tools</a>.</p>
 
  <div class="card">
