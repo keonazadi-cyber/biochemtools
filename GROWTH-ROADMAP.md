@@ -295,3 +295,26 @@ everywhere, a few honest, contextual recommendations near relevant tools
 (e.g. an MCAT-prep-course mention near the quiz/study tools). Chase the
 bigger brand deals (Blueprint, UWorld) once there's a traffic number
 worth showing them.
+
+### 2026-07-21 — more real fixes found on a fresh pass
+Keon asked to keep improving in parallel with the distribution/waiting
+phase rather than stop. Found two more genuine (not manufactured) gaps:
+- **[DONE, commit ca62617]** No custom 404 page — GitHub Pages was
+  serving its generic error page for any broken/mistyped link. Added
+  404.html (auto-served by GitHub Pages for any unmatched path) with
+  links back into popular tools, `noindex` meta so it never competes in
+  search. Also fixed a bug caught before shipping: streak.js's
+  tools-tried tracking would have miscounted 404 visits as a "tool
+  tried" — excluded it.
+- **[DONE, commit ca62617]** sitemap.xml lastmod dates were stuck at the
+  original 2026-06-30 launch date on 21 of 24 pages, even after those
+  pages got 2-3x more content this week. Refreshed to 2026-07-21 —
+  matters because lastmod is a real signal Google uses for crawl
+  prioritization; a page that claims "unchanged since June" gets
+  recrawled less urgently than one that's honestly marked as updated.
+
+**Next candidate identified, not yet done:** zero ARIA attributes
+anywhere on the site. Sliders and live-updating result displays (pH,
+net charge, Tm, Km/Vmax, etc.) give screen reader users no feedback when
+values change — worth adding `aria-live="polite"` to each tool's primary
+result element.
