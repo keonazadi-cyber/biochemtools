@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardiac Output Calculator — HR × SV or Fick's Method, Free</title>
+<meta name="description" content="Free cardiac output calculator. Solve CO = HR × SV, or use Fick's principle from oxygen consumption and the A-V O2 difference, with every step shown.">
+<meta name="keywords" content="cardiac output calculator, fick principle calculator, HR x SV, stroke volume calculator, fick's method cardiac output, A-V O2 difference">
+<link rel="canonical" href="https://biochemtools.com/cardiac-output-calculator.html">
+<meta property="og:title" content="Cardiac Output Calculator — HR × SV or Fick's Method">
+<meta property="og:description" content="Solve cardiac output two ways: HR × SV, or Fick's principle from VO2 and the A-V O2 difference. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/cardiac-output-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/cardiac-output-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate cardiac output","step":[{"@type":"HowToStep","name":"Simple method","text":"CO = HR × SV, heart rate (beats/min) times stroke volume (mL/beat)."},{"@type":"HowToStep","name":"Fick's principle","text":"CO = VO2 / (CaO2 − CvO2), oxygen consumption divided by the arteriovenous oxygen difference."},{"@type":"HowToStep","name":"Units","text":"Convert mL/min to L/min by dividing by 1000 for typical resting values around 5 L/min."}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why do HR × SV and Fick's principle give the same cardiac output?","acceptedAnswer":{"@type":"Answer","text":"They're measuring the same physical quantity — total blood pumped per minute — through two independent methods. HR × SV counts it mechanically (beats per minute times volume per beat); Fick's principle counts it indirectly through oxygen delivery (how fast oxygen is consumed divided by how much oxygen each liter of blood gives up). Agreement between the two is a useful physiological sanity check."}},
+{"@type":"Question","name":"What is a normal resting cardiac output?","acceptedAnswer":{"@type":"Answer","text":"About 5 L/min for an average adult at rest — roughly 70-75 beats/min times 65-75 mL/beat. It can rise to 20-25 L/min during intense exercise, mostly through increased heart rate and, to a lesser extent, increased stroke volume."}},
+{"@type":"Question","name":"Why does Fick's principle use the arteriovenous (A-V) O2 difference?","acceptedAnswer":{"@type":"Answer","text":"CaO2 (arterial oxygen content) minus CvO2 (venous oxygen content) is how much oxygen each liter of blood gives up to the tissues on one pass. Total oxygen consumed per minute (VO2) divided by oxygen given up per liter tells you how many liters of blood must have passed through per minute — which is exactly cardiac output."}},
+{"@type":"Question","name":"How does cardiac output relate to blood pressure?","acceptedAnswer":{"@type":"Answer","text":"Mean arterial pressure ≈ cardiac output × total peripheral resistance (MAP = CO × TPR), the cardiovascular analog of Ohm's law (V = IR). Anything that changes CO (heart rate, stroke volume) or TPR (vessel diameter) shifts blood pressure."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}.out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.92rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<header><h1>Cardiac Output Calculator</h1><p>Find cardiac output the simple way (HR × SV) or from Fick's principle (oxygen consumption and the A-V O₂ difference) — every step shown.</p></header>
+<main>
+ <div class="card">
+  <div class="modes" id="modes">
+   <button data-m="hrsv" class="on">HR × SV</button>
+   <button data-m="fick">Fick's principle</button>
+  </div>
+  <div id="hrsvFields">
+   <div class="fields">
+    <div><label>Heart rate (beats/min)</label><input id="hr" type="number" step="any" value="72"></div>
+    <div><label>Stroke volume (mL/beat)</label><input id="sv" type="number" step="any" value="70"></div>
+   </div>
+  </div>
+  <div id="fickFields" style="display:none">
+   <div class="fields">
+    <div><label>VO₂ — O₂ consumption (mL/min)</label><input id="vo2" type="number" step="any" value="250"></div>
+    <div><label>CaO₂ — arterial O₂ content (mL/L)</label><input id="cao2" type="number" step="any" value="200"></div>
+    <div><label>CvO₂ — venous O₂ content (mL/L)</label><input id="cvo2" type="number" step="any" value="150"></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Cardiac output</div><div class="v" id="outval" aria-live="polite">—</div></div>
+  <div class="work" id="work"></div>
+ </div>
+ <h2>How to calculate cardiac output</h2>
+ <p class="note">Cardiac output (CO) is the volume of blood the heart pumps per minute. The direct, mechanical way: CO = HR × SV, heart rate in beats/min times stroke volume (blood ejected per beat) in mL/beat — divide by 1000 for L/min. The indirect way is Fick's principle: CO = VO₂ / (CaO₂ − CvO₂), where VO₂ is whole-body oxygen consumption and (CaO₂ − CvO₂) is the arteriovenous oxygen difference — how much oxygen each liter of blood delivers to tissue on one circuit. Both methods measure the same underlying quantity and should agree.</p>
+ <p class="note">Typical resting values: HR ≈ 70-75 bpm, SV ≈ 65-75 mL/beat, giving CO ≈ 5 L/min. Units matter — this tool assumes SV in mL/beat and O₂ contents in mL/L; watch for the common alternate unit of mL/100 mL (vol%), which is 10× smaller.</p>
+ <p class="note">Related tools: <a href="/osmotic-pressure-calculator.html">Osmotic pressure &amp; tonicity</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: resting cardiac output, both methods</h2>
+  <p class="note">A healthy adult at rest: HR = 72 bpm, SV = 70 mL/beat (the tool's HR×SV default).</p>
+  <div class="work">CO = HR × SV = 72 × 70 = 5040 mL/min = 5.04 L/min</div>
+  <p class="note">Now the same person via Fick's principle: VO₂ = 250 mL/min, CaO₂ = 200 mL/L, CvO₂ = 150 mL/L (the tool's Fick default).</p>
+  <div class="work">CO = VO₂ / (CaO₂ − CvO₂) = 250 / (200 − 150) = 250/50 = 5.0 L/min</div>
+  <p class="note">5.04 L/min and 5.0 L/min — the two independent methods agree almost exactly, which is exactly the point: cardiac output is one real physical quantity, measurable multiple ways.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> During exercise, HR rises to 150 bpm and SV to 100 mL/beat. What's the new cardiac output?</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">CO = HR × SV = 150 × 100 = 15,000 mL/min = 15.0 L/min
+
+Roughly 3× the resting value — mostly from the doubled heart rate, with a smaller contribution from increased stroke volume.</div></details>
+  <p class="note"><b>2.</b> During that same exercise, VO₂ rises to 1200 mL/min, CaO₂ to 195 mL/L, and CvO₂ drops to 120 mL/L (tissues extracting more oxygen). Find CO via Fick's principle.</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">CO = VO₂ / (CaO₂ − CvO₂) = 1200 / (195 − 120) = 1200/75 = 16.0 L/min
+
+Close to the 15.0 L/min from the HR×SV method above — real physiological measurements from two different methods rarely match to the decimal, but should land in the same range.</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why do HR×SV and Fick's principle give the same answer?</b><br>They measure the same thing two ways — one mechanically (beats × volume/beat), one via oxygen delivery (consumption ÷ extraction per liter). Agreement is a useful physiological sanity check.</p>
+  <p class="note"><b>What's a normal resting cardiac output?</b><br>About 5 L/min for an average adult (70-75 bpm × 65-75 mL/beat). Can reach 20-25 L/min during intense exercise, mostly via increased heart rate.</p>
+  <p class="note"><b>Why the A-V O₂ difference specifically?</b><br>CaO₂ − CvO₂ is how much oxygen each liter of blood gives up to tissue on one pass. VO₂ (total O₂ consumed per minute) divided by that per-liter delivery tells you how many liters must have passed through per minute — cardiac output.</p>
+  <p class="note"><b>How does cardiac output relate to blood pressure?</b><br>MAP ≈ CO × TPR (total peripheral resistance) — the cardiovascular analog of Ohm's law (V=IR). Anything changing CO or TPR shifts blood pressure.</p>
+ </div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 22 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Cardiac output</span><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+let mode="hrsv";const $=id=>document.getElementById(id);
+function calc(){
+ let CO_L, work;
+ if(mode==="hrsv"){
+  const hr=+$("hr").value, sv=+$("sv").value;
+  const CO_mL = hr*sv;
+  CO_L = CO_mL/1000;
+  work = `CO = HR × SV = ${hr} × ${sv} = ${CO_mL.toLocaleString()} mL/min = ${CO_L.toFixed(2)} L/min`;
+ } else {
+  const vo2=+$("vo2").value, cao2=+$("cao2").value, cvo2=+$("cvo2").value;
+  const diff = cao2-cvo2;
+  if(diff<=0){ $("outval").textContent="—"; $("work").textContent="CaO₂ must be greater than CvO₂."; return; }
+  CO_L = vo2/diff;
+  work = `CO = VO₂ / (CaO₂ − CvO₂) = ${vo2} / (${cao2} − ${cvo2}) = ${vo2}/${diff} = ${CO_L.toFixed(2)} L/min`;
+ }
+ $("outval").textContent = CO_L.toFixed(2)+" L/min";
+ $("work").textContent = work;
+}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ mode=b.dataset.m;$("hrsvFields").style.display=mode==="hrsv"?"block":"none";$("fickFields").style.display=mode==="fick"?"block":"none";calc();});
+["hr","sv","vo2","cao2","cvo2"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>

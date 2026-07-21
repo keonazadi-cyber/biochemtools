@@ -1,6 +1,6 @@
 (function(){
 "use strict";
-var TOOL_COUNT = 20;
+var TOOL_COUNT = 22;
 var VISITS_KEY = "bct_visits";
 var QUIZ_KEY = "bct_quiz_dates";
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renal Clearance Calculator — GFR &amp; Filtration Fraction, Free</title>
+<meta name="description" content="Free renal clearance calculator. Solve Cx = UxV/Px for any substance (inulin, PAH, creatinine), plus filtration fraction from GFR and RPF, with every step shown.">
+<meta name="keywords" content="renal clearance calculator, GFR calculator, inulin clearance, PAH clearance, filtration fraction, creatinine clearance">
+<link rel="canonical" href="https://biochemtools.com/renal-clearance-calculator.html">
+<meta property="og:title" content="Renal Clearance Calculator — GFR &amp; Filtration Fraction">
+<meta property="og:description" content="Solve renal clearance for any substance, plus filtration fraction from GFR and RPF. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/renal-clearance-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/renal-clearance-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate renal clearance","step":[{"@type":"HowToStep","name":"Write the clearance equation","text":"Cx = (Ux × V) / Px, where Ux is urine concentration, V is urine flow rate, and Px is plasma concentration."},{"@type":"HowToStep","name":"Pick the right marker","text":"Inulin clearance estimates GFR (freely filtered, not reabsorbed or secreted); PAH clearance estimates renal plasma flow (RPF)."},{"@type":"HowToStep","name":"Find filtration fraction","text":"FF = GFR / RPF, normally about 20%."}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why is inulin used to measure GFR specifically?","acceptedAnswer":{"@type":"Answer","text":"Inulin is freely filtered at the glomerulus but neither reabsorbed nor secreted by the tubules afterward — so the amount that appears in urine per minute exactly equals the amount filtered per minute, making its clearance a direct measure of GFR. Creatinine approximates this in clinical practice (it's endogenous, no infusion needed) but is slightly secreted, which makes measured creatinine clearance run a bit higher than true GFR."}},
+{"@type":"Question","name":"Why does PAH clearance estimate renal plasma flow instead of GFR?","acceptedAnswer":{"@type":"Answer","text":"Para-aminohippurate (PAH) is both filtered at the glomerulus and actively secreted by the tubules, so nearly all of it is removed from the plasma in a single pass through the kidney. That means its clearance approximates the total plasma flow through the kidney (RPF), not just the filtered fraction."}},
+{"@type":"Question","name":"What does filtration fraction tell you?","acceptedAnswer":{"@type":"Answer","text":"FF = GFR/RPF is the fraction of plasma flowing through the glomerulus that actually gets filtered into the tubule — normally about 20%, meaning roughly 1/5 of renal plasma flow becomes filtrate and 4/5 continues on to the peritubular capillaries."}},
+{"@type":"Question","name":"If clearance is higher than GFR, what does that mean?","acceptedAnswer":{"@type":"Answer","text":"A substance with clearance greater than GFR (like PAH) is being net secreted by the tubules in addition to being filtered — the kidney is actively adding it to the urine beyond what filtration alone would deliver. Clearance below GFR means net reabsorption is occurring."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:700px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+ @media(max-width:560px){.fields{grid-template-columns:1fr}}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}.out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.92rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<header><h1>Renal Clearance Calculator</h1><p>Find the clearance of any substance from urine and plasma concentrations, plus filtration fraction from GFR and RPF — every step shown.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-bottom:.6rem">Clearance: Cx = (Ux × V) / Px</label>
+  <div class="fields">
+   <div><label>Ux — urine concentration (mg/mL)</label><input id="ux" type="number" step="any" value="125"></div>
+   <div><label>V — urine flow rate (mL/min)</label><input id="v" type="number" step="any" value="1"></div>
+   <div><label>Px — plasma concentration (mg/mL)</label><input id="px" type="number" step="any" value="1"></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Clearance</div><div class="v" id="cxval" aria-live="polite">—</div></div>
+  <div class="work" id="cxwork"></div>
+ </div>
+ <div class="card">
+  <label style="margin-bottom:.6rem">Filtration fraction: FF = GFR / RPF</label>
+  <div class="fields" style="grid-template-columns:1fr 1fr">
+   <div><label>GFR (mL/min, e.g. from inulin)</label><input id="gfr" type="number" step="any" value="125"></div>
+   <div><label>RPF (mL/min, e.g. from PAH)</label><input id="rpf" type="number" step="any" value="625"></div>
+  </div>
+  <div class="work" id="ffwork" style="margin-top:1rem"></div>
+ </div>
+ <h2>How to calculate renal clearance</h2>
+ <p class="note">Clearance is the volume of plasma the kidneys completely clear of a substance per minute: Cx = (Ux × V) / Px, where Ux is the substance's urine concentration, V is urine flow rate, and Px is its plasma concentration. Which substance you use determines what the number means. Inulin is freely filtered but never reabsorbed or secreted, so its clearance directly equals GFR (glomerular filtration rate). PAH is filtered <i>and</i> almost completely secreted, so its clearance approximates RPF (renal plasma flow). The ratio GFR/RPF is the filtration fraction — normally about 20%, the share of plasma flowing through the glomerulus that actually becomes filtrate.</p>
+ <p class="note">Normal values: GFR ≈ 125 mL/min (~180 L/day), RPF ≈ 600-700 mL/min, filtration fraction ≈ 20%.</p>
+ <p class="note">Related tools: <a href="/osmotic-pressure-calculator.html">Osmotic pressure &amp; tonicity</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: inulin clearance (GFR) and filtration fraction</h2>
+  <p class="note">Inulin: urine concentration 125 mg/mL, flow rate 1 mL/min, plasma concentration 1 mg/mL (the tool's defaults).</p>
+  <div class="work">Cx = (Ux × V) / Px = (125 × 1) / 1 = 125 mL/min
+
+This is a normal GFR — inulin's clearance is used as the reference standard because it's neither reabsorbed nor secreted.</div>
+  <p class="note">With RPF measured (via PAH clearance) at 625 mL/min:</p>
+  <div class="work">FF = GFR / RPF = 125 / 625 = 0.20 = 20%
+
+Right at the normal filtration fraction — about a fifth of the plasma flowing through the glomerulus becomes filtrate.</div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> PAH: urine concentration 15 mg/mL, flow rate 1.2 mL/min, plasma concentration 0.03 mg/mL. Find the clearance (this estimates RPF).</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Cx = (15 × 1.2) / 0.03 = 18/0.03 = 600 mL/min
+
+A textbook-normal renal plasma flow — consistent with PAH being almost completely cleared from plasma in one pass through the kidney.</div></details>
+  <p class="note"><b>2.</b> Creatinine: urine concentration 60 mg/mL, flow rate 1.5 mL/min, plasma concentration 1.2 mg/mL. Find the clearance. Is this GFR normal, low, or high?</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Cx = (60 × 1.5) / 1.2 = 90/1.2 = 75 mL/min
+
+75 mL/min is well below the normal ~125 mL/min GFR — consistent with reduced kidney function (a plasma creatinine of 1.2 mg/mL is itself already a mild-to-moderate elevation above the typical ~0.6-1.0 mg/mL range).</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why inulin for GFR specifically?</b><br>It's freely filtered but never reabsorbed or secreted, so urine output per minute exactly equals the filtered amount — a direct GFR measure. Creatinine approximates this clinically (endogenous, no infusion needed) but is slightly secreted, running measured clearance a bit above true GFR.</p>
+  <p class="note"><b>Why does PAH estimate renal plasma flow instead?</b><br>PAH is filtered AND actively secreted, so it's almost completely removed from plasma in one pass — its clearance approximates total plasma flow through the kidney, not just the filtered fraction.</p>
+  <p class="note"><b>What does filtration fraction tell you?</b><br>FF = GFR/RPF, normally ~20% — the share of renal plasma flow that actually gets filtered into the tubule, versus the ~80% that continues to the peritubular capillaries.</p>
+  <p class="note"><b>What does clearance above or below GFR mean?</b><br>Above GFR (like PAH) means net tubular secretion is adding to what filtration alone delivers. Below GFR means net reabsorption is occurring.</p>
+ </div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 22 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Renal clearance</span></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+function calcCx(){
+ const ux=+$("ux").value, v=+$("v").value, px=+$("px").value;
+ if(px<=0){ $("cxval").textContent="—"; $("cxwork").textContent="Px must be greater than 0."; return; }
+ const cx = (ux*v)/px;
+ $("cxval").textContent = cx.toFixed(1)+" mL/min";
+ $("cxwork").textContent = `Cx = (Ux × V) / Px = (${ux} × ${v}) / ${px} = ${cx.toFixed(1)} mL/min`;
+}
+function calcFF(){
+ const gfr=+$("gfr").value, rpf=+$("rpf").value;
+ if(rpf<=0){ $("ffwork").textContent="RPF must be greater than 0."; return; }
+ const ff = gfr/rpf*100;
+ $("ffwork").textContent = `FF = GFR / RPF = ${gfr} / ${rpf} = ${(ff/100).toFixed(3)} = ${ff.toFixed(1)}%`;
+}
+["ux","v","px"].forEach(id=>$(id).addEventListener("input",calcCx));
+["gfr","rpf"].forEach(id=>$(id).addEventListener("input",calcFF));
+calcCx(); calcFF();
+</script>
+</body>
+</html>
