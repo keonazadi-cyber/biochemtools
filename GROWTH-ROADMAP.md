@@ -1292,3 +1292,51 @@ to throw and confirming the correct/incorrect highlighting still
 renders correctly with zero console errors — the only remaining
 degradation (answer state not persisting across reload in that one
 scenario) is expected and acceptable.
+
+### 2026-07-22 — expert content/pedagogy audit + Priority 1 fixes shipped (commit 56b1a5b)
+
+Ran a different kind of audit than the rest of today: four parallel
+agents, each acting as a biochem PhD/MCAT tutor, independently reviewed
+all 27 content pages (24 tools + 3 guides) purely for teaching quality
+— not arithmetic (already exhaustively verified earlier today). Full
+report published as an artifact. Headline: 8.1/10 average, genuinely
+strong teaching throughout, with a consistent pattern across almost
+every page — nails the formula, stops just short of the exam-
+application/mechanism layer a real professor would test.
+
+Two findings were real inconsistencies rather than missing depth, and
+got fixed today:
+
+1. **Amino acid pKa mismatch across two tools.** peptide-charge-
+   calculator.html and how-to-calculate-pi-without-a-calculator.html
+   used a different side-chain pKa table than amino-acid-titration-
+   curve.html (Asp 3.9 vs 3.65, Glu 4.1 vs 4.25, Cys 8.3 vs 8.18, Tyr
+   10.5 vs 10.07, Lys 10.5 vs 10.53, Arg 12.5 vs 12.48). Standardized
+   the two peptide pages onto the titration-curve tool's values (kept
+   the generic N/C-terminus 9.0/3.1 as-is — that's a legitimate,
+   separate simplification for peptide termini, not the same
+   inconsistency). Required recomputing every hardcoded worked example
+   on both pages in Python first (DKHEYR, KR, DD on the calculator;
+   all 4 examples + 2 practice problems on the guide) since a few
+   answers genuinely shifted (DD's pI: 3.29→3.14; DKHEYR's pI: 7.49→
+   7.48; Gly-Lys: 9.75→9.77; Lys-Glu: 6.55→6.63) while most others
+   rounded to the same displayed value. Verified via live UI
+   interaction, not just source-reading — typing "DD" into the actual
+   calculator now shows 3.14, matching the updated guide exactly.
+
+2. **quiz.html's His oversimplification.** Its reference table listed
+   Histidine as flatly "Positive" alongside Lys/Arg, contradicting the
+   site's own titration-curve page, which correctly treats His (pKa
+   ~6.0, only ~10% protonated at pH 7.4) as the "sometimes charged"
+   residue — a real MCAT trap precisely because it's unreliable.
+   Changed to "Positive*" with a footnote explaining why and linking
+   to the titration-curve tool. Confirmed the quiz gameplay itself
+   (unrelated array fields) still works correctly.
+
+Remaining findings from the audit (Priority 2: kcat/Km missing from
+the whole enzyme-kinetics cluster, the glycolysis/TCA/ATP-yield trio
+never connecting to anaerobic fermentation, physiology pages light on
+regulatory mechanism vs. formula, several smaller one-line additions;
+Priority 3: strategic topic gaps like lipid metabolism and cell
+membrane transport) are logged in the published audit report, not yet
+started — natural next content-writing session.
