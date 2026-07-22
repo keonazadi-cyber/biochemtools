@@ -884,3 +884,42 @@ molarity, Gibbs title) show up as new impressions/clicks, and whether
 the two new guides + two new tools from yesterday have started
 accumulating impressions yet (they had none as of this morning's data,
 too new to expect otherwise).
+
+**Same-day, second follow-up:** pulled the full Pages breakdown
+(clicks/impressions/CTR/position per page, all 21 pages with any
+data). Two real findings:
+
+1. serial-dilution-calculator.html ranks at position 11.5 — by far the
+   best on the site (next best: enzyme-kinetics-simulator at 27.5).
+   Checked its title/meta for an obvious fix the way gibbs-free-energy
+   needed one — found nothing wrong. Title and description are
+   already solid; the low absolute impressions (4) just reflect that
+   "serial dilution calculator" itself is a lower-volume query. No
+   action needed here, correctly identified as already-fine rather
+   than force-fixing something that isn't broken.
+2. amino-acid-titration-curve.html: 297 impressions (2nd-highest
+   site-wide) at position 31, zero clicks. Cross-referenced the
+   sitewide query list against this page's topic and found a whole
+   cluster of "[amino acid] titration curve" queries landing here
+   (tyrosine, arginine, valine, alanine, aspartic acid, serine,
+   leucine) with wildly different positions — the ones matching exact
+   worked numbers already on the page (glycine, position 6.8-10) rank
+   far better than ones with no matching static content (arginine,
+   tyrosine, valine: position 26-47), confirming the exact-match
+   pattern found earlier applies here too, at a larger scale than
+   previously seen. Added arginine as worked example 3 (highest real
+   query volume among the uncovered amino acids, ~9 impressions) —
+   verified pI = 10.76 independently in Python, then confirmed the
+   live interactive tool produces the identical value when Arginine is
+   selected.
+
+**5 data-driven fixes shipped today total:** histidine buffer preset,
+antibody dilution content, g/mL-to-molarity mode, Gibbs free energy
+title formula, arginine titration curve worked example. All pulled
+directly from real Search Console query/position data, none guessed.
+
+Stopping the query-mining here for real this time — checked both the
+top-impression and top-position ends of the data, found and fixed the
+two clearest real gaps, and confirmed one high-performing page needed
+no changes. Next real checkpoint is the same as before: revisit in a
+few days to see which of today's fixes move the needle.
