@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amino Acid Titration Curve &amp; pI Calculator — Free</title>
 <meta name="description" content="Pick an amino acid, see its full titration curve with buffering regions at each pKa and the isoelectric point marked. Free, shows the work.">
-<meta name="keywords" content="amino acid titration curve, titration curve pKa, isoelectric point, buffering region, glycine titration curve, pI calculation">
+<meta name="keywords" content="amino acid titration curve, titration curve pKa, isoelectric point, buffering region, glycine titration curve, pI calculation, arginine titration curve">
 <link rel="canonical" href="https://biochemtools.com/amino-acid-titration-curve.html">
 <meta property="og:title" content="Amino Acid Titration Curve Generator (pKa &amp; pI)">
 <meta property="og:description" content="Pick an amino acid, see its titration curve with buffering regions and the pI marked. Free.">
@@ -90,6 +90,18 @@ pI = (2.34 + 9.60) / 2 = 5.97</div>
 The neutral (net-zero) species sits between pKa 6.00 and pKa 9.17 — NOT between 1.82 and 6.00.
 pI = (6.00 + 9.17) / 2 = 7.585 ≈ 7.59</div>
   <p class="note">The carboxyl pKa of 1.82 is essentially irrelevant to the pI calculation here — by the time pH is anywhere near the isoelectric region, that group is already fully deprotonated and stays that way. Only the two pKa values that actually bracket the net-zero point (6.00 and 9.17) matter. Averaging all three pKas (which would give (1.82+6.00+9.17)/3 = 5.66) is a common mistake and gives the wrong answer — the tool correctly finds the true flanking pair by solving for where the net charge crosses zero, not by guessing which pKas to average.</p>
+
+  <h2>Worked example 3: arginine, two basic groups</h2>
+  <p class="note">Arginine has 3 pKa values: carboxyl (2.17), the α-amino group (9.04), and the guanidino side chain (12.48) — the most basic side chain of any standard amino acid.</p>
+  <div class="work">pKa values: 2.17, 9.04, 12.48
+
+Below pH 2.17: net charge = +2 (both amino groups protonated, carboxyl neutral)
+2.17 to 9.04: net charge = +1 (carboxyl deprotonated, both amines still protonated)
+9.04 to 12.48: net charge = 0 (α-amino now deprotonated, guanidino still protonated)
+
+The neutral species sits between pKa 9.04 and pKa 12.48 — the two highest pKa values, not the two lowest.
+pI = (9.04 + 12.48) / 2 = 10.76</div>
+  <p class="note">Arginine's pI (10.76) is even higher than lysine's (9.74) because its guanidino side chain (pKa 12.48) is more basic than lysine's amine side chain (pKa 10.53) — it holds onto its proton more strongly, so more base is needed to reach the neutral, net-zero point.</p>
  </div>
 
  <div class="card">
