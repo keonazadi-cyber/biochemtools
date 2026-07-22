@@ -183,13 +183,19 @@ function calc(){
   $("work").textContent=`p = ${p.toFixed(3)},  q = 1 − p = ${q.toFixed(3)}\np² (AA)  = ${p.toFixed(3)}² = ${g.p2.toFixed(4)}\n2pq (Aa) = 2×${p.toFixed(3)}×${q.toFixed(3)} = ${g.het.toFixed(4)}\nq² (aa)  = ${q.toFixed(3)}² = ${g.q2.toFixed(4)}\nSum = ${(g.p2+g.het+g.q2).toFixed(4)}`;
   $("verdict").innerHTML="";
  } else {
-  const AA=+$("AA").value,Aa=+$("Aa").value,aa=+$("aa").value,N=AA+Aa+aa;
+  let AA=+$("AA").value,Aa=+$("Aa").value,aa=+$("aa").value;
+  if(AA<0)AA=0;if(Aa<0)Aa=0;if(aa<0)aa=0;
+  const N=AA+Aa+aa;
   if(N<=0){$("pv").textContent="—";$("qv").textContent="—";$("work").textContent="Enter counts.";return;}
   const p=(2*AA+Aa)/(2*N),q=1-p;
   $("pv").textContent=p.toFixed(3);$("qv").textContent=q.toFixed(3);
   const g=bars(p,q);
   const eAA=g.p2*N,eAa=g.het*N,eaa=g.q2*N;
-  const chi=(AA-eAA)**2/eAA+(Aa-eAa)**2/eAa+(aa-eaa)**2/eaa;
+  // If an expected count is 0 (only possible when the corresponding allele frequency is 0),
+  // the observed count for that class is necessarily 0 too, so it contributes no evidence
+  // of departure from equilibrium — treat it as 0 instead of dividing by zero (NaN).
+  const chiTerm=(o,e)=>e>0?(o-e)**2/e:0;
+  const chi=chiTerm(AA,eAA)+chiTerm(Aa,eAa)+chiTerm(aa,eaa);
   const inHWE=chi<3.84;
   $("work").textContent=`N = ${N}\np = (2×AA + Aa)/(2N) = (2×${AA}+${Aa})/${2*N} = ${p.toFixed(3)}\nq = 1 − p = ${q.toFixed(3)}\n\nExpected counts (freq × N):\n  AA: ${eAA.toFixed(1)}   Aa: ${eAa.toFixed(1)}   aa: ${eaa.toFixed(1)}\nObserved:\n  AA: ${AA}   Aa: ${Aa}   aa: ${aa}\n\nχ² = Σ(O−E)²/E = ${chi.toFixed(3)}   (df=1, critical 3.84)`;
   $("verdict").innerHTML=`<div class="verdict" style="background:${inHWE?'rgba(93,202,165,.12);color:var(--yes)':'rgba(226,75,74,.12);color:var(--no)'}">${inHWE?"χ² &lt; 3.84 — consistent with Hardy-Weinberg equilibrium":"χ² &gt; 3.84 — departs from Hardy-Weinberg equilibrium (something is acting on this population)"}</div>`;
