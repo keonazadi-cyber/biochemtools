@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Molar Mass &amp; Molarity Calculator — Free</title>
 <meta name="description" content="Type any chemical formula to get its molar mass, then the exact grams to weigh for your target molarity and volume. Free, shows the work.">
-<meta name="keywords" content="molar mass calculator, molarity calculator, grams to moles, how many grams for a solution, molecular weight calculator, formula molar mass">
+<meta name="keywords" content="molar mass calculator, molarity calculator, grams to moles, how many grams for a solution, molecular weight calculator, formula molar mass, molarity to grams, g/mL to molarity, mg/mL to molarity">
 <link rel="canonical" href="https://biochemtools.com/molarity-molar-mass-calculator.html">
 <meta property="og:title" content="Molar Mass &amp; Molarity Calculator — Formula to Grams">
 <meta property="og:description" content="Type a formula, get molar mass, then the exact grams to weigh for your solution. Free, shows the work.">
@@ -20,7 +20,8 @@
 {"@type":"Question","name":"What's the difference between molar mass and molecular weight?","acceptedAnswer":{"@type":"Answer","text":"They describe the same quantity — the mass of one mole of a substance — just with different units emphasized. 'Molar mass' is typically expressed in g/mol, while 'molecular weight' is technically a dimensionless ratio, though in practice the terms are used interchangeably in most chemistry and biochemistry contexts."}},
 {"@type":"Question","name":"Why does hydration matter for weighing out a compound?","acceptedAnswer":{"@type":"Answer","text":"Many lab chemicals are sold as hydrates (e.g. CaCl2·2H2O, containing water molecules built into the crystal), which have a higher molar mass than the anhydrous formula. Using the anhydrous molar mass for a hydrated salt will underestimate the grams needed and give you a solution that's too dilute — always check the bottle label for which form you actually have."}},
 {"@type":"Question","name":"Does the order of operations matter — moles first or grams first?","acceptedAnswer":{"@type":"Answer","text":"No, but going through moles first (moles = molarity × volume, then grams = moles × molar mass) is the standard sequence because molarity is defined in terms of moles per liter — computing moles directly mirrors that definition and is easier to check for errors than trying to combine everything into one step."}},
-{"@type":"Question","name":"Why use standard atomic masses instead of a specific isotope's mass?","acceptedAnswer":{"@type":"Answer","text":"Standard atomic masses (like carbon's 12.011) are weighted averages across an element's naturally occurring isotopes, since any real sample of the element is a mix of isotopes in their natural abundance. This is the correct value to use for everyday lab-scale calculations; individual isotope masses only matter for specialized work like mass spectrometry or isotope labeling."}}]}
+{"@type":"Question","name":"Why use standard atomic masses instead of a specific isotope's mass?","acceptedAnswer":{"@type":"Answer","text":"Standard atomic masses (like carbon's 12.011) are weighted averages across an element's naturally occurring isotopes, since any real sample of the element is a mix of isotopes in their natural abundance. This is the correct value to use for everyday lab-scale calculations; individual isotope masses only matter for specialized work like mass spectrometry or isotope labeling."}},
+{"@type":"Question","name":"How do I convert g/mL or mg/mL to molarity?","acceptedAnswer":{"@type":"Answer","text":"Divide the mass concentration (in g/L) by the molar mass (in g/mol). If your concentration is in g/mL, multiply by 1000 first to get g/L. If it's already in mg/mL, no conversion is needed — mg/mL and g/L are numerically identical, since both the mass and volume unit scale down by the same factor of 1000."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--err:#e24b4a}
@@ -59,12 +60,26 @@
   <div class="mw"><div style="color:var(--muted);font-size:.85rem">Molar mass</div><div class="v" id="mw" aria-live="polite">—</div><div class="note" id="breakdown"></div></div>
  </div>
  <div class="card">
-  <label style="margin-bottom:.6rem">How many grams to weigh?</label>
-  <div class="fields">
-   <div><label>Target molarity (M)</label><input id="molarity" type="number" step="any" value="0.5"></div>
-   <div><label>Volume (mL)</label><input id="vol" type="number" step="any" value="250"></div>
+  <div class="modes" id="modes2">
+   <button data-m="toGrams" class="on">Molarity → grams</button>
+   <button data-m="toMolarity">Concentration → molarity</button>
   </div>
-  <div class="out"><div style="color:var(--muted);font-size:.85rem">Weigh out</div><div class="v" id="grams">—</div></div>
+  <div id="toGramsFields">
+   <div class="fields">
+    <div><label>Target molarity (M)</label><input id="molarity" type="number" step="any" value="0.5"></div>
+    <div><label>Volume (mL)</label><input id="vol" type="number" step="any" value="250"></div>
+   </div>
+  </div>
+  <div id="toMolarityFields" style="display:none">
+   <label>Concentration</label>
+   <input id="conc" type="number" step="any" value="1">
+   <div class="modes" id="concUnit" style="margin-top:.5rem">
+    <button data-u="gL" class="on">g/L</button>
+    <button data-u="gmL">g/mL</button>
+    <button data-u="mgmL">mg/mL</button>
+   </div>
+  </div>
+  <div class="out"><div style="color:var(--muted);font-size:.85rem" id="outlbl2">Weigh out</div><div class="v" id="grams">—</div></div>
   <div class="work" id="work"></div>
  </div>
  <h2>How to figure out grams for a solution</h2>
@@ -95,6 +110,14 @@ grams = moles × molar mass = 0.125 × 180.16 = 22.520 g</div>
 moles = M × V = 0.2 × 0.100 L = 0.02 mol
 grams = moles × molar mass = 0.02 × 74.09 = 1.482 g</div>
   <p class="note">Type "Ca(OH)2" into the tool with molarity 0.2 and volume 100 mL to reproduce this — 1.482 g of calcium hydroxide dissolved up to 100 mL gives a 0.2 M solution.</p>
+
+  <h2>Worked example 3: converting g/mL or mg/mL to molarity</h2>
+  <p class="note">Sometimes a concentration is given by mass per volume instead of molarity — common for drug stocks and cell culture reagents. A caffeine stock solution is labeled 1 mg/mL. What's its molarity?</p>
+  <div class="work">Caffeine (C₈H₁₀N₄O₂) molar mass = 194.19 g/mol
+1 mg/mL = 1 g/L (the units cancel exactly — mg/mL and g/L are numerically identical)
+
+Molarity = concentration ÷ molar mass = 1 ÷ 194.19 = 0.00515 M (5.15 mM)</div>
+  <p class="note">This matches the calculator's "Concentration → molarity" mode exactly — switch to that mode, enter 1 with the mg/mL unit selected, and it shows the same 5.15 mM.</p>
  </div>
 
  <div class="card">
@@ -103,6 +126,7 @@ grams = moles × molar mass = 0.02 × 74.09 = 1.482 g</div>
   <p class="note"><b>Why does hydration matter for weighing out a compound?</b><br>Many lab chemicals are sold as hydrates (e.g. CaCl₂·2H₂O), which have a higher molar mass than the anhydrous formula. Using the anhydrous mass for a hydrated salt underestimates the grams needed — check the bottle label for which form you have.</p>
   <p class="note"><b>Does the order matter — moles first or grams first?</b><br>No, but computing moles first (moles = molarity × volume, then grams = moles × molar mass) mirrors how molarity is actually defined and is easier to check for errors than combining everything into one step.</p>
   <p class="note"><b>Why use standard atomic masses instead of one isotope's mass?</b><br>Standard atomic masses (like carbon's 12.011) are weighted averages across an element's naturally occurring isotopes, since any real sample is a mix of isotopes. That's correct for everyday lab calculations; individual isotope masses only matter for specialized work like mass spectrometry.</p>
+  <p class="note"><b>How do I convert g/mL or mg/mL to molarity?</b><br>Divide the mass concentration (in g/L) by the molar mass (in g/mol). Concentration in g/mL needs ×1000 first to reach g/L; mg/mL needs no conversion, since mg/mL and g/L are numerically identical.</p>
  </div>
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>
@@ -155,16 +179,37 @@ function calcMW(){
  }catch(e){MW=NaN;$("mw").textContent="—";$("breakdown").innerHTML=`<span class="err">${e}</span>`;}
  calcGrams();
 }
+let mode2="toGrams",concUnit="gL";
+const UNIT_LBL={gL:"g/L",gmL:"g/mL",mgmL:"mg/mL"};
 function calcGrams(){
- const M=+$("molarity").value,Vml=+$("vol").value,V=Vml/1000;
  if(!isFinite(MW)||MW<=0){$("grams").textContent="—";$("work").textContent="";return;}
- const mol=M*V, g=mol*MW;
- $("grams").textContent=g.toFixed(3)+" g";
- $("work").textContent=`moles = M × V = ${M} × ${V} L = ${mol.toFixed(4)} mol\ngrams = moles × molar mass = ${mol.toFixed(4)} × ${MW.toFixed(2)} = ${g.toFixed(3)} g`;
+ if(mode2==="toGrams"){
+  const M=+$("molarity").value,Vml=+$("vol").value,V=Vml/1000;
+  const mol=M*V, g=mol*MW;
+  $("outlbl2").textContent="Weigh out";
+  $("grams").textContent=g.toFixed(3)+" g";
+  $("work").textContent=`moles = M × V = ${M} × ${V} L = ${mol.toFixed(4)} mol\ngrams = moles × molar mass = ${mol.toFixed(4)} × ${MW.toFixed(2)} = ${g.toFixed(3)} g`;
+ } else {
+  const c=+$("conc").value;
+  const cGL = concUnit==="gL"?c : concUnit==="gmL"?c*1000 : c;
+  const M=cGL/MW;
+  $("outlbl2").textContent="Molarity";
+  $("grams").textContent=(M*1000>=1?M.toFixed(5):M.toExponential(3))+" M";
+  $("work").textContent=`Concentration = ${c} ${UNIT_LBL[concUnit]} = ${cGL.toFixed(4)} g/L\nMolarity = concentration ÷ molar mass = ${cGL.toFixed(4)} ÷ ${MW.toFixed(2)} = ${M.toFixed(5)} M (${(M*1000).toFixed(2)} mM)`;
+ }
 }
 document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{$("formula").value=b.dataset.f;calcMW();});
 $("formula").addEventListener("input",calcMW);
-["molarity","vol"].forEach(id=>$(id).addEventListener("input",calcGrams));
+["molarity","vol","conc"].forEach(id=>$(id).addEventListener("input",calcGrams));
+document.querySelectorAll("#modes2 button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#modes2 button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ mode2=b.dataset.m;
+ $("toGramsFields").style.display=mode2==="toGrams"?"block":"none";
+ $("toMolarityFields").style.display=mode2==="toMolarity"?"block":"none";
+ calcGrams();});
+document.querySelectorAll("#concUnit button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#concUnit button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ concUnit=b.dataset.u;calcGrams();});
 calcMW();
 </script>
 <script src="/streak.js" defer></script>
