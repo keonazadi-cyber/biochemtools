@@ -26,7 +26,8 @@ function save(key, arr){
  try { localStorage.setItem(key, JSON.stringify(arr.slice(-90))); } catch(e){}
 }
 
-var NON_TOOL_PAGES = ["index","about","privacy","contact","404","daily-question"];
+var NON_TOOL_PAGES = ["index","about","privacy","contact","404","daily-question",
+ "how-to-calculate-pi-without-a-calculator","mcat-buffer-questions-explained","michaelis-menten-vs-lineweaver-burk"];
 function isToolPage(){
  var p = location.pathname.replace(/^\//,"").replace(/\.html$/,"");
  return !!p && NON_TOOL_PAGES.indexOf(p) === -1;
