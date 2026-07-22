@@ -1216,3 +1216,28 @@ back completely empty — zero matches across all 33 pages and streak.js.
 No vulnerabilities found, no changes made. Worth documenting since
 this rules out a real risk class for a non-technical site owner who
 wouldn't otherwise know it had been checked.
+
+### 2026-07-22 — ads.txt flagged (needs Keon), streak.js counter bug fixed (commit 4df3147)
+
+Checked third-party script trust: the Cloudflare Web Analytics beacon
+token is identical across all 33 pages (no copy-paste drift), and
+every page has it. Checked for `ads.txt` (required once AdSense is
+live) — **it doesn't exist**. Not fixing this myself: it needs Keon's
+actual AdSense publisher ID, which I don't have and won't fabricate a
+placeholder for. Flagging so it's on the list for whenever the AdSense
+application (still not submitted per earlier notes) goes through.
+
+Then did a full read-through of streak.js's core counting logic
+(currentStreak, toolsTried, NON_TOOL_PAGES) since it's shared
+infrastructure on every page and hadn't been deep-reviewed this
+session — found a real bug: `NON_TOOL_PAGES` excluded the utility
+pages from the "tools tried" tracker but not the 3 long-form guides
+(how-to-calculate-pi, mcat-buffer-questions-explained, michaelis-
+menten-vs-lineweaver-burk). Those are static articles, not
+calculators, but `isToolPage()` was counting them as tools — a student
+could read all 3 guides and never touch an actual tool, yet see
+"3/24 tools tried." Added the 3 guide slugs to the exclusion list.
+Verified live with cleared localStorage: a guide page now correctly
+leaves the counter at 0, a real tool page still correctly increments
+it. Streak-day math (currentStreak/daysAgoStr) was also reviewed and
+found correct - no change needed there.
