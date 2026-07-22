@@ -1141,3 +1141,44 @@ Also checked two categories with no prior findings this session:
 
 CNAME and .nojekyll (GitHub Pages config) also checked — both correct,
 no drift possible.
+
+### 2026-07-22 — production sanity check + guide-content re-verification + sitewide print stylesheet (commit 5b30610)
+
+Checked production (biochemtools.com, not localhost) to confirm all of
+today's changes actually deployed correctly — confirmed clean (one
+screenshot glitch turned out to be the same known test-tool timing
+quirk from earlier, not a real bug, resolved by re-screenshotting).
+Checked page weight/performance: ~30KB per tool page including the
+shared JS, zero external fonts or frameworks — already about as fast
+as a page can be, nothing to optimize. Re-verified all worked-example
+arithmetic in the 3 long-form guides in Python (pI calculations,
+buffer titration math, MM/LB regression) — everything checked out
+exactly, no errors found. Also fully tested the homepage's client-side
+search (type-to-filter, the `?q=` URL param used by the WebSite/
+SearchAction JSON-LD, and the zero-results empty state) — all working
+correctly (one false alarm on my end from checking the wrong CSS
+selector, caught and corrected before it became a wasted "fix").
+
+**Real finding: zero print CSS across all 33 pages.** The site is
+dark-themed (near-black bg, near-white text), and Chrome's print
+dialog has "Background graphics" off by default — meaning printing any
+page as-is would skip the dark background but still respect the
+near-white text color, producing invisible white-on-white output. That
+matters for this specific audience: the About page explicitly promotes
+downloading the formula sheet PDF "for a final review pass," implying
+printing reference material is expected. Added a shared `@media print`
+block to all 33 pages. Initial attempt (redefining the standard --bg/
+--txt/--accent custom properties on `:root`) was insufficient — caught
+live that the pH calculator's big result number stayed colored because
+it uses a page-only `--out` variable, and an audit turned up ~30 other
+page-specific custom properties across the metabolism-explorer pages
+alone. Switched to a universal `*{color:#000!important;
+background:transparent!important}` override instead, which catches
+every element regardless of which variable or hardcoded color it uses.
+Also caught and fixed a second issue live: `.tally`'s `position:sticky`
+(from today's earlier topnav-clearance fix) overlapped the step-control
+buttons in print context, fixed by forcing `position:static` there.
+Verified by extracting the actual shipped print CSS from three
+structurally different served pages (plain calculator, sticky-tally
+explorer, homepage grid) and re-applying it live in-browser — confirmed
+fully legible, non-overlapping output in all three before shipping.
