@@ -166,7 +166,8 @@ const STORE_KEY = "bct_dq_" + dateKey();
 function render(){
  document.getElementById("topic").textContent = question.topic + " · Question " + (idx+1) + " of " + BANK.length;
  document.getElementById("qtext").textContent = question.q;
- const already = localStorage.getItem(STORE_KEY);
+ let already = null;
+ try { already = localStorage.getItem(STORE_KEY); } catch(e){}
  const opts = document.getElementById("opts");
  if (already !== null){
   const picked = parseInt(already, 10);
@@ -192,7 +193,7 @@ function render(){
 }
 
 function pick(i){
- localStorage.setItem(STORE_KEY, String(i));
+ try { localStorage.setItem(STORE_KEY, String(i)); } catch(e){}
  const correct = i === question.correct;
  document.querySelectorAll(".opt").forEach((b, bi) => {
   b.disabled = true;
