@@ -1241,3 +1241,30 @@ Verified live with cleared localStorage: a guide page now correctly
 leaves the counter at 0, a real tool page still correctly increments
 it. Streak-day math (currentStreak/daysAgoStr) was also reviewed and
 found correct - no change needed there.
+
+### 2026-07-22 — favicon.ico added, BreadcrumbList extended to all 24 tools (commits 25f012b, 32636fd)
+
+Checked internal linking for orphan pages — only 404.html came back
+(correct and expected; error pages should never be linked to). Checked
+for `/favicon.ico` at document root — missing. The site already has
+proper favicon declarations (SVG data-URI + favicon.png + apple-touch-
+icon.png) covering all modern browsers, but some browsers/crawlers
+still request `/favicon.ico` directly by legacy convention. Generated
+one from the existing favicon.png via Pillow (16x16 + 32x32 ICO).
+
+Bigger find: the 3 long-form guides had BreadcrumbList structured data,
+but none of the 24 actual tool pages did — an inconsistency from how
+they were built at different times, not a deliberate choice.
+BreadcrumbList lets Google show a Home > Category > Tool trail in
+search results instead of a bare URL. Added it to all 24, mapping each
+tool to its real sitenav category and linking the category level to
+that section's actual homepage anchor (e.g. `/#chemistry`) rather than
+a fake page. Verified zero HTML/JSON-LD errors sitewide afterward and
+hand-checked several pages' breadcrumb JSON, including ones with
+special characters in the title (subscripts, em-dashes) to confirm
+correct Unicode-escaping.
+
+Also confirmed the formula-sheet sidebar card's existing copy ("great
+for a final review pass") is now actually true again — this was
+already accurate copy, it just wasn't backed by working code until
+today's earlier print-stylesheet fix.
