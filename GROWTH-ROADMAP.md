@@ -1182,3 +1182,37 @@ Verified by extracting the actual shipped print CSS from three
 structurally different served pages (plain calculator, sticky-tally
 explorer, homepage grid) and re-applying it live in-browser — confirmed
 fully legible, non-overlapping output in all three before shipping.
+
+### 2026-07-22 — client-side security sweep, clean bill of health
+
+New angle: checked for XSS-class vulnerabilities, since several tools
+take free-text input (DNA/peptide sequences, genotype strings) and
+render computed results back into the page. Specifically checked
+whether any tool reflects a URL query parameter into the page
+unescaped (would be a real reflected-XSS risk via a shared malicious
+link, unlike self-input issues) — traced every `URLSearchParams`/
+`location.search` usage (enzyme-kinetics-simulator, henderson-
+hasselbalch, index.html's search box) and confirmed all of them only
+ever set `.value` on `&lt;input&gt;` elements or do strict string-equality
+comparisons, never `innerHTML`.
+
+Then checked the free-text tools that build `innerHTML` from user
+input directly: dna-to-protein-translation.html's `clean()` strips
+everything except A/C/G/T via regex before the sequence ever reaches
+a codon string; punnett-square-calculator.html's `genes()` strips
+everything except A-Za-z letters before any genotype string is built.
+Both make it structurally impossible for `&lt;`, `&gt;`, `"` or any other
+HTML-special character to survive into the HTML that gets injected —
+this isn't incidental, it's the same regex whitelist doing double duty
+as both domain validation (reject a garbage sequence) and XSS
+prevention. peptide-charge-calculator.html doesn't even need that —
+it uses `textContent` exclusively for all dynamic output, including
+echoing back invalid characters in its warning message, which is safe
+by construction regardless of what's in the string.
+
+Sitewide grep for `eval(`, `new Function(`, and `document.write` came
+back completely empty — zero matches across all 33 pages and streak.js.
+
+No vulnerabilities found, no changes made. Worth documenting since
+this rules out a real risk class for a non-technical site owner who
+wouldn't otherwise know it had been checked.
