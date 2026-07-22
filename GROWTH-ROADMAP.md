@@ -753,3 +753,46 @@ new tool + homepage, confirmed live on production with fresh load.
 the cellular respiration story this ATP calculator's math depends on —
 right now the calculator states TCA cycle yields without a dedicated
 tool teaching them the way glycolysis has one.
+
+### 2026-07-21 — Citric Acid Cycle Explorer, tool #24 (commit 01c7ec5)
+Built the natural next step flagged above. Same step-through UX as
+glycolysis-pathway-explorer.html: 8 reactions, live NADH/FADH2/GTP/CO2
+tally, every enzyme named, three regulated steps flagged (citrate
+synthase, isocitrate dehydrogenase — the rate-limiting step — and
+alpha-ketoglutarate dehydrogenase). This closes the gap the ATP yield
+calculator left open: that tool already cited "6 NADH, 2 FADH2, 2 GTP"
+from the TCA cycle without the site having anything that taught where
+those numbers come from.
+
+Per-turn yield (3 NADH, 1 FADH2, 1 GTP, 2 CO2) verified in Python
+before writing anything — matches exactly what atp-yield-calculator.html
+already states for one turn ×2. Added a cross-tool practice problem:
+using the ATP calculator's own default (modern P/O ratio) settings,
+one turn contributes exactly 10 ATP (3×2.5 + 1×1.5 oxidative + 1 GTP
+substrate-level) — a clean number, verified, and it directly ties the
+two tools together for anyone using both.
+
+Interactive step-through logic verified live in-browser, not just in
+Python: full run matches the computed final tally (3/1/1/2), reset
+zeroes correctly, and the partial-progress state after 3 steps (1
+NADH, 1 CO2) matches hand-tracing since only isocitrate dehydrogenase
+among the first 3 steps produces either.
+
+Full 23->24 ripple done the same way as the previous tool addition:
+streak.js TOOL_COUNT, homepage (hero tag, stats, meta description,
+og:description, new tool card with a cycle-arrow icon, ItemList schema
+regenerated from parsed JSON — sequential 1-24 positions verified, no
+repeat of the earlier renumbering bug), sitemap.xml, dedicated
+og-image, sitenav + "All 23/24 tools" copy across all 26 other pages.
+
+Verified: HTML well-formedness + JSON-LD validity across all 33 pages,
+0 broken internal links across 32 unique targets, 0 mobile overflow on
+both new tool + homepage, zero console errors, confirmed live on
+production (GitHub Pages took ~30s to propagate this time).
+
+**The cellular respiration story is now complete as real interactive
+tools:** glycolysis → citric acid cycle → ATP yield, each with its own
+dedicated, verified tool rather than numbers cited from an uncovered
+pathway. No further tool gap identified yet — next content decision
+should probably wait for a fresh look at what's actually getting
+traffic/engagement before picking the next build.
