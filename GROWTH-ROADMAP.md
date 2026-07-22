@@ -1064,3 +1064,50 @@ One process note worth keeping: raw pixel-coordinate clicks via the
 down (e.g. 800×450) from the real viewport (e.g. 1280×720) — using
 `read_page` refs for clicks and `form_input` for field entry avoids
 this entirely and was reliable throughout both agents' runs.
+
+### 2026-07-22 — edge-case QA sweep: 13 real bugs found and fixed (commits 311a969, cb26e13)
+
+Since happy-path testing came back 100% clean, pushed further: two more
+parallel agents probed all 24 tools with edge-case inputs (zero,
+negative, sub-absolute-zero temperatures, malformed genotype/sequence
+strings, identical-x regression data) rather than typical values. This
+found real bugs the happy-path pass structurally couldn't have caught.
+
+**13 real, confirmed bugs fixed, all the same underlying pattern —
+physically-impossible inputs silently accepted and rendered as
+confident nonsense instead of being caught:**
+
+- beer-lambert's %T→A converter literally displayed "Infinity"/"NaN"
+  text for %T&le;0
+- michaelis-menten-fitter: identical-[S] data points caused a
+  Lineweaver-Burk division-by-zero → literal "NaN" for Vmax/Km/R²
+  everywhere in the output; unsaturated data gave Vmax=Infinity
+- hardy-weinberg: a genotype class with 0 observed AND 0 expected
+  count caused a 0/0 chi-square term → literal "NaN" and a wrong
+  equilibrium verdict
+- henderson-hasselbalch, molarity/molar-mass, dilution,
+  serial-dilution, cardiac-output, renal-clearance: negative
+  concentration/volume/heart-rate/flow-rate silently produced negative
+  mmol/grams/mL/output values with a straight face
+- gibbs-free-energy, nernst-equation, ideal-gas-law, osmotic-pressure:
+  temperature &le; 0 K (below absolute zero) was silently accepted and
+  given a confident spontaneity/voltage/pressure/tonicity verdict
+
+Only ph-calculator, peptide-charge, amino-acid-titration-curve,
+enzyme-kinetics-simulator, dna-melting-temp, dna-to-protein-
+translation, punnett-square, atp-yield, glycolysis, citric-acid-cycle,
+and quiz passed edge-case testing with zero changes needed — most of
+those already had solid guards in place from earlier building.
+
+Every fix is a small, targeted guard (early-return + a plain-English
+message) matching each page's existing validation style — not a
+redesign. Every fix was re-verified against that tool's own documented
+worked-example defaults to confirm the happy path is unchanged, plus
+the sitewide HTML/JSON-LD validation pass. Two agents ran fully in
+parallel touching disjoint file sets with no merge conflicts.
+
+This is the highest-value finding of the whole "keep looking" arc
+today — real, user-facing correctness bugs (a confused student typing
+a negative volume or a sub-zero temperature would have gotten a
+confidently wrong answer with zero warning) that only surfaced because
+the audit deliberately moved past typical/happy-path inputs.
