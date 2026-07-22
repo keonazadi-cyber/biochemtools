@@ -1111,3 +1111,33 @@ today — real, user-facing correctness bugs (a confused student typing
 a negative volume or a sub-zero temperature would have gotten a
 confidently wrong answer with zero warning) that only surfaced because
 the audit deliberately moved past typical/happy-path inputs.
+
+### 2026-07-22 — two more stale-config bugs + accessibility/contact verified clean (commits 33da670, 9824fae)
+
+Kept pulling the same thread that found the formula-sheet PDF stale:
+checked every other generated/config file for drift.
+
+1. **manifest.json's description said "20 free interactive tools"**
+   (site has 24) — same class of bug as the PDF, just never updated
+   as tools were added. Fixed.
+2. **sitemap.xml's &lt;lastmod&gt; was 2026-07-21 on all 32 URLs**, despite
+   literally every one of those pages having real changes committed
+   today (topnav rollout, daily-question expansion, OG tags, 13
+   edge-case fixes). Cross-referenced against git history to confirm
+   0 of 32 URLs were actually untouched today, so bumped all 32 dates
+   to 2026-07-22 — lastmod is a real re-crawl signal, worth keeping
+   honest.
+
+Also checked two categories with no prior findings this session:
+- **Keyboard accessibility** — tabbed through ph-calculator.html and
+  confirmed a fully logical tab order (topnav → mode buttons → input),
+  all clickable elements are real `&lt;button&gt;`/`&lt;a&gt;` tags (no
+  inaccessible `[onclick]` divs sitewide), and the one place a custom
+  `:focus{outline:none}` exists (homepage search box) properly replaces
+  it with a visible border+glow instead of just removing it. Clean,
+  no fix needed.
+- **Contact page mechanism** — plain `mailto:` link, no form/backend
+  to have bugs in. Clean by construction.
+
+CNAME and .nojekyll (GitHub Pages config) also checked — both correct,
+no drift possible.
