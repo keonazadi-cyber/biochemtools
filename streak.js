@@ -123,11 +123,21 @@ function renderToolBadge(){
  if (streak > 0) parts.push("🔥 " + streak + "-day streak");
  parts.push(tried + "/" + TOOL_COUNT + " tools tried");
  bar.innerHTML = parts.join(" &nbsp;&middot;&nbsp; ");
- if (document.body.firstChild){
+ var topnav = document.querySelector(".topnav");
+ if (topnav){
+  document.body.insertBefore(bar, topnav.nextSibling);
+ } else if (document.body.firstChild){
   document.body.insertBefore(bar, document.body.firstChild);
  } else {
   document.body.appendChild(bar);
  }
+}
+
+function adjustStickyOffsets(){
+ var nav = document.querySelector(".topnav");
+ var badge = document.getElementById("tool-streak-badge");
+ var h = (nav ? nav.getBoundingClientRect().height : 0) + (badge ? badge.getBoundingClientRect().height : 0);
+ if (h > 0) document.documentElement.style.setProperty("--sticky-offset", h + "px");
 }
 
 var SHARE_EXCLUDE = ["about","privacy","contact","404"];
@@ -211,6 +221,8 @@ function renderAll(){
  renderToolBadge();
  renderShareButton();
  renderRecommended();
+ requestAnimationFrame(function(){ requestAnimationFrame(adjustStickyOffsets); });
+ window.addEventListener("load", adjustStickyOffsets);
 }
 
 recordVisit();
