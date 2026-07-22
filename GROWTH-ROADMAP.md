@@ -1033,3 +1033,34 @@ flowing frame), and literal Unicode subscript characters rendering as
 missing-glyph boxes in Helvetica (switched to proper `<sub>` tags).
 Verified via pypdf text extraction that all formulas and the corrected
 tool count are present, and confirmed it's back to a single page.
+
+### 2026-07-22 — full functional audit of all 24 tools, zero bugs found
+
+Ran two parallel background agents to functionally test every tool not
+yet click-tested this session (18 of them — the other 6 had already
+been verified: pH calculator, glycolysis explorer, citric acid cycle
+explorer, ATP yield calculator, daily question, quiz, Punnett square).
+Method for each: read the tool's own JS to find its formula, pick a
+non-trivial input, independently compute the expected answer in
+Python *before* looking at the tool's output, then drive the live page
+in-browser and compare.
+
+Result: **all 18 passed clean, zero real bugs found.** Every formula
+matched its independently-computed expected value to displayed
+precision — amino acid titration curve, Beer-Lambert, cardiac output,
+dilution, DNA melting temp, DNA-to-protein translation, enzyme
+kinetics simulator, Gibbs free energy, Hardy-Weinberg, Henderson-
+Hasselbalch, ideal gas law, Michaelis-Menten fitter, molarity/molar
+mass, Nernst equation, osmotic pressure, peptide charge, renal
+clearance, serial dilution. Combined with the 6 already checked
+earlier this session, **every one of the 24 live tools has now been
+independently functionally verified this session** — the core
+calculators are solid; today's real findings were all in supporting
+content/infrastructure (topnav, daily-question bank, OG tags, formula
+sheet PDF), not in the tools' math itself.
+
+One process note worth keeping: raw pixel-coordinate clicks via the
+`computer` tool can mis-fire because the screenshot returns scaled
+down (e.g. 800×450) from the real viewport (e.g. 1280×720) — using
+`read_page` refs for clicks and `form_input` for field entry avoids
+this entirely and was reliable throughout both agents' runs.
