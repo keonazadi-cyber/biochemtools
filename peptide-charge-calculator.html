@@ -129,7 +129,7 @@
 
  <h2>How to calculate the pI of a peptide by hand</h2>
  <p class="note">List every ionizable group (the N-terminus, the C-terminus, and any charged side chains). At a given pH, each positive group contributes +1/(1+10^(pH−pKa)) and each negative group contributes −1/(1+10^(pKa−pH)). The net charge is the sum. The pI is the pH where that sum equals zero — you can find it by averaging the two pKa values that bracket the neutral species. This tool does all of that live so you can check your hand calculations.</p>
- <p class="note">pKa values used (standard textbook set): N-terminus 9.0, C-terminus 3.1; Asp 3.9, Glu 4.1, His 6.0, Cys 8.3, Tyr 10.5, Lys 10.5, Arg 12.5. Different textbooks use slightly different values — yours may vary by a few tenths.</p>
+ <p class="note">pKa values used (standard textbook set, matching the <a href="/amino-acid-titration-curve.html">amino acid titration curve</a> tool's side-chain values): N-terminus 9.0, C-terminus 3.1; Asp 3.65, Glu 4.25, His 6.0, Cys 8.18, Tyr 10.07, Lys 10.53, Arg 12.48. Different textbooks use slightly different values — yours may vary by a few tenths.</p>
  <p class="note">Want the full by-hand method with worked examples? See <a href="/how-to-calculate-pi-without-a-calculator.html">How to calculate pI without a calculator</a>.</p>
  <p class="note">Related tools: <a href="/henderson-hasselbalch-buffer-calculator.html">Henderson-Hasselbalch buffer calculator</a> · <a href="/amino-acid-titration-curve.html">Amino acid titration curve</a> · <a href="/">all biochem tools</a>.</p>
 
@@ -140,18 +140,18 @@
    <thead><tr><th>Group</th><th>pKa</th><th>Type</th><th>Charge at pH 7.0</th></tr></thead>
    <tbody>
     <tr><td>N-terminus</td><td>9.0</td><td>base</td><td class="chg-pos">+0.99</td></tr>
-    <tr><td>Asp (D)</td><td>3.9</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
-    <tr><td>Lys (K)</td><td>10.5</td><td>base</td><td class="chg-pos">+1.00</td></tr>
+    <tr><td>Asp (D)</td><td>3.65</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td>Lys (K)</td><td>10.53</td><td>base</td><td class="chg-pos">+1.00</td></tr>
     <tr><td>His (H)</td><td>6.0</td><td>base</td><td class="chg-pos">+0.09</td></tr>
-    <tr><td>Glu (E)</td><td>4.1</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
-    <tr><td>Tyr (Y)</td><td>10.5</td><td>acid</td><td>0.00</td></tr>
-    <tr><td>Arg (R)</td><td>12.5</td><td>base</td><td class="chg-pos">+1.00</td></tr>
+    <tr><td>Glu (E)</td><td>4.25</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td>Tyr (Y)</td><td>10.07</td><td>acid</td><td>0.00</td></tr>
+    <tr><td>Arg (R)</td><td>12.48</td><td>base</td><td class="chg-pos">+1.00</td></tr>
     <tr><td>C-terminus</td><td>3.1</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
     <tr><td colspan="3" style="text-align:right;font-weight:600">Net charge at pH 7.0</td><td style="font-weight:600">+0.08</td></tr>
    </tbody>
   </table>
-  <p class="note">The four acidic groups (D, E, C-terminus, and effectively Y since its pKa of 10.5 is far above 7) are almost fully deprotonated, and three of the four basic groups (N-terminus, K, R) are almost fully protonated — those roughly cancel. The one group still transitioning at pH 7 is His (pKa 6.0, so it's only about 9% protonated), which is why the net charge is a small positive number rather than exactly zero.</p>
-  <p class="note">Since the net charge is slightly positive at pH 7 and charge decreases as pH rises (every group loses a proton), the pI must sit a bit above 7. Solving where the sum crosses zero gives <b>pI ≈ 7.49</b> — matching what the calculator above shows if you load DKHEYR and slide to pH 7.49.</p>
+  <p class="note">The four acidic groups (D, E, C-terminus, and effectively Y since its pKa of 10.07 is far above 7) are almost fully deprotonated, and three of the four basic groups (N-terminus, K, R) are almost fully protonated — those roughly cancel. The one group still transitioning at pH 7 is His (pKa 6.0, so it's only about 9% protonated), which is why the net charge is a small positive number rather than exactly zero.</p>
+  <p class="note">Since the net charge is slightly positive at pH 7 and charge decreases as pH rises (every group loses a proton), the pI must sit a bit above 7. Solving where the sum crosses zero gives <b>pI ≈ 7.48</b> — matching what the calculator above shows if you load DKHEYR and slide to pH 7.48.</p>
  </div>
 
  <div class="card">
@@ -164,7 +164,7 @@
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>
   <p class="note"><b>1.</b> What is the net charge of the dipeptide KR (Lys-Arg) at pH 7.0?</p>
-  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, pKa 9.0), Lys (base, pKa 10.5), Arg (base, pKa 12.5), C-terminus (acid, pKa 3.1)
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, pKa 9.0), Lys (base, pKa 10.53), Arg (base, pKa 12.48), C-terminus (acid, pKa 3.1)
 
 N-terminus: +0.99
 Lys:        +1.00
@@ -173,18 +173,18 @@ C-terminus: −1.00
 
 Net charge ≈ +1.99</div></details>
   <p class="note"><b>2.</b> What is the isoelectric point (pI) of the dipeptide DD (Asp-Asp)?</p>
-  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, pKa 9.0), Asp (acid, pKa 3.9) ×2, C-terminus (acid, pKa 3.1)
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, pKa 9.0), Asp (acid, pKa 3.65) ×2, C-terminus (acid, pKa 3.1)
 
 With three acidic groups and only one basic group, the molecule is acidic overall — the pI sits low.
 
-pI ≈ 3.29</div></details>
+pI ≈ 3.14</div></details>
  </div>
  <div id="recommended-slot"></div>
 </main>
 <nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 24 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</span><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
 <footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
 <script>
-const SC={D:{pka:3.9,t:"acid",n:"Asp (D)"},E:{pka:4.1,t:"acid",n:"Glu (E)"},C:{pka:8.3,t:"acid",n:"Cys (C)"},Y:{pka:10.5,t:"acid",n:"Tyr (Y)"},H:{pka:6.0,t:"base",n:"His (H)"},K:{pka:10.5,t:"base",n:"Lys (K)"},R:{pka:12.5,t:"base",n:"Arg (R)"}};
+const SC={D:{pka:3.65,t:"acid",n:"Asp (D)"},E:{pka:4.25,t:"acid",n:"Glu (E)"},C:{pka:8.18,t:"acid",n:"Cys (C)"},Y:{pka:10.07,t:"acid",n:"Tyr (Y)"},H:{pka:6.0,t:"base",n:"His (H)"},K:{pka:10.53,t:"base",n:"Lys (K)"},R:{pka:12.48,t:"base",n:"Arg (R)"}};
 const VALID="ACDEFGHIKLMNPQRSTVWY";
 function groups(seq){
  const g=[{n:"N-terminus (α-amino)",pka:9.0,t:"base"}];

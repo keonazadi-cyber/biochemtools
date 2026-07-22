@@ -121,7 +121,7 @@
   <li><b>Find where the running charge crosses zero</b>, and average the two pKa values on either side of that crossing. That average is the pI.</li>
  </ol>
 
- <p class="note">This works because near its own pKa, a group is roughly half-charged — so directly between two consecutive pKa values, the net charge is at its most stable (flattest) point, and for two groups that's almost exactly zero at the midpoint. This guide uses the same pKa table as the <a href="/peptide-charge-calculator.html">peptide charge calculator</a>: N-terminus 9.0, C-terminus 3.1, Asp 3.9, Glu 4.1, His 6.0, Cys 8.3, Tyr 10.5, Lys 10.5, Arg 12.5.</p>
+ <p class="note">This works because near its own pKa, a group is roughly half-charged — so directly between two consecutive pKa values, the net charge is at its most stable (flattest) point, and for two groups that's almost exactly zero at the midpoint. This guide uses the same pKa table as the <a href="/peptide-charge-calculator.html">peptide charge calculator</a>: N-terminus 9.0, C-terminus 3.1, Asp 3.65, Glu 4.25, His 6.0, Cys 8.18, Tyr 10.07, Lys 10.53, Arg 12.48.</p>
 
  <div class="card">
   <h3 style="margin-top:0">Example 1: the simplest case — 2 groups (dipeptide Gly-Ala)</h3>
@@ -138,30 +138,30 @@ Above pH 9.0:  N-term  0, C-term -1   →  net = -1</div>
  <div class="card">
   <h3 style="margin-top:0">Example 2: adding one basic side chain (Gly-Lys)</h3>
   <p class="note">Now there are three groups: two bases and one acid.</p>
-  <div class="work">Groups: N-terminus (base, 9.0), Lys side chain (base, 10.5), C-terminus (acid, 3.1)
+  <div class="work">Groups: N-terminus (base, 9.0), Lys side chain (base, 10.53), C-terminus (acid, 3.1)
 
-Below pH 3.1:   +1 +1 +0  →  net = +2
-3.1 to 9.0:     +1 +1 -1  →  net = +1
-9.0 to 10.5:     0 +1 -1  →  net =  0
-Above pH 10.5:   0  0 -1  →  net = -1</div>
-  <p>This time the zero-charge region sits between 9.0 and 10.5 — <b>not</b> between the two lowest pKa's, and not a simple "middle value" pick. You have to actually track the running charge to see this.</p>
-  <div class="work">pI = (9.0 + 10.5) / 2 = <b>9.75</b></div>
+Below pH 3.1:    +1 +1 +0  →  net = +2
+3.1 to 9.0:      +1 +1 -1  →  net = +1
+9.0 to 10.53:     0 +1 -1  →  net =  0
+Above pH 10.53:   0  0 -1  →  net = -1</div>
+  <p>This time the zero-charge region sits between 9.0 and 10.53 — <b>not</b> between the two lowest pKa's, and not a simple "middle value" pick. You have to actually track the running charge to see this.</p>
+  <div class="work">pI = (9.0 + 10.53) / 2 = <b>9.77</b></div>
  </div>
 
  <div class="card">
   <h3 style="margin-top:0">Example 3: three basic groups (Lys-Arg)</h3>
   <p class="note">This is where "average the two middle values" breaks completely — there's no middle when three of four groups are bases.</p>
-  <div class="work">Groups: N-terminus (base, 9.0), Lys (base, 10.5), Arg (base, 12.5), C-terminus (acid, 3.1)
+  <div class="work">Groups: N-terminus (base, 9.0), Lys (base, 10.53), Arg (base, 12.48), C-terminus (acid, 3.1)
 
 Below pH 3.1:   +1 +1 +1 +0  →  net = +3
 3.1 to 9.0:     +1 +1 +1 -1  →  net = +2
-9.0 to 10.5:     0 +1 +1 -1  →  net = +1
-10.5 to 12.5:    0  0 +1 -1  →  net =  0
-Above pH 12.5:   0  0  0 -1  →  net = -1</div>
-  <p>The crossing is bracketed by Lys (10.5) and Arg (12.5) — the two <i>highest</i> pKa's, not the middle ones.</p>
-  <div class="work">pI = (10.5 + 12.5) / 2 = <b>11.5</b>
+9.0 to 10.53:    0 +1 +1 -1  →  net = +1
+10.53 to 12.48:  0  0 +1 -1  →  net =  0
+Above pH 12.48:  0  0  0 -1  →  net = -1</div>
+  <p>The crossing is bracketed by Lys (10.53) and Arg (12.48) — the two <i>highest</i> pKa's, not the middle ones.</p>
+  <div class="work">pI = (10.53 + 12.48) / 2 = <b>11.5</b>
 (11.51 solving the exact Henderson-Hasselbalch curve — see note below)</div>
-  <p class="note">The bracketing average (11.5) and the exact numeric solution (11.51) are this close because 10.5 and 12.5 are far enough apart that each group is essentially fully charged by the time the next one starts transitioning. When bracketing pKa's are close together, the two numbers can diverge by a few tenths — which is exactly why the <a href="/peptide-charge-calculator.html">calculator</a> solves the exact version rather than the hand-shortcut.</p>
+  <p class="note">The bracketing average (11.5) and the exact numeric solution (11.51) are this close because 10.53 and 12.48 are far enough apart that each group is essentially fully charged by the time the next one starts transitioning. When bracketing pKa's are close together, the two numbers can diverge by a few tenths — which is exactly why the <a href="/peptide-charge-calculator.html">calculator</a> solves the exact version rather than the hand-shortcut.</p>
  </div>
 
  <div class="card">
@@ -171,18 +171,18 @@ Above pH 12.5:   0  0  0 -1  →  net = -1</div>
    <thead><tr><th>Group</th><th>pKa</th><th>Type</th><th>Charge at pH 7.0</th></tr></thead>
    <tbody>
     <tr><td>N-terminus</td><td>9.0</td><td>base</td><td class="chg-pos">+0.99</td></tr>
-    <tr><td>Asp (D)</td><td>3.9</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
-    <tr><td>Lys (K)</td><td>10.5</td><td>base</td><td class="chg-pos">+1.00</td></tr>
+    <tr><td>Asp (D)</td><td>3.65</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td>Lys (K)</td><td>10.53</td><td>base</td><td class="chg-pos">+1.00</td></tr>
     <tr><td>His (H)</td><td>6.0</td><td>base</td><td class="chg-pos">+0.09</td></tr>
-    <tr><td>Glu (E)</td><td>4.1</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
-    <tr><td>Tyr (Y)</td><td>10.5</td><td>acid</td><td>0.00</td></tr>
-    <tr><td>Arg (R)</td><td>12.5</td><td>base</td><td class="chg-pos">+1.00</td></tr>
+    <tr><td>Glu (E)</td><td>4.25</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
+    <tr><td>Tyr (Y)</td><td>10.07</td><td>acid</td><td>0.00</td></tr>
+    <tr><td>Arg (R)</td><td>12.48</td><td>base</td><td class="chg-pos">+1.00</td></tr>
     <tr><td>C-terminus</td><td>3.1</td><td>acid</td><td class="chg-neg">−1.00</td></tr>
     <tr><td colspan="3" style="text-align:right;font-weight:600">Net charge at pH 7.0</td><td style="font-weight:600">+0.08</td></tr>
    </tbody>
   </table>
   <p>At this point, tracking a clean step-function bracket stops being practical — several groups (especially His, with a pKa right in the physiological range) are partially charged at the same time. The reliable move here is exactly what the peptide charge calculator does: sum every group's exact Henderson-Hasselbalch charge at a trial pH, and adjust the pH until that sum hits zero.</p>
-  <div class="work">Solving numerically: pI ≈ <b>7.49</b></div>
+  <div class="work">Solving numerically: pI ≈ <b>7.48</b></div>
   <a class="cta" href="/peptide-charge-calculator.html">Load DKHEYR in the calculator →</a>
  </div>
 
@@ -195,25 +195,25 @@ Above pH 12.5:   0  0  0 -1  →  net = -1</div>
  <h2>Practice problems</h2>
  <div class="card">
   <p><b>1.</b> Find the pI of the dipeptide Asp-Asp (Asp-Asp, "DD").</p>
-  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent2)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, 9.0), Asp (acid, 3.9), Asp (acid, 3.9), C-terminus (acid, 3.1)
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent2)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, 9.0), Asp (acid, 3.65), Asp (acid, 3.65), C-terminus (acid, 3.1)
 
-Below pH 3.1:   +1  0  0  0  →  net = +1
-3.1 to 3.9:     +1  0  0 -1  →  net =  0
-Above pH 3.9:   +1 -1 -1 -1  →  net = -2
+Below pH 3.1:    +1  0  0  0  →  net = +1
+3.1 to 3.65:     +1  0  0 -1  →  net =  0
+Above pH 3.65:   +1 -1 -1 -1  →  net = -2
 
-Bracket: C-terminus (3.1) and Asp (3.9)
-pI = (3.1 + 3.9) / 2 = 3.5
-(3.29 solving exactly — the two pKa's are close together, so like Example 3's caveat, the hand estimate and exact answer diverge slightly more here)</div></details>
+Bracket: C-terminus (3.1) and Asp (3.65)
+pI = (3.1 + 3.65) / 2 = 3.38
+(3.14 solving exactly — the two pKa's are close together, so like Example 3's caveat, the hand estimate and exact answer diverge slightly more here)</div></details>
   <p><b>2.</b> Find the pI of the dipeptide Lys-Glu ("KE").</p>
-  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, 9.0), Lys (base, 10.5), Glu (acid, 4.1), C-terminus (acid, 3.1)
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2)">Show answer</summary><div class="work" style="margin-top:.5rem">Groups: N-terminus (base, 9.0), Lys (base, 10.53), Glu (acid, 4.25), C-terminus (acid, 3.1)
 
-Below pH 3.1:   +1 +1  0  0  →  net = +2
-3.1 to 4.1:     +1 +1  0 -1  →  net = +1
-4.1 to 9.0:     +1 +1 -1 -1  →  net =  0
-9.0 to 10.5:     0 +1 -1 -1  →  net = -1
+Below pH 3.1:    +1 +1  0  0  →  net = +2
+3.1 to 4.25:     +1 +1  0 -1  →  net = +1
+4.25 to 9.0:     +1 +1 -1 -1  →  net =  0
+9.0 to 10.53:     0 +1 -1 -1  →  net = -1
 
-Bracket: Glu (4.1) and N-terminus (9.0)
-pI = (4.1 + 9.0) / 2 = 6.55</div></details>
+Bracket: Glu (4.25) and N-terminus (9.0)
+pI = (4.25 + 9.0) / 2 = 6.63</div></details>
  </div>
 
  <h2>FAQ</h2>
