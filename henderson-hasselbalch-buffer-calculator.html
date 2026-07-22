@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Henderson-Hasselbalch Buffer Calculator — Free</title>
 <meta name="description" content="Free buffer calculator. Enter pKa, target pH, concentration &amp; volume to get the exact acid and conjugate base amounts, fully worked.">
-<meta name="keywords" content="henderson hasselbalch calculator, buffer calculator, how to make a buffer at a given pH, conjugate base acid ratio, buffer preparation calculator, pKa pH ratio">
+<meta name="keywords" content="henderson hasselbalch calculator, buffer calculator, how to make a buffer at a given pH, conjugate base acid ratio, buffer preparation calculator, pKa pH ratio, histidine buffer calculator">
 <link rel="canonical" href="https://biochemtools.com/henderson-hasselbalch-buffer-calculator.html">
 <meta property="og:title" content="Henderson-Hasselbalch Buffer Calculator — Shows Every Step">
 <meta property="og:description" content="Get the exact acid/conjugate-base amounts for any buffer, with the full worked Henderson-Hasselbalch calculation. Free.">
@@ -25,7 +25,8 @@
 {"@type":"Question","name":"Why does buffering capacity fail outside pKa ± 1?","acceptedAnswer":{"@type":"Answer","text":"Outside that range, one form of the buffer (the acid or the conjugate base) vastly outnumbers the other. Since buffering works by the minority form absorbing added acid or base, a buffer with almost none of one form left has very little capacity to resist a pH change — added acid or base swings the pH quickly instead of being absorbed."}},
 {"@type":"Question","name":"Why is phosphate buffer used for physiological pH instead of acetate?","acceptedAnswer":{"@type":"Answer","text":"Phosphate's pKa (about 7.21) sits close to physiological pH (7.4), well within the effective pKa ± 1 range. Acetate's pKa (about 4.76) is over 2.5 pH units away from 7.4 — far outside its buffering range — so it would have almost no capacity to resist pH changes at physiological pH even though it's a perfectly good buffer near its own pKa."}},
 {"@type":"Question","name":"Do I need to know the volume to find the acid/base ratio?","acceptedAnswer":{"@type":"Answer","text":"No — the ratio [A⁻]/[HA] = 10^(pH − pKa) and the fractions of each form depend only on pH and pKa. Concentration and volume are only needed for the last step, converting those fractions into actual moles or grams to weigh out."}},
-{"@type":"Question","name":"What buffers the blood at pH 7.4 in the body?","acceptedAnswer":{"@type":"Answer","text":"The bicarbonate buffer system (H2CO3/HCO3−) is the primary one, even though its pKa (often quoted around 6.1, lower than the phosphate value here) looks further from 7.4 than phosphate's. It works physiologically because it's an open system — CO2 is constantly exhaled by the lungs, which shifts the equilibrium and effectively extends its buffering range beyond what a closed-system pKa ± 1 rule would predict."}}]}
+{"@type":"Question","name":"What buffers the blood at pH 7.4 in the body?","acceptedAnswer":{"@type":"Answer","text":"The bicarbonate buffer system (H2CO3/HCO3−) is the primary one, even though its pKa (often quoted around 6.1, lower than the phosphate value here) looks further from 7.4 than phosphate's. It works physiologically because it's an open system — CO2 is constantly exhaled by the lungs, which shifts the equilibrium and effectively extends its buffering range beyond what a closed-system pKa ± 1 rule would predict."}},
+{"@type":"Question","name":"Why is histidine used as a buffer?","acceptedAnswer":{"@type":"Answer","text":"Histidine's imidazole side chain has a pKa of about 6.0, close enough to physiological pH to give it real buffering capacity between roughly pH 5 and 7 — useful for protein formulation and purification steps run in that range. It's also one of the few amino acid side chains meaningfully charged at physiological pH, which is why it shows up so often in enzyme active sites as a proton donor/acceptor."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--a:#5dcaa5;--ha:#e0a93b;--accent:#378add;--warn:#e24b4a}
@@ -81,6 +82,7 @@
    <button data-pka="7.48" data-n="HEPES">HEPES (7.48)</button>
    <button data-pka="6.35" data-n="Bicarbonate">Bicarbonate (6.35)</button>
    <button data-pka="9.25" data-n="Ammonium">Ammonium (9.25)</button>
+   <button data-pka="6.0" data-n="Histidine">Histidine (6.0)</button>
   </div>
   <div class="fields">
    <div><label>pKa</label><input id="pka" type="number" step="0.01" value="7.21"></div>
@@ -144,6 +146,7 @@ Moles in 500 mL: A⁻ = 49.89 mmol
   <p class="note"><b>Why phosphate instead of acetate for physiological pH?</b><br>Phosphate's pKa (~7.21) sits close to 7.4, within pKa ± 1. Acetate's pKa (~4.76) is over 2.5 units away — far outside its range — so it has almost no capacity to resist pH changes at 7.4 even though it's a fine buffer near its own pKa.</p>
   <p class="note"><b>Do I need the volume to find the acid/base ratio?</b><br>No — the ratio and fractions depend only on pH and pKa. Concentration and volume are only needed for the last step: converting those fractions into actual moles or grams.</p>
   <p class="note"><b>What buffers blood at pH 7.4?</b><br>The bicarbonate system (H₂CO₃/HCO₃⁻), even though its pKa (~6.1) looks further from 7.4 than phosphate's. It works because it's an open system — CO₂ is constantly exhaled, shifting the equilibrium and extending its effective buffering range beyond the simple closed-system pKa ± 1 rule.</p>
+  <p class="note"><b>Why is histidine used as a buffer?</b><br>Its imidazole side chain has a pKa of about 6.0 — close enough to physiological pH to give real buffering capacity between roughly pH 5 and 7, useful for protein formulation and purification. It's also one of the few side chains meaningfully charged at physiological pH, which is why it's so common in enzyme active sites as a proton donor/acceptor.</p>
  </div>
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>

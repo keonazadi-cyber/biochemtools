@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dilution Calculator (C1V1 = C2V2) — Free</title>
 <meta name="description" content="Free dilution calculator. Solve C1V1 = C2V2 for any variable and see exactly how much stock and solvent to mix, with every step shown.">
-<meta name="keywords" content="dilution calculator, c1v1 calculator, c1v1=c2v2, how to dilute a solution, stock solution dilution, serial dilution">
+<meta name="keywords" content="dilution calculator, c1v1 calculator, c1v1=c2v2, how to dilute a solution, stock solution dilution, serial dilution, antibody dilution calculator">
 <link rel="canonical" href="https://biochemtools.com/dilution-calculator.html">
 <meta property="og:title" content="Dilution Calculator (C1V1 = C2V2) — Shows Every Step">
 <meta property="og:description" content="Solve any variable in C1V1 = C2V2 and see how much stock and solvent to mix. Free.">
@@ -20,7 +20,8 @@
 {"@type":"Question","name":"Why do units have to match on both sides of C1V1 = C2V2?","acceptedAnswer":{"@type":"Answer","text":"The equation is really a statement that moles of solute don't change on dilution — only true if concentration is in the same unit on both sides (e.g. both in M, or both in mg/mL) and volume is in the same unit on both sides (both mL, or both L). Mixing units, like M on one side and mM on the other, gives an answer off by a factor of 1000."}},
 {"@type":"Question","name":"Does C1V1 = C2V2 work for units other than molarity?","acceptedAnswer":{"@type":"Answer","text":"Yes — it holds for any concentration unit as long as it's used consistently: percent (w/v or v/v), mg/mL, ng/µL, or normality. The underlying logic (amount of solute is conserved, only solvent is added) doesn't depend on which concentration unit you're tracking."}},
 {"@type":"Question","name":"Can I use this formula when mixing two different solutions together, not just adding pure solvent?","acceptedAnswer":{"@type":"Answer","text":"No — C1V1 = C2V2 assumes you're diluting a stock with pure solvent (C = 0 for whatever you're adding). If you're combining two solutions that both contain solute, you need a mass balance instead: C1V1 + C2V2 = C3(V1+V2), solved for the final concentration C3."}},
-{"@type":"Question","name":"What's the difference between this calculator and the serial dilution calculator?","acceptedAnswer":{"@type":"Answer","text":"This one solves a single dilution step. The serial dilution calculator chains many identical dilution steps together (like a 10-fold dilution repeated six times) and tracks the concentration and transfer volume at every step of the series."}}]}
+{"@type":"Question","name":"What's the difference between this calculator and the serial dilution calculator?","acceptedAnswer":{"@type":"Answer","text":"This one solves a single dilution step. The serial dilution calculator chains many identical dilution steps together (like a 10-fold dilution repeated six times) and tracks the concentration and transfer volume at every step of the series."}},
+{"@type":"Question","name":"How do I calculate an antibody dilution like 1:1000?","acceptedAnswer":{"@type":"Answer","text":"Use the same C1V1 = C2V2 formula, treating the undiluted antibody stock as C1 = 1 and the target ratio as a fraction (1:1000 becomes C2 = 0.001). Solve for V1 to find how much stock to use for your target final volume, then add diluent (blocking buffer or PBS/TBST) to reach that volume."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
@@ -87,6 +88,16 @@ Solvent to add = V₂ − V₁ = 100 − 10 = 90 mL</div>
   <div class="work">V₁ = C₂V₂ / C₁ = (0.1 × 2000) / 5 = 40 mL
 Solvent to add = V₂ − V₁ = 2000 − 40 = 1960 mL</div>
   <p class="note">Measure 40 mL of the 5 M stock into a container, then add solvent (typically water, added carefully to concentrated NaOH — never the reverse) up to a total of 2000 mL.</p>
+
+  <h2>Worked example 3: antibody dilution for Western blot</h2>
+  <p class="note">Antibody dilutions are usually given as a ratio (like "1:1000") rather than a molar concentration, but the same C₁V₁ = C₂V₂ math applies — just treat the undiluted stock as C₁ = 1 and the target dilution as a fraction. You need 10 mL of primary antibody at a 1:1000 dilution for a Western blot.</p>
+  <div class="work">C₁ = 1 (undiluted stock)
+C₂ = 1/1000 = 0.001 (target dilution)
+V₂ = 10 mL
+
+V₁ = C₂V₂ / C₁ = (0.001 × 10) / 1 = 0.01 mL = 10 µL
+Solvent (blocking buffer/TBST) to add = 10 − 0.01 = 9.99 mL</div>
+  <p class="note">Pipette 10 µL of antibody stock into 9.99 mL of blocking buffer — in practice, most people just top up to 10 mL total after adding the 10 µL, since the difference is negligible at this dilution factor.</p>
  </div>
 
  <div class="card">
@@ -95,6 +106,7 @@ Solvent to add = V₂ − V₁ = 2000 − 40 = 1960 mL</div>
   <p class="note"><b>Does this work for units other than molarity?</b><br>Yes — percent (w/v or v/v), mg/mL, ng/µL, normality, anything, as long as it's used consistently. The logic (solute amount is conserved, only solvent is added) doesn't depend on which unit you're tracking.</p>
   <p class="note"><b>Can I use this when mixing two solutions together, not just adding solvent?</b><br>No — this assumes you're diluting with pure solvent (C = 0). Combining two solutions that both contain solute needs a mass balance instead: C₁V₁ + C₂V₂ = C₃(V₁+V₂), solved for the final concentration C₃.</p>
   <p class="note"><b>What's the difference between this and the serial dilution calculator?</b><br>This solves one dilution step. The <a href="/serial-dilution-calculator.html">serial dilution calculator</a> chains many identical steps together and tracks concentration and transfer volume at every step of the series.</p>
+  <p class="note"><b>How do I calculate an antibody dilution like 1:1000?</b><br>Same formula — treat the undiluted stock as C₁ = 1 and the target ratio as a fraction (1:1000 → C₂ = 0.001). Solve for V₁ to find how much stock to use, then add diluent up to your target final volume.</p>
  </div>
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>
