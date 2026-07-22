@@ -1010,3 +1010,26 @@ work held up. Two real things found and fixed:
 Everything else checked this round — cross-linking, mobile overflow,
 duplicate IDs, contrast on the new topnav, stale tool-count copy — came
 back clean, correctly left alone rather than force-fixed.
+
+### 2026-07-22 — functional spot-checks + stale formula-sheet PDF fixed (commit 05dd261)
+
+Live-tested a couple of interactive tools not yet touched this
+session (quiz.html scoring, punnett-square-calculator's dihybrid grid)
+— both correct, no bugs found.
+
+Then checked the downloadable MCAT formula sheet linked from
+about.html ("every formula on the site, condensed to one page") and
+found it genuinely stale: footer said "22 free interactive tools"
+(site has 24), and it had zero coverage for Citric Acid Cycle Explorer
+and ATP Yield Calculator — both added to the site after this PDF was
+last generated. No source script existed for it (made by hand/
+externally), so rebuilt it from scratch with reportlab, matching the
+original's two-column layout and section color-coding (verified by
+rendering old vs. new to images and comparing side by side). Hit two
+real rendering bugs while building the replacement: a reportlab frame-
+sequencing issue that shifted all content into the wrong column
+(fixed by drawing the title via a fixed canvas callback instead of a
+flowing frame), and literal Unicode subscript characters rendering as
+missing-glyph boxes in Helvetica (switched to proper `<sub>` tags).
+Verified via pypdf text extraction that all formulas and the corrected
+tool count are present, and confirmed it's back to a single page.
