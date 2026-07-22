@@ -923,3 +923,54 @@ top-impression and top-position ends of the data, found and fixed the
 two clearest real gaps, and confirmed one high-performing page needed
 no changes. Next real checkpoint is the same as before: revisit in a
 few days to see which of today's fixes move the needle.
+
+### 2026-07-22 — sitewide topnav added to all 32 non-homepage pages (commit e44100c)
+
+Asked to keep hunting for improvements beyond SEO specifically —
+visual polish, technical fixes, redundancy, anything. Biggest real gap
+found: every tool page, guide, and utility page (24 tools + 3 guides +
+daily-question/about/privacy/contact/404) had **no top navigation at
+all** — they dropped straight from the streak badge into the page's
+own header. Only the homepage had the polished sticky glass topnav
+from the earlier redesign. Given Search Console data confirms most
+real traffic lands directly on tool pages (not the homepage), this
+meant the premium first impression from the redesign was only ever
+seen by a minority of visits.
+
+Fix: injected the same topnav (brand mark, Daily question/About links,
+All tools CTA, sticky/blurred glass background) into all 32 other
+pages via a Python script, reusing the homepage's exact class names
+and hardcoding the brand gradient colors so it renders identically
+regardless of each page's own local CSS theme variables.
+
+Two follow-on fixes this required:
+1. streak.js's tool-streak-badge was hardcoded to insert itself as
+   the very first `<body>` child — now inserts right after `.topnav`
+   instead (falls back to old behavior if no topnav found).
+2. glycolysis-pathway-explorer.html and citric-acid-cycle-explorer.html
+   both have their own sticky "tally" bar pinned to `top:0`, which
+   would've overlapped the new topnav+badge. Added a new
+   `adjustStickyOffsets()` in streak.js (runs via double
+   requestAnimationFrame + window `load`) that measures the real
+   combined topnav+badge height and writes it into a
+   `--sticky-offset` CSS custom property; both tally bars now use
+   `top:var(--sticky-offset,70px)` so they stick just below the nav
+   instead of under/behind it.
+
+Verified: all 33 HTML files still pass the tag-balance + JSON-LD
+validation pass, live-tested in browser at desktop and mobile widths
+(links correctly collapse to just brand+CTA under 640px), no console
+errors, homepage confirmed unaffected. Ran into a red herring mid-way:
+`getBoundingClientRect()` calls made directly via the testing tool's
+JS-exec bridge (without a preceding screenshot/render trigger) were
+reporting wildly inflated heights (e.g. badge measuring 184px instead
+of the real ~38px) because that bridge evaluates against an
+unrendered/zero-width viewport unless a screenshot action runs first —
+confirmed by pairing a screenshot with the measurement immediately
+after, which gave the correct, internally-consistent numbers. Not a
+site bug, purely a test-tool quirk; noted here so it isn't re-debugged
+from scratch next time.
+
+Next: continuing to look for more (redundancy, further visual
+consistency, new content gaps) per standing "there's always
+something" instruction.
