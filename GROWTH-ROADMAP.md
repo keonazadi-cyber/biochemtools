@@ -851,3 +851,36 @@ addition to Python.
 report (not just Page Indexing) periodically — it updates much faster
 (hours, not weeks) and is now the best source of real, specific,
 actionable next-fixes, far better than guessing at new content.
+
+**Same-day follow-up: sorted the query list by position instead of
+impressions, and found something more interesting.** A handful of
+ultra-specific queries — exact formulas (`π = iMRT`, `a=εbc`, `RT/nF`)
+and even literal homework-question text (`glycine titration curve pka
+2.34 9.60 pi 5.97 source`) — rank on **page 1** (position 6.8-10),
+despite the domain's zero backlinks and terrible average position
+(54.6) on broad terms. Checked why: osmotic-pressure-calculator,
+beer-lambert-calculator, and nernst-equation-calculator all already
+have their exact formula baked into title/meta/schema — that's what's
+winning the exact-match. Checked the other formula-based tools for the
+same treatment and found gibbs-free-energy-calculator.html's title was
+completely generic (no formula at all) — added ΔG=ΔH−TΔS to its
+title/description/keywords to match. ph-calculator, henderson-
+hasselbalch, and hardy-weinberg were left as-is since their tool names
+themselves already function as the "exact match" term.
+
+**Real strategic takeaway:** for a brand-new, zero-backlink domain,
+literal formula strings and literal worked-example numbers are
+currently a stronger ranking lever than broad head-terms — exact-match
+relevance is apparently strong enough to fully outweigh weak domain
+authority for these ultra-specific queries. Worth keeping in mind for
+any future tool or guide: put the literal formula in the title, not
+just the concept name.
+
+Stopping the query-mining here for today — the remaining 620+ queries
+are mostly 1-2 impression long-tail with fast-diminishing signal.
+Next real checkpoint: revisit Search Console Performance in a few days
+to see whether today's 4 fixes (histidine, antibody dilution, g/mL-to-
+molarity, Gibbs title) show up as new impressions/clicks, and whether
+the two new guides + two new tools from yesterday have started
+accumulating impressions yet (they had none as of this morning's data,
+too new to expect otherwise).
