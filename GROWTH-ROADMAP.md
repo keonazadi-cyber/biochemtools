@@ -974,3 +974,39 @@ from scratch next time.
 Next: continuing to look for more (redundancy, further visual
 consistency, new content gaps) per standing "there's always
 something" instruction.
+
+### 2026-07-22 — daily-question bank expanded + missing OG tags fixed (commits 6dbbd2c, 8404377)
+
+Continued the "keep looking" pass. Ran a broad technical audit
+(broken links, sitemap/robots.txt sync, duplicate element IDs, image
+sizes, title/description length outliers, mobile overflow, contrast,
+cross-linking) — almost everything came back clean, confirming past
+work held up. Two real things found and fixed:
+
+1. **daily-question.html's BANK was only 30 questions**, cycling on a
+   30-day modulo — would've started repeating 2026-08-20. It also had
+   zero coverage for 4 tools: ATP Yield Calculator, Citric Acid Cycle
+   Explorer, Cardiac Output Calculator, Renal Clearance Calculator.
+   Added one question per gap (bank now 34), each checked against that
+   tool's own stated formula (Cx=(Ux×V)/Px, CO=HR×SV, 3 NADH/1 FADH2/1
+   GTP per turn) for consistency. The ATP yield question deliberately
+   tests the P/O-ratio convention concept rather than picking one of
+   30/32/36/38 as "the" answer, matching that tool's own "all four are
+   defensible" framing instead of contradicting it. Verified the array
+   parses via node eval (all `correct` indices in bounds) and tested
+   live that the counter/click-to-answer flow still works.
+
+2. **about.html, contact.html, privacy.html had zero Open Graph or
+   Twitter Card tags** — not just a missing image, the entire block
+   was absent. Sharing any of these (the Share button is on every
+   page) would've shown a blank/bare-URL preview. Generated 3 new
+   1200×630 og-images with Pillow matching the site's established
+   visual template (no generation script existed for the other 29 —
+   they were made by hand/externally), then wired in og:title/
+   description/image/twitter:card exactly like every tool page already
+   does. Caught a stray placeholder-ellipse bug (visible white circle
+   outline) in the first draft before finalizing.
+
+Everything else checked this round — cross-linking, mobile overflow,
+duplicate IDs, contrast on the new topnav, stale tool-count copy — came
+back clean, correctly left alone rather than force-fixed.
