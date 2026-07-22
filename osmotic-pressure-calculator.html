@@ -145,6 +145,8 @@ function getI(){const v=$("solute").value;if(v==="custom")return +$("icustom").v
 function calc(){
  $("iwrap").style.display=$("solute").value==="custom"?"block":"none";
  const M=+$("M").value,i=getI(),Tc=+$("T").value,T=Tc+273.15;
+ if(M<=0){$("osm").textContent="—";$("pi").textContent="—";$("work").textContent="Molarity must be greater than 0.";$("ton").innerHTML="";return;}
+ if(T<=0){$("osm").textContent="—";$("pi").textContent="—";$("work").textContent="Temperature must be above absolute zero (−273.15 °C).";$("ton").innerHTML="";return;}
  const osm=i*M, pi=i*M*R*T;
  $("osm").textContent=(+osm.toPrecision(4))+" Osm";
  $("pi").textContent=(+pi.toPrecision(4))+" atm";

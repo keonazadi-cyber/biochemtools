@@ -134,6 +134,7 @@ const $=id=>document.getElementById(id);
 function calcCx(){
  const ux=+$("ux").value, v=+$("v").value, px=+$("px").value;
  if(px<=0){ $("cxval").textContent="—"; $("cxwork").textContent="Px must be greater than 0."; return; }
+ if(ux<=0||v<=0){ $("cxval").textContent="—"; $("cxwork").textContent="Ux and V must both be greater than 0."; return; }
  const cx = (ux*v)/px;
  $("cxval").textContent = cx.toFixed(1)+" mL/min";
  $("cxwork").textContent = `Cx = (Ux × V) / Px = (${ux} × ${v}) / ${px} = ${cx.toFixed(1)} mL/min`;
@@ -141,6 +142,7 @@ function calcCx(){
 function calcFF(){
  const gfr=+$("gfr").value, rpf=+$("rpf").value;
  if(rpf<=0){ $("ffwork").textContent="RPF must be greater than 0."; return; }
+ if(gfr<=0){ $("ffwork").textContent="GFR must be greater than 0."; return; }
  const ff = gfr/rpf*100;
  $("ffwork").textContent = `FF = GFR / RPF = ${gfr} / ${rpf} = ${(ff/100).toFixed(3)} = ${ff.toFixed(1)}%`;
 }

@@ -197,6 +197,7 @@ function show(dg,detail,cross){
 function calc(){
  if(mode==="hs"){
   const dh=+$("dh").value, ds=+$("ds").value, T=toK(+$("temp").value,$("tunit").value);
+  if(T<=0){show(NaN,"Temperature must be above absolute zero (0 K).","");$("dgval").textContent="—";$("dglab").textContent="Enter a temperature above 0 K";return;}
   const dsk=ds/1000;
   const dg=dh-T*dsk;
   let w=`ΔG = ΔH − TΔS\n`;
@@ -211,6 +212,7 @@ function calc(){
  } else {
   const dg0=+$("dg0").value, q=+$("q").value, T=toK(+$("qtemp").value,$("qtunit").value);
   if(q<=0){show(NaN,"Q must be greater than 0.","");$("dgval").textContent="—";$("dglab").textContent="Enter Q > 0";return;}
+  if(T<=0){show(NaN,"Temperature must be above absolute zero (0 K).","");$("dgval").textContent="—";$("dglab").textContent="Enter a temperature above 0 K";return;}
   const rtlnq=R*T*Math.log(q);
   const dg=dg0+rtlnq;
   let w=`ΔG = ΔG°′ + RT ln Q\n`;

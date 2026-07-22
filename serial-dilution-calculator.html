@@ -140,6 +140,7 @@ function calc(){
  let rows="";
  for(let n=1;n<=N;n++){const conc=stock/Math.pow(F,n);rows+=`<tr><td>${n}</td><td>1 : ${fmt(Math.pow(F,n))}</td><td class="c">${fmt(conc)}</td></tr>`;}
  $("rows").innerHTML=rows;
+ if(V<=0){$("prep").textContent="Volume per tube must be greater than 0.";return;}
  const transfer=V/F, diluent=V-transfer;
  $("prep").innerHTML=`<b>Per tube (${V} µL final, ${F}-fold):</b><br>Add <b style="color:var(--out)">${fmt(transfer)} µL</b> of sample from the previous tube into <b style="color:var(--out)">${fmt(diluent)} µL</b> of diluent, mix, then repeat.<br><span class="note">Tube 1 takes ${fmt(transfer)} µL of the original stock.</span>`;
 }

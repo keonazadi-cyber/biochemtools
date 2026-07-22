@@ -135,11 +135,13 @@ function calc(){
  let CO_L, work;
  if(mode==="hrsv"){
   const hr=+$("hr").value, sv=+$("sv").value;
+  if(hr<=0||sv<=0){ $("outval").textContent="—"; $("work").textContent="Heart rate and stroke volume must both be greater than 0."; return; }
   const CO_mL = hr*sv;
   CO_L = CO_mL/1000;
   work = `CO = HR × SV = ${hr} × ${sv} = ${CO_mL.toLocaleString()} mL/min = ${CO_L.toFixed(2)} L/min`;
  } else {
   const vo2=+$("vo2").value, cao2=+$("cao2").value, cvo2=+$("cvo2").value;
+  if(vo2<=0||cao2<=0||cvo2<=0){ $("outval").textContent="—"; $("work").textContent="VO₂, CaO₂, and CvO₂ must all be greater than 0."; return; }
   const diff = cao2-cvo2;
   if(diff<=0){ $("outval").textContent="—"; $("work").textContent="CaO₂ must be greater than CvO₂."; return; }
   CO_L = vo2/diff;

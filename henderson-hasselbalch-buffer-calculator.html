@@ -195,6 +195,14 @@ Ratio [A⁻]/[HA] = 10^(8.5−9.25) = 10^(−0.75) = 0.178, meaning the weak aci
 const $=id=>document.getElementById(id);
 function calc(){
  const pka=+$("pka").value, pH=+$("ph").value, C=+$("conc").value, Vml=+$("vol").value, V=Vml/1000;
+ if(C<=0||Vml<=0){
+  $("pctA").textContent="—";$("pctHA").textContent="—";
+  $("fa").style.width="50%";$("fha").style.width="50%";
+  $("molA").textContent="—";$("molHA").textContent="—";
+  $("work").textContent="";
+  $("range").innerHTML=`<div class="warn">Concentration and final volume must both be greater than 0.</div>`;
+  return;
+ }
  const ratio=Math.pow(10,pH-pka);
  const fA=ratio/(1+ratio), fHA=1/(1+ratio);
  const cA=fA*C, cHA=fHA*C, mA=cA*V, mHA=cHA*V;

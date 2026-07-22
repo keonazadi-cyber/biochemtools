@@ -127,6 +127,7 @@ function fmt(x){return isFinite(x)?(+x.toPrecision(5)).toString():"—";}
 function calc(){
  ["P","V","n","T"].forEach(k=>$(k).disabled=(k===solveFor));
  const P=+$("P").value,V=+$("V").value,n=+$("n").value,T=+$("T").value;let val,work;
+ if(solveFor!=="T"&&T<=0){$("outlbl").textContent=LBL[solveFor];$("outval").textContent="—";$("work").textContent="Temperature must be above absolute zero (0 K).";return;}
  if(solveFor==="P"){val=n*R*T/V;work=`P = nRT / V = (${n} × 0.08206 × ${T}) / ${V} = ${fmt(val)} atm`;}
  else if(solveFor==="V"){val=n*R*T/P;work=`V = nRT / P = (${n} × 0.08206 × ${T}) / ${P} = ${fmt(val)} L`;}
  else if(solveFor==="n"){val=P*V/(R*T);work=`n = PV / RT = (${P} × ${V}) / (0.08206 × ${T}) = ${fmt(val)} mol`;}

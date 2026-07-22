@@ -207,12 +207,14 @@ function calcGrams(){
  if(!isFinite(MW)||MW<=0){$("grams").textContent="—";$("work").textContent="";return;}
  if(mode2==="toGrams"){
   const M=+$("molarity").value,Vml=+$("vol").value,V=Vml/1000;
+  if(M<=0||Vml<=0){$("outlbl2").textContent="Weigh out";$("grams").textContent="—";$("work").textContent="Molarity and volume must both be greater than 0.";return;}
   const mol=M*V, g=mol*MW;
   $("outlbl2").textContent="Weigh out";
   $("grams").textContent=g.toFixed(3)+" g";
   $("work").textContent=`moles = M × V = ${M} × ${V} L = ${mol.toFixed(4)} mol\ngrams = moles × molar mass = ${mol.toFixed(4)} × ${MW.toFixed(2)} = ${g.toFixed(3)} g`;
  } else {
   const c=+$("conc").value;
+  if(c<=0){$("outlbl2").textContent="Molarity";$("grams").textContent="—";$("work").textContent="Concentration must be greater than 0.";return;}
   const cGL = concUnit==="gL"?c : concUnit==="gmL"?c*1000 : c;
   const M=cGL/MW;
   $("outlbl2").textContent="Molarity";

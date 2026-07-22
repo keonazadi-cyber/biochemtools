@@ -136,6 +136,7 @@ const R=8.314,F=96485;const $=id=>document.getElementById(id);
 function calc(){
  const e0=+$("e0").value,n=+$("n").value,q=+$("q").value,T=+$("T").value;
  if(q<=0||n<=0){$("eval").textContent="—";$("elab").textContent="Q and n must be greater than 0";$("work").textContent="";return;}
+ if(T<=0){$("eval").textContent="—";$("elab").textContent="Temperature must be above absolute zero (0 K)";$("work").textContent="";return;}
  const lnQ=Math.log(q);
  const E=e0-(R*T/(n*F))*lnQ;
  const out=$("out");out.className="out "+(E>=0?"pos":"neg");

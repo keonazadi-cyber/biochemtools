@@ -148,6 +148,8 @@ function calc(){
  ["C1","V1","C2","V2"].forEach(k=>$(k).disabled=(k===solveFor));
  const C1=+$("C1").value,V1=+$("V1").value,C2=+$("C2").value,V2=+$("V2").value;
  let val,work;
+ const invalid=["C1","V1","C2","V2"].filter(k=>k!==solveFor).some(k=>+$(k).value<=0);
+ if(invalid){$("outlbl").textContent=LBL[solveFor];$("outval").textContent="—";$("work").textContent="Concentrations and volumes must all be greater than 0.";return;}
  if(solveFor==="V1"){val=C2*V2/C1;work=`V₁ = C₂V₂ / C₁ = (${C2} × ${V2}) / ${C1} = ${fmt(val)} mL\n`;if(isFinite(val)&&V2)work+=`Solvent to add = V₂ − V₁ = ${V2} − ${fmt(val)} = ${fmt(V2-val)} mL`;}
  else if(solveFor==="C2"){val=C1*V1/V2;work=`C₂ = C₁V₁ / V₂ = (${C1} × ${V1}) / ${V2} = ${fmt(val)} M`;}
  else if(solveFor==="V2"){val=C1*V1/C2;work=`V₂ = C₁V₁ / C₂ = (${C1} × ${V1}) / ${C2} = ${fmt(val)} mL`;}
