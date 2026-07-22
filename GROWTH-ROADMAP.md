@@ -796,3 +796,58 @@ dedicated, verified tool rather than numbers cited from an uncovered
 pathway. No further tool gap identified yet — next content decision
 should probably wait for a fresh look at what's actually getting
 traffic/engagement before picking the next build.
+
+### 2026-07-22 — first real Search Console Performance check, 3 data-driven fixes
+New day, Keon asked what's next. Instead of guessing at another tool,
+went and checked Search Console's actual Performance report (not just
+the Page Indexing report used previously, which lags ~2 weeks) via his
+authenticated Chrome session.
+
+**Real numbers, first time seeing them:** 2.7K impressions across 638
+distinct queries over the last 3 weeks (climbing since ~7/9), but
+average position 54.6 (~page 5-6 of results) and only 4 total clicks
+(0.1% CTR). This reframes the whole traffic problem: it's not "nobody
+finds the site," it's "found but ranked too low to click." The actual
+queries showing up (molarity to grams, c1v1 calculator, absorbance
+formula, punnett square calculator, etc.) are excellent matches for
+the site's real content — confirming targeting is right and the
+remaining gap is domain authority/ranking strength, which mostly just
+needs time + backlinks (the thing Keon has ruled out doing manually).
+
+Per-page breakdown: only 3 of ~24 pages have any clicks yet (quiz.html
+2, osmotic-pressure-calculator.html 1, michaelis-menten-fitter.html 1).
+The highest-impression pages (molarity-molar-mass: 444, amino-acid-
+titration-curve: 297, beer-lambert: 230, dilution: 219, peptide-
+charge: 212) all still have zero clicks — pure ranking-position
+problem, not a content problem.
+
+**3 concrete fixes pulled directly from the query data itself, not
+guessed:**
+1. henderson-hasselbalch-buffer-calculator.html — "histidine buffer
+   calculator" (17 impressions) wasn't captured at all; added Histidine
+   (pKa 6.0, matching the value already used site-wide for this side
+   chain) as a 7th preset, plus a FAQ entry.
+2. dilution-calculator.html — "antibody dilution calculator" (33
+   impressions, 0 clicks) is a real, common wet-lab need the generic
+   C1V1 framing didn't speak to. Added a worked example (1:1000
+   primary antibody dilution for Western blot, verified: 10 µL stock +
+   9.99 mL diluent) and a FAQ entry mapping ratio dilutions onto the
+   same formula.
+3. molarity-molar-mass-calculator.html — "molarity to grams" (80) and
+   "g/mL to molarity" (61) together are 141 of this page's 444
+   impressions, but the tool only ever computed grams-for-a-target-
+   molarity, never the reverse. Added a second mode, "Concentration →
+   molarity," with a g/L / g/mL / mg/mL unit selector. Verified in
+   Python first (1 mg/mL caffeine = 1 g/L = 0.00515 M), then verified
+   live by driving all three unit options to the same answer, then
+   confirmed the original mode's default output was unchanged after
+   the refactor.
+
+All 3 verified: HTML well-formedness + JSON-LD validity, 0 mobile
+overflow, 0 console errors, new interactive logic tested live in
+addition to Python.
+
+**Standing recommendation:** keep checking Search Console's Performance
+report (not just Page Indexing) periodically — it updates much faster
+(hours, not weeks) and is now the best source of real, specific,
+actionable next-fixes, far better than guessing at new content.
