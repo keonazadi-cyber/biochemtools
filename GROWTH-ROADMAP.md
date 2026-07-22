@@ -1268,3 +1268,27 @@ Also confirmed the formula-sheet sidebar card's existing copy ("great
 for a final review pass") is now actually true again — this was
 already accurate copy, it just wasn't backed by working code until
 today's earlier print-stylesheet fix.
+
+### 2026-07-22 — daily-question.html localStorage crash fixed for private browsing (commit b586d97)
+
+Followed up on streak.js's already-guarded load()/save() localStorage
+wrappers by checking whether any tool rolls its own direct localStorage
+calls outside that shared pattern — daily-question.html does, for its
+per-day "already answered" state, and neither call was wrapped in
+try/catch.
+
+Real impact: `localStorage.setItem()` throws in Safari private
+browsing (and other storage-restricted contexts), and it was the
+literal first line of `pick(i)` — the click handler for every answer
+button. On any device where it throws, the whole function aborts
+before the correct/incorrect styling or explanation ever renders. A
+student in a Safari private tab would click an answer and see nothing
+happen, with zero indication anything went wrong.
+
+Wrapped both the read and write in try/catch (read defaults to
+"unanswered" on failure, write silently no-ops), matching streak.js's
+existing pattern. Verified live by patching `Storage.prototype.setItem`
+to throw and confirming the correct/incorrect highlighting still
+renders correctly with zero console errors — the only remaining
+degradation (answer state not persisting across reload in that one
+scenario) is expected and acceptable.
