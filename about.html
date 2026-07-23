@@ -39,6 +39,7 @@
  .topnav-links a:hover{color:#e8eaed}
  .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
  .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ .topnav-links a[aria-current="page"]{color:var(--txt);font-weight:600}
  @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
 
  @media print{
@@ -56,7 +57,7 @@
   <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
   <div class="topnav-links">
    <a href="/daily-question.html">Daily question</a>
-   <a href="/about.html">About</a>
+   <a href="/about.html" aria-current="page">About</a>
    <a class="navcta" href="/">All tools &rarr;</a>
   </div>
  </div>
