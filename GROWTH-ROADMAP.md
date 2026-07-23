@@ -1340,3 +1340,36 @@ regulatory mechanism vs. formula, several smaller one-line additions;
 Priority 3: strategic topic gaps like lipid metabolism and cell
 membrane transport) are logged in the published audit report, not yet
 started — natural next content-writing session.
+
+### 2026-07-23 — kcat/Km added across the enzyme kinetics cluster (commit 023b862)
+
+New day, picked up exactly where the audit's Priority 2 list left off.
+Checked Search Console first (one more day of data, through 7/21) —
+impressions ticked up slightly but clicks/position unchanged, too soon
+to expect movement from yesterday's fixes. Confirmed, moved on.
+
+Closed the single most-repeated gap from yesterday's 4-reviewer
+content audit: k<sub>cat</sub> and k<sub>cat</sub>/K<sub>m</sub> (the
+specificity constant) were missing from all three enzyme kinetics
+pages. enzyme-kinetics-simulator.html got the full build: a new
+[E]total input wired to the page's existing Vmax/Km sliders, live
+k<sub>cat</sub>/k<sub>cat</sub>-K<sub>m</sub> metrics with worked steps,
+an explanation of what the specificity constant measures and why
+it's usually the number "how efficient is this enzyme" questions
+actually want, the diffusion-limit/catalytically-perfect-enzyme
+context (catalase, triose phosphate isomerase), a new practice
+problem, and 2 new FAQ entries. michaelis-menten-fitter.html and the
+MM-vs-LB guide each got a shorter version — one FAQ entry linking to
+the simulator's full calculator, avoiding writing the same explanation
+three times.
+
+All unit conversions (µM/min→s⁻¹, µM→M) verified in Python before
+writing anything. Both the page's default case and the new practice
+problem were re-verified live in the browser against the tool's actual
+output — not just checked against the source text — and confirmed
+kcat/Km correctly stays fixed when switching inhibition types (by
+design: it describes the enzyme's intrinsic chemistry, not a
+particular inhibitor's effect).
+
+Next up from the audit's Priority 2 list: the anaerobic-metabolism
+bridge across glycolysis → TCA cycle → ATP yield.
