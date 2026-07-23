@@ -32,6 +32,7 @@
  .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
  label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}input:disabled{opacity:.5}
  .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+ @media(max-width:560px){.fields{grid-template-columns:1fr}}
  .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}.out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
  .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
  h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}

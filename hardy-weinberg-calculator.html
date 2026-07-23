@@ -32,6 +32,7 @@
  .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
  label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
  .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+ @media(max-width:560px){.fields{grid-template-columns:1fr}}
  .grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0}
  .metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.8rem}.metric .val{font-size:1.5rem;font-weight:600;margin-top:.2rem;color:var(--out)}
  .bars{margin:1rem 0}.bar{display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
