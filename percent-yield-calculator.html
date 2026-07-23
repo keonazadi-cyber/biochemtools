@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percent Yield Calculator — Theoretical &amp; Actual, Free</title>
+<meta name="description" content="Free percent yield calculator. Get theoretical yield from the limiting reactant and mole ratio, then percent yield from your actual yield, every step shown.">
+<meta name="keywords" content="percent yield calculator, theoretical yield calculator, how to calculate percent yield, actual vs theoretical yield, stoichiometry calculator, limiting reactant yield">
+<link rel="canonical" href="https://biochemtools.com/percent-yield-calculator.html">
+<meta property="og:title" content="Percent Yield Calculator — Theoretical &amp; Actual">
+<meta property="og:description" content="Theoretical yield from the limiting reactant and mole ratio, then percent yield — every step shown. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/percent-yield-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/percent-yield-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Chemistry","item":"https://biochemtools.com/#chemistry"},{"@type":"ListItem","position":3,"name":"Percent Yield Calculator","item":"https://biochemtools.com/percent-yield-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate percent yield","step":[
+{"@type":"HowToStep","name":"Find moles of the limiting reactant","text":"Divide the mass of the limiting reactant by its molar mass: moles = mass / molar mass."},
+{"@type":"HowToStep","name":"Convert to moles of product","text":"Multiply by the mole ratio from the balanced equation: moles product = moles reactant × (product coefficient / reactant coefficient)."},
+{"@type":"HowToStep","name":"Find theoretical yield","text":"Multiply moles of product by the product's molar mass to get the theoretical yield in grams."},
+{"@type":"HowToStep","name":"Divide actual by theoretical","text":"Percent yield = (actual yield / theoretical yield) × 100."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between theoretical yield and actual yield?","acceptedAnswer":{"@type":"Answer","text":"Theoretical yield is the maximum amount of product you could possibly get if the reaction went perfectly and every bit of the limiting reactant were converted — it's calculated purely from stoichiometry. Actual yield is what you actually recover in the lab, which is almost always less because of side reactions, incomplete reactions, and product lost during transfer and purification. Percent yield = actual / theoretical × 100."}},
+{"@type":"Question","name":"Why is percent yield almost never 100%?","acceptedAnswer":{"@type":"Answer","text":"Real reactions lose product to several unavoidable causes: some reactant is consumed by competing side reactions, the reaction may not go fully to completion (it can reach equilibrium before all reactant converts), and material is inevitably lost sticking to glassware, during filtration, or in purification steps like recrystallization. A percent yield above 100% almost always means the product is impure or still wet (contains solvent or unreacted material adding extra mass), not that you beat stoichiometry."}},
+{"@type":"Question","name":"Why do I use the limiting reactant and not the other reactant?","acceptedAnswer":{"@type":"Answer","text":"The limiting reactant is the one that runs out first, so it caps how much product can form — any excess of the other reactant just sits there unreacted. Theoretical yield is always calculated from the limiting reactant. If you're not sure which reactant is limiting, compute the moles of product each reactant could make on its own; whichever gives the smaller amount is the limiting one."}},
+{"@type":"Question","name":"Where does the mole ratio come from?","acceptedAnswer":{"@type":"Answer","text":"Straight from the coefficients of the balanced chemical equation. For N2 + 3H2 → 2NH3, the ratio of N2 to NH3 is 1:2, so 1 mole of N2 makes 2 moles of NH3. Getting the equation balanced first is essential — an unbalanced equation gives the wrong ratio and therefore the wrong theoretical yield."}},
+{"@type":"Question","name":"Can percent yield be greater than 100%?","acceptedAnswer":{"@type":"Answer","text":"Not really, in the sense that you can't create more product than stoichiometry allows. If your calculation gives over 100%, the actual-yield mass is too high — usually because the product still contains impurities, leftover solvent, or water it hasn't been fully dried of. Drying and purifying the product to constant mass before weighing fixes this."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--warn:#e0a93b}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ @media(max-width:560px){.fields{grid-template-columns:1fr}}
+ .ratio{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;align-items:end}
+ .ratio .colon{padding-bottom:.7rem;color:var(--muted);font-weight:600}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.2rem;font-weight:700;color:var(--out)}
+ .out.warn-box{background:rgba(224,169,59,.12)}.out.warn-box .v{color:var(--warn);font-size:1.4rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Percent Yield Calculator</h1><p>Enter the limiting reactant, the mole ratio from your balanced equation, and the product's molar mass to get the theoretical yield — then your actual yield gives percent yield, every step shown.</p></header>
+<main>
+ <div class="card">
+  <label for="massR" style="margin-top:0">Limiting reactant</label>
+  <div class="fields">
+   <div><label for="massR">Mass of limiting reactant (g)</label><input id="massR" type="number" step="any" min="0" value="28"></div>
+   <div><label for="mmR">Its molar mass (g/mol)</label><input id="mmR" type="number" step="any" min="0" value="28.014"></div>
+  </div>
+  <label style="margin-top:1.25rem">Mole ratio (limiting reactant : product) from the balanced equation</label>
+  <div class="ratio">
+   <div><label for="rc">Reactant coefficient</label><input id="rc" type="number" step="1" min="1" value="1"></div>
+   <div class="colon">:</div>
+   <div><label for="pc">Product coefficient</label><input id="pc" type="number" step="1" min="1" value="2"></div>
+  </div>
+  <div class="fields" style="margin-top:1.25rem">
+   <div><label for="mmP">Product molar mass (g/mol)</label><input id="mmP" type="number" step="any" min="0" value="17.031"></div>
+   <div><label for="actual">Actual yield you obtained (g)</label><input id="actual" type="number" step="any" min="0" value="30"></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Theoretical yield</div><div class="v" id="theoOut" aria-live="polite">—</div></div>
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Percent yield</div><div class="v" id="pctOut" aria-live="polite">—</div></div>
+  <div class="out warn-box" id="warnBox" style="display:none"><div class="v" id="warnText"></div></div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How percent yield is built, step by step</h2>
+ <p class="note">Theoretical yield is the most product the reaction could possibly make, calculated purely from the limiting reactant and the balanced equation — it assumes every bit of limiting reactant converts perfectly. You get it in three moves: convert the limiting reactant's mass to moles (divide by its molar mass), convert those to moles of product using the mole ratio from the coefficients, then convert to grams of product (multiply by the product's molar mass). Percent yield is then just how much you actually recovered as a fraction of that maximum: actual ÷ theoretical × 100.</p>
+ <p class="note">Related tools: <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity calculator</a> · <a href="/chemical-equilibrium-calculator.html">Chemical equilibrium (Keq)</a> · <a href="/dilution-calculator.html">Dilution calculator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: the Haber process (the default)</h2>
+  <div class="work">Reaction: N2 + 3 H2 → 2 NH3   (N2 is the limiting reactant)
+
+Step 1 — moles of N2:
+  moles = mass / molar mass = 28 / 28.014 = 0.9995 mol
+
+Step 2 — moles of NH3 (mole ratio N2:NH3 = 1:2):
+  moles NH3 = 0.9995 × (2/1) = 1.999 mol
+
+Step 3 — theoretical yield of NH3:
+  mass = 1.999 × 17.031 = 34.04 g
+
+Step 4 — percent yield (actual = 30 g):
+  % yield = 30 / 34.04 × 100 = 88.1%</div>
+  <p class="note">That 88.1% is a realistic lab result — a bit of ammonia is always lost to the reverse reaction (the Haber process is a classic equilibrium that never goes fully to completion) and to handling. Change any input above and every step updates.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> 5.40 g of aluminum reacts with excess chlorine: 2 Al + 3 Cl₂ → 2 AlCl₃. If you recover 24.0 g of AlCl₃ (molar mass 133.34 g/mol, Al molar mass 26.98), what is the percent yield?</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Moles Al = 5.40 / 26.98 = 0.2001 mol
+Mole ratio Al:AlCl3 = 2:2 = 1:1, so moles AlCl3 = 0.2001 mol
+Theoretical = 0.2001 × 133.34 = 26.69 g
+% yield = 24.0 / 26.69 × 100 = 89.9%</div></details>
+  <p class="note"><b>2.</b> A student calculates a theoretical yield of 12.0 g but weighs 12.6 g of product and reports a 105% yield. What went wrong, and what should they do?</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">A real percent yield cannot exceed 100% — you can't make more product than
+stoichiometry allows. A value above 100% means the weighed product is heavier
+than pure product should be, almost always because it still contains impurities,
+leftover solvent, or water it wasn't fully dried of.
+
+Fix: dry the product to constant mass (and/or purify it, e.g. by recrystallization)
+before weighing, then recompute. The true yield will come out at or below 100%.</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Theoretical vs. actual yield?</b><br>Theoretical is the maximum possible from stoichiometry (assumes perfect conversion of the limiting reactant); actual is what you recover in the lab, always less due to side reactions, incomplete conversion, and losses in transfer/purification.</p>
+  <p class="note"><b>Why is it almost never 100%?</b><br>Competing side reactions, reactions that reach equilibrium before completing, and product lost on glassware or during filtration/purification all cut into the recovered amount.</p>
+  <p class="note"><b>Why the limiting reactant, not the other one?</b><br>The limiting reactant runs out first and caps how much product can form; excess of the other reactant just sits unreacted. Theoretical yield is always figured from the limiting reactant.</p>
+  <p class="note"><b>Where does the mole ratio come from?</b><br>Straight from the balanced equation's coefficients — for N₂ + 3H₂ → 2NH₃, N₂:NH₃ is 1:2. Balance the equation first, or the ratio (and the yield) will be wrong.</p>
+  <p class="note"><b>Can it be over 100%?</b><br>Not genuinely. Over 100% means your actual-yield mass is inflated by impurities or leftover solvent/water — dry and purify to constant mass, then recompute.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 31 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Percent yield calculator</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+function calc(){
+ const massR=+$("massR").value, mmR=+$("mmR").value, rc=Math.round(+$("rc").value), pc=Math.round(+$("pc").value), mmP=+$("mmP").value, actual=+$("actual").value;
+ const warnBox=$("warnBox"), warnText=$("warnText");
+ warnBox.style.display="none";
+ if(massR<=0||mmR<=0||mmP<=0||rc<1||pc<1){
+  $("theoOut").textContent="—";$("pctOut").textContent="—";$("work").textContent="Enter positive masses, molar masses, and whole-number coefficients (≥1).";
+  return;
+ }
+ const molR=massR/mmR;
+ const molP=molR*(pc/rc);
+ const theo=molP*mmP;
+ $("theoOut").textContent=theo.toFixed(2)+" g";
+ let w=`Step 1 — moles of limiting reactant:\n  moles = ${massR} / ${mmR} = ${molR.toFixed(4)} mol\n\n`;
+ w+=`Step 2 — moles of product (ratio ${rc}:${pc}):\n  moles product = ${molR.toFixed(4)} × (${pc}/${rc}) = ${molP.toFixed(4)} mol\n\n`;
+ w+=`Step 3 — theoretical yield:\n  mass = ${molP.toFixed(4)} × ${mmP} = ${theo.toFixed(2)} g\n`;
+ if(actual>0){
+  const pct=actual/theo*100;
+  $("pctOut").textContent=pct.toFixed(1)+"%";
+  w+=`\nStep 4 — percent yield (actual = ${actual} g):\n  % yield = ${actual} / ${theo.toFixed(2)} × 100 = ${pct.toFixed(1)}%`;
+  if(pct>100){
+   warnBox.style.display="block";
+   warnText.textContent="⚠ Over 100% — your product mass is higher than pure product should be. It's likely impure or not fully dried. Dry/purify to constant mass and reweigh.";
+  }
+ } else {
+  $("pctOut").textContent="—";
+  w+=`\nStep 4 — enter your actual yield above to get percent yield.`;
+ }
+ $("work").textContent=w;
+}
+["massR","mmR","rc","pc","mmP","actual"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
