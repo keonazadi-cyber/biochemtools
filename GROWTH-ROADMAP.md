@@ -1409,3 +1409,49 @@ pressure), several smaller one-line additions, and the full Priority 3
 list of strategic new topics (lipid metabolism, cell membrane
 transport, etc.) — all still in the published audit report, not yet
 started.
+
+### 2026-07-23 — physiology regulatory-mechanism depth shipped (commit ed4f65c)
+
+Closed the last Priority 2 item from the content audit, third batch
+shipped today. Started with osmotic-pressure-calculator.html since it
+was the audit's single lowest-scored page (6/10).
+
+osmotic-pressure-calculator.html: added the osmolarity-vs-tonicity
+distinction — reflection coefficient (σ), effective osmolarity
+(Σσ×i×M), urea as the textbook example of a solute that's iso-osmotic
+but not isotonic (σ≈0, freely permeant), and the analogous
+oncotic-pressure/Starling-forces case at the capillary wall (kept
+separate from the cell-membrane case on purpose — same σ principle,
+different membrane, didn't want to conflate them). Also added a real
+interactive element, not just prose: a "Urea (i = 1, freely permeant)"
+dropdown option that triggers a dynamic warning box explaining why the
+tonicity label it just computed is based on total osmolarity, not
+effective osmolarity. New FAQ entry synced to JSON-LD.
+
+cardiac-output-calculator.html: added preload/Frank-Starling,
+afterload, contractility, and ejection fraction (EF = SV/EDV, normal
+55-70%, low EF as the systolic-heart-failure marker), a new worked
+example (EDV=120/ESV=50 → SV=70mL, EF=58.3%) and a new practice
+problem (EDV=140/EF=35% → SV=49mL, heart-failure interpretation), both
+Python-verified. 2 new FAQ entries synced to JSON-LD.
+
+renal-clearance-calculator.html: added the afferent-vs-efferent
+arteriolar tone mechanism — afferent constriction drops RPF and GFR
+together, efferent constriction drops RPF but raises GFR (which is why
+filtration fraction specifically rises with efferent constriction),
+the angiotensin II / ACE-inhibitor-worsens-GFR mechanism that follows
+from it, and a caveat that PAH clearance only approximates RPF below
+the tubular transport maximum (Tm). 2 new FAQ entries synced to
+JSON-LD.
+
+All 3 files validated clean (HTML tag-balance + JSON-LD parse, 0
+errors each), live-tested in-browser with zero console errors, and
+each tool's own default calculation re-confirmed unaffected (e.g.
+renal clearance still shows 125.0 mL/min for the inulin default).
+
+This closes out the entire Priority 2 list from the content audit in
+3 days of same-day-shipped batches (kcat/Km → anaerobic bridge →
+physiology depth). Remaining from the audit: several smaller
+one-line additions (not yet itemized), and the full Priority 3 list of
+strategic new topics (lipid metabolism, cell membrane transport,
+etc.) — not started, would need explicit go-ahead to open that scope.
