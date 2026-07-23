@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glycolysis Pathway Explorer — 10 Steps, Free</title>
 <meta name="description" content="Step through all 10 reactions of glycolysis with a live ATP/NADH tally and the three regulated steps highlighted. Free, for biochem &amp; MCAT.">
-<meta name="keywords" content="glycolysis steps, glycolysis enzymes, glycolysis ATP NADH net, glycolysis regulated steps, glycolysis pathway diagram, hexokinase PFK pyruvate kinase">
+<meta name="keywords" content="glycolysis steps, glycolysis enzymes, glycolysis ATP NADH net, glycolysis regulated steps, glycolysis pathway diagram, hexokinase PFK pyruvate kinase, anaerobic glycolysis, lactate fermentation, does glycolysis need oxygen">
 <link rel="canonical" href="https://biochemtools.com/glycolysis-pathway-explorer.html">
 <meta property="og:title" content="Glycolysis Pathway Explorer — 10 Steps, Live Energy Tally">
 <meta property="og:description" content="Walk through glycolysis step by step with a running ATP/NADH count and the regulated steps highlighted. Free.">
@@ -20,7 +20,8 @@
 {"@type":"Question","name":"What is the net ATP and NADH yield of glycolysis?","acceptedAnswer":{"@type":"Answer","text":"Per glucose, glycolysis nets 2 ATP (4 produced minus 2 invested) and 2 NADH, ending in 2 pyruvate."}},
 {"@type":"Question","name":"What are the three regulated steps of glycolysis?","acceptedAnswer":{"@type":"Answer","text":"The irreversible, regulated steps are catalyzed by hexokinase (step 1), phosphofructokinase-1 (step 3, the committed step), and pyruvate kinase (step 10)."}},
 {"@type":"Question","name":"Why does glycolysis run the payoff phase twice per glucose?","acceptedAnswer":{"@type":"Answer","text":"Aldolase splits the single 6-carbon fructose-1,6-bisphosphate into two 3-carbon molecules (DHAP and GAP). Triose phosphate isomerase converts DHAP into a second GAP, so every glucose produces two GAP molecules — and everything from GAP onward (steps 6-10) happens twice per original glucose, doubling the ATP and NADH produced in that phase."}},
-{"@type":"Question","name":"Why is phosphofructokinase-1 (PFK-1) called the committed step?","acceptedAnswer":{"@type":"Answer","text":"PFK-1 catalyzes the first step that is both irreversible and unique to the glycolytic pathway (unlike hexokinase's product, which can be shunted into other pathways like glycogen synthesis or the pentose phosphate pathway). Once PFK-1 acts, the molecule is committed to continuing through glycolysis, which is why it's the pathway's main regulatory control point."}}]}
+{"@type":"Question","name":"Why is phosphofructokinase-1 (PFK-1) called the committed step?","acceptedAnswer":{"@type":"Answer","text":"PFK-1 catalyzes the first step that is both irreversible and unique to the glycolytic pathway (unlike hexokinase's product, which can be shunted into other pathways like glycogen synthesis or the pentose phosphate pathway). Once PFK-1 acts, the molecule is committed to continuing through glycolysis, which is why it's the pathway's main regulatory control point."}},
+{"@type":"Question","name":"Does glycolysis need oxygen?","acceptedAnswer":{"@type":"Answer","text":"No, every step of glycolysis itself runs identically with or without oxygen. Oxygen is what enables the steps that come after glycolysis: reoxidizing the 2 NADH via the electron transport chain. Without oxygen, cells regenerate NAD+ through fermentation (lactate or ethanol) instead, which lets glycolysis keep running, but the citric acid cycle and oxidative phosphorylation stay shut down, capping total ATP yield at glycolysis's own 2 ATP per glucose."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--invest:#e24b4a;--payoff:#5dcaa5;--reg:#e0a93b;--accent:#378add}
@@ -139,11 +140,20 @@ Final: ATP = +2, NADH = 2, Pyruvate = 2</div>
  </div>
 
  <div class="card">
+  <h2 style="margin-top:0">What happens to pyruvate and NADH next?</h2>
+  <p class="note">Glycolysis on its own doesn't finish oxidizing glucose — it hands off two things that both need somewhere to go: <b>2 pyruvate</b> and <b>2 NADH</b>. Which path they take depends entirely on whether oxygen is available.</p>
+  <p class="note"><b>With oxygen (aerobic):</b> pyruvate dehydrogenase converts each pyruvate into acetyl-CoA, which feeds the <a href="/citric-acid-cycle-explorer.html">citric acid cycle</a>. The 2 NADH from glycolysis get shuttled into the mitochondria and, along with everything the citric acid cycle produces, feed the electron transport chain — see the <a href="/atp-yield-calculator.html">ATP yield calculator</a> for the full accounting, typically 30-32 ATP per glucose.</p>
+  <p class="note"><b>Without oxygen (anaerobic): fermentation.</b> The electron transport chain needs O₂ as its final electron acceptor — no oxygen means NADH has no way to hand off its electrons there, so it just accumulates. That's a real problem: step 6 (GAPDH) requires NAD⁺ to run, and if every NAD⁺ gets tied up as NADH with nowhere to unload, glycolysis itself grinds to a halt. Fermentation exists purely to prevent that. In muscle and red blood cells, lactate dehydrogenase converts pyruvate + NADH directly to <b>lactate + NAD⁺</b>; in yeast, pyruvate is instead decarboxylated to acetaldehyde and then reduced to <b>ethanol + NAD⁺</b>. Either way, the point isn't the lactate or ethanol itself — it's regenerating NAD⁺ so glycolysis's payoff phase can keep running.</p>
+  <p class="note">The exam trap this sets up: <b>fermentation makes zero additional ATP.</b> All it does is let glycolysis's own net 2 ATP per glucose keep being produced. So the real difference between aerobic and anaerobic metabolism isn't "glycolysis needs oxygen" (it doesn't) — it's that without oxygen, you're stuck with glycolysis's 2 ATP per glucose instead of the ~30 you'd get once the citric acid cycle and electron transport chain are running too. (The lactate doesn't just disappear either — it's shuttled to the liver and turned back into glucose, the Cori cycle, though that's a separate topic from what happens here in the cell producing it.)</p>
+ </div>
+
+ <div class="card">
   <h2 style="margin-top:0">FAQ</h2>
   <p class="note"><b>What is the net ATP and NADH yield of glycolysis?</b><br>Per glucose: 2 ATP net (4 produced minus 2 invested), 2 NADH, and 2 pyruvate.</p>
   <p class="note"><b>What are the three regulated steps?</b><br>Hexokinase (step 1), phosphofructokinase-1 (step 3, the committed step), and pyruvate kinase (step 10) — all irreversible and regulated.</p>
   <p class="note"><b>Why does the payoff phase run twice per glucose?</b><br>Aldolase splits the 6-carbon fructose-1,6-bisphosphate into two 3-carbon molecules (DHAP and GAP); triose phosphate isomerase converts DHAP into a second GAP. So every glucose yields two GAP molecules, and steps 6-10 happen once for each — doubling the ATP and NADH from that phase.</p>
   <p class="note"><b>Why is PFK-1 called the committed step?</b><br>It's the first step that's both irreversible and unique to glycolysis — hexokinase's product can still be shunted into glycogen synthesis or the pentose phosphate pathway, but once PFK-1 acts, the molecule is committed to finishing glycolysis. That's why it's the pathway's main control point.</p>
+  <p class="note"><b>Does glycolysis need oxygen?</b><br>No — every step of glycolysis itself runs the same with or without O₂. What oxygen actually enables is what happens <i>after</i> glycolysis: reoxidizing the 2 NADH via the electron transport chain. Without O₂, cells regenerate NAD⁺ through fermentation instead (lactate or ethanol) so glycolysis can keep running — but the citric acid cycle and oxidative phosphorylation stay shut down, capping total yield at glycolysis's own 2 ATP per glucose.</p>
  </div>
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>
@@ -154,9 +164,17 @@ Final: ATP = +2, NADH = 2, Pyruvate = 2</div>
 5 × 2 NADH = 10 NADH
 5 × 2 pyruvate = 10 pyruvate</div></details>
   <p class="note"><b>2.</b> Step 4 splits fructose-1,6-bisphosphate into DHAP and GAP, but only GAP continues directly into step 6. What happens to the DHAP, and why does this matter for the ATP/NADH count?</p>
-  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Triose phosphate isomerase (step 5) converts DHAP into a second GAP. So both three-carbon halves of the original glucose end up as GAP, and both continue through steps 6-10.
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Triose phosphate isomerase (step 5) converts DHAP into a second GAP. So both three-carbon halves of the original glucose end up as GAP, and both continue through steps 6-10.
 
 That's exactly why the payoff phase (steps 6-10) is counted twice per glucose — it isn't that the pathway repeats, it's that there are genuinely two GAP molecules moving through it in parallel.</div></details>
+  <p class="note"><b>3.</b> A sprinting muscle cell runs out of oxygen faster than the electron transport chain can use it. Compare its total ATP yield per glucose to a resting cell with plenty of oxygen — and explain why fermentation itself doesn't close that gap.</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Oxygen-limited (anaerobic): only glycolysis runs to completion. NADH is reoxidized by lactate fermentation (regenerating NAD⁺, not ATP), so total yield = glycolysis's own net 2 ATP per glucose.
+
+Resting, oxygen-rich (aerobic): pyruvate → acetyl-CoA → citric acid cycle, and all the NADH/FADH₂ (from glycolysis and the cycle) feed the electron transport chain. Total yield ≈ 30-32 ATP per glucose (see the ATP yield calculator for the full breakdown).
+
+Ratio: roughly 15-16× more ATP per glucose with oxygen than without.
+
+Fermentation itself contributes zero ATP — lactate dehydrogenase doesn't phosphorylate anything. Its entire job is regenerating the NAD⁺ that step 6 (GAPDH) needs, so glycolysis's substrate-level phosphorylation can keep producing its normal 2 ATP per glucose instead of stalling out entirely.</div></details>
  </div>
  <div id="recommended-slot"></div>
 </main>
