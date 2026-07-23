@@ -38,7 +38,7 @@
  .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap;margin-top:1rem}
  h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
  footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
- .warn{color:#e24b4a;font-size:.85rem}
+ .inline-warn{color:#e24b4a;font-size:.85rem}
 
  .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
  .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
@@ -174,17 +174,17 @@ function parse(){
 }
 function fit(){
  const pts=parse();
- if(pts.length<2){$("parsed").innerHTML='<span class="warn">Enter at least 2 valid data points ([S] > 0, v > 0).</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
+ if(pts.length<2){$("parsed").innerHTML='<span class="inline-warn">Enter at least 2 valid data points ([S] > 0, v > 0).</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
  // Lineweaver-Burk linear regression: x=1/S, y=1/v
  const n=pts.length;let sx=0,sy=0,sxy=0,sx2=0;
  const X=pts.map(p=>1/p.s),Y=pts.map(p=>1/p.v);
  for(let i=0;i<n;i++){sx+=X[i];sy+=Y[i];sxy+=X[i]*Y[i];sx2+=X[i]*X[i];}
  const denom=n*sx2-sx*sx;
- if(Math.abs(denom)<1e-12){$("parsed").innerHTML='<span class="warn">All [S] values are identical — enter at least two different [S] values to fit a line.</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
+ if(Math.abs(denom)<1e-12){$("parsed").innerHTML='<span class="inline-warn">All [S] values are identical — enter at least two different [S] values to fit a line.</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
  $("parsed").textContent=pts.length+" points read.";
  const m=(n*sxy-sx*sy)/denom;
  const b=(sy-m*sx)/n;
- if(Math.abs(b)<1e-12){$("parsed").innerHTML+=' <span class="warn">This data doesn\'t show saturation (fits a straight line through the origin), so Vmax can\'t be determined.</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
+ if(Math.abs(b)<1e-12){$("parsed").innerHTML+=' <span class="inline-warn">This data doesn\'t show saturation (fits a straight line through the origin), so Vmax can\'t be determined.</span>';$("vmax").textContent="—";$("km").textContent="—";$("r2").textContent="—";$("work").textContent="";draw(pts,null);return;}
  const Vmax=1/b, Km=m*Vmax;
  // R^2 on the linear fit
  const ymean=sy/n;let ssr=0,sst=0;for(let i=0;i<n;i++){const yp=m*X[i]+b;ssr+=(Y[i]-yp)**2;sst+=(Y[i]-ymean)**2;}
