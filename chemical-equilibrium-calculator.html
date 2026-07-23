@@ -98,7 +98,7 @@
    <tbody>
     <tr><td>Initial</td><td id="iA">0.500</td><td>0</td><td>0</td></tr>
     <tr><td>Change</td><td>−x</td><td>+x</td><td>+x</td></tr>
-    <tr style="font-weight:600"><td>Equilibrium</td><td id="eA">—</td><td id="eB">—</td><td id="eC">—</td></tr>
+    <tr style="font-weight:600" aria-live="polite"><td>Equilibrium</td><td id="eA">—</td><td id="eB">—</td><td id="eC">—</td></tr>
    </tbody>
   </table>
   </div>
@@ -120,7 +120,7 @@
    <div><label>[C] now (M)</label><input id="Cq" type="number" step="any" value="0.150"></div>
    <div><label>Keq (same reaction)</label><input id="keq2" type="number" step="any" value="0.0400"></div>
   </div>
-  <div class="out shift"><div style="color:var(--muted);font-size:.85rem">Q vs Keq</div><div class="v" id="qOut">—</div></div>
+  <div class="out shift" aria-live="polite"><div style="color:var(--muted);font-size:.85rem">Q vs Keq</div><div class="v" id="qOut">—</div></div>
   <div class="work" id="qWork"></div>
  </div>
 
@@ -130,7 +130,7 @@
    <div><label>Keq</label><input id="keq3" type="number" step="any" value="5200"></div>
    <div><label>Temperature (K)</label><input id="T" type="number" step="any" value="298.15"></div>
   </div>
-  <div class="out"><div style="color:var(--muted);font-size:.85rem">ΔG°</div><div class="v" id="dgOut">—</div></div>
+  <div class="out" aria-live="polite"><div style="color:var(--muted);font-size:.85rem">ΔG°</div><div class="v" id="dgOut">—</div></div>
   <div class="work" id="dgWork"></div>
   <p class="note">Same relationship the <a href="/gibbs-free-energy-calculator.html">Gibbs free energy calculator</a> and <a href="/nernst-equation-calculator.html">Nernst equation calculator</a> both build on — ΔG° = −RT ln(K), just with K in place of the reaction-quotient term.</p>
   <p class="note"><b>Don't confuse ΔG° with ΔG.</b> ΔG° is the <i>standard-state</i> value (all species at 1 M) and is fixed for a reaction at a given temperature. The actual free-energy change under real conditions is ΔG = ΔG° + RT ln Q — equivalently ΔG = RT ln(Q/K). This is the bridge between the two cards above: when Q &lt; K, ln(Q/K) is negative, so ΔG &lt; 0 and the forward reaction is spontaneous right now — the same forward shift the Q-vs-K comparison predicts. A reaction with a positive ΔG° can still run forward if Q is kept low enough, which is exactly how coupled reactions in metabolism work.</p>

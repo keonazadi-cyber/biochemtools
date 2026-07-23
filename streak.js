@@ -224,11 +224,29 @@ function renderRecommended(){
   "<p style=\"color:var(--muted,#9aa0aa);font-size:.72rem;margin:.7rem 0 0\">As an affiliate, we may earn a commission on qualifying purchases through these links, at no extra cost to you. We only recommend resources we'd actually tell a friend to use.</p>";
 }
 
+// Expose single-select toggle-group state (the ".on"/".active" button) to
+// assistive tech via aria-pressed, syncing after each page's own click handler.
+// Covers .modes / .aa-grid / .frames groups on every page in one place.
+function isSelectedToggle(b){ return b.classList.contains("on") || b.classList.contains("active"); }
+function syncToggleA11y(){
+ var groups = document.querySelectorAll(".modes, .aa-grid, .frames");
+ for (var g = 0; g < groups.length; g++){
+  (function(group){
+   var btns = group.querySelectorAll("button");
+   if (!btns.length) return;
+   function resync(){ for (var i = 0; i < btns.length; i++){ btns[i].setAttribute("aria-pressed", isSelectedToggle(btns[i]) ? "true" : "false"); } }
+   resync();
+   for (var j = 0; j < btns.length; j++){ btns[j].addEventListener("click", function(){ setTimeout(resync, 0); }); }
+  })(groups[g]);
+ }
+}
+
 function renderAll(){
  renderStreakWidget();
  renderToolBadge();
  renderShareButton();
  renderRecommended();
+ syncToggleA11y();
  requestAnimationFrame(function(){ requestAnimationFrame(adjustStickyOffsets); });
  window.addEventListener("load", adjustStickyOffsets);
 }

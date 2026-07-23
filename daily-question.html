@@ -37,6 +37,7 @@
  .opt:hover:not(:disabled){border-color:var(--accent2)}
  .opt.correct{background:rgba(93,202,165,.15);border-color:var(--accent);color:var(--accent)}
  .opt.wrong{background:rgba(226,75,74,.15);border-color:var(--wrong);color:var(--wrong)}
+ .explain .v-yes{color:var(--accent)}.explain .v-no{color:var(--wrong)}
  .opt:disabled{cursor:default}
  .explain{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem;display:none}
  .already{text-align:center;color:var(--muted);padding:1rem 0}
@@ -98,7 +99,7 @@
   <div class="topic" id="topic">Loading…</div>
   <p class="qtext" id="qtext"></p>
   <div class="opts" id="opts"></div>
-  <div class="explain" id="explain"></div>
+  <div class="explain" id="explain" role="status" aria-live="polite"></div>
  </div>
  <div class="streakline" id="streakline"></div>
 
@@ -198,11 +199,13 @@ function pick(i){
  const correct = i === question.correct;
  document.querySelectorAll(".opt").forEach((b, bi) => {
   b.disabled = true;
-  if (bi === question.correct) b.classList.add("correct");
-  else if (bi === i) b.classList.add("wrong");
+  if (bi === question.correct){ b.classList.add("correct"); b.insertAdjacentHTML("beforeend",' <span aria-hidden="true">✓</span>'); }
+  else if (bi === i){ b.classList.add("wrong"); b.insertAdjacentHTML("beforeend",' <span aria-hidden="true">✗</span>'); }
  });
- document.getElementById("explain").style.display = "block";
- document.getElementById("explain").textContent = question.explain;
+ const ex = document.getElementById("explain");
+ ex.style.display = "block";
+ const verdict = correct ? '<b class="v-yes">Correct.</b> ' : '<b class="v-no">Incorrect — the correct answer is ' + question.choices[question.correct] + '.</b> ';
+ ex.innerHTML = verdict + question.explain;
  if (window.BCT && window.BCT.recordDailyQuestion) window.BCT.recordDailyQuestion(correct);
  setTimeout(renderStreakLine, 50);
 }

@@ -85,9 +85,9 @@
 <main>
  <div class="card">
   <div class="modes" id="curves">
-   <button data-c="myo" class="on"><span class="dot" style="background:var(--myo)"></span>Myoglobin</button>
-   <button data-c="adult"><span class="dot" style="background:var(--adult)"></span>Adult Hb</button>
-   <button data-c="fetal"><span class="dot" style="background:var(--fetal)"></span>Fetal Hb</button>
+   <button data-c="myo" class="on"><span class="dot" style="background:var(--myo)" aria-hidden="true"></span>Myoglobin</button>
+   <button data-c="adult"><span class="dot" style="background:var(--adult)" aria-hidden="true"></span>Adult Hb</button>
+   <button data-c="fetal"><span class="dot" style="background:var(--fetal)" aria-hidden="true"></span>Fetal Hb</button>
    <button data-c="all">Show all 3</button>
   </div>
   <canvas id="plot" width="700" height="320" role="img" aria-label="Percent oxygen saturation versus pO2 for myoglobin, adult hemoglobin, and fetal hemoglobin."></canvas>
@@ -176,6 +176,9 @@ function draw(){
  } else {
   $("satOut").textContent = toShow.map(k=>sat(po2,CURVES[k].p50,CURVES[k].n).toFixed(0)+"%").join(" / ");
  }
+ // keep the canvas aria-label in sync with what's actually shown
+ const shownNames = toShow.map(k=>CURVES[k].label).join(", ");
+ c.setAttribute("aria-label", `Oxygen dissociation curve for ${shownNames}. At pO2 ${po2} mmHg, ${toShow.map(k=>CURVES[k].label+" is "+sat(po2,CURVES[k].p50,CURVES[k].n).toFixed(0)+"% saturated").join("; ")}.`);
 }
 document.querySelectorAll("#curves button").forEach(b=>b.onclick=()=>{
  document.querySelectorAll("#curves button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
