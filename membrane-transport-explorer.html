@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membrane Transport Explorer — Diffusion vs. Active Transport, Free</title>
+<meta name="description" content="Free membrane transport explorer. Compare simple diffusion, facilitated diffusion, and primary/secondary active transport side by side, plus the Na+/K+-ATPase.">
+<meta name="keywords" content="facilitated diffusion vs active transport, primary vs secondary active transport, channel vs carrier protein, sodium potassium pump stoichiometry, membrane transport mcat, symport antiport">
+<link rel="canonical" href="https://biochemtools.com/membrane-transport-explorer.html">
+<meta property="og:title" content="Membrane Transport Explorer — Diffusion vs. Active Transport">
+<meta property="og:description" content="Every membrane transport mechanism compared side by side, plus a full Na+/K+-ATPase breakdown. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/membrane-transport-explorer.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/membrane-transport-explorer.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Physiology","item":"https://biochemtools.com/#physiology"},{"@type":"ListItem","position":3,"name":"Membrane Transport Explorer","item":"https://biochemtools.com/membrane-transport-explorer.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to classify a membrane transport mechanism","step":[
+{"@type":"HowToStep","name":"Check the direction","text":"Moving down a concentration gradient (high to low) is always passive. Moving against a gradient (low to high) always requires energy from somewhere."},
+{"@type":"HowToStep","name":"Check whether a protein is involved","text":"No protein and moving down-gradient means simple diffusion. A protein moving something down-gradient is facilitated diffusion."},
+{"@type":"HowToStep","name":"For facilitated diffusion, check saturation","text":"A channel (pore) doesn't saturate at physiological concentrations. A carrier does, since it undergoes a conformational cycle per molecule transported, giving it a finite maximum rate."},
+{"@type":"HowToStep","name":"For against-gradient movement, check the energy source","text":"Direct ATP hydrolysis is primary active transport. Using another ion's electrochemical gradient (itself built by a primary pump) is secondary active transport — symport if both solutes move the same direction, antiport if opposite."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What's the actual difference between a channel and a carrier?","acceptedAnswer":{"@type":"Answer","text":"A channel is a pore that, once open, lets solute flow through continuously — it doesn't change shape per molecule that passes, so its flux keeps rising as concentration rises, with no real saturation at physiological ranges. A carrier binds one (or a few) solute molecules, undergoes a conformational change to move them across, then resets — that per-molecule cycle time creates a maximum rate, so carriers show Michaelis-Menten-like saturation kinetics, the same shape as enzyme kinetics."}},
+{"@type":"Question","name":"Why is the Na+/K+-ATPase called electrogenic?","acceptedAnswer":{"@type":"Answer","text":"Each cycle moves 3 Na+ out and only 2 K+ in — 3 positive charges leave for every 2 that enter, a net movement of +1 charge out of the cell per cycle. That net charge movement directly contributes a small hyperpolarizing effect to the resting membrane potential, on top of its indirect effect through the ion gradients it sets up."}},
+{"@type":"Question","name":"If secondary active transport doesn't use ATP, where does its energy actually come from?","acceptedAnswer":{"@type":"Answer","text":"From the electrochemical gradient of the co-transported ion (almost always Na+), which was built using ATP by a primary active transporter (the Na+/K+-ATPase) somewhere else in the cell. The energy is one step removed from ATP, not absent — which is exactly what 'secondary' means here."}},
+{"@type":"Question","name":"Why doesn't simple diffusion show saturation kinetics?","acceptedAnswer":{"@type":"Answer","text":"There's no protein and no binding step to become rate-limiting. The solute just dissolves into and moves through the lipid bilayer directly, so flux stays proportional to the concentration gradient (Fick's law) with no upper plateau, unlike carrier-mediated transport."}},
+{"@type":"Question","name":"How does any of this connect to resting membrane potential?","acceptedAnswer":{"@type":"Answer","text":"The ion gradients that primary and secondary active transport maintain are exactly what the Nernst equation uses to calculate each ion's own equilibrium potential, and what the GHK equation combines to predict the cell's actual resting potential. Facilitated diffusion through leak channels (mostly K+) is what lets the membrane potential actually approach those equilibrium values at rest."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--pos:#e0a93b}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:760px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.55rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ .out{background:var(--bg);border-radius:10px;padding:1.25rem}
+ .out .name{font-size:1.25rem;font-weight:700;margin-bottom:.75rem}
+ .props{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+ @media(max-width:520px){.props{grid-template-columns:1fr}}
+ .prop{background:var(--card);border-radius:8px;padding:.65rem .8rem}
+ .prop .lbl{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+ .prop .val{font-weight:600;font-size:.95rem}
+ .out .note2{font-size:.9rem;color:var(--txt)}
+ table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Membrane Transport Explorer</h1><p>Compare every membrane transport mechanism side by side — energy source, whether it saturates, direction relative to the gradient — plus a full breakdown of the Na⁺/K⁺-ATPase.</p></header>
+<main>
+ <div class="card">
+  <div class="modes" id="modes">
+   <button data-m="simple" class="on">Simple diffusion</button>
+   <button data-m="channel">Facilitated (channel)</button>
+   <button data-m="carrier">Facilitated (carrier)</button>
+   <button data-m="primary">Primary active</button>
+   <button data-m="symport">Secondary (symport)</button>
+   <button data-m="antiport">Secondary (antiport)</button>
+  </div>
+  <div class="out">
+   <div class="name" id="mName"></div>
+   <div class="props">
+    <div class="prop"><div class="lbl">Energy source</div><div class="val" id="mEnergy"></div></div>
+    <div class="prop"><div class="lbl">Direction</div><div class="val" id="mDirection"></div></div>
+    <div class="prop"><div class="lbl">Protein required</div><div class="val" id="mProtein"></div></div>
+    <div class="prop"><div class="lbl">Saturable?</div><div class="val" id="mSaturable"></div></div>
+   </div>
+   <div class="note2" id="mExamples"></div>
+   <div class="note2" style="margin-top:.5rem;color:var(--muted)" id="mNote"></div>
+  </div>
+ </div>
+
+ <h2>How to classify one on sight</h2>
+ <p class="note">First ask direction: moving down a concentration gradient is always passive; moving against one always costs energy from somewhere. Then ask whether a protein is involved — no protein plus down-gradient is simple diffusion, a protein plus down-gradient is facilitated diffusion. For facilitated diffusion, a channel doesn't saturate (it's just a pore) while a carrier does (it cycles through a conformational change per molecule, exactly like an enzyme, which is why carrier kinetics look Michaelis-Menten-shaped). For against-gradient movement, direct ATP hydrolysis is primary active transport; spending another ion's gradient instead is secondary active transport — same direction is symport, opposite is antiport.</p>
+ <p class="note">Related tools: <a href="/osmotic-pressure-calculator.html">Osmotic pressure &amp; tonicity</a> · <a href="/nernst-equation-calculator.html">Nernst equation calculator</a> · <a href="/enzyme-kinetics-simulator.html">Enzyme kinetics simulator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">The Na⁺/K⁺-ATPase, in detail</h2>
+  <p class="note">The primary active transporter that sets up the ion gradients almost every secondary active transporter in the body spends. One cycle, one ATP:</p>
+  <div class="work">Per cycle: 3 Na+ pumped OUT, 2 K+ pumped IN, 1 ATP hydrolyzed
+
+Charge balance: 3 positive charges out − 2 positive charges in = net +1 charge leaves the cell
+
+This is why the pump is called "electrogenic" — it directly contributes
+a small hyperpolarizing effect to resting membrane potential, on top of
+the much larger indirect effect of the Na+ and K+ gradients it builds.</div>
+  <p class="note">Those gradients are what secondary active transporters like the Na⁺-glucose symporter (SGLT, intestine and kidney) and the Na⁺/Ca²⁺ exchanger (NCX, cardiac muscle) spend — no ATP touches them directly, but their energy traces back to this pump. And once you have the K⁺ gradient it maintains, you can plug it straight into the <a href="/nernst-equation-calculator.html">Nernst equation</a> to find K⁺'s own equilibrium potential.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>What's the actual difference between a channel and a carrier?</b><br>A channel is a pore — once open, solute flows through continuously with no per-molecule cycle, so flux keeps rising with concentration and doesn't really saturate. A carrier binds solute, changes shape to move it across, then resets — that cycle time creates a maximum rate, giving carriers Michaelis-Menten-shaped saturation kinetics.</p>
+  <p class="note"><b>Why is the Na⁺/K⁺-ATPase electrogenic?</b><br>3 Na+ out, 2 K+ in per cycle — a net +1 charge leaves the cell each time, directly contributing to the resting membrane potential.</p>
+  <p class="note"><b>If secondary active transport doesn't use ATP, where's the energy?</b><br>From the electrochemical gradient of the co-transported ion (usually Na+), which a primary pump already built using ATP. The energy is one step removed from ATP, not absent.</p>
+  <p class="note"><b>Why doesn't simple diffusion saturate?</b><br>No protein, no binding step to become rate-limiting — the solute just dissolves into and moves through the bilayer directly, so flux stays proportional to the gradient (Fick's law) with no plateau.</p>
+  <p class="note"><b>How does this connect to resting membrane potential?</b><br>The gradients active transport maintains are exactly what the Nernst equation uses to find each ion's equilibrium potential, and leak channels (facilitated diffusion) are what let the real membrane potential approach those values at rest.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 27 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</span></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+const MODES = {
+ simple:   ["Simple diffusion", "None (passive)", "Down gradient", "No", "No",
+            "Examples: O2, CO2, small nonpolar molecules, steroid hormones.",
+            "Crosses the lipid bilayer directly — rate is proportional to the concentration gradient with no upper plateau."],
+ channel:  ["Facilitated diffusion (channel)", "None (passive)", "Down gradient", "Yes (channel/pore)", "No (not physiologically)",
+            "Examples: K+ leak channels, aquaporins, other ion channels.",
+            "Gates open/closed but doesn't cycle through a conformational change per molecule, so flux keeps rising with concentration rather than saturating."],
+ carrier:  ["Facilitated diffusion (carrier)", "None (passive)", "Down gradient", "Yes (carrier)", "Yes (Michaelis-Menten-like)",
+            "Example: GLUT transporters (glucose uptake into cells).",
+            "Undergoes a conformational change per molecule transported — that cycle time creates a finite max rate, the same kinetic shape as an enzyme."],
+ primary:  ["Primary active transport", "ATP hydrolysis (direct)", "Against gradient", "Yes (pump)", "Yes",
+            "Examples: Na+/K+-ATPase, Ca2+-ATPase (SERCA), H+/K+-ATPase (gastric).",
+            "Directly couples ATP hydrolysis to a conformational change that moves solute uphill."],
+ symport:  ["Secondary active transport (symport)", "Electrochemical gradient (usually Na+)", "Both move same direction", "Yes (symporter)", "Yes",
+            "Example: Na+-glucose symporter (SGLT), intestine and kidney.",
+            "No direct ATP use — spends the Na+ gradient a primary pump already built, moving glucose against its own gradient in the process."],
+ antiport: ["Secondary active transport (antiport)", "Electrochemical gradient (usually Na+)", "Solutes move opposite directions", "Yes (antiporter/exchanger)", "Yes",
+            "Examples: Na+/Ca2+ exchanger (NCX), Na+/H+ exchanger (NHE).",
+            "Same energy source as symport, but the two solutes swap in opposite directions across the membrane."]
+};
+function render(m){
+ document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on", b.dataset.m===m));
+ const [name,energy,dir,protein,sat,examples,note] = MODES[m];
+ $("mName").textContent = name;
+ $("mEnergy").textContent = energy;
+ $("mDirection").textContent = dir;
+ $("mProtein").textContent = protein;
+ $("mSaturable").textContent = sat;
+ $("mExamples").textContent = examples;
+ $("mNote").textContent = note;
+}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>render(b.dataset.m));
+render("simple");
+</script>
+</body>
+</html>
