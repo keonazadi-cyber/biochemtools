@@ -204,8 +204,15 @@ function renderRecommended(){
  if (!el || (!AMAZON_LIVE && !GOLDSTANDARD_LIVE)) return;
  var links = "";
  if (AMAZON_LIVE){
-  var amazonHref = "https://www.amazon.com/s?k=mcat+prep+books&tag=" + encodeURIComponent(AMAZON_TAG);
-  links += "<a href=\"" + amazonHref + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem;margin-bottom:.4rem\">MCAT prep books on Amazon &rarr;</a>";
+  var mcatBooks = [
+   ["1506297544", "Kaplan MCAT Complete 7-Book Subject Review"],
+   ["0593518918", "Princeton Review MCAT Subject Review Box Set"],
+   ["1577541731", "AAMC Official Guide to the MCAT Exam"]
+  ];
+  for (var bi = 0; bi < mcatBooks.length; bi++){
+   var bookHref = "https://www.amazon.com/dp/" + mcatBooks[bi][0] + "?tag=" + encodeURIComponent(AMAZON_TAG);
+   links += "<a href=\"" + bookHref + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem;margin-bottom:.4rem\">" + mcatBooks[bi][1] + " &rarr;</a>";
+  }
  }
  if (GOLDSTANDARD_LIVE){
   links += "<a href=\"" + GOLDSTANDARD_URL + "\" target=\"_blank\" rel=\"noopener sponsored\" style=\"display:block;color:var(--accent,#5dcaa5);text-decoration:none;font-size:.88rem;margin-bottom:.4rem\">Gold Standard MCAT prep course &rarr;</a>";
