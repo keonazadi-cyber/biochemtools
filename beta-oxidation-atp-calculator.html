@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beta-Oxidation ATP Calculator — Fatty Acid ATP Yield, Free</title>
+<meta name="description" content="Free beta-oxidation ATP calculator. Enter any fatty acid chain length and get total ATP yield from β-oxidation + the TCA cycle, every step shown.">
+<meta name="keywords" content="beta oxidation atp calculator, fatty acid atp yield, palmitate atp yield, how many atp from fatty acid oxidation, beta oxidation cycles calculator, lipid metabolism calculator">
+<link rel="canonical" href="https://biochemtools.com/beta-oxidation-atp-calculator.html">
+<meta property="og:title" content="Beta-Oxidation ATP Calculator — Fatty Acid ATP Yield">
+<meta property="og:description" content="Total ATP from any fatty acid via β-oxidation and the TCA cycle, with every step shown. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/beta-oxidation-atp-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/beta-oxidation-atp-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Molecular biology","item":"https://biochemtools.com/#molecular-biology"},{"@type":"ListItem","position":3,"name":"Beta-Oxidation ATP Calculator","item":"https://biochemtools.com/beta-oxidation-atp-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate ATP yield from beta-oxidation of a fatty acid","step":[
+{"@type":"HowToStep","name":"Subtract the activation cost","text":"Activating a fatty acid (fatty acid + CoA + ATP → fatty acyl-CoA + AMP + PPi) costs the equivalent of 2 ATP, paid once regardless of chain length."},
+{"@type":"HowToStep","name":"Count beta-oxidation cycles","text":"A saturated fatty acid with n carbons runs (n/2 − 1) cycles of beta-oxidation, each producing 1 FADH2 and 1 NADH and releasing one acetyl-CoA, with the final cycle releasing 2 acetyl-CoA."},
+{"@type":"HowToStep","name":"Send every acetyl-CoA through the TCA cycle","text":"Total acetyl-CoA produced is n/2. Each one going through the TCA cycle yields 3 NADH, 1 FADH2, and 1 GTP."},
+{"@type":"HowToStep","name":"Apply the P/O ratio and sum","text":"Multiply total NADH and FADH2 by their ATP yield per molecule (modern: 2.5 and 1.5; classic: 3 and 2), add the substrate-level GTP, then subtract the 2 ATP activation cost."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why does activating a fatty acid cost 2 ATP instead of 1?","acceptedAnswer":{"@type":"Answer","text":"Activation converts ATP to AMP + PPi (pyrophosphate), not ATP to ADP + Pi. Going from ATP to AMP removes two high-energy phosphate bonds instead of one, and the released PPi is immediately hydrolyzed to 2 Pi to pull the reaction forward, making it effectively irreversible. That two-bond loss is why the cost is counted as 2 ATP equivalents, paid once per fatty acid regardless of how long it is."}},
+{"@type":"Question","name":"Why does fat yield so much more ATP than glucose?","acceptedAnswer":{"@type":"Answer","text":"Carbon-for-carbon, a fatty acid chain is far more reduced than glucose — it's almost all C-H and C-C bonds with very little oxygen already attached, so oxidizing it releases far more electrons (as NADH and FADH2) per carbon. Palmitate (16 carbons) yields about 106 ATP versus glucose's roughly 32 ATP from only 6 carbons — over 3x more ATP from fewer than 3x the carbons, which is also why fat stores about twice the energy per gram of dry weight."}},
+{"@type":"Question","name":"Does this change for unsaturated fatty acids?","acceptedAnswer":{"@type":"Answer","text":"Yes, slightly. Each cis double bond in the chain is handled by an isomerase or reductase step instead of the normal FAD-linked acyl-CoA dehydrogenase step, which means that cycle skips producing its FADH2. Net effect: each double bond costs about 1.5 fewer ATP (using modern P/O ratios) compared to the fully saturated chain of the same length. This calculator assumes a fully saturated chain."}},
+{"@type":"Question","name":"What about odd-chain fatty acids?","acceptedAnswer":{"@type":"Answer","text":"An odd-chain fatty acid runs out of pairs of carbons at the end and releases propionyl-CoA (3 carbons) instead of a final acetyl-CoA. Propionyl-CoA is converted, via a vitamin B12-dependent enzyme, to succinyl-CoA, which enters the TCA cycle directly rather than combining with oxaloacetate the way acetyl-CoA does — a different (and less-tested) entry point. This calculator assumes an even-chain fatty acid, the far more common exam case."}},
+{"@type":"Question","name":"When does the body make ketone bodies instead of running the full TCA cycle?","acceptedAnswer":{"@type":"Answer","text":"During prolonged fasting or low-carbohydrate states, oxaloacetate gets diverted into gluconeogenesis, leaving too little available to condense with the acetyl-CoA pouring in from beta-oxidation. That excess acetyl-CoA gets converted in the liver to ketone bodies (acetoacetate, beta-hydroxybutyrate) instead, which are exported for other tissues, including a starving brain, to use as fuel."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ input[type=number]{width:100%;max-width:180px;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Beta-Oxidation ATP Calculator</h1><p>Enter any fatty acid's chain length and get total ATP yield from β-oxidation and the TCA cycle — every cycle, every NADH and FADH₂, every step shown.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-top:0">Fatty acid (saturated, even-chain)</label>
+  <div class="modes" id="preset">
+   <button data-n="12">Lauric (C12)</button>
+   <button data-n="14">Myristic (C14)</button>
+   <button data-n="16" class="on">Palmitic (C16)</button>
+   <button data-n="18">Stearic (C18)</button>
+   <button data-n="20">Arachidic (C20)</button>
+  </div>
+  <label>Or enter carbon count directly</label>
+  <input id="n" type="number" step="2" min="4" max="26" value="16">
+  <label>P/O ratio convention</label>
+  <div class="modes" id="conv">
+   <button data-v="modern" class="on">Modern (2.5 / 1.5)</button>
+   <button data-v="classic">Classic (3.0 / 2.0)</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Total net ATP</div><div class="v" id="total" aria-live="polite">—</div></div>
+  <div style="overflow-x:auto">
+  <table>
+   <thead><tr><th>Stage</th><th>NADH</th><th>FADH₂</th><th>Substrate-level</th></tr></thead>
+   <tbody>
+    <tr><td>Activation</td><td>—</td><td>—</td><td>−2 ATP</td></tr>
+    <tr><td id="boxLabel">β-oxidation (7 cycles)</td><td id="boxNadh">7</td><td id="boxFadh2">7</td><td>—</td></tr>
+    <tr><td id="tcaLabel">TCA cycle (×8 acetyl-CoA)</td><td id="tcaNadh">24</td><td id="tcaFadh2">8</td><td id="tcaGtp">8 GTP</td></tr>
+    <tr style="font-weight:600"><td>Total</td><td id="totNadh">31</td><td id="totFadh2">15</td><td id="totSub">8 GTP − 2</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How the total is actually built</h2>
+ <p class="note">A fatty acid first has to be "activated" by attaching coenzyme A, which costs the equivalent of 2 ATP — paid once, no matter how long the chain is. From there, β-oxidation runs in cycles, each one lopping off a 2-carbon acetyl-CoA unit from the end of the chain and generating 1 FADH₂ and 1 NADH per cycle. An n-carbon saturated fatty acid needs (n/2 − 1) cycles to fully break down into n/2 acetyl-CoA units.</p>
+ <p class="note">Every one of those acetyl-CoA units then enters the TCA cycle exactly like the acetyl-CoA from glucose does, each one worth 3 NADH, 1 FADH₂, and 1 GTP. Add up all the NADH and FADH₂ from both stages, apply the P/O ratio, add the substrate-level GTP, subtract the 2-ATP activation cost, and that's the total.</p>
+ <p class="note">Related tools: <a href="/atp-yield-calculator.html">ATP yield calculator</a> · <a href="/citric-acid-cycle-explorer.html">Citric acid cycle explorer</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: palmitate (C16), modern P/O ratios (the default)</h2>
+  <div class="work">Activation: −2 ATP (paid once)
+
+β-oxidation cycles: 16/2 − 1 = 7 cycles
+  → 7 FADH2, 7 NADH
+Acetyl-CoA produced: 16/2 = 8
+
+TCA cycle, ×8 acetyl-CoA:
+  NADH:  8 × 3 = 24
+  FADH2: 8 × 1 = 8
+  GTP:   8 × 1 = 8 ATP (substrate-level)
+
+Total NADH  = 7 + 24 = 31  →  31 × 2.5 = 77.5 ATP
+Total FADH2 = 7 + 8  = 15  →  15 × 1.5 = 22.5 ATP
+Substrate-level GTP = 8 ATP
+
+Total = 77.5 + 22.5 + 8 − 2 (activation) = 106 ATP</div>
+  <p class="note">Compare that to glucose's roughly 32 ATP (modern ratios) from only 6 carbons — palmitate's 16 carbons deliver over 3x the ATP from less than 3x the carbons, since a fatty acid chain is far more reduced (more C-H bonds, more electrons to harvest) than glucose. Switch to classic P/O ratios and the same palmitate calculation gives 129 ATP instead.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> Using modern P/O ratios, find the total ATP yield of myristic acid (C14).</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Activation: −2 ATP
+
+β-oxidation cycles: 14/2 − 1 = 6 cycles → 6 FADH2, 6 NADH
+Acetyl-CoA: 14/2 = 7
+
+TCA cycle, ×7: NADH = 21, FADH2 = 7, GTP = 7 ATP
+
+Total NADH  = 6 + 21 = 27 → 27 × 2.5 = 67.5 ATP
+Total FADH2 = 6 + 7  = 13 → 13 × 1.5 = 19.5 ATP
+Substrate-level GTP = 7 ATP
+
+Total = 67.5 + 19.5 + 7 − 2 = 92 ATP</div></details>
+  <p class="note"><b>2.</b> Gram for gram, a fatty acid stores roughly twice the usable energy of glycogen. Using palmitate (C16, 106 ATP) vs. glucose (6 carbons, 32 ATP) as a rough proxy, explain why — in terms of ATP per carbon — this checks out.</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Palmitate: 106 ATP / 16 carbons = 6.6 ATP per carbon
+Glucose:    32 ATP / 6 carbons  = 5.3 ATP per carbon
+
+Palmitate yields about 24% more ATP per carbon than glucose. On top of that, a fatty acid chain is almost entirely nonpolar C-H and C-C bonds, so it packs far more mass into fuel storage with no water of hydration — unlike glycogen, which binds several grams of water per gram of glycogen. Both effects together are why fat stores roughly twice the ATP per gram of actual body mass.</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why does activating a fatty acid cost 2 ATP instead of 1?</b><br>Activation converts ATP to AMP + PPi, not ATP to ADP + Pi — going to AMP removes two high-energy phosphate bonds instead of one, and the released PPi is immediately hydrolyzed to pull the reaction forward. That two-bond loss is why it's counted as 2 ATP, paid once per fatty acid.</p>
+  <p class="note"><b>Why does fat yield so much more ATP than glucose?</b><br>A fatty acid chain is far more reduced (more C-H bonds, fewer oxygens already attached) than glucose, so oxidizing it releases more electrons per carbon. Palmitate (16 carbons) yields about 106 ATP versus glucose's roughly 32 ATP from only 6 carbons.</p>
+  <p class="note"><b>Does this change for unsaturated fatty acids?</b><br>Yes, slightly — each cis double bond skips the FADH2-producing step in that cycle, costing about 1.5 fewer ATP per double bond (modern ratios). This calculator assumes a fully saturated chain.</p>
+  <p class="note"><b>What about odd-chain fatty acids?</b><br>They end in propionyl-CoA instead of acetyl-CoA, which is converted (via a B12-dependent enzyme) to succinyl-CoA and enters the TCA cycle at a different point. This calculator assumes the far more common even-chain case.</p>
+  <p class="note"><b>When does the body make ketone bodies instead?</b><br>During fasting or low-carb states, oxaloacetate gets pulled into gluconeogenesis, leaving too little to condense with all the acetyl-CoA pouring in from β-oxidation. The liver converts the excess to ketone bodies instead, exported as fuel for other tissues.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 25 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+let conv="modern";
+const $=id=>document.getElementById(id);
+function calc(){
+ let n=Math.round(+$("n").value);
+ if(n%2!==0)n+=1;
+ if(n<4)n=4; if(n>26)n=26;
+ $("n").value=n;
+ document.querySelectorAll("#preset button").forEach(b=>b.classList.toggle("on", +b.dataset.n===n));
+
+ const nadhRatio = conv==="modern" ? 2.5 : 3.0;
+ const fadh2Ratio = conv==="modern" ? 1.5 : 2.0;
+
+ const cycles = n/2 - 1;
+ const acetylCoA = n/2;
+ const boxNadh = cycles, boxFadh2 = cycles;
+ const tcaNadh = 3*acetylCoA, tcaFadh2 = 1*acetylCoA, tcaGtp = 1*acetylCoA;
+ const totNadh = boxNadh + tcaNadh, totFadh2 = boxFadh2 + tcaFadh2;
+ const nadhAtp = totNadh*nadhRatio, fadh2Atp = totFadh2*fadh2Ratio;
+ const total = nadhAtp + fadh2Atp + tcaGtp - 2;
+
+ $("boxLabel").textContent = `β-oxidation (${cycles} cycle${cycles===1?"":"s"})`;
+ $("boxNadh").textContent = boxNadh; $("boxFadh2").textContent = boxFadh2;
+ $("tcaLabel").textContent = `TCA cycle (×${acetylCoA} acetyl-CoA)`;
+ $("tcaNadh").textContent = tcaNadh; $("tcaFadh2").textContent = tcaFadh2; $("tcaGtp").textContent = tcaGtp+" GTP";
+ $("totNadh").textContent = totNadh; $("totFadh2").textContent = totFadh2; $("totSub").textContent = tcaGtp+" GTP − 2";
+ $("total").textContent = (total%1===0?total:total.toFixed(1))+" ATP";
+
+ let w = `Activation: −2 ATP (paid once)\n\n`;
+ w += `β-oxidation cycles: ${n}/2 − 1 = ${cycles} cycles → ${boxFadh2} FADH2, ${boxNadh} NADH\n`;
+ w += `Acetyl-CoA produced: ${n}/2 = ${acetylCoA}\n\n`;
+ w += `TCA cycle, ×${acetylCoA}: NADH = ${tcaNadh}, FADH2 = ${tcaFadh2}, GTP = ${tcaGtp} ATP\n\n`;
+ w += `Total NADH  = ${boxNadh} + ${tcaNadh} = ${totNadh} → ${totNadh} × ${nadhRatio} = ${nadhAtp} ATP\n`;
+ w += `Total FADH2 = ${boxFadh2} + ${tcaFadh2} = ${totFadh2} → ${totFadh2} × ${fadh2Ratio} = ${fadh2Atp} ATP\n`;
+ w += `Substrate-level GTP = ${tcaGtp} ATP\n\n`;
+ w += `Total = ${nadhAtp} + ${fadh2Atp} + ${tcaGtp} − 2 = ${(total%1===0?total:total.toFixed(1))} ATP`;
+ $("work").textContent = w;
+}
+document.querySelectorAll("#preset button").forEach(b=>b.onclick=()=>{
+ $("n").value=b.dataset.n; calc();});
+document.querySelectorAll("#conv button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#conv button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ conv=b.dataset.v;calc();});
+$("n").addEventListener("input",calc);
+calc();
+</script>
+</body>
+</html>
