@@ -1373,3 +1373,39 @@ particular inhibitor's effect).
 
 Next up from the audit's Priority 2 list: the anaerobic-metabolism
 bridge across glycolysis → TCA cycle → ATP yield.
+
+### 2026-07-23 — anaerobic-metabolism bridge shipped (commit 69314c6)
+
+Closed the second Priority 2 item from yesterday's content audit, same
+day. The audit's exact words: "the biggest opportunity across all
+three [glycolysis/TCA/ATP-yield] pages is connecting them explicitly
+around fermentation/anaerobic metabolism... absent from all three
+despite being one of the most commonly tested integration points."
+
+glycolysis-pathway-explorer.html got the main addition (this is
+literally where the audit found the gap — "the page ends cleanly at
+pyruvate with no mention of what happens next"): a new section on the
+aerobic fork (pyruvate → acetyl-CoA → TCA cycle) versus the anaerobic
+fork (lactate/ethanol fermentation, purely to regenerate NAD⁺ so
+glycolysis's own GAPDH step keeps running), the exam-trap framing that
+fermentation itself makes zero additional ATP, a new FAQ entry, and a
+new practice problem comparing anaerobic vs. aerobic total yield.
+citric-acid-cycle-explorer.html and atp-yield-calculator.html each got
+a short, focused addition instead of repeating the full explanation —
+noting they're specifically the aerobic side of the fork, cross-linked
+back to glycolysis's new content.
+
+Verified the aerobic/anaerobic ATP ratio (~15-16×, depending on which
+of the site's own four accepted P/O-ratio conventions) in Python
+before writing it anywhere. All 3 files validated clean, new content
+confirmed present live in-browser, zero console errors, and the ATP
+yield calculator's own live tool re-checked unaffected.
+
+Both Priority 2 items from yesterday's audit (kcat/Km, this bridge)
+are now done in one day. Remaining: physiology pages' regulatory-
+mechanism depth (Frank-Starling for cardiac output, arteriolar
+autoregulation for renal clearance, effective osmolarity for osmotic
+pressure), several smaller one-line additions, and the full Priority 3
+list of strategic new topics (lipid metabolism, cell membrane
+transport, etc.) — all still in the published audit report, not yet
+started.
