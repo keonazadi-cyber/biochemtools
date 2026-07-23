@@ -88,7 +88,7 @@
   </div>
   <div class="fields">
    <div><label>Concentration (M)</label><input id="C" type="number" step="any" value="0.1"></div>
-   <div id="kwrap"><label id="klbl">pKa</label><input id="pk" type="number" step="any" value="4.76"></div>
+   <div id="kwrap"><label id="klbl">pKa</label><input id="pk" type="number" step="any" min="-20" max="50" value="4.76"></div>
   </div>
  </div>
  <div class="card">
@@ -168,9 +168,13 @@ function calc(){
  if(C<=0){$("ph").textContent="—";return;}
  if(mode==="sa"){H=C;work=`Strong acid — fully dissociates.\n[H⁺] = C = ${C} M\npH = −log[H⁺] = −log(${C}) = ${(-Math.log10(C)).toFixed(2)}`;}
  else if(mode==="sb"){OH=C;work=`Strong base — fully dissociates.\n[OH⁻] = C = ${C} M\npOH = −log(${C}) = ${(-Math.log10(C)).toFixed(2)}\npH = 14 − pOH = ${(14+Math.log10(C)).toFixed(2)}`;}
- else if(mode==="wa"){const Ka=Math.pow(10,-(+$("pk").value));H=(-Ka+Math.sqrt(Ka*Ka+4*Ka*C))/2;const approx=Math.sqrt(Ka*C);
+ else if(mode==="wa"){const Ka=Math.pow(10,-(+$("pk").value));
+  if(!isFinite(Ka)||Ka<=0){$("ph").textContent="—";$("work").textContent="Enter a pKa between about −20 and 50 — that value is too extreme to compute.";return;}
+  H=(-Ka+Math.sqrt(Ka*Ka+4*Ka*C))/2;const approx=Math.sqrt(Ka*C);
   work=`Weak acid.  Ka = 10^(−pKa) = 10^(−${+$("pk").value}) = ${Ka.toExponential(2)}\nKa = x²/(C − x),  solve for x = [H⁺]:\nx = (−Ka + √(Ka² + 4·Ka·C))/2 = ${H.toExponential(3)} M\n(approx √(Ka·C) = ${approx.toExponential(3)})\npH = −log[H⁺] = ${(-Math.log10(H)).toFixed(2)}`;}
- else {const Kb=Math.pow(10,-(+$("pk").value));OH=(-Kb+Math.sqrt(Kb*Kb+4*Kb*C))/2;
+ else {const Kb=Math.pow(10,-(+$("pk").value));
+  if(!isFinite(Kb)||Kb<=0){$("ph").textContent="—";$("work").textContent="Enter a pKb between about −20 and 50 — that value is too extreme to compute.";return;}
+  OH=(-Kb+Math.sqrt(Kb*Kb+4*Kb*C))/2;
   work=`Weak base.  Kb = 10^(−pKb) = ${Kb.toExponential(2)}\nKb = x²/(C − x),  solve for x = [OH⁻]:\nx = ${OH.toExponential(3)} M\npOH = −log[OH⁻] = ${(-Math.log10(OH)).toFixed(2)}\npH = 14 − pOH = ${(14+Math.log10(OH)).toFixed(2)}`;}
  if(H===undefined)H=1e-14/OH; if(OH===undefined)OH=1e-14/H;
  const pH=-Math.log10(H),pOH=-Math.log10(OH);

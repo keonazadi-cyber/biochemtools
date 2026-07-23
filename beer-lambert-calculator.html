@@ -162,7 +162,7 @@ function calc(){
 document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#modes button").forEach(x=>x.classList.remove("on"));b.classList.add("on");solveFor=b.dataset.s;calc();});
 ["A","e","b","c"].forEach(id=>$(id).addEventListener("input",calc));
 // converter
-function fromA(){const A=+$("cA").value;const T=Math.pow(10,-A)*100;$("cT").value=+T.toFixed(2);$("twork").textContent=`%T = 100 × 10^(−A) = 100 × 10^(−${A}) = ${T.toFixed(2)}%`;}
+function fromA(){const A=+$("cA").value;const T=Math.pow(10,-A)*100;if(!isFinite(T)){$("cT").value="";$("twork").textContent="That Absorbance value is too extreme to convert — try something closer to 0-3.";return;}$("cT").value=+T.toFixed(2);$("twork").textContent=`%T = 100 × 10^(−A) = 100 × 10^(−${A}) = ${T.toFixed(2)}%`;}
 function fromT(){const T=+$("cT").value;if(T<=0){$("cA").value="";$("twork").textContent="%Transmittance must be greater than 0%.";return;}const A=-Math.log10(T/100);$("cA").value=+A.toFixed(3);$("twork").textContent=`A = −log₁₀(T) = −log₁₀(${(T/100)}) = ${A.toFixed(3)}`;}
 $("cA").addEventListener("input",fromA);$("cT").addEventListener("input",fromT);
 calc();fromA();

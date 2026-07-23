@@ -213,6 +213,14 @@ function calc(){
   return;
  }
  const ratio=Math.pow(10,pH-pka);
+ if(!isFinite(ratio)){
+  $("pctA").textContent="—";$("pctHA").textContent="—";
+  $("fa").style.width="50%";$("fha").style.width="50%";
+  $("molA").textContent="—";$("molHA").textContent="—";
+  $("work").textContent="";
+  $("range").innerHTML=`<div class="warn">pH and pKa are too far apart to compute (that's a ${Math.abs(pH-pka).toFixed(0)}-unit gap) — try values within roughly ±30 of each other.</div>`;
+  return;
+ }
  const fA=ratio/(1+ratio), fHA=1/(1+ratio);
  const cA=fA*C, cHA=fHA*C, mA=cA*V, mHA=cHA*V;
  $("pctA").textContent=(fA*100).toFixed(0)+"%";
