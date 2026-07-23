@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amino Acid Catabolism Explorer — Ketogenic vs. Glucogenic, Free</title>
+<meta name="description" content="Free amino acid catabolism explorer. Look up ketogenic vs. glucogenic for all 20 amino acids plus a fully worked urea cycle, nitrogen atoms tracked.">
+<meta name="keywords" content="ketogenic vs glucogenic amino acids, urea cycle steps, amino acid catabolism, which amino acids are purely ketogenic, urea cycle nitrogen, transamination deamination">
+<link rel="canonical" href="https://biochemtools.com/amino-acid-catabolism-explorer.html">
+<meta property="og:title" content="Amino Acid Catabolism Explorer — Ketogenic vs. Glucogenic">
+<meta property="og:description" content="Ketogenic vs. glucogenic for all 20 amino acids, plus a fully worked urea cycle with nitrogen atoms tracked. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/amino-acid-catabolism-explorer.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/amino-acid-catabolism-explorer.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Biochemistry","item":"https://biochemtools.com/#biochemistry"},{"@type":"ListItem","position":3,"name":"Amino Acid Catabolism Explorer","item":"https://biochemtools.com/amino-acid-catabolism-explorer.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to classify an amino acid as ketogenic or glucogenic","step":[
+{"@type":"HowToStep","name":"Remove the amino group","text":"Transamination (or deamination) strips the alpha-amino group, usually onto alpha-ketoglutarate to form glutamate, leaving a carbon skeleton behind."},
+{"@type":"HowToStep","name":"Find where the carbon skeleton enters central metabolism","text":"Every amino acid's carbon skeleton is degraded down to one or more of: pyruvate, alpha-ketoglutarate, succinyl-CoA, fumarate, oxaloacetate (all glucogenic), or acetyl-CoA/acetoacetyl-CoA (ketogenic)."},
+{"@type":"HowToStep","name":"Classify it","text":"An entry point of pyruvate, alpha-KG, succinyl-CoA, fumarate, or OAA makes it glucogenic (can be converted to glucose via gluconeogenesis). An entry point of acetyl-CoA or acetoacetyl-CoA makes it ketogenic (can only be converted to fat or ketone bodies, since pyruvate dehydrogenase is irreversible). Some amino acids split into two skeletons and are both."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why can't acetyl-CoA be converted back to glucose?","acceptedAnswer":{"@type":"Answer","text":"Pyruvate dehydrogenase, which converts pyruvate to acetyl-CoA, is irreversible in humans — there is no enzyme that runs it backward. Once a carbon skeleton becomes acetyl-CoA, its carbons can still enter the TCA cycle and be fully oxidized for energy, or be used to build fatty acids or ketone bodies, but they can never net contribute to new glucose. That irreversibility is the entire reason the ketogenic/glucogenic distinction exists."}},
+{"@type":"Question","name":"Which amino acids are purely ketogenic?","acceptedAnswer":{"@type":"Answer","text":"Only leucine and lysine. Every other amino acid is either purely glucogenic or both, which is why 'leucine and lysine are the only purely ketogenic amino acids' is one of the most commonly tested one-liners in amino acid metabolism."}},
+{"@type":"Question","name":"Why does the urea cycle cost 4 ATP if only 2 nitrogen atoms go in?","acceptedAnswer":{"@type":"Answer","text":"Step 1 (carbamoyl phosphate synthetase I) directly spends 2 ATP. Step 3 (argininosuccinate synthetase) spends 1 ATP, but converts it to AMP + PPi rather than ADP + Pi — going to AMP removes two high-energy phosphate bonds instead of one, so that step is counted as 2 ATP-equivalents, the same accounting used for fatty acid activation in beta-oxidation. 2 + 2 = 4 ATP-equivalents per turn, disposing of 2 nitrogen atoms as 1 urea."}},
+{"@type":"Question","name":"Where does the fumarate from the urea cycle go?","acceptedAnswer":{"@type":"Answer","text":"It's released in the cytosol by argininosuccinase, and can be converted to malate and then oxaloacetate, connecting the urea cycle directly to the citric acid cycle — a link sometimes called the 'Krebs bicycle.' That oxaloacetate can be transaminated back to aspartate, which regenerates the nitrogen donor step 3 needs for the next turn of the urea cycle."}},
+{"@type":"Question","name":"Is threonine's classification settled?","acceptedAnswer":{"@type":"Answer","text":"Not entirely — most standard tables (including this one) list threonine as both glucogenic and ketogenic, since a minor pathway produces some acetyl-CoA. But its dominant pathway in humans is glucogenic (via propionyl-CoA to succinyl-CoA), and some textbooks simplify it to glucogenic-only. Check which convention your course uses if this comes up."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--accent:#5dcaa5;--gluco:#378add;--keto:#e0a93b;--both:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:760px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .aa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:.5rem;margin-bottom:1rem}
+ .aa-grid button{background:var(--bg);border:1px solid var(--line);color:var(--txt);padding:.55rem .3rem;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:600}
+ .aa-grid button.on{border-color:var(--accent);color:var(--accent);background:rgba(93,202,165,.1)}
+ .badge{display:inline-block;padding:.3rem .8rem;border-radius:99px;font-size:.85rem;font-weight:600;margin-bottom:.75rem}
+ .badge.gluco{background:rgba(55,138,221,.15);color:var(--gluco)}
+ .badge.keto{background:rgba(224,169,59,.15);color:var(--keto)}
+ .badge.both{background:rgba(127,119,221,.15);color:var(--both)}
+ .out{background:var(--bg);border-radius:10px;padding:1.25rem;margin:1rem 0}
+ .out .name{font-size:1.3rem;font-weight:700;margin-bottom:.4rem}
+ .out .entry{color:var(--muted);font-size:.95rem;margin-bottom:.4rem}
+ .out .detail{font-size:.9rem;color:var(--txt)}
+ table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .step{background:var(--bg);border-radius:10px;padding:1rem 1.25rem;margin:.75rem 0;border-left:3px solid var(--accent)}
+ .step .num{color:var(--accent);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+ .step .loc{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;float:right}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Amino Acid Catabolism Explorer</h1><p>Pick any amino acid to see whether it's ketogenic, glucogenic, or both, and exactly which central-metabolism intermediate its carbon skeleton feeds into — plus the full urea cycle for where the nitrogen goes.</p></header>
+<main>
+ <div class="card">
+  <div class="aa-grid" id="aaGrid"></div>
+  <div class="out">
+   <span class="badge" id="badge"></span>
+   <div class="name" id="aaName"></div>
+   <div class="entry" id="aaEntry"></div>
+   <div class="detail" id="aaDetail"></div>
+  </div>
+ </div>
+
+ <h2>How the classification actually works</h2>
+ <p class="note">Every amino acid's alpha-amino group is removed first (transamination, usually onto α-ketoglutarate to form glutamate), leaving a carbon skeleton. That skeleton is broken down until it becomes one of five glucogenic entry points — pyruvate, α-ketoglutarate, succinyl-CoA, fumarate, or oxaloacetate — all of which can run through gluconeogenesis to make new glucose, or one of two ketogenic entry points — acetyl-CoA or acetoacetyl-CoA — which cannot, since pyruvate dehydrogenase only runs one direction in humans. A handful of amino acids split into two separate skeletons that land in both categories.</p>
+ <p class="note">Related tools: <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a> · <a href="/citric-acid-cycle-explorer.html">Citric acid cycle explorer</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">The urea cycle: where the nitrogen goes</h2>
+  <p class="note">Free ammonia (NH₄⁺) is toxic, so the body packages 2 nitrogen atoms per cycle into urea, a neutral, water-soluble molecule the kidneys excrete. The cycle starts and ends in the mitochondrial matrix but crosses into the cytosol partway through.</p>
+  <div class="step"><span class="loc">Mitochondria</span><span class="num">Step 1 · CPS1</span><br>NH₄⁺ + HCO₃⁻ + 2 ATP → carbamoyl phosphate + 2 ADP + Pi<br><span class="note">First nitrogen atom enters here, from free ammonia. Costs 2 ATP.</span></div>
+  <div class="step"><span class="loc">Mitochondria</span><span class="num">Step 2 · OTC</span><br>Carbamoyl phosphate + ornithine → citrulline + Pi<br><span class="note">Citrulline is exported to the cytosol for the rest of the cycle.</span></div>
+  <div class="step"><span class="loc">Cytosol</span><span class="num">Step 3 · Argininosuccinate synthetase</span><br>Citrulline + aspartate + ATP → argininosuccinate + AMP + PPi<br><span class="note">Second nitrogen atom enters here, from aspartate. ATP → AMP + PPi costs 2 ATP-equivalents (same accounting as fatty acid activation).</span></div>
+  <div class="step"><span class="loc">Cytosol</span><span class="num">Step 4 · Argininosuccinase</span><br>Argininosuccinate → arginine + fumarate<br><span class="note">The released fumarate feeds directly into the citric acid cycle.</span></div>
+  <div class="step"><span class="loc">Cytosol</span><span class="num">Step 5 · Arginase</span><br>Arginine + H₂O → urea + ornithine<br><span class="note">Urea is excreted; ornithine returns to the mitochondria to start the next turn.</span></div>
+  <div class="work">Nitrogen in:  1 from NH4+ (step 1) + 1 from aspartate (step 3) = 2 N atoms
+ATP cost:     2 (step 1) + 2 (step 3, ATP→AMP+PPi) = 4 ATP-equivalents
+
+Net per turn: 2 nitrogen atoms disposed of as 1 urea, for 4 ATP</div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Full classification table (all 20)</h2>
+  <div style="overflow-x:auto">
+  <table>
+   <thead><tr><th>Amino acid</th><th>Class</th><th>Enters as</th></tr></thead>
+   <tbody id="fullTable"></tbody>
+  </table>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why can't acetyl-CoA be converted back to glucose?</b><br>Pyruvate dehydrogenase (pyruvate → acetyl-CoA) is irreversible in humans. Once a carbon skeleton becomes acetyl-CoA, it can be oxidized for energy or built into fat/ketone bodies, but it can never net contribute to new glucose — that irreversibility is the whole reason this classification exists.</p>
+  <p class="note"><b>Which amino acids are purely ketogenic?</b><br>Only leucine and lysine. Every other amino acid is purely glucogenic or both — one of the most commonly tested one-liners in amino acid metabolism.</p>
+  <p class="note"><b>Why does the urea cycle cost 4 ATP for only 2 nitrogen atoms?</b><br>Step 1 spends 2 ATP directly. Step 3 spends 1 ATP but converts it to AMP + PPi, counted as 2 ATP-equivalents since going to AMP removes two high-energy bonds instead of one. 2 + 2 = 4 ATP-equivalents per turn.</p>
+  <p class="note"><b>Where does the urea-cycle fumarate go?</b><br>It's released in the cytosol and can become malate then oxaloacetate, linking directly to the citric acid cycle — sometimes called the "Krebs bicycle." That oxaloacetate can transaminate back to aspartate, regenerating step 3's nitrogen donor.</p>
+  <p class="note"><b>Is threonine's classification settled?</b><br>Not entirely — most tables (including this one) list it as both, since a minor pathway makes some acetyl-CoA, but its dominant human pathway is glucogenic. Some textbooks simplify it to glucogenic-only; check your course's convention.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 26 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+const AA = [
+ ["Alanine","Ala","gluco","Pyruvate","Direct transamination to pyruvate."],
+ ["Arginine","Arg","gluco","α-Ketoglutarate","Degraded via glutamate; also a urea-cycle intermediate itself."],
+ ["Asparagine","Asn","gluco","Oxaloacetate","Hydrolyzed to aspartate first, then transaminated."],
+ ["Aspartate","Asp","gluco","Oxaloacetate","Direct transamination; also the urea cycle's step-3 nitrogen donor."],
+ ["Cysteine","Cys","gluco","Pyruvate","Sulfur removed, carbon skeleton becomes pyruvate."],
+ ["Glutamate","Glu","gluco","α-Ketoglutarate","Direct transamination — the central hub amino acid for nitrogen transfer."],
+ ["Glutamine","Gln","gluco","α-Ketoglutarate","Deamidated to glutamate first."],
+ ["Glycine","Gly","gluco","Pyruvate","Converted via serine."],
+ ["Histidine","His","gluco","α-Ketoglutarate","Degraded via glutamate."],
+ ["Isoleucine","Ile","both","Succinyl-CoA + Acetyl-CoA","Branched-chain amino acid; splits into two skeletons."],
+ ["Leucine","Leu","keto","Acetyl-CoA + Acetoacetate","Branched-chain; one of only two purely ketogenic amino acids."],
+ ["Lysine","Lys","keto","Acetoacetyl-CoA","The other purely ketogenic amino acid."],
+ ["Methionine","Met","gluco","Succinyl-CoA","Via the propionyl-CoA pathway, same route as odd-chain fatty acids."],
+ ["Phenylalanine","Phe","both","Fumarate + Acetoacetate","Degraded via tyrosine; splits into two skeletons."],
+ ["Proline","Pro","gluco","α-Ketoglutarate","Converted to glutamate first."],
+ ["Serine","Ser","gluco","Pyruvate","Direct conversion to pyruvate."],
+ ["Threonine","Thr","both","Pyruvate + Succinyl-CoA","Dominant pathway is glucogenic; a minor pathway is ketogenic (see FAQ)."],
+ ["Tryptophan","Trp","both","Alanine (→Pyruvate) + Acetoacetyl-CoA","The most complex catabolic pathway of the 20 amino acids."],
+ ["Tyrosine","Tyr","both","Fumarate + Acetoacetate","Same entry points as phenylalanine, its precursor."],
+ ["Valine","Val","gluco","Succinyl-CoA","Branched-chain amino acid; purely glucogenic unlike its BCAA siblings."]
+];
+const LABEL = {gluco:"Glucogenic", keto:"Ketogenic only", both:"Both glucogenic & ketogenic"};
+
+function renderGrid(){
+ $("aaGrid").innerHTML = AA.map((a,i)=>`<button data-i="${i}" class="${i===0?'on':''}">${a[1]}</button>`).join("");
+ document.querySelectorAll("#aaGrid button").forEach(b=>b.onclick=()=>select(+b.dataset.i));
+}
+function select(i){
+ document.querySelectorAll("#aaGrid button").forEach(b=>b.classList.toggle("on", +b.dataset.i===i));
+ const [name,abbr,cls,entry,detail] = AA[i];
+ $("badge").className = "badge "+cls;
+ $("badge").textContent = LABEL[cls];
+ $("aaName").textContent = `${name} (${abbr})`;
+ $("aaEntry").textContent = "Enters central metabolism as: "+entry;
+ $("aaDetail").textContent = detail;
+}
+function renderTable(){
+ $("fullTable").innerHTML = AA.map(a=>`<tr><td>${a[0]} (${a[1]})</td><td>${LABEL[a[2]]}</td><td>${a[3]}</td></tr>`).join("");
+}
+renderGrid(); select(0); renderTable();
+</script>
+</body>
+</html>
