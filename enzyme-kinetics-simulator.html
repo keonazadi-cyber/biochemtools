@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enzyme Kinetics Simulator — Michaelis-Menten, Free</title>
-<meta name="description" content="Free enzyme kinetics simulator. See Michaelis-Menten &amp; Lineweaver-Burk live, compare inhibition types, with full worked Km and Vmax steps.">
-<meta name="keywords" content="enzyme kinetics simulator, michaelis menten calculator, lineweaver burk plot, competitive vs noncompetitive inhibition, apparent Km Vmax, enzyme inhibition graph">
+<meta name="description" content="Free enzyme kinetics simulator. See Michaelis-Menten &amp; Lineweaver-Burk live, compare inhibition types, plus kcat and kcat/Km, with every step worked.">
+<meta name="keywords" content="enzyme kinetics simulator, michaelis menten calculator, lineweaver burk plot, competitive vs noncompetitive inhibition, apparent Km Vmax, enzyme inhibition graph, kcat calculator, kcat/Km specificity constant, catalytic efficiency">
 <link rel="canonical" href="https://biochemtools.com/enzyme-kinetics-simulator.html">
 <meta property="og:title" content="Enzyme Kinetics Simulator — Inhibition, Shown Step by Step">
 <meta property="og:description" content="Michaelis-Menten + Lineweaver-Burk live, with competitive/noncompetitive/uncompetitive inhibition and the full worked math. Free.">
@@ -26,7 +26,9 @@
 {"@type":"Question","name":"How can I tell inhibition type from a Lineweaver-Burk plot?","acceptedAnswer":{"@type":"Answer","text":"Look at where the inhibited and uninhibited lines meet. Same y-intercept (shared 1/Vmax) means competitive inhibition. Same x-intercept (shared −1/Km) means noncompetitive. Parallel lines with no intersection mean uncompetitive."}},
 {"@type":"Question","name":"Why doesn't competitive inhibition change Vmax?","acceptedAnswer":{"@type":"Answer","text":"Competitive inhibitors bind the same active site as the substrate, so they're in direct competition. At a high enough substrate concentration, substrate molecules outcompete the inhibitor for the active site often enough that the enzyme can still reach the same maximum velocity — it just takes more substrate to get there, which is why apparent Km rises while Vmax stays the same."}},
 {"@type":"Question","name":"Can real enzyme inhibition be a mix of these types?","acceptedAnswer":{"@type":"Answer","text":"Yes — competitive, uncompetitive, and pure noncompetitive are special cases of the more general 'mixed inhibition' model, where the inhibitor's affinity for the free enzyme and for the enzyme-substrate complex can differ (different Ki values for each). This tool's α and α′ factors are exactly that general framework; pure noncompetitive is just the case where both affinities happen to be equal."}},
-{"@type":"Question","name":"Why do some textbooks distinguish 'noncompetitive' from 'mixed' inhibition?","acceptedAnswer":{"@type":"Answer","text":"Strictly, 'pure noncompetitive' inhibition requires the inhibitor to bind the free enzyme and the enzyme-substrate complex with equal affinity (Ki = Ki′), giving unchanged Km and lowered Vmax. When the affinities differ, both Km and Vmax change, and some textbooks reserve the term 'mixed inhibition' for that more general case rather than calling it noncompetitive."}}]}
+{"@type":"Question","name":"Why do some textbooks distinguish 'noncompetitive' from 'mixed' inhibition?","acceptedAnswer":{"@type":"Answer","text":"Strictly, 'pure noncompetitive' inhibition requires the inhibitor to bind the free enzyme and the enzyme-substrate complex with equal affinity (Ki = Ki′), giving unchanged Km and lowered Vmax. When the affinities differ, both Km and Vmax change, and some textbooks reserve the term 'mixed inhibition' for that more general case rather than calling it noncompetitive."}},
+{"@type":"Question","name":"What is the difference between Km and kcat/Km?","acceptedAnswer":{"@type":"Answer","text":"Km alone only measures binding affinity - a low Km means tight binding, but says nothing about how fast the enzyme converts bound substrate into product. kcat/Km (the specificity constant) combines binding affinity (1/Km) with turnover speed (kcat) into one efficiency number, which is why it, not Km alone, is what you compare to judge which of two enzymes or substrates is genuinely better."}},
+{"@type":"Question","name":"Does competitive inhibition change kcat/Km?","acceptedAnswer":{"@type":"Answer","text":"Yes, even though Vmax (and therefore kcat) stays completely unchanged. Competitive inhibition raises the apparent Km, and since kcat is fixed while Km(app) rises, the apparent kcat/Km falls - the enzyme's intrinsic chemistry hasn't changed, but its practical efficiency at that inhibitor concentration has."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--base:#5dcaa5;--inh:#7f77dd;--accent:#378add}
@@ -159,11 +161,27 @@ Noncompetitive:      α=1+r=2, α′=1+r=2 → Km(app)=25.0   Vmax(app)=50.0    
  </div>
 
  <div class="card">
+  <h2 style="margin-top:0">Catalytic efficiency: k<sub>cat</sub> and k<sub>cat</sub>/K<sub>m</sub></h2>
+  <p class="note">V<sub>max</sub> and K<sub>m</sub> describe a whole reaction mixture — but V<sub>max</sub> depends on how much enzyme you happened to use. <b>k<sub>cat</sub></b> (the turnover number) fixes that: it's V<sub>max</sub> divided by total enzyme concentration, so it's a property of one enzyme molecule at saturation — how many substrate molecules it converts per second when it's never waiting around for more substrate to bind. <b>k<sub>cat</sub>/K<sub>m</sub></b> (the specificity constant) goes a step further, and it's usually the single number a question is really asking for when it says "how efficient is this enzyme": it combines how fast the enzyme is (k<sub>cat</sub>) with how well it grabs onto substrate in the first place (1/K<sub>m</sub>) into one value, and it's what actually matters at the low, non-saturating substrate concentrations most enzymes see inside a cell.</p>
+  <div class="row"><label style="min-width:7em">[E]<sub>total</sub> (nM)</label><input id="etot" type="range" min="0.5" max="50" step="0.5" value="10"><span class="v" id="etotv">10</span></div>
+  <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+   <div class="metric"><div class="lbl">k<sub>cat</sub> (turnover number)</div><div class="val" id="kcatv" aria-live="polite">—</div></div>
+   <div class="metric"><div class="lbl">k<sub>cat</sub>/K<sub>m</sub> (specificity constant)</div><div class="val" id="kcatkmv" style="font-size:1.2rem" aria-live="polite">—</div></div>
+  </div>
+  <div class="work" id="kcatwork"></div>
+  <p class="note">This uses whichever V<sub>max</sub> and K<sub>m</sub> are set above (the uninhibited, intrinsic values — not the apparent ones under inhibition, since k<sub>cat</sub>/K<sub>m</sub> describes the enzyme's own chemistry, not a particular inhibitor).</p>
+  <p class="note">Diffusion-limited ("catalytically perfect") enzymes — catalase and triose phosphate isomerase are the two classic textbook examples — reach k<sub>cat</sub>/K<sub>m</sub> around 10<sup>8</sup>–10<sup>9</sup> M<sup>−1</sup>s<sup>−1</sup>, the physical speed limit set by how fast enzyme and substrate can diffuse into contact with each other in solution. At that point, essentially every collision between enzyme and substrate leads to product — the enzyme's chemistry is no longer the bottleneck, diffusion is. Most real enzymes fall well short of this, in the 10<sup>4</sup>–10<sup>7</sup> M<sup>−1</sup>s<sup>−1</sup> range.</p>
+  <p class="note">One more use for k<sub>cat</sub>/K<sub>m</sub>: it's exactly how "which substrate does this enzyme prefer" gets answered quantitatively. Given two possible substrates, whichever one has the higher k<sub>cat</sub>/K<sub>m</sub> is the one the enzyme actually processes faster when both are present at low, competing concentrations — regardless of which one has the lower K<sub>m</sub> alone.</p>
+ </div>
+
+ <div class="card">
   <h2 style="margin-top:0">FAQ</h2>
   <p class="note"><b>How can I tell inhibition type from a Lineweaver-Burk plot?</b><br>Same y-intercept (shared 1/Vmax) = competitive. Same x-intercept (shared −1/Km) = noncompetitive. Parallel lines, no intersection = uncompetitive.</p>
   <p class="note"><b>Why doesn't competitive inhibition change Vmax?</b><br>The inhibitor competes for the same active site as substrate. At high enough [S], substrate outcompetes the inhibitor often enough to still reach the same maximum velocity — it just takes more substrate to get there, which is why apparent Km rises while Vmax stays put.</p>
   <p class="note"><b>Can real inhibition be a mix of these types?</b><br>Yes — competitive, uncompetitive, and pure noncompetitive are special cases of the general "mixed inhibition" model, where the inhibitor's affinity for free enzyme and for the ES complex can differ. This tool's α and α′ factors are exactly that framework; pure noncompetitive is just the case where both affinities are equal.</p>
   <p class="note"><b>Why do some textbooks separate "noncompetitive" from "mixed"?</b><br>Strictly, pure noncompetitive requires equal affinity for E and ES (Ki = Ki′). When the affinities differ, both Km and Vmax change, and some textbooks reserve "mixed inhibition" for that broader case instead of calling it noncompetitive.</p>
+  <p class="note"><b>What's the actual difference between Km and kcat/Km?</b><br>Km alone only tells you binding affinity — a low Km means tight binding, but says nothing about how fast the enzyme actually converts that bound substrate into product. kcat/Km folds both binding (1/Km) and turnover speed (kcat) into a single efficiency number, which is why it (not Km alone) is what you compare to judge which of two enzymes, or two substrates, is genuinely better.</p>
+  <p class="note"><b>Does competitive inhibition change kcat/Km?</b><br>Yes, even though it leaves Vmax (and therefore kcat) completely unchanged. Competitive inhibition raises the apparent Km, and since kcat stays fixed while Km(app) goes up, the apparent kcat/Km falls — the enzyme's intrinsic chemistry hasn't changed, but its practical efficiency at that inhibitor concentration has.</p>
  </div>
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>
@@ -176,13 +194,21 @@ Vmax(app) = Vmax/α′ = 100/3 = 33.33 µM/min
 
 v = Vmax·[S] / (α·Km + α′·[S]) = 100×50 / (1×25 + 3×50) = 5000/175 = 28.57 µM/min</div></details>
   <p class="note"><b>2.</b> Vmax = 100 µM/min, Km = 25 µM, [S] = 100 µM. With competitive inhibition at [I] = 50 µM and Ki = 25 µM, find v.</p>
-  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">r = [I]/Ki = 50/25 = 2
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">r = [I]/Ki = 50/25 = 2
 Competitive: α = 1 + r = 3, α′ = 1
 
 Km(app) = (α/α′)·Km = 3×25 = 75 µM
 Vmax(app) = Vmax/α′ = 100 µM/min (unchanged)
 
 v = Vmax·[S] / (α·Km + α′·[S]) = 100×100 / (3×25 + 1×100) = 10000/175 = 57.14 µM/min</div></details>
+  <p class="note"><b>3.</b> An enzyme has Vmax = 60 µM/min and Km = 15 µM in an assay with [E]total = 2 nM. Find kcat and kcat/Km, and say roughly how efficient this enzyme is compared to a diffusion-limited one.</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent2,#378add)">Show answer</summary><div class="work" style="margin-top:.5rem">[E]total = 2 nM = 0.002 µM
+
+kcat = Vmax / [E]total = 60 / 0.002 = 30,000 min⁻¹ = 500.0 s⁻¹
+
+Km = 15 µM = 1.5×10⁻⁵ M
+kcat/Km = 500.0 / 1.5×10⁻⁵ = 3.33×10⁷ M⁻¹s⁻¹</div></details>
+  <p class="note">3.33×10⁷ M⁻¹s⁻¹ is a genuinely fast, well-optimized enzyme — but it's still roughly 3–30× below the 10⁸–10⁹ diffusion limit, so there's still real room for tighter binding (lower Km) or faster turnover (higher kcat) before collisions with substrate become the bottleneck instead of the enzyme's own chemistry.</p>
  </div>
  <div id="recommended-slot"></div>
 </main>
@@ -263,10 +289,28 @@ function render(){
   noncompetitive:"Noncompetitive: the inhibitor binds away from the active site and lowers Vmax, while Km stays the same. In Lineweaver-Burk the lines share the same x-intercept.",
   uncompetitive:"Uncompetitive: the inhibitor binds only the ES complex, lowering both Km and Vmax by the same factor. In Lineweaver-Burk the lines are parallel."};
  $("teach").textContent=T[type];
+ renderKcat();
+}
+function computeKcat(){
+ const Vmax=+$("vmax").value, Km=+$("km").value, EtotNM=+$("etot").value;
+ const EtotUM=EtotNM/1000;
+ const kcatPerMin=Vmax/EtotUM, kcatPerS=kcatPerMin/60;
+ const KmM=Km*1e-6;
+ const kcatKm=kcatPerS/KmM;
+ return {Vmax,Km,EtotNM,EtotUM,kcatPerMin,kcatPerS,KmM,kcatKm};
+}
+function renderKcat(){
+ const d=computeKcat();
+ $("etotv").textContent=d.EtotNM;
+ $("kcatv").textContent=d.kcatPerS.toFixed(1)+" s⁻¹";
+ $("kcatkmv").textContent=d.kcatKm.toExponential(2)+" M⁻¹s⁻¹";
+ let w=`kcat  = Vmax / [E]total = ${d.Vmax} / ${d.EtotUM} = ${d.kcatPerMin.toFixed(0)} min⁻¹ = ${d.kcatPerS.toFixed(1)} s⁻¹\n`;
+ w+=`kcat/Km = ${d.kcatPerS.toFixed(1)} / ${d.KmM.toExponential(1)} = ${d.kcatKm.toExponential(2)} M⁻¹s⁻¹`;
+ $("kcatwork").textContent=w;
 }
 function setType(t){type=t;[...document.querySelectorAll("#types button")].forEach(b=>b.classList.toggle("on",b.dataset.t===t));$("inhrow").style.display=t==="none"?"none":"block";render();}
 document.querySelectorAll("#types button").forEach(b=>b.onclick=()=>setType(b.dataset.t));
-["vmax","km","s","i","ki"].forEach(id=>$(id).addEventListener("input",render));
+["vmax","km","s","i","ki","etot"].forEach(id=>$(id).addEventListener("input",render));
 $("share").onclick=()=>{const p=new URLSearchParams({vmax:$("vmax").value,km:$("km").value,s:$("s").value,type,i:$("i").value,ki:$("ki").value});const u=location.origin+location.pathname+"?"+p;navigator.clipboard&&navigator.clipboard.writeText(u);$("share").textContent="Link copied";setTimeout(()=>$("share").textContent="Copy shareable link",1500);};
 (function init(){const p=new URLSearchParams(location.search);if(p.get("vmax")){["vmax","km","s","i","ki"].forEach(id=>{if(p.get(id))$(id).value=p.get(id);});if(p.get("type"))type=p.get("type");}setType(type);})();
 </script>
