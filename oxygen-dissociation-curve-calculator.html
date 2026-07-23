@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxygen-Hemoglobin Dissociation Curve Calculator, Free</title>
+<meta name="description" content="Free O2-hemoglobin dissociation curve calculator. Compare myoglobin, adult, and fetal hemoglobin, find %saturation at any pO2, and see the Bohr effect.">
+<meta name="keywords" content="oxygen hemoglobin dissociation curve, bohr effect explained, p50 hemoglobin, myoglobin vs hemoglobin curve, fetal hemoglobin oxygen affinity, hill equation oxygen saturation">
+<link rel="canonical" href="https://biochemtools.com/oxygen-dissociation-curve-calculator.html">
+<meta property="og:title" content="Oxygen-Hemoglobin Dissociation Curve Calculator">
+<meta property="og:description" content="Compare myoglobin, adult, and fetal hemoglobin curves, find %saturation at any pO2, and see the Bohr effect. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/oxygen-dissociation-curve-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/oxygen-dissociation-curve-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Physiology","item":"https://biochemtools.com/#physiology"},{"@type":"ListItem","position":3,"name":"Oxygen-Hemoglobin Dissociation Curve Calculator","item":"https://biochemtools.com/oxygen-dissociation-curve-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to find percent oxygen saturation at a given pO2","step":[
+{"@type":"HowToStep","name":"Write the Hill equation","text":"%Saturation = 100 x pO2^n / (P50^n + pO2^n), where P50 is the pO2 at which the protein is 50% saturated and n is the Hill coefficient."},
+{"@type":"HowToStep","name":"Pick the right P50 and n","text":"Myoglobin: P50 ~2.8 mmHg, n=1 (no cooperativity, hyperbolic curve). Adult hemoglobin: P50 ~26.6 mmHg, n~2.8 (cooperative, sigmoidal). Fetal hemoglobin: P50 ~19 mmHg, n~2.8 (higher affinity than adult Hb)."},
+{"@type":"HowToStep","name":"Plug in pO2 and solve","text":"Substitute the tissue's actual partial pressure of oxygen to get percent saturation directly."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why is the hemoglobin curve sigmoidal but the myoglobin curve hyperbolic?","acceptedAnswer":{"@type":"Answer","text":"Hemoglobin has 4 subunits that bind O2 cooperatively — binding the first O2 shifts the whole tetramer toward a higher-affinity conformation, making the second, third, and fourth O2 bind more easily. That positive cooperativity produces the S-shaped (sigmoidal) curve, described by a Hill coefficient around 2.8. Myoglobin has only one subunit and one binding site, so there's no cooperativity to speak of (Hill coefficient of 1), giving a simple hyperbolic curve identical in shape to a non-cooperative enzyme's Michaelis-Menten curve."}},
+{"@type":"Question","name":"Why does fetal hemoglobin have a higher affinity than adult hemoglobin?","acceptedAnswer":{"@type":"Answer","text":"Fetal hemoglobin (HbF) binds 2,3-BPG more weakly than adult hemoglobin does, and since 2,3-BPG binding is what lowers hemoglobin's oxygen affinity, weaker 2,3-BPG binding means HbF holds onto oxygen more tightly (lower P50). This left-shifted curve relative to maternal (adult) hemoglobin is exactly what lets the fetus extract oxygen from the mother's blood at the placental interface, where both bloodstreams sit at the same pO2 but fetal Hb still ends up more saturated."}},
+{"@type":"Question","name":"What is the Bohr effect?","acceptedAnswer":{"@type":"Answer","text":"The observation that hemoglobin's oxygen affinity drops (curve shifts right, P50 increases) as CO2, H+ (lower pH), and temperature rise — exactly the conditions found in actively metabolizing tissue. That drop in affinity is what makes hemoglobin release more of its bound oxygen right where it's needed most. In the lungs, the opposite conditions (low CO2, higher pH, lower temperature) shift the curve back left, favoring oxygen loading instead."}},
+{"@type":"Question","name":"What causes the Bohr effect mechanistically?","acceptedAnswer":{"@type":"Answer","text":"CO2 and H+ both bind to hemoglobin at sites other than the heme iron (H+ protonates specific side chains, CO2 forms carbamino groups with N-terminal amines) and stabilize the lower-affinity conformation (the 'tense' or T state) over the higher-affinity 'relaxed' R state. 2,3-BPG does something similar, binding in the central cavity of the deoxygenated tetramer and stabilizing the T state as well."}},
+{"@type":"Question","name":"Why does carbon monoxide poisoning shift the curve left in addition to reducing total oxygen capacity?","acceptedAnswer":{"@type":"Answer","text":"CO binds the same heme iron site as O2, with roughly 200x higher affinity, so it directly reduces how many sites are available for O2 (lowering the maximum percent saturation achievable). But CO bound to one subunit also increases the remaining subunits' affinity for O2 through the same cooperative mechanism that makes normal O2 binding cooperative — left-shifting the curve for whatever O2-binding capacity remains, so what oxygen is loaded gets held onto more tightly and released less easily at the tissues, compounding the problem."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--myo:#e0a93b;--adult:#5dcaa5;--fetal:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:760px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;gap:.4rem}.modes button.on{border-color:var(--accent);color:var(--txt)}
+ .modes button .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+ canvas{width:100%;height:320px;background:var(--bg);border-radius:10px;margin-top:.5rem}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ input[type=range]{width:100%}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;text-align:center;margin:1rem 0}.out .v{font-size:1.9rem;font-weight:600;color:var(--out)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Oxygen-Hemoglobin Dissociation Curve</h1><p>Compare myoglobin, adult hemoglobin, and fetal hemoglobin curves, find exact %saturation at any pO₂, and see why the Bohr effect shifts the curve.</p></header>
+<main>
+ <div class="card">
+  <div class="modes" id="curves">
+   <button data-c="myo" class="on"><span class="dot" style="background:var(--myo)"></span>Myoglobin</button>
+   <button data-c="adult"><span class="dot" style="background:var(--adult)"></span>Adult Hb</button>
+   <button data-c="fetal"><span class="dot" style="background:var(--fetal)"></span>Fetal Hb</button>
+   <button data-c="all">Show all 3</button>
+  </div>
+  <canvas id="plot" width="700" height="320" role="img" aria-label="Percent oxygen saturation versus pO2 for myoglobin, adult hemoglobin, and fetal hemoglobin."></canvas>
+  <label>pO₂ (mmHg) — drag to read saturation off the curve</label>
+  <input id="po2" type="range" min="0" max="110" step="1" value="40">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">%Saturation at this pO₂</div><div class="v" id="satOut" aria-live="polite">—</div></div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>Why the shapes are different</h2>
+ <p class="note">Hemoglobin has 4 subunits that bind O₂ cooperatively — binding the first O₂ shifts the whole tetramer toward a higher-affinity shape, making the next ones bind more easily. That positive cooperativity is what produces the S-shaped (sigmoidal) curve (Hill coefficient n ≈ 2.8). Myoglobin has just one subunit, no cooperativity (n = 1), and a much higher affinity (P50 ≈ 2.8 mmHg vs. hemoglobin's ≈ 26.6 mmHg) — fitting its job as an oxygen-storage protein in muscle rather than a transport protein. Fetal hemoglobin sits between the two: still cooperative (n ≈ 2.8) but higher-affinity than adult Hb (P50 ≈ 19 mmHg), letting it pull oxygen across the placenta from maternal blood.</p>
+ <p class="note">Related tools: <a href="/cardiac-output-calculator.html">Cardiac output calculator</a> · <a href="/renal-clearance-calculator.html">Renal clearance calculator</a> · <a href="/enzyme-kinetics-simulator.html">Enzyme kinetics simulator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">The Bohr effect</h2>
+  <p class="note">Rising CO₂, falling pH (more H⁺), and rising temperature — exactly the conditions inside actively metabolizing tissue — all shift hemoglobin's curve to the right (lower affinity, higher P50), making it release more of its bound oxygen right where it's needed most. In the lungs, the opposite conditions (low CO₂, higher pH, cooler) shift the curve back left, favoring loading instead. 2,3-BPG (elevated at high altitude and in chronic hypoxia) works the same direction as the Bohr effect, also right-shifting the curve.</p>
+  <div class="work">Right shift (lower O2 affinity, easier unloading) — tissue conditions:
+  ↑ CO2   ↓ pH (more acidic)   ↑ Temperature   ↑ 2,3-BPG
+
+Left shift (higher O2 affinity, easier loading) — lung conditions:
+  ↓ CO2   ↑ pH (more alkaline)   ↓ Temperature   ↓ 2,3-BPG
+
+Mechanism: CO2, H+, and 2,3-BPG all bind hemoglobin away from the heme
+iron and stabilize the low-affinity "tense" (T) conformation over the
+high-affinity "relaxed" (R) conformation.</div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why is the hemoglobin curve sigmoidal but myoglobin's is hyperbolic?</b><br>Hemoglobin's 4 subunits bind O₂ cooperatively (n ≈ 2.8) — the S-shape. Myoglobin has one subunit and no cooperativity (n = 1), giving a simple hyperbolic curve, the same shape as a non-cooperative enzyme's Michaelis-Menten curve.</p>
+  <p class="note"><b>Why does fetal hemoglobin have higher affinity?</b><br>HbF binds 2,3-BPG more weakly than adult Hb, and weaker 2,3-BPG binding means higher O₂ affinity (lower P50). That left-shifted curve is exactly what lets the fetus pull oxygen from maternal blood at the placenta.</p>
+  <p class="note"><b>What is the Bohr effect?</b><br>Rising CO₂, falling pH, and rising temperature shift hemoglobin's curve right (lower affinity), releasing more oxygen exactly where metabolically active tissue needs it. The lungs' opposite conditions shift it back left for loading.</p>
+  <p class="note"><b>What causes the Bohr effect mechanistically?</b><br>CO₂ and H⁺ bind hemoglobin away from the heme iron and stabilize the low-affinity T conformation over the high-affinity R conformation. 2,3-BPG does the same, binding the deoxygenated tetramer's central cavity.</p>
+  <p class="note"><b>Why does CO poisoning shift the curve left too?</b><br>CO binds the same heme site as O2 with ~200x higher affinity, reducing available sites — but CO bound to one subunit also raises the remaining subunits' O2 affinity through the same cooperative mechanism, left-shifting the curve for whatever capacity remains, so what oxygen is loaded gets released less easily at the tissues.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 28 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+const CURVES = {
+ myo:   {p50:2.8,  n:1,   color:"#e0a93b", label:"Myoglobin"},
+ adult: {p50:26.6, n:2.8, color:"#5dcaa5", label:"Adult Hb"},
+ fetal: {p50:19,   n:2.8, color:"#7f77dd", label:"Fetal Hb"}
+};
+let mode="myo";
+function sat(pO2,p50,n){ return 100*Math.pow(pO2,n)/(Math.pow(p50,n)+Math.pow(pO2,n)); }
+function drawCurve(ctx,X,Y,p50,n,color){
+ ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.beginPath();let first=true;
+ for(let po2=0;po2<=110;po2+=0.5){
+  const s=sat(po2,p50,n);
+  const x=X(po2),y=Y(s);
+  if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);
+ }
+ ctx.stroke();
+}
+function draw(){
+ const c=$("plot"),ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
+ ctx.clearRect(0,0,W,H);
+ const X=po2=>P+(po2/110)*(W-P-14), Y=s=>H-P-(s/100)*(H-P-14);
+ ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";
+ for(let s=0;s<=80;s+=20){ctx.fillText(s,P-30,Y(s)+4);ctx.strokeStyle="#1c1f27";ctx.beginPath();ctx.moveTo(P,Y(s));ctx.lineTo(W-14,Y(s));ctx.stroke();}
+ ctx.fillText("%Sat",4,18);ctx.fillText("pO2 (mmHg) →",W-110,H-14);
+
+ const toShow = mode==="all" ? Object.keys(CURVES) : [mode];
+ toShow.forEach(k=>{ const cv=CURVES[k]; drawCurve(ctx,X,Y,cv.p50,cv.n,cv.color); });
+
+ // pO2 marker
+ const po2=+$("po2").value;
+ ctx.strokeStyle="#e8eaed";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(po2),10);ctx.lineTo(X(po2),H-P);ctx.stroke();ctx.setLineDash([]);
+
+ let w="";
+ toShow.forEach(k=>{
+  const cv=CURVES[k];
+  const s=sat(po2,cv.p50,cv.n);
+  w += `${cv.label} (P50=${cv.p50}, n=${cv.n}):  %Sat = 100×${po2}^${cv.n} / (${cv.p50}^${cv.n} + ${po2}^${cv.n}) = ${s.toFixed(1)}%\n`;
+ });
+ $("work").textContent=w.trim();
+ if(toShow.length===1){
+  $("satOut").textContent = sat(po2,CURVES[toShow[0]].p50,CURVES[toShow[0]].n).toFixed(1)+"%";
+ } else {
+  $("satOut").textContent = toShow.map(k=>sat(po2,CURVES[k].p50,CURVES[k].n).toFixed(0)+"%").join(" / ");
+ }
+}
+document.querySelectorAll("#curves button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#curves button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ mode=b.dataset.c; draw();
+});
+$("po2").addEventListener("input",draw);
+draw();
+</script>
+</body>
+</html>
