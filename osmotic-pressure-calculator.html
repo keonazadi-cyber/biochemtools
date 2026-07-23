@@ -80,9 +80,8 @@
 <main>
  <div class="card">
   <div class="fields">
-   <div><label>Molarity (M)</label><input id="M" type="number" step="any" value="0.15"></div>
-   <div><label>Solute (sets i)</label>
-    <select id="solute">
+   <div><label for="M">Molarity (M)</label> <input id="M" type="number" step="any" value="0.15"></div>
+   <div><label for="solute">Solute (sets i)</label> <select id="solute">
      <option value="2">NaCl (i = 2)</option>
      <option value="1">Glucose (i = 1)</option>
      <option value="3">CaCl₂ (i = 3)</option>
@@ -90,9 +89,9 @@
      <option value="1u">Urea (i = 1, freely permeant)</option>
      <option value="custom">Custom i…</option>
     </select></div>
-   <div><label>Temperature (°C)</label><input id="T" type="number" step="any" value="37"></div>
+   <div><label for="T">Temperature (°C)</label> <input id="T" type="number" step="any" value="37"></div>
   </div>
-  <div id="iwrap" style="display:none;margin-top:1rem"><label>Custom van't Hoff factor i</label><input id="icustom" type="number" step="any" value="1"></div>
+  <div id="iwrap" style="display:none;margin-top:1rem"><label for="icustom">Custom van't Hoff factor i</label> <input id="icustom" type="number" step="any" value="1"></div>
  </div>
  <div class="card">
   <div class="grid">

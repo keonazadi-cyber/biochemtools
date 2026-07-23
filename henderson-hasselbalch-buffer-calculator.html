@@ -106,7 +106,7 @@
 </header>
 <main>
  <div class="card">
-  <label>Common buffers (sets pKa) — or enter your own below</label>
+  <label for="pka">Common buffers (sets pKa) — or enter your own below</label>
   <div class="buffers" id="buffers">
    <button data-pka="4.76" data-n="Acetate">Acetate (4.76)</button>
    <button data-pka="7.21" data-n="Phosphate" class="on">Phosphate (7.21)</button>
@@ -117,10 +117,10 @@
    <button data-pka="6.0" data-n="Histidine">Histidine (6.0)</button>
   </div>
   <div class="fields">
-   <div><label>pKa</label><input id="pka" type="number" step="0.01" value="7.21"></div>
-   <div><label>Target pH</label><input id="ph" type="number" step="0.01" value="7.40"></div>
-   <div><label>Total buffer concentration (M)</label><input id="conc" type="number" step="0.01" value="0.10"></div>
-   <div><label>Final volume (mL)</label><input id="vol" type="number" step="1" value="500"></div>
+   <div><label for="pka">pKa</label> <input id="pka" type="number" step="0.01" value="7.21"></div>
+   <div><label for="ph">Target pH</label> <input id="ph" type="number" step="0.01" value="7.40"></div>
+   <div><label for="conc">Total buffer concentration (M)</label> <input id="conc" type="number" step="0.01" value="0.10"></div>
+   <div><label for="vol">Final volume (mL)</label> <input id="vol" type="number" step="1" value="500"></div>
   </div>
   <button class="share" id="share">Copy shareable link</button>
  </div>

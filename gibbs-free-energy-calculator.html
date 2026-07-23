@@ -106,21 +106,19 @@
   </div>
   <div id="hsFields">
    <div class="fields">
-    <div><label>ΔH — enthalpy (kJ/mol)</label><input id="dh" type="number" step="any" value="-40"></div>
-    <div><label>ΔS — entropy (J/mol·K)</label><input id="ds" type="number" step="any" value="-100"></div>
-    <div><label>Temperature</label><input id="temp" type="number" step="any" value="25"></div>
-    <div><label>Temp units</label>
-     <select id="tunit" style="width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px">
+    <div><label for="dh">ΔH — enthalpy (kJ/mol)</label> <input id="dh" type="number" step="any" value="-40"></div>
+    <div><label for="ds">ΔS — entropy (J/mol·K)</label> <input id="ds" type="number" step="any" value="-100"></div>
+    <div><label for="temp">Temperature</label> <input id="temp" type="number" step="any" value="25"></div>
+    <div><label for="tunit">Temp units</label> <select id="tunit" style="width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px">
       <option value="C">°C</option><option value="K">K</option></select></div>
    </div>
   </div>
   <div id="qFields" style="display:none">
    <div class="fields">
-    <div><label>ΔG°′ — standard free energy (kJ/mol)</label><input id="dg0" type="number" step="any" value="-30.5"></div>
-    <div><label>Q — reaction quotient</label><input id="q" type="number" step="any" value="0.01"></div>
-    <div><label>Temperature</label><input id="qtemp" type="number" step="any" value="37"></div>
-    <div><label>Temp units</label>
-     <select id="qtunit" style="width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px">
+    <div><label for="dg0">ΔG°′ — standard free energy (kJ/mol)</label> <input id="dg0" type="number" step="any" value="-30.5"></div>
+    <div><label for="q">Q — reaction quotient</label> <input id="q" type="number" step="any" value="0.01"></div>
+    <div><label for="qtemp">Temperature</label> <input id="qtemp" type="number" step="any" value="37"></div>
+    <div><label for="qtunit">Temp units</label> <select id="qtunit" style="width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px">
       <option value="C">°C</option><option value="K">K</option></select></div>
    </div>
   </div>

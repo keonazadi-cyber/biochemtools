@@ -107,10 +107,10 @@
 </header>
 <main>
  <div class="card">
-  <div class="row"><label style="min-width:7em">V<sub>max</sub> (µM/min)</label><input id="vmax" type="range" min="10" max="200" step="5" value="100"><span class="v" id="vmaxv">100</span></div>
-  <div class="row"><label style="min-width:7em">K<sub>m</sub> (µM)</label><input id="km" type="range" min="5" max="100" step="1" value="25"><span class="v" id="kmv">25</span></div>
-  <div class="row"><label style="min-width:7em">[S] (µM)</label><input id="s" type="range" min="1" max="200" step="1" value="25"><span class="v" id="sv">25</span></div>
-  <label>Inhibition type</label>
+  <div class="row"><label for="vmax" style="min-width:7em">V<sub>max</sub> (µM/min)</label> <input id="vmax" type="range" min="10" max="200" step="5" value="100"><span class="v" id="vmaxv">100</span></div>
+  <div class="row"><label for="km" style="min-width:7em">K<sub>m</sub> (µM)</label> <input id="km" type="range" min="5" max="100" step="1" value="25"><span class="v" id="kmv">25</span></div>
+  <div class="row"><label for="s" style="min-width:7em">[S] (µM)</label> <input id="s" type="range" min="1" max="200" step="1" value="25"><span class="v" id="sv">25</span></div>
+  <label for="i">Inhibition type</label>
   <div class="types" id="types">
    <button data-t="none" class="on">None</button>
    <button data-t="competitive">Competitive</button>
@@ -118,8 +118,8 @@
    <button data-t="uncompetitive">Uncompetitive</button>
   </div>
   <div id="inhrow" style="display:none">
-   <div class="row"><label style="min-width:7em">[I] (µM)</label><input id="i" type="range" min="0" max="200" step="5" value="50"><span class="v" id="iv">50</span></div>
-   <div class="row"><label style="min-width:7em">K<sub>i</sub> (µM)</label><input id="ki" type="range" min="5" max="200" step="5" value="50"><span class="v" id="kiv">50</span></div>
+   <div class="row"><label for="i" style="min-width:7em">[I] (µM)</label> <input id="i" type="range" min="0" max="200" step="5" value="50"><span class="v" id="iv">50</span></div>
+   <div class="row"><label for="ki" style="min-width:7em">K<sub>i</sub> (µM)</label> <input id="ki" type="range" min="5" max="200" step="5" value="50"><span class="v" id="kiv">50</span></div>
   </div>
   <button id="share" style="margin-top:.5rem;background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:8px;cursor:pointer">Copy shareable link</button>
  </div>
@@ -163,7 +163,7 @@ Noncompetitive:      α=1+r=2, α′=1+r=2 → Km(app)=25.0   Vmax(app)=50.0    
  <div class="card">
   <h2 style="margin-top:0">Catalytic efficiency: k<sub>cat</sub> and k<sub>cat</sub>/K<sub>m</sub></h2>
   <p class="note">V<sub>max</sub> and K<sub>m</sub> describe a whole reaction mixture — but V<sub>max</sub> depends on how much enzyme you happened to use. <b>k<sub>cat</sub></b> (the turnover number) fixes that: it's V<sub>max</sub> divided by total enzyme concentration, so it's a property of one enzyme molecule at saturation — how many substrate molecules it converts per second when it's never waiting around for more substrate to bind. <b>k<sub>cat</sub>/K<sub>m</sub></b> (the specificity constant) goes a step further, and it's usually the single number a question is really asking for when it says "how efficient is this enzyme": it combines how fast the enzyme is (k<sub>cat</sub>) with how well it grabs onto substrate in the first place (1/K<sub>m</sub>) into one value, and it's what actually matters at the low, non-saturating substrate concentrations most enzymes see inside a cell.</p>
-  <div class="row"><label style="min-width:7em">[E]<sub>total</sub> (nM)</label><input id="etot" type="range" min="0.5" max="50" step="0.5" value="10"><span class="v" id="etotv">10</span></div>
+  <div class="row"><label for="etot" style="min-width:7em">[E]<sub>total</sub> (nM)</label> <input id="etot" type="range" min="0.5" max="50" step="0.5" value="10"><span class="v" id="etotv">10</span></div>
   <div class="grid" style="grid-template-columns:repeat(2,1fr)">
    <div class="metric"><div class="lbl">k<sub>cat</sub> (turnover number)</div><div class="val" id="kcatv" aria-live="polite">—</div></div>
    <div class="metric"><div class="lbl">k<sub>cat</sub>/K<sub>m</sub> (specificity constant)</div><div class="val" id="kcatkmv" style="font-size:1.2rem" aria-live="polite">—</div></div>

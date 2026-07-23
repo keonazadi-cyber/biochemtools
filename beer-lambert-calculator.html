@@ -79,7 +79,7 @@
 <header><h1>Beer-Lambert Law Calculator</h1><p>Solve A = εbc for any variable, and convert between absorbance and %transmittance — with every step shown.</p></header>
 <main>
  <div class="card">
-  <label>Solve for</label>
+  <label for="A">Solve for</label>
   <div class="modes" id="modes">
    <button data-s="c" class="on">Concentration c</button>
    <button data-s="A">Absorbance A</button>
@@ -87,10 +87,10 @@
    <button data-s="b">Path length b</button>
   </div>
   <div class="fields">
-   <div><label>A — absorbance (unitless)</label><input id="A" type="number" step="any" value="0.6"></div>
-   <div><label>ε — molar absorptivity (M⁻¹cm⁻¹)</label><input id="e" type="number" step="any" value="6000"></div>
-   <div><label>b — path length (cm)</label><input id="b" type="number" step="any" value="1"></div>
-   <div><label>c — concentration (M)</label><input id="c" type="number" step="any" value=""></div>
+   <div><label for="A">A — absorbance (unitless)</label> <input id="A" type="number" step="any" value="0.6"></div>
+   <div><label for="e">ε — molar absorptivity (M⁻¹cm⁻¹)</label> <input id="e" type="number" step="any" value="6000"></div>
+   <div><label for="b">b — path length (cm)</label> <input id="b" type="number" step="any" value="1"></div>
+   <div><label for="c">c — concentration (M)</label> <input id="c" type="number" step="any" value=""></div>
   </div>
  </div>
  <div class="card">
@@ -98,10 +98,10 @@
   <div class="work" id="work"></div>
  </div>
  <div class="card">
-  <label style="margin-bottom:.6rem">Absorbance ↔ %Transmittance converter</label>
+  <label for="cA" style="margin-bottom:.6rem">Absorbance ↔ %Transmittance converter</label>
   <div class="conv">
-   <div style="flex:1"><label>Absorbance A</label><input id="cA" type="number" step="any" value="0.6"></div>
-   <div style="flex:1"><label>%Transmittance</label><input id="cT" type="number" step="any" value="25.1"></div>
+   <div style="flex:1"><label for="cA">Absorbance A</label> <input id="cA" type="number" step="any" value="0.6"></div>
+   <div style="flex:1"><label for="cT">%Transmittance</label> <input id="cT" type="number" step="any" value="25.1"></div>
   </div>
   <div class="work" id="twork" style="margin-top:1rem"></div>
  </div>

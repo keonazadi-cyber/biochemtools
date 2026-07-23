@@ -85,7 +85,7 @@
 <header><h1>Dilution Calculator (C₁V₁ = C₂V₂)</h1><p>Solve for any variable, and see exactly how much stock solution and solvent to mix — with every step shown.</p></header>
 <main>
  <div class="card">
-  <label>Solve for</label>
+  <label for="C1">Solve for</label>
   <div class="modes" id="modes">
    <button data-s="V1" class="on">Stock volume V₁</button>
    <button data-s="C2">Final conc. C₂</button>
@@ -93,10 +93,10 @@
    <button data-s="C1">Stock conc. C₁</button>
   </div>
   <div class="fields">
-   <div><label>C₁ — stock concentration (M)</label><input id="C1" type="number" step="any" value="10"></div>
-   <div><label>V₁ — stock volume (mL)</label><input id="V1" type="number" step="any" value=""></div>
-   <div><label>C₂ — final concentration (M)</label><input id="C2" type="number" step="any" value="1"></div>
-   <div><label>V₂ — final volume (mL)</label><input id="V2" type="number" step="any" value="100"></div>
+   <div><label for="C1">C₁ — stock concentration (M)</label> <input id="C1" type="number" step="any" value="10"></div>
+   <div><label for="V1">V₁ — stock volume (mL)</label> <input id="V1" type="number" step="any" value=""></div>
+   <div><label for="C2">C₂ — final concentration (M)</label> <input id="C2" type="number" step="any" value="1"></div>
+   <div><label for="V2">V₂ — final volume (mL)</label> <input id="V2" type="number" step="any" value="100"></div>
   </div>
  </div>
  <div class="card">

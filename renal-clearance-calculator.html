@@ -79,11 +79,11 @@
 <header><h1>Renal Clearance Calculator</h1><p>Find the clearance of any substance from urine and plasma concentrations, plus filtration fraction from GFR and RPF — every step shown.</p></header>
 <main>
  <div class="card">
-  <label style="margin-bottom:.6rem">Clearance: Cx = (Ux × V) / Px</label>
+  <label for="ux" style="margin-bottom:.6rem">Clearance: Cx = (Ux × V) / Px</label>
   <div class="fields">
-   <div><label>Ux — urine concentration (mg/mL)</label><input id="ux" type="number" step="any" value="125"></div>
-   <div><label>V — urine flow rate (mL/min)</label><input id="v" type="number" step="any" value="1"></div>
-   <div><label>Px — plasma concentration (mg/mL)</label><input id="px" type="number" step="any" value="1"></div>
+   <div><label for="ux">Ux — urine concentration (mg/mL)</label> <input id="ux" type="number" step="any" value="125"></div>
+   <div><label for="v">V — urine flow rate (mL/min)</label> <input id="v" type="number" step="any" value="1"></div>
+   <div><label for="px">Px — plasma concentration (mg/mL)</label> <input id="px" type="number" step="any" value="1"></div>
   </div>
  </div>
  <div class="card">
@@ -91,10 +91,10 @@
   <div class="work" id="cxwork"></div>
  </div>
  <div class="card">
-  <label style="margin-bottom:.6rem">Filtration fraction: FF = GFR / RPF</label>
+  <label for="gfr" style="margin-bottom:.6rem">Filtration fraction: FF = GFR / RPF</label>
   <div class="fields" style="grid-template-columns:1fr 1fr">
-   <div><label>GFR (mL/min, e.g. from inulin)</label><input id="gfr" type="number" step="any" value="125"></div>
-   <div><label>RPF (mL/min, e.g. from PAH)</label><input id="rpf" type="number" step="any" value="625"></div>
+   <div><label for="gfr">GFR (mL/min, e.g. from inulin)</label> <input id="gfr" type="number" step="any" value="125"></div>
+   <div><label for="rpf">RPF (mL/min, e.g. from PAH)</label> <input id="rpf" type="number" step="any" value="625"></div>
   </div>
   <div class="work" id="ffwork" style="margin-top:1rem"></div>
  </div>
