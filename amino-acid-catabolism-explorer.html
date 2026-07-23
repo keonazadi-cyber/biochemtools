@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amino Acid Catabolism Explorer — Ketogenic vs. Glucogenic, Free</title>
+<title>Amino Acid Catabolism — Ketogenic vs. Glucogenic, Free</title>
 <meta name="description" content="Free amino acid catabolism explorer. Look up ketogenic vs. glucogenic for all 20 amino acids plus a fully worked urea cycle, nitrogen atoms tracked.">
 <meta name="keywords" content="ketogenic vs glucogenic amino acids, urea cycle steps, amino acid catabolism, which amino acids are purely ketogenic, urea cycle nitrogen, transamination deamination">
 <link rel="canonical" href="https://biochemtools.com/amino-acid-catabolism-explorer.html">
@@ -109,8 +109,8 @@
 
  <div class="card">
   <h2 style="margin-top:0">The urea cycle: where the nitrogen goes</h2>
-  <p class="note">Free ammonia (NH₄⁺) is toxic, so the body packages 2 nitrogen atoms per cycle into urea, a neutral, water-soluble molecule the kidneys excrete. The cycle starts and ends in the mitochondrial matrix but crosses into the cytosol partway through.</p>
-  <div class="step"><span class="loc">Mitochondria</span><span class="num">Step 1 · CPS1</span><br>NH₄⁺ + HCO₃⁻ + 2 ATP → carbamoyl phosphate + 2 ADP + Pi<br><span class="note">First nitrogen atom enters here, from free ammonia. Costs 2 ATP.</span></div>
+  <p class="note">Free ammonia (as NH₃, largely protonated to ammonium NH₄⁺ at body pH) is toxic, so the body packages 2 nitrogen atoms per cycle into urea, a neutral, water-soluble molecule the kidneys excrete. The cycle starts in the mitochondrial matrix (steps 1–2), moves to the cytosol (steps 3–5), and ornithine shuttles back into the mitochondrion to begin the next turn.</p>
+  <div class="step"><span class="loc">Mitochondria</span><span class="num">Step 1 · CPS1</span><br>NH₃ + HCO₃⁻ + 2 ATP → carbamoyl phosphate + 2 ADP + Pi<br><span class="note">First nitrogen atom enters here, from free ammonia. Costs 2 ATP. This is the committed, rate-limiting step, and CPS1 requires <b>N-acetylglutamate (NAG)</b> as an obligate allosteric activator — no NAG, no urea cycle.</span></div>
   <div class="step"><span class="loc">Mitochondria</span><span class="num">Step 2 · OTC</span><br>Carbamoyl phosphate + ornithine → citrulline + Pi<br><span class="note">Citrulline is exported to the cytosol for the rest of the cycle.</span></div>
   <div class="step"><span class="loc">Cytosol</span><span class="num">Step 3 · Argininosuccinate synthetase</span><br>Citrulline + aspartate + ATP → argininosuccinate + AMP + PPi<br><span class="note">Second nitrogen atom enters here, from aspartate. ATP → AMP + PPi costs 2 ATP-equivalents (same accounting as fatty acid activation).</span></div>
   <div class="step"><span class="loc">Cytosol</span><span class="num">Step 4 · Argininosuccinase</span><br>Argininosuccinate → arginine + fumarate<br><span class="note">The released fumarate feeds directly into the citric acid cycle.</span></div>
@@ -119,6 +119,7 @@
 ATP cost:     2 (step 1) + 2 (step 3, ATP→AMP+PPi) = 4 ATP-equivalents
 
 Net per turn: 2 nitrogen atoms disposed of as 1 urea, for 4 ATP</div>
+  <p class="note"><b>Regulation:</b> N-acetylglutamate (NAG) is made from glutamate + acetyl-CoA whenever amino acid breakdown is high — so the cycle automatically speeds up exactly when there's a lot of nitrogen to dispose of. This is why the cycle is regulated at CPS1: NAG is the sensor. (A genetic loss of the NAG-making enzyme, NAGS deficiency, causes hyperammonemia even though every urea-cycle enzyme itself is intact — a classic board-exam scenario.)</p>
  </div>
 
  <div class="card">
@@ -164,7 +165,7 @@ const AA = [
  ["Phenylalanine","Phe","both","Fumarate + Acetoacetate","Degraded via tyrosine; splits into two skeletons."],
  ["Proline","Pro","gluco","α-Ketoglutarate","Converted to glutamate first."],
  ["Serine","Ser","gluco","Pyruvate","Direct conversion to pyruvate."],
- ["Threonine","Thr","both","Pyruvate + Succinyl-CoA","Dominant pathway is glucogenic; a minor pathway is ketogenic (see FAQ)."],
+ ["Threonine","Thr","both","Succinyl-CoA + Acetyl-CoA","Glucogenic via succinyl-CoA (the dominant human route, through propionyl-CoA); ketogenic via the minor acetyl-CoA branch. See FAQ — some texts simplify it to glucogenic-only."],
  ["Tryptophan","Trp","both","Alanine (→Pyruvate) + Acetoacetyl-CoA","The most complex catabolic pathway of the 20 amino acids."],
  ["Tyrosine","Tyr","both","Fumarate + Acetoacetate","Same entry points as phenylalanine, its precursor."],
  ["Valine","Val","gluco","Succinyl-CoA","Branched-chain amino acid; purely glucogenic unlike its BCAA siblings."]

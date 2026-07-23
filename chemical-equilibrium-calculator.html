@@ -133,6 +133,7 @@
   <div class="out"><div style="color:var(--muted);font-size:.85rem">ΔG°</div><div class="v" id="dgOut">—</div></div>
   <div class="work" id="dgWork"></div>
   <p class="note">Same relationship the <a href="/gibbs-free-energy-calculator.html">Gibbs free energy calculator</a> and <a href="/nernst-equation-calculator.html">Nernst equation calculator</a> both build on — ΔG° = −RT ln(K), just with K in place of the reaction-quotient term.</p>
+  <p class="note"><b>Don't confuse ΔG° with ΔG.</b> ΔG° is the <i>standard-state</i> value (all species at 1 M) and is fixed for a reaction at a given temperature. The actual free-energy change under real conditions is ΔG = ΔG° + RT ln Q — equivalently ΔG = RT ln(Q/K). This is the bridge between the two cards above: when Q &lt; K, ln(Q/K) is negative, so ΔG &lt; 0 and the forward reaction is spontaneous right now — the same forward shift the Q-vs-K comparison predicts. A reaction with a positive ΔG° can still run forward if Q is kept low enough, which is exactly how coupled reactions in metabolism work.</p>
  </div>
 
  <div class="card">
@@ -173,6 +174,7 @@ function calcIce(){
  if(A0<=0||Keq<0){$("eA").textContent="—";$("eB").textContent="—";$("eC").textContent="—";$("iceWork").textContent="";return;}
  const x=(-Keq+Math.sqrt(Keq*Keq+4*Keq*A0))/2;
  const Aeq=A0-x, Beq=x, Ceq=x;
+ if(!isFinite(x)||Aeq<0){$("eA").textContent="—";$("eB").textContent="—";$("eC").textContent="—";$("iceWork").textContent="That Keq is too large to compute here — try a value below about 1e150.";return;}
  $("eA").textContent=Aeq.toFixed(4);
  $("eB").textContent=Beq.toFixed(4);
  $("eC").textContent=Ceq.toFixed(4);
@@ -192,6 +194,7 @@ function calcQ(){
  const Q=B*C/A;
  const out=$("qOut"), work=$("qWork");
  out.classList.remove("fwd","rev");
+ if(!isFinite(Q)){out.textContent="—";work.textContent="Those concentrations are too large to compute.";return;}
  let verdict, cls;
  if(Math.abs(Q-Keq)<1e-9){verdict="At equilibrium — no net shift";cls="";}
  else if(Q<Keq){verdict="Q < K — shifts forward (toward products)";cls="fwd";}
@@ -205,6 +208,7 @@ function calcDg(){
  const R=0.008314; // kJ/mol·K
  if(Keq<=0||T<=0){$("dgOut").textContent="—";$("dgWork").textContent="Keq and T must both be greater than 0.";return;}
  const dg=-R*T*Math.log(Keq);
+ if(!isFinite(dg)){$("dgOut").textContent="—";$("dgWork").textContent="Those values are too extreme to compute — try a smaller Keq or temperature.";return;}
  $("dgOut").textContent=dg.toFixed(2)+" kJ/mol";
  $("dgWork").textContent=`ΔG° = −RT ln(K) = −(${R})(${T}) × ln(${Keq}) = −(${(R*T).toFixed(3)}) × ${Math.log(Keq).toFixed(3)} = ${dg.toFixed(2)} kJ/mol\n\n${dg<0?"Negative ΔG° — products favored at equilibrium (K > 1).":dg>0?"Positive ΔG° — reactants favored at equilibrium (K < 1).":"ΔG° = 0 — K = 1 exactly, equal favorability."}`;
 }
