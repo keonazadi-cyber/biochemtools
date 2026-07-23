@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Osmotic Pressure &amp; Osmolarity Calculator — Free</title>
 <meta name="description" content="Free osmotic pressure calculator using π = iMRT. Get osmolarity and pressure from concentration, plus tonicity compared to blood.">
-<meta name="keywords" content="osmotic pressure calculator, osmolarity calculator, van't hoff factor, iMRT, tonicity, isotonic hypertonic hypotonic">
+<meta name="keywords" content="osmotic pressure calculator, osmolarity calculator, van't hoff factor, iMRT, tonicity, isotonic hypertonic hypotonic, reflection coefficient, effective osmolarity, oncotic pressure, urea tonicity">
 <link rel="canonical" href="https://biochemtools.com/osmotic-pressure-calculator.html">
 <meta property="og:title" content="Osmotic Pressure &amp; Osmolarity Calculator (π = iMRT)">
 <meta property="og:description" content="Osmolarity and osmotic pressure from concentration, van't Hoff factor, and temperature, with a tonicity check. Free.">
@@ -21,7 +21,8 @@
 {"@type":"Question","name":"What's the difference between osmolarity and molarity?","acceptedAnswer":{"@type":"Answer","text":"Molarity counts moles of formula units dissolved; osmolarity counts moles of dissolved particles. A solute that dissociates, like NaCl into Na⁺ and Cl⁻, produces more osmotically active particles than its molarity alone suggests, which is what the van't Hoff factor i corrects for."}},
 {"@type":"Question","name":"Why does the osmotic pressure equation use kelvin instead of Celsius?","acceptedAnswer":{"@type":"Answer","text":"π = iMRT is derived from the same ideal gas relationship as PV = nRT, and that relationship only holds with absolute temperature. Using Celsius (which can be zero or negative at normal lab temperatures) would make the equation physically meaningless."}},
 {"@type":"Question","name":"Is blood plasma exactly 0.30 Osm?","acceptedAnswer":{"@type":"Answer","text":"0.30 Osm (about 300 mOsm/L) is the standard approximate value used in coursework; real plasma osmolarity in a healthy person typically falls in a narrow range around 275-295 mOsm/L. For exam purposes, 0.30 Osm is the reference point used to judge tonicity."}},
-{"@type":"Question","name":"Why is real osmotic pressure usually a bit lower than the ideal π = iMRT prediction?","acceptedAnswer":{"@type":"Answer","text":"The van't Hoff factor i assumes complete, ideal dissociation. In real solutions some ion pairs stay associated, especially at higher concentrations, so the effective osmotic coefficient is slightly below the ideal integer value of i — meaning measured osmotic pressure runs a bit below the simple calculation."}}]}
+{"@type":"Question","name":"Why is real osmotic pressure usually a bit lower than the ideal π = iMRT prediction?","acceptedAnswer":{"@type":"Answer","text":"The van't Hoff factor i assumes complete, ideal dissociation. In real solutions some ion pairs stay associated, especially at higher concentrations, so the effective osmotic coefficient is slightly below the ideal integer value of i — meaning measured osmotic pressure runs a bit below the simple calculation."}},
+{"@type":"Question","name":"Can a solution be iso-osmotic but not isotonic?","acceptedAnswer":{"@type":"Answer","text":"Yes - this is the urea case. Total osmolarity only counts particles; tonicity depends on whether the membrane actually stops those particles from crossing. A freely permeant solute like urea can match blood's osmolarity on paper while still letting water move freely, since it cannot stay concentrated on one side of the membrane. This is captured by the reflection coefficient (sigma): sigma=1 for a fully impermeant, fully effective solute, sigma=0 for one that crosses as freely as water."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
@@ -85,6 +86,7 @@
      <option value="1">Glucose (i = 1)</option>
      <option value="3">CaCl₂ (i = 3)</option>
      <option value="2b">KCl (i = 2)</option>
+     <option value="1u">Urea (i = 1, freely permeant)</option>
      <option value="custom">Custom i…</option>
     </select></div>
    <div><label>Temperature (°C)</label><input id="T" type="number" step="any" value="37"></div>
@@ -102,6 +104,13 @@
  <h2>How to calculate osmotic pressure</h2>
  <p class="note">Osmotic pressure is the pressure needed to stop water from flowing into a solution across a membrane, and it depends on the number of dissolved particles, not what they are. First find osmolarity by multiplying the molarity by the van't Hoff factor i — the number of particles each formula unit splits into (glucose stays as 1, NaCl splits into Na⁺ and Cl⁻ for 2, CaCl₂ into 3). Then the van't Hoff equation gives the pressure: π = iMRT, with R = 0.08206 L·atm/mol·K and temperature in kelvin. Comparing to blood plasma (about 0.30 Osm, roughly 7.6 atm at body temperature) tells you the tonicity: a more concentrated solution is hypertonic and pulls water out of cells, a less concentrated one is hypotonic and pushes water in.</p>
  <p class="note">Assumes ideal, fully dissociating solutes. Real solutions deviate slightly (the osmotic coefficient), so measured values run a bit lower than the ideal i.</p>
+
+ <h2>Osmolarity isn't the same thing as tonicity</h2>
+ <p class="note">Everything above computes <b>osmolarity</b> — the total concentration of dissolved particles. But whether those particles actually pull water across a real membrane depends on whether the membrane lets them through. A solute that crosses the membrane just as easily as water contributes to osmolarity but does almost nothing to tonicity, since it can't stay concentrated on one side long enough to hold water there.</p>
+ <p class="note">This is captured by the <b>reflection coefficient (σ)</b>, a value between 0 and 1 for each solute-membrane pair: σ = 1 means the membrane completely blocks the solute (fully "effective" — real, sustained osmotic pressure); σ = 0 means the solute crosses as freely as water (fully "ineffective" — no matter how concentrated, it can't hold water anywhere). <b>Effective osmolarity</b> = the sum of σ×i×M over every solute, and that number — not total osmolarity — is what actually predicts water movement.</p>
+ <p class="note"><b>Urea is the classic example.</b> Cell membranes are meaningfully permeable to it, so a urea solution has real, calculable osmolarity by the math above, but doesn't hold water the way the same osmolarity of NaCl would. A solution that's "iso-osmotic" to blood using urea alone still lets water move freely across the membrane — cells don't actually experience it as isotonic.</p>
+ <p class="note"><b>Plasma proteins apply the same principle at a different membrane.</b> Capillary walls are leaky to small solutes — ions, glucose, and urea all cross fairly freely there — so none of those create effective osmotic pressure at the capillary level. What does stay trapped inside capillaries is plasma protein (mainly albumin), too large to cross. That protein-driven pressure is <b>oncotic (colloid osmotic) pressure</b>, and it's the force pulling fluid back into capillaries that balances the hydrostatic pressure pushing fluid out — together, Starling forces.</p>
+ <p class="note">One more distinction worth knowing: this tool computes <b>osmolarity</b> (particles per liter of solution). Clinically, <b>osmolality</b> (particles per kilogram of solvent) is what lab osmometers actually measure. For dilute aqueous solutions like these, the two are numerically almost identical, but they aren't defined the same way.</p>
  <p class="note">Related tools: <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity</a> · <a href="/">all biochem tools</a>.</p>
 
  <div class="card">
@@ -130,6 +139,7 @@ Osmolarity = i × M = 3 × 0.05 = 0.15 Osm
   <p class="note"><b>Why kelvin instead of Celsius?</b><br>π = iMRT comes from the same ideal-gas relationship as PV = nRT, which only holds with absolute temperature. Celsius can be zero or negative at normal lab temperatures, which would make the equation meaningless.</p>
   <p class="note"><b>Is blood plasma exactly 0.30 Osm?</b><br>0.30 Osm (300 mOsm/L) is the standard approximate value used in coursework; real plasma typically falls around 275-295 mOsm/L. For exam purposes, 0.30 Osm is the reference point for judging tonicity.</p>
   <p class="note"><b>Why does real osmotic pressure run a bit lower than the ideal calculation?</b><br>The van't Hoff factor i assumes complete, ideal dissociation. Real solutions have some ion pairing, especially at higher concentration, so the effective osmotic coefficient is a bit below the ideal integer i — measured pressure comes in slightly under the simple π = iMRT prediction.</p>
+  <p class="note"><b>Can a solution be iso-osmotic but not isotonic?</b><br>Yes — this is exactly the urea case. Total osmolarity only counts particles; tonicity depends on whether the membrane actually stops those particles from crossing. A freely permeant solute like urea can match blood's osmolarity on paper while still letting water move freely, since it can't stay concentrated on one side of the membrane.</p>
  </div>
  <div class="card">
   <h2 style="margin-top:0">Practice problems</h2>
@@ -164,7 +174,11 @@ function calc(){
  if(osm>bloodOsm*1.05){label="Hypertonic to blood — water leaves cells (they shrink)";col="226,75,74";}
  else if(osm<bloodOsm*0.95){label="Hypotonic to blood — water enters cells (they swell)";col="55,138,221";}
  else {label="Isotonic with blood (~0.30 Osm) — no net water movement";col="93,202,165";}
- $("ton").innerHTML=`<div class="ton" style="background:rgba(${col},.12);color:rgb(${col})">${label}</div>`;
+ let html=`<div class="ton" style="background:rgba(${col},.12);color:rgb(${col})">${label}</div>`;
+ if($("solute").value==="1u"){
+  html+=`<div class="ton" style="background:rgba(224,169,59,.12);color:#e0a93b;margin-top:.6rem;font-weight:500;font-size:.88rem;text-align:left">⚠ That tonicity label is based on <b>total</b> osmolarity, but urea is freely permeant (reflection coefficient σ ≈ 0) — cell membranes let it cross about as easily as water. It can't stay concentrated on one side, so it doesn't actually produce sustained water movement the way an equal osmolarity of NaCl or glucose would. Effective tonicity for a permeant solute like this is much closer to 0 Osm than the number above suggests. See "Osmolarity isn't the same thing as tonicity" below for why.</div>`;
+ }
+ $("ton").innerHTML=html;
 }
 ["M","solute","T","icustom"].forEach(id=>$(id).addEventListener("input",calc));
 $("solute").addEventListener("change",calc);

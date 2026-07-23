@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cardiac Output Calculator — HR × SV or Fick's Method, Free</title>
 <meta name="description" content="Free cardiac output calculator. Solve CO = HR × SV, or use Fick's principle from oxygen consumption and the A-V O2 difference, with every step shown.">
-<meta name="keywords" content="cardiac output calculator, fick principle calculator, HR x SV, stroke volume calculator, fick's method cardiac output, A-V O2 difference">
+<meta name="keywords" content="cardiac output calculator, fick principle calculator, HR x SV, stroke volume calculator, fick's method cardiac output, A-V O2 difference, ejection fraction calculator, preload afterload contractility, Frank-Starling mechanism">
 <link rel="canonical" href="https://biochemtools.com/cardiac-output-calculator.html">
 <meta property="og:title" content="Cardiac Output Calculator — HR × SV or Fick's Method">
 <meta property="og:description" content="Solve cardiac output two ways: HR × SV, or Fick's principle from VO2 and the A-V O2 difference. Free, shows the work.">
@@ -21,7 +21,9 @@
 {"@type":"Question","name":"Why do HR × SV and Fick's principle give the same cardiac output?","acceptedAnswer":{"@type":"Answer","text":"They're measuring the same physical quantity — total blood pumped per minute — through two independent methods. HR × SV counts it mechanically (beats per minute times volume per beat); Fick's principle counts it indirectly through oxygen delivery (how fast oxygen is consumed divided by how much oxygen each liter of blood gives up). Agreement between the two is a useful physiological sanity check."}},
 {"@type":"Question","name":"What is a normal resting cardiac output?","acceptedAnswer":{"@type":"Answer","text":"About 5 L/min for an average adult at rest — roughly 70-75 beats/min times 65-75 mL/beat. It can rise to 20-25 L/min during intense exercise, mostly through increased heart rate and, to a lesser extent, increased stroke volume."}},
 {"@type":"Question","name":"Why does Fick's principle use the arteriovenous (A-V) O2 difference?","acceptedAnswer":{"@type":"Answer","text":"CaO2 (arterial oxygen content) minus CvO2 (venous oxygen content) is how much oxygen each liter of blood gives up to the tissues on one pass. Total oxygen consumed per minute (VO2) divided by oxygen given up per liter tells you how many liters of blood must have passed through per minute — which is exactly cardiac output."}},
-{"@type":"Question","name":"How does cardiac output relate to blood pressure?","acceptedAnswer":{"@type":"Answer","text":"Mean arterial pressure ≈ cardiac output × total peripheral resistance (MAP = CO × TPR), the cardiovascular analog of Ohm's law (V = IR). Anything that changes CO (heart rate, stroke volume) or TPR (vessel diameter) shifts blood pressure."}}]}
+{"@type":"Question","name":"How does cardiac output relate to blood pressure?","acceptedAnswer":{"@type":"Answer","text":"Mean arterial pressure ≈ cardiac output × total peripheral resistance (MAP = CO × TPR), the cardiovascular analog of Ohm's law (V = IR). Anything that changes CO (heart rate, stroke volume) or TPR (vessel diameter) shifts blood pressure."}},
+{"@type":"Question","name":"What actually changes stroke volume?","acceptedAnswer":{"@type":"Answer","text":"Three things: preload (end-diastolic volume - more venous return stretches the ventricle more, and via the Frank-Starling mechanism a more-stretched ventricle contracts more forcefully), afterload (the resistance the ventricle pumps against - higher afterload lowers stroke volume), and contractility (intrinsic contraction force, raised by sympathetic stimulation). During exercise, preload and contractility both rise together."}},
+{"@type":"Question","name":"What is ejection fraction and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"Ejection fraction equals stroke volume divided by end-diastolic volume, the fraction of the ventricle's filled volume actually pumped out each beat, normally about 55-70%. It is the standard clinical measure of contractile function: a reduced ejection fraction defines systolic heart failure, where the ventricle fills normally but cannot contract forcefully enough to eject a normal fraction."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add}
@@ -102,6 +104,18 @@
  <h2>How to calculate cardiac output</h2>
  <p class="note">Cardiac output (CO) is the volume of blood the heart pumps per minute. The direct, mechanical way: CO = HR × SV, heart rate in beats/min times stroke volume (blood ejected per beat) in mL/beat — divide by 1000 for L/min. The indirect way is Fick's principle: CO = VO₂ / (CaO₂ − CvO₂), where VO₂ is whole-body oxygen consumption and (CaO₂ − CvO₂) is the arteriovenous oxygen difference — how much oxygen each liter of blood delivers to tissue on one circuit. Both methods measure the same underlying quantity and should agree.</p>
  <p class="note">Typical resting values: HR ≈ 70-75 bpm, SV ≈ 65-75 mL/beat, giving CO ≈ 5 L/min. Units matter — this tool assumes SV in mL/beat and O₂ contents in mL/L; watch for the common alternate unit of mL/100 mL (vol%), which is 10× smaller.</p>
+
+ <h2>Why does stroke volume actually change?</h2>
+ <p class="note">HR × SV tells you the math, but it doesn't explain <i>why</i> stroke volume moves — that comes down to three separate things, and exam questions love testing which one is responsible for a given scenario.</p>
+ <p class="note"><b>Preload</b> is how stretched the ventricle is right before it contracts — essentially its end-diastolic volume (EDV), set by how much blood has returned to the heart. The <b>Frank-Starling mechanism</b> is the direct consequence: within physiological limits, more stretch means a more forceful contraction and a bigger stroke volume, the same way a more-stretched rubber band snaps back harder. This is intrinsic to cardiac muscle itself — it needs no nervous or hormonal signal, just more blood arriving.</p>
+ <p class="note"><b>Afterload</b> is the resistance the ventricle has to pump against (roughly aortic pressure). Higher afterload makes it harder to eject blood, so — holding preload and contractility constant — stroke volume falls.</p>
+ <p class="note"><b>Contractility</b> is the heart muscle's intrinsic force of contraction, independent of how stretched it is. Sympathetic stimulation (epinephrine, norepinephrine) increases it; conditions like heart failure decrease it.</p>
+ <p class="note">During exercise, both preload (more venous return from active muscle pumping blood back) and contractility (sympathetic activation) rise together, which is why stroke volume climbs alongside heart rate rather than heart rate doing all the work alone.</p>
+ <p class="note"><b>Ejection fraction (EF)</b> = SV / EDV — the fraction of the ventricle's end-diastolic volume that actually gets pumped out each beat. A normal EF is roughly 55-70%. It's one of the most commonly cited clinical numbers for heart function: a reduced EF is the defining feature of systolic heart failure, when the ventricle can't contract forcefully enough to eject a normal fraction even though it may still fill normally.</p>
+ <div class="work">Example: EDV = 120 mL, ESV (end-systolic volume) = 50 mL
+
+SV = EDV − ESV = 120 − 50 = 70 mL   (matches this tool's own default SV)
+EF = SV / EDV = 70 / 120 = 0.583 = 58.3%   (normal range)</div>
  <p class="note">Related tools: <a href="/osmotic-pressure-calculator.html">Osmotic pressure &amp; tonicity</a> · <a href="/">all biochem tools</a>.</p>
 
  <div class="card">
@@ -120,9 +134,13 @@
 
 Roughly 3× the resting value — mostly from the doubled heart rate, with a smaller contribution from increased stroke volume.</div></details>
   <p class="note"><b>2.</b> During that same exercise, VO₂ rises to 1200 mL/min, CaO₂ to 195 mL/L, and CvO₂ drops to 120 mL/L (tissues extracting more oxygen). Find CO via Fick's principle.</p>
-  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">CO = VO₂ / (CaO₂ − CvO₂) = 1200 / (195 − 120) = 1200/75 = 16.0 L/min
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">CO = VO₂ / (CaO₂ − CvO₂) = 1200 / (195 − 120) = 1200/75 = 16.0 L/min
 
 Close to the 15.0 L/min from the HR×SV method above — real physiological measurements from two different methods rarely match to the decimal, but should land in the same range.</div></details>
+  <p class="note"><b>3.</b> A patient's echocardiogram shows EDV = 140 mL and EF = 35% (reduced from the normal 55-70% range). Find their stroke volume, and say what this EF alone tells you about preload versus contractility.</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">SV = EF × EDV = 0.35 × 140 = 49 mL
+
+An EDV of 140 mL is a normal-to-high filling volume — preload isn't the problem, the ventricle is filling fine. A low EF despite normal filling points specifically to reduced contractility: the muscle can't contract forcefully enough to eject a normal fraction of the blood it received. That's the hallmark of systolic heart failure.</div></details>
  </div>
 
  <div class="card">
@@ -131,6 +149,8 @@ Close to the 15.0 L/min from the HR×SV method above — real physiological meas
   <p class="note"><b>What's a normal resting cardiac output?</b><br>About 5 L/min for an average adult (70-75 bpm × 65-75 mL/beat). Can reach 20-25 L/min during intense exercise, mostly via increased heart rate.</p>
   <p class="note"><b>Why the A-V O₂ difference specifically?</b><br>CaO₂ − CvO₂ is how much oxygen each liter of blood gives up to tissue on one pass. VO₂ (total O₂ consumed per minute) divided by that per-liter delivery tells you how many liters must have passed through per minute — cardiac output.</p>
   <p class="note"><b>How does cardiac output relate to blood pressure?</b><br>MAP ≈ CO × TPR (total peripheral resistance) — the cardiovascular analog of Ohm's law (V=IR). Anything changing CO or TPR shifts blood pressure.</p>
+  <p class="note"><b>What actually changes stroke volume?</b><br>Three things: preload (EDV — more venous return stretches the ventricle more, and via the Frank-Starling mechanism a more-stretched ventricle contracts more forcefully), afterload (resistance the ventricle pumps against — higher afterload lowers SV), and contractility (intrinsic contraction force, raised by sympathetic stimulation). During exercise, preload and contractility both rise together.</p>
+  <p class="note"><b>What is ejection fraction and why does it matter?</b><br>EF = SV/EDV, the fraction of the ventricle's filled volume actually pumped out each beat — normally about 55-70%. It's the standard clinical measure of contractile function: a reduced EF defines systolic heart failure, where the ventricle fills normally but can't contract forcefully enough to eject a normal fraction.</p>
  </div>
  <div id="recommended-slot"></div>
 </main>
