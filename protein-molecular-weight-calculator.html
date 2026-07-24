@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protein Molecular Weight &amp; Extinction Coefficient Calculator, Free</title>
+<meta name="description" content="Free protein calculator from an amino acid sequence: molecular weight, molar extinction coefficient at 280 nm, A280 of a 1 mg/mL solution, theoretical pI, net charge, and composition. Every number explained.">
+<meta name="keywords" content="protein molecular weight calculator, extinction coefficient calculator, protein pi calculator, a280 protein concentration, molar absorptivity 280 nm, amino acid sequence molecular weight, protein mw from sequence, theoretical pi">
+<link rel="canonical" href="https://biochemtools.com/protein-molecular-weight-calculator.html">
+<meta property="og:title" content="Protein Molecular Weight &amp; Extinction Coefficient Calculator">
+<meta property="og:description" content="Paste an amino acid sequence, get molecular weight, extinction coefficient at 280 nm, A280 of 1 mg/mL, theoretical pI, and composition. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/protein-molecular-weight-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/protein-molecular-weight-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Biochemistry","item":"https://biochemtools.com/#biochemistry"},{"@type":"ListItem","position":3,"name":"Protein Molecular Weight & Extinction Coefficient Calculator","item":"https://biochemtools.com/protein-molecular-weight-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate a protein's molecular weight and extinction coefficient from its sequence","step":[
+{"@type":"HowToStep","name":"Add up the residue masses","text":"Each amino acid contributes its residue mass (the amino acid minus one water, since a water is lost at every peptide bond). Sum the residue masses for the whole sequence."},
+{"@type":"HowToStep","name":"Add one water","text":"Add back a single water (18.02 Da) for the two free ends of the finished chain. That total is the molecular weight."},
+{"@type":"HowToStep","name":"Count Trp, Tyr, and Cys for the extinction coefficient","text":"At 280 nm the molar extinction coefficient is 5500 per tryptophan plus 1490 per tyrosine, plus 125 per disulfide bond if cysteines are oxidized (Pace/Gill/Edelhoch method)."},
+{"@type":"HowToStep","name":"Divide to get the 1 mg/mL absorbance","text":"Dividing the extinction coefficient by the molecular weight gives the absorbance at 280 nm of a 1 mg/mL solution, which converts a spectrophotometer reading straight into protein concentration."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is protein molecular weight calculated from the sequence?","acceptedAnswer":{"@type":"Answer","text":"You add up the residue mass of every amino acid in the chain and then add one water molecule. Each amino acid's residue mass is the free amino acid minus a water, because forming each peptide bond releases a water. Adding one water back at the end accounts for the free amino and carboxyl groups at the two ends of the finished protein. Using average isotopic masses, this gives the average molecular weight in daltons."}},
+{"@type":"Question","name":"What is the 280 nm extinction coefficient and where do 5500 and 1490 come from?","acceptedAnswer":{"@type":"Answer","text":"The molar extinction coefficient at 280 nm predicts how strongly a protein absorbs UV light, and it comes almost entirely from aromatic side chains. Using the Pace/Gill/Edelhoch method, each tryptophan contributes about 5500 M-1 cm-1, each tyrosine about 1490, and each disulfide bond (cystine) about 125 when cysteines are oxidized. A protein with no Trp or Tyr absorbs very little at 280 nm, which is why those proteins are hard to quantify by A280."}},
+{"@type":"Question","name":"How do I turn an A280 reading into a protein concentration?","acceptedAnswer":{"@type":"Answer","text":"Divide the extinction coefficient by the molecular weight to get the absorbance of a 1 mg/mL solution (often written as A 0.1% or E1%). Then concentration in mg/mL equals your measured A280 divided by that value. For example, if 1 mg/mL gives an A280 of 1.5 and you read 0.75, the sample is 0.5 mg/mL. This is the number a NanoDrop uses when you tell it a protein's extinction coefficient."}},
+{"@type":"Question","name":"What is theoretical pI and why does the calculated value vary between tools?","acceptedAnswer":{"@type":"Answer","text":"The theoretical isoelectric point (pI) is the pH at which the protein carries no net charge. It is found by summing the charge of every ionizable group (the N-terminus, C-terminus, and the side chains of Asp, Glu, Cys, Tyr, His, Lys, and Arg) across pH and locating where the total crosses zero. Different calculators use slightly different pKa tables, so the same sequence can give a pI that differs by a few tenths of a unit. Treat it as an estimate, not an exact measurement."}},
+{"@type":"Question","name":"Should I use the reduced or oxidized extinction coefficient?","acceptedAnswer":{"@type":"Answer","text":"Use the reduced value if your cysteines are free thiols, which is the case for most cytoplasmic proteins and for samples run under reducing conditions. Use the oxidized value if the cysteines form disulfide bonds, common in secreted and extracellular proteins. The two differ only by 125 per disulfide bond, so for proteins with few or no cysteines the choice barely matters."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.95rem;letter-spacing:.04em;padding:.7rem;border-radius:8px;resize:vertical;line-height:1.7}
+ input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem;align-items:center}
+ .row button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.45rem .9rem;border-radius:99px;cursor:pointer;font-size:.82rem}
+ .row button:hover{border-color:var(--accent);color:var(--accent)}
+ .metrics{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.25rem 0}
+ @media(max-width:520px){.metrics{grid-template-columns:1fr}}
+ .metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}
+ .metric .mlbl{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.05em}
+ .metric .mval{font-size:1.7rem;font-weight:700;color:var(--out);margin:.15rem 0;line-height:1.15}
+ .metric .msub{color:var(--muted);font-size:.78rem}
+ .metric.blue .mval{color:var(--accent)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;line-height:1.9;white-space:pre-wrap;margin-top:1rem}
+ .comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:.4rem;margin-top:.5rem}
+ .comp .cbox{background:var(--bg);border-radius:8px;padding:.5rem;text-align:center;font-size:.82rem}
+ .comp .cbox b{color:var(--txt)}.comp .cbox span{color:var(--muted)}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ .warnmsg{color:var(--warn);font-size:.82rem;margin-top:.6rem}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Protein Molecular Weight &amp; Extinction Coefficient Calculator</h1><p>Paste an amino acid sequence and get its molecular weight, the molar extinction coefficient at 280 nm, the A<sub>280</sub> of a 1 mg/mL solution, the theoretical pI, and the full composition. Every number is explained.</p></header>
+<main>
+ <div class="card">
+  <label for="seq">Amino acid sequence (one-letter code — spaces, numbers, and FASTA header lines are ignored)</label>
+  <textarea id="seq" rows="5" spellcheck="false">FVNQHLCGSHLVEALYLVCGERGFFYTPKT</textarea>
+  <div class="row">
+   <button type="button" id="ex1">Insulin B-chain</button>
+   <button type="button" id="ex2">Lysozyme (hen)</button>
+   <button type="button" id="clr">Clear</button>
+   <span class="note" id="lenNote" style="margin-left:auto"></span>
+  </div>
+  <div class="warnmsg" id="warn" style="display:none"></div>
+ </div>
+
+ <div class="card">
+  <div class="metrics">
+   <div class="metric"><div class="mlbl">Molecular weight</div><div class="mval" id="mw" aria-live="polite">—</div><div class="msub" id="mwsub"></div></div>
+   <div class="metric blue"><div class="mlbl">Extinction coeff. (280 nm)</div><div class="mval" id="eps" aria-live="polite">—</div><div class="msub" id="epssub"></div></div>
+   <div class="metric"><div class="mlbl">A<sub>280</sub> of 1 mg/mL</div><div class="mval" id="a280" aria-live="polite">—</div><div class="msub" id="a280sub"></div></div>
+   <div class="metric blue"><div class="mlbl">Theoretical pI</div><div class="mval" id="pi" aria-live="polite">—</div><div class="msub" id="pisub"></div></div>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Amino acid composition</h2>
+  <div class="comp" id="comp"></div>
+  <p class="note" id="charged" style="margin-top:1rem"></p>
+ </div>
+
+ <h2>How the numbers work</h2>
+ <p class="note">A protein is a chain of amino acids joined by peptide bonds, and every peptide bond forms by removing one water. So the mass of the chain is the sum of each amino acid's <b>residue mass</b> (the amino acid minus a water) plus a single water added back for the two free ends. The molecular weight here uses average isotopic masses, so it matches what you would report for a purified protein.</p>
+ <p class="note">The <b>extinction coefficient at 280 nm</b> comes almost entirely from aromatic side chains. Using the Pace/Gill/Edelhoch method, each tryptophan adds about 5500 M<sup>-1</sup> cm<sup>-1</sup>, each tyrosine about 1490, and each disulfide bond about 125 when cysteines are oxidized. Dividing that by the molecular weight gives the absorbance of a 1 mg/mL solution, so a spectrophotometer reading at 280 nm converts straight into concentration.</p>
+ <p class="note">The <b>theoretical pI</b> is the pH where the summed charge of the N-terminus, C-terminus, and the ionizable side chains (Asp, Glu, Cys, Tyr, His, Lys, Arg) crosses zero. Different pKa tables shift it by a few tenths, so read it as an estimate.</p>
+ <p class="note">Related tools: <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI</a> · <a href="/nucleic-acid-concentration-calculator.html">DNA &amp; RNA concentration (A260/A280)</a> · <a href="/beer-lambert-calculator.html">Beer-Lambert calculator</a> · <a href="/amino-acid-titration-curve.html">Amino acid titration curve</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Turning an A<sub>280</sub> into a concentration</h2>
+  <p class="note">The whole point of the extinction coefficient is quantification. Once you have the A<sub>280</sub> of a 1 mg/mL solution (call it the reference), any reading converts in one step:</p>
+  <div class="work">concentration (mg/mL) = measured A280 ÷ (A280 of 1 mg/mL)
+
+Example — a protein whose 1 mg/mL solution reads A280 = 1.50:
+  you measure A280 = 0.75
+  concentration = 0.75 / 1.50 = 0.50 mg/mL</div>
+  <p class="note">This is exactly what a NanoDrop does when you enter a protein's extinction coefficient instead of using the generic "1 Abs = 1 mg/mL" setting.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>How is molecular weight calculated?</b><br>Sum every residue mass (amino acid minus a water) and add one water for the free ends. Average isotopic masses give the average MW in daltons.</p>
+  <p class="note"><b>Where do 5500 and 1490 come from?</b><br>They are the per-residue absorptivities at 280 nm (Pace/Gill/Edelhoch): 5500 M<sup>-1</sup> cm<sup>-1</sup> per Trp, 1490 per Tyr, plus 125 per disulfide bond when oxidized. Proteins with no Trp or Tyr barely absorb at 280 nm.</p>
+  <p class="note"><b>Reduced vs oxidized extinction coefficient?</b><br>Reduced = free cysteine thiols (most intracellular proteins). Oxidized = disulfide-bonded cysteines (many secreted proteins). They differ only by 125 per disulfide, so with few cysteines it hardly matters.</p>
+  <p class="note"><b>Why does the pI differ from another calculator?</b><br>Different pKa tables. The same sequence can shift by a few tenths of a pH unit. It is a theoretical estimate, not a measured value.</p>
+  <p class="note"><b>Does this handle a FASTA sequence?</b><br>Yes — a leading header line starting with "&gt;" is ignored, and so are spaces, line breaks, and residue numbers. Non-standard letters (X, B, Z, U) are skipped and flagged.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 35 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/protein-molecular-weight-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Protein MW &amp; extinction coeff.</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+// Average residue masses (Da), ExPASy set
+const RES={G:57.0519,A:71.0788,S:87.0782,P:97.1167,V:99.1326,T:101.1051,C:103.1388,L:113.1594,I:113.1594,N:114.1038,D:115.0886,Q:128.1307,K:128.1741,E:129.1155,M:131.1926,H:137.1411,F:147.1766,R:156.1875,Y:163.1760,W:186.2132};
+const NAMES={A:"Ala",R:"Arg",N:"Asn",D:"Asp",C:"Cys",E:"Glu",Q:"Gln",G:"Gly",H:"His",I:"Ile",L:"Leu",K:"Lys",M:"Met",F:"Phe",P:"Pro",S:"Ser",T:"Thr",W:"Trp",Y:"Tyr",V:"Val"};
+const ORDER="ARNDCEQGHILKMFPSTWYV".split("");
+const WATER=18.01528;
+// pKa set (matches the peptide charge & pI tool)
+const POS={Nterm:9.0,H:6.0,K:10.53,R:12.48};
+const NEG={Cterm:3.1,D:3.65,E:4.25,C:8.18,Y:10.07};
+
+const LYSOZYME="KVFGRCELAAAMKRHGLDNYRGYSLGNWVCAAKFESNFNTQATNRNTDGSTDYGILQINSRWWCNDGRTPGSRNLCNIPCSALLSSDITASVNCAKKIVSDGNGMNAWVAWRNRCKGTDVQAWIRGCRL";
+
+function charge(count,pH){
+ let q=0;
+ q+=1/(1+Math.pow(10,pH-POS.Nterm));
+ q-=1/(1+Math.pow(10,NEG.Cterm-pH));
+ q+=(count.H||0)/(1+Math.pow(10,pH-POS.H));
+ q+=(count.K||0)/(1+Math.pow(10,pH-POS.K));
+ q+=(count.R||0)/(1+Math.pow(10,pH-POS.R));
+ q-=(count.D||0)/(1+Math.pow(10,NEG.D-pH));
+ q-=(count.E||0)/(1+Math.pow(10,NEG.E-pH));
+ q-=(count.C||0)/(1+Math.pow(10,NEG.C-pH));
+ q-=(count.Y||0)/(1+Math.pow(10,NEG.Y-pH));
+ return q;
+}
+function pI(count){
+ let lo=0,hi=14;
+ for(let i=0;i<60;i++){const mid=(lo+hi)/2; if(charge(count,mid)>0) lo=mid; else hi=mid;}
+ return (lo+hi)/2;
+}
+function fmt(n,d){return n.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});}
+
+function calc(){
+ let raw=$("seq").value;
+ // drop FASTA header lines
+ raw=raw.split("\n").filter(l=>!l.trim().startsWith(">")).join("");
+ const up=raw.toUpperCase();
+ const count={}; let n=0, skipped=0;
+ for(const ch of up){
+  if(/[A-Z]/.test(ch)){
+   if(RES[ch]!==undefined){count[ch]=(count[ch]||0)+1; n++;}
+   else{skipped++;}
+  }
+ }
+ $("lenNote").textContent = n? n+" residues" : "";
+ const warn=$("warn");
+ if(skipped>0){warn.style.display="block"; warn.textContent="Skipped "+skipped+" non-standard character"+(skipped>1?"s":"")+" (only the 20 standard amino acids are counted).";}
+ else warn.style.display="none";
+
+ if(n===0){
+  ["mw","eps","a280","pi"].forEach(id=>$(id).textContent="—");
+  ["mwsub","epssub","a280sub","pisub"].forEach(id=>$(id).textContent="");
+  $("work").textContent="Paste an amino acid sequence above to see its properties.";
+  $("comp").innerHTML=""; $("charged").textContent="";
+  return;
+ }
+
+ let mw=WATER;
+ for(const a in count) mw+=RES[a]*count[a];
+ const nW=count.W||0, nY=count.Y||0, nC=count.C||0;
+ const epsRed=5500*nW+1490*nY;
+ const nSS=Math.floor(nC/2);
+ const epsOx=epsRed+125*nSS;
+ const a280Red=epsRed/mw, a280Ox=epsOx/mw;
+ const p=pI(count);
+ const q7=charge(count,7.0);
+
+ $("mw").textContent=fmt(mw,1)+" Da";
+ $("mwsub").textContent="= "+fmt(mw/1000,2)+" kDa  ·  "+n+" residues";
+
+ if(epsRed===0){
+  $("eps").textContent="0";
+  $("epssub").textContent="no Trp or Tyr — very weak A280";
+ } else {
+  $("eps").textContent=epsRed.toLocaleString()+"";
+  $("epssub").innerHTML="M<sup>-1</sup> cm<sup>-1</sup> (reduced Cys)"+(nSS>0?"  ·  "+epsOx.toLocaleString()+" oxidized":"");
+ }
+
+ if(a280Red>0){
+  $("a280").textContent=fmt(a280Red,3);
+  $("a280sub").textContent="1 mg/mL reads this A280"+(nSS>0?"  ·  "+fmt(a280Ox,3)+" oxidized":"");
+ } else {
+  $("a280").textContent="~0";
+  $("a280sub").textContent="not quantifiable by A280";
+ }
+
+ $("pi").textContent=fmt(p,2);
+ $("pisub").textContent="net charge at pH 7.0 ≈ "+(q7>=0?"+":"")+fmt(q7,1);
+
+ // work box
+ let w="Molecular weight:\n  = Σ residue masses + 1 water\n  = "+fmt(mw-WATER,1)+" + "+WATER.toFixed(2)+"\n  = "+fmt(mw,1)+" Da ("+fmt(mw/1000,2)+" kDa)\n\n";
+ w+="Extinction coefficient at 280 nm (Pace/Gill):\n  = 5500·Trp + 1490·Tyr"+(nSS>0?" + 125·disulfide":"")+"\n  = 5500·"+nW+" + 1490·"+nY+(nSS>0?" + 125·"+nSS:"")+"\n  = "+epsRed.toLocaleString()+" M-1 cm-1 (Cys reduced)"+(nSS>0?"\n  = "+epsOx.toLocaleString()+" M-1 cm-1 (Cys oxidized)":"")+"\n\n";
+ if(a280Red>0){
+  w+="A280 of a 1 mg/mL solution:\n  = extinction coeff ÷ MW\n  = "+epsRed.toLocaleString()+" ÷ "+fmt(mw,1)+"\n  = "+fmt(a280Red,3)+"\n\n";
+ }
+ w+="Theoretical pI = "+fmt(p,2)+"  (pH of zero net charge)";
+ $("work").textContent=w;
+
+ // composition
+ let html="";
+ for(const a of ORDER){
+  const c=count[a]||0; if(c===0) continue;
+  const pct=(100*c/n).toFixed(1);
+  html+='<div class="cbox"><b>'+a+'</b> <span>'+NAMES[a]+'</span><br><b>'+c+'</b> <span>('+pct+'%)</span></div>';
+ }
+ $("comp").innerHTML=html;
+
+ const nNeg=(count.D||0)+(count.E||0), nPos=(count.K||0)+(count.R||0);
+ $("charged").innerHTML="<b>Charged residues:</b> "+nNeg+" acidic (Asp+Glu), "+nPos+" basic (Lys+Arg), "+(count.H||0)+" His. "+
+  "Aromatic: "+nW+" Trp, "+nY+" Tyr, "+(count.F||0)+" Phe. Cys: "+nC+(nC>=2?" (up to "+nSS+" disulfide bond"+(nSS>1?"s":"")+")":"")+".";
+}
+
+$("ex1").onclick=()=>{$("seq").value="FVNQHLCGSHLVEALYLVCGERGFFYTPKT"; calc();};
+$("ex2").onclick=()=>{$("seq").value=LYSOZYME; calc();};
+$("clr").onclick=()=>{$("seq").value=""; $("seq").focus(); calc();};
+$("seq").addEventListener("input",calc);
+calc();
+</script>
+</body>
+</html>
