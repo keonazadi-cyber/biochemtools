@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X-Linked (Sex-Linked) Inheritance Calculator, Free</title>
+<meta name="description" content="Free X-linked inheritance calculator for sex-linked recessive and dominant traits like colorblindness and hemophilia. Cross a mother and father to see affected, carrier, and unaffected sons and daughters, with the Punnett square shown.">
+<meta name="keywords" content="x linked inheritance calculator, sex linked traits, colorblindness punnett square, hemophilia inheritance, x linked recessive, carrier daughter, sex linked cross, criss cross inheritance">
+<link rel="canonical" href="https://biochemtools.com/x-linked-inheritance-calculator.html">
+<meta property="og:title" content="X-Linked (Sex-Linked) Inheritance Calculator">
+<meta property="og:description" content="Cross a mother and father for a sex-linked trait to see affected, carrier, and unaffected sons and daughters, with the Punnett square. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/x-linked-inheritance-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/x-linked-inheritance-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"X-Linked Inheritance Calculator","item":"https://biochemtools.com/x-linked-inheritance-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to solve an X-linked genetics cross","step":[
+{"@type":"HowToStep","name":"Write the parents on the X chromosome","text":"A sex-linked gene sits on the X chromosome. Write the mother as two X alleles (for example X^H X^h for a carrier) and the father as one X allele plus a Y, since his single X carries the gene and the Y does not."},
+{"@type":"HowToStep","name":"Set up the Punnett square","text":"Put the mother's two X alleles on one axis and the father's X and Y on the other. Each of the four boxes is an equally likely offspring: two are daughters (they get the father's X) and two are sons (they get the father's Y)."},
+{"@type":"HowToStep","name":"Determine each child's phenotype","text":"For a recessive trait a daughter is affected only if she has two copies of the mutant allele, while a son is affected with a single mutant allele because he has no second X to mask it. A heterozygous daughter is an unaffected carrier."},
+{"@type":"HowToStep","name":"Split the results by sex","text":"Report the outcome separately for sons and daughters. This is why sex-linked recessive traits show up far more often in males and why an affected father passes the allele to every daughter but no son."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why are X-linked recessive traits more common in males?","acceptedAnswer":{"@type":"Answer","text":"Males have only one X chromosome, so a single copy of a recessive mutant allele is enough to show the trait, since there is no second X to mask it. Females need two copies, one on each X, to be affected, which is much less likely. This is why conditions like red-green colorblindness and hemophilia appear far more often in males than females."}},
+{"@type":"Question","name":"What does it mean to be a carrier?","acceptedAnswer":{"@type":"Answer","text":"A carrier is a heterozygous female with one normal allele and one mutant allele on her two X chromosomes (X^H X^h). For a recessive trait she is unaffected because the normal allele is enough, but she can pass the mutant allele to her children. Each of her sons has a 50 percent chance of being affected, and each daughter a 50 percent chance of also being a carrier."}},
+{"@type":"Question","name":"If the father is affected, will his sons be affected?","acceptedAnswer":{"@type":"Answer","text":"Not from him. A father passes his Y chromosome to his sons and his X chromosome to his daughters, so a son never inherits his father's X-linked allele. An affected father passes the mutant X to every daughter, making them all at least carriers, but his sons' status depends entirely on the mother. This father-to-daughter pattern is a hallmark of X-linked inheritance."}},
+{"@type":"Question","name":"What is criss-cross inheritance?","acceptedAnswer":{"@type":"Answer","text":"Criss-cross inheritance describes how an X-linked trait passes from an affected father to his carrier daughters and then to half of their sons, so the trait appears to skip from grandfather to grandson through an unaffected mother. It happens because the father gives his X only to daughters, who then pass it to their sons. Recognizing this zig-zag pattern in a pedigree is a strong clue that a trait is X-linked."}},
+{"@type":"Question","name":"How is X-linked dominant different?","acceptedAnswer":{"@type":"Answer","text":"For an X-linked dominant trait, a single mutant allele causes the condition in both sexes, so heterozygous daughters are affected, not carriers. An affected father passes the trait to all of his daughters and none of his sons, while an affected heterozygous mother passes it to about half of all her children regardless of sex. There are no unaffected carriers, which distinguishes it from the recessive pattern."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#e0a93b;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a;--pink:#e07ab0;--blue:#5b9be0}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.02rem;padding:.6rem;border-radius:8px}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem}
+ @media(max-width:560px){.pgrid{grid-template-columns:1fr}}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ .sexcols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem}
+ @media(max-width:560px){.sexcols{grid-template-columns:1fr}}
+ .sexbox{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:1rem}
+ .sexbox h3{margin:0 0 .6rem;font-size:1.05rem}
+ .sexbox.daughters h3{color:var(--pink)}.sexbox.sons h3{color:var(--blue)}
+ .prow{display:flex;justify-content:space-between;font-size:.9rem;padding:.28rem 0;border-bottom:1px solid var(--line)}
+ .prow:last-child{border-bottom:none}.prow b{font-weight:700}
+ .prow .aff{color:var(--bad)}.prow .car{color:var(--warn)}.prow .un{color:var(--good)}
+ .punnett{border-collapse:collapse;margin:.5rem auto;font-size:.95rem}
+ .punnett td,.punnett th{border:1px solid var(--line);padding:.5rem .6rem;text-align:center;min-width:76px}
+ .punnett th{background:var(--bg);color:var(--muted);font-weight:600}
+ .punnett .cell b{color:var(--txt);font-size:1rem}.punnett .cell span{font-size:.76rem;display:block;margin-top:.1rem}
+ .punnett .daughter{background:rgba(224,122,176,.10)}.punnett .son{background:rgba(91,155,224,.10)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.85;white-space:pre-wrap;margin-top:1rem}
+ table.info{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}table.info th,table.info td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}table.info th{color:var(--muted);font-weight:500}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>X-Linked (Sex-Linked) Inheritance Calculator</h1><p>Cross a mother and father for a trait on the X chromosome and see the chance of affected, carrier, and unaffected sons and daughters, with the Punnett square and the reasoning shown. Built for colorblindness, hemophilia, and any sex-linked cross.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-bottom:.5rem">Trait type</label>
+  <div class="modes" id="mode">
+   <button data-m="rec" class="on">X-linked recessive</button>
+   <button data-m="dom">X-linked dominant</button>
+  </div>
+  <p class="note" style="margin:0 0 .5rem" id="modeNote"></p>
+  <div class="pgrid">
+   <div><label for="mom" style="color:var(--pink);font-weight:600">Mother (X X)</label>
+    <select id="mom"></select></div>
+   <div><label for="dad" style="color:var(--blue);font-weight:600">Father (X Y)</label>
+    <select id="dad"></select></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Children</h2>
+  <div class="sexcols">
+   <div class="sexbox daughters"><h3>Daughters</h3><div id="dOut" aria-live="polite"></div></div>
+   <div class="sexbox sons"><h3>Sons</h3><div id="sOut" aria-live="polite"></div></div>
+  </div>
+  <p class="note" id="summary" style="margin-top:1rem"></p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The Punnett square</h2>
+  <div style="overflow-x:auto"><div id="punnett"></div></div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How sex-linked inheritance works</h2>
+ <p class="note">A sex-linked gene sits on the <b>X chromosome</b>. A mother has two X chromosomes and passes one at random; a father has a single X (which he gives only to daughters) and a Y (which he gives only to sons). That asymmetry drives everything. For a <b>recessive</b> trait a son needs just one mutant allele to be affected, because he has no second X to mask it, while a daughter needs two. That is why colorblindness and hemophilia are far more common in males, and why an affected father passes the allele to every daughter but never to a son. A heterozygous daughter is an unaffected <b>carrier</b> who can still pass the allele on.</p>
+ <p class="note">Related tools: <a href="/punnett-square-calculator.html">Punnett square calculator</a> · <a href="/blood-type-calculator.html">Blood type inheritance</a> · <a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Reading the notation</h2>
+  <div style="overflow-x:auto">
+  <table class="info">
+   <thead><tr><th>Genotype</th><th>Sex</th><th>Meaning (recessive trait)</th></tr></thead>
+   <tbody>
+    <tr><td>X<sup>H</sup>X<sup>H</sup></td><td>female</td><td>Unaffected, not a carrier</td></tr>
+    <tr><td>X<sup>H</sup>X<sup>h</sup></td><td>female</td><td>Unaffected carrier</td></tr>
+    <tr><td>X<sup>h</sup>X<sup>h</sup></td><td>female</td><td>Affected</td></tr>
+    <tr><td>X<sup>H</sup>Y</td><td>male</td><td>Unaffected</td></tr>
+    <tr><td>X<sup>h</sup>Y</td><td>male</td><td>Affected (only one X)</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <p class="note">H is the normal allele, h the mutant. For a dominant trait the single mutant allele (h) causes the condition in both sexes, so there are no unaffected carriers.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why are these traits more common in males?</b><br>Males have one X, so a single recessive mutant allele shows the trait; females need two copies. Hence colorblindness and hemophilia are mostly male.</p>
+  <p class="note"><b>What is a carrier?</b><br>A heterozygous female (X<sup>H</sup>X<sup>h</sup>): unaffected for a recessive trait but able to pass the allele. Half her sons are affected, half her daughters are carriers.</p>
+  <p class="note"><b>Will an affected father's sons be affected?</b><br>Not from him — sons get his Y, not his X. But all his daughters inherit his mutant X and are at least carriers.</p>
+  <p class="note"><b>What is criss-cross inheritance?</b><br>The trait passes affected-father to carrier-daughter to affected-grandson, seeming to skip a generation through an unaffected mother.</p>
+  <p class="note"><b>How is X-linked dominant different?</b><br>One mutant allele affects both sexes, so heterozygous daughters are affected (no carriers). Affected fathers pass it to all daughters, no sons.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 39 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/protein-molecular-weight-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Protein MW &amp; extinction coeff.</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/x-linked-inheritance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">X-linked inheritance</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/reaction-rate-half-life-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Reaction half-life &amp; rate law</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+let mode="rec";
+// mother genotypes and father genotypes with mode-dependent phenotype labels
+function momOpts(){
+ const rec = mode==="rec";
+ return [
+  {v:"HH", l:"XᴴXᴴ — unaffected"},
+  {v:"Hh", l:"XᴴXʰ — "+(rec?"carrier (unaffected)":"affected")},
+  {v:"hh", l:"XʰXʰ — affected"}
+ ];
+}
+function dadOpts(){
+ return [
+  {v:"HY", l:"XᴴY — unaffected"},
+  {v:"hY", l:"XʰY — affected"}
+ ];
+}
+function fillSelect(sel,opts,keep){
+ sel.innerHTML=opts.map(o=>`<option value="${o.v}">${o.l}</option>`).join("");
+ if(keep && opts.some(o=>o.v===keep)) sel.value=keep;
+}
+function sup(al){ return al==="Y" ? "Y" : "X<sup>"+al+"</sup>"; }
+
+function femaleStatus(a,b){ // returns 'affected'|'carrier'|'unaffected'
+ const h=(a==="h"?1:0)+(b==="h"?1:0);
+ if(mode==="rec"){ return h===2?"affected":(h===1?"carrier":"unaffected"); }
+ else { return h>=1?"affected":"unaffected"; }
+}
+function maleStatus(a){ return a==="h"?"affected":"unaffected"; }
+const CLS={affected:"aff",carrier:"car",unaffected:"un"};
+
+function calc(){
+ const mom=$("mom").value, dad=$("dad").value;
+ const mA=[mom[0],mom[1]];   // mother's two X alleles
+ const dX=dad[0];            // father's X allele (to daughters)
+
+ // four offspring, each 25%
+ const daughters=mA.map(a=>({alleles:[a,dX].sort(), from:a, status:femaleStatus(a,dX)}));
+ const sons=mA.map(a=>({allele:a, status:maleStatus(a)}));
+
+ // aggregate daughters
+ function agg(list,keyf){ const m={}; list.forEach(x=>{const k=keyf(x); m[k]=(m[k]||0)+0.5;}); return m; }
+ const dAgg=agg(daughters,d=>d.status);
+ const sAgg=agg(sons,s=>s.status);
+
+ // render daughter/son boxes (each sex = 50% of children; percentages are within that sex)
+ function box(agg){
+  const order=["affected","carrier","unaffected"];
+  return order.filter(k=>agg[k]).map(k=>
+   `<div class="prow"><span class="${CLS[k]}">${k[0].toUpperCase()+k.slice(1)}</span><b>${(agg[k]*100).toFixed(0)}%</b></div>`
+  ).join("");
+ }
+ $("dOut").innerHTML=box(dAgg)+`<div class="prow" style="color:var(--muted)"><span>of all children</span><b>50% girls</b></div>`;
+ $("sOut").innerHTML=box(sAgg)+`<div class="prow" style="color:var(--muted)"><span>of all children</span><b>50% boys</b></div>`;
+
+ // overall summary (of ALL children)
+ const parts=[];
+ ["affected","carrier","unaffected"].forEach(k=>{ if(dAgg[k]) parts.push(`${(dAgg[k]*0.5*100).toFixed(0)}% ${k} daughters`); });
+ ["affected","unaffected"].forEach(k=>{ if(sAgg[k]) parts.push(`${(sAgg[k]*0.5*100).toFixed(0)}% ${k} sons`); });
+ $("summary").innerHTML="<b>Of all children:</b> "+parts.join(", ")+".";
+
+ // Punnett square: columns = father's X allele and Y ; rows = mother's two alleles
+ let pt='<table class="punnett"><tr><th></th><th>'+sup(dX)+' <span style="color:var(--muted);font-weight:400">(→ girls)</span></th><th>Y <span style="color:var(--muted);font-weight:400">(→ boys)</span></th></tr>';
+ mA.forEach(a=>{
+  pt+='<tr><th>'+sup(a)+'</th>';
+  // daughter cell
+  const dst=femaleStatus(a,dX);
+  pt+=`<td class="cell daughter"><b>${sup(a)+sup(dX)}</b><span class="${CLS[dst]}" style="color:var(--${dst==="affected"?"bad":dst==="carrier"?"warn":"good"})">girl · ${dst}</span></td>`;
+  // son cell
+  const sst=maleStatus(a);
+  pt+=`<td class="cell son"><b>${sup(a)}Y</b><span style="color:var(--${sst==="affected"?"bad":"good"})">boy · ${sst}</span></td>`;
+  pt+='</tr>';
+ });
+ pt+='</table>';
+ $("punnett").innerHTML=pt;
+
+ // work
+ const nm={HH:"XᴴXᴴ",Hh:"XᴴXʰ",hh:"XʰXʰ",HY:"XᴴY",hY:"XʰY"};
+ let w=`Cross: mother ${nm[mom]} × father ${nm[dad]}  (${mode==="rec"?"recessive":"dominant"} trait)\n`;
+ w+=`  Mother passes one X: ${mA[0]==="H"?"Xᴴ":"Xʰ"} or ${mA[1]==="H"?"Xᴴ":"Xʰ"}\n`;
+ w+=`  Father passes Xᴴ/Xʰ to daughters, Y to sons: ${dX==="H"?"Xᴴ":"Xʰ"} or Y\n\n`;
+ w+=`Daughters (get father's X = ${dX==="H"?"Xᴴ":"Xʰ"}):\n`;
+ daughters.forEach(d=>{ w+=`  ${d.alleles[0]==="H"?"Xᴴ":"Xʰ"}${d.alleles[1]==="H"?"Xᴴ":"Xʰ"} → ${d.status}\n`; });
+ w+=`\nSons (get father's Y):\n`;
+ sons.forEach(s=>{ w+=`  ${s.allele==="H"?"Xᴴ":"Xʰ"}Y → ${s.status}\n`; });
+ $("work").textContent=w.trimEnd();
+}
+
+function refresh(keepMom,keepDad){
+ fillSelect($("mom"),momOpts(),keepMom);
+ fillSelect($("dad"),dadOpts(),keepDad);
+ $("modeNote").textContent = mode==="rec"
+  ? "Recessive: a son needs one mutant allele to be affected, a daughter needs two. Examples: red-green colorblindness, hemophilia."
+  : "Dominant: a single mutant allele affects both sons and daughters, so there are no unaffected carriers.";
+ calc();
+}
+
+document.querySelectorAll("#mode button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#mode button").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
+ b.classList.add("on"); b.setAttribute("aria-pressed","true"); mode=b.dataset.m;
+ refresh($("mom").value,$("dad").value);
+});
+["mom","dad"].forEach(id=>$(id).addEventListener("change",calc));
+// defaults: carrier mother, unaffected father
+fillSelect($("mom"),momOpts(),"Hh"); fillSelect($("dad"),dadOpts(),"HY");
+refresh("Hh","HY");
+</script>
+</body>
+</html>
