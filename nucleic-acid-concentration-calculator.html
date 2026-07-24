@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA &amp; RNA Concentration Calculator (A260/A280), Free</title>
+<meta name="description" content="Free DNA/RNA concentration calculator from A260 absorbance, with 260/280 and 260/230 purity ratios and what they mean. dsDNA, ssDNA, and RNA, every step shown.">
+<meta name="keywords" content="dna concentration calculator, a260 a280 ratio, nucleic acid quantification, 260 280 ratio meaning, rna concentration from absorbance, nanodrop concentration calculation, 260 230 ratio">
+<link rel="canonical" href="https://biochemtools.com/nucleic-acid-concentration-calculator.html">
+<meta property="og:title" content="DNA &amp; RNA Concentration Calculator (A260/A280)">
+<meta property="og:description" content="Concentration from A260, plus 260/280 and 260/230 purity ratios and what they mean. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/nucleic-acid-concentration-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/nucleic-acid-concentration-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Molecular biology","item":"https://biochemtools.com/#molecular-biology"},{"@type":"ListItem","position":3,"name":"DNA & RNA Concentration Calculator","item":"https://biochemtools.com/nucleic-acid-concentration-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate DNA or RNA concentration from A260","step":[
+{"@type":"HowToStep","name":"Read A260","text":"Measure the absorbance of the sample at 260 nm, the wavelength nucleic acids absorb most strongly."},
+{"@type":"HowToStep","name":"Multiply by the conversion factor","text":"An A260 of 1.0 corresponds to about 50 ug/mL of double-stranded DNA, 33 ug/mL of single-stranded DNA, or 40 ug/mL of RNA (at a 1 cm path length). Multiply A260 by the right factor for your sample."},
+{"@type":"HowToStep","name":"Multiply by the dilution factor","text":"If the sample was diluted before reading, multiply by the dilution factor to get the concentration of the original stock."},
+{"@type":"HowToStep","name":"Check purity with the ratios","text":"A260/A280 tells you about protein contamination (about 1.8 for pure DNA, 2.0 for pure RNA); A260/A230 tells you about salt, phenol, and carbohydrate contamination (about 2.0 to 2.2 when clean)."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does the A260/A280 ratio tell you?","acceptedAnswer":{"@type":"Answer","text":"It's a purity check for protein contamination. Nucleic acids absorb strongly at 260 nm and proteins absorb at 280 nm (from aromatic amino acids like tryptophan and tyrosine), so the ratio of the two reflects how clean the prep is. Pure DNA reads about 1.8 and pure RNA about 2.0. A ratio noticeably below those values (say under 1.7 for DNA) usually means residual protein or phenol from the extraction."}},
+{"@type":"Question","name":"What does the A260/A230 ratio tell you?","acceptedAnswer":{"@type":"Answer","text":"It's a second purity check, sensitive to a different set of contaminants: chaotropic salts (like guanidine), phenol, carbohydrates, and EDTA, which all absorb around 230 nm. A clean sample reads about 2.0 to 2.2. A low A260/A230 (below about 1.8) flags leftover extraction reagents even when the 260/280 looks fine, which is why both ratios are reported together."}},
+{"@type":"Question","name":"Why is an A260 of 1.0 equal to 50 ug/mL for DNA but 40 for RNA?","acceptedAnswer":{"@type":"Answer","text":"Because different nucleic acids absorb 260 nm light with slightly different efficiency per unit mass, based on their base composition and structure. Double-stranded DNA's bases are stacked and partially hidden (hypochromicity), so it takes more DNA to reach a given absorbance — about 50 ug/mL per A260 unit. Single-stranded DNA (33) and RNA (40) have more exposed bases and absorb more per microgram, so a lower concentration reaches the same absorbance."}},
+{"@type":"Question","name":"Do I need to account for the dilution I made?","acceptedAnswer":{"@type":"Answer","text":"Yes. The A260 you read reflects the diluted sample, so the calculated concentration is the concentration of what's in the cuvette. To get back to your original undiluted stock, multiply by the dilution factor. For example, a 1:100 dilution reading A260 = 0.2 gives 0.2 x 50 x 100 = 1000 ug/mL for dsDNA. Forgetting the dilution factor is one of the most common quantification mistakes."}},
+{"@type":"Question","name":"Is ng/uL the same as ug/mL?","acceptedAnswer":{"@type":"Answer","text":"Yes, they're numerically identical: 1 ug/mL equals 1 ng/uL. Instruments like the NanoDrop report ng/uL and older bench spectrophotometer protocols often use ug/mL, but the number is the same, so no conversion is needed between them."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ @media(max-width:560px){.fields{grid-template-columns:1fr}}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.2rem;font-weight:700;color:var(--out)}
+ .ratios{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0}
+ @media(max-width:520px){.ratios{grid-template-columns:1fr}}
+ .rbox{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}
+ .rbox .rlbl{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+ .rbox .rval{font-size:1.6rem;font-weight:700;margin:.15rem 0}
+ .rbox .rmsg{font-size:.82rem}
+ .rbox.good .rval,.rbox.good .rmsg{color:var(--good)}.rbox.warn .rval,.rbox.warn .rmsg{color:var(--warn)}.rbox.bad .rval,.rbox.bad .rmsg{color:var(--bad)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>DNA &amp; RNA Concentration Calculator</h1><p>Turn a spectrophotometer or NanoDrop reading into concentration, and check the 260/280 and 260/230 purity ratios to see whether your prep is clean. Every step shown.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-bottom:.5rem">Sample type</label>
+  <div class="modes" id="type">
+   <button data-t="dsDNA" class="on">Double-stranded DNA</button>
+   <button data-t="ssDNA">Single-stranded DNA</button>
+   <button data-t="RNA">RNA</button>
+  </div>
+  <div class="fields">
+   <div><label for="a260">A<sub>260</sub> (absorbance at 260 nm)</label><input id="a260" type="number" step="any" min="0" value="0.400"></div>
+   <div><label for="dil">Dilution factor (1 if undiluted)</label><input id="dil" type="number" step="any" min="1" value="50"></div>
+  </div>
+  <div class="fields" style="margin-top:1rem">
+   <div><label for="a280">A<sub>280</sub> (for the 260/280 ratio)</label><input id="a280" type="number" step="any" min="0" value="0.222"></div>
+   <div><label for="a230">A<sub>230</sub> (optional, for 260/230)</label><input id="a230" type="number" step="any" min="0" value="0.182"></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Concentration</div><div class="v" id="concOut" aria-live="polite">—</div></div>
+  <div class="ratios">
+   <div class="rbox" id="box280" aria-live="polite"><div class="rlbl">A260 / A280</div><div class="rval" id="r280">—</div><div class="rmsg" id="m280"></div></div>
+   <div class="rbox" id="box230" aria-live="polite"><div class="rlbl">A260 / A230</div><div class="rval" id="r230">—</div><div class="rmsg" id="m230"></div></div>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How the numbers work</h2>
+ <p class="note">Nucleic acids absorb ultraviolet light most strongly at 260 nm, and the amount of absorbance is proportional to concentration (Beer-Lambert law). Empirically, at a 1 cm path length an A<sub>260</sub> of 1.0 corresponds to about 50 µg/mL of double-stranded DNA, 33 µg/mL of single-stranded DNA, or 40 µg/mL of RNA — the differences come from how exposed the bases are (double-stranded DNA hides its stacked bases, so it takes more of it to reach the same absorbance). Multiply A<sub>260</sub> by the right factor and by any dilution you made, and you have the concentration. The two ratios are quick purity checks against different contaminants.</p>
+ <p class="note">Related tools: <a href="/beer-lambert-calculator.html">Beer-Lambert calculator</a> · <a href="/dna-melting-temperature-calculator.html">DNA melting temperature calculator</a> · <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">The two purity ratios, at a glance</h2>
+  <div style="overflow-x:auto">
+  <table>
+   <thead><tr><th>Ratio</th><th>Clean value</th><th>If it's low, suspect…</th></tr></thead>
+   <tbody>
+    <tr><td>A260 / A280</td><td>~1.8 (DNA), ~2.0 (RNA)</td><td>Residual protein or phenol (they absorb at 280 nm)</td></tr>
+    <tr><td>A260 / A230</td><td>~2.0 – 2.2</td><td>Chaotropic salts (guanidine), phenol, carbohydrates, EDTA (absorb at 230 nm)</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <p class="note">Both ratios are reported together because they catch different problems — a prep can have a perfect 260/280 but a poor 260/230 if extraction salts weren't fully washed out.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example (the default)</h2>
+  <div class="work">Double-stranded DNA, read at A260 = 0.400 after a 1:50 dilution
+A280 = 0.222, A230 = 0.182
+
+Concentration:
+  = A260 × factor × dilution
+  = 0.400 × 50 µg/mL × 50
+  = 1000 µg/mL = 1000 ng/µL   (1 µg/mL = 1 ng/µL)
+
+Purity:
+  A260/A280 = 0.400 / 0.222 = 1.80   → ideal for DNA (clean)
+  A260/A230 = 0.400 / 0.182 = 2.20   → in the clean 2.0–2.2 range</div>
+  <p class="note">A textbook-clean genomic DNA prep. Drop the A280 to, say, 0.27 and the 260/280 falls to ~1.48, flagging protein or phenol carryover.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>What does A260/A280 tell you?</b><br>Protein contamination. Nucleic acids absorb at 260, proteins at 280. Pure DNA ≈ 1.8, pure RNA ≈ 2.0; noticeably lower means residual protein or phenol.</p>
+  <p class="note"><b>What does A260/A230 tell you?</b><br>A second check for salts (guanidine), phenol, carbohydrates, and EDTA, which absorb near 230. Clean is ~2.0–2.2; low flags leftover extraction reagents.</p>
+  <p class="note"><b>Why 50 for DNA but 40 for RNA?</b><br>They absorb 260 nm light differently per microgram. Double-stranded DNA's stacked bases are partly hidden (hypochromicity), so it takes ~50 µg/mL to reach A260 = 1; ssDNA (33) and RNA (40) have more exposed bases.</p>
+  <p class="note"><b>Do I include the dilution factor?</b><br>Yes — the A260 reflects the diluted sample, so multiply by the dilution factor to recover the original stock concentration. Forgetting it is a very common mistake.</p>
+  <p class="note"><b>Is ng/µL the same as µg/mL?</b><br>Yes, numerically identical (1 µg/mL = 1 ng/µL). NanoDrops report ng/µL; older protocols use µg/mL; same number.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 34 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+const FACTOR={dsDNA:50, ssDNA:33, RNA:40};
+const FNAME={dsDNA:"double-stranded DNA", ssDNA:"single-stranded DNA", RNA:"RNA"};
+let type="dsDNA";
+function calc(){
+ const A260=+$("a260").value, dil=+$("dil").value||1, A280=+$("a280").value, A230=+$("a230").value;
+ const f=FACTOR[type];
+ if(A260<=0||dil<=0){
+  $("concOut").textContent="—";
+  $("box280").className="rbox";$("r280").textContent="—";$("m280").textContent="";
+  $("box230").className="rbox";$("r230").textContent="—";$("m230").textContent="";
+  $("work").textContent="Enter a positive A260 and a dilution factor of at least 1.";
+  return;
+ }
+ const conc=A260*f*dil;
+ $("concOut").textContent = (conc>=10 ? conc.toFixed(0) : conc.toFixed(1)) + " ng/µL";
+
+ let w=`Concentration:\n  = A260 × factor × dilution\n  = ${A260} × ${f} µg/mL × ${dil}\n  = ${(conc>=10?conc.toFixed(0):conc.toFixed(1))} µg/mL = ${(conc>=10?conc.toFixed(0):conc.toFixed(1))} ng/µL\n`;
+
+ // 260/280
+ const b280=$("box280");
+ if(A280>0){
+  const r=A260/A280;
+  const target = type==="RNA" ? 2.0 : 1.8;
+  const low = type==="RNA" ? 1.8 : 1.7;
+  let cls,msg;
+  if(r>=low && r<=target+0.15){ cls="good"; msg=`clean (ideal ≈ ${target.toFixed(1)} for ${type==="RNA"?"RNA":"DNA"})`; }
+  else if(r<low){ cls="bad"; msg="low — likely protein or phenol contamination"; }
+  else { cls="warn"; msg=type==="RNA"?"high — check for other absorbing species":"high — possible RNA carryover in a DNA prep"; }
+  b280.className="rbox "+cls; $("r280").textContent=r.toFixed(2); $("m280").textContent=msg;
+  w+=`\nA260/A280 = ${A260}/${A280} = ${r.toFixed(2)}   → ${msg}`;
+ } else { b280.className="rbox"; $("r280").textContent="—"; $("m280").textContent="enter A280"; }
+
+ // 260/230
+ const b230=$("box230");
+ if(A230>0){
+  const r=A260/A230;
+  let cls,msg;
+  if(r>=1.8 && r<=2.4){ cls="good"; msg="clean (ideal ≈ 2.0–2.2)"; }
+  else if(r<1.8){ cls="bad"; msg="low — salt, phenol, carbohydrate, or EDTA carryover"; }
+  else { cls="warn"; msg="high — unusual; recheck the blank/baseline"; }
+  b230.className="rbox "+cls; $("r230").textContent=r.toFixed(2); $("m230").textContent=msg;
+  w+=`\nA260/A230 = ${A260}/${A230} = ${r.toFixed(2)}   → ${msg}`;
+ } else { b230.className="rbox"; $("r230").textContent="—"; $("m230").textContent="optional"; }
+
+ $("work").textContent=w;
+}
+document.querySelectorAll("#type button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#type button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ type=b.dataset.t; calc();
+});
+["a260","dil","a280","a230"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
