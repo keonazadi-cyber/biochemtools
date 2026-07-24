@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empirical Formula Calculator — and Molecular Formula, Free</title>
+<meta name="description" content="Free empirical formula calculator. Turn percent composition or element masses into the empirical formula, then the molecular formula from molar mass, step by step.">
+<meta name="keywords" content="empirical formula calculator, molecular formula calculator, percent composition to formula, how to find empirical formula, empirical vs molecular formula, mass percent to formula">
+<link rel="canonical" href="https://biochemtools.com/empirical-formula-calculator.html">
+<meta property="og:title" content="Empirical Formula Calculator — and Molecular Formula">
+<meta property="og:description" content="Turn percent composition or element masses into the empirical formula, then the molecular formula from molar mass. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/empirical-formula-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/empirical-formula-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Chemistry","item":"https://biochemtools.com/#chemistry"},{"@type":"ListItem","position":3,"name":"Empirical Formula Calculator","item":"https://biochemtools.com/empirical-formula-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to find the empirical formula from percent composition","step":[
+{"@type":"HowToStep","name":"Treat percent as grams","text":"Assume a 100 g sample, so each element's mass percent becomes its mass in grams. (If you already have masses in grams, use them directly.)"},
+{"@type":"HowToStep","name":"Convert each element to moles","text":"Divide each element's mass by its atomic mass to get moles."},
+{"@type":"HowToStep","name":"Divide by the smallest","text":"Divide every element's moles by the smallest of the mole values. This gives the mole ratio, normalized so the smallest is 1."},
+{"@type":"HowToStep","name":"Scale to whole numbers","text":"If a ratio is close to a simple fraction (like 1.5 or 1.33), multiply all ratios by the smallest whole number that turns them into integers (2, 3, etc). Those integers are the subscripts of the empirical formula."},
+{"@type":"HowToStep","name":"Find the molecular formula","text":"Divide the compound's actual molar mass by the empirical formula mass to get a whole-number multiplier, then multiply every subscript by it."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between empirical and molecular formula?","acceptedAnswer":{"@type":"Answer","text":"The empirical formula is the simplest whole-number ratio of atoms in a compound; the molecular formula is the actual number of each atom in one molecule. They can be the same (water is H2O both ways) or the molecular formula can be a whole-number multiple of the empirical one — glucose is CH2O empirically but C6H12O6 as a molecule, exactly 6 times the empirical formula. You need the compound's molar mass to get from the empirical formula to the molecular formula."}},
+{"@type":"Question","name":"Why do I divide by the smallest number of moles?","acceptedAnswer":{"@type":"Answer","text":"Dividing every element's moles by the smallest value forces the least-abundant element to a ratio of exactly 1, which makes the other ratios easy to read as 'how many of this atom per one of that.' It's just a way of normalizing the ratio into its simplest starting form before you clean it up into whole numbers."}},
+{"@type":"Question","name":"What do I do when a ratio comes out as 1.5 or 2.33?","acceptedAnswer":{"@type":"Answer","text":"Multiply every ratio by the smallest whole number that turns them all into integers. A 1.5 means multiply by 2 (giving 3); a 1.33 (which is 4/3) means multiply by 3 (giving 4); a 1.25 (5/4) means multiply by 4. The point is that atoms can only come in whole numbers, so a non-integer ratio just means your 'divide by the smallest' step landed on a fraction that needs scaling up."}},
+{"@type":"Question","name":"How do I get the molecular formula once I have the empirical formula?","acceptedAnswer":{"@type":"Answer","text":"Add up the atomic masses in the empirical formula to get the empirical formula mass, then divide the compound's known molar mass by it. That gives a whole number (call it n), and the molecular formula is every empirical-formula subscript multiplied by n. For glucose: empirical CH2O has a mass of about 30, the molar mass is about 180, so n = 180/30 = 6, giving C6H12O6."}},
+{"@type":"Question","name":"Can I enter masses in grams instead of percent?","acceptedAnswer":{"@type":"Answer","text":"Yes. Percent composition and grams are handled identically here, because assuming a 100 g sample turns each percent directly into grams. So whether a problem gives you '40.0% carbon' or '4.00 g of carbon,' you enter the number the same way and the mole ratio comes out the same."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--mol:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.45rem .95rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.55rem;border-radius:8px}
+ .erow{display:grid;grid-template-columns:1.2fr 1.6fr 1.6fr;gap:.7rem;margin-bottom:.7rem}
+ @media(max-width:560px){.erow{grid-template-columns:1fr 1fr 1fr;gap:.5rem}}
+ .erow .hd{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.2rem;font-weight:700;color:var(--out)}
+ .out.mol{background:rgba(127,119,221,.12)}.out.mol .v{color:var(--mol)}
+ .out .v sub{font-size:1.3rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ .amtlabel{color:var(--accent);font-weight:600}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Empirical Formula Calculator</h1><p>Enter each element's percent composition (or its mass in grams) and atomic mass. This finds the empirical formula, showing the tricky scale-to-whole-numbers step, then the molecular formula if you give the molar mass.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-bottom:.5rem">Each element's amount is given as:</label>
+  <div class="modes" id="unit">
+   <button data-u="pct" class="on">Percent composition (%)</button>
+   <button data-u="g">Mass in grams (g)</button>
+  </div>
+  <div class="erow"><div class="hd">Element (optional)</div><div class="hd"><span class="amtlabel" id="amtHd">Percent (%)</span></div><div class="hd">Atomic mass</div></div>
+  <div class="erow"><input id="s0" type="text" value="C" aria-label="Element 1 symbol"><input id="a0" type="number" step="any" min="0" value="40.0" aria-label="Element 1 amount"><input id="m0" type="number" step="any" min="0" value="12.011" aria-label="Element 1 atomic mass"></div>
+  <div class="erow"><input id="s1" type="text" value="H" aria-label="Element 2 symbol"><input id="a1" type="number" step="any" min="0" value="6.7" aria-label="Element 2 amount"><input id="m1" type="number" step="any" min="0" value="1.008" aria-label="Element 2 atomic mass"></div>
+  <div class="erow"><input id="s2" type="text" value="O" aria-label="Element 3 symbol"><input id="a2" type="number" step="any" min="0" value="53.3" aria-label="Element 3 amount"><input id="m2" type="number" step="any" min="0" value="15.999" aria-label="Element 3 atomic mass"></div>
+  <div class="erow"><input id="s3" type="text" value="" placeholder="(optional)" aria-label="Element 4 symbol"><input id="a3" type="number" step="any" min="0" value="" aria-label="Element 4 amount"><input id="m3" type="number" step="any" min="0" value="" aria-label="Element 4 atomic mass"></div>
+  <label for="mm" style="margin-top:1rem">Compound's molar mass (g/mol) — optional, for the molecular formula</label>
+  <input id="mm" type="number" step="any" min="0" value="180.16" style="max-width:220px">
+ </div>
+
+ <div class="card">
+  <div class="out"><div style="color:var(--muted);font-size:.85rem">Empirical formula</div><div class="v" id="empOut" aria-live="polite">—</div></div>
+  <div class="out mol" id="molBox"><div style="color:var(--muted);font-size:.85rem">Molecular formula</div><div class="v" id="molOut" aria-live="polite">—</div></div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How the empirical formula is found</h2>
+ <p class="note">The whole method turns "how much of each element" into "how many atoms of each, in the simplest whole-number ratio." Percent composition is treated as grams by imagining a 100 g sample, so 40% carbon just means 40 g of carbon. Convert each element's grams to moles (divide by atomic mass), then divide every mole value by the smallest one so the least-abundant element becomes 1. If any ratio lands on a fraction like 1.5 or 1.33, multiply them all by the smallest whole number that clears the fraction — atoms only come in whole numbers. Those integers are your subscripts. To go from there to the molecular formula, divide the real molar mass by the empirical formula's mass and multiply every subscript by that whole number.</p>
+ <p class="note">Related tools: <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity calculator</a> · <a href="/percent-yield-calculator.html">Percent yield calculator</a> · <a href="/limiting-reagent-calculator.html">Limiting reagent calculator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: glucose (the default)</h2>
+  <div class="work">Composition: 40.0% C, 6.7% H, 53.3% O   (molar mass 180.16 g/mol)
+Treat percents as grams (100 g sample):
+
+Step 1 — moles of each:
+  C: 40.0 / 12.011 = 3.330 mol
+  H: 6.7  / 1.008  = 6.647 mol
+  O: 53.3 / 15.999 = 3.331 mol
+
+Step 2 — divide by the smallest (3.330):
+  C: 3.330/3.330 = 1.00
+  H: 6.647/3.330 = 2.00
+  O: 3.331/3.330 = 1.00
+
+Step 3 — already whole numbers →  empirical formula = CH2O
+  empirical formula mass = 12.011 + 2(1.008) + 15.999 = 30.03 g/mol
+
+Step 4 — molecular formula:
+  n = 180.16 / 30.03 = 6  →  multiply each subscript by 6
+  molecular formula = C6H12O6</div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> A hydrocarbon is 82.7% C and 17.3% H, with a molar mass of 58.12 g/mol. Find the empirical and molecular formulas. (C = 12.011, H = 1.008)</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Moles: C = 82.7/12.011 = 6.885;  H = 17.3/1.008 = 17.16
+Divide by smallest (6.885): C = 1.00;  H = 2.49
+
+2.49 is close to 2.5 = 5/2, so multiply both by 2:
+  C = 2,  H = 5  →  empirical formula = C2H5
+  empirical mass = 2(12.011) + 5(1.008) = 29.06 g/mol
+
+Molecular: n = 58.12/29.06 = 2  →  C4H10 (butane)</div></details>
+  <p class="note"><b>2.</b> Why can two completely different compounds share the same empirical formula?</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Because the empirical formula only fixes the ratio of atoms, not the actual count.
+Formaldehyde (CH2O), acetic acid (C2H4O2), and glucose (C6H12O6) all reduce to the
+same empirical formula CH2O — a 1:2:1 ratio of C:H:O — even though they are very
+different molecules. Only the molar mass tells you which multiple of the empirical
+formula you actually have, which is why the molecular formula needs it.</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Empirical vs. molecular formula?</b><br>Empirical is the simplest whole-number atom ratio; molecular is the actual atom count in one molecule. They match for water (H₂O) but differ for glucose (CH₂O empirical, C₆H₁₂O₆ molecular). You need the molar mass to get from one to the other.</p>
+  <p class="note"><b>Why divide by the smallest number of moles?</b><br>It forces the least-abundant element to a ratio of 1, making the other ratios easy to read as atoms-per-atom before you scale to whole numbers.</p>
+  <p class="note"><b>What if a ratio is 1.5 or 2.33?</b><br>Multiply every ratio by the smallest whole number that makes them all integers: 1.5 → ×2, 1.33 (4/3) → ×3, 1.25 (5/4) → ×4. Atoms only come in whole numbers.</p>
+  <p class="note"><b>How do I get the molecular formula?</b><br>Divide the real molar mass by the empirical formula mass to get a whole number n, then multiply every subscript by n.</p>
+  <p class="note"><b>Grams or percent?</b><br>Either — they're handled the same, because assuming a 100 g sample turns each percent directly into grams.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 33 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+let unit="pct";
+function fmtFormula(pairs){ // pairs: [[symbol, count], ...] -> HTML with <sub>
+ return pairs.map(([s,n])=>s+(n>1?`<sub>${n}</sub>`:"")).join("");
+}
+function calc(){
+ // gather up to 4 element rows
+ const els=[];
+ for(let i=0;i<4;i++){
+  const sym=($("s"+i).value||"").trim() || ("El"+(i+1));
+  const amt=+$("a"+i).value, am=+$("m"+i).value;
+  if(amt>0 && am>0) els.push({sym,amt,am});
+ }
+ if(els.length<2){
+  $("empOut").textContent="—";$("molOut").textContent="—";$("molBox").style.display="none";
+  $("work").textContent="Enter at least two elements, each with a positive amount and atomic mass.";
+  return;
+ }
+ // moles
+ els.forEach(e=>{ e.mol=e.amt/e.am; });
+ const minMol=Math.min(...els.map(e=>e.mol));
+ els.forEach(e=>{ e.ratio=e.mol/minMol; });
+ // find smallest multiplier 1..6 making all ratios ~integers
+ let mult=1;
+ for(let k=1;k<=6;k++){
+  const err=Math.max(...els.map(e=>Math.abs(e.ratio*k - Math.round(e.ratio*k))));
+  if(err<0.10){ mult=k; break; }
+ }
+ els.forEach(e=>{ e.sub=Math.round(e.ratio*mult); });
+ const efPairs=els.map(e=>[e.sym,e.sub]);
+ $("empOut").innerHTML=fmtFormula(efPairs);
+ const efMass=els.reduce((s,e)=>s+e.sub*e.am,0);
+
+ let w=`Treat amounts as grams${unit==="pct"?" (100 g sample, so % = g)":""}:\n\nStep 1 — moles of each:\n`;
+ els.forEach(e=>{ w+=`  ${e.sym}: ${e.amt} / ${e.am} = ${e.mol.toFixed(4)} mol\n`; });
+ w+=`\nStep 2 — divide by the smallest (${minMol.toFixed(4)}):\n`;
+ els.forEach(e=>{ w+=`  ${e.sym}: ${e.mol.toFixed(4)}/${minMol.toFixed(4)} = ${e.ratio.toFixed(3)}\n`; });
+ if(mult>1){
+  w+=`\nStep 3 — a ratio is fractional, so multiply all by ${mult}:\n`;
+  els.forEach(e=>{ w+=`  ${e.sym}: ${e.ratio.toFixed(3)} × ${mult} = ${e.sub}\n`; });
+ } else {
+  w+=`\nStep 3 — already whole numbers.\n`;
+ }
+ const efText=els.map(e=>e.sym+(e.sub>1?e.sub:"")).join("");
+ w+=`\nEmpirical formula = ${efText}\n`;
+ w+=`Empirical formula mass = ${els.map(e=>`${e.sub>1?e.sub:""}(${e.am})`).join(" + ")} = ${efMass.toFixed(2)} g/mol`;
+
+ const mm=+$("mm").value;
+ if(mm>0){
+  const n=Math.max(1, Math.round(mm/efMass));
+  const mfPairs=els.map(e=>[e.sym, e.sub*n]);
+  $("molBox").style.display="block";
+  $("molOut").innerHTML=fmtFormula(mfPairs);
+  const mfText=els.map(e=>e.sym+(e.sub*n>1?e.sub*n:"")).join("");
+  w+=`\n\nStep 4 — molecular formula:\n  n = molar mass / empirical mass = ${mm} / ${efMass.toFixed(2)} = ${(mm/efMass).toFixed(2)} ≈ ${n}\n  multiply each subscript by ${n}  →  ${mfText}`;
+ } else {
+  $("molBox").style.display="none";
+  $("molOut").textContent="—";
+  w+=`\n\nStep 4 — enter the compound's molar mass above to get the molecular formula.`;
+ }
+ $("work").textContent=w;
+}
+document.querySelectorAll("#unit button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#unit button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ unit=b.dataset.u; $("amtHd").textContent = unit==="pct" ? "Percent (%)" : "Mass (g)";
+ calc();
+});
+["s0","a0","m0","s1","a1","m1","s2","a2","m2","s3","a3","m3","mm"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
