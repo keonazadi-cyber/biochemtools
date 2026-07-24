@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limiting Reagent Calculator — Find the Limiter, Free</title>
+<meta name="description" content="Free limiting reagent calculator. Enter two reactants and the balanced coefficients to find which runs out first and how much excess is left over, step by step.">
+<meta name="keywords" content="limiting reagent calculator, limiting reactant calculator, how to find the limiting reactant, excess reactant left over, stoichiometry limiting reactant, mole ratio limiting">
+<link rel="canonical" href="https://biochemtools.com/limiting-reagent-calculator.html">
+<meta property="og:title" content="Limiting Reagent Calculator — Find the Limiter">
+<meta property="og:description" content="Find which reactant runs out first and how much excess is left over, step by step. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/limiting-reagent-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/limiting-reagent-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Chemistry","item":"https://biochemtools.com/#chemistry"},{"@type":"ListItem","position":3,"name":"Limiting Reagent Calculator","item":"https://biochemtools.com/limiting-reagent-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to find the limiting reagent","step":[
+{"@type":"HowToStep","name":"Convert each reactant to moles","text":"Divide each reactant's mass by its molar mass to get moles."},
+{"@type":"HowToStep","name":"Divide by the coefficient","text":"Divide each reactant's moles by its coefficient from the balanced equation. This normalizes them so they can be compared directly."},
+{"@type":"HowToStep","name":"Compare","text":"The reactant with the smaller moles-per-coefficient value runs out first — that is the limiting reagent. The other is in excess."},
+{"@type":"HowToStep","name":"Find the leftover excess","text":"Moles of excess consumed = moles of limiting reagent × (excess coefficient / limiting coefficient). Subtract that from the starting moles of excess, then multiply by its molar mass to get the grams left over."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the limiting reagent?","acceptedAnswer":{"@type":"Answer","text":"The limiting reagent (or limiting reactant) is the reactant that runs out first in a chemical reaction. Because it's used up before the others, it sets the maximum amount of product that can form — no matter how much of the other reactants you have, the reaction stops when the limiting reagent is gone. Everything left over from the other reactants is called the excess."}},
+{"@type":"Question","name":"Why can't I just compare the masses or moles directly?","acceptedAnswer":{"@type":"Answer","text":"Because reactants are consumed in the ratio set by the balanced equation's coefficients, not one-to-one. For N2 + 3H2 → 2NH3, you need 3 moles of H2 for every 1 mole of N2, so having more moles of H2 doesn't automatically make N2 the limiting one. The fair comparison is moles divided by coefficient — that tells you how many 'batches' of the reaction each reactant could support, and the smallest number wins."}},
+{"@type":"Question","name":"How do I find how much excess reactant is left over?","acceptedAnswer":{"@type":"Answer","text":"First find how much of the excess reactant actually gets used: multiply the moles of limiting reagent by the ratio of the two coefficients (excess coefficient ÷ limiting coefficient). Subtract that consumed amount from the moles of excess you started with, and multiply the leftover moles by the excess reactant's molar mass to get the grams remaining unreacted."}},
+{"@type":"Question","name":"What is the connection to percent yield?","acceptedAnswer":{"@type":"Answer","text":"The limiting reagent is what you use to calculate theoretical yield — the maximum product possible — since it's the reactant that caps the reaction. Once you've identified the limiting reagent here, you carry its moles into a percent yield calculation. That's why the two topics are almost always taught together."}},
+{"@type":"Question","name":"Can there be no limiting reagent?","acceptedAnswer":{"@type":"Answer","text":"If the two reactants are supplied in exactly the stoichiometric ratio — their moles-per-coefficient values are equal — then neither is in excess and both run out at the same instant. That's the ideal 'no leftover' case, but it's rare in practice; usually one reactant is deliberately added in excess to push the reaction toward completion, and the other is the limiting one."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--lim:#e0a93b}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:2.5rem 1rem 1rem}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ .rlabel{color:var(--accent);font-weight:600;font-size:.9rem;margin:.5rem 0 .3rem}
+ .fields3{display:grid;grid-template-columns:2fr 2fr 1fr;gap:.8rem}
+ @media(max-width:560px){.fields3{grid-template-columns:1fr}}
+ .out{background:rgba(224,169,59,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:1.7rem;font-weight:700;color:var(--lim)}
+ .out.tie{background:rgba(93,202,165,.12)}.out.tie .v{color:var(--out)}
+ .out .sub{color:var(--muted);font-size:.9rem;margin-top:.4rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Limiting Reagent Calculator</h1><p>Enter two reactants and their coefficients from the balanced equation. This finds which one runs out first (the limiting reagent) and exactly how much of the other is left over, every step shown.</p></header>
+<main>
+ <div class="card">
+  <div class="rlabel">Reactant A</div>
+  <div class="fields3">
+   <div><label for="mA">Mass (g)</label><input id="mA" type="number" step="any" min="0" value="28"></div>
+   <div><label for="mmA">Molar mass (g/mol)</label><input id="mmA" type="number" step="any" min="0" value="28.014"></div>
+   <div><label for="cA">Coefficient</label><input id="cA" type="number" step="1" min="1" value="1"></div>
+  </div>
+  <div class="rlabel" style="margin-top:1.25rem">Reactant B</div>
+  <div class="fields3">
+   <div><label for="mB">Mass (g)</label><input id="mB" type="number" step="any" min="0" value="10"></div>
+   <div><label for="mmB">Molar mass (g/mol)</label><input id="mmB" type="number" step="any" min="0" value="2.016"></div>
+   <div><label for="cB">Coefficient</label><input id="cB" type="number" step="1" min="1" value="3"></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="out" id="outBox"><div style="color:var(--muted);font-size:.85rem">Limiting reagent</div><div class="v" id="limOut" aria-live="polite">—</div><div class="sub" id="excessOut"></div></div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How to find the limiting reagent</h2>
+ <p class="note">You can't just compare masses, or even moles, directly — reactants are used up in the ratio set by the balanced equation, not one for one. The fair comparison is moles divided by coefficient, which tells you how many "batches" of the reaction each reactant could support on its own. Convert each reactant's mass to moles (divide by molar mass), divide each by its coefficient, and whichever gives the smaller number runs out first: that's the limiting reagent. To find the leftover excess, work out how much of the other reactant the limiting reagent actually consumes, then subtract it from what you started with.</p>
+ <p class="note">Related tools: <a href="/percent-yield-calculator.html">Percent yield calculator</a> · <a href="/molarity-molar-mass-calculator.html">Molar mass &amp; molarity calculator</a> · <a href="/chemical-equilibrium-calculator.html">Chemical equilibrium (Keq)</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Worked example: the Haber process (the default)</h2>
+  <div class="work">Reaction: N2 + 3 H2 → 2 NH3
+Given: 28 g N2 (molar mass 28.014), 10 g H2 (molar mass 2.016)
+
+Step 1 — moles of each:
+  N2: 28 / 28.014 = 0.9995 mol
+  H2: 10 / 2.016  = 4.960 mol
+
+Step 2 — divide by coefficient:
+  N2: 0.9995 / 1 = 0.9995
+  H2: 4.960 / 3  = 1.653
+
+Step 3 — smaller value is limiting:
+  0.9995 (N2) < 1.653 (H2)  →  N2 is the limiting reagent
+
+Step 4 — leftover H2 (the excess):
+  H2 consumed = 0.9995 × (3/1) = 2.999 mol
+  H2 leftover = 4.960 − 2.999 = 1.962 mol
+             = 1.962 × 2.016 = 3.96 g H2 left unreacted</div>
+  <p class="note">N₂ runs out first, so it caps the reaction — carry its 0.9995 mol into the <a href="/percent-yield-calculator.html">percent yield calculator</a> to find how much ammonia can form.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Practice problems</h2>
+  <p class="note"><b>1.</b> 2 Al + 3 Cl₂ → 2 AlCl₃. You have 5.40 g Al (molar mass 26.98) and 12.0 g Cl₂ (molar mass 70.90). Which is limiting, and how much of the excess is left?</p>
+  <details style="margin:0 0 1.25rem"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Moles: Al = 5.40/26.98 = 0.2001;  Cl2 = 12.0/70.90 = 0.1693
+Divide by coefficient: Al = 0.2001/2 = 0.1001;  Cl2 = 0.1693/3 = 0.0564
+0.0564 (Cl2) < 0.1001 (Al)  →  Cl2 is limiting
+
+Al consumed = 0.1693 × (2/3) = 0.1128 mol
+Al leftover = 0.2001 − 0.1128 = 0.0873 mol = 0.0873 × 26.98 = 2.36 g Al left over</div></details>
+  <p class="note"><b>2.</b> Why is it a mistake to assume the reactant present in the smaller mass (or smaller number of moles) is automatically the limiting one?</p>
+  <details style="margin:0"><summary style="cursor:pointer;color:var(--accent)">Show answer</summary><div class="work">Because reactants are consumed in the coefficient ratio, not one-to-one. A reactant
+with more moles can still be limiting if the equation demands even more of it — e.g. in
+N2 + 3H2, you need 3× as much H2 as N2, so H2 can be the larger amount and still run out.
+Always compare moles ÷ coefficient, never raw mass or raw moles.</div></details>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>What is the limiting reagent?</b><br>The reactant that runs out first. It caps how much product can form; whatever is left of the other reactants is the excess.</p>
+  <p class="note"><b>Why not just compare masses or moles?</b><br>Reactants are consumed in the coefficient ratio, not one-to-one. Compare moles ÷ coefficient — that's how many "batches" each reactant supports — and the smallest wins.</p>
+  <p class="note"><b>How do I find the leftover excess?</b><br>Excess consumed = moles of limiting reagent × (excess coefficient ÷ limiting coefficient). Subtract from the starting moles of excess, then multiply by its molar mass for grams left.</p>
+  <p class="note"><b>How does this connect to percent yield?</b><br>The limiting reagent is what you use to find theoretical yield, since it caps the reaction — that's why the two are taught together. Carry its moles into the percent yield calculator.</p>
+  <p class="note"><b>Can there be no limiting reagent?</b><br>Yes, if the reactants are in exactly the stoichiometric ratio (equal moles ÷ coefficient) — then both run out together with nothing left over. Rare in practice, since one reactant is usually added in excess on purpose.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 32 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</span></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+function calc(){
+ const mA=+$("mA").value, mmA=+$("mmA").value, cA=Math.round(+$("cA").value);
+ const mB=+$("mB").value, mmB=+$("mmB").value, cB=Math.round(+$("cB").value);
+ const box=$("outBox");
+ box.classList.remove("tie");
+ if(mA<=0||mmA<=0||cA<1||mB<=0||mmB<=0||cB<1){
+  $("limOut").textContent="—";$("excessOut").textContent="";$("work").textContent="Enter positive masses and molar masses, and whole-number coefficients (≥1), for both reactants.";
+  return;
+ }
+ const molA=mA/mmA, molB=mB/mmB;
+ const rA=molA/cA, rB=molB/cB;
+ let w=`Step 1 — moles of each:\n  A: ${mA} / ${mmA} = ${molA.toFixed(4)} mol\n  B: ${mB} / ${mmB} = ${molB.toFixed(4)} mol\n\n`;
+ w+=`Step 2 — divide by coefficient:\n  A: ${molA.toFixed(4)} / ${cA} = ${rA.toFixed(4)}\n  B: ${molB.toFixed(4)} / ${cB} = ${rB.toFixed(4)}\n\n`;
+ if(Math.abs(rA-rB)<1e-9){
+  box.classList.add("tie");
+  $("limOut").textContent="Neither — exact ratio";
+  $("excessOut").textContent="Both reactants run out at the same time; no excess left over.";
+  w+=`Step 3 — the two values are equal (${rA.toFixed(4)}):\n  The reactants are in exactly the stoichiometric ratio,\n  so both are fully consumed with nothing left over.`;
+  $("work").textContent=w;
+  return;
+ }
+ const aLim = rA<rB;
+ const limName=aLim?"A":"B", excName=aLim?"B":"A";
+ const molLim=aLim?molA:molB, cLim=aLim?cA:cB;
+ const molExc=aLim?molB:molA, cExc=aLim?cB:cA, mmExc=aLim?mmB:mmA;
+ const consumed=molLim*(cExc/cLim);
+ const leftMol=molExc-consumed;
+ const leftG=leftMol*mmExc;
+ $("limOut").textContent=`Reactant ${limName}`;
+ $("excessOut").textContent=`${leftG.toFixed(2)} g of reactant ${excName} left over (excess)`;
+ w+=`Step 3 — smaller value is limiting:\n  ${Math.min(rA,rB).toFixed(4)} (${limName}) < ${Math.max(rA,rB).toFixed(4)} (${excName})  →  reactant ${limName} is limiting\n\n`;
+ w+=`Step 4 — leftover excess (reactant ${excName}):\n  consumed = ${molLim.toFixed(4)} × (${cExc}/${cLim}) = ${consumed.toFixed(4)} mol\n  leftover = ${molExc.toFixed(4)} − ${consumed.toFixed(4)} = ${leftMol.toFixed(4)} mol\n           = ${leftMol.toFixed(4)} × ${mmExc} = ${leftG.toFixed(2)} g left over`;
+ $("work").textContent=w;
+}
+["mA","mmA","cA","mB","mmB","cB"].forEach(id=>$(id).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
