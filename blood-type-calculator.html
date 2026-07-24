@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Type Inheritance Calculator (ABO + Rh), Free</title>
+<meta name="description" content="Free blood type inheritance calculator. Pick two parents' ABO and Rh genotypes to see every possible child blood type and its probability, with the Punnett square and codominance shown step by step.">
+<meta name="keywords" content="blood type calculator, blood type inheritance, abo punnett square, baby blood type calculator, rh factor inheritance, blood type genetics, multiple alleles codominance, parents blood type child">
+<link rel="canonical" href="https://biochemtools.com/blood-type-calculator.html">
+<meta property="og:title" content="Blood Type Inheritance Calculator (ABO + Rh)">
+<meta property="og:description" content="Pick two parents' ABO and Rh genotypes to see every possible child blood type and its probability, with the Punnett square shown. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/blood-type-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/blood-type-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"Blood Type Inheritance Calculator","item":"https://biochemtools.com/blood-type-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to predict a child's blood type from the parents","step":[
+{"@type":"HowToStep","name":"Write each parent's genotype","text":"The ABO gene has three alleles: A and B are codominant and both are dominant over O (also written i). Type A is AA or AO, type B is BB or BO, type AB is AB, and type O is OO."},
+{"@type":"HowToStep","name":"Cross the ABO alleles in a Punnett square","text":"Each parent passes one ABO allele. Combine every allele from one parent with every allele from the other to list the four equally likely offspring genotypes, then read each one's blood type."},
+{"@type":"HowToStep","name":"Do the Rh gene separately","text":"Rh factor is a separate gene where Rh positive (D) is dominant over Rh negative (d). Positive is DD or Dd, negative is dd. Cross the Rh alleles the same way to get the chance of a positive or negative child."},
+{"@type":"HowToStep","name":"Combine the two genes","text":"ABO and Rh are inherited independently, so multiply the ABO probability by the Rh probability to get the chance of each full blood type, such as A positive or O negative."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can two type O parents have a child that is not type O?","acceptedAnswer":{"@type":"Answer","text":"No. Type O means the genotype is OO (ii), so each type O parent can only pass an O allele. Every child of two type O parents is therefore OO, or type O. This is one of the few blood type combinations that gives a single certain outcome, which is why it comes up so often in genetics problems."}},
+{"@type":"Question","name":"Can an AB parent and an O parent have an AB or an O child?","acceptedAnswer":{"@type":"Answer","text":"No, neither is possible. The AB parent passes either an A or a B allele, and the O parent can only pass an O allele. So every child is AO (type A) or BO (type B). This AB by O cross is the classic example that a child can have a blood type different from both parents, and that AB and O children are ruled out."}},
+{"@type":"Question","name":"Why are A and B called codominant?","acceptedAnswer":{"@type":"Answer","text":"Codominant means both alleles are fully expressed when present together, rather than one masking the other. A person with the AB genotype makes both the A antigen and the B antigen on their red blood cells and has blood type AB, showing both traits at once. This is different from the O allele, which is recessive to both A and B."}},
+{"@type":"Question","name":"How is the Rh factor inherited?","acceptedAnswer":{"@type":"Answer","text":"The Rh factor is a separate gene from ABO, with Rh positive (the D allele) dominant over Rh negative (d). A positive person is DD or Dd, and a negative person is dd. Because it is a simple dominant and recessive gene inherited independently of ABO, you calculate it on its own and then combine it with the ABO result by multiplying the probabilities."}},
+{"@type":"Question","name":"Can this calculator prove paternity?","acceptedAnswer":{"@type":"Answer","text":"No. Blood type can sometimes rule a person out as a possible parent when the child's type could not come from that pairing, but it can never prove parentage, because many people share the same blood type. Only DNA testing can confirm a biological relationship. Treat these results as genetics practice, not a paternity test."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#e0a93b;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.02rem;padding:.6rem;border-radius:8px}
+ .parent{border:1px solid var(--line);border-radius:12px;padding:1rem;background:var(--bg)}
+ .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ @media(max-width:560px){.pgrid{grid-template-columns:1fr}}
+ .sub{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ .results{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:.6rem;margin-top:.5rem}
+ .rb{background:var(--bg);border-radius:10px;padding:.85rem .5rem;text-align:center;border:1px solid var(--line)}
+ .rb .bt{font-size:1.35rem;font-weight:800;color:var(--accent)}
+ .rb .bp{font-size:1.05rem;font-weight:700;margin-top:.15rem}
+ .rb .bar{height:5px;border-radius:3px;background:var(--accent);margin-top:.5rem;opacity:.85}
+ .rb.zero{opacity:.4}.rb.zero .bt{color:var(--muted)}
+ .punnett{border-collapse:collapse;margin:.5rem auto;font-size:.95rem}
+ .punnett td,.punnett th{border:1px solid var(--line);padding:.55rem .7rem;text-align:center;min-width:64px}
+ .punnett th{background:var(--bg);color:var(--muted);font-weight:600}
+ .punnett .cell{background:rgba(224,169,59,.10)}
+ .punnett .cell b{color:var(--txt)}.punnett .cell span{color:var(--accent);font-size:.8rem;display:block}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.85;white-space:pre-wrap;margin-top:1rem}
+ table.info{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}table.info th,table.info td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}table.info th{color:var(--muted);font-weight:500}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Blood Type Inheritance Calculator</h1><p>Pick each parent's ABO and Rh genotype to see every possible child blood type and its probability, with the Punnett square and the codominance logic shown. Great for genetics practice.</p></header>
+<main>
+ <div class="card">
+  <div class="pgrid">
+   <div class="parent">
+    <label style="color:var(--accent);font-weight:600">Parent 1</label>
+    <div class="sub">
+     <div><label for="p1abo">ABO genotype</label>
+      <select id="p1abo">
+       <option value="AA">AA (type A)</option>
+       <option value="AO" selected>AO (type A)</option>
+       <option value="BB">BB (type B)</option>
+       <option value="BO">BO (type B)</option>
+       <option value="AB">AB (type AB)</option>
+       <option value="OO">OO (type O)</option>
+      </select></div>
+     <div><label for="p1rh">Rh genotype</label>
+      <select id="p1rh">
+       <option value="DD">DD (Rh+)</option>
+       <option value="Dd" selected>Dd (Rh+)</option>
+       <option value="dd">dd (Rh−)</option>
+      </select></div>
+    </div>
+   </div>
+   <div class="parent">
+    <label style="color:var(--accent);font-weight:600">Parent 2</label>
+    <div class="sub">
+     <div><label for="p2abo">ABO genotype</label>
+      <select id="p2abo">
+       <option value="AA">AA (type A)</option>
+       <option value="AO">AO (type A)</option>
+       <option value="BB">BB (type B)</option>
+       <option value="BO" selected>BO (type B)</option>
+       <option value="AB">AB (type AB)</option>
+       <option value="OO">OO (type O)</option>
+      </select></div>
+     <div><label for="p2rh">Rh genotype</label>
+      <select id="p2rh">
+       <option value="DD">DD (Rh+)</option>
+       <option value="Dd" selected>Dd (Rh+)</option>
+       <option value="dd">dd (Rh−)</option>
+      </select></div>
+    </div>
+   </div>
+  </div>
+  <p class="note" style="margin:1rem 0 0">Only know the blood type, not the genotype? Type A can be <b>AA</b> or <b>AO</b>, type B can be <b>BB</b> or <b>BO</b>, and Rh+ can be <b>DD</b> or <b>Dd</b>. Try each to see the full range.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Possible child blood types</h2>
+  <div class="results" id="results" aria-live="polite"></div>
+  <p class="note" id="summary" style="margin-top:1rem"></p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The ABO Punnett square</h2>
+  <div style="overflow-x:auto"><div id="punnett"></div></div>
+  <p class="note" id="rhline" style="margin-top:1rem"></p>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How blood type inheritance works</h2>
+ <p class="note">Two independent genes set your blood type. The <b>ABO gene</b> has three alleles: A and B are <b>codominant</b> (both show up together as type AB), and both are dominant over the recessive O allele. So type A is AA or AO, type B is BB or BO, type AB is exactly AB, and type O is OO. The <b>Rh gene</b> is separate and simpler: Rh positive (D) is dominant over Rh negative (d). Because the two genes are inherited independently, you solve each with its own Punnett square and then multiply the probabilities to get a full type like A positive or O negative.</p>
+ <p class="note">Related tools: <a href="/punnett-square-calculator.html">Punnett square calculator</a> · <a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">ABO genotypes and blood types</h2>
+  <div style="overflow-x:auto">
+  <table class="info">
+   <thead><tr><th>Blood type</th><th>Possible genotypes</th><th>Antigens on red cells</th></tr></thead>
+   <tbody>
+    <tr><td>A</td><td>AA or AO</td><td>A</td></tr>
+    <tr><td>B</td><td>BB or BO</td><td>B</td></tr>
+    <tr><td>AB</td><td>AB</td><td>A and B (codominant)</td></tr>
+    <tr><td>O</td><td>OO</td><td>none</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <p class="note">O is often written <b>i</b>, and the A and B alleles as I<sup>A</sup> and I<sup>B</sup>. The letters here are kept simple, but the genetics are identical.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Can two type O parents have a non-O child?</b><br>No. Both are OO, so they can only pass O, and every child is type O.</p>
+  <p class="note"><b>Can AB and O parents have an AB or O child?</b><br>No. Children are type A (AO) or type B (BO) only. This is the classic case where kids differ from both parents.</p>
+  <p class="note"><b>Why are A and B codominant?</b><br>Both are fully expressed together: an AB person makes both A and B antigens, showing both traits at once.</p>
+  <p class="note"><b>How is Rh inherited?</b><br>As a separate dominant gene: Rh+ (D) is dominant over Rh− (d). Solve it on its own, then multiply with the ABO result.</p>
+  <p class="note"><b>Can this prove paternity?</b><br>No. It can sometimes rule a pairing out, but never prove it. Only DNA testing confirms parentage.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 38 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/protein-molecular-weight-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Protein MW &amp; extinction coeff.</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/reaction-rate-half-life-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Reaction half-life &amp; rate law</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+const ABO_ALLELES={AA:["A","A"],AO:["A","O"],BB:["B","B"],BO:["B","O"],AB:["A","B"],OO:["O","O"]};
+const RH_ALLELES={DD:["D","D"],Dd:["D","d"],dd:["d","d"]};
+const ABO_ORDER=["A","B","AB","O"];
+
+function fmtPct(p){ const v=p*100; return (Math.abs(v-Math.round(v))<0.05)? Math.round(v)+"%" : v.toFixed(1)+"%"; }
+function abopheno(g){ // g is a sorted 2-allele array
+ const s=new Set(g);
+ if(s.size===1 && s.has("O")) return "O";
+ if(s.has("A") && s.has("B")) return "AB";
+ if(s.has("A")) return "A";
+ return "B";
+}
+function crossAlleles(a1,a2){ // returns array of 4 [allele,allele] combos
+ const out=[];
+ for(const x of a1) for(const y of a2) out.push([x,y]);
+ return out;
+}
+
+function calc(){
+ const p1=ABO_ALLELES[$("p1abo").value], p2=ABO_ALLELES[$("p2abo").value];
+ const r1=RH_ALLELES[$("p1rh").value], r2=RH_ALLELES[$("p2rh").value];
+
+ // ABO combos (4)
+ const combos=crossAlleles(p1,p2);
+ const abo={}; combos.forEach(c=>{ const ph=abopheno(c); abo[ph]=(abo[ph]||0)+0.25; });
+ // Rh combos
+ const rhc=crossAlleles(r1,r2);
+ const rh={}; rhc.forEach(c=>{ const ph=(c.includes("D"))?"+":"−"; rh[ph]=(rh[ph]||0)+0.25; });
+
+ // combined
+ const combined=[];
+ ABO_ORDER.forEach(a=>{
+  if(!abo[a]) return;
+  ["+","−"].forEach(r=>{ if(!rh[r]) return; combined.push({type:a+r, p:abo[a]*rh[r]}); });
+ });
+ combined.sort((x,y)=>y.p-x.p);
+
+ // results grid — show all 8 possible types, greying impossible ones
+ const maxp=Math.max(...combined.map(c=>c.p),0.001);
+ let html="";
+ ABO_ORDER.forEach(a=>{
+  ["+","−"].forEach(r=>{
+   const t=a+r;
+   const hit=combined.find(c=>c.type===t);
+   const p=hit?hit.p:0;
+   const cls=p>0?"":"zero";
+   const pctTxt=p>0?fmtPct(p):"0%";
+   html+=`<div class="rb ${cls}"><div class="bt">${t}</div><div class="bp">${pctTxt}</div><div class="bar" style="width:${p>0?Math.max(12,100*p/maxp):0}%"></div></div>`;
+  });
+ });
+ $("results").innerHTML=html;
+
+ const possible=combined.map(c=>c.type);
+ const impossible=[];
+ ABO_ORDER.forEach(a=>["+","−"].forEach(r=>{ if(!possible.includes(a+r)) impossible.push(a+r); }));
+ $("summary").innerHTML=`<b>Possible:</b> ${possible.join(", ")}.<br><b>Not possible:</b> ${impossible.length?impossible.join(", "):"none — every blood type can occur"}.`;
+
+ // Punnett square (ABO) 2x2
+ let pt='<table class="punnett"><tr><th></th>';
+ p2.forEach(al=>pt+=`<th>${al==="O"?"O":al}</th>`);
+ pt+='</tr>';
+ p1.forEach(a1=>{
+  pt+=`<tr><th>${a1==="O"?"O":a1}</th>`;
+  p2.forEach(a2=>{
+   const g=[a1,a2].sort(); const ph=abopheno(g);
+   const gtxt=g.join("").replace(/O/g,"O");
+   pt+=`<td class="cell"><b>${gtxt}</b><span>type ${ph}</span></td>`;
+  });
+  pt+='</tr>';
+ });
+ pt+='</table>';
+ $("punnett").innerHTML=pt;
+
+ // Rh line
+ const rhtxt=Object.entries(rh).map(([k,v])=>`${(v*100).toFixed(0)}% Rh${k==="+"?"+":"−"}`).join(", ");
+ $("rhline").innerHTML=`<b>Rh gene (separate):</b> ${$("p1rh").value} × ${$("p2rh").value} → ${rhtxt}. Multiply each ABO chance by the Rh chance for the full type.`;
+
+ // work
+ const abotxt=ABO_ORDER.filter(a=>abo[a]).map(a=>`${(abo[a]*100).toFixed(0)}% ${a}`).join(", ");
+ let w=`ABO cross: ${$("p1abo").value} × ${$("p2abo").value}\n`;
+ w+=`  parent 1 passes: ${p1.join(" or ")}\n  parent 2 passes: ${p2.join(" or ")}\n`;
+ w+=`  → offspring types: ${abotxt}\n\n`;
+ w+=`Rh cross: ${$("p1rh").value} × ${$("p2rh").value} → ${rhtxt}\n\n`;
+ w+=`Combined (ABO × Rh, independent):\n`;
+ combined.forEach(c=>{ w+=`  ${c.type}: ${fmtPct(c.p)}\n`; });
+ $("work").textContent=w.trimEnd();
+}
+
+["p1abo","p1rh","p2abo","p2rh"].forEach(id=>$(id).addEventListener("change",calc));
+calc();
+</script>
+</body>
+</html>
