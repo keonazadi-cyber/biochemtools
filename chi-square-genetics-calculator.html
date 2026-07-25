@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi-Square Genetic Ratio Calculator, Free</title>
+<meta name="description" content="Free chi-square goodness-of-fit calculator for genetic crosses. Test whether observed offspring counts fit an expected Mendelian ratio like 3:1 or 9:3:3:1, with the chi-square value, degrees of freedom, a real p-value, and a pass or fail verdict. Every step shown.">
+<meta name="keywords" content="chi square calculator genetics, goodness of fit genetic cross, 9:3:3:1 chi square, chi square 3:1 ratio, mendelian ratio test, p value genetics, degrees of freedom cross, expected observed genetics">
+<link rel="canonical" href="https://biochemtools.com/chi-square-genetics-calculator.html">
+<meta property="og:title" content="Chi-Square Genetic Ratio Calculator">
+<meta property="og:description" content="Test whether observed cross counts fit an expected ratio like 3:1 or 9:3:3:1, with chi-square, degrees of freedom, a real p-value, and a pass or fail verdict. Free, shows the work.">
+<meta property="og:image" content="https://biochemtools.com/og-images/chi-square-genetics-calculator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/chi-square-genetics-calculator.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"Chi-Square Genetic Ratio Calculator","item":"https://biochemtools.com/chi-square-genetics-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to run a chi-square test on a genetic cross","step":[
+{"@type":"HowToStep","name":"Write the expected ratio","text":"State the ratio your genetic hypothesis predicts, such as 3 to 1 for a monohybrid cross or 9 to 3 to 3 to 1 for a dihybrid cross, and add up the total number of offspring you counted."},
+{"@type":"HowToStep","name":"Calculate expected counts","text":"Multiply the total number of offspring by each category's share of the ratio. For a 3 to 1 ratio out of 800 offspring, the expected counts are 600 and 200."},
+{"@type":"HowToStep","name":"Compute the chi-square statistic","text":"For each category find observed minus expected, square it, and divide by the expected count. Add these up across all categories to get the chi-square value."},
+{"@type":"HowToStep","name":"Compare against the p-value","text":"Degrees of freedom equal the number of categories minus one. If the p-value is greater than 0.05 the deviations are within chance and the data fit the ratio; if it is 0.05 or less, the fit is rejected."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does the chi-square test tell you in genetics?","acceptedAnswer":{"@type":"Answer","text":"It measures whether the difference between the offspring counts you observed and the counts a genetic ratio predicts is small enough to be due to chance. A small chi-square value means the observed and expected numbers are close, supporting your hypothesized ratio. A large chi-square value means the deviation is bigger than random sampling easily explains, which is evidence against the predicted ratio."}},
+{"@type":"Question","name":"How do I find the degrees of freedom?","acceptedAnswer":{"@type":"Answer","text":"For a goodness-of-fit test the degrees of freedom equal the number of phenotype categories minus one. A monohybrid 3 to 1 cross has two categories, so one degree of freedom. A dihybrid 9 to 3 to 3 to 1 cross has four categories, so three degrees of freedom. You subtract one because the total count is fixed, so once all but one category is known the last is determined."}},
+{"@type":"Question","name":"What does the p-value mean here?","acceptedAnswer":{"@type":"Answer","text":"The p-value is the probability of seeing a deviation at least as large as yours if the predicted ratio were true. By the usual 0.05 cutoff, a p-value above 0.05 means you fail to reject the hypothesis, so the data are considered a good fit to the ratio. A p-value of 0.05 or below means the deviation is statistically significant and the observed data do not fit the expected ratio."}},
+{"@type":"Question","name":"Why is a high p-value good in a genetics chi-square test?","acceptedAnswer":{"@type":"Answer","text":"Because the hypothesis being tested is that the data fit the predicted ratio. A high p-value means the observed counts are close to the expected counts, so you fail to reject that hypothesis and conclude the cross behaved as predicted. This is the opposite of many experiments, where a low p-value is the desired result. In a goodness-of-fit test, a high p-value supports your genetic model."}},
+{"@type":"Question","name":"When should I not use a chi-square test?","acceptedAnswer":{"@type":"Answer","text":"The chi-square goodness-of-fit test assumes you are working with actual counts, not percentages or proportions, and it becomes unreliable when expected counts in any category are very small, roughly below five. It also tests only whether the data fit one specific ratio; it cannot by itself tell you which alternative ratio is correct. For very small samples an exact test is more appropriate."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#e0a93b;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1rem;padding:.5rem;border-radius:8px}
+ .dtable{width:100%;border-collapse:collapse;font-size:.92rem}
+ .dtable th,.dtable td{padding:.45rem .5rem;border-bottom:1px solid var(--line);text-align:center}
+ .dtable th{color:var(--muted);font-weight:500;font-size:.8rem}
+ .dtable td:first-child,.dtable th:first-child{text-align:left}
+ .dtable input{text-align:center}
+ .addrow{display:flex;gap:.5rem;margin-top:.75rem}
+ .addrow button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.4rem .8rem;border-radius:8px;cursor:pointer;font-size:.82rem}
+ .addrow button:hover{border-color:var(--accent);color:var(--accent)}
+ .verdict{border-radius:10px;padding:1.1rem;text-align:center;margin:.5rem 0}
+ .verdict.fit{background:rgba(93,202,165,.13)}.verdict.fit .vv{color:var(--good)}
+ .verdict.rej{background:rgba(226,75,74,.13)}.verdict.rej .vv{color:var(--bad)}
+ .verdict .vv{font-size:1.5rem;font-weight:800;margin:.1rem 0}
+ .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin:1rem 0}
+ @media(max-width:520px){.stats{grid-template-columns:1fr}}
+ .sbox{background:var(--bg);border-radius:10px;padding:.9rem;text-align:center}
+ .sbox .slbl{color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+ .sbox .sval{font-size:1.5rem;font-weight:700;margin:.15rem 0;color:var(--accent)}
+ .rtable{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.5rem}
+ .rtable th,.rtable td{padding:.45rem .5rem;border-bottom:1px solid var(--line);text-align:center}
+ .rtable th{color:var(--muted);font-weight:500;font-size:.8rem}.rtable td:first-child,.rtable th:first-child{text-align:left}
+ .rtable tfoot td{font-weight:700;color:var(--txt);border-top:2px solid var(--line)}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.85;white-space:pre-wrap;margin-top:1rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ table.info{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}table.info th,table.info td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}table.info th{color:var(--muted);font-weight:500}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Chi-Square Genetic Ratio Calculator</h1><p>Test whether your observed offspring counts fit an expected Mendelian ratio like 3:1 or 9:3:3:1. Get the chi-square value, degrees of freedom, a real p-value, and a clear pass or fail verdict, with every step shown.</p></header>
+<main>
+ <div class="card">
+  <label style="margin-bottom:.5rem">Expected ratio (pick a preset or edit the ratio column)</label>
+  <div class="modes" id="preset">
+   <button data-p="3,1" data-n="Dominant,Recessive" class="on">3 : 1 monohybrid</button>
+   <button data-p="9,3,3,1" data-n="A_ B_,A_ bb,aa B_,aa bb">9 : 3 : 3 : 1 dihybrid</button>
+   <button data-p="1,1" data-n="Class 1,Class 2">1 : 1 test cross</button>
+   <button data-p="1,2,1" data-n="Homozygous 1,Heterozygous,Homozygous 2">1 : 2 : 1 codominant</button>
+   <button data-p="1,1,1,1" data-n="Class 1,Class 2,Class 3,Class 4">1 : 1 : 1 : 1</button>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="dtable">
+   <thead><tr><th>Phenotype</th><th>Observed count</th><th>Ratio part</th></tr></thead>
+   <tbody id="rows"></tbody>
+  </table>
+  </div>
+  <div class="addrow">
+   <button type="button" id="addBtn">+ Add category</button>
+   <button type="button" id="delBtn">− Remove last</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="verdict" id="verdict"><div style="color:var(--muted);font-size:.85rem">Verdict at &alpha; = 0.05</div><div class="vv" id="vv">—</div><div class="note" id="vmsg"></div></div>
+  <div class="stats">
+   <div class="sbox"><div class="slbl">Chi-square &chi;&sup2;</div><div class="sval" id="chi">—</div></div>
+   <div class="sbox"><div class="slbl">Deg. freedom</div><div class="sval" id="df">—</div></div>
+   <div class="sbox"><div class="slbl">p-value</div><div class="sval" id="pval">—</div></div>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="rtable" id="calc">
+   <thead><tr><th>Phenotype</th><th>Observed</th><th>Expected</th><th>O − E</th><th>(O−E)²/E</th></tr></thead>
+   <tbody id="calcbody"></tbody>
+   <tfoot><tr><td colspan="4" style="text-align:right">&chi;&sup2; total =</td><td id="chifoot">—</td></tr></tfoot>
+  </table>
+  </div>
+  <div class="work" id="work"></div>
+ </div>
+
+ <h2>How the chi-square test works</h2>
+ <p class="note">A genetic hypothesis predicts a ratio, and real data always wander from it a little through pure chance. The chi-square test asks whether the wandering is small enough to be chance, or too big to ignore. For every category you compute <b>(observed − expected)² / expected</b> and add them up: that sum is <b>χ²</b>. A small χ² means the counts hug the prediction; a large χ² means they stray. You then compare χ² against the chi-square distribution for your <b>degrees of freedom</b> (categories minus one) to get a <b>p-value</b>. By the standard 0.05 cutoff, a p-value above 0.05 means the data fit the ratio, and 0.05 or below means the deviation is significant. Note that here a <b>high p-value is the good result</b>, because the hypothesis is that the cross matches the ratio.</p>
+ <p class="note">Related tools: <a href="/punnett-square-calculator.html">Punnett square calculator</a> · <a href="/x-linked-inheritance-calculator.html">X-linked inheritance</a> · <a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Critical values at &alpha; = 0.05</h2>
+  <div style="overflow-x:auto">
+  <table class="info">
+   <thead><tr><th>Degrees of freedom</th><th>Critical &chi;&sup2;</th><th>Meaning</th></tr></thead>
+   <tbody>
+    <tr><td>1 (2 categories, e.g. 3:1)</td><td>3.84</td><td>χ² above this rejects the fit</td></tr>
+    <tr><td>2 (3 categories, e.g. 1:2:1)</td><td>5.99</td><td>&nbsp;</td></tr>
+    <tr><td>3 (4 categories, e.g. 9:3:3:1)</td><td>7.81</td><td>&nbsp;</td></tr>
+    <tr><td>4 (5 categories)</td><td>9.49</td><td>&nbsp;</td></tr>
+    <tr><td>5 (6 categories)</td><td>11.07</td><td>&nbsp;</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <p class="note">If your χ² is below the critical value (equivalently, p &gt; 0.05), you fail to reject the hypothesis and the data fit the ratio. This calculator reports the exact p-value, so you do not have to read a table.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>What does the test tell you?</b><br>Whether the gap between observed and expected counts is small enough to be chance (data fit the ratio) or too large (significant deviation).</p>
+  <p class="note"><b>How do I get degrees of freedom?</b><br>Categories minus one. A 3:1 cross has df = 1; a 9:3:3:1 cross has df = 3.</p>
+  <p class="note"><b>Why is a high p-value good here?</b><br>The hypothesis is that the cross fits the ratio, so a high p-value (deviation is just chance) supports your genetic model.</p>
+  <p class="note"><b>Percentages or counts?</b><br>Always use raw counts, never percentages. Chi-square depends on sample size.</p>
+  <p class="note"><b>When is it unreliable?</b><br>When any expected count is very small (roughly under 5). Use larger samples or an exact test.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 40 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/protein-molecular-weight-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Protein MW &amp; extinction coeff.</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/x-linked-inheritance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">X-linked inheritance</a><a href="/chi-square-genetics-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chi-square genetic ratio</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/reaction-rate-half-life-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Reaction half-life &amp; rate law</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+// ---- chi-square p-value via regularized upper incomplete gamma (Numerical Recipes gammq) ----
+function gammln(x){
+ const cof=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];
+ let y=x,tmp=x+5.5; tmp-=(x+0.5)*Math.log(tmp); let ser=1.000000000190015;
+ for(const c of cof){ y++; ser+=c/y; }
+ return -tmp+Math.log(2.5066282746310005*ser/x);
+}
+function gser(a,x){ let ap=a,s=1/a,d=s; for(let i=0;i<500;i++){ ap++; d*=x/ap; s+=d; if(Math.abs(d)<Math.abs(s)*1e-12) break; } return s*Math.exp(-x+a*Math.log(x)-gammln(a)); }
+function gcf(a,x){ let b=x+1-a,c=1e30,d=1/b,h=d; for(let i=1;i<500;i++){ const an=-i*(i-a); b+=2; d=an*d+b; if(Math.abs(d)<1e-30)d=1e-30; c=b+an/c; if(Math.abs(c)<1e-30)c=1e-30; d=1/d; const del=d*c; h*=del; if(Math.abs(del-1)<1e-12) break; } return Math.exp(-x+a*Math.log(x)-gammln(a))*h; }
+function gammq(a,x){ if(x<=0)return 1; return (x<a+1)?1-gser(a,x):gcf(a,x); }
+function chiSqP(chi2,df){ if(chi2<=0)return 1; return gammq(df/2,chi2/2); }
+
+let rows=[]; // {name, obs, ratio}
+function setPreset(parts,names){
+ const ns=names.split(","), ps=parts.split(",").map(Number);
+ rows=ps.map((p,i)=>({name:ns[i]||("Class "+(i+1)), obs:"", ratio:p}));
+ // fill some illustrative observed defaults for the two common presets
+ render(); calc();
+}
+function render(){
+ const tb=$("rows"); tb.innerHTML="";
+ rows.forEach((r,i)=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td><input data-i="${i}" data-k="name" value="${r.name.replace(/"/g,'&quot;')}"></td>`+
+   `<td><input data-i="${i}" data-k="obs" type="number" min="0" step="1" inputmode="numeric" value="${r.obs}"></td>`+
+   `<td><input data-i="${i}" data-k="ratio" type="number" min="0" step="any" value="${r.ratio}" style="max-width:90px;margin:0 auto"></td>`;
+  tb.appendChild(tr);
+ });
+ tb.querySelectorAll("input").forEach(inp=>inp.addEventListener("input",e=>{
+  const i=+e.target.dataset.i,k=e.target.dataset.k;
+  rows[i][k]= (k==="name")? e.target.value : e.target.value;
+  calc();
+ }));
+}
+function calc(){
+ const obs=rows.map(r=>parseFloat(r.obs)); const ratio=rows.map(r=>parseFloat(r.ratio));
+ const valid = rows.length>=2 && obs.every(o=>!isNaN(o)&&o>=0) && ratio.every(r=>!isNaN(r)&&r>0) && obs.some(o=>o>0);
+ const cb=$("calcbody"); cb.innerHTML="";
+ if(!valid){
+  ["chi","df","pval","chifoot"].forEach(id=>$(id).textContent="—");
+  $("vv").textContent="—"; $("vmsg").textContent="Enter an observed count and ratio part for at least two categories."; $("verdict").className="verdict";
+  $("work").textContent=""; return;
+ }
+ const total=obs.reduce((a,b)=>a+b,0); const rsum=ratio.reduce((a,b)=>a+b,0);
+ let chi2=0;
+ rows.forEach((r,i)=>{
+  const e=ratio[i]/rsum*total; const diff=obs[i]-e; const term=diff*diff/e; chi2+=term;
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td>${r.name}</td><td>${obs[i]}</td><td>${e.toFixed(2)}</td><td>${diff.toFixed(2)}</td><td>${term.toFixed(4)}</td>`;
+  cb.appendChild(tr);
+ });
+ const df=rows.length-1; const p=chiSqP(chi2,df);
+ $("chi").textContent=chi2.toFixed(3); $("df").textContent=df;
+ $("pval").textContent = p<0.001 ? p.toExponential(1) : p.toFixed(3);
+ $("chifoot").textContent=chi2.toFixed(4);
+ const fit = p>0.05;
+ $("verdict").className="verdict "+(fit?"fit":"rej");
+ $("vv").textContent = fit ? "Data FIT the ratio" : "Deviation is SIGNIFICANT";
+ $("vmsg").innerHTML = fit
+  ? `p = ${p<0.001?p.toExponential(1):p.toFixed(3)} &gt; 0.05, so you fail to reject the hypothesis. The deviations are within chance.`
+  : `p = ${p<0.001?p.toExponential(1):p.toFixed(3)} &le; 0.05, so you reject the hypothesis. The counts do not fit this ratio.`;
+ // work
+ let w=`Ratio ${ratio.join(":")} (sum ${rsum}), total offspring = ${total}\n\n`;
+ w+=`Expected = ratio share × total:\n`;
+ rows.forEach((r,i)=>{ w+=`  ${r.name}: ${ratio[i]}/${rsum} × ${total} = ${(ratio[i]/rsum*total).toFixed(2)}\n`; });
+ w+=`\nχ² = Σ (O−E)²/E = ${chi2.toFixed(4)}\n`;
+ w+=`df = categories − 1 = ${rows.length} − 1 = ${df}\n`;
+ w+=`p-value = ${p<0.001?p.toExponential(3):p.toFixed(4)}\n\n`;
+ w+= fit ? `p > 0.05 → fail to reject → the data fit the ${ratio.join(":")} ratio.` : `p ≤ 0.05 → reject → the data do NOT fit the ${ratio.join(":")} ratio.`;
+ $("work").textContent=w;
+}
+
+document.querySelectorAll("#preset button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#preset button").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
+ b.classList.add("on"); b.setAttribute("aria-pressed","true");
+ setPreset(b.dataset.p,b.dataset.n);
+});
+$("addBtn").onclick=()=>{ if(rows.length<8){ rows.push({name:"Class "+(rows.length+1),obs:"",ratio:1}); render(); calc(); } };
+$("delBtn").onclick=()=>{ if(rows.length>2){ rows.pop(); render(); calc(); } };
+
+// default: Mendel's classic 3:1 with real data preloaded
+rows=[{name:"Dominant",obs:787,ratio:3},{name:"Recessive",obs:277,ratio:1}];
+render(); calc();
+</script>
+</body>
+</html>
