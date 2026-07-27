@@ -256,7 +256,7 @@ function draw(Vsel){
 
 function calc(){
  const Ca=+$("Ca").value, Va=+$("Va").value, Ct=+$("Ct").value, pk=+$("pk").value;
- if(!(Ca>0&&Va>0&&Ct>0)){ $("phOut").textContent="—"; $("work").textContent="Enter positive concentrations and volume."; return; }
+ if(!(Ca>0&&Va>0&&Ct>0)){ $("phOut").textContent="—"; ["startPh","eqPt","halfPt"].forEach(id=>$(id).textContent="—"); $("volReadout").textContent="0.0 mL"; const c=$("plot"),g=c.getContext("2d"); g.clearRect(0,0,c.width,c.height); $("work").textContent="Enter positive concentrations and volume."; return; }
  Veq = Ca*Va/Ct;                       // equivalence volume (mL)
  maxV = Math.max(Veq*2, Veq+5);        // plot to 2x equivalence
  const slider=$("vol"); slider.max=maxV.toFixed(2); slider.step=(maxV/500).toFixed(4);

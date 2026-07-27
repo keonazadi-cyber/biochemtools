@@ -210,7 +210,7 @@ function calc(){
  const k=+$("k").value, A0=+$("A0").value;
  $("kUnit").textContent=KUNIT[order];
  $("lin").textContent=LINFORM[order];
- if(!(k>0&&A0>0)){ $("cOut").textContent="—"; $("work").textContent="Enter a positive rate constant and initial concentration."; return; }
+ if(!(k>0&&A0>0)){ $("cOut").textContent="—"; ["th","lin","pct"].forEach(id=>$(id).textContent="—"); $("tReadout").textContent="0 s"; const c=$("plot"),g=c.getContext("2d"); g.clearRect(0,0,c.width,c.height); $("work").textContent="Enter a positive rate constant and initial concentration."; return; }
  A0v=A0;
  th=halfLife(A0,k);
  tmax = (order===0) ? (A0/k) : th*4;      // show ~4 half-lives (or full consumption for zero order)
