@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biochem &amp; MCAT Equation Sheet — Every Formula, Free</title>
+<meta name="description" content="Free biochemistry and MCAT equation sheet: every formula for acids and buffers, thermodynamics, enzyme and chemical kinetics, solutions, gases, genetics, and physiology, each with what it means and a calculator that solves it. Print-friendly.">
+<meta name="keywords" content="mcat equation sheet, biochemistry formulas, biochem equation sheet, mcat formulas, henderson hasselbalch, michaelis menten equation, gibbs free energy formula, chemistry equation sheet, mcat cheat sheet">
+<link rel="canonical" href="https://biochemtools.com/biochem-equation-sheet.html">
+<meta property="og:title" content="Biochem &amp; MCAT Equation Sheet — Every Formula">
+<meta property="og:description" content="Every biochem, chemistry, genetics, and physiology formula, each with what it means and a calculator that solves it. Filter, search, print. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/biochem-equation-sheet.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/biochem-equation-sheet.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Biochemistry","item":"https://biochemtools.com/#biochemistry"},{"@type":"ListItem","position":3,"name":"Biochem & MCAT Equation Sheet","item":"https://biochemtools.com/biochem-equation-sheet.html"}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What equations do I need to know for MCAT biochemistry?","acceptedAnswer":{"@type":"Answer","text":"The highest-yield set is small. For acids and buffers: pH equals negative log of hydrogen ion concentration, and the Henderson-Hasselbalch equation, pH equals pKa plus the log of conjugate base over acid. For thermodynamics: delta G equals delta H minus T delta S, and delta G standard equals negative RT natural log of the equilibrium constant. For enzymes: the Michaelis-Menten equation and the fact that velocity is half of Vmax when substrate equals Km. Beyond those, know the ideal gas law, Hardy-Weinberg, and cardiac output equals heart rate times stroke volume. Most exam questions test whether you can rearrange and interpret these rather than plug into obscure formulas."}},
+{"@type":"Question","name":"Why does pH equal pKa at the half-equivalence point?","acceptedAnswer":{"@type":"Answer","text":"Because at half-equivalence exactly half the weak acid has been converted to its conjugate base, so their concentrations are equal. In the Henderson-Hasselbalch equation the ratio of conjugate base to acid becomes one, and the log of one is zero, which leaves pH equal to pKa. This is the standard way to read a pKa directly off a titration curve, and it is also why a buffer is strongest at a pH equal to its pKa."}},
+{"@type":"Question","name":"What is the difference between delta G and delta G standard?","acceptedAnswer":{"@type":"Answer","text":"Delta G standard is the free energy change under standard conditions, meaning one molar concentrations, and it is fixed for a given reaction because it is tied to the equilibrium constant by delta G standard equals negative RT natural log of K. Delta G is the actual free energy change under the concentrations present right now, given by delta G equals delta G standard plus RT natural log of Q. This is why a reaction with a positive delta G standard can still run forward in a cell: if the concentrations keep Q well below K, delta G is negative even though delta G standard is not."}},
+{"@type":"Question","name":"How do I know which half-life formula to use?","acceptedAnswer":{"@type":"Answer","text":"It depends entirely on the reaction order. Zero order gives half-life equals starting concentration divided by 2k, so it shortens as reactant is used up. First order gives half-life equals natural log of 2 divided by k, which is constant no matter the concentration. Second order gives half-life equals one over k times starting concentration, so it doubles with each successive half-life. A quick way to identify the order from data is to check whether successive half-lives stay the same, get shorter, or get longer."}},
+{"@type":"Question","name":"What values should I memorize for the constants?","acceptedAnswer":{"@type":"Answer","text":"The gas constant R is 8.314 joules per mole per kelvin when you are working in joules, or 0.08206 liter-atmospheres per mole per kelvin for gas law problems. Faraday's constant is about 96485 coulombs per mole. The ion product of water, Kw, is 1 times 10 to the negative 14 at 25 degrees Celsius, which is why pH plus pOH equals 14. Body temperature is 310 kelvin and room temperature is about 298 kelvin. Knowing which R to use in which equation saves more points than memorizing extra formulas."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#5dcaa5;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a;--blue:#378add;--purple:#7f77dd;--amber:#e0a93b}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:690px;margin:0 auto}
+ main{max-width:940px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22)}
+ .controls{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+ .controls button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.45rem .9rem;border-radius:99px;cursor:pointer;font-size:.84rem}
+ .controls button.on{border-color:var(--accent);color:var(--accent)}
+ #q{flex:1;min-width:180px;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:.95rem;padding:.5rem .7rem;border-radius:8px}
+ .grp{margin-top:1.6rem}
+ .grp:first-of-type{margin-top:.4rem}
+ .grp h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--purple);margin:0 0 .7rem;font-weight:700}
+ .eq{display:grid;grid-template-columns:minmax(210px,1fr) 1.35fr;gap:1rem;align-items:start;padding:.75rem 0;border-bottom:1px solid var(--line)}
+ .eq:last-child{border-bottom:none}
+ .f{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem;color:var(--txt);background:var(--bg);padding:.5rem .7rem;border-radius:8px;overflow-x:auto}
+ .d .nm{font-weight:600;font-size:.93rem;display:block}
+ .d .ex{color:var(--muted);font-size:.85rem;display:block;margin-top:.1rem}
+ .d a{font-size:.82rem;color:var(--accent);text-decoration:none;display:inline-block;margin-top:.3rem}
+ .d a:hover{text-decoration:underline}
+ @media(max-width:620px){.eq{grid-template-columns:1fr;gap:.4rem}}
+ .count{color:var(--muted);font-size:.82rem;margin-top:1rem}
+ .consts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin-top:.5rem}
+ .cbox{background:var(--bg);border-radius:10px;padding:.7rem;text-align:center}
+ .cbox b{display:block;font-family:ui-monospace,monospace;color:var(--accent);font-size:1rem}
+ .cbox span{color:var(--muted);font-size:.76rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;border-color:#bbb!important}
+  body{background:#fff!important}
+  a{text-decoration:none!important;color:#000!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.controls,.count,header p{display:none!important}
+  header{padding:.5rem 0}
+  .card{border:none;padding:0;margin:.4rem 0}
+  .eq{padding:.28rem 0;grid-template-columns:minmax(190px,1fr) 1.4fr}
+  .f{padding:.1rem .2rem;font-size:.82rem}
+  .d .nm{font-size:.8rem}.d .ex{font-size:.72rem}.d a{display:none!important}
+  .grp h3{color:#000!important;font-size:.72rem;margin:.5rem 0 .2rem}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Biochem &amp; MCAT Equation Sheet</h1><p>Every formula worth knowing, grouped by topic, with what each one actually means and a calculator that solves it. Filter by subject, search, or hit print for a clean paper copy.</p></header>
+<main>
+ <div class="card">
+  <div class="controls" id="filters">
+   <button data-f="all" class="on">All</button>
+   <button data-f="Acids &amp; buffers">Acids &amp; buffers</button>
+   <button data-f="Thermodynamics">Thermodynamics</button>
+   <button data-f="Enzyme kinetics">Enzyme kinetics</button>
+   <button data-f="Reaction kinetics">Reaction kinetics</button>
+   <button data-f="Solutions">Solutions</button>
+   <button data-f="Genetics">Genetics</button>
+   <button data-f="Physiology">Physiology</button>
+   <button data-f="Nucleic acids &amp; protein">Nucleic acids &amp; protein</button>
+   <input id="q" type="search" placeholder="Search equations…" aria-label="Search equations">
+  </div>
+  <div id="list"></div>
+  <div class="count" id="count"></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Constants worth memorizing</h2>
+  <div class="consts">
+   <div class="cbox"><b>8.314</b><span>R, J/(mol&middot;K)</span></div>
+   <div class="cbox"><b>0.08206</b><span>R, L&middot;atm/(mol&middot;K)</span></div>
+   <div class="cbox"><b>96485</b><span>F, C/mol</span></div>
+   <div class="cbox"><b>1&times;10<sup>&minus;14</sup></b><span>K<sub>w</sub> at 25&deg;C</span></div>
+   <div class="cbox"><b>298 K</b><span>25&deg;C, "room temp"</span></div>
+   <div class="cbox"><b>310 K</b><span>37&deg;C, body temp</span></div>
+   <div class="cbox"><b>22.4 L</b><span>1 mol gas at STP</span></div>
+   <div class="cbox"><b>6.022&times;10<sup>23</sup></b><span>Avogadro's number</span></div>
+  </div>
+  <p class="note" style="margin-top:1rem">Knowing <b>which R to use</b> saves more points than memorizing extra formulas: use 8.314 J/(mol&middot;K) whenever the answer is in joules (&Delta;G, Nernst), and 0.08206 L&middot;atm/(mol&middot;K) for gas-law and osmotic-pressure problems in atmospheres.</p>
+ </div>
+
+ <h2>How to use this sheet</h2>
+ <p class="note">Most exam questions do not ask you to recall an obscure formula. They ask whether you can <b>rearrange and interpret</b> a handful of common ones. So rather than memorizing this page top to bottom, work through the calculator linked next to each equation until you can predict which way a value moves before you compute it. If you know that raising pH above a pKa deprotonates a group, that &Delta;G is negative when Q sits below K, and that velocity is half of V<sub>max</sub> at [S] = K<sub>m</sub>, you can reason through most of the quantitative questions without touching a calculator.</p>
+ <p class="note">Related references: <a href="/amino-acid-chart.html">Amino acid chart (all 20)</a> · <a href="/codon-chart.html">Codon chart (genetic code)</a> · <a href="/">all 44 free tools</a>.</p>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 44 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/biochem-equation-sheet.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Equation sheet (all formulas)</a><a href="/amino-acid-chart.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid chart (all 20)</a><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/protein-molecular-weight-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Protein MW &amp; extinction coeff.</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/codon-chart.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Codon chart (genetic code)</a><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/x-linked-inheritance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">X-linked inheritance</a><a href="/chi-square-genetics-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chi-square genetic ratio</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/reaction-rate-half-life-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Reaction half-life &amp; rate law</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/percent-composition-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent composition calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+// every formula verified numerically before publishing
+const EQ=[
+// --- Acids & buffers ---
+["Acids &amp; buffers","pH = &minus;log[H<sup>+</sup>]","pH from hydrogen ion concentration","Every 1 unit of pH is a 10x change in [H+].","/ph-calculator.html","pH calculator"],
+["Acids &amp; buffers","pOH = &minus;log[OH<sup>&minus;</sup>]","pOH from hydroxide concentration","","/ph-calculator.html","pH calculator"],
+["Acids &amp; buffers","pH + pOH = 14","At 25&deg;C","Follows from Kw = 1e-14.","/ph-calculator.html","pH calculator"],
+["Acids &amp; buffers","K<sub>w</sub> = [H<sup>+</sup>][OH<sup>&minus;</sup>] = 1&times;10<sup>&minus;14</sup>","Ion product of water","","/ph-calculator.html","pH calculator"],
+["Acids &amp; buffers","K<sub>a</sub> &times; K<sub>b</sub> = K<sub>w</sub>","Conjugate acid-base pair","Stronger acid means weaker conjugate base.","",""],
+["Acids &amp; buffers","pH = pK<sub>a</sub> + log([A<sup>&minus;</sup>]/[HA])","Henderson-Hasselbalch","pH = pKa exactly when the two forms are equal.","/henderson-hasselbalch-buffer-calculator.html","Buffer calculator"],
+["Acids &amp; buffers","[H<sup>+</sup>] &asymp; &radic;(K<sub>a</sub> &times; C)","Weak acid approximation","Valid when dissociation is small vs C.","/ph-calculator.html","pH calculator"],
+["Acids &amp; buffers","pI = &frac12;(pK<sub>a1</sub> + pK<sub>a2</sub>)","Isoelectric point","Average the two pKa flanking the neutral form.","/peptide-charge-calculator.html","Peptide charge &amp; pI"],
+// --- Thermodynamics ---
+["Thermodynamics","&Delta;G = &Delta;H &minus; T&Delta;S","Gibbs free energy","Negative dG means spontaneous.","/gibbs-free-energy-calculator.html","Gibbs free energy"],
+["Thermodynamics","&Delta;G&deg; = &minus;RT ln K<sub>eq</sub>","Free energy from equilibrium","K &gt; 1 gives a negative dG&deg;.","/chemical-equilibrium-calculator.html","Chemical equilibrium"],
+["Thermodynamics","&Delta;G = &Delta;G&deg; + RT ln Q","Actual free energy now","Why an unfavourable reaction still runs when Q &lt; K.","/gibbs-free-energy-calculator.html","Gibbs free energy"],
+["Thermodynamics","&Delta;G&deg;&prime; = &minus;nF&Delta;E&deg;&prime;","Free energy from cell potential","n = electrons transferred, F = 96485 C/mol.","/nernst-equation-calculator.html","Nernst equation"],
+["Thermodynamics","E = E&deg; &minus; (RT/nF) ln Q","Nernst equation","At 25&deg;C the prefactor is 0.0592/n with log.","/nernst-equation-calculator.html","Nernst equation"],
+// --- Enzyme kinetics ---
+["Enzyme kinetics","v = V<sub>max</sub>[S] / (K<sub>m</sub> + [S])","Michaelis-Menten","v = Vmax/2 exactly when [S] = Km.","/enzyme-kinetics-simulator.html","Enzyme kinetics"],
+["Enzyme kinetics","1/v = (K<sub>m</sub>/V<sub>max</sub>)(1/[S]) + 1/V<sub>max</sub>","Lineweaver-Burk","y-intercept 1/Vmax, x-intercept &minus;1/Km.","/michaelis-menten-fitter.html","Michaelis-Menten fitter"],
+["Enzyme kinetics","k<sub>cat</sub> = V<sub>max</sub> / [E]<sub>T</sub>","Turnover number","Reactions per enzyme per second.","/enzyme-kinetics-simulator.html","Enzyme kinetics"],
+["Enzyme kinetics","k<sub>cat</sub>/K<sub>m</sub>","Catalytic efficiency","Diffusion limit is about 1e8 to 1e9 M-1 s-1.","/enzyme-kinetics-simulator.html","Enzyme kinetics"],
+// --- Reaction kinetics ---
+["Reaction kinetics","[A] = [A]<sub>0</sub> &minus; kt","Zero order","Half-life t&frac12; = [A]0 / 2k, which shortens as reactant is used up.","/reaction-rate-half-life-calculator.html","Half-life &amp; rate law"],
+["Reaction kinetics","[A] = [A]<sub>0</sub>e<sup>&minus;kt</sup>","First order","Half-life t&frac12; = ln2/k = 0.693/k, constant at any concentration.","/reaction-rate-half-life-calculator.html","Half-life &amp; rate law"],
+["Reaction kinetics","1/[A] = 1/[A]<sub>0</sub> + kt","Second order","Half-life t&frac12; = 1/(k[A]0), which doubles each successive half-life.","/reaction-rate-half-life-calculator.html","Half-life &amp; rate law"],
+// --- Solutions ---
+["Solutions","M = mol solute / L solution","Molarity","","/molarity-molar-mass-calculator.html","Molarity &amp; molar mass"],
+["Solutions","C<sub>1</sub>V<sub>1</sub> = C<sub>2</sub>V<sub>2</sub>","Dilution","Moles are conserved when you add solvent.","/dilution-calculator.html","Dilution calculator"],
+["Solutions","A = &epsilon;lc","Beer-Lambert law","Absorbance is linear in concentration.","/beer-lambert-calculator.html","Beer-Lambert"],
+["Solutions","&pi; = iMRT","Osmotic pressure","i = particles per formula unit.","/osmotic-pressure-calculator.html","Osmotic pressure"],
+["Solutions","PV = nRT","Ideal gas law","Use R = 0.08206 L&middot;atm/(mol&middot;K).","/ideal-gas-law-calculator.html","Ideal gas law"],
+["Solutions","% yield = (actual / theoretical) &times; 100","Percent yield","","/percent-yield-calculator.html","Percent yield"],
+// --- Genetics ---
+["Genetics","p + q = 1","Allele frequencies","","/hardy-weinberg-calculator.html","Hardy-Weinberg"],
+["Genetics","p&sup2; + 2pq + q&sup2; = 1","Hardy-Weinberg equilibrium","q&sup2; is the recessive phenotype frequency.","/hardy-weinberg-calculator.html","Hardy-Weinberg"],
+["Genetics","&chi;&sup2; = &Sigma;(O &minus; E)&sup2; / E","Chi-square goodness of fit","df = categories &minus; 1; p &gt; 0.05 means it fits.","/chi-square-genetics-calculator.html","Chi-square test"],
+// --- Physiology ---
+["Physiology","CO = HR &times; SV","Cardiac output","","/cardiac-output-calculator.html","Cardiac output"],
+["Physiology","MAP &asymp; DBP + &frac13;(SBP &minus; DBP)","Mean arterial pressure","Diastole lasts longer, so it is weighted more.","/cardiac-output-calculator.html","Cardiac output"],
+["Physiology","C = (U &times; V) / P","Renal clearance","U = urine conc, V = flow, P = plasma conc.","/renal-clearance-calculator.html","Renal clearance"],
+["Physiology","%sat = 100&middot;pO<sub>2</sub><sup>n</sup> / (P<sub>50</sub><sup>n</sup> + pO<sub>2</sub><sup>n</sup>)","Hill equation (oxygen binding)","n &asymp; 2.8 for hemoglobin, 1 for myoglobin.","/oxygen-dissociation-curve-calculator.html","O&sub2; dissociation curve"],
+// --- Nucleic acids & protein ---
+["Nucleic acids &amp; protein","T<sub>m</sub> = 4(G+C) + 2(A+T)","Wallace rule, short primers","Only valid for primers under about 20 bases.","/dna-melting-temperature-calculator.html","DNA melting temp"],
+["Nucleic acids &amp; protein","conc = A<sub>260</sub> &times; factor &times; dilution","Nucleic acid quantification","50 dsDNA, 33 ssDNA, 40 RNA (&micro;g/mL).","/nucleic-acid-concentration-calculator.html","DNA &amp; RNA concentration"],
+["Nucleic acids &amp; protein","&epsilon;<sub>280</sub> = 5500&middot;n<sub>W</sub> + 1490&middot;n<sub>Y</sub> + 125&middot;n<sub>SS</sub>","Protein extinction coefficient","Aromatics do essentially all the absorbing.","/protein-molecular-weight-calculator.html","Protein MW &amp; &epsilon;"],
+["Nucleic acids &amp; protein","A<sub>280</sub> of 1 mg/mL = &epsilon; / MW","Protein concentration","conc (mg/mL) = measured A280 &divide; this.","/protein-molecular-weight-calculator.html","Protein MW &amp; &epsilon;"],
+["Nucleic acids &amp; protein","MW = &Sigma;(residue masses) + 18.02","Protein molecular weight","One water added back for the free ends.","/protein-molecular-weight-calculator.html","Protein MW &amp; &epsilon;"]
+];
+const ORDER=["Acids &amp; buffers","Thermodynamics","Enzyme kinetics","Reaction kinetics","Solutions","Genetics","Physiology","Nucleic acids &amp; protein"];
+let filter="all", query="";
+const norm=s=>s.replace(/[-\u2010-\u2015]/g," ").replace(/\s+/g," ").trim().toLowerCase();
+const strip=s=>norm(s.replace(/<[^>]+>/g,"").replace(/&[a-z]+;/gi," "));
+function render(){
+ const q=norm(query);
+ const rows=EQ.filter(e=>{
+  if(filter!=="all" && e[0]!==filter) return false;
+  if(!q) return true;
+  return strip(e[1]).includes(q)||strip(e[2]).includes(q)||strip(e[3]).includes(q)||strip(e[0]).includes(q);
+ });
+ let html="";
+ ORDER.forEach(g=>{
+  const inG=rows.filter(e=>e[0]===g);
+  if(!inG.length) return;
+  html+=`<div class="grp"><h3>${g}</h3>`;
+  inG.forEach(e=>{
+   const link=e[4]?`<a href="${e[4]}">${e[5]} &rarr;</a>`:"";
+   const ex=e[3]?`<span class="ex">${e[3]}</span>`:"";
+   html+=`<div class="eq"><div class="f">${e[1]}</div><div class="d"><span class="nm">${e[2]}</span>${ex}${link}</div></div>`;
+  });
+  html+=`</div>`;
+ });
+ $("list").innerHTML=html||'<p class="note">No equations match that search.</p>';
+ $("count").textContent=`Showing ${rows.length} of ${EQ.length} equations`+(filter!=="all"||query?" (filtered)":"");
+}
+document.querySelectorAll("#filters button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#filters button").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
+ b.classList.add("on"); b.setAttribute("aria-pressed","true"); filter=b.dataset.f; render();
+});
+$("q").addEventListener("input",e=>{query=e.target.value.trim(); render();});
+render();
+</script>
+</body>
+</html>
