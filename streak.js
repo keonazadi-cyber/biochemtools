@@ -1,6 +1,6 @@
 (function(){
 "use strict";
-var TOOL_COUNT = 42;
+var TOOL_COUNT = 43;
 
 // --- Affiliate links: each program activates independently once you have a real tracked link/tag. ---
 var AMAZON_LIVE = true;
