@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Molar Mass &amp; Molarity Calculator — Free</title>
-<meta name="description" content="Type any chemical formula to get its molar mass, then the exact grams to weigh for your target molarity and volume. Free, shows the work.">
-<meta name="keywords" content="molar mass calculator, molarity calculator, grams to moles, how many grams for a solution, molecular weight calculator, formula molar mass, molarity to grams, g/mL to molarity, mg/mL to molarity">
+<title>Molarity to Grams Calculator (+ Molar Mass), Free</title>
+<meta name="description" content="Convert molarity to grams, grams to molarity, or g/mL to molarity. Type any formula for its molar mass and the exact grams to weigh out.">
+<meta name="keywords" content="molarity to grams, grams to molarity, g/mL to molarity, mass to molarity calculator, molecular weight to molarity, molar mass calculator, molarity calculator, convert molarity to grams, g/mol to molarity">
 <link rel="canonical" href="https://biochemtools.com/molarity-molar-mass-calculator.html">
-<meta property="og:title" content="Molar Mass &amp; Molarity Calculator — Formula to Grams">
-<meta property="og:description" content="Type a formula, get molar mass, then the exact grams to weigh for your solution. Free, shows the work.">
+<meta property="og:title" content="Molarity to Grams Calculator (+ Molar Mass)">
+<meta property="og:description" content="Convert molarity to grams, grams to molarity, or g/mL to molarity, with the molar mass worked out. Free.">
 <meta property="og:image" content="https://biochemtools.com/og-images/molarity-molar-mass-calculator.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -81,7 +81,7 @@
  </div>
 </div>
 
-<header><h1>Molar Mass &amp; Molarity Calculator</h1><p>Type any chemical formula to get its molar mass, then find exactly how many grams to weigh out for your target concentration and volume — every step shown.</p></header>
+<header><h1>Molarity to Grams Calculator</h1><p>Type any chemical formula to get its molar mass, then find exactly how many grams to weigh out for your target concentration and volume — every step shown.</p></header>
 <main>
  <div class="card">
   <label for="formula">Chemical formula (e.g. NaCl, C6H12O6, Ca(OH)2, CuSO4)</label>
@@ -114,6 +114,27 @@
   </div>
   <div class="out"><div style="color:var(--muted);font-size:.85rem" id="outlbl2">Weigh out</div><div class="v" id="grams">—</div></div>
   <div class="work" id="work"></div>
+ </div>
+ <h2>Every conversion, both directions</h2>
+ <p class="note">The same two relationships cover all of these, so once you have the molar mass you can go either way:</p>
+ <div class="card">
+  <h3 style="margin:0 0 .5rem;font-size:1.02rem">Molarity to grams</h3>
+  <p class="note" style="margin:0 0 1rem">You know the concentration you want and the volume, and you need the mass to weigh out.<br>
+  <b>grams = molarity &times; volume in litres &times; molar mass</b><br>
+  0.5 M glucose in 250 mL: 0.5 &times; 0.25 &times; 180.16 = <b>22.5 g</b></p>
+
+  <h3 style="margin:0 0 .5rem;font-size:1.02rem">Grams to molarity</h3>
+  <p class="note" style="margin:0 0 1rem">You weighed something out and need to know the concentration.<br>
+  <b>molarity = grams &divide; molar mass &divide; volume in litres</b><br>
+  22.5 g glucose in 250 mL: 22.5 / 180.16 / 0.25 = <b>0.5 M</b></p>
+
+  <h3 style="margin:0 0 .5rem;font-size:1.02rem">g/mL or mg/mL to molarity</h3>
+  <p class="note" style="margin:0 0 1rem">You have a mass concentration and need molarity. Convert to grams per litre first, then divide by molar mass.<br>
+  <b>molarity = (g/L) &divide; molar mass</b><br>
+  10 mg/mL glucose = 10 g/L, so 10 / 180.16 = <b>0.0555 M</b> (55.5 mM)</p>
+
+  <h3 style="margin:0 0 .5rem;font-size:1.02rem">Molecular weight to molarity</h3>
+  <p class="note" style="margin:0">Molecular weight <i>is</i> the molar mass in g/mol, so this is the same calculation: divide your grams per litre by the molecular weight. A 1 g/L solution of something with MW 180.16 is 1 / 180.16 = <b>0.00555 M</b>.</p>
  </div>
  <h2>How to figure out grams for a solution</h2>
  <p class="note">First find the molar mass by adding the atomic mass of every atom in the formula — for glucose, C₆H₁₂O₆, that is 6 carbons + 12 hydrogens + 6 oxygens. Then work in three steps: moles needed = molarity × volume in liters; grams = moles × molar mass. So for 0.5 M glucose in 250 mL: 0.5 × 0.25 = 0.125 mol, then 0.125 × 180.16 = about 22.5 g. Weigh that out, dissolve, and bring to the final volume.</p>
