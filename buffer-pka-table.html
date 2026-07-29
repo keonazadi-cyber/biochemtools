@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buffer pKa Table — Pick a Buffer for Any pH, Free</title>
+<meta name="description" content="Buffer pKa table for 32 common buffers. Enter your target pH to see which buffers work, with useful ranges and temperature corrections. Free.">
+<meta name="keywords" content="buffer pka table, buffer table, good's buffers, tris pka, hepes pka, buffer selection, buffering range, biological buffers, buffer ph range, tris temperature dependence">
+<link rel="canonical" href="https://biochemtools.com/buffer-pka-table.html">
+<meta property="og:title" content="Buffer pKa Table — Pick a Buffer for Any pH">
+<meta property="og:description" content="32 common buffers with pKa, useful range, and temperature correction. Enter a target pH to see which ones actually work. Free.">
+<meta property="og:image" content="https://biochemtools.com/og-images/buffer-pka-table.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/buffer-pka-table.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Solutions & lab prep","item":"https://biochemtools.com/#solutions"},{"@type":"ListItem","position":3,"name":"Buffer pKa Table","item":"https://biochemtools.com/buffer-pka-table.html"}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I choose a buffer for a given pH?","acceptedAnswer":{"@type":"Answer","text":"Pick a buffer whose pKa is as close as possible to your target pH, and ideally within one unit of it. A buffer works because both the acid and conjugate base forms are present in meaningful amounts, and that is only true near the pKa. At exactly one pH unit away from the pKa the mixture is already about 91 percent one form and 9 percent the other, so its capacity to soak up added acid or base is nearly exhausted. For a target of pH 7.4, that points to buffers like TES, HEPES, or MOPS."}},
+{"@type":"Question","name":"Why is the buffering range pKa plus or minus 1?","acceptedAnswer":{"@type":"Answer","text":"It comes straight out of the Henderson-Hasselbalch equation. At a pH one unit above the pKa the ratio of conjugate base to acid is 10 to 1, meaning about 91 percent of the buffer is in the base form and only 9 percent remains as acid to neutralize any base you add. Push further and one form essentially runs out, so the pH starts moving freely. Within pKa plus or minus 1 both forms are still abundant enough to resist change in either direction, which is why that is the accepted working window."}},
+{"@type":"Question","name":"Why does Tris pH change so much with temperature?","acceptedAnswer":{"@type":"Answer","text":"Tris has an unusually large temperature coefficient of about minus 0.028 pH units per degree Celsius, far bigger than most buffers. A Tris buffer adjusted to pH 8.00 at room temperature will actually sit near pH 8.59 in a 4 degree cold room and near pH 7.66 at 37 degrees. That is a swing of nearly a full pH unit across normal working temperatures, and it is a classic source of failed experiments. The fix is to adjust the pH at the temperature where the buffer will actually be used, and to prefer a buffer like phosphate or HEPES when temperature will vary."}},
+{"@type":"Question","name":"What are Good's buffers?","acceptedAnswer":{"@type":"Answer","text":"Good's buffers are a family of zwitterionic buffers, including MES, PIPES, MOPS, HEPES, TES, TAPS, CHES, and CAPS, selected by Norman Good and colleagues for biological work. They were chosen to have pKa values spanning the physiological range, high water solubility, minimal binding of metal ions, low membrane permeability, and little absorbance in the visible or near-UV range. Those properties make them far less likely to interfere with enzymes, cells, and spectrophotometric assays than older buffers like phosphate or citrate."}},
+{"@type":"Question","name":"When should I avoid phosphate buffer?","acceptedAnswer":{"@type":"Answer","text":"Phosphate is cheap, biologically relevant, and barely shifts with temperature, but it has real drawbacks. It precipitates with calcium and many divalent metal cations, it inhibits a number of enzymes including several kinases and phosphatases, and it participates directly in reactions where phosphate is a substrate or product. It also buffers poorly between about pH 8.5 and 10 because that region sits between its second and third pKa values. In those situations a Good's buffer such as HEPES or Tris is usually the better choice."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#5dcaa5;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a;--blue:#378add;--purple:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:690px;margin:0 auto}
+ main{max-width:960px;margin:0 auto;padding:1rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.3rem}
+ .picker{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+ @media(max-width:560px){.picker{grid-template-columns:1fr}}
+ input[type=number]{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.1rem;padding:.6rem;border-radius:8px}
+ .best{background:rgba(93,202,165,.12);border-radius:10px;padding:1rem;margin-top:1rem}
+ .best .bt{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+ .pickrow{display:flex;align-items:baseline;gap:.6rem;padding:.3rem 0;font-size:.95rem}
+ .pickrow b{font-size:1.05rem;color:var(--out)}
+ .pickrow .off{color:var(--muted);font-size:.82rem;margin-left:auto}
+ .warnbox{background:rgba(224,169,59,.12);border-left:3px solid var(--warn);border-radius:8px;padding:.9rem 1rem;margin-top:1rem;font-size:.88rem}
+ .warnbox b{color:var(--warn)}
+ .controls{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.9rem}
+ .controls button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.45rem .9rem;border-radius:99px;cursor:pointer;font-size:.84rem}
+ .controls button.on{border-color:var(--accent);color:var(--accent)}
+ #search{flex:1;min-width:160px;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:.95rem;padding:.5rem .7rem;border-radius:8px}
+ .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+ table.bt{width:100%;border-collapse:collapse;font-size:.88rem;min-width:640px}
+ table.bt th,table.bt td{padding:.45rem .5rem;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+ table.bt th:first-child,table.bt td:first-child{text-align:left}
+ table.bt th{color:var(--muted);font-weight:500;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;user-select:none}
+ table.bt th:hover{color:var(--accent)}
+ table.bt tbody tr:hover{background:rgba(255,255,255,.03)}
+ tr.inrange{background:rgba(93,202,165,.09)}
+ tr.inrange td:first-child{box-shadow:inset 3px 0 0 var(--out)}
+ .nm{font-weight:600}
+ .tag{font-size:.68rem;padding:.05rem .4rem;border-radius:4px;margin-left:.35rem;vertical-align:middle}
+ .tag.good{background:rgba(93,202,165,.18);color:var(--out)}
+ .tag.tsens{background:rgba(226,75,74,.16);color:var(--bad)}
+ .count{color:var(--muted);font-size:.82rem;margin-top:.8rem}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ table.info{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}table.info th,table.info td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}table.info th{color:var(--muted);font-weight:500}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;border-color:#bbb!important}
+  body{background:#fff!important}a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.controls{display:none!important}
+  table.bt{min-width:0;font-size:.72rem}.tblwrap{overflow:visible}
+  tr.inrange td:first-child{box-shadow:none!important}
+ }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header><h1>Buffer pKa Table</h1><p>32 common buffers with their pKa, useful pH range, and how much that pKa drifts with temperature. Enter the pH you need and it tells you which buffers actually work, ranked by fit.</p></header>
+<main>
+ <div class="card">
+  <div class="picker">
+   <div><label for="target">What pH do you need?</label>
+    <input id="target" type="number" step="0.1" min="0" max="14" value="7.4"></div>
+   <div><label for="temp">Working temperature (&deg;C)</label>
+    <input id="temp" type="number" step="1" min="0" max="100" value="25"></div>
+  </div>
+  <div class="best">
+   <div class="bt">Best matches</div>
+   <div id="best" aria-live="polite"></div>
+  </div>
+  <div class="warnbox" id="tempwarn" style="display:none"></div>
+ </div>
+
+ <div class="card">
+  <div class="controls" id="filters">
+   <button data-f="all" class="on">All buffers</button>
+   <button data-f="inrange">Works at my pH</button>
+   <button data-f="goods">Good's buffers</button>
+   <button data-f="stable">Temperature-stable</button>
+   <input id="search" type="search" placeholder="Search buffer name…" aria-label="Search buffers">
+  </div>
+  <div class="tblwrap">
+   <table class="bt" id="tbl">
+    <thead><tr>
+     <th data-k="name">Buffer</th>
+     <th data-k="pka">pKa (25&deg;C)</th>
+     <th data-k="pkaT">pKa at your temp</th>
+     <th data-k="range">Useful range</th>
+     <th data-k="dt">&Delta;pKa / &deg;C</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+   </table>
+  </div>
+  <div class="count" id="count"></div>
+ </div>
+
+ <h2>How to pick a buffer</h2>
+ <p class="note">Match the <b>pKa to your target pH</b>, as closely as you can and within one unit at the outside. A buffer resists pH change only while both the acid and conjugate base forms are present in real amounts, and that is only true near the pKa. One full unit away, Henderson-Hasselbalch says the mix is already about <b>91% one form and 9% the other</b>, so there is very little of the minority form left to absorb what you add. That is exactly where the accepted "pKa &plusmn; 1" window comes from, and why a buffer at the edge of its range fails much faster than one at its centre.</p>
+ <p class="note">Then check the <b>temperature column</b>. Most tables quietly report pKa at 25&deg;C, but you may be working in a cold room or at 37&deg;C, and some buffers shift far more than others. Tris is the notorious one: adjust it to pH 8.00 on the bench and it is roughly <b>pH 8.59 at 4&deg;C</b> and <b>pH 7.66 at 37&deg;C</b>, nearly a full unit of swing. Phosphate and acetate barely move at all. Adjust the pH at the temperature you will actually use, or pick a buffer that does not care.</p>
+ <p class="note">Related tools: <a href="/henderson-hasselbalch-buffer-calculator.html">Buffer calculator</a> (exact amounts to mix) · <a href="/acid-base-titration-curve-calculator.html">Titration curve</a> · <a href="/ph-calculator.html">pH calculator</a> · <a href="/biochem-equation-sheet.html">Equation sheet</a> · <a href="/">all biochem tools</a>.</p>
+
+ <div class="card">
+  <h2 style="margin-top:0">Buffers to be careful with</h2>
+  <div style="overflow-x:auto">
+  <table class="info">
+   <thead><tr><th>Buffer</th><th>Watch out for</th></tr></thead>
+   <tbody>
+    <tr><td>Tris</td><td>Large temperature shift (&minus;0.028/&deg;C); also reacts with aldehydes and interferes with some protein assays</td></tr>
+    <tr><td>Phosphate</td><td>Precipitates with calcium and many divalent metals; inhibits several kinases and phosphatases; poor buffering pH 8.5&ndash;10</td></tr>
+    <tr><td>Citrate</td><td>Strong metal chelator, so it strips required cofactors from many enzymes</td></tr>
+    <tr><td>Borate</td><td>Complexes with cis-diols, so it binds sugars, glycerol, and some nucleotides</td></tr>
+    <tr><td>Carbonate</td><td>Exchanges CO<sub>2</sub> with the air, so the pH drifts in an open vessel</td></tr>
+    <tr><td>Glycine</td><td>An amino acid, so it can take part in reactions and interfere with amine assays</td></tr>
+   </tbody>
+  </table>
+  </div>
+  <p class="note"><b>Good's buffers</b> (MES, PIPES, MOPS, HEPES, TES, TAPS, CHES, CAPS and relatives) were designed to avoid most of these problems: they are zwitterionic, water-soluble, barely bind metals, do not cross membranes easily, and are largely transparent in the visible and near-UV.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>How do I choose a buffer?</b><br>Pick the pKa closest to your target pH, within &plusmn;1. For pH 7.4 that means TES, HEPES, or MOPS.</p>
+  <p class="note"><b>Why is the range pKa &plusmn; 1?</b><br>At one unit away the ratio is already 10:1, so ~91% sits in one form and only ~9% is left to neutralize what you add.</p>
+  <p class="note"><b>Why does Tris drift so much?</b><br>Its coefficient is about &minus;0.028 per &deg;C. pH 8.00 on the bench is ~8.59 at 4&deg;C and ~7.66 at 37&deg;C. Adjust at the working temperature.</p>
+  <p class="note"><b>What are Good's buffers?</b><br>Zwitterionic buffers picked for biology: physiological pKa range, soluble, minimal metal binding, membrane-impermeant, optically clear.</p>
+  <p class="note"><b>When should I skip phosphate?</b><br>With calcium or divalent metals, with kinases and phosphatases, when phosphate is a reactant, or between pH 8.5 and 10.</p>
+ </div>
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 45 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/biochem-equation-sheet.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Equation sheet (all formulas)</a><a href="/amino-acid-chart.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid chart (all 20)</a><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge &amp; pI</a><a href="/protein-molecular-weight-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Protein MW &amp; extinction coeff.</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/codon-chart.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Codon chart (genetic code)</a><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp &amp; GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/x-linked-inheritance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">X-linked inheritance</a><a href="/chi-square-genetics-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chi-square genetic ratio</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq)</a><a href="/reaction-rate-half-life-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Reaction half-life &amp; rate law</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/percent-composition-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent composition calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions &amp; lab prep</div><a href="/buffer-pka-table.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer pKa table</a><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass &amp; molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure &amp; tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+const $=id=>document.getElementById(id);
+// name, pKa at 25C, dpKa/degC, isGoodsBuffer
+const BUF=[
+["Phosphoric acid (pKa1)",2.15,0.005,0],["Glycine (pKa1)",2.35,0,0],
+["Citric acid (pKa1)",3.13,0,0],["Formate",3.75,0,0],["Lactate",3.86,0,0],
+["Succinate (pKa1)",4.21,0,0],["Acetate",4.76,0.0002,0],["Citrate (pKa2)",4.76,0,0],
+["Succinate (pKa2)",5.64,0,0],["MES",6.15,-0.011,1],["Citrate (pKa3)",6.40,0,0],
+["Carbonate (pKa1)",6.35,-0.009,0],["Bis-Tris",6.46,-0.017,0],["ADA",6.60,-0.011,1],
+["PIPES",6.80,-0.0085,1],["ACES",6.90,-0.020,1],["Imidazole",7.00,-0.020,0],
+["MOPS",7.20,-0.011,1],["Phosphate (pKa2)",7.20,-0.0028,0],["TES",7.50,-0.020,1],
+["HEPES",7.55,-0.014,1],["Tricine",8.05,-0.021,1],["Tris",8.06,-0.028,0],
+["Bicine",8.35,-0.018,1],["TAPS",8.40,-0.018,1],["Borate",9.24,-0.008,0],
+["Ammonium",9.25,-0.031,0],["CHES",9.30,-0.011,1],["Glycine (pKa2)",9.78,-0.025,0],
+["Carbonate (pKa2)",10.33,-0.009,0],["CAPS",10.40,-0.018,1],["Phosphate (pKa3)",12.35,0,0]
+];
+let filter="all", query="", sortKey="pka", sortDir=1;
+const pkaAt=(pka,dt,T)=>pka+dt*(T-25);
+const norm=s=>s.replace(/[-‐-―]/g," ").replace(/\s+/g," ").trim().toLowerCase();
+
+function readInputs(){
+ const t=parseFloat($("target").value), T=parseFloat($("temp").value);
+ return {target:isNaN(t)?null:t, temp:isNaN(T)?25:T};
+}
+function render(){
+ const {target,temp}=readInputs();
+ // best matches (uses temperature-corrected pKa when a temp is given)
+ if(target===null){
+  $("best").innerHTML='<span class="note">Enter a target pH between 0 and 14.</span>';
+ } else {
+  const ranked=BUF.map(b=>({n:b[0],p:pkaAt(b[1],b[2],temp),off:Math.abs(pkaAt(b[1],b[2],temp)-target)}))
+                  .sort((a,b)=>a.off-b.off).slice(0,4);
+  $("best").innerHTML=ranked.map(r=>{
+   const ok=r.off<=1;
+   return `<div class="pickrow"><b>${r.n}</b> <span class="note">pKa ${r.p.toFixed(2)}</span>`+
+     `<span class="off">${ok?"":"outside range · "}${r.off.toFixed(2)} from target</span></div>`;
+  }).join("");
+ }
+ // temperature warning for large drifters
+ const w=$("tempwarn");
+ if(Math.abs(temp-25)>=5){
+  const big=BUF.filter(b=>Math.abs(b[2])>=0.018).map(b=>b[0]);
+  const tris=BUF.find(b=>b[0]==="Tris");
+  const shifted=pkaAt(tris[1],tris[2],temp);
+  w.style.display="block";
+  w.innerHTML=`<b>Temperature matters here.</b> At ${temp}&deg;C, Tris shifts from pKa 8.06 to <b>${shifted.toFixed(2)}</b>. `+
+   `Buffers that drift most: ${big.join(", ")}. Adjust the pH at your working temperature, or choose phosphate or acetate, which barely move.`;
+ } else w.style.display="none";
+
+ // table
+ const q=norm(query);
+ const rows=BUF.filter(b=>{
+  if(q && !norm(b[0]).includes(q)) return false;
+  if(filter==="goods") return b[3]===1;
+  if(filter==="stable") return Math.abs(b[2])<=0.009;
+  if(filter==="inrange") return target!==null && Math.abs(pkaAt(b[1],b[2],temp)-target)<=1;
+  return true;
+ }).map(b=>({name:b[0],pka:b[1],dt:b[2],goods:b[3],pkaT:pkaAt(b[1],b[2],temp)}))
+   .sort((a,b)=>{
+     let x=a[sortKey],y=b[sortKey];
+     if(typeof x==="string") return sortDir*x.localeCompare(y);
+     return sortDir*(x-y);
+   });
+ $("rows").innerHTML=rows.map(r=>{
+  const inr = target!==null && Math.abs(r.pkaT-target)<=1;
+  const tags=(r.goods?'<span class="tag good">Good’s</span>':'')+
+             (Math.abs(r.dt)>=0.018?'<span class="tag tsens">temp-sensitive</span>':'');
+  const dt=r.dt===0?'<span class="note">~0</span>':(r.dt>0?"+":"")+r.dt.toFixed(4);
+  return `<tr class="${inr?'inrange':''}"><td><span class="nm">${r.name}</span>${tags}</td>`+
+   `<td>${r.pka.toFixed(2)}</td><td>${r.pkaT.toFixed(2)}</td>`+
+   `<td>${(r.pkaT-1).toFixed(1)} &ndash; ${(r.pkaT+1).toFixed(1)}</td><td>${dt}</td></tr>`;
+ }).join("");
+ const inCount=target===null?0:BUF.filter(b=>Math.abs(pkaAt(b[1],b[2],temp)-target)<=1).length;
+ $("count").textContent=`Showing ${rows.length} of ${BUF.length} buffers`+
+   (target!==null?` · ${inCount} work at pH ${target} (highlighted)`:"");
+}
+document.querySelectorAll("#filters button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#filters button").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
+ b.classList.add("on"); b.setAttribute("aria-pressed","true"); filter=b.dataset.f; render();
+});
+document.querySelectorAll("#tbl th").forEach(th=>th.onclick=()=>{
+ const k=th.dataset.k; if(!k) return;
+ const key = k==="range" ? "pkaT" : k;
+ if(sortKey===key) sortDir*=-1; else {sortKey=key; sortDir=1;}
+ render();
+});
+["target","temp"].forEach(id=>$(id).addEventListener("input",render));
+$("search").addEventListener("input",e=>{query=e.target.value; render();});
+render();
+</script>
+</body>
+</html>
