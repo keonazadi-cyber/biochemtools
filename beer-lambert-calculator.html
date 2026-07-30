@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beer-Lambert Law Calculator — Free, Shows Steps</title>
-<meta name="description" content="Free Beer-Lambert calculator (A = εbc). Solve for absorbance, molar absorptivity, path length, or concentration, with every step shown.">
-<meta name="keywords" content="beer lambert law calculator, absorbance to concentration, molar absorptivity calculator, A=ebc, transmittance to absorbance, spectrophotometry calculator">
+<title>Absorbance Formula Calculator (Beer-Lambert A = εbc)</title>
+<meta name="description" content="The absorbance formula A = εbc, solved for any variable. Calculate absorbance, convert absorbance to concentration, or find molar absorptivity.">
+<meta name="keywords" content="absorbance formula, absorbance equation, calculate absorbance, beer lambert law calculator, beers law calculator, absorbance to concentration, molar absorptivity calculator, absorbance to transmittance">
 <link rel="canonical" href="https://biochemtools.com/beer-lambert-calculator.html">
-<meta property="og:title" content="Beer-Lambert Law Calculator — Absorbance ↔ Concentration">
-<meta property="og:description" content="Solve A = εbc for any variable and convert absorbance and %transmittance, with every step shown. Free.">
+<meta property="og:title" content="Absorbance Formula Calculator (Beer-Lambert A = εbc)">
+<meta property="og:description" content="The absorbance formula A = εbc solved for any variable, with every step shown. Free.">
 <meta property="og:image" content="https://biochemtools.com/og-images/beer-lambert-calculator.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -78,7 +78,7 @@
  </div>
 </div>
 
-<header><h1>Beer-Lambert Law Calculator</h1><p>Solve A = εbc for any variable, and convert between absorbance and %transmittance — with every step shown.</p></header>
+<header><h1>Absorbance Formula Calculator</h1><p>The absorbance formula is <b>A = &epsilon;bc</b>, the Beer-Lambert law. Solve it for any variable, calculate absorbance, convert absorbance to concentration, or find molar absorptivity, with every step shown.</p></header>
 <main>
  <div class="card">
   <label for="A">Solve for</label>
@@ -106,6 +106,22 @@
    <div style="flex:1"><label for="cT">%Transmittance</label> <input id="cT" type="number" step="any" value="25.1"></div>
   </div>
   <div class="work" id="twork" style="margin-top:1rem"></div>
+ </div>
+ <h2>The absorbance formula (Beer-Lambert law)</h2>
+ <p class="note">The absorbance equation is <b>A = &epsilon;bc</b>, also written A = &epsilon;lc or A = abc. Beer's law is the same relationship whichever letters your course uses:</p>
+ <div class="card">
+  <div class="work">A = &epsilon; &times; b &times; c
+
+  A = absorbance          (no units)
+  &epsilon; = molar absorptivity   (M-1 cm-1, also called the extinction coefficient)
+  b = path length         (cm, usually 1 cm for a standard cuvette)
+  c = concentration       (M)</div>
+  <h3 style="margin:1rem 0 .4rem;font-size:1.02rem">How to calculate absorbance</h3>
+  <p class="note" style="margin:0 0 1rem">Multiply the three: <b>A = &epsilon;bc</b>. For a compound with &epsilon; = 6220 M-1cm-1 in a 1 cm cuvette at 50 &micro;M (5&times;10<sup>-5</sup> M): A = 6220 &times; 1 &times; 5&times;10<sup>-5</sup> = <b>0.311</b>.</p>
+  <h3 style="margin:0 0 .4rem;font-size:1.02rem">Absorbance to concentration</h3>
+  <p class="note" style="margin:0 0 1rem">Rearrange to <b>c = A / (&epsilon;b)</b>. Reading A = 0.311 with the same &epsilon; and cuvette: 0.311 / (6220 &times; 1) = <b>5&times;10<sup>-5</sup> M</b>, which is 50 &micro;M.</p>
+  <h3 style="margin:0 0 .4rem;font-size:1.02rem">Finding molar absorptivity</h3>
+  <p class="note" style="margin:0">Rearrange to <b>&epsilon; = A / (bc)</b>. That is how &epsilon; is measured in the first place: read the absorbance of a known concentration and divide.</p>
  </div>
  <h2>How to find concentration from absorbance</h2>
  <p class="note">The Beer-Lambert law says absorbance is directly proportional to concentration: A = εbc. Here A is the measured absorbance, ε (epsilon) is the molar absorptivity — a constant for a given substance and wavelength — b is the path length of the cuvette (almost always 1 cm), and c is the molar concentration. To find an unknown concentration, rearrange to c = A / (εb). If your instrument reports %transmittance instead of absorbance, convert first with A = −log₁₀(T), where T is the fraction of light transmitted (%T divided by 100). The law holds best at low absorbance (roughly A &lt; 1); above that, readings deviate from linearity.</p>

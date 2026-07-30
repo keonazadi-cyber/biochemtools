@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amino Acid Titration Curve &amp; pI Calculator — Free</title>
-<meta name="description" content="Pick an amino acid, see its full titration curve with buffering regions at each pKa and the isoelectric point marked. Free, shows the work.">
-<meta name="keywords" content="amino acid titration curve, titration curve pKa, isoelectric point, buffering region, glycine titration curve, pI calculation, arginine titration curve">
+<meta name="description" content="Pick an amino acid for its full titration curve, and see how to calculate pKa from a titration curve using the half-equivalence points and the pI.">
+<meta name="keywords" content="amino acid titration curve, how to calculate pka from titration curve, glycine titration curve, alanine titration curve, arginine titration curve, isoelectric point, half equivalence point, pi calculation">
 <link rel="canonical" href="https://biochemtools.com/amino-acid-titration-curve.html">
 <meta property="og:title" content="Amino Acid Titration Curve Generator (pKa &amp; pI)">
 <meta property="og:description" content="Pick an amino acid, see its titration curve with buffering regions and the pI marked. Free.">
@@ -77,7 +77,7 @@
  </div>
 </div>
 
-<header><h1>Amino Acid Titration Curve</h1><p>Pick an amino acid and see its full titration curve — with each buffering region and the isoelectric point (pI) marked, and the pI worked out.</p></header>
+<header><h1>Amino Acid Titration Curve</h1><p>Pick an amino acid and see its full titration curve, with each buffering region and the isoelectric point (pI) marked and worked out. Also shows <b>how to calculate pKa from a titration curve</b> by reading the half-equivalence points.</p></header>
 <main>
  <div class="card">
   <label for="aa">Amino acid</label>
@@ -101,6 +101,14 @@
    <div class="metric"><div class="lbl">pKa values</div><div class="val" id="pkas" style="font-size:1.1rem">—</div></div>
   </div>
   <div class="work" id="work"></div>
+ </div>
+ <h2>How to calculate pKa from a titration curve</h2>
+ <p class="note">Every pKa sits at a <b>half-equivalence point</b>, the flat middle of each buffering region. Read it in three steps:</p>
+ <div class="card">
+  <div class="work">1. Find each equivalence point  (the steep vertical jumps)
+2. Go back to HALF that volume of titrant
+3. Read the pH there — that pH IS the pKa</div>
+  <p class="note" style="margin:.8rem 0 0">It works because at half-equivalence exactly half the group is deprotonated, so [A<sup>-</sup>] = [HA]. Henderson-Hasselbalch becomes pH = pKa + log(1) = pKa. A curve with two flat regions has two pKa values, and the <b>pI is the average of the two that flank the neutral form</b>. For glycine, pKa 2.34 and 9.60 give pI = (2.34 + 9.60)/2 = 5.97.</p>
  </div>
  <h2>How to read an amino acid titration curve</h2>
  <p class="note">As you add base, you strip protons off the amino acid one group at a time. The flat, gently sloped stretches are buffering regions, each centered on a pKa — that is the half-equivalence point, where the group is half protonated and resists pH change best. The steep vertical jumps are equivalence points, where a proton has been fully removed. The isoelectric point (pI), where the molecule carries no net charge, sits at the midpoint of the two pKa values flanking the neutral zwitterion: for a simple amino acid like glycine that is just (pKa₁ + pKa₂)/2, and for one with an ionizable side chain you average the two pKas around the net-zero species.</p>
