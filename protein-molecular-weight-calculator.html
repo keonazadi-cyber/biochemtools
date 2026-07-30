@@ -77,6 +77,10 @@
   .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
   .tally{position:static!important}
  }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -151,6 +155,41 @@ Example — a protein whose 1 mg/mL solution reads A280 = 1.50:
   <p class="note"><b>Reduced vs oxidized extinction coefficient?</b><br>Reduced = free cysteine thiols (most intracellular proteins). Oxidized = disulfide-bonded cysteines (many secreted proteins). They differ only by 125 per disulfide, so with few cysteines it hardly matters.</p>
   <p class="note"><b>Why does the pI differ from another calculator?</b><br>Different pKa tables. The same sequence can shift by a few tenths of a pH unit. It is a theoretical estimate, not a measured value.</p>
   <p class="note"><b>Does this handle a FASTA sequence?</b><br>Yes — a leading header line starting with "&gt;" is ignored, and so are spaces, line breaks, and residue numbers. Non-standard letters (X, B, Z, U) are skipped and flagged.</p>
+ </div>
+ 
+ <div class="card" id="sources">
+  <h2 style="margin-top:0">Sources and how to cite this page</h2>
+  <p class="note">Molecular weight is the sum of average-isotopic residue masses plus one water molecule for the free termini. The molar extinction coefficient at 280&nbsp;nm is calculated by the method of <b>Gill and von Hippel</b> (Gill, S.C. &amp; von Hippel, P.H., &ldquo;Calculation of protein extinction coefficients from amino acid sequence data,&rdquo; <i>Analytical Biochemistry</i> 182(2):319&ndash;326, 1989), which sums per-residue contributions of 5500&nbsp;M&minus;&sup1;cm&minus;&sup1; per tryptophan, 1490 per tyrosine, and 125 per cystine (disulfide-bonded cysteine pair).</p>
+  <p class="note"><b>How accurate it is.</b> The sequence-based estimate is typically within a few percent for proteins containing tryptophan, which is why it is the standard way to convert an A280 reading into concentration. It is less reliable for proteins with no tryptophan, where the tyrosine and cystine terms dominate and the relative error is larger. Note also that the calculation assumes the protein is folded and free of absorbing contaminants; nucleic acid contamination inflates A280 badly.</p>
+  <h3 style="font-size:1rem;margin:1.4rem 0 .6rem">Cite this page</h3>
+  <div style="display:flex;flex-direction:column;gap:.6rem">
+   <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem">
+    <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem">APA</div>
+    <div style="display:flex;gap:.75rem;align-items:flex-start">
+     <span id="cite-apa" style="font-size:.86rem;flex:1;overflow-wrap:anywhere">BiochemTools. (2026). <i>Protein molecular weight and extinction coefficient calculator</i>. https://biochemtools.com/protein-molecular-weight-calculator.html</span>
+     <button type="button" class="citebtn" data-t="cite-apa">Copy</button>
+    </div>
+   </div>
+   <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem">
+    <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem">MLA</div>
+    <div style="display:flex;gap:.75rem;align-items:flex-start">
+     <span id="cite-mla" style="font-size:.86rem;flex:1;overflow-wrap:anywhere">&ldquo;Protein Molecular Weight and Extinction Coefficient Calculator.&rdquo; <i>BiochemTools</i>, 2026, biochemtools.com/protein-molecular-weight-calculator.html.</span>
+     <button type="button" class="citebtn" data-t="cite-mla">Copy</button>
+    </div>
+   </div>
+   <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem">
+    <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem">BibTeX</div>
+    <div style="display:flex;gap:.75rem;align-items:flex-start">
+     <span id="cite-bib" style="font-size:.86rem;flex:1;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap">@misc{biochemtools_proteinmw,
+  title  = {Protein molecular weight and extinction coefficient calculator},
+  author = {{BiochemTools}},
+  year   = {2026},
+  url    = {https://biochemtools.com/protein-molecular-weight-calculator.html}
+}</span>
+     <button type="button" class="citebtn" data-t="cite-bib">Copy</button>
+    </div>
+   </div>
+  </div>
  </div>
  <div id="recommended-slot"></div>
 </main>
@@ -276,6 +315,28 @@ $("ex2").onclick=()=>{$("seq").value=LYSOZYME; calc();};
 $("clr").onclick=()=>{$("seq").value=""; $("seq").focus(); calc();};
 $("seq").addEventListener("input",calc);
 calc();
+</script>
+<script>
+document.querySelectorAll(".citebtn").forEach(function(b){
+ b.addEventListener("click",function(){
+  var el=document.getElementById(b.dataset.t);
+  if(!el) return;
+  var flash=function(msg){
+   b.textContent=msg; b.disabled=true;
+   setTimeout(function(){b.textContent="Copy";b.disabled=false;},1600);
+  };
+  var sel=window.getSelection(), rng=document.createRange();
+  rng.selectNodeContents(el); sel.removeAllRanges(); sel.addRange(rng);
+  var fallback=function(){
+   var ok=false;
+   try{ ok=document.execCommand("copy"); }catch(e){}
+   flash(ok?"Copied":"Selected, press Ctrl+C");
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+   navigator.clipboard.writeText(el.innerText.trim()).then(function(){flash("Copied");}).catch(fallback);
+  }else{ fallback(); }
+ });
+});
 </script>
 </body>
 </html>
