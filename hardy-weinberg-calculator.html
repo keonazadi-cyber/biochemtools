@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hardy-Weinberg Calculator — Free, Shows Every Step</title>
-<meta name="description" content="Free Hardy-Weinberg calculator. Find allele &amp; genotype frequencies from p or counts, plus a chi-square equilibrium test, fully worked.">
-<meta name="keywords" content="hardy weinberg calculator, allele frequency calculator, genotype frequency, p2 2pq q2, hardy weinberg equilibrium test, chi square hardy weinberg">
+<title>Genotype Frequency &amp; Hardy-Weinberg Calculator</title>
+<meta name="description" content="Calculate genotype frequency and allele frequency with the Hardy-Weinberg equation, from p or from real counts, plus a chi-square equilibrium test.">
+<meta name="keywords" content="genotype frequency calculator, how to calculate genotype frequency, hardy weinberg calculator, allele frequency calculator, hardy weinberg equilibrium calculator, p2 2pq q2, chi square hardy weinberg">
 <link rel="canonical" href="https://biochemtools.com/hardy-weinberg-calculator.html">
 <meta property="og:title" content="Hardy-Weinberg Calculator — Frequencies + Equilibrium Test">
 <meta property="og:description" content="Allele and genotype frequencies from p or from counts, plus a chi-square equilibrium test. Free, shows the work.">
@@ -81,7 +81,7 @@
  </div>
 </div>
 
-<header><h1>Hardy-Weinberg Calculator</h1><p>Find allele and genotype frequencies — from a known allele frequency, or from real genotype counts — and test whether a population is in Hardy-Weinberg equilibrium. Every step shown.</p></header>
+<header><h1>Genotype Frequency Calculator</h1><p>Calculate genotype frequency and allele frequency with the Hardy-Weinberg equation, starting either from a known allele frequency or from real genotype counts, and test whether the population is in Hardy-Weinberg equilibrium. Every step shown.</p></header>
 <main>
  <div class="card">
   <div class="modes" id="modes">
@@ -109,6 +109,19 @@
   <div class="bars"><div class="bar" id="bar"></div></div>
   <div class="work" id="work"></div>
   <div id="verdict"></div>
+ </div>
+ <h2>How to calculate genotype frequency</h2>
+ <p class="note">Genotype frequency is the fraction of a population carrying each genotype, and Hardy-Weinberg gives it from a single allele frequency:</p>
+ <div class="card">
+  <div class="work">p = frequency of the dominant allele
+q = frequency of the recessive allele      (p + q = 1)
+
+homozygous dominant  (AA) = p²
+heterozygous         (Aa) = 2pq
+homozygous recessive (aa) = q²
+
+            p² + 2pq + q² = 1</div>
+  <p class="note" style="margin:.8rem 0 0">Worked: if p = 0.6, then q = 0.4, so AA = 0.36, Aa = 2(0.6)(0.4) = 0.48, and aa = 0.16. Those sum to 1.00, which is the built-in check. Going the other way, the recessive phenotype frequency <i>is</i> q², so q = &radic;(aa frequency) and p = 1 &minus; q.</p>
  </div>
  <h2>How the Hardy-Weinberg equation works</h2>
  <p class="note">Hardy-Weinberg describes a population that is <i>not</i> evolving. With two alleles, their frequencies add to one: p + q = 1. The genotype frequencies then follow p² + 2pq + q² = 1, where p² is the homozygous dominant fraction, 2pq is the heterozygous fraction, and q² is the homozygous recessive fraction. A common exam move is to start from the recessive phenotype: if q² is known, then q = √(q²), p = 1 − q, and you can predict every genotype. When you have real counts, calculate the allele frequencies as p = (2 × AA + Aa) / (2N), compare the observed genotype counts to the expected ones, and use a chi-square test (critical value 3.84 for 1 degree of freedom at α = 0.05) to decide whether the population departs from equilibrium.</p>

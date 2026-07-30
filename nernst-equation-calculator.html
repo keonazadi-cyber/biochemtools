@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nernst Equation Calculator — Cell Potential, Free</title>
-<meta name="description" content="Free Nernst equation calculator. Get cell potential from E°, n, and Q at any temperature, with both the RT/nF and 0.0592/n forms shown.">
-<meta name="keywords" content="nernst equation calculator, cell potential calculator, E = E0 - RT/nF lnQ, electrochemistry calculator, 0.0592/n, reaction quotient cell potential">
+<meta name="description" content="Nernst equation calculator for cell potential under non-standard conditions, plus what n means and the Goldman equation for membrane potential.">
+<meta name="keywords" content="nernst equation calculator, nernst potential calculator, cell potential calculator, goldman equation calculator, goldman hodgkin katz equation, what is n in nernst equation, membrane potential, 0.0592">
 <link rel="canonical" href="https://biochemtools.com/nernst-equation-calculator.html">
 <meta property="og:title" content="Nernst Equation Calculator — Cell Potential, Step by Step">
 <meta property="og:description" content="Compute cell potential from E°, n, and Q at any temperature, with the full worked steps. Free.">
@@ -90,6 +90,25 @@
  <div class="card">
   <div class="out" id="out"><div class="v" id="eval" aria-live="polite">—</div><div class="l" id="elab"></div></div>
   <div class="work" id="work"></div>
+ </div>
+ <h2>What is n in the Nernst equation?</h2>
+ <p class="note"><b>n is the number of moles of electrons transferred</b> in the balanced redox reaction, not the number of atoms or ions. Balance the two half-reactions so the electrons cancel, and n is that shared number. In the Daniell cell, Zn &rarr; Zn²⁺ + 2e⁻ and Cu²⁺ + 2e⁻ &rarr; Cu, so <b>n = 2</b>. Because n divides the log term, doubling it halves how much the potential shifts away from E&deg;.</p>
+
+ <h2>The Goldman equation (membrane potential)</h2>
+ <p class="note">The Nernst equation gives the equilibrium potential for <b>one</b> ion. A real membrane is permeable to several at once, and the <b>Goldman-Hodgkin-Katz equation</b> weights each by its permeability:</p>
+ <div class="card">
+  <div class="work">Vm = (RT/F) · ln [ (P_K[K⁺]out + P_Na[Na⁺]out + P_Cl[Cl⁻]in )
+                   ------------------------------------------
+                    (P_K[K⁺]in  + P_Na[Na⁺]in  + P_Cl[Cl⁻]out) ]
+
+RT/F = 26.7 mV at 37°C     (61.5 mV if you use log10 instead of ln)</div>
+  <p class="note" style="margin:.8rem 0 0"><b>Chloride is flipped</b> (out on top, in on the bottom) because it is an anion, so its charge sign reverses the ratio.</p>
+  <p class="note" style="margin:.6rem 0 0">Worked, with typical mammalian values and permeability ratios P<sub>K</sub>:P<sub>Na</sub>:P<sub>Cl</sub> = 1 : 0.04 : 0.45:</p>
+  <div class="work">numerator   = 1(5) + 0.04(145) + 0.45(10)  = 15.3
+denominator = 1(140) + 0.04(15) + 0.45(110) = 190.1
+
+Vm = 26.7 × ln(15.3 / 190.1) = -67 mV        (a normal resting potential)</div>
+  <p class="note" style="margin:.8rem 0 0">Compare the single-ion Nernst potentials from the same concentrations: E<sub>K</sub> = 26.7 &times; ln(5/140) = <b>-89 mV</b> and E<sub>Na</sub> = 26.7 &times; ln(145/15) = <b>+61 mV</b>. Resting membrane potential sits close to E<sub>K</sub> precisely because the membrane is far more permeable to potassium, and it swings toward E<sub>Na</sub> during an action potential when sodium channels open.</p>
  </div>
  <h2>How to use the Nernst equation</h2>
  <p class="note">The Nernst equation adjusts a cell's standard potential for real, non-standard concentrations: E = E° − (RT/nF) ln Q. Here E° is the standard cell potential, R = 8.314 J/mol·K, T is temperature in kelvin, n is the number of electrons transferred, F = 96485 C/mol is Faraday's constant, and Q is the reaction quotient. At 25 °C (298 K) the RT/F term collapses to a constant, giving the common shortcut E = E° − (0.0592/n) log₁₀ Q. A positive E means the reaction is spontaneous as written under those conditions; at equilibrium Q equals K and E = 0.</p>
