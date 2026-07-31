@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Melting Temperature of DNA Calculator (Tm &amp; GC)</title>
-<meta name="description" content="Find the melting temperature of DNA (Tm) and primer GC content from any sequence, with the base composition, reverse complement, and formula shown.">
-<meta name="keywords" content="melting temperature of dna, dna melting temperature, tm of dna, tm calculator dna, primer gc content calculator, primer melting temperature, gc content calculator, reverse complement">
+<title>DNA Melting Temperature Calculator (Nearest-Neighbor Tm)</title>
+<meta name="description" content="Oligo and primer Tm by nearest-neighbor thermodynamics (SantaLucia), with salt and oligo concentration, plus GC content and reverse complement. Free.">
+<meta name="keywords" content="nearest neighbor tm calculator, oligo tm calculator, primer melting temperature calculator, melting temperature of dna, santalucia tm, oligo analyzer, gc content calculator, reverse complement">
 <link rel="canonical" href="https://biochemtools.com/dna-melting-temperature-calculator.html">
 <meta property="og:title" content="DNA Melting Temperature (Tm) &amp; GC Calculator + Reverse Complement">
 <meta property="og:description" content="Paste a primer, get Tm, GC%, and the reverse complement instantly, with the work shown. Free.">
@@ -21,7 +21,7 @@
 {"@type":"Question","name":"Why are there two different Tm formulas depending on sequence length?","acceptedAnswer":{"@type":"Answer","text":"The simple Wallace rule (2×(A+T) + 4×(G+C)) works well for short oligos (14 nt or fewer) but overestimates Tm for longer sequences, since it doesn't account for how base-stacking and length interact at scale. The GC-content-based formula (64.9 + 41×(G+C−16.4)/N) is calibrated for longer sequences instead."}},
 {"@type":"Question","name":"Why does higher GC content raise the melting temperature?","acceptedAnswer":{"@type":"Answer","text":"A G-C base pair forms three hydrogen bonds, while an A-T pair forms only two. More hydrogen bonds means more energy (higher temperature) is needed to separate the two strands, so GC-rich sequences melt at a higher temperature than AT-rich sequences of the same length."}},
 {"@type":"Question","name":"What is the reverse complement used for?","acceptedAnswer":{"@type":"Answer","text":"DNA is double-stranded and antiparallel, so the opposite strand at any position is the complement of the first, read in the reverse direction. The reverse complement is what you need to design a primer that binds the opposite strand (a reverse primer in PCR), or to know what sequence you'd read off the other strand of a given region."}},
-{"@type":"Question","name":"Why might a real PCR primer design tool give a different Tm than this formula?","acceptedAnswer":{"@type":"Answer","text":"These are the standard teaching formulas, which are salt- and concentration-independent. Real primer design software (like Primer3) uses nearest-neighbor thermodynamics, which accounts for the specific sequence of adjacent base pairs, salt concentration, and primer concentration — typically shifting the calculated Tm by a few degrees from the simple formulas here."}}]}
+{"@type":"Question","name":"Why might a real PCR primer design tool give a different Tm than the simple formula?","acceptedAnswer":{"@type":"Answer","text":"The Wallace rule and the GC-content formula are salt- and concentration-independent teaching formulas, so they ignore two things that genuinely change the answer: how much primer is in the tube and how much salt is in the buffer. Real primer design software uses nearest-neighbor thermodynamics instead, which sums the stacking energy of each adjacent base-pair step. This page calculates that too, using the SantaLucia 1998 unified parameters with a sodium correction, so you can compare the teaching estimate against the accurate value. For a typical 16 to 20 base primer the two usually agree within a few degrees, but for very short oligos the Wallace rule can overestimate Tm by 20 degrees Celsius or more, because it ignores how little duplex there is to stabilise."}}]}
 </script>
 <style>
  :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--a:#e24b4a;--t:#e0a93b;--g:#5dcaa5;--c:#378add}
@@ -65,6 +65,11 @@
  .citebtn:hover{border-color:var(--accent);color:var(--accent)}
  .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
  #sources h3{color:var(--txt)}
+ .nnin{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+ @media(max-width:520px){.nnin{grid-template-columns:1fr}}
+ .nnin input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ #nncard .grid{grid-template-columns:repeat(4,1fr)}
+ @media(max-width:640px){#nncard .grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -109,9 +114,32 @@
   <div class="rc" id="rc">—</div>
   <div class="work" id="work" style="margin-top:1rem"></div>
  </div>
+
+ <div class="card" id="nncard">
+  <h2 style="margin-top:0">Nearest-neighbor T<sub>m</sub> (SantaLucia 1998)</h2>
+  <p class="note" style="margin-top:0">This is the accurate method, the one primer design software uses. It sums the stacking energy of every adjacent base pair instead of just counting bases, then corrects for how much oligo and salt you actually have. Use this number for ordering primers; use the rules above for coursework.</p>
+  <div class="nnin">
+   <div>
+    <label for="ct">Oligo concentration (nM)</label>
+    <input type="number" id="ct" value="250" min="0.01" step="10">
+   </div>
+   <div>
+    <label for="na">Na<sup>+</sup> concentration (mM)</label>
+    <input type="number" id="na" value="50" min="0.1" step="10">
+   </div>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+   <div class="metric"><div class="lbl">T<sub>m</sub> (nearest-neighbor)</div><div class="val" id="nntm" aria-live="polite" style="color:var(--out)">—</div></div>
+   <div class="metric"><div class="lbl">&Delta;H&deg;</div><div class="val" id="nndh" style="font-size:1.15rem">—</div></div>
+   <div class="metric"><div class="lbl">&Delta;S&deg;</div><div class="val" id="nnds" style="font-size:1.15rem">—</div></div>
+   <div class="metric"><div class="lbl">&Delta;G&deg;<sub>37</sub></div><div class="val" id="nndg" style="font-size:1.15rem">—</div></div>
+  </div>
+  <div class="work" id="nnwork"></div>
+ </div>
+
  <h2>How to calculate primer Tm and GC content</h2>
  <p class="note">The melting temperature is the temperature at which half the DNA strands separate — critical for setting PCR annealing temperatures. For short primers (14 bases or fewer) the simple Wallace rule works well: T<sub>m</sub> = 2 × (A + T) + 4 × (G + C), because G-C pairs have three hydrogen bonds and A-T pairs only two. For longer sequences use T<sub>m</sub> = 64.9 + 41 × (G + C − 16.4) / N, where N is the length. GC content is just (G + C) / N × 100. The reverse complement is what you get by pairing each base (A↔T, G↔C) and reading the new strand 5′→3′ — the sequence of the opposite strand, and the basis for designing a reverse primer.</p>
- <p class="note">Method note: these are the standard teaching formulas (basic and salt-independent). Real primer design tools also account for salt and oligo concentration using nearest-neighbor thermodynamics, which shifts T<sub>m</sub> by a few degrees.</p>
+ <p class="note">Method note: the two rules above are the standard teaching formulas, and they are salt-independent and concentration-independent. The <a href="#nncard">nearest-neighbor calculator</a> on this page does the accurate version, accounting for base stacking, oligo concentration, and salt. For a typical 16 to 20 base primer the two agree within a few degrees, but for short oligos the Wallace rule runs far too hot: ATGCAT comes out at 16&nbsp;&deg;C by the rule and about &minus;11&nbsp;&deg;C by nearest-neighbor at 250&nbsp;nM. Use the nearest-neighbor number when a PCR has to work.</p>
  <p class="note">Related tools: <a href="/dna-to-protein-translation.html">DNA → protein translation</a> · <a href="/gene-expression-regulation-explorer.html">Gene expression regulation explorer</a> · <a href="/codon-chart.html">Codon chart (genetic code)</a> · <a href="/">all biochem tools</a>.</p>
 
  <div class="card">
@@ -160,7 +188,7 @@ Tm = 64.9 + 41×(12−16.4)/24 = 57.4 °C</div></details>
  <div class="card" id="sources">
   <h2 style="margin-top:0">Sources and how to cite this page</h2>
   <p class="note">For short oligonucleotides this uses the <b>Wallace rule</b>, Tm = 2(A+T) + 4(G+C), from Wallace, R.B. et al., <i>Nucleic Acids Research</i> 6(11):3543&ndash;3557, 1979. For longer sequences it uses the GC-content formula with a salt correction, which accounts for the fact that Tm rises with both GC content and cation concentration. GC pairs contribute more because they form three hydrogen bonds to AT's two, and because of stronger base stacking.</p>
-  <p class="note"><b>When to use something more accurate.</b> The most reliable method for oligonucleotides is <b>nearest-neighbor thermodynamics</b>, which accounts for stacking between adjacent base pairs rather than just counting bases (SantaLucia, J., &ldquo;A unified view of polymer, dumbbell, and oligonucleotide DNA nearest-neighbor thermodynamics,&rdquo; <i>PNAS</i> 95(4):1460&ndash;1465, 1998). That is what commercial primer design software uses. The rules here are quick estimates suitable for coursework and rough primer checks, not a substitute for a nearest-neighbor calculation when a PCR has to work first time.</p>
+  <p class="note"><b>The nearest-neighbor calculation.</b> The calculator on this page implements the unified nearest-neighbor parameters of SantaLucia, J., &ldquo;A unified view of polymer, dumbbell, and oligonucleotide DNA nearest-neighbor thermodynamics,&rdquo; <i>PNAS</i> 95(4):1460&ndash;1465, 1998. It sums the &Delta;H and &Delta;S of each adjacent base-pair step, adds the helix initiation terms, applies the &minus;1.4 cal/(mol&middot;K) symmetry correction for self-complementary sequences, and corrects the entropy for sodium concentration. The implementation was checked against the published worked example CGTTGA/TCAACG, which gives &Delta;H&deg; &minus;41.2&nbsp;kcal/mol, &Delta;S&deg; &minus;115.4&nbsp;cal/(mol&middot;K), and &Delta;G&deg;<sub>37</sub> &minus;5.4&nbsp;kcal/mol. Note that it models sodium only, so if your buffer is magnesium-dominated the true T<sub>m</sub> will be somewhat higher.</p>
   <h3 style="font-size:1rem;margin:1.4rem 0 .6rem">Cite this page</h3>
   <div style="display:flex;flex-direction:column;gap:.6rem">
    <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem">
@@ -216,9 +244,54 @@ function calc(){
  const rc=seq.split("").reverse().map(b=>COMP[b]).join("");
  $("rc").textContent=rc;
  $("work").textContent=`Counts: A=${cnt.A}  T=${cnt.T}  G=${cnt.G}  C=${cnt.C}   (N=${n})\nGC% = (G+C)/N = (${gc})/${n} = ${gcPct.toFixed(1)}%\n\n${formula}`;
+ nnCalc(seq);
 }
+
+/* ---- Nearest-neighbor thermodynamics, SantaLucia 1998 unified parameters ----
+   dH in kcal/mol, dS in cal/(mol K). Verified against the published worked
+   example CGTTGA/TCAACG: dH -41.2, dS -115.4, dG37 -5.4. */
+const NN={AA:[-7.9,-22.2],TT:[-7.9,-22.2],AT:[-7.2,-20.4],TA:[-7.2,-21.3],
+ CA:[-8.5,-22.7],TG:[-8.5,-22.7],GT:[-8.4,-22.4],AC:[-8.4,-22.4],
+ CT:[-7.8,-21.0],AG:[-7.8,-21.0],GA:[-8.2,-22.2],TC:[-8.2,-22.2],
+ CG:[-10.6,-27.2],GC:[-9.8,-24.4],GG:[-8.0,-19.9],CC:[-8.0,-19.9]};
+const INIT_GC=[0.1,-2.8], INIT_AT=[2.3,4.1], Rgas=1.987;
+
+function nnCalc(seq){
+ const blank=()=>{["nntm","nndh","nnds","nndg"].forEach(i=>$(i).textContent="—");$("nnwork").textContent="";};
+ if(!seq||seq.length<2){ blank(); return; }
+ let dH=0,dS=0;
+ for(let i=0;i<seq.length-1;i++){ const p=NN[seq.substr(i,2)]; dH+=p[0]; dS+=p[1]; }
+ [seq[0],seq[seq.length-1]].forEach(function(e){
+   const p=("GC".indexOf(e)>-1)?INIT_GC:INIT_AT; dH+=p[0]; dS+=p[1]; });
+ const rc=seq.split("").reverse().map(b=>COMP[b]).join("");
+ const selfComp=(seq===rc);
+ if(selfComp) dS+=-1.4;                      // symmetry correction
+ const ctNM=parseFloat($("ct").value), naMM=parseFloat($("na").value);
+ if(!isFinite(ctNM)||ctNM<=0||!isFinite(naMM)||naMM<=0){ blank();
+   $("nnwork").textContent="Enter a positive oligo concentration and Na+ concentration."; return; }
+ const CT=ctNM*1e-9, Na=naMM/1000, x=selfComp?1:4;
+ const dSsalt=dS+0.368*(seq.length-1)*Math.log(Na);
+ const tmK=(dH*1000)/(dSsalt+Rgas*Math.log(CT/x));
+ const dG37=dH-310.15*(dS/1000);
+ if(!isFinite(tmK)||tmK<=0){ blank(); return; }
+ $("nntm").textContent=(tmK-273.15).toFixed(1)+" °C";
+ $("nndh").textContent=dH.toFixed(1);
+ $("nnds").textContent=dS.toFixed(1);
+ $("nndg").textContent=dG37.toFixed(1);
+ $("nnwork").textContent=
+`ΔH° = Σ(nearest-neighbor pairs) + initiation = ${dH.toFixed(1)} kcal/mol
+ΔS° = ${dS.toFixed(1)} cal/(mol·K)${selfComp?"   (includes −1.4 symmetry correction)":""}
+ΔG°37 = ΔH° − T·ΔS° = ${dG37.toFixed(1)} kcal/mol
+
+Salt-corrected ΔS° = ΔS° + 0.368×(N−1)×ln[Na+] = ${dSsalt.toFixed(1)} cal/(mol·K)
+Tm = ΔH° / (ΔS°salt + R·ln(CT/${x})) = ${(tmK-273.15).toFixed(1)} °C
+     CT = ${ctNM} nM, [Na+] = ${naMM} mM${selfComp?", self-complementary so x=1":", non-self-complementary so x=4"}`;
+}
+
 document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{$("seq").value=b.dataset.s;calc();});
 $("seq").addEventListener("input",calc);
+$("ct").addEventListener("input",calc);
+$("na").addEventListener("input",calc);
 calc();
 </script>
 <script src="/streak.js" defer></script>
