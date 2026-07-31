@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OligoCalc: Where It Went, and a Free Alternative</title>
+<meta name="description" content="The Northwestern OligoCalc URL now returns 404. The original still runs at oligocalc.eu. What changed, and a free alternative that handles magnesium.">
+<meta name="keywords" content="oligocalc, oligocalc alternative, oligocalc not working, basic northwestern oligocalc, biotools oligocalc, oligo tm calculator, oligonucleotide properties calculator">
+<link rel="canonical" href="https://biochemtools.com/oligocalc-alternative.html">
+<meta property="og:title" content="OligoCalc: Where It Went, and a Free Alternative">
+<meta property="og:description" content="The Northwestern OligoCalc URL now 404s. The original still runs at oligocalc.eu. What changed, and an alternative that handles magnesium.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Molecular biology","item":"https://biochemtools.com/#molecular-biology"},{"@type":"ListItem","position":3,"name":"OligoCalc alternative","item":"https://biochemtools.com/oligocalc-alternative.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is OligoCalc not working?","acceptedAnswer":{"@type":"Answer","text":"The Northwestern address most people have bookmarked, basic.northwestern.edu/biotools/oligocalc.html, now returns a 404. The server still answers but the biotools content is no longer served from it, and the site has no working HTTPS. A later address, biotools.nubic.northwestern.edu, no longer resolves in DNS at all. The tool itself was not withdrawn; the hosting changed. A working copy runs at oligocalc.eu."}},{"@type":"Question","name":"Where can I still use OligoCalc?","acceptedAnswer":{"@type":"Answer","text":"A functioning copy is hosted at oligocalc.eu. It runs Warren Kibbe's original code and carries the Northwestern copyright notice from 1997 to 2007. If you want the exact tool you had bookmarked, including the molecular weight and OD260 conversions, that is the place to go."}},{"@type":"Question","name":"Does OligoCalc account for magnesium?","acceptedAnswer":{"@type":"Answer","text":"No. OligoCalc's own documentation states that its calculations do not provide an adjustment for magnesium or manganese divalent cations. It takes a sodium concentration and a primer concentration only. This matters because PCR buffers are magnesium-dominated, so a sodium-only calculation will read low for real PCR conditions."}},{"@type":"Question","name":"What nearest-neighbor parameters does OligoCalc use?","acceptedAnswer":{"@type":"Answer","text":"OligoCalc's thermodynamic method uses the base-stacking parameters of Sugimoto and colleagues from 1996. Most current tools use the later unified parameter set published by SantaLucia in 1998, which is why two nearest-neighbor calculators can disagree by a degree or two even on identical inputs."}},{"@type":"Question","name":"Is this page affiliated with OligoCalc or Northwestern University?","acceptedAnswer":{"@type":"Answer","text":"No. This is an independent page written after finding the OligoCalc link broken on a number of university lab pages. It is not affiliated with, endorsed by, or connected to Northwestern University or the authors of OligoCalc. It points to the surviving copy of the original tool first, because for many uses that is the right answer."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/oligocalc-alternative.html","name":"OligoCalc: Where It Went, and a Free Alternative","datePublished":"2026-07-31","dateModified":"2026-07-31","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/icon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#378add;--a:#e24b4a;--t:#e0a93b;--g:#5dcaa5;--c:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;letter-spacing:.1em;padding:.75rem;border-radius:10px;font-family:monospace;min-height:60px;resize:vertical}
+ .ex{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}.ex button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.35rem .8rem;border-radius:99px;cursor:pointer;font-size:.8rem;font-family:monospace}
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.78rem}.metric .val{font-size:1.6rem;font-weight:600;margin-top:.2rem}
+ .comp{display:flex;height:26px;border-radius:6px;overflow:hidden;margin:.5rem 0}
+ .comp span{display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#0f1115;font-weight:600}
+ .rc{font-family:monospace;font-size:1.05rem;letter-spacing:.1em;word-break:break-all;background:var(--bg);padding:.75rem;border-radius:8px}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.9;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+ .nnin{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+ @media(max-width:520px){.nnin{grid-template-columns:1fr}}
+ .nnin input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ #nncard .grid{grid-template-columns:repeat(4,1fr)}
+ @media(max-width:640px){#nncard .grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+<header>
+ <h1>OligoCalc: where it went, and what to use now</h1>
+ <p>If your OligoCalc bookmark stopped working, the short answer is that the tool still exists, just not at the Northwestern address. Here is exactly what changed, checked on 31 July 2026.</p>
+</header>
+<main>
+
+ <div class="card" style="border-color:#5dcaa5">
+  <h2 style="margin-top:0">Short answer</h2>
+  <p class="note" style="font-size:.95rem">A working copy of OligoCalc runs at <a href="https://oligocalc.eu/" rel="noopener">oligocalc.eu</a>. It is Warren Kibbe's original code with the Northwestern copyright notice intact. If you want the exact tool you had bookmarked, use that. You can stop reading here.</p>
+  <p class="note">If you specifically need magnesium and dNTP corrections, which OligoCalc does not do, there is a note on that <a href="#alternative">further down</a>.</p>
+ </div>
+
+ <h2>What actually happened to the Northwestern URL</h2>
+ <p class="note">Three addresses have hosted OligoCalc over the years. This is the state of each one, checked on 31 July 2026.</p>
+ <div class="card">
+  <div class="tblwrap">
+  <table class="bt" style="width:100%;border-collapse:collapse;font-size:.88rem">
+   <tr><th style="text-align:left;padding:.5rem;border-bottom:1px solid var(--line);color:var(--muted)">Address</th><th style="text-align:left;padding:.5rem;border-bottom:1px solid var(--line);color:var(--muted)">State</th></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)"><code>basic.northwestern.edu/biotools/oligocalc.html</code></td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">Returns 404. The server still answers, but the whole biotools directory is gone, and the root returns 404 as well. There is no working HTTPS on that host.</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)"><code>biotools.nubic.northwestern.edu</code></td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">No DNS record at all. This host no longer exists, so links to it fail before a request is even made.</td></tr>
+   <tr><td style="padding:.5rem"><code>oligocalc.eu</code></td><td style="padding:.5rem;color:var(--out)">Working. Serves the OligoCalc interface and its documentation.</td></tr>
+  </table>
+  </div>
+  <p class="note" style="margin-top:1rem">The tool was not withdrawn or deprecated by its authors. What changed was the hosting. That is why old links in papers, protocols, and university resource pages fail while the tool itself is fine.</p>
+ </div>
+
+ <h2 id="alternative">Which one you should use</h2>
+ <p class="note">These do different things, and for a lot of tasks OligoCalc is still the better answer. An honest comparison:</p>
+ <div class="card">
+  <div class="tblwrap">
+  <table class="bt" style="width:100%;border-collapse:collapse;font-size:.88rem;min-width:520px">
+   <tr>
+     <th style="text-align:left;padding:.5rem;border-bottom:1px solid var(--line);color:var(--muted)"></th>
+     <th style="text-align:left;padding:.5rem;border-bottom:1px solid var(--line);color:var(--muted)">OligoCalc (oligocalc.eu)</th>
+     <th style="text-align:left;padding:.5rem;border-bottom:1px solid var(--line);color:var(--muted)">This site's Tm calculator</th>
+   </tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">Nearest-neighbor set</td><td style="padding:.5rem;border-bottom:1px solid var(--line)">Sugimoto 1996</td><td style="padding:.5rem;border-bottom:1px solid var(--line)">SantaLucia 1998 unified</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">Sodium correction</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes (Owczarzy 2004)</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">Magnesium correction</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">No, stated in its own docs</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes (Owczarzy 2008)</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">dNTP chelation of Mg</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">No</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes, solves for free Mg</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">Shows &Delta;H, &Delta;S, &Delta;G</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">No</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">Oligo molecular weight</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes, DNA and RNA</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">No</td></tr>
+   <tr><td style="padding:.5rem;border-bottom:1px solid var(--line)">OD260 and extinction coefficient</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--out)">Yes</td><td style="padding:.5rem;border-bottom:1px solid var(--line);color:var(--bad)">No</td></tr>
+   <tr><td style="padding:.5rem">Hairpin / self-dimer</td><td style="padding:.5rem">Yes, marked deprecated in its docs</td><td style="padding:.5rem">Yes, base-pair screen only</td></tr>
+  </table>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Use OligoCalc if</h2>
+  <p class="note">You want oligo molecular weight, OD260 to concentration conversions, or extinction coefficients. This site does not do those, and OligoCalc does them well. <a href="https://oligocalc.eu/" rel="noopener">oligocalc.eu</a></p>
+  <h2>Use this site's calculator if</h2>
+  <p class="note">You are calculating a Tm for a real PCR and want the magnesium and dNTPs in your buffer to affect the answer, or you want to see the &Delta;H, &Delta;S, and &Delta;G behind the number rather than just the Tm. <a href="/dna-melting-temperature-calculator.html">DNA melting temperature calculator</a></p>
+  <p class="note">For a 20-mer at 250&nbsp;nM in 50&nbsp;mM Na<sup>+</sup>, adding 1.5&nbsp;mM Mg<sup>2+</sup> and 0.8&nbsp;mM dNTPs raises the calculated T<sub>m</sub> by about 4&nbsp;&deg;C. A sodium-only figure reads low for PCR conditions.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">FAQ</h2>
+  <p class="note"><b>Why is OligoCalc not working?</b><br>The Northwestern address returns a 404 and the newer nubic address no longer resolves. The hosting changed, not the tool.</p>
+  <p class="note"><b>Where can I still use it?</b><br>oligocalc.eu, running the original code.</p>
+  <p class="note"><b>Does OligoCalc handle magnesium?</b><br>No. Its documentation states it makes no adjustment for magnesium or manganese. It takes sodium and primer concentration only.</p>
+  <p class="note"><b>Why do two nearest-neighbor calculators disagree?</b><br>OligoCalc uses the Sugimoto 1996 parameters. Most current tools use the SantaLucia 1998 unified set, so a degree or two of difference on identical inputs is expected.</p>
+  <p class="note"><b>Is this page affiliated with OligoCalc or Northwestern?</b><br>No. It is independent, and not endorsed by or connected to Northwestern University or the OligoCalc authors.</p>
+ </div>
+
+ <div class="card" id="sources">
+  <h2 style="margin-top:0">How this was checked</h2>
+  <p class="note">Every address in the table above was requested directly on 31 July 2026, with a DNS lookup and an HTTP request using a normal browser user agent, over both HTTP and HTTPS. A 404 means the host answered and reported no such page. "No DNS record" means the hostname did not resolve, so no request was possible. Feature claims about OligoCalc come from the tool and its own documentation at oligocalc.eu, including its statement that it makes no divalent cation adjustment.</p>
+  <p class="note">Underlying methods: Sugimoto, N. et al., <i>Nucleic Acids Research</i> 24(22):4501&ndash;4505, 1996. SantaLucia, J., <i>PNAS</i> 95(4):1460&ndash;1465, 1998. Owczarzy, R. et al., <i>Biochemistry</i> 43(12):3537&ndash;3554, 2004, and 47(19):5336&ndash;5353, 2008.</p>
+  <p class="note">If any of this goes out of date, or a link here breaks, <a href="/contact.html">let us know</a> and it will be corrected.</p>
+ </div>
+
+ <div id="recommended-slot"></div>
+</main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2a2e38"><div style="color:#9aa0aa;font-size:.85rem;margin-bottom:1.25rem">All 46 free biochem tools — <a href="/" style="color:#5dcaa5;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#7f77dd;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><a href="/quiz.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid quiz</a><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/codon-chart.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Codon chart (genetic code)</a><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><span style="display:block;color:#e8eaed;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</span><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/x-linked-inheritance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">X-linked inheritance</a><a href="/chi-square-genetics-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chi-square genetic ratio</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq) calculator</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/percent-composition-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent composition calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#7f77dd;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free biochem study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> · <span style="opacity:.75">Updated July 30, 2026</span></footer>
+<script src="/streak.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
