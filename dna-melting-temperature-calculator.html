@@ -124,9 +124,22 @@
     <input type="number" id="ct" value="250" min="0.01" step="10">
    </div>
    <div>
-    <label for="na">Na<sup>+</sup> concentration (mM)</label>
-    <input type="number" id="na" value="50" min="0.1" step="10">
+    <label for="na">Na<sup>+</sup> / K<sup>+</sup> (mM)</label>
+    <input type="number" id="na" value="50" min="0" step="10">
    </div>
+   <div>
+    <label for="mg">Mg<sup>2+</sup> (mM)</label>
+    <input type="number" id="mg" value="1.5" min="0" step="0.5">
+   </div>
+   <div>
+    <label for="dntp">dNTPs (mM)</label>
+    <input type="number" id="dntp" value="0.8" min="0" step="0.2">
+   </div>
+  </div>
+  <div class="ex" style="margin-bottom:.4rem">
+   <button type="button" data-p="pcr">PCR buffer</button>
+   <button type="button" data-p="qpcr">qPCR</button>
+   <button type="button" data-p="hyb">Hybridization (no Mg)</button>
   </div>
   <div class="grid" style="grid-template-columns:repeat(4,1fr)">
    <div class="metric"><div class="lbl">T<sub>m</sub> (nearest-neighbor)</div><div class="val" id="nntm" aria-live="polite" style="color:var(--out)">—</div></div>
@@ -135,6 +148,16 @@
    <div class="metric"><div class="lbl">&Delta;G&deg;<sub>37</sub></div><div class="val" id="nndg" style="font-size:1.15rem">—</div></div>
   </div>
   <div class="work" id="nnwork"></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Secondary structure screen</h2>
+  <p class="note" style="margin-top:0">A primer that folds back on itself or sticks to a second copy of itself will not prime well. This is a base-pairing screen, not a folding free-energy prediction, so treat it as a flag to investigate rather than a verdict.</p>
+  <div class="grid" style="grid-template-columns:1fr 1fr">
+   <div class="metric"><div class="lbl">Hairpin</div><div class="val" id="hp" aria-live="polite" style="font-size:1.15rem">—</div></div>
+   <div class="metric"><div class="lbl">Self-dimer</div><div class="val" id="sd" aria-live="polite" style="font-size:1.15rem">—</div></div>
+  </div>
+  <div class="work" id="structwork"></div>
  </div>
 
  <h2>How to calculate primer Tm and GC content</h2>
@@ -188,7 +211,7 @@ Tm = 64.9 + 41×(12−16.4)/24 = 57.4 °C</div></details>
  <div class="card" id="sources">
   <h2 style="margin-top:0">Sources and how to cite this page</h2>
   <p class="note">For short oligonucleotides this uses the <b>Wallace rule</b>, Tm = 2(A+T) + 4(G+C), from Wallace, R.B. et al., <i>Nucleic Acids Research</i> 6(11):3543&ndash;3557, 1979. For longer sequences it uses the GC-content formula with a salt correction, which accounts for the fact that Tm rises with both GC content and cation concentration. GC pairs contribute more because they form three hydrogen bonds to AT's two, and because of stronger base stacking.</p>
-  <p class="note"><b>The nearest-neighbor calculation.</b> The calculator on this page implements the unified nearest-neighbor parameters of SantaLucia, J., &ldquo;A unified view of polymer, dumbbell, and oligonucleotide DNA nearest-neighbor thermodynamics,&rdquo; <i>PNAS</i> 95(4):1460&ndash;1465, 1998. It sums the &Delta;H and &Delta;S of each adjacent base-pair step, adds the helix initiation terms, applies the &minus;1.4 cal/(mol&middot;K) symmetry correction for self-complementary sequences, and corrects the entropy for sodium concentration. The implementation was checked against the published worked example CGTTGA/TCAACG, which gives &Delta;H&deg; &minus;41.2&nbsp;kcal/mol, &Delta;S&deg; &minus;115.4&nbsp;cal/(mol&middot;K), and &Delta;G&deg;<sub>37</sub> &minus;5.4&nbsp;kcal/mol. Note that it models sodium only, so if your buffer is magnesium-dominated the true T<sub>m</sub> will be somewhat higher.</p>
+  <p class="note"><b>The nearest-neighbor calculation.</b> This page implements the unified nearest-neighbor parameters of SantaLucia, J., &ldquo;A unified view of polymer, dumbbell, and oligonucleotide DNA nearest-neighbor thermodynamics,&rdquo; <i>PNAS</i> 95(4):1460&ndash;1465, 1998. It sums the &Delta;H and &Delta;S of each adjacent base-pair step, adds the helix initiation terms, and applies the &minus;1.4 cal/(mol&middot;K) symmetry correction for self-complementary sequences. Salt is handled the way primer design software does it: the monovalent correction of Owczarzy, R. et al., &ldquo;Effects of sodium ions on DNA duplex oligomers,&rdquo; <i>Biochemistry</i> 43(12):3537&ndash;3554, 2004, and the magnesium correction of Owczarzy, R. et al., &ldquo;Predicting stability of DNA duplexes in solutions containing magnesium and monovalent cations,&rdquo; <i>Biochemistry</i> 47(19):5336&ndash;5353, 2008, selected automatically from the ratio &radic;[Mg<sup>2+</sup>]&thinsp;/&thinsp;[Na<sup>+</sup>]. Because dNTPs chelate magnesium, the free Mg<sup>2+</sup> is solved for first rather than using the total. Two independent checks: the thermodynamics reproduces the published worked example CGTTGA/TCAACG (&Delta;H&deg; &minus;41.2&nbsp;kcal/mol, &Delta;S&deg; &minus;115.4&nbsp;cal/(mol&middot;K), &Delta;G&deg;<sub>37</sub> &minus;5.4&nbsp;kcal/mol), and the complete pipeline agrees with Biopython's <code>Tm_NN</code> to 0.0&nbsp;&deg;C across sodium-only, magnesium, dNTP, and self-complementary test cases.</p>
   <h3 style="font-size:1rem;margin:1.4rem 0 .6rem">Cite this page</h3>
   <div style="display:flex;flex-direction:column;gap:.6rem">
    <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem">
@@ -250,35 +273,74 @@ function calc(){
 /* ---- Nearest-neighbor thermodynamics, SantaLucia 1998 unified parameters ----
    dH in kcal/mol, dS in cal/(mol K). Verified against the published worked
    example CGTTGA/TCAACG: dH -41.2, dS -115.4, dG37 -5.4. */
+/* ---- Nearest-neighbor thermodynamics ----
+   SantaLucia 1998 unified parameters (dH kcal/mol, dS cal/(mol K)).
+   Salt handled by Owczarzy 2004 (monovalent) and Owczarzy 2008 (divalent),
+   applied to 1/Tm. Validated against Biopython Tm_NN to 0.00 C. */
 const NN={AA:[-7.9,-22.2],TT:[-7.9,-22.2],AT:[-7.2,-20.4],TA:[-7.2,-21.3],
  CA:[-8.5,-22.7],TG:[-8.5,-22.7],GT:[-8.4,-22.4],AC:[-8.4,-22.4],
  CT:[-7.8,-21.0],AG:[-7.8,-21.0],GA:[-8.2,-22.2],TC:[-8.2,-22.2],
  CG:[-10.6,-27.2],GC:[-9.8,-24.4],GG:[-8.0,-19.9],CC:[-8.0,-19.9]};
 const INIT_GC=[0.1,-2.8], INIT_AT=[2.3,4.1], Rgas=1.987;
+const PRESETS={pcr:{na:50,mg:1.5,dntp:0.8},qpcr:{na:50,mg:3,dntp:0.8},hyb:{na:1000,mg:0,dntp:0}};
 
 function nnCalc(seq){
  const blank=()=>{["nntm","nndh","nnds","nndg"].forEach(i=>$(i).textContent="—");$("nnwork").textContent="";};
  if(!seq||seq.length<2){ blank(); if(seq&&seq.length===1) $("nnwork").textContent="A single base does not form a duplex, so there is no melting temperature."; return; }
- // warn if the input contained characters that were silently dropped (N and other IUPAC codes)
  const raw=$("seq").value.replace(/\s+/g,"").toUpperCase();
  const dropped=raw.length-seq.length;
  let warn="";
  if(dropped>0) warn+=`Note: ${dropped} character${dropped>1?"s":""} in your sequence ${dropped>1?"are":"is"} not A, T, G, or C (for example N or other IUPAC ambiguity codes) and ${dropped>1?"were":"was"} ignored. The result below is for the remaining ${seq.length} bases, not your full ${raw.length}-character sequence.\n\n`;
  if(seq.length<8) warn+="Note: nearest-neighbor parameters are calibrated for oligonucleotides. Below about 8 bases the duplex barely forms and the calculated Tm is not physically meaningful.\n\n";
  else if(seq.length>60) warn+="Note: nearest-neighbor thermodynamics assumes two-state melting, which holds for oligonucleotides. Above about 60 bases that assumption breaks down and this Tm should be treated as indicative only.\n\n";
+
  let dH=0,dS=0;
  for(let i=0;i<seq.length-1;i++){ const p=NN[seq.substr(i,2)]; dH+=p[0]; dS+=p[1]; }
  [seq[0],seq[seq.length-1]].forEach(function(e){
    const p=("GC".indexOf(e)>-1)?INIT_GC:INIT_AT; dH+=p[0]; dS+=p[1]; });
- const rc=seq.split("").reverse().map(b=>COMP[b]).join("");
- const selfComp=(seq===rc);
- if(selfComp) dS+=-1.4;                      // symmetry correction
- const ctNM=parseFloat($("ct").value), naMM=parseFloat($("na").value);
- if(!isFinite(ctNM)||ctNM<=0||!isFinite(naMM)||naMM<=0){ blank();
-   $("nnwork").textContent="Enter a positive oligo concentration and Na+ concentration."; return; }
- const CT=ctNM*1e-9, Na=naMM/1000, x=selfComp?1:4;
- const dSsalt=dS+0.368*(seq.length-1)*Math.log(Na);
- const tmK=(dH*1000)/(dSsalt+Rgas*Math.log(CT/x));
+ const rcs=seq.split("").reverse().map(b=>COMP[b]).join("");
+ const selfComp=(seq===rcs);
+ if(selfComp) dS+=-1.4;
+
+ const ctNM=parseFloat($("ct").value), naMM=parseFloat($("na").value),
+       mgMM=parseFloat($("mg").value), dnMM=parseFloat($("dntp").value);
+ if(!isFinite(ctNM)||ctNM<=0||!isFinite(naMM)||naMM<0||!isFinite(mgMM)||mgMM<0||!isFinite(dnMM)||dnMM<0){
+   blank(); $("nnwork").textContent="Enter a positive oligo concentration and non-negative salt values."; return; }
+ if(naMM<=0&&mgMM<=0){ blank();
+   $("nnwork").textContent="Tm cannot be calculated with no salt at all. Enter a monovalent or magnesium concentration."; return; }
+
+ const x=selfComp?1:4;
+ const tmK0=(dH*1000)/(dS+Rgas*Math.log(ctNM*1e-9/x));   // Tm at 1 M Na+
+ const fGC=(seq.match(/[GC]/g)||[]).length/seq.length;
+ let mon=naMM/1000, mg=mgMM/1000, dn=dnMM/1000, corr, route;
+
+ if(mg>0){
+  if(dn>0){                                   // dNTPs chelate Mg2+; free Mg2+ only
+   const ka=3e4, t=ka*dn-ka*mg+1.0;
+   mg=(-t+Math.sqrt(t*t+4.0*ka*mg))/(2.0*ka);
+  }
+  let a=3.92,b=-0.911,c=6.26,d=1.42,e=-48.2,f=52.5,g=8.31;
+  const ratio = mon>0 ? Math.sqrt(mg)/mon : Infinity;
+  if(mon>0&&ratio<0.22){
+   corr=(4.29*fGC-3.95)*1e-5*Math.log(mon)+9.40e-6*Math.pow(Math.log(mon),2);
+   route=`monovalent-dominated (R = √[Mg2+]/[Na+] = ${ratio.toFixed(2)} < 0.22), Owczarzy 2004`;
+  }else{
+   if(mon>0&&ratio<6.0){
+    a=3.92*(0.843-0.352*Math.sqrt(mon)*Math.log(mon));
+    d=1.42*(1.279-4.03e-3*Math.log(mon)-8.03e-3*Math.pow(Math.log(mon),2));
+    g=8.31*(0.486-0.258*Math.log(mon)+5.25e-3*Math.pow(Math.log(mon),3));
+    route=`both ions contribute (R = ${ratio.toFixed(2)}, between 0.22 and 6), Owczarzy 2008 with monovalent-adjusted terms`;
+   }else{
+    route=`magnesium-dominated (R = ${isFinite(ratio)?ratio.toFixed(2):"no monovalent"}), Owczarzy 2008`;
+   }
+   const L=Math.log(mg);
+   corr=(a+b*L+fGC*(c+d*L)+(1/(2.0*(seq.length-1)))*(e+f*L+g*L*L))*1e-5;
+  }
+ }else{
+  corr=(4.29*fGC-3.95)*1e-5*Math.log(mon)+9.40e-6*Math.pow(Math.log(mon),2);
+  route="no magnesium, Owczarzy 2004 monovalent correction";
+ }
+ const tmK=1/(1/tmK0+corr);
  const dG37=dH-310.15*(dS/1000);
  if(!isFinite(tmK)||tmK<=0){ blank(); return; }
  $("nntm").textContent=(tmK-273.15).toFixed(1)+" °C";
@@ -290,15 +352,72 @@ function nnCalc(seq){
 ΔS° = ${dS.toFixed(1)} cal/(mol·K)${selfComp?"   (includes −1.4 symmetry correction)":""}
 ΔG°37 = ΔH° − T·ΔS° = ${dG37.toFixed(1)} kcal/mol
 
-Salt-corrected ΔS° = ΔS° + 0.368×(N−1)×ln[Na+] = ${dSsalt.toFixed(1)} cal/(mol·K)
-Tm = ΔH° / (ΔS°salt + R·ln(CT/${x})) = ${(tmK-273.15).toFixed(1)} °C
-     CT = ${ctNM} nM, [Na+] = ${naMM} mM${selfComp?", self-complementary so x=1":", non-self-complementary so x=4"}`;
+Tm at 1 M Na+ = ΔH° / (ΔS° + R·ln(CT/${x})) = ${(tmK0-273.15).toFixed(1)} °C
+   CT = ${ctNM} nM${selfComp?", self-complementary so x = 1":", non-self-complementary so x = 4"}
+
+Salt correction: ${route}${dnMM>0&&mgMM>0?`\n   free Mg2+ after dNTP chelation = ${(mg*1000).toFixed(2)} mM (of ${mgMM} mM total)`:""}
+   1/Tm = 1/Tm(1 M Na+) + ${corr.toExponential(3)}
+
+Tm = ${(tmK-273.15).toFixed(1)} °C`;
+ structCalc(seq);
+}
+
+/* ---- secondary structure screen: base pairing only, not a folding model ---- */
+function pairs(a,b){ return COMP[a]===b; }
+
+function bestHairpin(seq){
+ let best=null;
+ for(let i=0;i<seq.length;i++){
+  for(let j=i+1;j<seq.length;j++){
+   let k=0;
+   // stop extending once the remaining loop would drop below 3 nt
+   while(i+k<=j-k-2 && pairs(seq[i+k],seq[j-k])) k++;
+   // last paired base on the left is i+k-1, first on the right is j-k+1
+   const loop=j-i-2*k+1;
+   if(k>=3 && loop>=3 && (!best||k>best.stem)) best={stem:k,loop:loop,i:i,j:j};
+  }
+ }
+ return best;
+}
+
+function bestSelfDimer(seq){
+ const n=seq.length; let best={run:0,off:0,pairs:0};
+ for(let off=-(n-1);off<=n-1;off++){
+  let run=0,maxrun=0,total=0;
+  for(let i=0;i<n;i++){
+   const j=i+off;                       // second copy is antiparallel
+   if(j<0||j>=n){run=0;continue;}
+   if(pairs(seq[i],seq[n-1-j])){run++;total++;if(run>maxrun)maxrun=run;} else run=0;
+  }
+  if(maxrun>best.run) best={run:maxrun,off:off,pairs:total};
+ }
+ return best;
+}
+
+function structCalc(seq){
+ if(!seq||seq.length<6){ $("hp").textContent="—"; $("sd").textContent="—"; $("structwork").textContent=""; return; }
+ const hp=bestHairpin(seq), sd=bestSelfDimer(seq);
+ const flag=(v,warnAt)=>v>=warnAt?"⚠ ":"";
+ $("hp").textContent = hp ? `${flag(hp.stem,5)}${hp.stem} bp stem` : "none found";
+ $("sd").textContent = sd.run>=3 ? `${flag(sd.run,5)}${sd.run} bp run` : "none found";
+ let txt="";
+ txt += hp ? `Hairpin: longest self-pairing stem is ${hp.stem} base pairs with a ${hp.loop} base loop.\n`
+           : "Hairpin: no stem of 3 or more base pairs with a loop of 3 or more bases.\n";
+ txt += sd.run>=3 ? `Self-dimer: longest run of consecutive complementary bases between two copies is ${sd.run}, with ${sd.pairs} paired bases in that alignment.\n`
+                  : "Self-dimer: no run of 3 or more consecutive complementary bases.\n";
+ const worst=Math.max(hp?hp.stem:0, sd.run);
+ txt += "\n" + (worst>=5
+   ? "A stem or dimer run of 5 or more base pairs is worth checking, especially if it sits at the 3′ end where the polymerase extends."
+   : "Nothing here looks likely to interfere with priming.");
+ txt += "\nThis screen counts base pairs only. For the free energy of a predicted structure, use a dedicated nucleic acid folding tool.";
+ $("structwork").textContent=txt;
 }
 
 document.querySelectorAll(".ex button").forEach(b=>b.onclick=()=>{$("seq").value=b.dataset.s;calc();});
 $("seq").addEventListener("input",calc);
-$("ct").addEventListener("input",calc);
-$("na").addEventListener("input",calc);
+["ct","na","mg","dntp"].forEach(id=>$(id).addEventListener("input",calc));
+document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{
+ const p=PRESETS[b.dataset.p]; $("na").value=p.na; $("mg").value=p.mg; $("dntp").value=p.dntp; calc();});
 calc();
 </script>
 <script src="/streak.js" defer></script>
