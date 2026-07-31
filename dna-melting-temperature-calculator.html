@@ -232,7 +232,7 @@ function calc(){
  const n=seq.length;
  const cnt={A:0,T:0,G:0,C:0};for(const ch of seq)cnt[ch]++;
  const gc=cnt.G+cnt.C, at=cnt.A+cnt.T;
- if(n===0){$("tm").textContent="—";$("gc").textContent="—";$("len").textContent="0";$("comp").innerHTML="";$("rc").textContent="—";$("work").textContent="";return;}
+ if(n===0){$("tm").textContent="—";$("gc").textContent="—";$("len").textContent="0";$("comp").innerHTML="";$("rc").textContent="—";$("work").textContent="";nnCalc("");return;}
  const gcPct=gc/n*100;
  let tm,formula;
  if(n<=14){tm=2*at+4*gc;formula=`Wallace rule (≤14 nt):\nTm = 2×(A+T) + 4×(G+C)\nTm = 2×${at} + 4×${gc} = ${tm.toFixed(0)} °C`;}
@@ -258,7 +258,14 @@ const INIT_GC=[0.1,-2.8], INIT_AT=[2.3,4.1], Rgas=1.987;
 
 function nnCalc(seq){
  const blank=()=>{["nntm","nndh","nnds","nndg"].forEach(i=>$(i).textContent="—");$("nnwork").textContent="";};
- if(!seq||seq.length<2){ blank(); return; }
+ if(!seq||seq.length<2){ blank(); if(seq&&seq.length===1) $("nnwork").textContent="A single base does not form a duplex, so there is no melting temperature."; return; }
+ // warn if the input contained characters that were silently dropped (N and other IUPAC codes)
+ const raw=$("seq").value.replace(/\s+/g,"").toUpperCase();
+ const dropped=raw.length-seq.length;
+ let warn="";
+ if(dropped>0) warn+=`Note: ${dropped} character${dropped>1?"s":""} in your sequence ${dropped>1?"are":"is"} not A, T, G, or C (for example N or other IUPAC ambiguity codes) and ${dropped>1?"were":"was"} ignored. The result below is for the remaining ${seq.length} bases, not your full ${raw.length}-character sequence.\n\n`;
+ if(seq.length<8) warn+="Note: nearest-neighbor parameters are calibrated for oligonucleotides. Below about 8 bases the duplex barely forms and the calculated Tm is not physically meaningful.\n\n";
+ else if(seq.length>60) warn+="Note: nearest-neighbor thermodynamics assumes two-state melting, which holds for oligonucleotides. Above about 60 bases that assumption breaks down and this Tm should be treated as indicative only.\n\n";
  let dH=0,dS=0;
  for(let i=0;i<seq.length-1;i++){ const p=NN[seq.substr(i,2)]; dH+=p[0]; dS+=p[1]; }
  [seq[0],seq[seq.length-1]].forEach(function(e){
@@ -278,7 +285,7 @@ function nnCalc(seq){
  $("nndh").textContent=dH.toFixed(1);
  $("nnds").textContent=dS.toFixed(1);
  $("nndg").textContent=dG37.toFixed(1);
- $("nnwork").textContent=
+ $("nnwork").textContent=warn+
 `ΔH° = Σ(nearest-neighbor pairs) + initiation = ${dH.toFixed(1)} kcal/mol
 ΔS° = ${dS.toFixed(1)} cal/(mol·K)${selfComp?"   (includes −1.4 symmetry correction)":""}
 ΔG°37 = ΔH° − T·ΔS° = ${dG37.toFixed(1)} kcal/mol
