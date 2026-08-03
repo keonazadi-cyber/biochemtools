@@ -51,6 +51,16 @@
  .Polar{background:rgba(93,202,165,.16);color:var(--polar)}
  .Acidic{background:rgba(226,104,95,.18);color:var(--acidic)}
  .Basic{background:rgba(91,155,224,.18);color:var(--basic)}
+ .aagrp{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin:1.5rem 0 .6rem;font-weight:700}
+ .aagrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:.85rem}
+ .aacell{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.55rem .55rem .75rem}
+ .aacell img{display:block;width:100%;height:auto}
+ .aacell figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem;font-size:.86rem;padding:0 .25rem}
+ .aac1{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800;font-size:1.05rem}
+ .aanm{color:var(--muted);font-size:.79rem}
+ .aapka,.aachg{flex-basis:100%;font-size:.75rem;color:var(--muted)}
+ .aapka b{color:var(--txt)}
+ @media(max-width:520px){.aagrid{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:.5rem}.aacell{padding:.4rem .4rem .6rem}.aanm{font-size:.74rem}}
  .ess{color:var(--warn);font-weight:600}.cond{color:var(--muted)}.non{color:var(--muted);opacity:.65}
  .rgroup{color:var(--txt);font-weight:600}.dash{color:var(--muted);opacity:.5}
  .count{color:var(--muted);font-size:.82rem;margin-top:.7rem}
@@ -169,6 +179,107 @@
   </table>
   </div>
   <p class="note">Rule of thumb: an <b>acidic</b> group is charged (negative) when the pH is <i>above</i> its pKa; a <b>basic</b> group is charged (positive) when the pH is <i>below</i> its pKa.</p>
+ </div>
+
+ <div class="card" id="structures">
+  <h2 style="margin-top:0">All 20 structures</h2>
+  <p class="note">Every amino acid drawn as it actually exists at physiological pH: the backbone carries a positive <b>&alpha;-amino</b> group and a negative <b>&alpha;-carboxyl</b> group, and each side chain is shown in the form it takes at pH 7.4. All 20 are drawn on the same backbone orientation, so you can compare side chains by looking at the same spot on each one. Only the seven ionizable side chains list a pKa, because they are the only ones that can change.</p>
+  <h3 class="aagrp" style="color:var(--nonpolar)">Nonpolar</h3>
+  <div class="aagrid">
+   <figure class="aacell">
+    <img src="/structures/Ala.svg" alt="Skeletal structure of alanine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">A</span> <b>Ala</b> <span class="aanm">Alanine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Gly.svg" alt="Skeletal structure of glycine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">G</span> <b>Gly</b> <span class="aanm">Glycine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Ile.svg" alt="Skeletal structure of isoleucine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">I</span> <b>Ile</b> <span class="aanm">Isoleucine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Leu.svg" alt="Skeletal structure of leucine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">L</span> <b>Leu</b> <span class="aanm">Leucine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Met.svg" alt="Skeletal structure of methionine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">M</span> <b>Met</b> <span class="aanm">Methionine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Pro.svg" alt="Skeletal structure of proline at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">P</span> <b>Pro</b> <span class="aanm">Proline</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Val.svg" alt="Skeletal structure of valine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--nonpolar)">V</span> <b>Val</b> <span class="aanm">Valine</span></figcaption>
+   </figure>
+  </div>
+  <h3 class="aagrp" style="color:var(--aromatic)">Aromatic</h3>
+  <div class="aagrid">
+   <figure class="aacell">
+    <img src="/structures/Phe.svg" alt="Skeletal structure of phenylalanine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--aromatic)">F</span> <b>Phe</b> <span class="aanm">Phenylalanine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Trp.svg" alt="Skeletal structure of tryptophan at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--aromatic)">W</span> <b>Trp</b> <span class="aanm">Tryptophan</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Tyr.svg" alt="Skeletal structure of tyrosine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--aromatic)">Y</span> <b>Tyr</b> <span class="aanm">Tyrosine</span><span class="aapka">side chain pKa <b>10.07</b></span></figcaption>
+   </figure>
+  </div>
+  <h3 class="aagrp" style="color:var(--polar)">Polar</h3>
+  <div class="aagrid">
+   <figure class="aacell">
+    <img src="/structures/Asn.svg" alt="Skeletal structure of asparagine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--polar)">N</span> <b>Asn</b> <span class="aanm">Asparagine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Cys.svg" alt="Skeletal structure of cysteine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--polar)">C</span> <b>Cys</b> <span class="aanm">Cysteine</span><span class="aapka">side chain pKa <b>8.18</b></span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Gln.svg" alt="Skeletal structure of glutamine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--polar)">Q</span> <b>Gln</b> <span class="aanm">Glutamine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Ser.svg" alt="Skeletal structure of serine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--polar)">S</span> <b>Ser</b> <span class="aanm">Serine</span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Thr.svg" alt="Skeletal structure of threonine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--polar)">T</span> <b>Thr</b> <span class="aanm">Threonine</span></figcaption>
+   </figure>
+  </div>
+  <h3 class="aagrp" style="color:var(--acidic)">Acidic</h3>
+  <div class="aagrid">
+   <figure class="aacell">
+    <img src="/structures/Asp.svg" alt="Skeletal structure of aspartate at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--acidic)">D</span> <b>Asp</b> <span class="aanm">Aspartate</span><span class="aachg">&minus;1 at pH 7.4</span><span class="aapka">side chain pKa <b>3.65</b></span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Glu.svg" alt="Skeletal structure of glutamate at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--acidic)">E</span> <b>Glu</b> <span class="aanm">Glutamate</span><span class="aachg">&minus;1 at pH 7.4</span><span class="aapka">side chain pKa <b>4.25</b></span></figcaption>
+   </figure>
+  </div>
+  <h3 class="aagrp" style="color:var(--basic)">Basic</h3>
+  <div class="aagrid">
+   <figure class="aacell">
+    <img src="/structures/Arg.svg" alt="Skeletal structure of arginine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--basic)">R</span> <b>Arg</b> <span class="aanm">Arginine</span><span class="aachg">+1 at pH 7.4</span><span class="aapka">side chain pKa <b>12.48</b></span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/His.svg" alt="Skeletal structure of histidine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--basic)">H</span> <b>His</b> <span class="aanm">Histidine</span><span class="aapka">side chain pKa <b>6.00</b></span></figcaption>
+   </figure>
+   <figure class="aacell">
+    <img src="/structures/Lys.svg" alt="Skeletal structure of lysine at physiological pH" loading="lazy" decoding="async" width="320" height="240">
+    <figcaption><span class="aac1" style="color:var(--basic)">K</span> <b>Lys</b> <span class="aanm">Lysine</span><span class="aachg">+1 at pH 7.4</span><span class="aapka">side chain pKa <b>10.53</b></span></figcaption>
+   </figure>
+  </div>
+  <p class="note" style="margin-top:1.2rem">Want it on paper? <a href="/downloads/amino-acid-structures-chart.png" download>Download the one-page structure chart</a> (PNG, prints on a single sheet). Molecular weight and hydropathy are deliberately left off that version, since they are not what structure questions test.</p>
  </div>
 
  <div class="card">
