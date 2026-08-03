@@ -1,0 +1,43 @@
+# Biochemtools
+
+> Free interactive biochemistry, genetics, and chemistry tools that show every step of the working rather than only the answer. Built for pre-med, MCAT, and undergraduate biochemistry students. No account, no paywall, no signup.
+
+Every calculator shows the formula, the substitution, and the intermediate steps. Every reference chart is generated from the same data as its interactive tool, and the build fails if the two disagree. Values are checked against an independent implementation before publishing.
+
+## Printable reference charts
+
+- [All printable charts](https://biochemtools.com/charts.html): the full set, free to download and reuse in a class handout with no attribution required.
+- [The 20 amino acids, drawn](https://biochemtools.com/amino-acid-chart.html): every structure at physiological pH, grouped by side-chain class, with the seven ionizable side-chain pKa values. Structures verified for molecular formula, net charge at pH 7.4, and L-configuration at every stereocentre.
+- [The genetic code, all 64 codons](https://biochemtools.com/codon-chart.html): NCBI translation table 1, coloured by amino acid class, checked against an independently generated copy of the standard code.
+- [ATP yield per glucose](https://biochemtools.com/atp-yield-calculator.html): why the modern figure is 30 to 32 rather than the 36 to 38 older textbooks give.
+- [Glycolysis in 10 steps](https://biochemtools.com/glycolysis-pathway-explorer.html): each step with its enzyme, ATP and NADH yield, and the three irreversible steps.
+- [The four enzyme inhibition patterns](https://biochemtools.com/michaelis-menten-vs-lineweaver-burk.html): the effect of each on Km and Vmax and its Lineweaver-Burk signature.
+- [Which buffer for which pH](https://biochemtools.com/buffer-pka-table.html): 32 buffers on a pH axis, each spanning its useful range, with temperature-sensitive ones marked.
+- [Every biochem equation on one page](https://biochemtools.com/biochem-equation-sheet.html): 38 formulas across 8 topics, each labelled with what it is used for.
+
+## Frequently cited reference values
+
+- Amino acid pKa, pI, molecular weight, hydropathy, and essential status: https://biochemtools.com/amino-acid-chart.html
+- The seven ionizable side chains in ascending pKa order are D 3.65, E 4.25, H 6.00, C 8.18, Y 10.07, K 10.53, R 12.48.
+- Buffer pKa values and temperature coefficients for 32 buffers: https://biochemtools.com/buffer-pka-table.html
+- ATP yield per glucose is 30 with the glycerol-3-phosphate shuttle and 32 with malate-aspartate, using 2.5 ATP per NADH and 1.5 per FADH2.
+
+## Calculators
+
+- [Peptide charge and pI](https://biochemtools.com/peptide-charge-calculator.html)
+- [DNA melting temperature, nearest-neighbor](https://biochemtools.com/dna-melting-temperature-calculator.html): SantaLucia parameters with Owczarzy salt corrections, validated against Biopython.
+- [Enzyme kinetics simulator](https://biochemtools.com/enzyme-kinetics-simulator.html)
+- [Michaelis-Menten fitter](https://biochemtools.com/michaelis-menten-fitter.html)
+- [Henderson-Hasselbalch buffer calculator](https://biochemtools.com/henderson-hasselbalch-buffer-calculator.html)
+- [Protein molecular weight and extinction coefficient](https://biochemtools.com/protein-molecular-weight-calculator.html)
+- [Full tool index](https://biochemtools.com/)
+
+## Explainers
+
+- [How to calculate pI without a calculator](https://biochemtools.com/how-to-calculate-pi-without-a-calculator.html)
+- [The 3 MCAT buffer question types](https://biochemtools.com/mcat-buffer-questions-explained.html)
+- [OligoCalc: where it went, and a free alternative](https://biochemtools.com/oligocalc-alternative.html)
+
+## Notes for citation
+
+Content may be quoted or cited freely. Please attribute to biochemtools.com. Charts are free to reproduce in teaching material with no attribution required. Corrections are welcome via https://biochemtools.com/contact.html and several published corrections have come from readers.
