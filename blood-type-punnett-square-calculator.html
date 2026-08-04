@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Type Punnett Square Calculator (ABO + Rh)</title>
+<meta name="description" content="Pick two parent blood types and see every possible child type with the odds. Handles unknown genotypes, Rh factor, and shows the actual Punnett squares.">
+<meta name="keywords" content="blood type punnett square, blood group punnett square, blood type calculator parents, ABO inheritance, can two type A parents have a type O child, Rh factor inheritance, codominance punnett square">
+<link rel="canonical" href="https://biochemtools.com/blood-type-punnett-square-calculator.html">
+<meta property="og:title" content="Blood Type Punnett Square Calculator">
+<meta property="og:description" content="Two parent blood types in, every possible child type and its odds out. Including the cases that surprise people.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"Blood Type Punnett Square Calculator","item":"https://biochemtools.com/blood-type-punnett-square-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can two parents with type A blood have a type O child?","acceptedAnswer":{"@type":"Answer","text":"Yes. Type A blood can be genotype AA or AO. If both parents are AO, each can pass the O allele, so there is a 1 in 4 chance of an OO child, who is type O. This surprises people because neither parent is type O, but the O allele is recessive and can be carried silently for generations."}},{"@type":"Question","name":"Can an AB parent and an O parent have an AB or O child?","acceptedAnswer":{"@type":"Answer","text":"No. An AB parent always passes either A or B, never O. An O parent is OO and always passes O. So every child is AO or BO, meaning type A or type B. This is the one blood type cross that rules out both parental types entirely, and it is a classic exam question."}},{"@type":"Question","name":"What blood types can a type A and a type B parent have?","acceptedAnswer":{"@type":"Answer","text":"All four. If both parents are heterozygous (AO and BO), the children can be AB, A, B or O, each with a 1 in 4 chance. It is the only phenotype pairing that can produce every blood type."}},{"@type":"Question","name":"Why can a blood type not tell you the genotype?","acceptedAnswer":{"@type":"Answer","text":"Because A and B are dominant over O. A person with type A blood is either AA or AO, and there is no way to tell from a blood test alone, only from family history or genetic testing. Type AB and type O are the exceptions: AB must be AB, and O must be OO."}},{"@type":"Question","name":"How is Rh factor inherited?","acceptedAnswer":{"@type":"Answer","text":"Separately from ABO, and as a simple dominant trait. Rh positive is DD or Dd, Rh negative is dd. Two Rh positive parents who are both Dd have a 1 in 4 chance of an Rh negative child. Two Rh negative parents can only have Rh negative children."}},{"@type":"Question","name":"Can a blood type Punnett square prove paternity?","acceptedAnswer":{"@type":"Answer","text":"It can sometimes exclude, but it can never confirm. If a cross makes a child's blood type impossible, that rules the parent out. But millions of people share any given blood type, so a compatible result proves nothing. Actual paternity testing uses DNA markers, not blood type."}},{"@type":"Question","name":"Why is ABO inheritance called codominance?","acceptedAnswer":{"@type":"Answer","text":"Because when someone inherits both A and B, neither masks the other and both antigens appear on the red blood cells, giving type AB. That is different from incomplete dominance, where you would get a blend. ABO also involves three alleles rather than the usual two, which is why it is a standard example of multiple allelism."}}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+</style>
+<style>
+ .picker{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+ .picker label{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.45rem}
+ .bt-row{display:flex;gap:.4rem;flex-wrap:wrap}
+ .bt-row button{flex:1;min-width:3.1rem;background:var(--bg);border:1px solid var(--line);color:var(--txt);padding:.55rem .2rem;border-radius:9px;cursor:pointer;font-weight:700;font-size:1rem}
+ .bt-row button[aria-pressed="true"]{background:rgba(93,202,165,.18);border-color:var(--out);color:var(--out)}
+ .rh-row button{font-size:.9rem;font-weight:600}
+ .sq{border-collapse:collapse;margin:.6rem 0}
+ .sq td,.sq th{border:1px solid var(--line);padding:.5rem .7rem;text-align:center;font-family:monospace;font-size:1rem}
+ .sq th{background:var(--bg);color:var(--muted);font-weight:600}
+ .sq td{font-weight:700}
+ .pheno-A{color:#5d9de2} .pheno-B{color:#e0a93b} .pheno-AB{color:#ab90e0} .pheno-O{color:#9aa0aa}
+ .bars{margin:.8rem 0}
+ .bar{display:flex;align-items:center;gap:.7rem;margin:.35rem 0}
+ .bar .t{width:2.6rem;font-weight:700;font-family:monospace}
+ .bar .track{flex:1;background:var(--bg);border-radius:99px;height:1.5rem;overflow:hidden}
+ .bar .fill{height:100%;border-radius:99px;transition:width .25s}
+ .bar .p{width:4.5rem;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.9rem}
+ .combo{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;margin:.7rem 0;background:var(--bg)}
+ .combo h4{margin:0 0 .3rem;font-size:.95rem;font-family:monospace}
+ details{border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;margin:.6rem 0;background:var(--bg)}
+ details summary{cursor:pointer;font-weight:600}
+ details p{margin:.7rem 0 .2rem;color:var(--muted)}
+ .flag{background:rgba(224,169,59,.12);border-left:3px solid var(--reg,#e0a93b);border-radius:0 8px 8px 0;padding:.7rem 1rem;margin:.8rem 0}
+ @media(max-width:560px){.picker{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/charts.html">Charts</a>
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header>
+ <h1>Blood type Punnett square calculator</h1>
+ <p>Pick both parents' blood types and get every possible child type with the odds. A blood type does not pin down a genotype, so this works through every genotype the parents could have.</p>
+</header>
+<main>
+ <div class="card">
+  <div class="picker">
+   <div>
+    <label id="l1">Parent 1 blood type</label>
+    <div class="bt-row" id="p1" role="group" aria-labelledby="l1"></div>
+    <div class="bt-row rh-row" id="r1" role="group" aria-label="Parent 1 Rh factor" style="margin-top:.4rem"></div>
+   </div>
+   <div>
+    <label id="l2">Parent 2 blood type</label>
+    <div class="bt-row" id="p2" role="group" aria-labelledby="l2"></div>
+    <div class="bt-row rh-row" id="r2" role="group" aria-label="Parent 2 Rh factor" style="margin-top:.4rem"></div>
+   </div>
+  </div>
+  <div id="summary" aria-live="polite"></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The squares behind it</h2>
+  <p class="note" style="margin-bottom:.6rem">Type A can be AA or AO, and type B can be BB or BO, so more than one square may apply. Each is shown with the odds it produces.</p>
+  <div id="squares"></div>
+ </div>
+
+ <h2>Why a blood type is not a genotype</h2>
+ <p>ABO blood type runs on three alleles, not the usual two: <b>A</b>, <b>B</b> and <b>O</b>. A and B are <b>codominant</b>, so someone carrying both shows both antigens and is type AB. O is recessive to both.</p>
+ <p>That means type A blood is either <b>AA</b> or <b>AO</b>, and a blood test cannot tell you which. The same goes for type B. Only AB and O are unambiguous: AB must be AB, and O must be OO. This is exactly why two type A parents can produce a type O child, and why that result is not evidence of anything except recessive alleles doing what recessive alleles do.</p>
+
+ <div class="flag">
+  <p style="margin:.1rem 0"><b>The one cross worth memorising.</b> An <b>AB</b> parent and an <b>O</b> parent can never have an AB or an O child. AB always passes A or B, O always passes O, so every child is AO or BO, which means type A or type B. It shows up on exams constantly.</p>
+ </div>
+
+ <h2>Rh factor is a separate gene</h2>
+ <p>Rh inheritance is ordinary dominance and has nothing to do with the ABO gene. Rh positive is <b>DD</b> or <b>Dd</b>, Rh negative is <b>dd</b>. Two Rh positive parents who both carry a hidden d have a 1 in 4 chance of an Rh negative child. Two Rh negative parents can only have Rh negative children, since neither has a D to pass on.</p>
+ <p class="note">Because the two genes are independent, the calculator above multiplies the ABO odds by the Rh odds when you set both.</p>
+
+ <div class="flag">
+  <p style="margin:.1rem 0"><b>This cannot establish paternity.</b> A Punnett square can sometimes <em>exclude</em> a parent, if a child's blood type is impossible from that cross. It can never confirm one, because millions of people share any given blood type. Real testing uses DNA markers.</p>
+ </div>
+
+ <h2>Common questions</h2>
+ <details><summary>Can two parents with type A blood have a type O child?</summary><p>Yes. Type A blood can be genotype AA or AO. If both parents are AO, each can pass the O allele, so there is a 1 in 4 chance of an OO child, who is type O. This surprises people because neither parent is type O, but the O allele is recessive and can be carried silently for generations.</p></details><details><summary>Can an AB parent and an O parent have an AB or O child?</summary><p>No. An AB parent always passes either A or B, never O. An O parent is OO and always passes O. So every child is AO or BO, meaning type A or type B. This is the one blood type cross that rules out both parental types entirely, and it is a classic exam question.</p></details><details><summary>What blood types can a type A and a type B parent have?</summary><p>All four. If both parents are heterozygous (AO and BO), the children can be AB, A, B or O, each with a 1 in 4 chance. It is the only phenotype pairing that can produce every blood type.</p></details><details><summary>Why can a blood type not tell you the genotype?</summary><p>Because A and B are dominant over O. A person with type A blood is either AA or AO, and there is no way to tell from a blood test alone, only from family history or genetic testing. Type AB and type O are the exceptions: AB must be AB, and O must be OO.</p></details><details><summary>How is Rh factor inherited?</summary><p>Separately from ABO, and as a simple dominant trait. Rh positive is DD or Dd, Rh negative is dd. Two Rh positive parents who are both Dd have a 1 in 4 chance of an Rh negative child. Two Rh negative parents can only have Rh negative children.</p></details><details><summary>Can a blood type Punnett square prove paternity?</summary><p>It can sometimes exclude, but it can never confirm. If a cross makes a child's blood type impossible, that rules the parent out. But millions of people share any given blood type, so a compatible result proves nothing. Actual paternity testing uses DNA markers, not blood type.</p></details><details><summary>Why is ABO inheritance called codominance?</summary><p>Because when someone inherits both A and B, neither masks the other and both antigens appear on the red blood cells, giving type AB. That is different from incomplete dominance, where you would get a blend. ABO also involves three alleles rather than the usual two, which is why it is a standard example of multiple allelism.</p></details>
+
+ <div class="card">
+  <h2 style="margin-top:0">Related tools</h2>
+  <p><a href="/punnett-square-calculator.html">General Punnett square calculator</a>, for monohybrid and dihybrid crosses with any letters.<br>
+  <a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a>, for allele frequencies across a whole population.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Sources</h2>
+  <p class="note">ABO inheritance follows the standard three-allele codominant model described in Griffiths et al., <i>Introduction to Genetic Analysis</i>. Rh is modelled as a single locus with D dominant to d, which is the usual teaching simplification. Real Rh genetics involves several genes and more than two haplotypes, so this page is right for coursework and not for clinical use.</p>
+ </div>
+</main>
+<footer>Free biochem study tool &middot; share it with your study group &middot; <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> &middot; <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> &middot; <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> &middot; <span style="opacity:.75">Updated August 4, 2026</span></footer>
+<script>
+const GENO={A:["AA","AO"],B:["BB","BO"],AB:["AB"],O:["OO"]};
+const TYPES=["A","B","AB","O"];
+const COL={A:"#5d9de2",B:"#e0a93b",AB:"#ab90e0",O:"#9aa0aa"};
+let s1="A",s2="B",rh1=null,rh2=null;
+
+function pheno(g){
+ const a=g.includes("A"),b=g.includes("B");
+ if(a&&b) return "AB";
+ if(a) return "A";
+ if(b) return "B";
+ return "O";
+}
+function alleles(g){return [g[0],g[1]];}
+function cross(g1,g2){
+ const out=[];
+ for(const a of alleles(g1)) for(const b of alleles(g2)){
+   out.push([a,b].sort((x,y)=>"ABO".indexOf(x)-"ABO".indexOf(y)).join(""));
+ }
+ return out;
+}
+function tally(kids){
+ const c={}; kids.forEach(k=>{const p=pheno(k); c[p]=(c[p]||0)+1;}); return c;
+}
+// Rh: parent phenotype -> possible genotypes
+const RHG={"+":["DD","Dd"],"-":["dd"]};
+// Same reasoning as the ABO odds: report the range across the possible parent
+// genotypes rather than averaging them, since Rh positive can be DD or Dd and
+// pretending those are equally likely invents a number no textbook would give.
+function rhOdds(a,b){
+ if(a===null||b===null) return null;
+ const ps=[];
+ for(const g1 of RHG[a]) for(const g2 of RHG[b]){
+   let pos=0,tot=0;
+   for(const x of g1) for(const y of g2){ tot++; if((x+y).includes("D")) pos++; }
+   ps.push(pos/tot);
+ }
+ return {lo:Math.min(...ps), hi:Math.max(...ps), exact:ps.every(p=>p===ps[0])};
+}
+
+function render(){
+ // every genotype pairing consistent with the two observed types
+ const combos=[];
+ for(const g1 of GENO[s1]) for(const g2 of GENO[s2]){
+   const kids=cross(g1,g2);
+   combos.push({g1,g2,kids,counts:tally(kids)});
+ }
+ const possible=TYPES.filter(t=>combos.some(c=>c.counts[t]));
+ const impossible=TYPES.filter(t=>!possible.includes(t));
+
+ // Report a RANGE across the genotype pairings rather than an average. Averaging would
+ // assume every genotype consistent with a blood type is equally likely, which is false
+ // in real populations (AO is far more common than AA), and would produce confident
+ // numbers no textbook agrees with. A range is the honest statement.
+ const range={};
+ TYPES.forEach(t=>{
+   const ps=combos.map(c=>100*(c.counts[t]||0)/c.kids.length);
+   range[t]={lo:Math.min(...ps), hi:Math.max(...ps)};
+ });
+ const exact=combos.length===1;
+ const rh=rhOdds(rh1,rh2);
+
+ let h=`<div class="out"><div class="note" style="margin-bottom:.3rem">Possible child blood types</div>`
+      +`<div class="v" style="font-size:2rem">${possible.join(", ")}</div></div>`;
+ h+=`<div class="bars">`;
+ TYPES.forEach(t=>{
+   const r=range[t];
+   const label = r.hi===0 ? "impossible"
+               : (exact||r.lo===r.hi) ? r.hi.toFixed(0)+"%"
+               : r.lo.toFixed(0)+" to "+r.hi.toFixed(0)+"%";
+   h+=`<div class="bar"><div class="t pheno-${t}">${t}</div>`
+     +`<div class="track">`
+     +(r.lo>0?`<div class="fill" style="width:${r.lo.toFixed(1)}%;background:${COL[t]}"></div>`:``)
+     +(r.hi>r.lo?`<div class="fill" style="width:${(r.hi-r.lo).toFixed(1)}%;background:${COL[t]};opacity:.4"></div>`:``)
+     +`</div>`
+     +`<div class="p">${label}</div></div>`;
+ });
+ h+=`</div>`;
+ if(impossible.length) h+=`<p class="note"><b>Cannot happen:</b> type ${impossible.join(", type ")}.</p>`;
+ h+= exact
+   ? `<p class="note">Both parents' genotypes are certain here, so these odds are exact.</p>`
+   : `<p class="note">A range is shown because a blood type does not fix a genotype. Type A can be AA or AO, and the odds differ. The solid bar is the lowest the chance can be, the faded part is how high it goes. Pick the matching square below if you know a parent's genotype.</p>`;
+ if(rh){
+   const rhTxt = rh.hi===0 ? `every child is Rh negative.`
+     : rh.lo===1 ? `every child is Rh positive.`
+     : rh.exact ? `${(100*rh.lo).toFixed(0)}% chance Rh positive, ${(100*(1-rh.lo)).toFixed(0)}% Rh negative.`
+     : `${(100*rh.lo).toFixed(0)} to ${(100*rh.hi).toFixed(0)}% chance Rh positive, depending on whether the Rh positive parent carries a hidden d.`;
+   h+=`<p class="note" style="margin-top:.7rem"><b>Rh factor:</b> ${rhTxt}`
+    +` Rh is inherited independently, so multiply it by the ABO odds above.</p>`;
+ }
+ document.getElementById("summary").innerHTML=h;
+
+ document.getElementById("squares").innerHTML=combos.map(c=>{
+   const a1=alleles(c.g1),a2=alleles(c.g2);
+   let t=`<table class="sq"><tr><th></th><th>${a2[0]}</th><th>${a2[1]}</th></tr>`;
+   a1.forEach(x=>{
+     t+=`<tr><th>${x}</th>`;
+     a2.forEach(y=>{
+       const g=[x,y].sort((p,q)=>"ABO".indexOf(p)-"ABO".indexOf(q)).join("");
+       t+=`<td class="pheno-${pheno(g)}">${g}</td>`;
+     });
+     t+=`</tr>`;
+   });
+   t+=`</table>`;
+   const tot=c.kids.length;
+   const ratio=TYPES.filter(x=>c.counts[x]).map(x=>`${c.counts[x]}/${tot} type ${x}`).join(", ");
+   return `<div class="combo"><h4>${c.g1} &times; ${c.g2}</h4>${t}<div class="note">${ratio}</div></div>`;
+ }).join("");
+}
+
+function buildPicker(id,which){
+ const el=document.getElementById(id);
+ el.innerHTML=TYPES.map(t=>`<button type="button" data-v="${t}" aria-pressed="false">${t}</button>`).join("");
+ el.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+   if(which===1) s1=b.dataset.v; else s2=b.dataset.v;
+   sync(); render();
+ });
+}
+function buildRh(id,which){
+ const el=document.getElementById(id);
+ el.innerHTML=[["+","Rh+"],["-","Rh&minus;"]].map(([v,l])=>`<button type="button" data-v="${v}" aria-pressed="false">${l}</button>`).join("")
+   +`<button type="button" data-v="" aria-pressed="true">Skip Rh</button>`;
+ el.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+   const v=b.dataset.v||null;
+   if(which===1) rh1=v; else rh2=v;
+   sync(); render();
+ });
+}
+function sync(){
+ [["p1",s1],["p2",s2]].forEach(([id,v])=>document.querySelectorAll(`#${id} button`)
+   .forEach(b=>b.setAttribute("aria-pressed", b.dataset.v===v)));
+ [["r1",rh1],["r2",rh2]].forEach(([id,v])=>document.querySelectorAll(`#${id} button`)
+   .forEach(b=>b.setAttribute("aria-pressed", (b.dataset.v||null)===v)));
+}
+buildPicker("p1",1); buildPicker("p2",2); buildRh("r1",1); buildRh("r2",2);
+sync(); render();
+
+// self-test: the classic cases must hold, or the tool is wrong
+(function(){
+ const t=(g1,g2)=>tally(cross(g1,g2));
+ console.assert(pheno("AB")==="AB"&&pheno("AO")==="A"&&pheno("OO")==="O","pheno");
+ console.assert(!t("AB","OO").AB&&!t("AB","OO").O,"AB x O must exclude AB and O");
+ console.assert(t("AO","AO").A===3&&t("AO","AO").O===1,"AO x AO should be 3:1");
+ console.assert(Object.keys(t("AO","BO")).length===4,"AO x BO should give all four types");
+ console.assert(rhOdds("-","-").hi===0,"Rh- x Rh- must be all negative");
+ console.assert(rhOdds("+","+").lo===0.75&&rhOdds("+","+").hi===1,"Rh+ x Rh+ spans 75 to 100");
+ console.assert(rhOdds("+","-").lo===0.5&&rhOdds("+","-").hi===1,"Rh+ x Rh- spans 50 to 100");
+ // AO x BO gives 1/4 each, AA x BB gives all AB, so type AB must span 25 to 100 for A x B
+ console.assert(t("AO","BO").AB===1&&t("AA","BB").AB===4,"A x B range endpoints");
+})();
+</script>
+</body>
+</html>
