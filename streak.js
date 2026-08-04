@@ -1,6 +1,8 @@
 (function(){
 "use strict";
-var TOOL_COUNT = 46;
+// Kept in sync with the homepage card count by the repo check in tools/check-counts.py.
+// It was stale at 46 for three releases, which quietly capped everyone's progress bar.
+var TOOL_COUNT = 48;
 
 // --- Affiliate links: each program activates independently once you have a real tracked link/tag. ---
 var AMAZON_LIVE = true;
@@ -45,7 +47,20 @@ function recordVisit(){
   var seen = load(toolsKey);
   if (seen.indexOf(slug) === -1) seen.push(slug);
   save(toolsKey, seen);
+  recordRecent(slug);
  }
+}
+
+// Most-recent-first list of {slug, title}, so someone returning to 48 tools has a
+// way back to the two or three they were actually working with.
+function recordRecent(slug){
+ var title = (document.title || slug).split(/[:|]/)[0].replace(/\s+$/,"");
+ var recent = load("bct_recent").filter(function(r){ return r && r.slug !== slug; });
+ recent.unshift({slug: slug, title: title, ts: Date.now()});
+ save("bct_recent", recent.slice(0, 8));
+}
+function recentTools(n){
+ return load("bct_recent").filter(function(r){ return r && r.slug && r.title; }).slice(0, n || 3);
 }
 
 function currentStreak(){
@@ -95,18 +110,42 @@ function renderStreakWidget(){
  if (!el) return;
  var streak = currentStreak();
  var tried = Math.min(toolsTried(), TOOL_COUNT);
+ var recent = recentTools(3);
+
+ // A first-time visitor used to get an empty box here, which meant the one feature
+ // designed to bring people back was invisible to everyone who had not already come
+ // back. Now it always says what is on offer.
  if (streak === 0 && tried === 0){
-  el.innerHTML = "";
+  el.innerHTML =
+   "<h4>Your progress</h4>" +
+   "<div style=\"color:var(--muted);font-size:.88rem;line-height:1.5\">Nothing saved yet. Open any tool and it shows up here, so you can pick up where you left off.</div>" +
+   "<div style=\"margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--line)\">" +
+    "<a href=\"/daily-question.html\" style=\"font-size:.88rem\">Start with today's question &rarr;</a>" +
+   "</div>" +
+   "<div style=\"color:var(--muted);font-size:.74rem;margin-top:.7rem\">Stays in your browser. No account, no email.</div>";
   return;
  }
- var streakLine = streak > 0
-  ? "<div style=\"font-size:1.6rem;font-weight:600;color:var(--accent)\">" + streak + " day" + (streak===1?"":"s") + " 🔥</div><div style=\"color:var(--muted);font-size:.82rem;margin-top:.15rem\">current study streak</div>"
-  : "<div style=\"color:var(--muted);font-size:.88rem\">Visit again tomorrow to start a streak.</div>";
+
+ var streakLine = streak > 1
+  ? "<div style=\"font-size:1.6rem;font-weight:600;color:var(--accent)\">" + streak + " days \ud83d\udd25</div><div style=\"color:var(--muted);font-size:.82rem;margin-top:.15rem\">current study streak</div>"
+  : "<div style=\"color:var(--muted);font-size:.88rem\">Come back tomorrow and your streak starts counting.</div>";
+
+ var recentHtml = "";
+ if (recent.length){
+  recentHtml = "<div style=\"margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--line)\">" +
+   "<div style=\"color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.45rem\">Pick up where you left off</div>";
+  for (var i = 0; i < recent.length; i++){
+   recentHtml += "<a href=\"/" + recent[i].slug + ".html\" style=\"display:block;font-size:.86rem;margin-bottom:.3rem;text-decoration:none\">" + recent[i].title + "</a>";
+  }
+  recentHtml += "</div>";
+ }
+
  el.innerHTML =
   "<h4>Your progress</h4>" +
   streakLine +
+  recentHtml +
   "<div style=\"margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem\">" +
-   tried + " / " + TOOL_COUNT + " tools tried" +
+   tried + " of " + TOOL_COUNT + " tools tried" +
   "</div>";
 }
 
