@@ -24,7 +24,8 @@
 {"@type":"Question","name":"When should I avoid phosphate buffer?","acceptedAnswer":{"@type":"Answer","text":"Phosphate is cheap, biologically relevant, and barely shifts with temperature, but it has real drawbacks. It precipitates with calcium and many divalent metal cations, it inhibits a number of enzymes including several kinases and phosphatases, and it participates directly in reactions where phosphate is a substrate or product. It also buffers poorly between about pH 8.5 and 10 because that region sits between its second and third pKa values. In those situations a Good's buffer such as HEPES or Tris is usually the better choice."}}]}
 </script>
 <style>
- :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#5dcaa5;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a;--blue:#378add;--purple:#7f77dd}
+ .chg{display:inline-block;min-width:1.6em;text-align:center;padding:.05em .35em;border-radius:4px;font-weight:700;background:var(--line)}.chg-pos{color:#e2645e}.chg-neg{color:#5d9de2}.chg-zw{color:#5fcca7}
+:root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#5dcaa5;--good:#5dcaa5;--warn:#e0a93b;--bad:#e24b4a;--blue:#378add;--purple:#7f77dd}
  *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
  header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
  header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
@@ -131,13 +132,16 @@
    <button data-f="inrange">Works at my pH</button>
    <button data-f="goods">Good's buffers</button>
    <button data-f="stable">Temperature-stable</button>
+    <button data-f="anionic" title="For cation exchange, where the resin is negative">Anionic (for CIEX)</button>
+    <button data-f="cationic" title="For anion exchange, where the resin is positive">Cationic (for AEX)</button>
    <input id="search" type="search" placeholder="Search buffer name…" aria-label="Search buffers">
   </div>
+  <p class="note" style="margin:.2rem 0 .8rem"><b>Why the charge column.</b> In ion exchange the buffer ion must not stick to the resin, or it gets stripped off and your pH drifts mid-run. Match the sign: a negative (cation exchange) resin wants an <b>anionic</b> buffer, a positive (anion exchange) resin wants a <b>cationic</b> one. Zwitterionic Good's buffers are usually safe with either. That is also why piperazine is worth knowing: it is one of only two cationic buffers covering pH 4.5 to 6.5, where nearly everything else is a carboxylate.</p>
   <div class="tblwrap">
    <table class="bt" id="tbl">
     <thead><tr>
      <th data-k="name">Buffer</th>
-     <th data-k="pka">pKa (25&deg;C)</th>
+     <th data-k="pka">pKa (25&deg;C)</th> <th data-k="chg">Charge</th>
      <th data-k="pkaT">pKa at your temp</th>
      <th data-k="range">Useful range</th>
      <th data-k="dt">&Delta;pKa / &deg;C</th>
@@ -233,19 +237,44 @@
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
 <script>
 const $=id=>document.getElementById(id);
-// name, pKa at 25C, dpKa/degC, isGoodsBuffer
+// name, pKa at 25C, dpKa/degC, isGoodsBuffer, charge of the buffering ion
+// Charge and piperazine were both asked for by a reader on r/Biochemistry so the table
+// can be used to plan ion exchange runs: the buffer ion must not stick to the resin.
 const BUF=[
-["Phosphoric acid (pKa1)",2.15,0.005,0],["Glycine (pKa1)",2.35,0,0],
-["Citric acid (pKa1)",3.13,0,0],["Formate",3.75,0,0],["Lactate",3.86,0,0],
-["Succinate (pKa1)",4.21,0,0],["Acetate",4.76,0.0002,0],["Citrate (pKa2)",4.76,0,0],
-["Succinate (pKa2)",5.64,0,0],["MES",6.15,-0.011,1],["Citrate (pKa3)",6.40,0,0],
-["Carbonate (pKa1)",6.35,-0.009,0],["Bis-Tris",6.46,-0.017,0],["ADA",6.60,-0.011,1],
-["PIPES",6.80,-0.0085,1],["ACES",6.90,-0.020,1],["Imidazole",7.00,-0.020,0],
-["MOPS",7.20,-0.011,1],["Phosphate (pKa2)",7.20,-0.0028,0],["TES",7.50,-0.020,1],
-["HEPES",7.55,-0.014,1],["Tricine",8.05,-0.021,1],["Tris",8.06,-0.028,0],
-["Bicine",8.35,-0.018,1],["TAPS",8.40,-0.018,1],["Borate",9.24,-0.008,0],
-["Ammonium",9.25,-0.031,0],["CHES",9.30,-0.011,1],["Glycine (pKa2)",9.78,-0.025,0],
-["Carbonate (pKa2)",10.33,-0.009,0],["CAPS",10.40,-0.018,1],["Phosphate (pKa3)",12.35,0,0]
+["Phosphoric acid (pKa1)",2.15,0.005,0,"-"],
+["Glycine (pKa1)",2.35,0,0,"+"],
+["Citric acid (pKa1)",3.13,0,0,"-"],
+["Formate",3.75,0,0,"-"],
+["Lactate",3.86,0,0,"-"],
+["Succinate (pKa1)",4.21,0,0,"-"],
+["Acetate",4.76,0.0002,0,"-"],
+["Citrate (pKa2)",4.76,0,0,"-"],
+["Piperazine (pKa1)",5.33,-0.015,0,"+"],
+["Succinate (pKa2)",5.64,0,0,"-"],
+["MES",6.15,-0.011,1,"0"],
+["Carbonate (pKa1)",6.35,-0.009,0,"-"],
+["Citrate (pKa3)",6.4,0,0,"-"],
+["Bis-Tris",6.46,-0.017,0,"+"],
+["ADA",6.6,-0.011,1,"0"],
+["PIPES",6.8,-0.0085,1,"0"],
+["ACES",6.9,-0.02,1,"0"],
+["Imidazole",7.0,-0.02,0,"+"],
+["MOPS",7.2,-0.011,1,"0"],
+["Phosphate (pKa2)",7.2,-0.0028,0,"-"],
+["TES",7.5,-0.02,1,"0"],
+["HEPES",7.55,-0.014,1,"0"],
+["Tricine",8.05,-0.021,1,"0"],
+["Tris",8.06,-0.028,0,"+"],
+["Bicine",8.35,-0.018,1,"0"],
+["TAPS",8.4,-0.018,1,"0"],
+["Borate",9.24,-0.008,0,"-"],
+["Ammonium",9.25,-0.031,0,"+"],
+["CHES",9.3,-0.011,1,"0"],
+["Piperazine (pKa2)",9.73,-0.015,0,"+"],
+["Glycine (pKa2)",9.78,-0.025,0,"-"],
+["Carbonate (pKa2)",10.33,-0.009,0,"-"],
+["CAPS",10.4,-0.018,1,"0"],
+["Phosphate (pKa3)",12.35,0,0,"-"]
 ];
 let filter="all", query="", sortKey="pka", sortDir=1;
 const pkaAt=(pka,dt,T)=>pka+dt*(T-25);
@@ -285,10 +314,12 @@ function render(){
  const rows=BUF.filter(b=>{
   if(q && !norm(b[0]).includes(q)) return false;
   if(filter==="goods") return b[3]===1;
+      if(filter==="anionic") return b[4]==="-";
+      if(filter==="cationic") return b[4]==="+";
   if(filter==="stable") return Math.abs(b[2])<=0.009;
   if(filter==="inrange") return target!==null && Math.abs(pkaAt(b[1],b[2],temp)-target)<=1;
   return true;
- }).map(b=>({name:b[0],pka:b[1],dt:b[2],goods:b[3],pkaT:pkaAt(b[1],b[2],temp)}))
+ }).map(b=>({name:b[0],pka:b[1],dt:b[2],goods:b[3],pkaT:pkaAt(b[1],b[2],temp), chg:b[4]}))
    .sort((a,b)=>{
      let x=a[sortKey],y=b[sortKey];
      if(typeof x==="string") return sortDir*x.localeCompare(y);
@@ -300,7 +331,7 @@ function render(){
              (Math.abs(r.dt)>=0.018?'<span class="tag tsens">temp-sensitive</span>':'');
   const dt=r.dt===0?'<span class="note">~0</span>':(r.dt>0?"+":"")+r.dt.toFixed(4);
   return `<tr class="${inr?'inrange':''}"><td><span class="nm">${r.name}</span>${tags}</td>`+
-   `<td>${r.pka.toFixed(2)}</td><td>${r.pkaT.toFixed(2)}</td>`+
+   `<td>${r.pka.toFixed(2)}</td><td><span class="chg chg-${r.chg==="+"?"pos":r.chg==="-"?"neg":"zw"}">${r.chg==="0"?"&plusmn;":r.chg}</span></td><td>${r.pkaT.toFixed(2)}</td>`+
    `<td>${(r.pkaT-1).toFixed(1)} &ndash; ${(r.pkaT+1).toFixed(1)}</td><td>${dt}</td></tr>`;
  }).join("");
  const inCount=target===null?0:BUF.filter(b=>Math.abs(pkaAt(b[1],b[2],temp)-target)<=1).length;
