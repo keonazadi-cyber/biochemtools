@@ -236,7 +236,11 @@ document.getElementById("next").onclick=()=>{
   if(window.BCT){
    window.BCT.recordQuizCompletion(score,total);
    const best=window.BCT.quizBest();
-   bestLine=`<p style="color:var(--muted);font-size:.85rem">Best score: ${best}/${total}${score>best?", new best!":""} &middot; ${window.BCT.currentStreak()}-day streak</p>`;
+   // Only mention a streak once it is worth mentioning. This printed "0-day streak"
+    // when storage was fresh, and a 1-day streak is just today, which nobody earned.
+    const st=window.BCT.currentStreak();
+    const streakBit = st>1 ? ` &middot; ${st}-day streak` : "";
+    bestLine=`<p style="color:var(--muted);font-size:.85rem">Best score: ${best}/${total}${score>best?", new best!":""}${streakBit}</p>`;
   }
   document.getElementById("opts").innerHTML=`<div style="grid-column:1/3;text-align:center;padding:1rem"><div style="font-size:2.5rem;font-weight:600;color:var(--accent)">${score}/${total}</div><p style="color:var(--muted)">${score===total?"Perfect, you've got these down.":score>=7?"Solid. Run it again to lock in the misses.":"Keep going, repetition is the whole game."}</p>${bestLine}</div>`;
   document.getElementById("prompt").textContent="";document.getElementById("ask").textContent="Quiz complete";
