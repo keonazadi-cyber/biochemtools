@@ -80,6 +80,22 @@ function toolsTried(){
  return load("bct_tools_seen").length;
 }
 
+// The visit streak counts any page load, which makes it unearned. This one counts
+// only days the daily question was actually answered, so it means something.
+function answerStreak(){
+ var days = load("bct_dq_dates");
+ var set = {};
+ days.forEach(function(d){ set[d] = true; });
+ var start = set[todayStr()] ? 0 : (set[daysAgoStr(1)] ? 1 : null);
+ if (start === null) return 0;
+ var streak = 0, i = start;
+ while (set[daysAgoStr(i)]) { streak++; i++; }
+ return streak;
+}
+function answeredToday(){
+ return load("bct_dq_dates").indexOf(todayStr()) !== -1;
+}
+
 function recordQuizCompletion(score, total){
  var dates = load(QUIZ_KEY);
  dates.push(todayStr());
@@ -297,5 +313,5 @@ if (document.readyState === "loading"){
  renderAll();
 }
 
-window.BCT = { recordQuizCompletion: recordQuizCompletion, quizBest: quizBest, currentStreak: currentStreak, toolsTried: toolsTried, recordDailyQuestion: recordDailyQuestion };
+window.BCT = { recordQuizCompletion: recordQuizCompletion, quizBest: quizBest, currentStreak: currentStreak, toolsTried: toolsTried, recordDailyQuestion: recordDailyQuestion, answerStreak: answerStreak, answeredToday: answeredToday };
 })();
