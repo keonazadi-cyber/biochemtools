@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dihybrid Cross Calculator: 16-Box Punnett Square</title>
+<meta name="description" content="Enter two parent genotypes for the full 16-box dihybrid square, the gametes, and genotype and phenotype ratios. Shows why AaBb x AaBb gives 9:3:3:1.">
+<meta name="keywords" content="dihybrid cross, dihybrid cross punnett square, dihybrid punnett square, punnett square for dihybrid cross, 9:3:3:1 ratio, independent assortment, dihybrid test cross">
+<link rel="canonical" href="https://biochemtools.com/dihybrid-cross-calculator.html">
+<meta property="og:title" content="Dihybrid Cross Calculator">
+<meta property="og:description" content="The full 16-box square with gametes and ratios, and why 9:3:3:1 falls out of two 3:1 ratios.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"Dihybrid Cross Calculator","item":"https://biochemtools.com/dihybrid-cross-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is a dihybrid cross 9:3:3:1?","acceptedAnswer":{"@type":"Answer","text":"Because two independent 3:1 ratios multiply. Three quarters show the first dominant trait and three quarters the second, so 3/4 x 3/4 = 9/16 show both, 3/4 x 1/4 = 3/16 show each single one, and 1/4 x 1/4 = 1/16 show neither."}},{"@type":"Question","name":"How do I find the gametes for AaBb?","acceptedAnswer":{"@type":"Answer","text":"Take one allele from each gene in every combination: AB, Ab, aB and ab. A useful check is that a genotype heterozygous at n genes produces 2 to the power n distinct gametes, so two heterozygous genes give four."}},{"@type":"Question","name":"How many boxes does a dihybrid Punnett square have?","acceptedAnswer":{"@type":"Answer","text":"Sixteen, because each parent makes four gamete types. Those 16 boxes contain only 9 distinct genotypes, since several combinations produce the same one. AaBb alone appears four times."}},{"@type":"Question","name":"What does independent assortment actually assume?","acceptedAnswer":{"@type":"Answer","text":"That the two genes end up in gametes independently of each other, which is true when they sit on different chromosomes or far apart on the same one. Genes close together on the same chromosome are linked, and their ratios deviate from 9:3:3:1. That deviation is how linkage was discovered."}},{"@type":"Question","name":"What is a dihybrid test cross?","acceptedAnswer":{"@type":"Answer","text":"Crossing the unknown with a fully recessive aabb individual. If the unknown is AaBb you get a 1:1:1:1 ratio, which reveals the gamete proportions directly, because the recessive parent contributes nothing that can mask anything."}},{"@type":"Question","name":"Can I use a dihybrid square for linked genes?","acceptedAnswer":{"@type":"Answer","text":"Not reliably. The 16-box square assumes independent assortment. Linked genes produce far more parental combinations than recombinant ones, and the deviation is used to estimate map distance rather than being an error to correct."}}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+</style>
+<style>
+ .gt{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+ .gt label{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.4rem}
+ .gt input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:.6rem .7rem;font-size:1.1rem;font-family:monospace;letter-spacing:.05em}
+ .gt input.bad{border-color:#e2645e}
+ .pq{border-collapse:collapse;margin:.5rem 0;font-family:monospace}
+ .pq th,.pq td{border:1px solid var(--line);padding:.45rem .5rem;text-align:center;font-size:.95rem}
+ .pq th{background:var(--bg);color:var(--muted);font-weight:600}
+ .pq td.p9{background:rgba(93,202,165,.16)}
+ .pq td.p3a{background:rgba(93,157,226,.16)}
+ .pq td.p3b{background:rgba(224,169,59,.16)}
+ .pq td.p1{background:rgba(226,100,94,.16)}
+ .legend{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0}
+ .legend span{font-size:.82rem;padding:.25rem .6rem;border-radius:99px}
+ .ratio{font-size:2rem;font-weight:700;color:var(--out);font-family:monospace}
+ details{border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;margin:.6rem 0;background:var(--bg)}
+ details summary{cursor:pointer;font-weight:600}
+ details p{margin:.7rem 0 .2rem;color:var(--muted)}
+ .tblwrap{overflow-x:auto}
+ .flag{background:rgba(224,169,59,.12);border-left:3px solid #e0a93b;border-radius:0 8px 8px 0;padding:.7rem 1rem;margin:.9rem 0}
+ @media(max-width:560px){.gt{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topnav"><div class="topnav-inner">
+ <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+ <div class="topnav-links"><a href="/charts.html">Charts</a><a href="/daily-question.html">Daily question</a><a href="/about.html">About</a><a class="navcta" href="/">All tools &rarr;</a></div>
+</div></div>
+<header>
+ <h1>Dihybrid cross calculator</h1>
+ <p>Two genes at once. Enter both parents and get the full 16-box square, the gametes each parent makes, and the genotype and phenotype ratios.</p>
+</header>
+<main>
+ <div class="card">
+  <div class="gt">
+   <div><label for="p1">Parent 1</label><input id="p1" value="AaBb" maxlength="4" spellcheck="false" autocomplete="off"></div>
+   <div><label for="p2">Parent 2</label><input id="p2" value="AaBb" maxlength="4" spellcheck="false" autocomplete="off"></div>
+  </div>
+  <p class="note" id="hint">Four letters, two per gene, like AaBb or AAbb. Case sets dominance, so A is dominant and a is recessive.</p>
+  <div id="out" aria-live="polite"></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The square</h2>
+  <div class="tblwrap" id="square"></div>
+  <div class="legend" id="legend"></div>
+ </div>
+
+ <h2>Why 9:3:3:1 falls out</h2>
+ <p>The ratio is not something to memorise on its own. It is just two independent 3:1 ratios multiplied together.</p>
+ <p>Cross Aa x Aa and three quarters of the offspring show the dominant trait. Do the same for Bb x Bb. If the two genes assort independently, the chance of showing both dominants is 3/4 x 3/4 = <b>9/16</b>. Showing the first but not the second is 3/4 x 1/4 = <b>3/16</b>, the reverse is another <b>3/16</b>, and showing neither is 1/4 x 1/4 = <b>1/16</b>.</p>
+ <p>That is also why the square has 16 boxes but only 9 distinct genotypes. Several gamete pairings land on the same genotype, and AaBb turns up four separate times.</p>
+
+ <div class="flag">
+  <p style="margin:.1rem 0"><b>The assumption doing the work is independent assortment.</b> It holds when the two genes sit on different chromosomes, or far enough apart on the same one. Genes close together are <b>linked</b>, travel together into gametes, and give far more parental combinations than 9:3:3:1 predicts. That deviation is not an error, it is how chromosome maps were built.</p>
+ </div>
+
+ <h2>Finding the gametes</h2>
+ <p>Take one allele from each gene, in every combination. AaBb gives AB, Ab, aB and ab. AABb gives only AB and Ab, because the first gene has nothing to vary.</p>
+ <p class="note">Quick check: a genotype heterozygous at n genes makes 2<sup>n</sup> distinct gametes. Two heterozygous genes give four, which is why the square is 4 x 4.</p>
+
+ <h2>Common questions</h2>
+ <details><summary>Why is a dihybrid cross 9:3:3:1?</summary><p>Because two independent 3:1 ratios multiply. Three quarters show the first dominant trait and three quarters the second, so 3/4 x 3/4 = 9/16 show both, 3/4 x 1/4 = 3/16 show each single one, and 1/4 x 1/4 = 1/16 show neither.</p></details><details><summary>How do I find the gametes for AaBb?</summary><p>Take one allele from each gene in every combination: AB, Ab, aB and ab. A useful check is that a genotype heterozygous at n genes produces 2 to the power n distinct gametes, so two heterozygous genes give four.</p></details><details><summary>How many boxes does a dihybrid Punnett square have?</summary><p>Sixteen, because each parent makes four gamete types. Those 16 boxes contain only 9 distinct genotypes, since several combinations produce the same one. AaBb alone appears four times.</p></details><details><summary>What does independent assortment actually assume?</summary><p>That the two genes end up in gametes independently of each other, which is true when they sit on different chromosomes or far apart on the same one. Genes close together on the same chromosome are linked, and their ratios deviate from 9:3:3:1. That deviation is how linkage was discovered.</p></details><details><summary>What is a dihybrid test cross?</summary><p>Crossing the unknown with a fully recessive aabb individual. If the unknown is AaBb you get a 1:1:1:1 ratio, which reveals the gamete proportions directly, because the recessive parent contributes nothing that can mask anything.</p></details><details><summary>Can I use a dihybrid square for linked genes?</summary><p>Not reliably. The 16-box square assumes independent assortment. Linked genes produce far more parental combinations than recombinant ones, and the deviation is used to estimate map distance rather than being an error to correct.</p></details>
+
+ <div class="card">
+  <h2 style="margin-top:0">Related tools</h2>
+  <p><a href="/punnett-square-calculator.html">Punnett square calculator</a>, for monohybrid crosses and other letter schemes.<br>
+  <a href="/blood-type-punnett-square-calculator.html">Blood type Punnett square</a>, for ABO codominance and Rh.<br>
+  <a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a>, for allele frequencies across a population.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Sources</h2>
+  <p class="note">Mendel's law of independent assortment and the 9:3:3:1 dihybrid ratio follow the standard treatment in Griffiths et al., <i>Introduction to Genetic Analysis</i>. The square assumes complete dominance at both loci and independent assortment. Incomplete dominance, codominance, epistasis and linkage all change the phenotype ratio while leaving the genotype ratio intact.</p>
+ </div>
+</main>
+<footer>Free biochem study tool &middot; share it with your study group &middot; <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> &middot; <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> &middot; <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> &middot; <span style="opacity:.75">Updated August 4, 2026</span></footer>
+<script>
+const $=id=>document.getElementById(id);
+function parse(g){
+ g=(g||"").replace(/\s/g,"");
+ if(g.length!==4) return null;
+ const a=g.slice(0,2), b=g.slice(2);
+ if(a[0].toLowerCase()!==a[1].toLowerCase()) return null;
+ if(b[0].toLowerCase()!==b[1].toLowerCase()) return null;
+ if(a[0].toLowerCase()===b[0].toLowerCase()) return null;
+ return {a:[a[0],a[1]], b:[b[0],b[1]], A:a[0].toUpperCase(), B:b[0].toUpperCase()};
+}
+const ord=(x,y)=>{ // dominant allele first, so Aa never renders as aA
+ if(x.toLowerCase()!==y.toLowerCase()) return x+y;
+ return (x===x.toUpperCase()? x+y : y+x);
+};
+function gametes(p){
+ const out=[];
+ for(const x of p.a) for(const y of p.b) out.push(x+y);
+ return [...new Set(out)];
+}
+function render(){
+ const g1=parse($("p1").value), g2=parse($("p2").value);
+ [["p1",g1],["p2",g2]].forEach(([id,g])=>$(id).classList.toggle("bad", !g));
+ if(!g1||!g2){
+  $("out").innerHTML='<p class="note" style="color:#e2645e">Each parent needs four letters: two of one gene then two of another, like AaBb or AAbb. The two genes must use different letters.</p>';
+  $("square").innerHTML=""; $("legend").innerHTML=""; return;
+ }
+ if(g1.A!==g2.A||g1.B!==g2.B){
+  $("out").innerHTML='<p class="note" style="color:#e2645e">Both parents must use the same two gene letters.</p>';
+  $("square").innerHTML=""; $("legend").innerHTML=""; return;
+ }
+ const A=g1.A, B=g1.B;
+ const gm1=gametes(g1), gm2=gametes(g2);
+ const cells=[], genos={}, phenos={};
+ let html='<table class="pq"><tr><th></th>'+gm2.map(x=>"<th>"+x+"</th>").join("")+"</tr>";
+ for(const x of gm1){
+  html+="<tr><th>"+x+"</th>";
+  for(const y of gm2){
+   const gt=ord(x[0],y[0])+ord(x[1],y[1]);
+   const domA=gt.slice(0,2).includes(A), domB=gt.slice(2).includes(B);
+   const key=(domA?A:A.toLowerCase())+"_"+(domB?B:B.toLowerCase());
+   const cls=domA&&domB?"p9":domA?"p3a":domB?"p3b":"p1";
+   genos[gt]=(genos[gt]||0)+1; phenos[key]=(phenos[key]||0)+1;
+   cells.push(gt);
+   html+='<td class="'+cls+'">'+gt+"</td>";
+  }
+  html+="</tr>";
+ }
+ html+="</table>";
+ $("square").innerHTML=html;
+
+ const n=cells.length;
+ const pk=[A+"_"+B, A+"_"+B.toLowerCase(), A.toLowerCase()+"_"+B, A.toLowerCase()+"_"+B.toLowerCase()];
+ const label={}; label[pk[0]]="both dominant"; label[pk[1]]=A+" dominant, "+B.toLowerCase()+" recessive";
+ label[pk[2]]=A.toLowerCase()+" recessive, "+B+" dominant"; label[pk[3]]="both recessive";
+ const cls={}; cls[pk[0]]="p9"; cls[pk[1]]="p3a"; cls[pk[2]]="p3b"; cls[pk[3]]="p1";
+ $("legend").innerHTML=pk.filter(k=>phenos[k]).map(k=>
+  '<span class="'+cls[k]+'">'+label[k]+": "+phenos[k]+"/"+n+"</span>").join("");
+
+ const ratio=pk.map(k=>phenos[k]||0);
+ const g=(a,b)=>b?g(b,a%b):a;
+ const div=ratio.filter(x=>x).reduce((a,b)=>g(a,b));
+ const shown=ratio.map(x=>x/div).join(":");
+ const gsorted=Object.entries(genos).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+ $("out").innerHTML=
+  '<div class="out"><div class="note" style="margin-bottom:.2rem">Phenotype ratio</div><div class="ratio">'+shown+'</div></div>'+
+  '<p class="note"><b>Gametes.</b> '+$("p1").value+" makes "+gm1.join(", ")+". "+$("p2").value+" makes "+gm2.join(", ")+
+  ". That is "+gm1.length+" x "+gm2.length+" = "+n+" boxes.</p>"+
+  '<p class="note"><b>'+gsorted.length+" distinct genotypes.</b> "+
+  gsorted.map(([k,v])=>k+" "+v+"/"+n).join(", ")+"</p>";
+}
+["p1","p2"].forEach(id=>$(id).addEventListener("input",render));
+render();
+
+// self-test: the textbook cases must hold or the tool is wrong
+(function(){
+ const run=(a,b)=>{ $("p1").value=a; $("p2").value=b; render();
+  return $("out").querySelector(".ratio").textContent; };
+ const keep1=$("p1").value, keep2=$("p2").value;
+ console.assert(run("AaBb","AaBb")==="9:3:3:1","AaBb x AaBb must be 9:3:3:1");
+ console.assert(run("AaBb","aabb")==="1:1:1:1","dihybrid test cross must be 1:1:1:1");
+ console.assert(run("AABB","aabb")==="1:0:0:0","AABB x aabb must be all dominant");
+ $("p1").value=keep1; $("p2").value=keep2; render();
+})();
+</script>
+</body>
+</html>

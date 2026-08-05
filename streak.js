@@ -2,7 +2,7 @@
 "use strict";
 // Kept in sync with the homepage card count by the repo check in tools/check-counts.py.
 // It was stale at 46 for three releases, which quietly capped everyone's progress bar.
-var TOOL_COUNT = 48;
+var TOOL_COUNT = 49;
 
 // --- Affiliate links: each program activates independently once you have a real tracked link/tag. ---
 var AMAZON_LIVE = true;
