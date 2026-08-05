@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Calculate Allele Frequency (With Worked Examples)</title>
+<meta name="description" content="p = (2 x AA + Aa) / 2N. Count alleles, not individuals. Worked examples, why the square root shortcut fails, and a calculator to check your answer.">
+<meta name="keywords" content="how to calculate allele frequency, allele frequency formula, p and q hardy weinberg, genotype frequency vs allele frequency, calculate p and q from genotype counts">
+<link rel="canonical" href="https://biochemtools.com/how-to-calculate-allele-frequency.html">
+<meta property="og:title" content="How to Calculate Allele Frequency">
+<meta property="og:description" content="Count alleles, not individuals. p = (2 x AA + Aa) / 2N, worked through, plus why the square root shortcut is often wrong.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"How to Calculate Allele Frequency","item":"https://biochemtools.com/how-to-calculate-allele-frequency.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you calculate allele frequency from genotype counts?","acceptedAnswer":{"@type":"Answer","text":"Count alleles, not individuals. Each homozygote carries two copies and each heterozygote carries one. So p = (2 x AA + Aa) / (2 x N) and q = (2 x aa + Aa) / (2 x N), where N is the number of individuals. The two must sum to 1, which is a free check on your arithmetic."}},{"@type":"Question","name":"Can I just take the square root of the recessive frequency?","acceptedAnswer":{"@type":"Answer","text":"Only if the population is already in Hardy-Weinberg equilibrium. q = sqrt(q squared) assumes the genotype counts follow the equilibrium proportions. If they do not, the shortcut can be badly wrong. In the worked example on this page it gives 0.316 when the true answer is 0.15."}},{"@type":"Question","name":"What is the difference between allele frequency and genotype frequency?","acceptedAnswer":{"@type":"Answer","text":"Allele frequency counts copies of an allele in the gene pool, so with two alleles there are 2N copies total. Genotype frequency counts individuals of each type, and there are only N of those. Mixing the two denominators is the most common error in these problems."}},{"@type":"Question","name":"Why must p and q add to 1?","acceptedAnswer":{"@type":"Answer","text":"Because with only two alleles at a locus, every copy in the population is either one or the other. If p is 0.85 then q must be 0.15. If your numbers do not sum to 1 you have miscounted, usually by forgetting that homozygotes contribute two copies."}},{"@type":"Question","name":"How do I know if a population is in Hardy-Weinberg equilibrium?","acceptedAnswer":{"@type":"Answer","text":"Calculate p and q by counting, then use them to predict the expected genotype counts as p squared, 2pq and q squared times N. Compare with what you actually observed, usually with a chi-square test at one degree of freedom. A large gap means something is acting on the population."}},{"@type":"Question","name":"What causes a population to leave Hardy-Weinberg equilibrium?","acceptedAnswer":{"@type":"Answer","text":"Selection, migration, mutation, genetic drift and non-random mating, which are exactly the five things the model assumes are absent. Real populations violate at least one, so deviation is the normal case and the equilibrium is a null hypothesis rather than a description of nature."}}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+</style>
+<style>
+ .answer{background:rgba(93,202,165,.13);border:1px solid rgba(93,202,165,.32);border-radius:14px;padding:1.4rem 1.5rem;margin:1.25rem 0}
+ .answer .big{font-size:1.7rem;font-weight:700;color:var(--out);font-family:monospace;margin:0 0 .5rem;line-height:1.3}
+ .calc{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1rem 0}
+ .calc label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.35rem}
+ .calc input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:.55rem .6rem;font-size:1rem;font-family:monospace}
+ .warn{background:rgba(226,100,94,.12);border-left:3px solid #e2645e;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin:1rem 0}
+ details{border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;margin:.6rem 0;background:var(--bg)}
+ details summary{cursor:pointer;font-weight:600}
+ details p{margin:.7rem 0 .2rem;color:var(--muted)}
+ @media(max-width:560px){.calc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topnav"><div class="topnav-inner">
+ <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+ <div class="topnav-links"><a href="/charts.html">Charts</a><a href="/daily-question.html">Daily question</a><a href="/about.html">About</a><a class="navcta" href="/">All tools &rarr;</a></div>
+</div></div>
+<header>
+ <h1>How to calculate allele frequency</h1>
+ <p>The formula, why it works, and the shortcut that quietly gives wrong answers.</p>
+</header>
+<main>
+ <div class="answer">
+  <p class="big">p = (2 &times; AA + Aa) &divide; 2N</p>
+  <p><b>Count alleles, not individuals.</b> Every homozygote carries two copies, every heterozygote carries one, and N individuals hold 2N copies in total.</p>
+  <p class="note">q is the same with aa in place of AA, and p + q must come to 1.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Try it with your own counts</h2>
+  <div class="calc">
+   <div><label for="nAA">AA individuals</label><input id="nAA" type="number" min="0" value="400"></div>
+   <div><label for="nAa">Aa individuals</label><input id="nAa" type="number" min="0" value="50"></div>
+   <div><label for="naa">aa individuals</label><input id="naa" type="number" min="0" value="50"></div>
+  </div>
+  <div id="out" aria-live="polite"></div>
+ </div>
+
+ <h2>Why you count copies, not people</h2>
+ <p>A population of N diploid individuals holds <b>2N</b> copies of the gene. Someone who is AA contributes two A copies. Someone who is Aa contributes one A and one a. Someone who is aa contributes no A at all.</p>
+ <p>So the number of A copies is 2 &times; (number of AA) + (number of Aa), and the frequency is that over 2N. Using N instead of 2N in the denominator is the single most common mistake in these problems, and it shows up immediately because p and q will not sum to 1.</p>
+
+ <div class="warn">
+  <p style="margin:.1rem 0"><b>The square root shortcut is not general.</b> You were probably taught q = &radic;(aa / N). That only holds if the population is <em>already</em> in Hardy-Weinberg equilibrium, because it works backwards from q&sup2;. In the default example above, 400 AA, 50 Aa and 50 aa, counting gives q = 0.15 while the shortcut gives 0.316. That is more than double, and nothing about the question warns you.</p>
+ </div>
+
+ <h2>Then check whether it is at equilibrium</h2>
+ <p>Once you have p and q from counting, you can predict what the genotype counts <em>should</em> be if nothing is acting on the population: p&sup2;N of AA, 2pqN of Aa, and q&sup2;N of aa. Compare those with what you actually observed.</p>
+ <p>A large gap means one of the five assumptions is broken: selection, migration, mutation, drift, or non-random mating. Since real populations always break at least one, Hardy-Weinberg is best understood as a null hypothesis you test against, not a law you expect to hold.</p>
+
+ <h2>Common questions</h2>
+ <details><summary>How do you calculate allele frequency from genotype counts?</summary><p>Count alleles, not individuals. Each homozygote carries two copies and each heterozygote carries one. So p = (2 x AA + Aa) / (2 x N) and q = (2 x aa + Aa) / (2 x N), where N is the number of individuals. The two must sum to 1, which is a free check on your arithmetic.</p></details><details><summary>Can I just take the square root of the recessive frequency?</summary><p>Only if the population is already in Hardy-Weinberg equilibrium. q = sqrt(q squared) assumes the genotype counts follow the equilibrium proportions. If they do not, the shortcut can be badly wrong. In the worked example on this page it gives 0.316 when the true answer is 0.15.</p></details><details><summary>What is the difference between allele frequency and genotype frequency?</summary><p>Allele frequency counts copies of an allele in the gene pool, so with two alleles there are 2N copies total. Genotype frequency counts individuals of each type, and there are only N of those. Mixing the two denominators is the most common error in these problems.</p></details><details><summary>Why must p and q add to 1?</summary><p>Because with only two alleles at a locus, every copy in the population is either one or the other. If p is 0.85 then q must be 0.15. If your numbers do not sum to 1 you have miscounted, usually by forgetting that homozygotes contribute two copies.</p></details><details><summary>How do I know if a population is in Hardy-Weinberg equilibrium?</summary><p>Calculate p and q by counting, then use them to predict the expected genotype counts as p squared, 2pq and q squared times N. Compare with what you actually observed, usually with a chi-square test at one degree of freedom. A large gap means something is acting on the population.</p></details><details><summary>What causes a population to leave Hardy-Weinberg equilibrium?</summary><p>Selection, migration, mutation, genetic drift and non-random mating, which are exactly the five things the model assumes are absent. Real populations violate at least one, so deviation is the normal case and the equilibrium is a null hypothesis rather than a description of nature.</p></details>
+
+ <div class="card">
+  <h2 style="margin-top:0">Related tools</h2>
+  <p><a href="/hardy-weinberg-calculator.html">Hardy-Weinberg calculator</a>, for the full equilibrium test with expected counts.<br>
+  <a href="/punnett-square-calculator.html">Punnett square calculator</a>, for single crosses rather than populations.<br>
+  <a href="/x-linked-inheritance-calculator.html">X-linked inheritance calculator</a>, where allele frequencies work differently in males.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Sources</h2>
+  <p class="note">The allele counting method and the Hardy-Weinberg expectations follow the standard treatment in Hartl and Clark, <i>Principles of Population Genetics</i>. The chi-square goodness-of-fit test for equilibrium uses one degree of freedom for a two-allele locus, because two of the three genotype classes are free once p is estimated from the data.</p>
+ </div>
+</main>
+<footer>Free biochem study tool &middot; share it with your study group &middot; <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> &middot; <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> &middot; <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> &middot; <span style="opacity:.75">Updated August 4, 2026</span></footer>
+<script>
+const $=id=>document.getElementById(id);
+function calc(){
+ const AA=+$("nAA").value||0, Aa=+$("nAa").value||0, aa=+$("naa").value||0;
+ const N=AA+Aa+aa;
+ if(N<=0){ $("out").innerHTML='<p class="note">Enter at least one individual.</p>'; return null; }
+ const p=(2*AA+Aa)/(2*N), q=(2*aa+Aa)/(2*N);
+ const eAA=p*p*N, eAa=2*p*q*N, eaa=q*q*N;
+ const chi=[[AA,eAA],[Aa,eAa],[aa,eaa]].reduce((s,[o,e])=>s+(e>0?(o-e)*(o-e)/e:0),0);
+ const shortcut=Math.sqrt(aa/N);
+ return {AA,Aa,aa,N,p,q,eAA,eAa,eaa,chi,shortcut};
+}
+function render(){
+ const r=calc(); if(!r) return;
+ const f=x=>x.toFixed(3), n=x=>x.toFixed(1);
+ const off=Math.abs(r.shortcut-r.q)>0.02;
+ $("out").innerHTML=
+  '<div class="out"><div class="note" style="margin-bottom:.2rem">Allele frequencies</div>'+
+  '<div class="v" style="font-size:1.8rem;font-family:monospace">p = '+f(r.p)+" &nbsp; q = "+f(r.q)+"</div></div>"+
+  '<p class="note"><b>By counting.</b> p = (2&times;'+r.AA+" + "+r.Aa+") / "+(2*r.N)+" = "+f(r.p)+
+  ". q = (2&times;"+r.aa+" + "+r.Aa+") / "+(2*r.N)+" = "+f(r.q)+". They sum to "+f(r.p+r.q)+".</p>"+
+  '<p class="note"><b>Expected under equilibrium.</b> '+n(r.eAA)+" AA, "+n(r.eAa)+" Aa, "+n(r.eaa)+
+  " aa. You observed "+r.AA+", "+r.Aa+", "+r.aa+". Chi-square "+r.chi.toFixed(2)+
+  " against a critical value of 3.84, so this population "+(r.chi>3.84?"<b>deviates from</b>":"is <b>consistent with</b>")+" Hardy-Weinberg equilibrium.</p>"+
+  (off? '<p class="note" style="color:#e2645e"><b>Note the shortcut.</b> &radic;(aa/N) gives q = '+f(r.shortcut)+
+        ", but the true value is "+f(r.q)+". The shortcut assumes equilibrium, and this population is not at it.</p>" : "");
+}
+["nAA","nAa","naa"].forEach(id=>$(id).addEventListener("input",render));
+render();
+(function(){
+ const set=(a,b,c)=>{$("nAA").value=a;$("nAa").value=b;$("naa").value=c;return calc();};
+ let r=set(400,50,50);
+ console.assert(Math.abs(r.p-0.85)<1e-9&&Math.abs(r.q-0.15)<1e-9,"counting must give p=0.85 q=0.15");
+ console.assert(r.chi>3.84,"400/50/50 must deviate from equilibrium");
+ console.assert(Math.abs(r.shortcut-0.3162)<1e-3,"shortcut must give 0.316 here");
+ r=set(320,160,20);
+ console.assert(Math.abs(r.p-0.8)<1e-9&&r.chi<0.01,"320/160/20 must sit at equilibrium");
+ console.assert(Math.abs(r.p+r.q-1)<1e-12,"p+q must always equal 1");
+ set(400,50,50); render();
+})();
+</script>
+</body>
+</html>
