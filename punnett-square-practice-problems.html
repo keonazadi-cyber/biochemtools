@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punnett Square Practice Problems (Free Worksheet)</title>
+<meta name="description" content="Generate a fresh Punnett square worksheet with answers. Monohybrid, test cross and dihybrid problems, new set every click, printable with or without the key.">
+<meta name="keywords" content="punnett square practice, punnett square worksheet, punnett square practice problems, punnett square practice worksheet, monohybrid cross practice, dihybrid cross practice, genetics worksheet with answers">
+<link rel="canonical" href="https://biochemtools.com/punnett-square-practice-problems.html">
+<meta property="og:title" content="Punnett Square Practice Problems">
+<meta property="og:description" content="A fresh worksheet every click, with a full answer key. Free, no signup, printable.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"Punnett Square Practice Problems","item":"https://biochemtools.com/punnett-square-practice-problems.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I actually do a Punnett square?","acceptedAnswer":{"@type":"Answer","text":"Write one parent's gametes across the top and the other's down the side, then fill each box with the alleles from its row and column. For a single gene each parent gives two gametes, so you get a 2x2 grid. Count the boxes to get genotype ratios, then group them by appearance to get phenotype ratios."}},{"@type":"Question","name":"What is the difference between genotype and phenotype ratio?","acceptedAnswer":{"@type":"Answer","text":"Genotype ratio counts the actual allele combinations, like 1 AA : 2 Aa : 1 aa. Phenotype ratio counts what you would see, and since AA and Aa look identical under complete dominance, that same cross is 3 dominant : 1 recessive. Exam questions often ask for one and get answered with the other."}},{"@type":"Question","name":"Why does Aa x Aa give 3:1?","acceptedAnswer":{"@type":"Answer","text":"Four boxes: AA, Aa, aA and aa. Three of the four carry at least one dominant allele, so three quarters show the dominant trait. The 1 in 4 chance of aa is where the recessive phenotype comes from, and it is why recessive conditions can skip generations."}},{"@type":"Question","name":"What is a test cross for?","acceptedAnswer":{"@type":"Answer","text":"To find out whether an individual showing the dominant trait is AA or Aa, which you cannot tell by looking. Cross it with aa. If any offspring are recessive, the unknown parent must have been Aa."}},{"@type":"Question","name":"How many boxes should a dihybrid square have?","acceptedAnswer":{"@type":"Answer","text":"Sixteen, because each parent heterozygous at two genes makes four gamete types. In general a parent heterozygous at n genes makes 2 to the power n gametes, so the square is that number squared."}}]}</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#7f77dd}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
+ main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
+ label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
+ .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
+ th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+</style>
+<style>
+ .bar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:1rem 0}
+ .bar button{background:var(--bg);border:1px solid var(--line);color:var(--txt);padding:.55rem .9rem;border-radius:9px;cursor:pointer;font-size:.9rem;font-family:inherit}
+ .bar button.primary{background:var(--out);color:#0b0d11;border-color:var(--out);font-weight:600}
+ .bar button[aria-pressed="true"]{border-color:var(--out);color:var(--out)}
+ .prob{border:1px solid var(--line);border-radius:12px;padding:1rem 1.15rem;margin:.8rem 0;background:var(--bg)}
+ .prob h3{margin:0 0 .4rem;font-size:.95rem}
+ .prob .q{margin:.2rem 0 .6rem}
+ .grid{border-collapse:collapse;font-family:monospace;margin:.5rem 0}
+ .grid th,.grid td{border:1px solid var(--line);width:3.1rem;height:2.4rem;text-align:center;font-size:.95rem}
+ .grid th{background:var(--card);color:var(--muted)}
+ .ans{display:none;border-top:1px dashed var(--line);margin-top:.7rem;padding-top:.7rem;color:var(--muted);font-size:.9rem}
+ body.show-answers .ans{display:block}
+ details{border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;margin:.6rem 0;background:var(--bg)}
+ details summary{cursor:pointer;font-weight:600}
+ details p{margin:.7rem 0 .2rem;color:var(--muted)}
+ @media print{
+  .topnav,.bar,footer,#bct-share-btn,#tool-streak-badge,#bct-recent-strip,header p,details{display:none!important}
+  .prob{break-inside:avoid;border-color:#999}
+  body{background:#fff;color:#000}
+  .grid th,.grid td{border-color:#666}
+ }
+</style>
+</head>
+<body>
+<div class="topnav"><div class="topnav-inner">
+ <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+ <div class="topnav-links"><a href="/charts.html">Charts</a><a href="/daily-question.html">Daily question</a><a href="/about.html">About</a><a class="navcta" href="/">All tools &rarr;</a></div>
+</div></div>
+<header>
+ <h1>Punnett square practice problems</h1>
+ <p>A fresh worksheet every time you click. Blank grids to fill in, and a full answer key you can show, hide, or leave off the printout.</p>
+</header>
+<main>
+ <div class="card">
+  <div class="bar">
+   <button class="primary" id="gen">New worksheet</button>
+   <button id="toggle" aria-pressed="false">Show answers</button>
+   <button id="print">Print</button>
+   <span class="note" style="margin-left:auto" id="mixnote"></span>
+  </div>
+  <div class="bar" role="group" aria-label="Difficulty">
+   <span class="note">Include:</span>
+   <button data-lvl="mono" aria-pressed="true">Monohybrid</button>
+   <button data-lvl="test" aria-pressed="true">Test crosses</button>
+   <button data-lvl="di" aria-pressed="true">Dihybrid</button>
+  </div>
+ </div>
+ <div id="sheet"></div>
+
+ <h2>How to work one by hand</h2>
+ <p>Put one parent's gametes along the top and the other's down the side. Fill each box with the allele from its row plus the allele from its column, writing the dominant one first so Aa never reads as aA. Then count.</p>
+ <p>The <b>genotype ratio</b> is the tally of the actual combinations. The <b>phenotype ratio</b> groups together everything that looks the same, so under complete dominance AA and Aa collapse into one group. Aa x Aa is 1:2:1 by genotype and 3:1 by phenotype, and questions frequently ask for one while students answer with the other.</p>
+
+ <h2>Common questions</h2>
+ <details><summary>How do I actually do a Punnett square?</summary><p>Write one parent's gametes across the top and the other's down the side, then fill each box with the alleles from its row and column. For a single gene each parent gives two gametes, so you get a 2x2 grid. Count the boxes to get genotype ratios, then group them by appearance to get phenotype ratios.</p></details><details><summary>What is the difference between genotype and phenotype ratio?</summary><p>Genotype ratio counts the actual allele combinations, like 1 AA : 2 Aa : 1 aa. Phenotype ratio counts what you would see, and since AA and Aa look identical under complete dominance, that same cross is 3 dominant : 1 recessive. Exam questions often ask for one and get answered with the other.</p></details><details><summary>Why does Aa x Aa give 3:1?</summary><p>Four boxes: AA, Aa, aA and aa. Three of the four carry at least one dominant allele, so three quarters show the dominant trait. The 1 in 4 chance of aa is where the recessive phenotype comes from, and it is why recessive conditions can skip generations.</p></details><details><summary>What is a test cross for?</summary><p>To find out whether an individual showing the dominant trait is AA or Aa, which you cannot tell by looking. Cross it with aa. If any offspring are recessive, the unknown parent must have been Aa.</p></details><details><summary>How many boxes should a dihybrid square have?</summary><p>Sixteen, because each parent heterozygous at two genes makes four gamete types. In general a parent heterozygous at n genes makes 2 to the power n gametes, so the square is that number squared.</p></details>
+
+ <div class="card">
+  <h2 style="margin-top:0">Related tools</h2>
+  <p><a href="/punnett-square-calculator.html">Punnett square calculator</a>, to check any cross.<br>
+  <a href="/dihybrid-cross-calculator.html">Dihybrid cross calculator</a>, for the 16-box version.<br>
+  <a href="/blood-type-punnett-square-calculator.html">Blood type Punnett square</a>, for ABO and Rh.</p>
+ </div>
+</main>
+<footer>Free biochem study tool &middot; share it with your study group &middot; <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> &middot; <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> &middot; <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> &middot; <span style="opacity:.75">Updated August 4, 2026</span></footer>
+<script>
+const $=id=>document.getElementById(id);
+const TRAITS=[["tall","short","T"],["purple flowers","white flowers","P"],["round seeds","wrinkled seeds","R"],
+ ["black fur","brown fur","B"],["green pods","yellow pods","G"],["long wings","short wings","L"],
+ ["red eyes","white eyes","E"],["smooth coat","rough coat","S"]];
+let levels={mono:true,test:true,di:true};
+
+// deterministic-enough shuffle without Math.random dependence on load order
+// Math.imul, not plain *, because seed*1103515245 exceeds 2^53 and JS doubles drop the
+// low bits, which collapsed the generator so every problem came out identical.
+let seed=1;
+function rnd(n){ seed=(Math.imul(seed,1103515245)+12345)>>>0; return (seed>>>16)%n; }
+function ordg(x,y){ return x.toLowerCase()!==y.toLowerCase() ? x+y : (x===x.toUpperCase()? x+y : y+x); }
+function phen(gt){ return /[A-Z]/.test(gt) ? "dom" : "rec"; }
+function tally(o){ const m={}; o.forEach(g=>m[g]=(m[g]||0)+1); return m; }
+function reduce(arr){ const g=(a,b)=>b?g(b,a%b):a; const d=arr.filter(x=>x).reduce((a,b)=>g(a,b)); return arr.map(x=>x/d); }
+
+function monoProblem(test){
+ const t=TRAITS[rnd(TRAITS.length)], L=t[2], l=L.toLowerCase();
+ const opts=test?[[L+l,l+l]]:[[L+l,L+l],[L+l,l+l],[L+L,l+l],[L+l,L+L]];
+ const [p1,p2]=opts[rnd(opts.length)];
+ const g1=[p1[0],p1[1]], g2=[p2[0],p2[1]];
+ const cells=[]; for(const a of g1) for(const b of g2) cells.push(ordg(a,b));
+ const gt=tally(cells), ph=tally(cells.map(phen));
+ return {kind:test?"Test cross":"Monohybrid", trait:t, p1:p1, p2:p2, rows:g1, cols:g2, cells:cells,
+  gt:gt, ph:ph, L:L};
+}
+function diProblem(){
+ let i=rnd(TRAITS.length), j=(i+1+rnd(TRAITS.length-1))%TRAITS.length;
+ const t1=TRAITS[i], t2=TRAITS[j], A=t1[2], B=t2[2];
+ if(A===B) return diProblem();
+ const p1=A+A.toLowerCase()+B+B.toLowerCase();
+ const p2=rnd(2)? p1 : A.toLowerCase()+A.toLowerCase()+B.toLowerCase()+B.toLowerCase();
+ const gam=g=>[...new Set([g[0],g[1]].flatMap(x=>[g[2],g[3]].map(y=>x+y)))];
+ const r=gam(p1), c=gam(p2), cells=[];
+ for(const x of r) for(const y of c) cells.push(ordg(x[0],y[0])+ordg(x[1],y[1]));
+ const ph=tally(cells.map(g=>phen(g.slice(0,2))+"/"+phen(g.slice(2))));
+ return {kind:"Dihybrid", trait:[t1,t2], p1:p1, p2:p2, rows:r, cols:c, cells:cells,
+  gt:tally(cells), ph:ph, L:A, L2:B};
+}
+function gridHtml(rows,cols,cells,reveal){
+ let h='<table class="grid"><tr><th></th>'+cols.map(c=>"<th>"+c+"</th>").join("")+"</tr>";
+ let k=0;
+ for(const r of rows){
+  h+="<tr><th>"+r+"</th>";
+  for(let i=0;i<cols.length;i++) h+="<td>"+(reveal?cells[k++]:(k++,"&nbsp;"))+"</td>";
+  h+="</tr>";
+ }
+ return h+"</table>";
+}
+function render(){
+ const pool=[];
+ if(levels.mono) pool.push(()=>monoProblem(false));
+ if(levels.test) pool.push(()=>monoProblem(true));
+ if(levels.di) pool.push(diProblem);
+ if(!pool.length){ $("sheet").innerHTML='<p class="note">Pick at least one problem type.</p>'; $("mixnote").textContent=""; return; }
+ let html="";
+ for(let n=1;n<=8;n++){
+  const p=pool[rnd(pool.length)]();
+  const names=Array.isArray(p.trait[0])? p.trait.map(t=>t[0]+" / "+t[1]).join(" and ") : p.trait[0]+" / "+p.trait[1];
+  const phLine=Object.entries(p.ph).map(([k,v])=>k+" "+v+"/"+p.cells.length).join(", ");
+  const gtLine=Object.entries(p.gt).sort().map(([k,v])=>k+" "+v).join(", ");
+  const ratio=reduce(Object.values(p.ph)).join(":");
+  html+='<div class="prob"><h3>'+n+". "+p.kind+"</h3>"+
+   '<p class="q">Trait: '+names+'. Cross <b>'+p.p1+"</b> x <b>"+p.p2+"</b>. Fill the square, then give the genotype and phenotype ratios.</p>"+
+   gridHtml(p.rows,p.cols,p.cells,false)+
+   '<div class="ans"><b>Answer.</b> '+gridHtml(p.rows,p.cols,p.cells,true)+
+   "Genotypes: "+gtLine+". Phenotypes: "+phLine+". Phenotype ratio "+ratio+".</div></div>";
+ }
+ $("sheet").innerHTML=html;
+ $("mixnote").textContent="8 problems";
+}
+$("gen").onclick=()=>{ seed=(Math.imul(seed,7919)+Date.now())>>>0; render(); };
+$("toggle").onclick=e=>{ const on=document.body.classList.toggle("show-answers");
+ e.target.setAttribute("aria-pressed",on); e.target.textContent=on?"Hide answers":"Show answers"; };
+$("print").onclick=()=>window.print();
+document.querySelectorAll("[data-lvl]").forEach(b=>b.onclick=()=>{
+ levels[b.dataset.lvl]=!levels[b.dataset.lvl];
+ b.setAttribute("aria-pressed",levels[b.dataset.lvl]); render(); });
+seed=20260804; render();
+
+(function(){
+ // the generated answers must match the genetics, or the worksheet teaches errors
+ const m=monoProblem(false);
+ console.assert(m.cells.length===4,"monohybrid must be 4 boxes");
+ console.assert(Object.values(m.ph).reduce((a,b)=>a+b,0)===4,"phenotype tally must cover all boxes");
+ const t=monoProblem(true);
+ console.assert(t.p2===t.p2.toLowerCase(),"test cross partner must be fully recessive");
+ const seen=new Set();
+ for(let i=0;i<8;i++){ const p=monoProblem(false); seen.add(p.p1+"x"+p.p2+p.trait[2]); }
+ console.assert(seen.size>2,"generator produced too little variety: "+seen.size);
+ const d=diProblem();
+ console.assert(d.cells.length===d.rows.length*d.cols.length,"dihybrid box count mismatch");
+ console.assert(d.L!==d.L2,"dihybrid genes must use different letters");
+})();
+</script>
+</body>
+</html>
