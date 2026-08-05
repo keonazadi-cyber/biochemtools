@@ -176,7 +176,7 @@ function renderToolBadge(){
  bar.id = "tool-streak-badge";
  bar.style.cssText = "text-align:center;padding:.5rem 1rem;font-size:.82rem;color:var(--muted,#9aa0aa);background:var(--card,#1a1d24);border-bottom:1px solid var(--line,#2a2e38)";
  var parts = [];
- if (streak > 0) parts.push("🔥 " + streak + "-day streak");
+ if (streak > 1) parts.push("\ud83d\udd25 " + streak + "-day streak");
  parts.push(tried + "/" + TOOL_COUNT + " tools tried");
  bar.innerHTML = parts.join(" &nbsp;&middot;&nbsp; ");
  var topnav = document.querySelector(".topnav");
@@ -187,6 +187,29 @@ function renderToolBadge(){
  } else {
   document.body.appendChild(bar);
  }
+}
+
+// Most visitors arrive on a tool page from search or Reddit and never touch the
+// homepage, so the "pick up where you left off" list was invisible to them. This puts
+// a compact version at the end of the page, where someone finishing a tool will see it.
+function renderToolFooterRecent(){
+ if (!isToolPage()) return;
+ if (document.getElementById("bct-recent-strip")) return;
+ var here = location.pathname.replace(/^\//,"").replace(/\.html$/,"");
+ var recent = recentTools(4).filter(function(r){ return r.slug !== here; }).slice(0, 3);
+ if (recent.length < 1) return;
+ var main = document.querySelector("main") || document.body;
+ var box = document.createElement("div");
+ box.id = "bct-recent-strip";
+ box.style.cssText = "background:var(--card,#1a1d24);border:1px solid var(--line,#2a2e38);border-radius:14px;padding:1.1rem 1.25rem;margin:1.25rem 0";
+ var links = recent.map(function(r){
+  return '<a href="/' + r.slug + '.html" style="display:block;font-size:.9rem;margin-bottom:.3rem;text-decoration:none">' + r.title + "</a>";
+ }).join("");
+ box.innerHTML =
+  '<div style="color:var(--muted,#9aa0aa);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem">Back to what you were doing</div>' +
+  links +
+  '<div style="color:var(--muted,#9aa0aa);font-size:.72rem;margin-top:.6rem">Saved in your browser only. No account, no email.</div>';
+ main.appendChild(box);
 }
 
 function adjustStickyOffsets(){
@@ -299,6 +322,7 @@ function syncToggleA11y(){
 function renderAll(){
  renderStreakWidget();
  renderToolBadge();
+ renderToolFooterRecent();
  renderShareButton();
  renderRecommended();
  syncToggleA11y();
