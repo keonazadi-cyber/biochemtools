@@ -382,25 +382,75 @@
  · <span style="opacity:.75">Updated July 30, 2026</span></footer>
 <script src="/streak.js?v=d20d85e1" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+ .moretoggle{display:block;width:100%;margin:.9rem 0 .2rem;padding:.7rem 1rem;background:var(--card);
+  border:1px solid var(--line);color:var(--muted);border-radius:12px;cursor:pointer;
+  font-family:inherit;font-size:.9rem;text-align:center;transition:border-color .15s,color .15s}
+ .moretoggle:hover{border-color:var(--accent);color:var(--txt)}
+ .section a.tool.folded,.section a.chartcard.folded{display:none!important}
+</style>
 <script>
+// The homepage rendered all 63 cards expanded, making it 51 screens tall and putting the
+// first calculator 8 screens down. Each section now previews a few and folds the rest.
+// Search still looks through everything and unfolds automatically.
+const PREVIEW = 4;
+
+function foldSections(){
+ document.querySelectorAll('.section').forEach(sec=>{
+  const cards=[...sec.querySelectorAll('a.tool, a.chartcard')];
+  if(cards.length<=PREVIEW) return;
+  cards.forEach((c,i)=>{ if(i>=PREVIEW) c.classList.add('folded'); });
+  const btn=document.createElement('button');
+  btn.type='button';
+  btn.className='moretoggle';
+  btn.setAttribute('aria-expanded','false');
+  btn.textContent='Show all '+cards.length+' \u2193';
+  btn.onclick=()=>{
+   const open=btn.getAttribute('aria-expanded')==='true';
+   cards.forEach((c,i)=>{ if(i>=PREVIEW) c.classList.toggle('folded', open); });
+   btn.setAttribute('aria-expanded', String(!open));
+   btn.textContent = open ? 'Show all '+cards.length+' \u2193' : 'Show fewer \u2191';
+   if(open) sec.scrollIntoView({block:'start', behavior:'smooth'});
+  };
+  cards[0].parentElement.insertAdjacentElement('afterend', btn);
+ });
+}
+
+function setFolding(on){
+ document.querySelectorAll('.moretoggle').forEach(b=>b.style.display=on?'':'none');
+ document.querySelectorAll('.section').forEach(sec=>{
+  const cards=[...sec.querySelectorAll('a.tool, a.chartcard')];
+  cards.forEach((c,i)=>{
+   if(!on) c.classList.remove('folded');
+   else if(i>=PREVIEW) c.classList.add('folded');
+  });
+  const b=sec.querySelector('.moretoggle');
+  if(b && on){ b.setAttribute('aria-expanded','false'); b.textContent='Show all '+cards.length+' \u2193'; }
+ });
+}
+
 function filterTools(){
  const q=document.getElementById('search').value.trim().toLowerCase();
+ setFolding(!q);
  const sections=document.querySelectorAll('.section');
  let anyVisible=false;
  sections.forEach(sec=>{
   let sectionHasMatch=false;
-  sec.querySelectorAll('a.tool').forEach(a=>{
-   const text=a.textContent.toLowerCase();
-   const match=!q || text.includes(q);
-   a.style.display=match?'':'none';
-   if(match)sectionHasMatch=true;
-  });
+  // Must include chartcards, not just a.tool. The charts section holds only
+ // chartcards, so it scored zero matches and stayed hidden after any search.
+ sec.querySelectorAll('a.tool, a.chartcard').forEach(a=>{
+  const text=a.textContent.toLowerCase();
+  const match=!q || text.includes(q);
+  a.style.display=match?'':'none';
+  if(match)sectionHasMatch=true;
+ });
   sec.style.display=sectionHasMatch?'':'none';
   if(sectionHasMatch)anyVisible=true;
  });
  document.getElementById('noresults').style.display=(!anyVisible && q)?'block':'none';
 }
 document.getElementById('search').addEventListener('input',filterTools);
+foldSections();
 (function(){
  const q=new URLSearchParams(location.search).get('q');
  if(q){document.getElementById('search').value=q;filterTools();}
