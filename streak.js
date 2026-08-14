@@ -5,7 +5,11 @@
 var TOOL_COUNT = 52;
 
 // --- Affiliate links: each program activates independently once you have a real tracked link/tag. ---
-var AMAZON_LIVE = true;
+// Switched off 2026-08-14. At ~350 visits a month this earned essentially nothing,
+// and "completely free, nothing paid anywhere on it" is a far stronger pitch to the
+// university librarians whose links are the actual growth constraint. Flip back to
+// true when traffic makes it worth more than the credibility.
+var AMAZON_LIVE = false;
 var AMAZON_TAG = "biochemtools20";
 var GOLDSTANDARD_LIVE = false;
 var GOLDSTANDARD_URL = "https://www.mcat-prep.com/goldstandard-affiliate/";
