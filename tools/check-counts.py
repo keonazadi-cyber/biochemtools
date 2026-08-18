@@ -37,9 +37,16 @@ if declared != cards:
 
 for f in sorted(glob.glob("*.html")):
     h = open(f).read()
-    for mm in re.finditer(r'\b(\d+)\s+(?:free\s+)?tools\b', h):
+    # Strip tags first and allow a few describing words between the number and
+    # the noun. The old pattern only caught "46 tools" written exactly that way,
+    # so it sat quiet through "<b>46</b> tools", "All 46 free biochem tools" on
+    # fifty pages, and "46 free interactive ... tools" in the meta description.
+    vis = re.sub(r"<[^>]+>", " ", h)
+    vis = vis.replace("&amp;", "&")
+    for mm in re.finditer(r"\b(\d+)((?:\s+[A-Za-z&,]+){0,6})\s+tools\b", vis):
         if int(mm.group(1)) != cards:
-            errs.append('%s claims "%s tools", should be %d' % (f, mm.group(1), cards))
+            errs.append('%s claims "%s%s tools", should be %d'
+                        % (f, mm.group(1), mm.group(2).rstrip(), cards))
     for mm in re.finditer(r'src="/streak\.js(\?v=([0-9a-f]+))?"', h):
         if mm.group(2) != ver:
             errs.append("%s loads streak.js with a stale or missing ?v= (want %s)" % (f, ver))

@@ -107,7 +107,7 @@ for c1, c3, name, note in [
 y += 20
 d.line([(56, y), (W - 56, y)], fill=LINE, width=2)
 y += 26
-d.text((60, y), "Only 7 side chains ionize (D, E, H, C, Y, K, R). Those are the ones that set a protein's charge and pI.",
+d.text((60, y), "Only 7 side chains ionize (D, E, H, C, Y, K, R). The N and C termini ionize too, and rule short peptides.",
        font=F_FOOT, fill=GRAY)
 d.text((60, y + 38), "Hydropathy is Kyte-Doolittle: positive is hydrophobic, negative is hydrophilic. pKa values are the Lehninger set.",
        font=F_FOOT, fill=DIM)
