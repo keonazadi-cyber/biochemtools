@@ -87,7 +87,7 @@ F_DOM = f(B, 34)
 
 W, M = 1500, 60
 CW = W - 2 * M
-H = 1660
+H = 1694
 img = Image.new("RGB", (W, H), BG)
 d = ImageDraw.Draw(img)
 d.rectangle([0, 0, W, 12], fill=GREEN)
@@ -162,6 +162,7 @@ foot = [
     f"Worked with Km {KM:.0f}, Vmax {VMAX:.0f}, and inhibitor at {R:.0f} times its Ki.",
     "Km(app) = Km x alpha / alpha', and Vmax(app) = Vmax / alpha', where alpha acts on free enzyme and alpha' on the ES complex.",
     "Uncompetitive lowering Km looks wrong but is real: removing ES pulls the equilibrium toward binding more substrate.",
+    "Mixed split into two rows after u/xtalgeek pointed out on r/Biochemistry that the old version showed one case as the rule.",
 ]
 for i, t in enumerate(foot):
     assert M + d.textlength(t, font=F_FOOT) < W - M, f"footer {i} overflows"
