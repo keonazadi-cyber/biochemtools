@@ -10,7 +10,7 @@ The emptiness check exists because a script once did
 which truncates the file before the read runs and shipped a 0-byte streak.js to
 production. Run this before every push.
 """
-import glob, re, sys, hashlib, os
+import glob, re, sys, hashlib, os, json
 
 os.chdir(os.path.join(os.path.dirname(__file__), ".."))
 errs = []
@@ -50,6 +50,28 @@ for f in sorted(glob.glob("*.html")):
     for mm in re.finditer(r'src="/streak\.js(\?v=([0-9a-f]+))?"', h):
         if mm.group(2) != ver:
             errs.append("%s loads streak.js with a stale or missing ?v= (want %s)" % (f, ver))
+
+
+# charts.html publishes each chart image's pixel dimensions in its structured data.
+# Rebuilding a chart taller (adding a footer line, say) silently makes those wrong,
+# and three of eleven had drifted before this check existed.
+try:
+    from PIL import Image
+    ch = open("charts.html").read()
+    mm = re.search(r'<script type="application/ld\+json">(.*?)</script>', ch, re.S)
+    if mm:
+        for part in json.loads(mm.group(1)).get("hasPart", []):
+            rel = part.get("contentUrl", "").split("/downloads/")[-1]
+            path = os.path.join("downloads", rel)
+            if not os.path.exists(path):
+                errs.append("charts.html lists %s but downloads/%s is missing" % (rel, rel))
+                continue
+            w, h_ = Image.open(path).size
+            if (part.get("width"), part.get("height")) != (w, h_):
+                errs.append("charts.html says %s is %sx%s, the file is %dx%d"
+                            % (rel, part.get("width"), part.get("height"), w, h_))
+except ImportError:
+    pass
 
 if errs:
     print("FAIL"); [print("  " + e) for e in errs]; sys.exit(1)
