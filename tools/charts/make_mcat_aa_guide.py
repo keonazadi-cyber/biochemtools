@@ -171,7 +171,7 @@ y += 36 * len(foot) + 22
 
 assert y + 50 < H, "content overflows canvas: needs %d, have %d" % (y + 50, H)
 d.text((MARGIN, y), "biochemtools.com", font=F_DOM, fill=WHITE)
-tag = "free, no signup"
+tag = "free, no signup  /  CC BY 4.0"
 d.text((W - MARGIN - d.textlength(tag, font=F_FOOT), y + 10), tag, font=F_FOOT, fill=DIM)
 
 out = BUILD_DIR + "/mcat-amino-acid-guide%s.png" % suffix()

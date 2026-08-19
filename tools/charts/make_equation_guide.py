@@ -142,7 +142,7 @@ y += 32 * len(foot) + 24
 
 assert y + 44 < H_, f"content overflows: needs {y + 44}, have {H_}"
 d.text((M, y), "biochemtools.com", font=F_DOM, fill=WHITE)
-tag = "free, no signup"
+tag = "free, no signup  /  CC BY 4.0"
 d.text((W - M - d.textlength(tag, font=F_FOOT), y + 10), tag, font=F_FOOT, fill=DIM)
 
 out = BUILD_DIR + "/equation-guide%s.png" % suffix()

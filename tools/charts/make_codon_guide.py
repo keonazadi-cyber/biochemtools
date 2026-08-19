@@ -107,7 +107,7 @@ for n, (line, colr) in enumerate(foot):
 y += 36 * (len(foot) - 2)
 
 d.text((60, y + 96), "biochemtools.com", font=F_DOM, fill=WHITE)
-tag = "free, no signup"
+tag = "free, no signup  /  CC BY 4.0"
 d.text((W - 60 - d.textlength(tag, font=F_FOOT), y + 104), tag, font=F_FOOT, fill=DIM)
 
 out = BUILD_DIR + "/codon-chart-guide%s.png" % suffix()

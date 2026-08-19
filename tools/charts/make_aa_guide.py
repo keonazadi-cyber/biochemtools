@@ -113,7 +113,7 @@ d.text((60, y + 38), "Hydropathy is Kyte-Doolittle: positive is hydrophobic, neg
        font=F_FOOT, fill=DIM)
 assert y + 92 + 46 < H, "content overflows canvas: needs %d, have %d" % (y + 92 + 46, H)
 d.text((60, y + 92), "biochemtools.com", font=F_DOM, fill=WHITE)
-tag = "free, no signup"
+tag = "free, no signup  /  CC BY 4.0"
 d.text((W - 60 - d.textlength(tag, font=F_FOOT), y + 100), tag, font=F_FOOT, fill=DIM)
 
 out = BUILD_DIR + "/amino-acid-guide%s.png" % suffix()

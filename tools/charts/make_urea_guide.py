@@ -128,7 +128,7 @@ y += 32 * len(foot) + 24
 
 assert y + 44 < H, f"content overflows: needs {y + 44}, have {H}"
 d.text((M, y), "biochemtools.com", font=F_DOM, fill=WHITE)
-t = "free, no signup"
+t = "free, no signup  /  CC BY 4.0"
 d.text((W - M - d.textlength(t, font=F_FOOT), y + 10), t, font=F_FOOT, fill=DIM)
 
 out = BUILD_DIR + "/urea-guide%s.png" % suffix()

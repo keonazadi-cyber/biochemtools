@@ -157,7 +157,7 @@ y += 34 * len(foot) + 26
 
 assert y + 46 < H, f"content overflows canvas: needs {y + 46}, have {H}"
 d.text((M, y), "biochemtools.com", font=F_DOM, fill=WHITE)
-tag = "free, no signup"
+tag = "free, no signup  /  CC BY 4.0"
 d.text((W - M - d.textlength(tag, font=F_FOOT), y + 10), tag, font=F_FOOT, fill=DIM)
 
 out = BUILD_DIR + "/atp-yield-guide%s.png" % suffix()
