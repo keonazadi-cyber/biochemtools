@@ -107,6 +107,33 @@ def bracket_pair(gs):
                key=lambda ab: abs((ab[0] + ab[1]) / 2 - solved))
 
 
+def charge_states(gs):
+    """The dominant species between each pair of pKa values, with its net charge.
+
+    At pH 0 every group is protonated: the basic groups each carry +1 and the
+    acidic ones are neutral. Each pKa passed removes one proton and drops the
+    net charge by one.
+    """
+    pks = sorted(g["pka"] for g in gs)
+    start = sum(1 for g in gs if g["t"] == "b")
+    out, edges = [], [None] + pks + [None]
+    for i in range(len(pks) + 1):
+        lo, hi = edges[i], edges[i + 1]
+        if lo is None:
+            rng = "below pH %.2f" % hi
+        elif hi is None:
+            rng = "above pH %.2f" % lo
+        else:
+            rng = "pH %.2f to %.2f" % (lo, hi)
+        out.append((rng, start - i))
+    return out
+
+
+def net_charge(gs, pH):
+    return sum((1 / (1 + 10 ** (pH - g["pka"]))) if g["t"] == "b"
+               else -(1 / (1 + 10 ** (g["pka"] - pH))) for g in gs)
+
+
 def page(code, gs, headsrc, navsrc):
     name, letter = NAMES[code]
     pks, buf, eq = regions(gs, pI(gs))
@@ -164,6 +191,15 @@ def page(code, gs, headsrc, navsrc):
         for i, p in enumerate(pks))
 
     buf_rows = "".join("<tr><td>%s</td><td>pKa %.2f</td></tr>" % (r, p) for r, p in buf)
+    sign = lambda q: ("%+d" % q) if q else "0"
+    chg_rows = "".join("<tr><td>%s</td><td>%s</td></tr>" % (r, sign(q)) for r, q in charge_states(gs))
+    q74 = net_charge(gs, 7.4)
+    terms = []
+    for g in sorted(gs, key=lambda g: g["pka"]):
+        c = (1 / (1 + 10 ** (7.4 - g["pka"]))) if g["t"] == "b" else -(1 / (1 + 10 ** (g["pka"] - 7.4)))
+        terms.append("%s (pKa %.2f) contributes %+.2f" % (
+            "the base group" if g["t"] == "b" else "the acid group", g["pka"], c))
+    terms_html = "".join("<li>%s</li>" % t for t in terms)
     eq_rows = "".join("<tr><td>Equivalence point %d</td><td>pH %.2f</td></tr>" % (n, v) for n, v in eq)
 
     if len(pks) == 2:
@@ -215,6 +251,27 @@ def page(code, gs, headsrc, navsrc):
  </div>
 
  <div class="card">
+  <h2 style="margin-top:0">What charge it carries, and when</h2>
+  <p>Reading the curve left to right, each pKa you pass strips off one proton and drops the
+  net charge by one. Between two pKa values one species dominates:</p>
+  <table><thead><tr><th>pH range</th><th>Net charge</th></tr></thead>
+  <tbody>%(chg_rows)s</tbody></table>
+  <p>The charge is zero at the isoelectric point, which is why %(lname)s will not move in an
+  electric field at pH %(pi).2f. That is the basis of isoelectric focusing, and it is why the pI
+  is the number worth remembering rather than the individual pKa values.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Net charge at physiological pH</h2>
+  <p>At pH 7.4 no group is cleanly on or off. Each contributes a fraction, given by the
+  Henderson-Hasselbalch relation, and the net charge is their sum:</p>
+  <ul>%(terms_html)s</ul>
+  <div class="work"><p>Net charge on %(lname)s at pH 7.4 = <b>%(q74)+.2f</b></p></div>
+  <p>This is the calculation behind every peptide charge question. Do it for each residue in a
+  sequence and add the results, and you have the charge on the whole peptide.</p>
+ </div>
+
+ <div class="card">
   <h2 style="margin-top:0">Working out the pI</h2>
   <div class="work"><p>%(work)s</p></div>
  </div>
@@ -259,6 +316,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
 """ % dict(name=name, lname=name.lower(), n=len(pks), pk_and=pk_and, pi=pi_,
            neq=len(eq), eqs="" if len(eq) == 1 else "s",
            grp_rows=grp_rows, buf_rows=buf_rows, eq_rows=eq_rows, work=work,
+           chg_rows=chg_rows, terms_html=terms_html, q74=q74,
            gsjson=json.dumps(gs))
 
     return slug, "<!DOCTYPE html>\n<html lang=\"en\">\n" + h + "</head>\n" + navsrc + body + "</body>\n</html>\n"
@@ -292,7 +350,12 @@ def wire_up(made):
 
     sm = os.path.join(SITE, "sitemap.xml")
     x = open(sm, encoding="utf-8").read()
-    x = re.sub(r'\s*<url><loc>https://biochemtools\.com/[a-z-]+-titration-curve\.html</loc>[^<]*<lastmod>[^<]*</lastmod><priority>[^<]*</priority></url>', "", x)
+    # Only strip the generated children. The earlier pattern also matched
+    # amino-acid-titration-curve.html, the parent tool, and quietly deleted it
+    # from the sitemap on every rebuild.
+    ours = "|".join(re.escape(s_) for _, s_ in made)
+    x = re.sub(r'\s*<url><loc>https://biochemtools\.com/(?:%s)</loc>[^<]*<lastmod>[^<]*</lastmod>'
+               r'<priority>[^<]*</priority></url>' % ours, "", x)
     rows = "".join('\n  <url><loc>https://biochemtools.com/%s</loc><lastmod>2026-08-20</lastmod>'
                    '<priority>0.6</priority></url>' % s for _, s in made)
     tail = "</urlset>"

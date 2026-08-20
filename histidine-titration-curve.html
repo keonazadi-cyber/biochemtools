@@ -128,6 +128,27 @@
  </div>
 
  <div class="card">
+  <h2 style="margin-top:0">What charge it carries, and when</h2>
+  <p>Reading the curve left to right, each pKa you pass strips off one proton and drops the
+  net charge by one. Between two pKa values one species dominates:</p>
+  <table><thead><tr><th>pH range</th><th>Net charge</th></tr></thead>
+  <tbody><tr><td>below pH 1.82</td><td>+2</td></tr><tr><td>pH 1.82 to 6.00</td><td>+1</td></tr><tr><td>pH 6.00 to 9.17</td><td>0</td></tr><tr><td>above pH 9.17</td><td>-1</td></tr></tbody></table>
+  <p>The charge is zero at the isoelectric point, which is why histidine will not move in an
+  electric field at pH 7.59. That is the basis of isoelectric focusing, and it is why the pI
+  is the number worth remembering rather than the individual pKa values.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Net charge at physiological pH</h2>
+  <p>At pH 7.4 no group is cleanly on or off. Each contributes a fraction, given by the
+  Henderson-Hasselbalch relation, and the net charge is their sum:</p>
+  <ul><li>the acid group (pKa 1.82) contributes -1.00</li><li>the base group (pKa 6.00) contributes +0.04</li><li>the base group (pKa 9.17) contributes +0.98</li></ul>
+  <div class="work"><p>Net charge on histidine at pH 7.4 = <b>+0.02</b></p></div>
+  <p>This is the calculation behind every peptide charge question. Do it for each residue in a
+  sequence and add the results, and you have the charge on the whole peptide.</p>
+ </div>
+
+ <div class="card">
   <h2 style="margin-top:0">Working out the pI</h2>
   <div class="work"><p>Histidine has three ionizable groups, so the pI is the average of the two pKa values that bracket the neutral form: (6.00 + 9.17) / 2 = 7.585, published as <b>pI 7.59</b>. The third group is already fully protonated or fully deprotonated there, so it does not enter the average.</p></div>
  </div>
