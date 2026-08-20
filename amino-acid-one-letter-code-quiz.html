@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amino Acid One-Letter Code Quiz: All 20, Free</title>
+<meta name="description" content="Quiz yourself on all 20 amino acid one-letter codes, plus the nine that do not match the first letter and why. Free, no signup, instant feedback.">
+<meta name="keywords" content="amino acid one letter code quiz, single letter amino acid quiz, amino acid letter quiz, one letter amino acid codes">
+<link rel="canonical" href="https://biochemtools.com/amino-acid-one-letter-code-quiz.html">
+<meta property="og:title" content="Amino Acid One-Letter Code Quiz: All 20, Free">
+<meta property="og:description" content="Quiz yourself on all 20 amino acid one-letter codes, plus the nine that do not match the first letter and why. Free, no signup, instant feedback.">
+<meta property="og:image" content="https://biochemtools.com/og-images/quiz.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/quiz.png">
+<meta property="og:type" content="website">
+<!-- AdSense / Ezoic script slot goes here once approved -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Quiz", "url": "https://biochemtools.com/amino-acid-one-letter-code-quiz.html", "name": "Amino Acid One-Letter Code Quiz: All 20, Free", "description": "Quiz yourself on all 20 amino acid one-letter codes, plus the nine that do not match the first letter and why. Free, no signup, instant feedback.", "inLanguage": "en", "isAccessibleForFree": true, "about": {"@type": "Thing", "name": "Amino acid one-letter codes"}, "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why don't all the one-letter amino acid codes match the first letter of the name?","acceptedAnswer":{"@type":"Answer","text":"Three amino acid names start with A (Alanine, Asparagine, Aspartate) and three start with G (Glycine, Glutamine, Glutamate), so only one of each group could keep the obvious letter. Alanine kept A and Glycine kept G since they were assigned first; the others were given distinctive alternate letters instead, Asparagine became N, Aspartate became D, Glutamine became Q, and Glutamate became E."}},
+{"@type":"Question","name":"Is amino acid side chain charge always fixed, or does it depend on pH?","acceptedAnswer":{"@type":"Answer","text":"The charges listed here (and taught in intro courses) assume physiological pH (~7.4), where acidic side chains are deprotonated (negative) and basic side chains are protonated (positive). Technically it depends on the side chain's pKa relative to the surrounding pH, exactly like any Henderson-Hasselbalch calculation. See the peptide charge calculator to compute it at any pH."}},
+{"@type":"Question","name":"Why memorize amino acid class before the one-letter codes?","acceptedAnswer":{"@type":"Answer","text":"Class (nonpolar, polar, acidic, basic, aromatic) sorts the 20 amino acids into just 5 groups with a clear chemical logic behind each one, which is far easier to reason your way back to than 20 arbitrary letters. The one-letter codes have much less internal logic, so they benefit more from pure repetition once the class groupings are automatic."}},
+{"@type":"Question","name":"Why are the acidic amino acids called Aspartate/Glutamate instead of Aspartic acid/Glutamic acid?","acceptedAnswer":{"@type":"Answer","text":"Both names refer to the same molecule. At physiological pH, the acidic side chain is deprotonated (ionized), so biochemists commonly use the '-ate' name for the ionized form (aspartate, glutamate) rather than the protonated acid form (aspartic acid, glutamic acid), the same convention used for lactate vs. lactic acid, or acetate vs. acetic acid."}}]}
+</script>
+<style>
+  :root{ --bg:#0f1115; --card:#1a1d24; --line:#2a2e38; --txt:#e8eaed; --muted:#9aa0aa; --accent:#5dcaa5; --accent2:#378add; --wrong:#e24b4a; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+  header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}
+  h1{font-size:1.9rem;font-weight:600;margin:0 0 .5rem}
+  header p{color:var(--muted);max-width:620px;margin:0 auto;font-size:1.05rem}
+  main{max-width:680px;margin:0 auto;padding:1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.75rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+  .bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:1.25rem}
+  .fill{height:100%;background:var(--accent);width:0;transition:width .3s}
+  .stat{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;margin-bottom:.75rem}
+  .prompt{font-size:1.05rem;color:var(--muted);margin:0 0 .25rem}
+  .ask{font-size:1.8rem;font-weight:600;margin:0 0 1.5rem}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .opt{background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.1rem;padding:1rem;border-radius:12px;cursor:pointer;transition:.15s;font-weight:500}
+  .opt:hover:not(:disabled){border-color:var(--accent2)}
+  .opt.correct{background:rgba(93,202,165,.15);border-color:var(--accent);color:var(--accent)}
+  .opt.wrong{background:rgba(226,75,74,.15);border-color:var(--wrong);color:var(--wrong)}
+  .feedback{min-height:1.3em;margin-top:.85rem;font-weight:600;text-align:center}
+  .feedback.right{color:var(--accent)}.feedback.wrong{color:var(--wrong)}
+  .opt:disabled{cursor:default}
+  .next{width:100%;margin-top:1.25rem;background:var(--accent);color:#04342c;border:0;padding:1rem;font-size:1.05rem;font-weight:600;border-radius:12px;cursor:pointer}
+  .modes{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+  .mode{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.9rem}
+  .mode.active{border-color:var(--accent);color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:1rem}
+  th,td{text-align:left;padding:.55rem .5rem;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:500}
+  .tag{font-size:.78rem;padding:.15rem .5rem;border-radius:99px;background:var(--line);color:var(--muted)}
+  h2{font-size:1.35rem;margin:2.5rem 0 .5rem}
+  .seo{color:var(--muted)}
+  footer{text-align:center;color:var(--muted);padding:2rem 1rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+
+ table{width:100%;border-collapse:collapse;margin:.9rem 0 .2rem;font-size:.95rem}
+ th{text-align:left;color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;
+    letter-spacing:.04em;padding:.35rem .9rem .5rem 0;border-bottom:1px solid var(--line)}
+ td{padding:.5rem .9rem .5rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+ tr:last-child td{border-bottom:none}
+ .code{font-family:ui-monospace,Menlo,monospace;font-weight:700;color:var(--accent);font-size:1.05rem}
+ #qname{font-size:2rem;font-weight:700;margin:.4rem 0 1rem}
+ .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:.6rem}
+ .opts button{font-size:1.3rem;font-weight:700;padding:.85rem 0;border-radius:10px;
+   border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer}
+ .opts button:hover{border-color:var(--accent)}
+ .opts button.right{border-color:#5dcaa5;color:#5dcaa5}
+ .opts button.wrong{border-color:#e2645e;color:#e2645e}
+ #fb{min-height:1.6rem;margin-top:.9rem;color:var(--muted)}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/quiz.html","name":"Amino Acid Quiz \u2014 Learn All 20, Free","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/charts.html">Charts</a>
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header>
+ <h1>Amino acid one-letter code quiz</h1>
+</header>
+<main>
+ <div class="card">
+  <div style="color:var(--muted);font-size:.85rem">What is the one-letter code for</div>
+  <div id="qname">&nbsp;</div>
+  <div class="opts" id="opts"></div>
+  <div id="fb"></div>
+  <div style="margin-top:1rem;color:var(--muted);font-size:.9rem">
+   Score <span id="score">0</span> of <span id="asked">0</span>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Eleven of them are just the first letter</h2>
+  <p>Alanine, Cysteine, Glycine, Histidine, Isoleucine, Leucine, Methionine, Proline, Serine, Threonine, Valine. If the name starts with the letter, that is the code. Learn the other nine and you
+  have all twenty.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The nine that do not match, and why</h2>
+  <p>These are not arbitrary. In every case the obvious letter had already been claimed by another
+  amino acid, so a nearby or phonetic letter was used instead.</p>
+  <table><thead><tr><th>Amino acid</th><th>Code</th><th>Why</th></tr></thead>
+  <tbody><tr><td>Arginine</td><td class="code">R</td><td>A was taken by alanine. Think <b>aRginine</b></td></tr><tr><td>Asparagine</td><td class="code">N</td><td>A was taken by alanine. Think <b>asparagiNe</b></td></tr><tr><td>Aspartate</td><td class="code">D</td><td>A was taken by alanine. Think <b>asparDic acid, or D for aciDic</b></td></tr><tr><td>Glutamate</td><td class="code">E</td><td>G was taken by glycine. Think <b>gluEtamic acid, and E follows D just as Glu is one carbon longer than Asp</b></td></tr><tr><td>Glutamine</td><td class="code">Q</td><td>G was taken by glycine. Think <b>Q-tamine</b></td></tr><tr><td>Lysine</td><td class="code">K</td><td>L was taken by leucine. Think <b>K sits next to L in the alphabet</b></td></tr><tr><td>Phenylalanine</td><td class="code">F</td><td>P was taken by proline. Think <b>Fenylalanine</b></td></tr><tr><td>Tryptophan</td><td class="code">W</td><td>T was taken by threonine. Think <b>tWyptophan, or the two rings of the indole drawn as a W</b></td></tr><tr><td>Tyrosine</td><td class="code">Y</td><td>T was taken by threonine. Think <b>tYrosine</b></td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">All twenty, for reference</h2>
+  <table><thead><tr><th>Name</th><th>1-letter</th><th>3-letter</th><th>Class</th></tr></thead>
+  <tbody><tr><td>Alanine</td><td class="code">A</td><td>Ala</td><td>Nonpolar</td></tr><tr><td>Arginine</td><td class="code">R</td><td>Arg</td><td>Basic</td></tr><tr><td>Asparagine</td><td class="code">N</td><td>Asn</td><td>Polar</td></tr><tr><td>Aspartate</td><td class="code">D</td><td>Asp</td><td>Acidic</td></tr><tr><td>Cysteine</td><td class="code">C</td><td>Cys</td><td>Polar</td></tr><tr><td>Glutamate</td><td class="code">E</td><td>Glu</td><td>Acidic</td></tr><tr><td>Glutamine</td><td class="code">Q</td><td>Gln</td><td>Polar</td></tr><tr><td>Glycine</td><td class="code">G</td><td>Gly</td><td>Nonpolar</td></tr><tr><td>Histidine</td><td class="code">H</td><td>His</td><td>Basic</td></tr><tr><td>Isoleucine</td><td class="code">I</td><td>Ile</td><td>Nonpolar</td></tr><tr><td>Leucine</td><td class="code">L</td><td>Leu</td><td>Nonpolar</td></tr><tr><td>Lysine</td><td class="code">K</td><td>Lys</td><td>Basic</td></tr><tr><td>Methionine</td><td class="code">M</td><td>Met</td><td>Nonpolar</td></tr><tr><td>Phenylalanine</td><td class="code">F</td><td>Phe</td><td>Aromatic</td></tr><tr><td>Proline</td><td class="code">P</td><td>Pro</td><td>Nonpolar</td></tr><tr><td>Serine</td><td class="code">S</td><td>Ser</td><td>Polar</td></tr><tr><td>Threonine</td><td class="code">T</td><td>Thr</td><td>Polar</td></tr><tr><td>Tryptophan</td><td class="code">W</td><td>Trp</td><td>Aromatic</td></tr><tr><td>Tyrosine</td><td class="code">Y</td><td>Tyr</td><td>Aromatic</td></tr><tr><td>Valine</td><td class="code">V</td><td>Val</td><td>Nonpolar</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Where you actually meet these</h2>
+  <p>One-letter codes are not a memory exercise for their own sake. They are how sequences get
+  written down anywhere space matters.</p>
+  <p><b>FASTA files and sequence alignments</b> use them exclusively, because a 300-residue protein
+  written in three-letter codes is unreadable. A BLAST result is a wall of single letters.</p>
+  <p><b>Mutation notation</b> uses them constantly. Sickle cell anaemia is written E6V: glutamate at
+  position 6 replaced by valine. If you cannot read E and V on sight, the notation tells you
+  nothing, and that is the form it appears in throughout the literature and on exams.</p>
+  <p><b>Restriction and cloning tools</b> return translated sequences in one-letter code by default,
+  including the <a href="/dna-to-protein-translation.html">DNA to protein translator</a> here.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Other ways to drill these</h2>
+  <p>The <a href="/quiz.html">full amino acid quiz</a> also tests three-letter codes and side-chain
+  class. There is a <a href="/amino-acid-chart.html">sortable chart of all 20</a> with pKa values
+  and molecular weights, and a
+  <a href="/downloads/amino-acid-structures-chart.png">printable structures chart</a> if you prefer
+  paper.</p>
+ </div>
+</main>
+<script>
+const AA=[{"name": "Alanine", "c1": "A"}, {"name": "Arginine", "c1": "R"}, {"name": "Asparagine", "c1": "N"}, {"name": "Aspartate", "c1": "D"}, {"name": "Cysteine", "c1": "C"}, {"name": "Glutamate", "c1": "E"}, {"name": "Glutamine", "c1": "Q"}, {"name": "Glycine", "c1": "G"}, {"name": "Histidine", "c1": "H"}, {"name": "Isoleucine", "c1": "I"}, {"name": "Leucine", "c1": "L"}, {"name": "Lysine", "c1": "K"}, {"name": "Methionine", "c1": "M"}, {"name": "Phenylalanine", "c1": "F"}, {"name": "Proline", "c1": "P"}, {"name": "Serine", "c1": "S"}, {"name": "Threonine", "c1": "T"}, {"name": "Tryptophan", "c1": "W"}, {"name": "Tyrosine", "c1": "Y"}, {"name": "Valine", "c1": "V"}];
+let score=0,asked=0,cur=null,locked=false;
+const $=i=>document.getElementById(i);
+function pick(){
+ locked=false;
+ cur=AA[Math.floor(Math.random()*AA.length)];
+ $("qname").textContent=cur.name;
+ const wrong=AA.filter(a=>a.c1!==cur.c1);
+ const opts=[cur.c1];
+ while(opts.length<4){const c=wrong[Math.floor(Math.random()*wrong.length)].c1;if(!opts.includes(c))opts.push(c);}
+ for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]];}
+ const box=$("opts");box.innerHTML="";
+ opts.forEach(c=>{const b=document.createElement("button");b.textContent=c;b.onclick=()=>answer(b,c);box.appendChild(b);});
+ $("fb").textContent="";
+}
+function answer(btn,c){
+ if(locked)return;locked=true;asked++;
+ const right=c===cur.c1;
+ if(right){score++;btn.classList.add("right");$("fb").textContent="Correct.";}
+ else{btn.classList.add("wrong");
+  [...$("opts").children].forEach(b=>{if(b.textContent===cur.c1)b.classList.add("right");});
+  $("fb").textContent=cur.name+" is "+cur.c1+".";}
+ $("score").textContent=score;$("asked").textContent=asked;
+ if(window.answerStreak){try{window.answerStreak(right);}catch(e){}}
+ setTimeout(pick,right?700:1900);
+}
+pick();
+</script>
+</body>
+</html>
