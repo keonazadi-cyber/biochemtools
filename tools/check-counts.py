@@ -68,8 +68,21 @@ try:
                 continue
             w, h_ = Image.open(path).size
             if (part.get("width"), part.get("height")) != (w, h_):
-                errs.append("charts.html says %s is %sx%s, the file is %dx%d"
+                errs.append("charts.html structured data says %s is %sx%s, the file is %dx%d"
                             % (rel, part.get("width"), part.get("height"), w, h_))
+            # the <img> attributes matter too: a wrong intrinsic size makes the
+            # browser reserve the wrong box and the page jumps as images load
+            im = re.search(r'<img src="/downloads/%s"[^>]*>' % re.escape(rel), ch)
+            if im:
+                aw = re.search(r'width="(\d+)"', im.group(0))
+                ah = re.search(r'height="(\d+)"', im.group(0))
+                if aw and ah and (int(aw.group(1)), int(ah.group(1))) != (w, h_):
+                    errs.append("charts.html <img> for %s says %sx%s, the file is %dx%d"
+                                % (rel, aw.group(1), ah.group(1), w, h_))
+
+    # CC BY requires credit, so the page must not also tell people it is not needed
+    if "no attribution needed" in ch or "without attribution" in ch:
+        errs.append("charts.html says attribution is not needed, which contradicts CC BY 4.0")
 except ImportError:
     pass
 
