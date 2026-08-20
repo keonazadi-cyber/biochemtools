@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspartic Acid Titration Curve: pKa 1.88, 3.65, 9.60, pI 2.77</title>
+<meta name="description" content="Aspartic acid titration curve: pKa 1.88, 3.65, 9.60, pI 2.77. Every buffering region and equivalence point, plotted and worked through.">
+<meta name="keywords" content="amino acid titration curve, how to calculate pka from titration curve, glycine titration curve, alanine titration curve, arginine titration curve, isoelectric point, half equivalence point, pi calculation">
+<link rel="canonical" href="https://biochemtools.com/aspartic-acid-titration-curve.html">
+<meta property="og:title" content="Aspartic Acid Titration Curve: pKa 1.88, 3.65, 9.60, pI 2.77">
+<meta property="og:description" content="Aspartic acid titration curve: pKa 1.88, 3.65, 9.60, pI 2.77. Every buffering region and equivalence point, plotted and worked through.">
+<meta property="og:image" content="https://biochemtools.com/og-images/amino-acid-titration-curve.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/amino-acid-titration-curve.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://biochemtools.com/aspartic-acid-titration-curve.html", "name": "Aspartic Acid Titration Curve: pKa 1.88, 3.65, 9.60, pI 2.77", "description": "Aspartic acid titration curve: pKa 1.88, 3.65, 9.60, pI 2.77. Every buffering region and equivalence point, plotted and worked through.", "inLanguage": "en", "isAccessibleForFree": true, "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to read an amino acid titration curve","step":[{"@type":"HowToStep","name":"Find the flat regions","text":"Flat, shallow parts of the curve are buffering regions, centered on each pKa (the half-equivalence points)."},{"@type":"HowToStep","name":"Find the steep jumps","text":"Steep parts are equivalence points, where a proton has been fully removed."},{"@type":"HowToStep","name":"Locate the pI","text":"The isoelectric point is the average of the two pKa values on either side of the neutral, zwitterionic species."}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a zwitterion?","acceptedAnswer":{"@type":"Answer","text":"A zwitterion is a molecule that carries both a positive and a negative charge at the same time, with the two canceling to a net charge of zero. Amino acids at their isoelectric point are zwitterions: the amino group is protonated (positive) while the carboxyl group is deprotonated (negative)."}},
+{"@type":"Question","name":"For an amino acid with 3 pKa values, why isn't pI the average of all three?","acceptedAnswer":{"@type":"Answer","text":"Only the two pKa values that directly flank the neutral, net-zero species determine the pI, a third pKa far outside that range (already fully protonated or fully deprotonated at the relevant pH) doesn't affect where the charge crosses zero. Averaging all three pKa values regardless of which ones actually flank the neutral point is a common exam mistake."}},
+{"@type":"Question","name":"Why do basic amino acids have a pI above 7 and acidic ones below 7?","acceptedAnswer":{"@type":"Answer","text":"An amino acid needs extra base (higher pH) to strip the last proton and reach net-zero charge when it has an additional protonatable (basic) group, which is why lysine and arginine have high pIs. Conversely, an extra acidic side chain group makes the molecule net-negative until a lower pH, pulling the pI down, which is why aspartate and glutamate have low pIs."}},
+{"@type":"Question","name":"Why does histidine's side chain pKa matter so much in biochemistry?","acceptedAnswer":{"@type":"Answer","text":"Histidine's side-chain pKa (~6.0) sits close to physiological pH (7.4), so it's one of the few side chains that's meaningfully both protonated and deprotonated near neutral pH. That makes it especially useful as a proton donor/acceptor in enzyme active sites and as a natural buffering component in proteins."}}]}
+</script>
+<style>
+ :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--curve:#7f77dd;--pi:#5dcaa5;--pka:#e0a93b;--accent:#378add}
+ *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ canvas{width:100%;height:320px;background:var(--bg);border-radius:10px;margin-top:.5rem}
+ .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:.9rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.8rem}.metric .val{font-size:1.4rem;font-weight:600;margin-top:.2rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#e8eaed}
+ .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+
+ table{width:100%;border-collapse:collapse;margin:.9rem 0 .2rem;font-size:.95rem}
+ th{text-align:left;color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;
+    letter-spacing:.04em;padding:.35rem .9rem .5rem 0;border-bottom:1px solid var(--line)}
+ td{padding:.55rem .9rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+ tr:last-child td{border-bottom:none}
+ td:first-child{color:var(--txt)}
+ td+td{color:var(--muted);white-space:nowrap}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="manifest" href="/manifest.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/amino-acid-titration-curve.html","name":"Amino Acid Titration Curve & pI Calculator \u2014 Free","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/charts.html">Charts</a>
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header>
+ <h1>Aspartic acid titration curve</h1>
+</header>
+<main>
+ <div class="card">
+  <p style="margin-top:0"><b>Aspartic acid has 3 ionizable groups</b>, with pKa values of 1.88, 3.65 and 9.60.
+  Its isoelectric point is <b>pI 2.77</b>, and the curve has 2 equivalence points
+  and 3 buffering plateaus.</p>
+ </div>
+
+ <div class="card">
+  <canvas id="plot" width="700" height="320" role="img"
+   aria-label="Titration curve of aspartic acid, pH against equivalents of hydroxide"></canvas>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The ionizable groups</h2>
+  <table><thead><tr><th>Group</th><th>pKa</th><th>Behaviour</th></tr></thead>
+  <tbody><tr><td>alpha-carboxyl</td><td>1.88</td><td>loses H<sup>+</sup> as pH rises</td></tr><tr><td>side-chain carboxyl</td><td>3.65</td><td>loses H<sup>+</sup> as pH rises</td></tr><tr><td>alpha-amino</td><td>9.60</td><td>keeps H<sup>+</sup> until pH passes it</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Where it buffers</h2>
+  <p>A weak acid buffers within about one pH unit either side of its pKa, which is the flat part
+  of the curve. For aspartic acid that means:</p>
+  <table><thead><tr><th>Buffering range</th><th>Centred on</th></tr></thead>
+  <tbody><tr><td>pH 0.88 to 2.88</td><td>pKa 1.88</td></tr><tr><td>pH 2.65 to 4.65</td><td>pKa 3.65</td></tr><tr><td>pH 8.60 to 10.60</td><td>pKa 9.60</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Equivalence points</h2>
+  <p>Halfway between two pKa values the previous group is fully titrated and the next has not
+  started. Those are the steep parts.</p>
+  <table><thead><tr><th>Point</th><th>pH</th></tr></thead><tbody><tr><td>Equivalence point 1</td><td>pH 2.76</td></tr><tr><td>Equivalence point 2</td><td>pH 6.62</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Working out the pI</h2>
+  <div class="work"><p>Aspartic acid has three ionizable groups, so the pI is the average of the two pKa values that bracket the neutral form: (1.88 + 3.65) / 2 = 2.765, published as <b>pI 2.77</b>. The third group is already fully protonated or fully deprotonated there, so it does not enter the average.</p></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Related</h2>
+  <p><a href="/amino-acid-titration-curve.html">Plot any amino acid's titration curve</a>,
+  or see <a href="/amino-acid-chart.html">all 20 amino acids with their pKa values</a>.
+  There is also a <a href="/peptide-charge-calculator.html">peptide charge and pI calculator</a>
+  for whole sequences.</p>
+ </div>
+
+ <div class="card" id="sources">
+  <h2 style="margin-top:0">Where the numbers come from</h2>
+  <p>pKa values are the Lehninger set, the same ones used across this site. The curve is generated
+  from those values with the Henderson-Hasselbalch relation for each group, and the pI is solved
+  solved numerically as a check on the arithmetic above, which agrees to within 0.03 pH units.</p>
+ </div>
+</main>
+<script>
+const GS=[{"pka": 1.88, "t": "a"}, {"pka": 3.65, "t": "a"}, {"pka": 9.6, "t": "b"}];
+function gcharge(g,pH){return g.t==="b"?1/(1+Math.pow(10,pH-g.pka)):-1/(1+Math.pow(10,g.pka-pH));}
+function net(pH){return GS.reduce((s,g)=>s+gcharge(g,pH),0);}
+function equiv(pH){return GS.reduce((s,g)=>s+1/(1+Math.pow(10,g.pka-pH)),0);}
+function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?lo=m:hi=m;}return (lo+hi)/2;}
+(function draw(){
+ const n=GS.length,c=document.getElementById("plot");if(!c)return;
+ const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
+ const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
+ ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";
+ for(let p=0;p<=14;p+=2){if(p<14)ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1c1f27";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
+ ctx.fillStyle="#9aa0aa";ctx.fillText("pH",P-30,Y(14)+4);ctx.fillText("equivalents of OH\u207B \u2192",W-170,H-14);
+ GS.forEach(g=>{ctx.strokeStyle="#e0a93b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e0a93b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
+ const pi=pIv();ctx.strokeStyle="#5dcaa5";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle="#5dcaa5";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
+ ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();let first=true;
+ for(let pH=0;pH<=14;pH+=0.02){const x=X(equiv(pH)),y=Y(pH);if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);}
+ ctx.stroke();
+})();
+</script>
+</body>
+</html>
