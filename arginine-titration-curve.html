@@ -24,10 +24,10 @@
 {"@type":"Question","name":"Why does histidine's side chain pKa matter so much in biochemistry?","acceptedAnswer":{"@type":"Answer","text":"Histidine's side-chain pKa (~6.0) sits close to physiological pH (7.4), so it's one of the few side chains that's meaningfully both protonated and deprotonated near neutral pH. That makes it especially useful as a proton donor/acceptor in enzyme active sites and as a natural buffering component in proteins."}}]}
 </script>
 <style>
- :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--curve:#7f77dd;--pi:#5dcaa5;--pka:#e0a93b;--accent:#378add}
- *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ :root{--bg:#0e0c0a;--card:#171310;--line:#2c2620;--txt:#f4efe7;--muted:#a2968a;--curve:#cf9366;--pi:#e8b04b;--pka:#e8b04b;--accent:#6fb59f}
+ *{box-sizing:border-box}body{margin:0;font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
  header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
- header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(232,176,75,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(207,147,102,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(111,181,159,.09),transparent 58%);pointer-events:none;z-index:0}
  header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
  main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
  .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
@@ -40,15 +40,15 @@
  h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
  footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
 
- .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2c2620}
  .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
- .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
- .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#f4efe7;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#e8b04b,#cf9366);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#17120c;flex-shrink:0}
  .topnav-links{display:flex;align-items:center;gap:1.6rem}
- .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
- .topnav-links a:hover{color:#e8eaed}
- .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
- .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ .topnav-links a{color:#a2968a;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#f4efe7}
+ .topnav-links .navcta{background:#e8b04b;color:#17120c;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#17120c;transform:translateY(-1px);box-shadow:0 6px 16px rgba(232,176,75,.3)}
  @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
 
  @media print{
@@ -63,6 +63,16 @@
  .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
  #sources h3{color:var(--txt)}
 
+ /* --- direction D --- */
+ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+ .brand,h1,h2{font-family:Fraunces,Georgia,serif;font-weight:400}
+ .brand{font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;font-weight:600}
+ h1{letter-spacing:-.03em;font-weight:300}
+ h2{letter-spacing:-.015em}
+ .btn,.navcta{border-radius:100px!important}
+ @media print{body::after{display:none}}
+
  table{width:100%;border-collapse:collapse;margin:.9rem 0 .2rem;font-size:.95rem}
  th{text-align:left;color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;
     letter-spacing:.04em;padding:.35rem .9rem .5rem 0;border-bottom:1px solid var(--line)}
@@ -71,10 +81,13 @@
  td:first-child{color:var(--txt)}
  td+td{color:var(--muted);white-space:nowrap}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%235dcaa5' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0f1115">
+<meta name="theme-color" content="#0e0c0a">
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/amino-acid-titration-curve.html","name":"Amino Acid Titration Curve & pI Calculator \u2014 Free","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
 </head>
@@ -178,13 +191,13 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
  const n=GS.length,c=document.getElementById("plot");if(!c)return;
  const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
  const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
- ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
- ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";
- for(let p=0;p<=14;p+=2){if(p<14)ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1c1f27";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
- ctx.fillStyle="#9aa0aa";ctx.fillText("pH",P-30,Y(14)+4);ctx.fillText("equivalents of OH\u207B \u2192",W-170,H-14);
- GS.forEach(g=>{ctx.strokeStyle="#e0a93b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e0a93b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
- const pi=pIv();ctx.strokeStyle="#5dcaa5";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
- ctx.fillStyle="#5dcaa5";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
+ ctx.strokeStyle="#2c2620";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#a2968a";ctx.font="12px sans-serif";
+ for(let p=0;p<=14;p+=2){if(p<14)ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1a1512";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
+ ctx.fillStyle="#a2968a";ctx.fillText("pH",P-30,Y(14)+4);ctx.fillText("equivalents of OH\u207B \u2192",W-170,H-14);
+ GS.forEach(g=>{ctx.strokeStyle="#e8b04b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e8b04b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
+ const pi=pIv();ctx.strokeStyle="#6fb59f";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle="#6fb59f";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();let first=true;
  for(let pH=0;pH<=14;pH+=0.02){const x=X(equiv(pH)),y=Y(pH);if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);}
  ctx.stroke();

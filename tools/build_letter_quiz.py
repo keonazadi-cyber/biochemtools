@@ -89,7 +89,7 @@ def build(AA, exc, matches):
  .opts button{font-size:1.3rem;font-weight:700;padding:.85rem 0;border-radius:10px;
    border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer}
  .opts button:hover{border-color:var(--accent)}
- .opts button.right{border-color:#5dcaa5;color:#5dcaa5}
+ .opts button.right{border-color:#6fb59f;color:#6fb59f}
  .opts button.wrong{border-color:#e2645e;color:#e2645e}
  #fb{min-height:1.6rem;margin-top:.9rem;color:var(--muted)}
 </style>""", 1)

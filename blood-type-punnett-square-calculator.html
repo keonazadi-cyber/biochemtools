@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blood Type Punnett Square Calculator (ABO + Rh)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <meta name="description" content="Pick two parent blood types and see every possible child type with the odds. Handles unknown genotypes, Rh factor, and shows the actual Punnett squares.">
 <meta name="keywords" content="blood type punnett square, blood group punnett square, blood type calculator parents, ABO inheritance, can two type A parents have a type O child, Rh factor inheritance, codominance punnett square">
 <link rel="canonical" href="https://biochemtools.com/blood-type-punnett-square-calculator.html">
@@ -18,31 +22,31 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Genetics","item":"https://biochemtools.com/#genetics"},{"@type":"ListItem","position":3,"name":"Blood Type Punnett Square Calculator","item":"https://biochemtools.com/blood-type-punnett-square-calculator.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can two parents with type A blood have a type O child?","acceptedAnswer":{"@type":"Answer","text":"Yes. Type A blood can be genotype AA or AO. If both parents are AO, each can pass the O allele, so there is a 1 in 4 chance of an OO child, who is type O. This surprises people because neither parent is type O, but the O allele is recessive and can be carried silently for generations."}},{"@type":"Question","name":"Can an AB parent and an O parent have an AB or O child?","acceptedAnswer":{"@type":"Answer","text":"Almost never, and for the standard alleles never at all. An AB parent passes either A or B, an O parent is OO and always passes O, so every child is AO or BO, meaning type A or type B. The exception is cis-AB, a rare allele carrying both the A and B antigens together, which leaves the other allele free to be O. A cis-AB parent crossed with an O parent can therefore have a type O child. Cis-AB is uncommon and is seen most often in Korean and Japanese families."}},{"@type":"Question","name":"What blood types can a type A and a type B parent have?","acceptedAnswer":{"@type":"Answer","text":"All four. If both parents are heterozygous (AO and BO), the children can be AB, A, B or O, each with a 1 in 4 chance. It is the only phenotype pairing that can produce every blood type."}},{"@type":"Question","name":"Why can a blood type not tell you the genotype?","acceptedAnswer":{"@type":"Answer","text":"Because A and B are dominant over O. A person with type A blood is either AA or AO, and there is no way to tell from a blood test alone, only from family history or genetic testing. Type AB and type O are the exceptions: AB must be AB, and O must be OO."}},{"@type":"Question","name":"How is Rh factor inherited?","acceptedAnswer":{"@type":"Answer","text":"Separately from ABO, and as a simple dominant trait. Rh positive is DD or Dd, Rh negative is dd. Two Rh positive parents who are both Dd have a 1 in 4 chance of an Rh negative child. Two Rh negative parents can only have Rh negative children."}},{"@type":"Question","name":"Can a blood type Punnett square prove paternity?","acceptedAnswer":{"@type":"Answer","text":"It can sometimes exclude, but it can never confirm. If a cross makes a child's blood type impossible, that rules the parent out. But millions of people share any given blood type, so a compatible result proves nothing. Actual paternity testing uses DNA markers, not blood type."}},{"@type":"Question","name":"Why is ABO inheritance called codominance?","acceptedAnswer":{"@type":"Answer","text":"Because when someone inherits both A and B, neither masks the other and both antigens appear on the red blood cells, giving type AB. That is different from incomplete dominance, where you would get a blend. ABO also involves three alleles rather than the usual two, which is why it is a standard example of multiple allelism."}}]}</script>
 <style>
- :root{--bg:#0f1115;--card:#1a1d24;--line:#2a2e38;--txt:#e8eaed;--muted:#9aa0aa;--out:#5dcaa5;--accent:#7f77dd}
- *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ :root{--bg:#0e0c0a;--card:#171310;--line:#2c2620;--txt:#f4efe7;--muted:#a2968a;--out:#e8b04b;--accent:#cf9366}
+ *{box-sizing:border-box}body{margin:0;font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
  header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
- header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(93,202,165,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(127,119,221,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(55,138,221,.09),transparent 58%);pointer-events:none;z-index:0}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(232,176,75,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(207,147,102,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(111,181,159,.09),transparent 58%);pointer-events:none;z-index:0}
  header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:660px;margin:0 auto}
  main{max-width:740px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
  .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
  .modes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}.modes button{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.85rem}.modes button.on{border-color:var(--accent);color:var(--accent)}
  label{color:var(--muted);font-size:.8rem;display:block;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em}
- .out{background:rgba(93,202,165,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
+ .out{background:rgba(232,176,75,.12);border-radius:10px;padding:1.25rem;text-align:center;margin:1rem 0}.out .v{font-size:2.4rem;font-weight:700;color:var(--out)}
  table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.75rem 0}
  th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}
  .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.9rem;line-height:1.85;white-space:pre-wrap}
  h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
  footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
 
- .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2a2e38}
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2c2620}
  .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
- .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#e8eaed;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
- .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5dcaa5,#7f77dd);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#0b0d11;flex-shrink:0}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#f4efe7;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#e8b04b,#cf9366);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#17120c;flex-shrink:0}
  .topnav-links{display:flex;align-items:center;gap:1.6rem}
- .topnav-links a{color:#9aa0aa;text-decoration:none;font-size:.88rem;transition:color .15s}
- .topnav-links a:hover{color:#e8eaed}
- .topnav-links .navcta{background:#5dcaa5;color:#0b0d11;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
- .topnav-links .navcta:hover{color:#0b0d11;transform:translateY(-1px);box-shadow:0 6px 16px rgba(93,202,165,.3)}
+ .topnav-links a{color:#a2968a;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#f4efe7}
+ .topnav-links .navcta{background:#e8b04b;color:#17120c;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#17120c;transform:translateY(-1px);box-shadow:0 6px 16px rgba(232,176,75,.3)}
  @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
 
  @media print{
@@ -56,19 +60,29 @@
  .citebtn:hover{border-color:var(--accent);color:var(--accent)}
  .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
  #sources h3{color:var(--txt)}
+
+ /* --- direction D --- */
+ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+ .brand,h1,h2{font-family:Fraunces,Georgia,serif;font-weight:400}
+ .brand{font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;font-weight:600}
+ h1{letter-spacing:-.03em;font-weight:300}
+ h2{letter-spacing:-.015em}
+ .btn,.navcta{border-radius:100px!important}
+ @media print{body::after{display:none}}
 </style>
 <style>
  .picker{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
  .picker label{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.45rem}
  .bt-row{display:flex;gap:.4rem;flex-wrap:wrap}
  .bt-row button{flex:1;min-width:3.1rem;background:var(--bg);border:1px solid var(--line);color:var(--txt);padding:.55rem .2rem;border-radius:9px;cursor:pointer;font-weight:700;font-size:1rem}
- .bt-row button[aria-pressed="true"]{background:rgba(93,202,165,.18);border-color:var(--out);color:var(--out)}
+ .bt-row button[aria-pressed="true"]{background:rgba(232,176,75,.18);border-color:var(--out);color:var(--out)}
  .rh-row button{font-size:.9rem;font-weight:600}
  .sq{border-collapse:collapse;margin:.6rem 0}
  .sq td,.sq th{border:1px solid var(--line);padding:.5rem .7rem;text-align:center;font-family:monospace;font-size:1rem}
  .sq th{background:var(--bg);color:var(--muted);font-weight:600}
  .sq td{font-weight:700}
- .pheno-A{color:#5d9de2} .pheno-B{color:#e0a93b} .pheno-AB{color:#ab90e0} .pheno-O{color:#9aa0aa}
+ .pheno-A{color:#5d9de2} .pheno-B{color:#e8b04b} .pheno-AB{color:#ab90e0} .pheno-O{color:#a2968a}
  .bars{margin:.8rem 0}
  .bar{display:flex;align-items:center;gap:.7rem;margin:.35rem 0}
  .bar .t{width:2.6rem;font-weight:700;font-family:monospace}
@@ -80,7 +94,7 @@
  details{border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;margin:.6rem 0;background:var(--bg)}
  details summary{cursor:pointer;font-weight:600}
  details p{margin:.7rem 0 .2rem;color:var(--muted)}
- .flag{background:rgba(224,169,59,.12);border-left:3px solid var(--reg,#e0a93b);border-radius:0 8px 8px 0;padding:.7rem 1rem;margin:.8rem 0}
+ .flag{background:rgba(232,176,75,.12);border-left:3px solid var(--reg,#e8b04b);border-radius:0 8px 8px 0;padding:.7rem 1rem;margin:.8rem 0}
  @media(max-width:560px){.picker{grid-template-columns:1fr}}
 </style>
 </head>
@@ -168,7 +182,7 @@
 <script>
 const GENO={A:["AA","AO"],B:["BB","BO"],AB:["AB"],O:["OO"]};
 const TYPES=["A","B","AB","O"];
-const COL={A:"#5d9de2",B:"#e0a93b",AB:"#ab90e0",O:"#9aa0aa"};
+const COL={A:"#5d9de2",B:"#e8b04b",AB:"#ab90e0",O:"#a2968a"};
 let s1="A",s2="B",rh1=null,rh2=null;
 
 function pheno(g){

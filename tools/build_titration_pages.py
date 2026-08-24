@@ -301,13 +301,13 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
  const n=GS.length,c=document.getElementById("plot");if(!c)return;
  const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
  const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
- ctx.strokeStyle="#2a2e38";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
- ctx.fillStyle="#9aa0aa";ctx.font="12px sans-serif";
- for(let p=0;p<=14;p+=2){if(p<14)ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1c1f27";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
- ctx.fillStyle="#9aa0aa";ctx.fillText("pH",P-30,Y(14)+4);ctx.fillText("equivalents of OH\\u207B \\u2192",W-170,H-14);
- GS.forEach(g=>{ctx.strokeStyle="#e0a93b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e0a93b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
- const pi=pIv();ctx.strokeStyle="#5dcaa5";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
- ctx.fillStyle="#5dcaa5";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
+ ctx.strokeStyle="#2c2620";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#a2968a";ctx.font="12px sans-serif";
+ for(let p=0;p<=14;p+=2){if(p<14)ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1a1512";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
+ ctx.fillStyle="#a2968a";ctx.fillText("pH",P-30,Y(14)+4);ctx.fillText("equivalents of OH\\u207B \\u2192",W-170,H-14);
+ GS.forEach(g=>{ctx.strokeStyle="#e8b04b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e8b04b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
+ const pi=pIv();ctx.strokeStyle="#6fb59f";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle="#6fb59f";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();let first=true;
  for(let pH=0;pH<=14;pH+=0.02){const x=X(equiv(pH)),y=Y(pH);if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);}
  ctx.stroke();
