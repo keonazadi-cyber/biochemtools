@@ -69,12 +69,14 @@ if LIGHT:
     BAND, CHIP = (240, 242, 245), (225, 229, 236)
     BAR_G, BAR_B = (150, 214, 189), (166, 199, 238)
 else:
-    BG, CARD = (17, 19, 24), (25, 28, 35)
-    LINE, WHITE, GRAY, DIM = (46, 50, 60), (240, 242, 245), (158, 164, 174), (120, 128, 140)
-    GREEN, AMBER, BLUE, RED = (95, 204, 167), (228, 169, 59), (93, 157, 226), (226, 100, 94)
-    PURPLE = (171, 144, 224)
-    BAND, CHIP = (22, 24, 30), (38, 42, 52)
-    BAR_G, BAR_B = (28, 52, 45), (38, 46, 56)
+    # Warm dark, matched to the site. Kept in step with lightmode.py by hand
+    # because this chart predates that module and still carries its own table.
+    BG, CARD = (14, 12, 10), (23, 19, 16)
+    LINE, WHITE, GRAY, DIM = (44, 38, 32), (244, 239, 231), (162, 150, 138), (128, 118, 108)
+    GREEN, AMBER, BLUE, RED = (111, 181, 159), (232, 176, 75), (96, 150, 224), (224, 104, 96)
+    PURPLE = (176, 148, 220)
+    BAND, CHIP = (20, 16, 14), (38, 32, 27)
+    BAR_G, BAR_B = (26, 46, 40), (30, 38, 50)
 
 # charge of the buffering ion, the thing that decides whether it sticks to an IEX resin
 CHG_COL = {"-": BLUE, "+": RED, "0": GREEN}

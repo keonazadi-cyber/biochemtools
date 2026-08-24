@@ -108,8 +108,8 @@ def check():
 
 def render(light):
     _, P = __import__("lightmode").theme(), None
-    bg = (245, 246, 249) if light else (25, 28, 35)          # CARD in each theme
-    fg = (0.09, 0.11, 0.14) if light else (0.94, 0.95, 0.96)
+    bg = (245, 246, 249) if light else (23, 19, 16)          # CARD in each theme
+    fg = (0.09, 0.11, 0.14) if light else (0.96, 0.94, 0.91)
     sub = os.path.join(OUT, "png_light" if light else "png")
     os.makedirs(sub, exist_ok=True)
     for c3, smi in SMILES.items():
@@ -132,8 +132,8 @@ def render(light):
             o.setSymbolColour(fg)
             o.useBWAtomPalette()
             o.setAtomPalette({-1: fg})
-            o.updateAtomPalette({7: (0.36, 0.62, 0.89), 8: (0.89, 0.39, 0.37),
-                                 16: (0.89, 0.69, 0.23)})
+            o.updateAtomPalette({7: (0.38, 0.59, 0.88), 8: (0.88, 0.41, 0.38),
+                                 16: (0.91, 0.69, 0.29)})
         rdMolDraw2D.PrepareAndDrawMolecule(d, m)
         d.FinishDrawing()
         open(os.path.join(sub, c3 + ".png"), "wb").write(d.GetDrawingText())

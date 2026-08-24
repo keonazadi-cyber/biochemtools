@@ -27,15 +27,18 @@ def theme():
             BAND=(240, 242, 245), CHIP=(225, 229, 236), PANEL=(232, 244, 238),
             WARM=(252, 243, 222),
         )
+    # Warm dark, matched to the site as of 2026-08-24. Only the neutrals moved.
+    # The hues stay separated because they carry meaning: a chart that colours
+    # acidic and basic side chains the same is a broken chart, not a restyled one.
     return False, dict(
-        BG=(17, 19, 24), CARD=(25, 28, 35), LINE=(46, 50, 60),
-        WHITE=(240, 242, 245), GRAY=(158, 164, 174), DIM=(120, 128, 140),
-        GREEN=(95, 204, 167), AMBER=(228, 169, 59), RED=(226, 100, 94),
-        BLUE=(93, 157, 226), PURPLE=(171, 144, 224),
-        NONPOLAR=(140, 149, 170), AROMATIC=(171, 144, 224), POLAR=(95, 204, 167),
-        ACIDIC=(228, 106, 97), BASIC=(93, 157, 226),
-        BAND=(22, 24, 30), CHIP=(38, 42, 52), PANEL=(22, 34, 30),
-        WARM=(30, 28, 22),
+        BG=(14, 12, 10), CARD=(23, 19, 16), LINE=(44, 38, 32),
+        WHITE=(244, 239, 231), GRAY=(162, 150, 138), DIM=(128, 118, 108),
+        GREEN=(111, 181, 159), AMBER=(232, 176, 75), RED=(224, 104, 96),
+        BLUE=(96, 150, 224), PURPLE=(176, 148, 220),
+        NONPOLAR=(150, 142, 130), AROMATIC=(176, 148, 220), POLAR=(111, 181, 159),
+        ACIDIC=(224, 104, 96), BASIC=(96, 150, 224),
+        BAND=(20, 16, 14), CHIP=(38, 32, 27), PANEL=(20, 30, 26),
+        WARM=(32, 26, 18),
     )
 
 
