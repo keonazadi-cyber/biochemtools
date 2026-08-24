@@ -297,7 +297,7 @@ function gcharge(g,pH){return g.t==="b"?1/(1+Math.pow(10,pH-g.pka)):-1/(1+Math.p
 function net(pH){return GS.reduce((s,g)=>s+gcharge(g,pH),0);}
 function equiv(pH){return GS.reduce((s,g)=>s+1/(1+Math.pow(10,g.pka-pH)),0);}
 function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?lo=m:hi=m;}return (lo+hi)/2;}
-(function draw(){
+(function(){
  const n=GS.length,c=document.getElementById("plot");if(!c)return;
  const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
  const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
@@ -308,9 +308,33 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
  GS.forEach(g=>{ctx.strokeStyle="#e8b04b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e8b04b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
  const pi=pIv();ctx.strokeStyle="#6fb59f";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
  ctx.fillStyle="#6fb59f";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
- ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();let first=true;
- for(let pH=0;pH<=14;pH+=0.02){const x=X(equiv(pH)),y=Y(pH);if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);}
- ctx.stroke();
+ // The curve draws itself, the way the hero line on the homepage does. An SVG
+ // path can be animated with stroke-dashoffset; a canvas cannot, so it is drawn
+ // progressively instead: each frame extends the line a little further.
+ const pts=[];
+ for(let pH=0;pH<=14;pH+=0.02) pts.push([X(equiv(pH)),Y(pH)]);
+ const still=(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches);
+ function curve(upto){
+  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+  for(let i=0;i<upto;i++){ i?ctx.lineTo(pts[i][0],pts[i][1]):ctx.moveTo(pts[0][0],pts[0][1]); }
+  ctx.stroke();
+ }
+ if(still||!window.requestAnimationFrame){curve(pts.length);return;}
+ let t0=null;const DUR=1150;
+ function frame(ts){
+  if(t0===null)t0=ts;
+  const k=Math.min(1,(ts-t0)/DUR);
+  const eased=1-Math.pow(1-k,3);
+  curve(Math.max(2,Math.round(eased*pts.length)));
+  if(k<1)requestAnimationFrame(frame);
+ }
+ // only start once the chart is actually on screen
+ if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(function(es){es.forEach(function(e){
+   if(e.isIntersecting){io.disconnect();requestAnimationFrame(frame);}})},{threshold:.2});
+  io.observe(c);
+  setTimeout(function(){ if(t0===null){io.disconnect();curve(pts.length);} },3000);
+ } else { requestAnimationFrame(frame); }
 })();
 </script>
 """ % dict(name=name, lname=name.lower(), n=len(pks), pk_and=pk_and, pi=pi_,
