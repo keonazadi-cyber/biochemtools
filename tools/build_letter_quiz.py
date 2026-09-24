@@ -14,6 +14,13 @@ listed, so the page cannot claim an exception that is not one.
 """
 import os, re, json, subprocess, tempfile, html
 
+# The generators build a page from a cloned <head> plus their own body, so the
+# analytics beacon that sits before </body> on the source page never came along.
+# Fourteen generated pages were invisible to Cloudflare for a month because of it.
+BEACON = ("<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+          "data-cf-beacon='{\"token\": \"101e4b9cdbae4363953f0ae30fae9a04\"}'></script>\n")
+
+
 SITE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 CHART = os.path.join(SITE, "amino-acid-chart.html")
 SRC = os.path.join(SITE, "quiz.html")
@@ -190,7 +197,7 @@ pick();
 """ % dict(easy=easy, exc_rows=exc_rows, all_rows=all_rows,
            aajson=json.dumps([{"name": a["name"], "c1": a["c1"]} for a in AA]))
 
-    return "<!DOCTYPE html>\n<html lang=\"en\">\n" + head + "</head>\n" + nav + body + "</body>\n</html>\n"
+    return "<!DOCTYPE html>\n<html lang=\"en\">\n" + head + "</head>\n" + nav + body + BEACON + "</body>\n</html>\n"
 
 
 if __name__ == "__main__":

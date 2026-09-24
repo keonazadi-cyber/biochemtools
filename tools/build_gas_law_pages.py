@@ -11,6 +11,13 @@ prints, so a page cannot ship with arithmetic that does not check out.
 """
 import os, re, json, html
 
+# The generators build a page from a cloned <head> plus their own body, so the
+# analytics beacon that sits before </body> on the source page never came along.
+# Fourteen generated pages were invisible to Cloudflare for a month because of it.
+BEACON = ("<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+          "data-cf-beacon='{\"token\": \"101e4b9cdbae4363953f0ae30fae9a04\"}'></script>\n")
+
+
 SITE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 SRC = os.path.join(SITE, "ideal-gas-law-calculator.html")
 
@@ -254,7 +261,7 @@ def page(f, headsrc, navsrc):
            sec_text=sec["text"], sec_steps=sec_steps, sec_ans=sec_ans,
            sec_unit=sec["unit"], sec_moral=sec["moral"], prac=prac)
 
-    return "<!DOCTYPE html>\n<html lang=\"en\">\n" + h + "</head>\n" + navsrc + body + "</body>\n</html>\n"
+    return "<!DOCTYPE html>\n<html lang=\"en\">\n" + h + "</head>\n" + navsrc + body + BEACON + "</body>\n</html>\n"
 
 
 if __name__ == "__main__":

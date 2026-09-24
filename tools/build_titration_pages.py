@@ -14,6 +14,13 @@ published value before anything is written.
 import os, re, json, subprocess, tempfile, sys
 from decimal import Decimal, ROUND_HALF_UP
 
+# The generators build a page from a cloned <head> plus their own body, so the
+# analytics beacon that sits before </body> on the source page never came along.
+# Fourteen generated pages were invisible to Cloudflare for a month because of it.
+BEACON = ("<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+          "data-cf-beacon='{\"token\": \"101e4b9cdbae4363953f0ae30fae9a04\"}'></script>\n")
+
+
 SITE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 SRC = os.path.join(SITE, "amino-acid-titration-curve.html")
 
@@ -343,7 +350,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
            chg_rows=chg_rows, terms_html=terms_html, q74=q74,
            gsjson=json.dumps(gs))
 
-    return slug, "<!DOCTYPE html>\n<html lang=\"en\">\n" + h + "</head>\n" + navsrc + body + "</body>\n</html>\n"
+    return slug, "<!DOCTYPE html>\n<html lang=\"en\">\n" + h + "</head>\n" + navsrc + body + BEACON + "</body>\n</html>\n"
 
 
 def wire_up(made):

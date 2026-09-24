@@ -164,7 +164,17 @@ for p, h in docs.items():
     if cards > 12: add("overwhelming", p, "%d cards on one page" % cards)
     if h2 > 14: add("overwhelming", p, "%d h2 sections" % h2)
 
-ORDER = ["broken link", "images", "structured data", "title", "description", "canonical",
+
+# ---------- analytics ----------
+# 22 pages shipped without the Cloudflare beacon, including charts.html, which is
+# the page submitted to OER Commons and MERLOT. They were invisible in the traffic
+# numbers for a month, which nearly produced a wrong conclusion about whether the
+# generated pages were working.
+for p, h in docs.items():
+    if "cloudflareinsights" not in h:
+        add("analytics", p, "no Cloudflare beacon, this page is invisible in traffic data")
+
+ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
          "house style", "overwhelming"]
 total = 0
