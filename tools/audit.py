@@ -173,6 +173,16 @@ for p, h in docs.items():
 for p, h in docs.items():
     if "cloudflareinsights" not in h:
         add("analytics", p, "no Cloudflare beacon, this page is invisible in traffic data")
+    n = h.count("gtag/js?id=G-E3NEEKFCPP")
+    if n == 0:
+        add("analytics", p, "no Google Analytics tag, this page is invisible to Mediavine")
+    elif n > 1:
+        add("analytics", p, "%d Google Analytics tags, Google says never add more than one" % n)
+    # charset has to land inside the first 1024 bytes or a browser may sniff the
+    # encoding wrong. The gtag block sits above it, so this is worth watching.
+    i = h.encode("utf-8").find(b"<meta charset")
+    if i >= 1024:
+        add("analytics", p, "charset is at byte %d, past the 1024 byte limit" % i)
 
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
