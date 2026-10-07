@@ -11,6 +11,10 @@ BUILD = os.path.join(HERE, "build")
 SITE = os.path.join(HERE, "..", "..", "downloads")
 MAP = {
     "amino-acid-catabolism-chart": "catabolism-guide",
+    # The full properties table. make_aa_guide.py has always built it, but it was
+    # never in this mapping, so it never reached /downloads and the page targeting
+    # "amino acid chart", 5,526 impressions, carried no chart image at all.
+    "amino-acid-chart": "amino-acid-guide",
     "amino-acid-structures-chart": "mcat-amino-acid-guide",
     "atp-yield-chart": "atp-yield-guide",
     "biochem-equation-chart": "equation-guide",

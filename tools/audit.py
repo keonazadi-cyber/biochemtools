@@ -252,6 +252,31 @@ if os.path.exists(_sm):
     for _u in sorted({u for u in _locs if _locs.count(u) > 1}):
         add("sitemap", "sitemap.xml", "%s is listed %d times" % (_u, _locs.count(_u)))
 
+# --- a content image must be declared on the page that shows it ---------------
+# Every chart was listed in the sitemap under charts.html and nowhere else, and
+# charts.html has never been indexed, so the only declared route to any chart we
+# own ran through a dead page. genetic-code-chart.png sat on codon-chart.html,
+# 4,349 impressions, undeclared. tools/sitemap_images.py fixes this; the guard is
+# here so it stays fixed.
+_sm2 = os.path.join(SITE, "sitemap.xml")
+if os.path.exists(_sm2):
+    _x2 = open(_sm2, encoding="utf-8").read()
+    for _p, _h in docs.items():
+        _imgs = {m.group(1).lstrip("/") for m in
+                 re.finditer(r'<img[^>]*\ssrc="(/(?:downloads|curves)/[^"]+)"', _h)}
+        if not _imgs:
+            continue
+        _loc = "https://biochemtools.com/" + ("" if _p == "index.html" else _p)
+        _m2 = re.search(r"<url><loc>%s</loc>([\s\S]*?)</url>" % re.escape(_loc), _x2)
+        if not _m2:
+            add("sitemap", _p, "embeds %d content image(s) but is not in the sitemap" % len(_imgs))
+            continue
+        _declared = set(re.findall(r"<image:loc>https://biochemtools\.com/([^<]+)</image:loc>",
+                                   _m2.group(1)))
+        for _u in sorted(_imgs - _declared):
+            add("images", _p, "shows %s but the sitemap does not declare it here, so "
+                              "Google has no route to it from this page" % _u)
+
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
          "house style", "overwhelming"]
