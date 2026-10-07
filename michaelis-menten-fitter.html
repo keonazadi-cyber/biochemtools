@@ -239,12 +239,12 @@ function draw(pts,f){
  if(f){
   // Vmax asymptote
   ctx.strokeStyle="#4a4560";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(P,Y(f.Vmax));ctx.lineTo(W-14,Y(f.Vmax));ctx.stroke();
-  ctx.fillStyle="#7f77dd";ctx.fillText("Vmax "+f.Vmax.toFixed(0),W-90,Y(f.Vmax)-6);
+  ctx.fillStyle="#cf9366";ctx.fillText("Vmax "+f.Vmax.toFixed(0),W-90,Y(f.Vmax)-6);
   // Km marker
   if(f.Km<=Smax){ctx.beginPath();ctx.moveTo(X(f.Km),H-P);ctx.lineTo(X(f.Km),Y(f.Vmax/2));ctx.lineTo(P,Y(f.Vmax/2));ctx.stroke();ctx.fillText("Km "+f.Km.toFixed(1),X(f.Km)+4,H-P-6);}
   ctx.setLineDash([]);
   // fitted curve
-  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+  ctx.strokeStyle="#cf9366";ctx.lineWidth=2.5;ctx.beginPath();
   for(let s=0;s<=Smax;s+=Smax/160){const v=f.Vmax*s/(f.Km+s);const x=X(s),y=Y(v);s===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();
  }
  // data points

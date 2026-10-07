@@ -184,6 +184,53 @@ for p, h in docs.items():
     if i >= 1024:
         add("analytics", p, "charset is at byte %d, past the 1024 byte limit" % i)
 
+# --- duplicate id attributes -------------------------------------------------
+# An id has to be unique in a document. This is here because a generator's cleanup
+# regex never matched its own output, so every run appended another copy of the
+# same link block, and eleven had stacked up on amino-acid-titration-curve.html
+# before anyone noticed. A duplicate id is the cheapest signal that a build step
+# is appending where it means to replace.
+for p, h in docs.items():
+    ids = re.findall(r'\sid="([^"]+)"', h)
+    for i in sorted({x for x in ids if ids.count(x) > 1}):
+        add("duplicate", p, 'id="%s" appears %d times, an id must be unique' % (i, ids.count(i)))
+
+# --- the curve pages must ship an image a crawler can actually see ------------
+# The titration curves are drawn in a <canvas>, which Google Images cannot index.
+# The `cysteine titration curve` result page opens with an image pack of eight
+# curves and ours was not among them. Each page now ships a real PNG as well.
+curve_pages = sorted(x for x in docs if x.endswith("-titration-curve.html")
+                     and x != "amino-acid-titration-curve.html")
+seen_og = {}
+for p in curve_pages:
+    h = docs[p]
+    imgs = re.findall(r'<img[^>]*src="([^"]+)"[^>]*>', h)
+    curve_img = [u for u in imgs if "/curves/" in u]
+    if not curve_img:
+        add("images", p, "draws its curve in canvas only, so Google Images cannot see it")
+    for u in curve_img:
+        f = os.path.join(SITE, u.lstrip("/"))
+        if not os.path.exists(f):
+            add("images", p, "references %s, which is not on disk" % u)
+    for m in re.finditer(r'<img[^>]*>', h):
+        if "/curves/" in m.group(0) and not re.search(r'alt="[^"]{30,}"', m.group(0)):
+            add("images", p, "the curve image has no usable alt text")
+
+# --- every page needs its own social image -----------------------------------
+# All nine curve pages shared og-images/amino-acid-titration-curve.png, so sharing
+# a link to the cysteine page previewed a different amino acid's curve.
+for p in curve_pages:
+    m = re.search(r'<meta property="og:image" content="([^"]+)"', docs[p])
+    if not m:
+        add("social", p, "no og:image")
+        continue
+    seen_og.setdefault(m.group(1), []).append(p)
+for url, pages in seen_og.items():
+    if len(pages) > 1:
+        n = len(pages) - 1
+        add("social", pages[0], "shares og:image %s with %d other curve page%s"
+            % (url.rsplit("/", 1)[-1], n, "" if n == 1 else "s"))
+
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
          "house style", "overwhelming"]

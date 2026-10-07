@@ -19,12 +19,12 @@
 <link rel="canonical" href="https://biochemtools.com/glycine-titration-curve.html">
 <meta property="og:title" content="Glycine Titration Curve: pKa 2.34, 9.60, pI 5.97">
 <meta property="og:description" content="Glycine titration curve: pKa 2.34, 9.60, pI 5.97. Every buffering region and equivalence point, plotted and worked through.">
-<meta property="og:image" content="https://biochemtools.com/og-images/amino-acid-titration-curve.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://biochemtools.com/curves/glycine-titration-curve.png">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="640">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://biochemtools.com/og-images/amino-acid-titration-curve.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://biochemtools.com/glycine-titration-curve.html", "name": "Glycine Titration Curve: pKa 2.34, 9.60, pI 5.97", "description": "Glycine titration curve: pKa 2.34, 9.60, pI 5.97. Every buffering region and equivalence point, plotted and worked through.", "inLanguage": "en", "isAccessibleForFree": true, "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}}</script>
+<meta name="twitter:image" content="https://biochemtools.com/curves/glycine-titration-curve.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://biochemtools.com/glycine-titration-curve.html", "name": "Glycine Titration Curve: pKa 2.34, 9.60, pI 5.97", "description": "Glycine titration curve: pKa 2.34, 9.60, pI 5.97. Every buffering region and equivalence point, plotted and worked through.", "inLanguage": "en", "isAccessibleForFree": true, "license": "https://creativecommons.org/licenses/by/4.0/", "image": "https://biochemtools.com/curves/glycine-titration-curve.png", "primaryImageOfPage": {"@type": "ImageObject", "contentUrl": "https://biochemtools.com/curves/glycine-titration-curve.png", "url": "https://biochemtools.com/curves/glycine-titration-curve.png", "width": 1400, "height": 640, "caption": "Titration curve of glycine: pH against equivalents of hydroxide, with buffering plateaus at pKa 2.34 and 9.60 and the isoelectric point at pH 5.97", "license": "https://creativecommons.org/licenses/by/4.0/", "acquireLicensePage": "https://biochemtools.com/charts.html", "creditText": "BiochemTools", "creator": {"@type": "Organization", "name": "BiochemTools"}}, "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to read an amino acid titration curve","step":[{"@type":"HowToStep","name":"Find the flat regions","text":"Flat, shallow parts of the curve are buffering regions, centered on each pKa (the half-equivalence points)."},{"@type":"HowToStep","name":"Find the steep jumps","text":"Steep parts are equivalence points, where a proton has been fully removed."},{"@type":"HowToStep","name":"Locate the pI","text":"The isoelectric point is the average of the two pKa values on either side of the neutral, zwitterionic species."}]}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -90,6 +90,17 @@
  tr:last-child td{border-bottom:none}
  td:first-child{color:var(--txt)}
  td+td{color:var(--muted);white-space:nowrap}
+ /* The curve ships as a real PNG so Google Images can see it, with the canvas
+    layered over the top to draw the same curve in. The canvas paints its own
+    opaque background, otherwise the finished line underneath would show through
+    and there would be nothing left to animate. */
+ .curvewrap{position:relative;line-height:0}
+ .curvewrap img{width:100%;height:auto;display:block;border-radius:6px}
+ /* margin:0 matters: the site's canvas rule sets margin-top:8px, and margin still
+    applies to an absolutely positioned box, so the canvas sat 8px below the image
+    it is supposed to sit exactly on top of. */
+ .curvewrap canvas{position:absolute;left:0;top:0;width:100%;height:100%;
+                   margin:0;border-radius:6px}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,8 +136,11 @@
  </div>
 
  <div class="card">
-  <canvas id="plot" width="700" height="320" role="img"
-   aria-label="Titration curve of glycine, pH against equivalents of hydroxide"></canvas>
+  <div class="curvewrap">
+   <img src="/curves/glycine-titration-curve.png" width="700" height="320" alt="Titration curve of glycine: pH against equivalents of hydroxide, with buffering plateaus at pKa 2.34 and 9.60 and the isoelectric point at pH 5.97"
+    fetchpriority="high" decoding="async">
+   <canvas id="plot" width="700" height="320" aria-hidden="true"></canvas>
+  </div>
  </div>
 
  <div class="card">
@@ -177,11 +191,15 @@
  </div>
 
  <div class="card">
-  <h2 style="margin-top:0">Related</h2>
-  <p><a href="/amino-acid-titration-curve.html">Plot any amino acid's titration curve</a>,
-  or see <a href="/amino-acid-chart.html">all 20 amino acids with their pKa values</a>.
-  There is also a <a href="/peptide-charge-calculator.html">peptide charge and pI calculator</a>
-  for whole sequences.</p>
+  <h2 style="margin-top:0">The other amino acids</h2>
+  <p>Each of these has its own curve, its own buffering regions and a worked isoelectric
+  point. The three-group side chains behave quite differently from the two-group ones,
+  so it is worth looking at one of each.</p>
+  <p><a href="/alanine-titration-curve.html">Alanine</a> &middot; <a href="/valine-titration-curve.html">Valine</a> &middot; <a href="/isoleucine-titration-curve.html">Isoleucine</a> &middot; <a href="/methionine-titration-curve.html">Methionine</a> &middot; <a href="/aspartic-acid-titration-curve.html">Aspartic acid</a> &middot; <a href="/glutamic-acid-titration-curve.html">Glutamic acid</a> &middot; <a href="/histidine-titration-curve.html">Histidine</a> &middot; <a href="/lysine-titration-curve.html">Lysine</a> &middot; <a href="/arginine-titration-curve.html">Arginine</a> &middot; <a href="/cysteine-titration-curve.html">Cysteine</a> &middot; <a href="/tyrosine-titration-curve.html">Tyrosine</a></p>
+  <p style="margin-bottom:0">You can also <a href="/amino-acid-titration-curve.html">plot any
+  amino acid's curve yourself</a>, see <a href="/amino-acid-chart.html">all 20 with their pKa
+  values</a>, or run a whole sequence through the
+  <a href="/peptide-charge-calculator.html">peptide charge and pI calculator</a>.</p>
  </div>
 
  <div class="card" id="sources">
@@ -200,6 +218,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
 (function(){
  const n=GS.length,c=document.getElementById("plot");if(!c)return;
  const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
+ ctx.fillStyle="#171310";ctx.fillRect(0,0,W,H);
  const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
  ctx.strokeStyle="#2c2620";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
  ctx.fillStyle="#a2968a";ctx.font="12px sans-serif";
@@ -215,7 +234,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
  for(let pH=0;pH<=14;pH+=0.02) pts.push([X(equiv(pH)),Y(pH)]);
  const still=(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches);
  function curve(upto){
-  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+  ctx.strokeStyle="#cf9366";ctx.lineWidth=2.5;ctx.beginPath();
   for(let i=0;i<upto;i++){ i?ctx.lineTo(pts[i][0],pts[i][1]):ctx.moveTo(pts[0][0],pts[0][1]); }
   ctx.stroke();
  }

@@ -278,7 +278,7 @@ function plotMM(c){
  ctx.strokeStyle="#6fb59f";ctx.lineWidth=2;ctx.setLineDash(type==="none"?[]:[5,4]);ctx.beginPath();
  for(let s=0;s<=Smax;s+=Smax/120){const x=X(s),y=Y(vel(s,Vmax,Km,1,1));s===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();
  // inhibited
- if(type!=="none"){ctx.strokeStyle="#7f77dd";ctx.setLineDash([]);ctx.beginPath();
+ if(type!=="none"){ctx.strokeStyle="#cf9366";ctx.setLineDash([]);ctx.beginPath();
   for(let s=0;s<=Smax;s+=Smax/120){const x=X(s),y=Y(vel(s,Vmax,Km,f.a,f.ap));s===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
  ctx.setLineDash([]);
  // current [S] point
@@ -301,7 +301,7 @@ function plotLB(c){
  const line=(slope,b,col)=>{ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();
   const y1=slope*xMin+b,y2=slope*xMax+b;ctx.moveTo(X(xMin),Y(y1));ctx.lineTo(X(xMax),Y(y2));ctx.stroke();};
  line(Km/Vmax,1/Vmax,"#6fb59f");
- if(type!=="none")line(KmApp/VmaxApp,1/VmaxApp,"#7f77dd");
+ if(type!=="none")line(KmApp/VmaxApp,1/VmaxApp,"#cf9366");
 }
 function render(){
  const d=compute();

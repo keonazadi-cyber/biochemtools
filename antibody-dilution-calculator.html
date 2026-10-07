@@ -173,7 +173,7 @@
    <div class="rbox dil"><div class="rl">Diluent</div><div class="rv" id="dilv" aria-live="polite">, </div><div class="rs">buffer to make up the rest</div></div>
   </div>
   <div id="pipnote"></div>
-  <div class="work" id="work"></div>
+  <div class="work" id="workbox"></div>
  </div>
 
  <h2>How antibody dilutions work</h2>
@@ -260,7 +260,7 @@ function calc(){
  const bad = !(N>1) || !(Vfinal>0) || !isFinite(N);
  if(bad){
   $("factor").innerHTML=""; $("abv").textContent=", "; $("dilv").textContent=", ";
-  $("pipnote").innerHTML=""; $("work").textContent="Enter a dilution factor above 1 and a positive final volume.";
+  $("pipnote").innerHTML=""; $("workbox").textContent="Enter a dilution factor above 1 and a positive final volume.";
   return;
  }
  const ab=Vfinal/N, dil=Vfinal-ab;
@@ -289,7 +289,7 @@ function calc(){
  } else {
   $("pipnote").innerHTML=`<div class="ok">Both volumes are comfortably pipettable.</div>`;
  }
- $("work").textContent=w;
+ $("workbox").textContent=w;
 }
 document.querySelectorAll("#mode button").forEach(b=>b.onclick=()=>{
  document.querySelectorAll("#mode button").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});

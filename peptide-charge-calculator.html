@@ -309,7 +309,7 @@ function drawMarker(curPH){
  // pI dashed
  const pi=pI(G);ctx.strokeStyle="#6fb59f";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x2px(pi),10);ctx.lineTo(x2px(pi),H-20);ctx.stroke();ctx.setLineDash([]);
  // curve
- ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+ ctx.strokeStyle="#cf9366";ctx.lineWidth=2.5;ctx.beginPath();
  for(let p=0;p<=14;p+=0.1){const px=x2px(p),py=chg2py(net(G,p),maxC);p===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}
  ctx.stroke();
  // current pH marker

@@ -209,7 +209,7 @@ const $=id=>document.getElementById(id);
 const CURVES = {
  myo:   {p50:2.8,  n:1,   color:"#e8b04b", label:"Myoglobin"},
  adult: {p50:26.6, n:2.8, color:"#6fb59f", label:"Adult Hb"},
- fetal: {p50:19,   n:2.8, color:"#7f77dd", label:"Fetal Hb"}
+ fetal: {p50:19,   n:2.8, color:"#cf9366", label:"Fetal Hb"}
 };
 let mode="myo";
 function sat(pO2,p50,n){ return 100*Math.pow(pO2,n)/(Math.pow(p50,n)+Math.pow(pO2,n)); }

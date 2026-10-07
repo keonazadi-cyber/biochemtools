@@ -11,7 +11,9 @@ Every number here is derived from the AA table inside amino-acid-titration-curve
 so these pages cannot disagree with the tool, and each pI is checked against the
 published value before anything is written.
 """
-import os, re, json, subprocess, tempfile, sys
+import os, re, json, subprocess, tempfile, sys, datetime
+
+TODAY = datetime.date.today().isoformat()
 from decimal import Decimal, ROUND_HALF_UP
 
 # The generators build a page from a cloned <head> plus their own body, so the
@@ -26,10 +28,46 @@ SRC = os.path.join(SITE, "amino-acid-titration-curve.html")
 
 NAMES = {"Gly": ("Glycine", "G"), "Ala": ("Alanine", "A"), "Asp": ("Aspartic acid", "D"),
          "Glu": ("Glutamic acid", "E"), "His": ("Histidine", "H"), "Lys": ("Lysine", "K"),
-         "Arg": ("Arginine", "R"), "Cys": ("Cysteine", "C"), "Tyr": ("Tyrosine", "Y")}
-# published pI, Lehninger. The build stops if the model disagrees.
-BOOK_PI = {"Gly": 5.97, "Ala": 6.01, "Asp": 2.77, "Glu": 3.22, "His": 7.59,
-           "Lys": 9.74, "Arg": 10.76, "Cys": 5.07, "Tyr": 5.66}
+         "Arg": ("Arginine", "R"), "Cys": ("Cysteine", "C"), "Tyr": ("Tyrosine", "Y"),
+         "Met": ("Methionine", "M"), "Val": ("Valine", "V"), "Ile": ("Isoleucine", "I")}
+# Published pI, Lehninger. Read out of amino-acid-chart.html rather than retyped,
+# so the chart and these pages cannot drift apart, and checked below against the
+# figures that were hand-entered when there were only nine of them.
+WAS_TYPED = {"Gly": 5.97, "Ala": 6.01, "Asp": 2.77, "Glu": 3.22, "His": 7.59,
+             "Lys": 9.74, "Arg": 10.76, "Cys": 5.07, "Tyr": 5.66}
+
+
+# No ionizable side chain first, then acidic, basic, and the special side chains,
+# which is the order the chart page teaches them in. Used for the sibling links on
+# each page and for the block on the parent tool, so the two cannot disagree.
+ORDER = ["Gly", "Ala", "Val", "Ile", "Met", "Asp", "Glu", "His", "Lys", "Arg", "Cys", "Tyr"]
+
+
+def load_book_pi():
+    """pI and pKa for every amino acid, straight from the chart page's own table."""
+    h = open(os.path.join(SITE, "amino-acid-chart.html"), encoding="utf-8").read()
+    m = re.search(r"const\s+AA\s*=\s*(\[[\s\S]*?\]);", h)
+    if not m:
+        raise RuntimeError("AA array not found in amino-acid-chart.html")
+    with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as f:
+        f.write("const A=" + m.group(1) + ";console.log(JSON.stringify(A))")
+        q = f.name
+    try:
+        r = subprocess.run(["node", q], capture_output=True, text=True)
+        if r.returncode:
+            raise RuntimeError(r.stderr[:300])
+        rows = json.loads(r.stdout)
+    finally:
+        os.unlink(q)
+    out = {row["c3"]: float(row["pI"]) for row in rows}
+    for code, typed in WAS_TYPED.items():
+        assert code in out, "%s is missing from the chart page" % code
+        assert abs(out[code] - typed) < 0.005, \
+            "%s: the chart says pI %.2f, this file was built on %.2f" % (code, out[code], typed)
+    return out
+
+
+BOOK_PI = None  # filled by load_book_pi() at build time
 # what each ionizable group actually is, for the prose
 GROUPS = {
     "Gly": ["alpha-carboxyl", "alpha-amino"],
@@ -41,6 +79,9 @@ GROUPS = {
     "Arg": ["alpha-carboxyl", "alpha-amino", "guanidinium side chain"],
     "Cys": ["alpha-carboxyl", "sulfhydryl side chain", "alpha-amino"],
     "Tyr": ["alpha-carboxyl", "alpha-amino", "phenol side chain"],
+    "Met": ["alpha-carboxyl", "alpha-amino"],
+    "Val": ["alpha-carboxyl", "alpha-amino"],
+    "Ile": ["alpha-carboxyl", "alpha-amino"],
 }
 
 
@@ -141,7 +182,7 @@ def net_charge(gs, pH):
                else -(1 / (1 + 10 ** (g["pka"] - pH))) for g in gs)
 
 
-def page(code, gs, headsrc, navsrc):
+def page(code, gs, headsrc, navsrc, siblings):
     name, letter = NAMES[code]
     pks, buf, eq = regions(gs, pI(gs))
     # Display the average of the bracketing pKa values, because that is the
@@ -158,6 +199,13 @@ def page(code, gs, headsrc, navsrc):
     pk_list = ", ".join("%.2f" % p for p in pks)
     pk_and = " and ".join([", ".join("%.2f" % p for p in pks[:-1]), "%.2f" % pks[-1]])
     slug = "%s-titration-curve.html" % name.lower().replace(" ", "-")
+    imgslug = "%s-titration-curve.png" % name.lower().replace(" ", "-")
+    imgurl = "https://biochemtools.com/curves/" + imgslug
+    # Written out rather than generic, because this is what Google Images reads and
+    # it is what a screen reader hears in place of the plot.
+    alt = ("Titration curve of %s: pH against equivalents of hydroxide, with buffering "
+           "plateaus at pKa %s and the isoelectric point at pH %.2f"
+           % (name.lower(), pk_and, pi_))
 
     title = "%s Titration Curve: pKa %s, pI %.2f" % (name.title(), pk_list, pi_)
     desc = ("%s titration curve: pKa %s, pI %.2f. Every buffering region and equivalence "
@@ -172,6 +220,17 @@ def page(code, gs, headsrc, navsrc):
  tr:last-child td{border-bottom:none}
  td:first-child{color:var(--txt)}
  td+td{color:var(--muted);white-space:nowrap}
+ /* The curve ships as a real PNG so Google Images can see it, with the canvas
+    layered over the top to draw the same curve in. The canvas paints its own
+    opaque background, otherwise the finished line underneath would show through
+    and there would be nothing left to animate. */
+ .curvewrap{position:relative;line-height:0}
+ .curvewrap img{width:100%;height:auto;display:block;border-radius:6px}
+ /* margin:0 matters: the site's canvas rule sets margin-top:8px, and margin still
+    applies to an absolutely positioned box, so the canvas sat 8px below the image
+    it is supposed to sit exactly on top of. */
+ .curvewrap canvas{position:absolute;left:0;top:0;width:100%;height:100%;
+                   margin:0;border-radius:6px}
 </style>""", 1)
     h = re.sub(r"<title>[\s\S]*?</title>", "<title>%s</title>" % esc(title), h, count=1)
     h = re.sub(r'<meta name="description" content="[^"]*"',
@@ -182,9 +241,27 @@ def page(code, gs, headsrc, navsrc):
                '<meta property="og:title" content="%s"' % esc(title), h, count=1)
     h = re.sub(r'<meta property="og:description" content="[^"]*"',
                '<meta property="og:description" content="%s"' % esc(desc), h, count=1)
+    # Every one of these pages used to share amino-acid-titration-curve.png, so a
+    # shared link to the cysteine page previewed a different amino acid's curve.
+    h = re.sub(r'<meta property="og:image" content="[^"]*"',
+               '<meta property="og:image" content="%s"' % imgurl, h, count=1)
+    h = re.sub(r'<meta property="og:image:width" content="[^"]*"',
+               '<meta property="og:image:width" content="1400"', h, count=1)
+    h = re.sub(r'<meta property="og:image:height" content="[^"]*"',
+               '<meta property="og:image:height" content="640"', h, count=1)
+    h = re.sub(r'<meta name="twitter:image" content="[^"]*"',
+               '<meta name="twitter:image" content="%s"' % imgurl, h, count=1)
+    img_ld = {"@type": "ImageObject", "contentUrl": imgurl, "url": imgurl,
+              "width": 1400, "height": 640, "caption": alt,
+              "license": "https://creativecommons.org/licenses/by/4.0/",
+              "acquireLicensePage": "https://biochemtools.com/charts.html",
+              "creditText": "BiochemTools",
+              "creator": {"@type": "Organization", "name": "BiochemTools"}}
     ld = {"@context": "https://schema.org", "@type": "WebPage",
           "url": "https://biochemtools.com/" + slug, "name": title, "description": desc,
           "inLanguage": "en", "isAccessibleForFree": True,
+          "license": "https://creativecommons.org/licenses/by/4.0/",
+          "image": imgurl, "primaryImageOfPage": img_ld,
           "publisher": {"@type": "Organization", "name": "BiochemTools",
                         "url": "https://biochemtools.com/"}}
     h = re.sub(r'<script type="application/ld\+json">[\s\S]*?</script>',
@@ -232,8 +309,11 @@ def page(code, gs, headsrc, navsrc):
  </div>
 
  <div class="card">
-  <canvas id="plot" width="700" height="320" role="img"
-   aria-label="Titration curve of %(lname)s, pH against equivalents of hydroxide"></canvas>
+  <div class="curvewrap">
+   <img src="/curves/%(imgslug)s" width="700" height="320" alt="%(alt)s"
+    fetchpriority="high" decoding="async">
+   <canvas id="plot" width="700" height="320" aria-hidden="true"></canvas>
+  </div>
  </div>
 
  <div class="card">
@@ -284,11 +364,15 @@ def page(code, gs, headsrc, navsrc):
  </div>
 
  <div class="card">
-  <h2 style="margin-top:0">Related</h2>
-  <p><a href="/amino-acid-titration-curve.html">Plot any amino acid's titration curve</a>,
-  or see <a href="/amino-acid-chart.html">all 20 amino acids with their pKa values</a>.
-  There is also a <a href="/peptide-charge-calculator.html">peptide charge and pI calculator</a>
-  for whole sequences.</p>
+  <h2 style="margin-top:0">The other amino acids</h2>
+  <p>Each of these has its own curve, its own buffering regions and a worked isoelectric
+  point. The three-group side chains behave quite differently from the two-group ones,
+  so it is worth looking at one of each.</p>
+  <p>%(siblings)s</p>
+  <p style="margin-bottom:0">You can also <a href="/amino-acid-titration-curve.html">plot any
+  amino acid's curve yourself</a>, see <a href="/amino-acid-chart.html">all 20 with their pKa
+  values</a>, or run a whole sequence through the
+  <a href="/peptide-charge-calculator.html">peptide charge and pI calculator</a>.</p>
  </div>
 
  <div class="card" id="sources">
@@ -307,6 +391,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
 (function(){
  const n=GS.length,c=document.getElementById("plot");if(!c)return;
  const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
+ ctx.fillStyle="#171310";ctx.fillRect(0,0,W,H);
  const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
  ctx.strokeStyle="#2c2620";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
  ctx.fillStyle="#a2968a";ctx.font="12px sans-serif";
@@ -322,7 +407,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
  for(let pH=0;pH<=14;pH+=0.02) pts.push([X(equiv(pH)),Y(pH)]);
  const still=(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches);
  function curve(upto){
-  ctx.strokeStyle="#7f77dd";ctx.lineWidth=2.5;ctx.beginPath();
+  ctx.strokeStyle="#cf9366";ctx.lineWidth=2.5;ctx.beginPath();
   for(let i=0;i<upto;i++){ i?ctx.lineTo(pts[i][0],pts[i][1]):ctx.moveTo(pts[0][0],pts[0][1]); }
   ctx.stroke();
  }
@@ -345,6 +430,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
 })();
 </script>
 """ % dict(name=name, lname=name.lower(), n=len(pks), pk_and=pk_and, pi=pi_,
+           imgslug=imgslug, alt=esc(alt), siblings=siblings,
            neq=len(eq), eqs="" if len(eq) == 1 else "s",
            grp_rows=grp_rows, buf_rows=buf_rows, eq_rows=eq_rows, work=work,
            chg_rows=chg_rows, terms_html=terms_html, q74=q74,
@@ -360,7 +446,9 @@ def wire_up(made):
     the homepage tool grid. Putting them there would inflate the tool count into
     something the site does not actually have.
     """
-    order = ["Gly", "Ala", "Ser" if False else "Asp", "Glu", "His", "Lys", "Arg", "Cys", "Tyr"]
+    order = ORDER
+    missing = [c for c in dict(made) if c not in order]
+    assert not missing, "built pages that the link block would silently drop: %s" % missing
     links = " &middot; ".join(
         '<a href="/%s">%s</a>' % (s, NAMES[c][0])
         for c, s in [(c, dict(made)[c]) for c in order if c in dict(made)])
@@ -372,7 +460,12 @@ def wire_up(made):
              '  <p>%s</p>\n </div>\n' % links)
 
     h = open(SRC, encoding="utf-8").read()
-    h = re.sub(r'\n <div class="card" id="per-amino-acid">[\s\S]*?</div>\n', "\n", h)
+    # Remove every previous copy before adding this one. The old pattern required a
+    # newline and a space in front of the div, but the insert below lstrips exactly
+    # that, so it never matched its own output and each run appended another block.
+    # Eleven had accumulated on the parent page before this was caught.
+    h = re.sub(r'\s*<div class="card" id="per-amino-acid">[\s\S]*?</p>\s*</div>', "", h)
+    assert 'id="per-amino-acid"' not in h, "a previous link block survived the cleanup"
     anchor = '<div class="card" id="sources">'
     if anchor not in h:
         raise RuntimeError("sources card not found, cannot place the link block")
@@ -387,8 +480,17 @@ def wire_up(made):
     ours = "|".join(re.escape(s_) for _, s_ in made)
     x = re.sub(r'\s*<url><loc>https://biochemtools\.com/(?:%s)</loc>[^<]*<lastmod>[^<]*</lastmod>'
                r'<priority>[^<]*</priority></url>' % ours, "", x)
-    rows = "".join('\n  <url><loc>https://biochemtools.com/%s</loc><lastmod>2026-08-20</lastmod>'
-                   '<priority>0.6</priority></url>' % s for _, s in made)
+    # Each entry carries its curve as an <image:image>, because getting into the
+    # image pack on "<amino acid> titration curve" is the point of rendering a PNG
+    # at all. The image namespace is already declared on <urlset>.
+    rows = "".join(
+        '\n  <url><loc>https://biochemtools.com/%s</loc><lastmod>%s</lastmod>'
+        '<priority>0.6</priority>'
+        '<image:image><image:loc>https://biochemtools.com/curves/%s</image:loc>'
+        '<image:title>%s</image:title></image:image></url>'
+        % (s, TODAY, s.replace(".html", ".png"),
+           esc("%s titration curve" % NAMES[c][0]))
+        for c, s in made)
     tail = "</urlset>"
     x = x.replace(tail, rows + "\n" + tail, 1)
     open(sm, "w", encoding="utf-8").write(x)
@@ -396,6 +498,7 @@ def wire_up(made):
 
 
 if __name__ == "__main__":
+    BOOK_PI = load_book_pi()
     aa = load_aa()
     headsrc, navsrc = head_and_nav()
     made = []
@@ -411,7 +514,11 @@ if __name__ == "__main__":
         assert abs(shown - calc) < 0.06, \
             "%s: published pI %.2f disagrees with the solver's %.2f" % (code, shown, calc)
         assert len(GROUPS[code]) == len(gs), "%s: group labels do not match the pKa count" % code
-        slug, html = page(code, gs, headsrc, navsrc)
+        sibs = " &middot; ".join(
+            '<a href="/%s-titration-curve.html">%s</a>'
+            % (NAMES[c][0].lower().replace(" ", "-"), NAMES[c][0])
+            for c in ORDER if c in aa and c != code)
+        slug, html = page(code, gs, headsrc, navsrc, sibs)
         open(os.path.join(SITE, slug), "w", encoding="utf-8").write(html)
         made.append((code, slug, shown))
     print("  wrote %d pages, every pI checked against the published value" % len(made))

@@ -277,7 +277,7 @@ function draw(Vsel){
   g.setLineDash([]);
  }
  // curve
- g.strokeStyle="#7f77dd"; g.lineWidth=2.4; g.beginPath();
+ g.strokeStyle="#cf9366"; g.lineWidth=2.4; g.beginPath();
  lastCurve.forEach((p,i)=>{ const px=x(p.v),py=y(p.ph); if(i===0)g.moveTo(px,py); else g.lineTo(px,py); });
  g.stroke();
  // selected point
