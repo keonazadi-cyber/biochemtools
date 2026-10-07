@@ -241,6 +241,17 @@ for url, pages in seen_og.items():
         add("social", pages[0], "shares og:image %s with %d other curve page%s"
             % (url.rsplit("/", 1)[-1], n, "" if n == 1 else "s"))
 
+# --- the sitemap must not list the same url twice -----------------------------
+# A generator whose cleanup regex stopped matching its own output quietly stacked
+# four copies of every titration page into sitemap.xml. The generator asserts this
+# itself now, but the guard belongs here too, so it holds for any source.
+_sm = os.path.join(SITE, "sitemap.xml")
+if os.path.exists(_sm):
+    _x = open(_sm, encoding="utf-8").read()
+    _locs = re.findall(r"<url><loc>([^<]+)</loc>", _x)
+    for _u in sorted({u for u in _locs if _locs.count(u) > 1}):
+        add("sitemap", "sitemap.xml", "%s is listed %d times" % (_u, _locs.count(_u)))
+
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
          "house style", "overwhelming"]

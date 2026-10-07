@@ -482,8 +482,13 @@ def wire_up(made):
     # amino-acid-titration-curve.html, the parent tool, and quietly deleted it
     # from the sitemap on every rebuild.
     ours = "|".join(re.escape(s_) for _, s_ in made)
-    x = re.sub(r'\s*<url><loc>https://biochemtools\.com/(?:%s)</loc>[^<]*<lastmod>[^<]*</lastmod>'
-               r'<priority>[^<]*</priority></url>' % ours, "", x)
+    # Match to </url>, whatever the entry contains. The old pattern required
+    # <priority>..</priority></url> to be adjacent, so the moment an <image:image>
+    # block was added between them the cleanup stopped matching its own output and
+    # every run appended another copy. Four had stacked up before this was caught.
+    # Same failure as the link block above: a cleanup that cannot remove what its
+    # own insert writes.
+    x = re.sub(r'\s*<url><loc>https://biochemtools\.com/(?:%s)</loc>[\s\S]*?</url>' % ours, "", x)
     # Each entry carries its curve as an <image:image>, because getting into the
     # image pack on "<amino acid> titration curve" is the point of rendering a PNG
     # at all. The image namespace is already declared on <urlset>.
@@ -497,6 +502,9 @@ def wire_up(made):
         for c, s in made)
     tail = "</urlset>"
     x = x.replace(tail, rows + "\n" + tail, 1)
+    locs = re.findall(r"<url><loc>([^<]+)</loc>", x)
+    dupes = sorted({u for u in locs if locs.count(u) > 1})
+    assert not dupes, "sitemap has duplicate urls after the rebuild: %s" % dupes[:5]
     open(sm, "w", encoding="utf-8").write(x)
     return len(made)
 
