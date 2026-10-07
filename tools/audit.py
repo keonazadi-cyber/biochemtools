@@ -215,6 +215,16 @@ for p in curve_pages:
     for m in re.finditer(r'<img[^>]*>', h):
         if "/curves/" in m.group(0) and not re.search(r'alt="[^"]{30,}"', m.group(0)):
             add("images", p, "the curve image has no usable alt text")
+    # The overlay canvas has to be transparent in CSS. The site's own canvas rule
+    # gives it an opaque background, and an unpainted canvas then covers the image
+    # completely, so with JavaScript off the curve was a blank dark rectangle. The
+    # script paints its own background before drawing, so this costs nothing.
+    m = re.search(r"\.curvewrap canvas\{([^}]*)\}", h)
+    if not m:
+        add("images", p, "no .curvewrap canvas rule, the overlay is unstyled")
+    elif "background:transparent" not in m.group(1).replace(" ", ""):
+        add("images", p, "the overlay canvas is not transparent, so the curve "
+                         "disappears for anyone without JavaScript")
 
 # --- every page needs its own social image -----------------------------------
 # All nine curve pages shared og-images/amino-acid-titration-curve.png, so sharing

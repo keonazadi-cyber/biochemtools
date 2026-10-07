@@ -229,8 +229,12 @@ def page(code, gs, headsrc, navsrc, siblings):
  /* margin:0 matters: the site's canvas rule sets margin-top:8px, and margin still
     applies to an absolutely positioned box, so the canvas sat 8px below the image
     it is supposed to sit exactly on top of. */
+ /* background:transparent matters as much as margin:0. The site's canvas rule sets
+    an opaque background, so with JavaScript off the unpainted canvas sat on top of
+    the image as a blank dark block and the curve was invisible. The script paints
+    its own opaque fillRect before it draws, so nothing changes when JS runs. */
  .curvewrap canvas{position:absolute;left:0;top:0;width:100%;height:100%;
-                   margin:0;border-radius:6px}
+                   margin:0;background:transparent;border-radius:6px}
 </style>""", 1)
     h = re.sub(r"<title>[\s\S]*?</title>", "<title>%s</title>" % esc(title), h, count=1)
     h = re.sub(r'<meta name="description" content="[^"]*"',
