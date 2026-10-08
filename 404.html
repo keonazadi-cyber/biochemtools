@@ -87,6 +87,7 @@
  <h1>That page doesn't exist</h1>
  <p>The link might be broken, or the page moved. Here's how to get back on track:</p>
  <a class="home" href="/">Browse all 52 free tools →</a>
+ <div class="popular" id="rescue-suggestions" style="display:none"></div>
  <div class="popular">
   <h2>Or jump straight to a tool</h2>
   <a href="/peptide-charge-calculator.html">Peptide charge &amp; pI calculator</a>
@@ -96,9 +97,56 @@
   <a href="/quiz.html">Amino acid quiz</a>
   <a href="/glycolysis-pathway-explorer.html">Glycolysis pathway explorer</a>
  </div>
-</main>
+ </main>
 <footer>Free biochem study tools · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a></footer>
 <script src="/streak.js?v=f493fb7c" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+
+
+
+
+
+<!-- rescue:start -->
+<script>
+(function(){
+ var PAGES=["about.html", "acid-base-titration-curve-calculator.html", "alanine-titration-curve.html", "amino-acid-catabolism-explorer.html", "amino-acid-chart.html", "amino-acid-one-letter-code-quiz.html", "amino-acid-titration-curve.html", "antibody-dilution-calculator.html", "arginine-titration-curve.html", "aspartic-acid-titration-curve.html", "atp-yield-calculator.html", "beer-lambert-calculator.html", "beta-oxidation-atp-calculator.html", "biochem-equation-sheet.html", "blood-type-calculator.html", "blood-type-punnett-square-calculator.html", "buffer-pka-table.html", "cardiac-output-calculator.html", "charts.html", "chemical-equilibrium-calculator.html", "chi-square-genetics-calculator.html", "citric-acid-cycle-explorer.html", "codon-chart.html", "contact.html", "cysteine-titration-curve.html", "daily-question.html", "dihybrid-cross-calculator.html", "dilution-calculator.html", "dna-melting-temperature-calculator.html", "dna-to-protein-translation.html", "empirical-formula-calculator.html", "enzyme-kinetics-simulator.html", "eye-color-punnett-square.html", "gene-expression-regulation-explorer.html", "gibbs-free-energy-calculator.html", "glutamic-acid-titration-curve.html", "glycine-titration-curve.html", "glycolysis-pathway-explorer.html", "hardy-weinberg-calculator.html", "henderson-hasselbalch-buffer-calculator.html", "histidine-titration-curve.html", "how-many-atp-are-produced-in-glycolysis.html", "how-to-calculate-allele-frequency.html", "how-to-calculate-pi-without-a-calculator.html", "ideal-gas-law-calculator.html", "index.html", "isoleucine-titration-curve.html", "license.html", "limiting-reagent-calculator.html", "lysine-titration-curve.html", "mcat-buffer-questions-explained.html", "membrane-transport-explorer.html", "methionine-titration-curve.html", "michaelis-menten-fitter.html", "michaelis-menten-vs-lineweaver-burk.html", "molarity-molar-mass-calculator.html", "nernst-equation-calculator.html", "nucleic-acid-concentration-calculator.html", "oligocalc-alternative.html", "osmotic-pressure-calculator.html", "oxygen-dissociation-curve-calculator.html", "peptide-charge-calculator.html", "percent-composition-calculator.html", "percent-yield-calculator.html", "ph-calculator.html", "privacy.html", "protein-molecular-weight-calculator.html", "punnett-square-calculator.html", "punnett-square-practice-problems.html", "quiz.html", "reaction-rate-half-life-calculator.html", "renal-clearance-calculator.html", "serial-dilution-calculator.html", "solve-ideal-gas-law-for-moles.html", "solve-ideal-gas-law-for-pressure.html", "solve-ideal-gas-law-for-temperature.html", "solve-ideal-gas-law-for-volume.html", "tyrosine-titration-curve.html", "valine-titration-curve.html", "x-linked-inheritance-calculator.html"];
+ var ALIAS={"genetic-code-codon-chart": "codon-chart.html", "genetic-code": "codon-chart.html", "codon-table": "codon-chart.html", "amino-acids": "amino-acid-chart.html", "amino-acid-table": "amino-acid-chart.html", "titration-curves": "amino-acid-titration-curve.html", "equations": "biochem-equation-sheet.html", "formula-sheet": "biochem-equation-sheet.html", "buffers": "buffer-pka-table.html"};
+ window.__rescue=function(pathname){
+  var raw=String(pathname||"").replace(/^\/+/,"").replace(/\/+$/,"");
+  if(!raw) return {action:"none", why:"empty path"};
+  var slug;
+  try{ slug=decodeURIComponent(raw); }catch(e){ slug=raw; }
+  slug=slug.toLowerCase().replace(/\.html$/,"");
+  if(ALIAS[slug]) return {action:"go", to:ALIAS[slug], why:"alias"};
+  var exact=slug+".html";
+  for(var i=0;i<PAGES.length;i++){
+   if(PAGES[i].toLowerCase()===exact) return {action:"go", to:PAGES[i], why:"case or suffix"};
+  }
+  var hits=PAGES.filter(function(p){ return p.toLowerCase().indexOf(slug)===0; });
+  if(hits.length===1) return {action:"go", to:hits[0], why:"only one page starts with it"};
+  if(hits.length>1) return {action:"suggest", hits:hits.slice(0,6), why:"ambiguous"};
+  return {action:"none", why:"no match"};
+ };
+ var r=window.__rescue(location.pathname);
+ if(r.action==="go"){ location.replace("/"+r.to+location.search+location.hash); return; }
+ if(r.action==="suggest"){
+  var box=document.getElementById("rescue-suggestions");
+  if(box){
+   var ACR=/^(dna|rna|atp|adp|nad|fad|ph|pi|pka|mcat|hiv|uv|tca|gdp|gtp)$/i;
+   box.innerHTML="<h2>Did you mean</h2>"+r.hits.map(function(p){
+    var n=p.replace(/\.html$/,"").replace(/-/g," ").split(" ").map(function(w,i){
+     if(ACR.test(w)) return w.toUpperCase();
+     return i===0 ? w.charAt(0).toUpperCase()+w.slice(1) : w;
+    }).join(" ");
+    return '<a href="/'+p+'">'+n+"</a>";
+   }).join("");
+   box.style.display="";
+  }
+ }
+})();
+</script>
+<!-- rescue:end -->
 </body>
 </html>
