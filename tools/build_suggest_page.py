@@ -61,6 +61,9 @@ RECEIPTS = [
 ]
 
 STYLE = """
+ /* contact.html's :root does not carry --bad, so the error border resolved to
+    nothing. Same value the tool pages use. */
+ :root{--bad:#e24b4a}
  main{max-width:760px}
  .eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
    margin:0 0 .6rem}
