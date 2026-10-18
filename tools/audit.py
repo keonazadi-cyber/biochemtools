@@ -277,6 +277,33 @@ if os.path.exists(_sm2):
             add("images", _p, "shows %s but the sitemap does not declare it here, so "
                               "Google has no route to it from this page" % _u)
 
+# --- the suggestions page must keep working ----------------------------------
+# A feedback form that silently stops posting looks identical to a site nobody has
+# opinions about. These check the parts that would fail quietly.
+_sg = os.path.join(SITE, "suggest.html")
+if not os.path.exists(_sg):
+    add("broken link", "suggest.html", "the suggestions page is missing")
+else:
+    _h = open(_sg, encoding="utf-8").read()
+    _m = re.search(r'<form[^>]*action="([^"]+)"', _h)
+    if not _m:
+        add("broken link", "suggest.html", "has no form at all")
+    elif "formspree.io/f/" not in _m.group(1):
+        add("broken link", "suggest.html", "form posts to %s, not a Formspree endpoint" % _m.group(1))
+    if 'name="message"' not in _h:
+        add("broken link", "suggest.html", "the form has no message field")
+    for _img in re.findall(r'<img[^>]*src="(/downloads/[^"]+)"', _h):
+        if not os.path.exists(os.path.join(SITE, _img.lstrip("/"))):
+            add("images", "suggest.html", "receipt image %s is not on disk" % _img)
+    # every tool page should offer the ask line; policy pages deliberately do not
+    _skip = {"404.html", "about.html", "contact.html", "privacy.html", "license.html",
+             "suggest.html", "charts.html", "daily-question.html", "index.html"}
+    for _p, _ph in docs.items():
+        if _p in _skip or "</main>" not in _ph:
+            continue
+        if "askline:start" not in _ph:
+            add("internal links", _p, "no link to the suggestions page, so feedback has to be hunted for")
+
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
          "house style", "overwhelming"]
