@@ -212,7 +212,11 @@
 <script>
 (function(){
  var f=document.getElementById("slip"), box=document.getElementById("formmsg");
- var from=new URLSearchParams(location.search).get("from");
+ // #from= first: a fragment is never a separate URL to a crawler. ?from= is still
+ // read so links already out in the world keep working.
+ var from=(location.hash.match(/(?:^#|&)from=([^&]*)/)||[])[1]
+          || new URLSearchParams(location.search).get("from");
+ if(from){ try{ from=decodeURIComponent(from); }catch(e){} }
  if(from && /^[a-z0-9\-]+\.html$/.test(from)) document.getElementById("fromPage").value=from;
  // If the action is not a real Formspree endpoint, posting would hit this page
  // itself, return 200, and we would cheerfully tell someone it sent. Hand them a
@@ -262,7 +266,7 @@
 })();
 </script>
 
-<footer>Free biochem study tools · made for students, by students · <a href="/">home</a> · <span style="opacity:.75">Updated July 22, 2026</span>    <!-- suggestfoot:start --> &middot; <a href="/suggest.html" style="color:inherit;text-decoration:underline">Suggest a tool</a><!-- suggestfoot:end --></footer>
+<footer>Free biochem study tools · made for students, by students · <a href="/">home</a> · <span style="opacity:.75">Updated July 22, 2026</span>      <!-- suggestfoot:start --> &middot; <a href="/suggest.html" style="color:inherit;text-decoration:underline">Suggest a tool</a><!-- suggestfoot:end --></footer>
 <script src="/streak.js?v=f493fb7c" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
 </body>

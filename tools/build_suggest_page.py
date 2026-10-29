@@ -220,7 +220,11 @@ def build():
 <script>
 (function(){
  var f=document.getElementById("slip"), box=document.getElementById("formmsg");
- var from=new URLSearchParams(location.search).get("from");
+ // #from= first: a fragment is never a separate URL to a crawler. ?from= is still
+ // read so links already out in the world keep working.
+ var from=(location.hash.match(/(?:^#|&)from=([^&]*)/)||[])[1]
+          || new URLSearchParams(location.search).get("from");
+ if(from){ try{ from=decodeURIComponent(from); }catch(e){} }
  if(from && /^[a-z0-9\\-]+\\.html$/.test(from)) document.getElementById("fromPage").value=from;
  // If the action is not a real Formspree endpoint, posting would hit this page
  // itself, return 200, and we would cheerfully tell someone it sent. Hand them a

@@ -5,7 +5,12 @@ Most feedback comes from someone mid-task who just hit the thing the site does n
 do, not from someone who went hunting for a contact page. So the ask has to be where
 the work happens.
 
-It carries ?from=<page> so a suggestion arrives already knowing which tool prompted
+It carries the source page, so a suggestion arrives already knowing which tool
+prompted it. It uses a #fragment, NOT ?from=: a query string makes a separate
+crawlable URL per tool page, 73 of them, and Google crawled every one. On a site
+whose binding constraint is crawl budget (~18 fetches a day) that is the worst
+thing to spend it on, and those URLs were competing with the real pages still
+waiting to be crawled. A fragment is never a separate URL to a crawler.
 it, which is the difference between "add a converter" and a fixable report.
 
 Excluded: policy and meta pages (privacy, license, about, contact, 404, and the
@@ -24,7 +29,7 @@ def block(page):
     return ('%s\n <p class="askline" style="margin:2.5rem 0 0;padding-top:1.4rem;'
             'border-top:1px solid var(--line);color:var(--muted);font-size:.92rem">'
             'Something missing from this tool, or a number that looks wrong? '
-            '<a href="/suggest.html?from=%s">Tell me</a> and it gets read.</p>\n%s'
+            '<a href="/suggest.html#from=%s">Tell me</a> and it gets read.</p>\n%s'
             % (START, page, END))
 
 

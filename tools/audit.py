@@ -304,6 +304,18 @@ else:
         if "askline:start" not in _ph:
             add("internal links", _p, "no link to the suggestions page, so feedback has to be hunted for")
 
+# --- never link an internal page with a query string -------------------------
+# The ask line shipped as /suggest.html?from=<page>, which made 73 separate
+# crawlable URLs of one page. Google crawled every one, on a site whose binding
+# constraint is crawl budget at roughly 18 fetches a day, so they were competing
+# with the real pages still waiting to be crawled. A #fragment does the same job
+# and is never a separate URL.
+for p, h in docs.items():
+    for m in re.finditer(r'href="(/[a-z0-9\-]+\.html)\?([^"]*)"', h):
+        add("internal links", p,
+            "links %s with a query string (?%s), which makes a separate crawlable URL; "
+            "use a #fragment" % (m.group(1), m.group(2)[:40]))
+
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
          "house style", "overwhelming"]
