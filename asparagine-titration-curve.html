@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E3NEEKFCPP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E3NEEKFCPP');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asparagine Titration Curve: pKa 2.02, 8.80, pI 5.41</title>
+<meta name="description" content="Asparagine titration curve: pKa 2.02, 8.80, pI 5.41. Every buffering region and equivalence point, plotted and worked through.">
+<meta name="keywords" content="amino acid titration curve, how to calculate pka from titration curve, glycine titration curve, alanine titration curve, arginine titration curve, isoelectric point, half equivalence point, pi calculation">
+<link rel="canonical" href="https://biochemtools.com/asparagine-titration-curve.html">
+<meta property="og:title" content="Asparagine Titration Curve: pKa 2.02, 8.80, pI 5.41">
+<meta property="og:description" content="Asparagine titration curve: pKa 2.02, 8.80, pI 5.41. Every buffering region and equivalence point, plotted and worked through.">
+<meta property="og:image" content="https://biochemtools.com/curves/asparagine-titration-curve.png">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/curves/asparagine-titration-curve.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://biochemtools.com/asparagine-titration-curve.html", "name": "Asparagine Titration Curve: pKa 2.02, 8.80, pI 5.41", "description": "Asparagine titration curve: pKa 2.02, 8.80, pI 5.41. Every buffering region and equivalence point, plotted and worked through.", "inLanguage": "en", "isAccessibleForFree": true, "license": "https://creativecommons.org/licenses/by/4.0/", "image": "https://biochemtools.com/curves/asparagine-titration-curve.png", "primaryImageOfPage": {"@type": "ImageObject", "contentUrl": "https://biochemtools.com/curves/asparagine-titration-curve.png", "url": "https://biochemtools.com/curves/asparagine-titration-curve.png", "width": 1400, "height": 640, "caption": "Titration curve of asparagine: pH against equivalents of hydroxide, with buffering plateaus at pKa 2.02 and 8.80 and the isoelectric point at pH 5.41", "license": "https://creativecommons.org/licenses/by/4.0/", "acquireLicensePage": "https://biochemtools.com/charts.html", "creditText": "BiochemTools", "creator": {"@type": "Organization", "name": "BiochemTools"}}, "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to read an amino acid titration curve","step":[{"@type":"HowToStep","name":"Find the flat regions","text":"Flat, shallow parts of the curve are buffering regions, centered on each pKa (the half-equivalence points)."},{"@type":"HowToStep","name":"Find the steep jumps","text":"Steep parts are equivalence points, where a proton has been fully removed."},{"@type":"HowToStep","name":"Locate the pI","text":"The isoelectric point is the average of the two pKa values on either side of the neutral, zwitterionic species."}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a zwitterion?","acceptedAnswer":{"@type":"Answer","text":"A zwitterion is a molecule that carries both a positive and a negative charge at the same time, with the two canceling to a net charge of zero. Amino acids at their isoelectric point are zwitterions: the amino group is protonated (positive) while the carboxyl group is deprotonated (negative)."}},
+{"@type":"Question","name":"For an amino acid with 3 pKa values, why isn't pI the average of all three?","acceptedAnswer":{"@type":"Answer","text":"Only the two pKa values that directly flank the neutral, net-zero species determine the pI, a third pKa far outside that range (already fully protonated or fully deprotonated at the relevant pH) doesn't affect where the charge crosses zero. Averaging all three pKa values regardless of which ones actually flank the neutral point is a common exam mistake."}},
+{"@type":"Question","name":"Why do basic amino acids have a pI above 7 and acidic ones below 7?","acceptedAnswer":{"@type":"Answer","text":"An amino acid needs extra base (higher pH) to strip the last proton and reach net-zero charge when it has an additional protonatable (basic) group, which is why lysine and arginine have high pIs. Conversely, an extra acidic side chain group makes the molecule net-negative until a lower pH, pulling the pI down, which is why aspartate and glutamate have low pIs."}},
+{"@type":"Question","name":"Why does histidine's side chain pKa matter so much in biochemistry?","acceptedAnswer":{"@type":"Answer","text":"Histidine's side-chain pKa (~6.0) sits close to physiological pH (7.4), so it's one of the few side chains that's meaningfully both protonated and deprotonated near neutral pH. That makes it especially useful as a proton donor/acceptor in enzyme active sites and as a natural buffering component in proteins."}}]}
+</script>
+<style>
+ :root{--bg:#0e0c0a;--card:#171310;--line:#2c2620;--txt:#f4efe7;--muted:#a2968a;--curve:#cf9366;--pi:#e8b04b;--pka:#e8b04b;--accent:#6fb59f}
+ *{box-sizing:border-box}body{margin:0;font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+ header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(232,176,75,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(207,147,102,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(111,181,159,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}h1{font-size:1.7rem;font-weight:600;margin:0 0 .5rem}header p{color:var(--muted);max-width:640px;margin:0 auto}
+ main{max-width:720px;margin:0 auto;padding:1rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+ label{color:var(--muted);font-size:.85rem;display:block;margin-bottom:.4rem}
+ select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.05rem;padding:.6rem;border-radius:8px}
+ canvas{width:100%;height:320px;background:var(--bg);border-radius:10px;margin-top:.5rem}
+ .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin:1rem 0}
+ .metric{background:var(--bg);border-radius:10px;padding:.9rem;text-align:center}.metric .lbl{color:var(--muted);font-size:.8rem}.metric .val{font-size:1.4rem;font-weight:600;margin-top:.2rem}
+ .work{background:var(--bg);border-radius:10px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8;white-space:pre-wrap}
+ h2{font-size:1.3rem;margin:2.5rem 0 .5rem}.note{color:var(--muted);font-size:.85rem}a{color:var(--accent)}
+ footer{text-align:center;color:var(--muted);padding:2rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2c2620}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#f4efe7;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#e8b04b,#cf9366);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#17120c;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#a2968a;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#f4efe7}
+ .topnav-links .navcta{background:#e8b04b;color:#17120c;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#17120c;transform:translateY(-1px);box-shadow:0 6px 16px rgba(232,176,75,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+ .citebtn{background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:.3rem .7rem;border-radius:99px;cursor:pointer;font-size:.78rem;white-space:nowrap;flex:none}
+ .citebtn:hover{border-color:var(--accent);color:var(--accent)}
+ .citebtn:disabled{border-color:var(--accent);color:var(--accent);cursor:default}
+ #sources h3{color:var(--txt)}
+
+ /* --- direction D --- */
+ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+ .brand,h1,h2{font-family:Fraunces,Georgia,serif;font-weight:400}
+ .brand{font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;font-weight:600}
+ h1{letter-spacing:-.03em;font-weight:300}
+ h2{letter-spacing:-.015em}
+ .btn,.navcta{border-radius:100px!important}
+ @media print{body::after{display:none}}
+
+ table{width:100%;border-collapse:collapse;margin:.9rem 0 .2rem;font-size:.95rem}
+ th{text-align:left;color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;
+    letter-spacing:.04em;padding:.35rem .9rem .5rem 0;border-bottom:1px solid var(--line)}
+ td{padding:.55rem .9rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+ tr:last-child td{border-bottom:none}
+ td:first-child{color:var(--txt)}
+ td+td{color:var(--muted);white-space:nowrap}
+ /* The curve ships as a real PNG so Google Images can see it, with the canvas
+    layered over the top to draw the same curve in. The canvas paints its own
+    opaque background, otherwise the finished line underneath would show through
+    and there would be nothing left to animate. */
+ .curvewrap{position:relative;line-height:0}
+ .curvewrap img{width:100%;height:auto;display:block;border-radius:6px}
+ /* margin:0 matters: the site's canvas rule sets margin-top:8px, and margin still
+    applies to an absolutely positioned box, so the canvas sat 8px below the image
+    it is supposed to sit exactly on top of. */
+ /* background:transparent matters as much as margin:0. The site's canvas rule sets
+    an opaque background, so with JavaScript off the unpainted canvas sat on top of
+    the image as a blank dark block and the curve was invisible. The script paints
+    its own opaque fillRect before it draws, so nothing changes when JS runs. */
+ .curvewrap canvas{position:absolute;left:0;top:0;width:100%;height:100%;
+                   margin:0;background:transparent;border-radius:6px}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0c0a'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%23e8b04b' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0e0c0a">
+<link rel="manifest" href="/manifest.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/amino-acid-titration-curve.html","name":"Amino Acid Titration Curve & pI Calculator \u2014 Free","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+</head>
+<body>
+<div class="topnav">
+ <div class="topnav-inner">
+  <a class="brand" href="/"><span class="mark">B</span>biochemtools</a>
+  <div class="topnav-links">
+   <a href="/charts.html">Charts</a>
+   <a href="/daily-question.html">Daily question</a>
+   <a href="/about.html">About</a>
+   <a href="/suggest.html">Suggest</a>
+   <a class="navcta" href="/">All tools &rarr;</a>
+  </div>
+ </div>
+</div>
+
+<header>
+ <h1>Asparagine titration curve</h1>
+</header>
+<main>
+ <div class="card">
+  <p style="margin-top:0"><b>Asparagine has 2 ionizable groups</b>, with pKa values of 2.02 and 8.80.
+  Its isoelectric point is <b>pI 5.41</b>, and the curve has 1 equivalence point
+  and 2 buffering plateaus.</p>
+ </div>
+
+ <div class="card">
+  <div class="curvewrap">
+   <img src="/curves/asparagine-titration-curve.png" width="700" height="320" alt="Titration curve of asparagine: pH against equivalents of hydroxide, with buffering plateaus at pKa 2.02 and 8.80 and the isoelectric point at pH 5.41"
+    fetchpriority="high" decoding="async">
+   <canvas id="plot" width="700" height="320" aria-hidden="true"></canvas>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The ionizable groups</h2>
+  <table><thead><tr><th>Group</th><th>pKa</th><th>Behaviour</th></tr></thead>
+  <tbody><tr><td>alpha-carboxyl</td><td>2.02</td><td>loses H<sup>+</sup> as pH rises</td></tr><tr><td>alpha-amino</td><td>8.80</td><td>keeps H<sup>+</sup> until pH passes it</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Where it buffers</h2>
+  <p>A weak acid buffers within about one pH unit either side of its pKa, which is the flat part
+  of the curve. For asparagine that means:</p>
+  <table><thead><tr><th>Buffering range</th><th>Centred on</th></tr></thead>
+  <tbody><tr><td>pH 1.02 to 3.02</td><td>pKa 2.02</td></tr><tr><td>pH 7.80 to 9.80</td><td>pKa 8.80</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Equivalence points</h2>
+  <p>Halfway between two pKa values the previous group is fully titrated and the next has not
+  started. Those are the steep parts.</p>
+  <table><thead><tr><th>Point</th><th>pH</th></tr></thead><tbody><tr><td>Equivalence point 1</td><td>pH 5.41</td></tr></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">What charge it carries, and when</h2>
+  <p>Reading the curve left to right, each pKa you pass strips off one proton and drops the
+  net charge by one. Between two pKa values one species dominates:</p>
+  <table><thead><tr><th>pH range</th><th>Net charge</th></tr></thead>
+  <tbody><tr><td>below pH 2.02</td><td>+1</td></tr><tr><td>pH 2.02 to 8.80</td><td>0</td></tr><tr><td>above pH 8.80</td><td>-1</td></tr></tbody></table>
+  <p>The charge is zero at the isoelectric point, which is why asparagine will not move in an
+  electric field at pH 5.41. That is the basis of isoelectric focusing, and it is why the pI
+  is the number worth remembering rather than the individual pKa values.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Net charge at physiological pH</h2>
+  <p>At pH 7.4 no group is cleanly on or off. Each contributes a fraction, given by the
+  Henderson-Hasselbalch relation, and the net charge is their sum:</p>
+  <ul><li>the acid group (pKa 2.02) contributes -1.00</li><li>the base group (pKa 8.80) contributes +0.96</li></ul>
+  <div class="work"><p>Net charge on asparagine at pH 7.4 = <b>-0.04</b></p></div>
+  <p>This is the calculation behind every peptide charge question. Do it for each residue in a
+  sequence and add the results, and you have the charge on the whole peptide.</p>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">Working out the pI</h2>
+  <div class="work"><p>Asparagine has no ionizable side chain, so the neutral zwitterion sits between the two pKa values, and the isoelectric point is their average: (2.02 + 8.80) / 2 = 5.410, published as <b>pI 5.41</b>.</p></div>
+ </div>
+
+ <div class="card">
+  <h2 style="margin-top:0">The other amino acids</h2>
+  <p>Each of these has its own curve, its own buffering regions and a worked isoelectric
+  point. The three-group side chains behave quite differently from the two-group ones,
+  so it is worth looking at one of each.</p>
+  <p><a href="/glycine-titration-curve.html">Glycine</a> &middot; <a href="/alanine-titration-curve.html">Alanine</a> &middot; <a href="/valine-titration-curve.html">Valine</a> &middot; <a href="/leucine-titration-curve.html">Leucine</a> &middot; <a href="/isoleucine-titration-curve.html">Isoleucine</a> &middot; <a href="/methionine-titration-curve.html">Methionine</a> &middot; <a href="/proline-titration-curve.html">Proline</a> &middot; <a href="/phenylalanine-titration-curve.html">Phenylalanine</a> &middot; <a href="/tryptophan-titration-curve.html">Tryptophan</a> &middot; <a href="/serine-titration-curve.html">Serine</a> &middot; <a href="/threonine-titration-curve.html">Threonine</a> &middot; <a href="/glutamine-titration-curve.html">Glutamine</a> &middot; <a href="/aspartic-acid-titration-curve.html">Aspartic acid</a> &middot; <a href="/glutamic-acid-titration-curve.html">Glutamic acid</a> &middot; <a href="/histidine-titration-curve.html">Histidine</a> &middot; <a href="/lysine-titration-curve.html">Lysine</a> &middot; <a href="/arginine-titration-curve.html">Arginine</a> &middot; <a href="/cysteine-titration-curve.html">Cysteine</a> &middot; <a href="/tyrosine-titration-curve.html">Tyrosine</a></p>
+  <p style="margin-bottom:0">You can also <a href="/amino-acid-titration-curve.html">plot any
+  amino acid's curve yourself</a>, see <a href="/amino-acid-chart.html">all 20 with their pKa
+  values</a>, or run a whole sequence through the
+  <a href="/peptide-charge-calculator.html">peptide charge and pI calculator</a>.</p>
+ </div>
+
+ <div class="card" id="sources">
+  <h2 style="margin-top:0">Where the numbers come from</h2>
+  <p>pKa values are the Lehninger set, the same ones used across this site. The curve is generated
+  from those values with the Henderson-Hasselbalch relation for each group, and the pI is solved
+  numerically as a check on the arithmetic above, which agrees to within 0.03 pH units.</p>
+ </div>
+<!-- askline:start -->
+ <p class="askline" style="margin:2.5rem 0 0;padding-top:1.4rem;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem">Something missing from this tool, or a number that looks wrong? <a href="/suggest.html#from=asparagine-titration-curve.html">Tell me</a> and it gets read.</p>
+<!-- askline:end --></main>
+<script>
+const GS=[{"pka": 2.02, "t": "a"}, {"pka": 8.8, "t": "b"}];
+function gcharge(g,pH){return g.t==="b"?1/(1+Math.pow(10,pH-g.pka)):-1/(1+Math.pow(10,g.pka-pH));}
+function net(pH){return GS.reduce((s,g)=>s+gcharge(g,pH),0);}
+function equiv(pH){return GS.reduce((s,g)=>s+1/(1+Math.pow(10,g.pka-pH)),0);}
+function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?lo=m:hi=m;}return (lo+hi)/2;}
+(function(){
+ const n=GS.length,c=document.getElementById("plot");if(!c)return;
+ const ctx=c.getContext("2d"),W=c.width,H=c.height,P=40;
+ ctx.fillStyle="#171310";ctx.fillRect(0,0,W,H);
+ const X=e=>P+(e/n)*(W-P-14), Y=pH=>H-P-(pH/14)*(H-P-14);
+ ctx.strokeStyle="#2c2620";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,10);ctx.lineTo(P,H-P);ctx.lineTo(W-14,H-P);ctx.stroke();
+ ctx.fillStyle="#a2968a";ctx.font="12px sans-serif";
+ for(let p=0;p<=14;p+=2){if(p<14)ctx.fillText(p,P-24,Y(p)+4);ctx.strokeStyle="#1a1512";ctx.beginPath();ctx.moveTo(P,Y(p));ctx.lineTo(W-14,Y(p));ctx.stroke();}
+ ctx.fillStyle="#a2968a";ctx.fillText("pH",P-30,Y(14)+4);ctx.fillText("equivalents of OH\u207B \u2192",W-170,H-14);
+ GS.forEach(g=>{ctx.strokeStyle="#e8b04b";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P,Y(g.pka));ctx.lineTo(W-14,Y(g.pka));ctx.stroke();ctx.fillStyle="#e8b04b";ctx.fillText("pKa "+g.pka.toFixed(2),W-96,Y(g.pka)-4);});
+ const pi=pIv();ctx.strokeStyle="#6fb59f";ctx.beginPath();ctx.moveTo(P,Y(pi));ctx.lineTo(W-14,Y(pi));ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle="#6fb59f";ctx.fillText("pI "+pi.toFixed(2),P+6,Y(pi)-4);
+ // The curve draws itself, the way the hero line on the homepage does. An SVG
+ // path can be animated with stroke-dashoffset; a canvas cannot, so it is drawn
+ // progressively instead: each frame extends the line a little further.
+ const pts=[];
+ for(let pH=0;pH<=14;pH+=0.02) pts.push([X(equiv(pH)),Y(pH)]);
+ const still=(window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches);
+ function curve(upto){
+  ctx.strokeStyle="#cf9366";ctx.lineWidth=2.5;ctx.beginPath();
+  for(let i=0;i<upto;i++){ i?ctx.lineTo(pts[i][0],pts[i][1]):ctx.moveTo(pts[0][0],pts[0][1]); }
+  ctx.stroke();
+ }
+ if(still||!window.requestAnimationFrame){curve(pts.length);return;}
+ let t0=null;const DUR=1150;
+ function frame(ts){
+  if(t0===null)t0=ts;
+  const k=Math.min(1,(ts-t0)/DUR);
+  const eased=1-Math.pow(1-k,3);
+  curve(Math.max(2,Math.round(eased*pts.length)));
+  if(k<1)requestAnimationFrame(frame);
+ }
+ // only start once the chart is actually on screen
+ if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(function(es){es.forEach(function(e){
+   if(e.isIntersecting){io.disconnect();requestAnimationFrame(frame);}})},{threshold:.2});
+  io.observe(c);
+  setTimeout(function(){ if(t0===null){io.disconnect();curve(pts.length);} },3000);
+ } else { requestAnimationFrame(frame); }
+})();
+</script>
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script>
+</body>
+</html>

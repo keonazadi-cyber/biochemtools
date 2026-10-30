@@ -29,7 +29,10 @@ SRC = os.path.join(SITE, "amino-acid-titration-curve.html")
 NAMES = {"Gly": ("Glycine", "G"), "Ala": ("Alanine", "A"), "Asp": ("Aspartic acid", "D"),
          "Glu": ("Glutamic acid", "E"), "His": ("Histidine", "H"), "Lys": ("Lysine", "K"),
          "Arg": ("Arginine", "R"), "Cys": ("Cysteine", "C"), "Tyr": ("Tyrosine", "Y"),
-         "Met": ("Methionine", "M"), "Val": ("Valine", "V"), "Ile": ("Isoleucine", "I")}
+         "Met": ("Methionine", "M"), "Val": ("Valine", "V"), "Ile": ("Isoleucine", "I"),
+         "Leu": ("Leucine", "L"), "Pro": ("Proline", "P"), "Phe": ("Phenylalanine", "F"),
+         "Trp": ("Tryptophan", "W"), "Ser": ("Serine", "S"), "Thr": ("Threonine", "T"),
+         "Asn": ("Asparagine", "N"), "Gln": ("Glutamine", "Q")}
 # Published pI, Lehninger. Read out of amino-acid-chart.html rather than retyped,
 # so the chart and these pages cannot drift apart, and checked below against the
 # figures that were hand-entered when there were only nine of them.
@@ -40,7 +43,8 @@ WAS_TYPED = {"Gly": 5.97, "Ala": 6.01, "Asp": 2.77, "Glu": 3.22, "His": 7.59,
 # No ionizable side chain first, then acidic, basic, and the special side chains,
 # which is the order the chart page teaches them in. Used for the sibling links on
 # each page and for the block on the parent tool, so the two cannot disagree.
-ORDER = ["Gly", "Ala", "Val", "Ile", "Met", "Asp", "Glu", "His", "Lys", "Arg", "Cys", "Tyr"]
+ORDER = ["Gly", "Ala", "Val", "Leu", "Ile", "Met", "Pro", "Phe", "Trp",
+         "Ser", "Thr", "Asn", "Gln", "Asp", "Glu", "His", "Lys", "Arg", "Cys", "Tyr"]
 
 
 def load_book_pi():
@@ -82,6 +86,20 @@ GROUPS = {
     "Met": ["alpha-carboxyl", "alpha-amino"],
     "Val": ["alpha-carboxyl", "alpha-amino"],
     "Ile": ["alpha-carboxyl", "alpha-amino"],
+    "Leu": ["alpha-carboxyl", "alpha-amino"],
+    "Phe": ["alpha-carboxyl", "alpha-amino"],
+    "Trp": ["alpha-carboxyl", "alpha-amino"],
+    # Serine and threonine have a hydroxyl, asparagine and glutamine an amide.
+    # Neither ionizes anywhere near the pH range of the curve, which is the whole
+    # reason these four look like glycine and the reason people search for them.
+    "Ser": ["alpha-carboxyl", "alpha-amino"],
+    "Thr": ["alpha-carboxyl", "alpha-amino"],
+    "Asn": ["alpha-carboxyl", "alpha-amino"],
+    "Gln": ["alpha-carboxyl", "alpha-amino"],
+    # Proline's nitrogen sits inside the ring, so it is a secondary amine and the
+    # group is an imino, not an amino. It is also why its pKa is 10.96, a full
+    # unit above every other amino acid on the site.
+    "Pro": ["alpha-carboxyl", "alpha-imino"],
 }
 
 
@@ -282,11 +300,18 @@ def page(code, gs, headsrc, navsrc, siblings):
     sign = lambda q: ("%+d" % q) if q else "0"
     chg_rows = "".join("<tr><td>%s</td><td>%s</td></tr>" % (r, sign(q)) for r, q in charge_states(gs))
     q74 = net_charge(gs, 7.4)
+    # -0.00 is arithmetically honest and looks like a bug. Anything inside the
+    # rounding window is zero as far as a two-decimal display is concerned.
+    q74_shown = "0.00" if abs(q74) < 0.005 else "%+.2f" % q74
     terms = []
     for g in sorted(gs, key=lambda g: g["pka"]):
         c = (1 / (1 + 10 ** (7.4 - g["pka"]))) if g["t"] == "b" else -(1 / (1 + 10 ** (g["pka"] - 7.4)))
-        terms.append("%s (pKa %.2f) contributes %+.2f" % (
-            "the base group" if g["t"] == "b" else "the acid group", g["pka"], c))
+        # Tyrosine's phenol is still fully protonated at pH 7.4, so it contributes
+        # about -0.0007, and %+.2f renders that as "-0.00". Say what is actually
+        # true instead, which is that the group has not started to titrate yet.
+        shown = "less than 0.01" if abs(c) < 0.005 else "%+.2f" % c
+        terms.append("%s (pKa %.2f) contributes %s" % (
+            "the base group" if g["t"] == "b" else "the acid group", g["pka"], shown))
     terms_html = "".join("<li>%s</li>" % t for t in terms)
     eq_rows = "".join("<tr><td>Equivalence point %d</td><td>pH %.2f</td></tr>" % (n, v) for n, v in eq)
 
@@ -357,7 +382,7 @@ def page(code, gs, headsrc, navsrc, siblings):
   <p>At pH 7.4 no group is cleanly on or off. Each contributes a fraction, given by the
   Henderson-Hasselbalch relation, and the net charge is their sum:</p>
   <ul>%(terms_html)s</ul>
-  <div class="work"><p>Net charge on %(lname)s at pH 7.4 = <b>%(q74)+.2f</b></p></div>
+  <div class="work"><p>Net charge on %(lname)s at pH 7.4 = <b>%(q74_shown)s</b></p></div>
   <p>This is the calculation behind every peptide charge question. Do it for each residue in a
   sequence and add the results, and you have the charge on the whole peptide.</p>
  </div>
@@ -383,7 +408,7 @@ def page(code, gs, headsrc, navsrc, siblings):
   <h2 style="margin-top:0">Where the numbers come from</h2>
   <p>pKa values are the Lehninger set, the same ones used across this site. The curve is generated
   from those values with the Henderson-Hasselbalch relation for each group, and the pI is solved
-  solved numerically as a check on the arithmetic above, which agrees to within 0.03 pH units.</p>
+  numerically as a check on the arithmetic above, which agrees to within 0.03 pH units.</p>
  </div>
 </main>
 <script>
@@ -437,7 +462,7 @@ function pIv(){let lo=0,hi=14;for(let i=0;i<60;i++){const m=(lo+hi)/2;net(m)>0?l
            imgslug=imgslug, alt=esc(alt), siblings=siblings,
            neq=len(eq), eqs="" if len(eq) == 1 else "s",
            grp_rows=grp_rows, buf_rows=buf_rows, eq_rows=eq_rows, work=work,
-           chg_rows=chg_rows, terms_html=terms_html, q74=q74,
+           chg_rows=chg_rows, terms_html=terms_html, q74=q74, q74_shown=q74_shown,
            gsjson=json.dumps(gs))
 
     return slug, "<!DOCTYPE html>\n<html lang=\"en\">\n" + h + "</head>\n" + navsrc + body + BEACON + "</body>\n</html>\n"

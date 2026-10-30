@@ -40,10 +40,12 @@ CURVE = "#cf9366"   # --curve
 # label ever picks up a character the font cannot draw.
 FONT = "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"
 
-NAMES = {"Gly": "Glycine", "Ala": "Alanine", "Asp": "Aspartic acid",
-         "Glu": "Glutamic acid", "His": "Histidine", "Lys": "Lysine",
-         "Arg": "Arginine", "Cys": "Cysteine", "Tyr": "Tyrosine",
-         "Met": "Methionine", "Val": "Valine", "Ile": "Isoleucine"}
+# One name table, not three. This file, build_titration_pages.py and the tool's
+# own <select> were three hand-kept copies of the same twenty rows, and adding the
+# eight missing amino acids broke this one the moment the other two learned them.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from build_titration_pages import NAMES as _NAMES          # noqa: E402
+NAMES = {code: full for code, (full, _letter) in _NAMES.items()}
 
 
 def load_aa():
