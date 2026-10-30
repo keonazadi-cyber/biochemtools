@@ -24,7 +24,7 @@ STEPS = [
     ("add_suggest_footer_link.py", "the footer link"),
     # discovery and schema, which read the finished pages
     ("sitemap_images.py", "declare each image on the page that shows it"),
-    ("normalize_image_schema.py", "one page claims each image, under a real licence"),
+    ("normalize_schema.py", "each page claims its own image, and only its own identity"),
 ]
 
 

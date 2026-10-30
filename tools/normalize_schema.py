@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Give every content image exactly one page that claims it.
+"""Make each page's JSON-LD describe that page, and no other.
+
+Two jobs, both "whose page is this".
 
 Google shows one page per image in an image pack. It picks that page from the
 signals on the page, and ours were pointing at the wrong one: nine pages carried
@@ -58,10 +60,60 @@ def primary_image(html):
     return None
 
 
+def drop_foreign_webpage(name, html, report):
+    """Remove a WebPage node that says it is a different page.
+
+    build_titration_pages.py builds each curve page out of the tool page's own
+    markup, and carried the tool's WebPage block along with it. All twenty curve
+    pages therefore declared a second WebPage entity with the hub's url, title
+    and dates, next to their own. Two WebPage entities on one page, one of them
+    naming a different URL, is a page telling Google two stories about what it
+    is, on the pages that rank best on the site.
+    """
+    # What counts as "this page" is wider than one string. index.html declared
+    # its WebPage as .../index.html while its canonical is .../ , and comparing
+    # on one spelling deleted the homepage's own identity. Take the page's own
+    # canonical as the authority and accept every spelling of itself.
+    mine = {page_url(name), SITE + name}
+    if name == "index.html":
+        mine.add(SITE)
+    can = re.search(r'<link rel="canonical"[^>]*href="([^"]+)"', html)
+    if can:
+        mine.add(can.group(1))
+        mine.add(can.group(1).rstrip("/") + "/index.html")
+    dropped = [0]
+
+    def fix(m):
+        raw = m.group(2)
+        try:
+            data = json.loads(raw)
+        except ValueError:
+            return m.group(0)
+        nodes = data if isinstance(data, list) else [data]
+        keep = [n for n in nodes
+                if not (n.get("@type") == "WebPage"
+                        and n.get("url") and n.get("url") not in mine)]
+        if len(keep) == len(nodes):
+            return m.group(0)
+        dropped[0] += len(nodes) - len(keep)
+        if not keep:
+            return ""                      # the whole block was the foreign node
+        out = keep[0] if len(keep) == 1 else keep
+        return m.group(1) + json.dumps(out, separators=(",", ":"),
+                                       ensure_ascii=False) + m.group(3)
+
+    out = LD_RE.sub(fix, html)
+    if dropped[0]:
+        report.append((name, "dropped %d WebPage node(s) naming another page"
+                       % dropped[0]))
+    return out
+
+
 def normalize(name, html, report):
+    html = drop_foreign_webpage(name, html, report)
     img = primary_image(html)
     if img is None or name in GALLERIES:
-        return html
+        return html          # the foreign-WebPage pass above already ran
     url = page_url(name)
     content_url = SITE.rstrip("/") + img["src"]
     changed = []
@@ -72,18 +124,36 @@ def normalize(name, html, report):
         except ValueError:
             report.append((name, "UNPARSEABLE ld+json, left alone"))
             return raw
-        nodes = data if isinstance(data, list) else [data]
+        def walk(x):
+            """Every object in the block, at any depth.
+
+            The licence also lives inside primaryImageOfPage, which this script
+            writes but only when the key is absent. Walking top-level nodes only
+            meant a wrong value nested there was never repaired, and the audit
+            could not see it either.
+            """
+            if isinstance(x, dict):
+                yield x
+                for v in x.values():
+                    for y in walk(v):
+                        yield y
+            elif isinstance(x, list):
+                for v in x:
+                    for y in walk(v):
+                        yield y
+
         touched = False
-        for node in nodes:
-            t = node.get("@type")
-            # Every chart on the site is CC BY. A `license` that is not a licence
-            # URL is wrong wherever it appears, including on a secondary chart the
-            # page shows but does not own.
-            if t == "ImageObject" and "creativecommons.org/licenses/" not in str(
-                    node.get("license", "")):
+        # Any node carrying a licence must carry a real one, however deep.
+        for node in walk(data):
+            if ("license" in node
+                    and "creativecommons.org/licenses/" not in str(node["license"])):
                 node["license"] = CCBY
                 changed.append("license")
                 touched = True
+
+        nodes = data if isinstance(data, list) else [data]
+        for node in nodes:
+            t = node.get("@type")
             if t == "ImageObject" and node.get("contentUrl") == content_url:
                 part = node.get("isPartOf")
                 if not (isinstance(part, dict) and part.get("url") == url):

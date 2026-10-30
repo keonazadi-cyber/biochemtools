@@ -326,6 +326,21 @@ for p, h in docs.items():
 # codon-chart.html, which got all three wrong, is not. tools/normalize_image_schema.py
 # fixes this at the source; these three checks stop it coming back.
 _CCBY = "https://creativecommons.org/licenses/by/4.0/"
+
+
+def _content_imgs(h):
+    """The images on a page that Google could rank, in page order.
+
+    /curves/ belongs here as much as /downloads/ does: the twenty titration
+    pages are the ones that actually rank, and leaving them out meant the
+    original defect could be reintroduced on any of them without the audit
+    noticing. -light variants are suggestion-page thumbnails of a chart that
+    already has a home, and /structures/ are 320px decorations.
+    """
+    return [u for u in re.findall(r'<img[^>]*src="(/(?:downloads|curves)/[^"]+)"', h)
+            if not u.endswith("-light.png")]
+
+
 _GALLERY = {"index.html", "charts.html"}
 _nominated = {}
 for p, h in docs.items():
@@ -335,7 +350,24 @@ for p, h in docs.items():
             _d = json.loads(_m.group(1))
         except Exception:
             continue                       # invalid JSON-LD is already reported
-        for _n in (_d if isinstance(_d, list) else [_d]):
+        def _walk(_x):
+            """Every object anywhere in the block, however deeply nested.
+
+            Checking only top-level nodes missed a `license` inside
+            primaryImageOfPage, which is one of the two places
+            normalize_image_schema.py writes one. A broken value there passed
+            the audit clean.
+            """
+            if isinstance(_x, dict):
+                yield _x
+                for _v in _x.values():
+                    for _y in _walk(_v):
+                        yield _y
+            elif isinstance(_x, list):
+                for _v in _x:
+                    for _y in _walk(_v):
+                        yield _y
+        for _n in _walk(_d):
             _lic = _n.get("license")
             if _lic and "creativecommons.org/licenses/" not in _lic:
                 add("structured data", p,
@@ -345,8 +377,7 @@ for p, h in docs.items():
                 # Only the page's own hero image is at stake. A page may also show
                 # a chart that genuinely belongs to the gallery, and saying so is
                 # correct, not a defect.
-                _mine = [u for u in re.findall(r'<img[^>]*src="(/downloads/[^"]+)"', h)
-                         if not u.endswith("-light.png")]
+                _mine = _content_imgs(h)
                 _hero = SITE_URL.rstrip("/") + _mine[0] if _mine else None
                 _part = _n.get("isPartOf")
                 _pu = _part.get("url") if isinstance(_part, dict) else None
@@ -365,12 +396,35 @@ for _cu, _pages in sorted(_nominated.items()):
         add("structured data", sorted(_pages)[0],
             "%s is nominated as the primary image of %d pages (%s), so Google has "
             "to pick one" % (_cu.rsplit("/", 1)[-1], len(_pages), ", ".join(sorted(_pages))))
+# --- a page may not claim to be a different page ----------------------------
+# build_titration_pages.py builds each curve page from the tool page's markup and
+# carried the tool's WebPage block with it, so twenty curve pages (and five more
+# built the same way) declared a second WebPage entity with another page's url,
+# title and dates. tools/normalize_schema.py removes it; this stops it returning.
+for p, h in docs.items():
+    _canon = re.search(r'<link rel="canonical"[^>]*href="([^"]+)"', h)
+    _mine = {SITE_URL + p, SITE_URL}
+    if _canon:
+        _mine.add(_canon.group(1))
+        _mine.add(_canon.group(1).rstrip("/") + "/index.html")
+    _mine.add(SITE_URL + "index.html")
+    for _m in re.finditer(r'<script type="application/ld\+json">([\s\S]*?)</script>', h):
+        try:
+            _d = json.loads(_m.group(1))
+        except Exception:
+            continue
+        for _n in (_d if isinstance(_d, list) else [_d]):
+            if (_n.get("@type") == "WebPage" and _n.get("url")
+                    and _n["url"] not in _mine):
+                add("structured data", p,
+                    "declares a WebPage whose url is %s, so the page tells Google "
+                    "it is a different page" % _n["url"])
+
 # a page that owns a chart has to say so, or it competes with the gallery unarmed
 for p, h in docs.items():
     if p in _GALLERY or p == "suggest.html":
         continue
-    _own = [u for u in re.findall(r'<img[^>]*src="(/downloads/[^"]+)"', h)
-            if not u.endswith("-light.png")]
+    _own = _content_imgs(h)
     # Several pages can legitimately show the same chart. What matters is that
     # exactly one of them claims it, so only an image no page claims is a finding.
     _orphan = [u for u in _own
