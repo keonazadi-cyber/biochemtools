@@ -8,6 +8,7 @@ quietly cost traffic or make a page hard to read.
 import os, re, glob, json, html, collections, sys
 
 SITE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+SITE_URL = "https://biochemtools.com/"
 os.chdir(SITE)
 PAGES = sorted(p for p in glob.glob("*.html") if p != "404.html")
 
@@ -315,6 +316,69 @@ for p, h in docs.items():
         add("internal links", p,
             "links %s with a query string (?%s), which makes a separate crawlable URL; "
             "use a #fragment" % (m.group(1), m.group(2)[:40]))
+
+# --- one page per image, and a licence that is actually a licence ------------
+# Google shows one page per image in an image pack, and it believes the page's
+# own schema about which page that is. Nine pages shipped an ImageObject whose
+# isPartOf named charts.html and whose `license` was charts.html rather than a
+# licence URL, so they nominated a different page and offered no licence terms.
+# amino-acid-chart.html, which gets all three right, is in its image pack;
+# codon-chart.html, which got all three wrong, is not. tools/normalize_image_schema.py
+# fixes this at the source; these three checks stop it coming back.
+_CCBY = "https://creativecommons.org/licenses/by/4.0/"
+_GALLERY = {"index.html", "charts.html"}
+_nominated = {}
+for p, h in docs.items():
+    _url = SITE_URL if p == "index.html" else SITE_URL + p
+    for _m in re.finditer(r'<script type="application/ld\+json">([\s\S]*?)</script>', h):
+        try:
+            _d = json.loads(_m.group(1))
+        except Exception:
+            continue                       # invalid JSON-LD is already reported
+        for _n in (_d if isinstance(_d, list) else [_d]):
+            _lic = _n.get("license")
+            if _lic and "creativecommons.org/licenses/" not in _lic:
+                add("structured data", p,
+                    'license is %r, which is not a licence URL, so no "Licensable" '
+                    'badge can ever show' % _lic[:60])
+            if _n.get("@type") == "ImageObject":
+                # Only the page's own hero image is at stake. A page may also show
+                # a chart that genuinely belongs to the gallery, and saying so is
+                # correct, not a defect.
+                _mine = [u for u in re.findall(r'<img[^>]*src="(/downloads/[^"]+)"', h)
+                         if not u.endswith("-light.png")]
+                _hero = SITE_URL.rstrip("/") + _mine[0] if _mine else None
+                _part = _n.get("isPartOf")
+                _pu = _part.get("url") if isinstance(_part, dict) else None
+                if (_pu and _pu != _url and p not in _GALLERY
+                        and _n.get("contentUrl") == _hero):
+                    add("structured data", p,
+                        "its ImageObject says isPartOf %s, handing its own image to "
+                        "another page" % _pu)
+            if _n.get("@type") == "WebPage" and _n.get("primaryImageOfPage"):
+                _pi = _n["primaryImageOfPage"]
+                _cu = _pi.get("contentUrl") if isinstance(_pi, dict) else None
+                if _cu:
+                    _nominated.setdefault(_cu, []).append(p)
+for _cu, _pages in sorted(_nominated.items()):
+    if len(_pages) > 1:
+        add("structured data", sorted(_pages)[0],
+            "%s is nominated as the primary image of %d pages (%s), so Google has "
+            "to pick one" % (_cu.rsplit("/", 1)[-1], len(_pages), ", ".join(sorted(_pages))))
+# a page that owns a chart has to say so, or it competes with the gallery unarmed
+for p, h in docs.items():
+    if p in _GALLERY or p == "suggest.html":
+        continue
+    _own = [u for u in re.findall(r'<img[^>]*src="(/downloads/[^"]+)"', h)
+            if not u.endswith("-light.png")]
+    # Several pages can legitimately show the same chart. What matters is that
+    # exactly one of them claims it, so only an image no page claims is a finding.
+    _orphan = [u for u in _own
+               if not any(u in _c for _c in _nominated)]
+    if _orphan and "primaryImageOfPage" not in h:
+        add("structured data", p,
+            "embeds %s and no page on the site nominates it as primaryImageOfPage, "
+            "so the gallery wins the image pack slot" % _orphan[0])
 
 ORDER = ["analytics", "broken link", "images", "structured data", "title", "description", "canonical",
          "headings", "duplicate", "sitemap", "orphan", "thin", "internal links", "social",
