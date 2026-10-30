@@ -199,35 +199,226 @@ def codon_table():
     return run_js(m.group(1)) if m else None
 
 
+def codon_info():
+    """One-letter code to [three-letter, full name, class], off the same page."""
+    h = (SITE / "codon-chart.html").read_text()
+    m = re.search(r"(?:const|var|let)\s+INFO\s*=\s*(\{[\s\S]*?\});", h)
+    return run_js(m.group(1)) if m else None
+
+
+def page_start_codon():
+    """The codon the page itself badges START, not the one the bank assumes."""
+    h = (SITE / "codon-chart.html").read_text()
+    m = re.search(r"isStart\s*=\s*cod\s*===\s*['\"]([ACGU]{3})['\"]", h)
+    return m.group(1) if m else None
+
+
 def check_codon(bank):
-    """Every codon named anywhere in the bank must resolve on the page's table."""
-    tab = codon_table()
-    if not tab:
-        bad("codon-chart", "could not read the CODON table off the page")
+    """Recompute the codon answers from the chart's own CODON and INFO tables.
+
+    Until now this function only checked that every triplet named in the bank
+    existed somewhere on the page, which an answer pointing at the wrong option
+    passes without complaint: six of the seven answers were never recomputed.
+    """
+    tab, info = codon_table(), codon_info()
+    if not tab or not info:
+        bad("codon-chart", "could not read the CODON and INFO tables off the page")
         return
     norm = {k.upper().replace("T", "U"): v for k, v in tab.items()}
+    if len(norm) != 64:
+        bad("codon-chart", "the page's table holds %d codons, not 64" % len(norm))
+
+    # "Leucine (Leu)" and "Tyr, from UAC" both have to resolve to a one-letter
+    # code, so build the lookup from the page's own INFO rather than a literal.
+    code_of = {}
+    for c1, row in info.items():
+        code_of[str(row[0]).lower()] = c1
+        code_of[str(row[1]).lower()] = c1
+    family = {}
+    for cod, aa in norm.items():
+        family.setdefault(aa, []).append(cod)
+
+    def named_aa(text):
+        for tok in re.findall(r"[A-Za-z]+", text):
+            if tok.lower() in code_of:
+                return code_of[tok.lower()]
+        return None
+
+    def three(aa):
+        return str(info[aa][0]) if aa in info else "?"
+
+    def codons_in(text):
+        return [c for c in re.findall(r"\b([ACGU]{3})\b", text.upper())]
+
+    # The claims the stems and explanations rest on, taken from the table
+    # instead of on trust: if the page's table ever changes under the bank,
+    # these are the sentences that quietly stop being true.
+    stops = sorted(c for c, aa in norm.items() if aa == "*")
+    if stops != ["UAA", "UAG", "UGA"]:
+        bad("codon-chart", "the table's stop codons are %s, the bank says "
+                           "UAA, UAG, UGA" % (", ".join(stops) or "none"))
+    six = sorted(three(a) for a, cs in family.items() if len(cs) == 6)
+    if six != ["Arg", "Leu", "Ser"]:
+        bad("codon-chart", "the table gives six codons to %s, the bank says "
+                           "Leu, Ser, Arg" % (", ".join(six) or "nothing"))
+    lone = sorted(three(a) for a, cs in family.items() if len(cs) == 1)
+    if lone != ["Met", "Trp"]:
+        bad("codon-chart", "the table gives one codon to %s, the bank says "
+                           "Met, Trp" % (", ".join(lone) or "nothing"))
+
     for n, q in enumerate(bank["questions"], 1):
-        text = " ".join([q["q"], q["why"], q.get("source", ""), *q["options"]])
+        src, correct = q.get("source", ""), q["options"][q["answer"]]
+        stem = q["q"]
+        text = " ".join([stem, q["why"], src, *q["options"]])
+
         # Match ANY three-letter uppercase token, not just [ACGU]{3}. Matching
         # only well-formed codons meant an invented one like UXG was never
         # extracted, so it was never checked: the guard silently passed it.
-        for tok in set(re.findall(r"\b([A-Z]{3})\b", text)):
+        for tok in sorted(set(re.findall(r"\b([A-Z]{3})\b", text))):
             if tok in ALLOWED_TRIPLETS:
                 continue
             if tok.replace("T", "U") not in norm:
                 bad("codon-chart", "Q%d names %s, which is neither a codon on "
                                    "the page nor an allowed word" % (n, tok))
-        # a stop-codon question must name exactly the page's stop set
-        if "stop codon" in q["q"].lower() and "all three" in q["q"].lower():
-            stops = sorted(k for k, v in norm.items()
-                           if str(v).lower().startswith("stop")
-                           or str(v) in ("*", "Ter"))
-            picked = sorted(re.findall(r"\b([ACGU]{3})\b",
-                                       q["options"][q["answer"]].upper()))
-            if stops and picked != stops:
-                bad("codon-chart", "Q%d answer is %s, the table's stops are %s"
-                    % (n, picked, stops))
 
+        # every "CODON -> AA" lookup the source claims, including the shape
+        # "UUA, UUG, CUU, CUC, CUA, CUG -> L (Leu)" where one arrow covers six
+        for lst, aa, c3 in re.findall(
+                r"((?:[ACGUT]{3}\s*,\s*)*[ACGUT]{3})\s*->\s*([A-Z*])"
+                r"(?:\s*\(([A-Za-z]+)\))?", src):
+            for cod in re.findall(r"[ACGUT]{3}", lst):
+                rna = cod.replace("T", "U")
+                if norm.get(rna) != aa:
+                    bad("codon-chart", "Q%d source says %s -> %s, the table "
+                        "says %s -> %s" % (n, cod, aa, rna, norm.get(rna)))
+            if c3 and aa in info and c3.lower() != three(aa).lower():
+                bad("codon-chart", "Q%d source calls %s %r, the table calls "
+                    "it %s" % (n, aa, c3, three(aa)))
+
+        done = False
+
+        # "Which set lists all three stop codons?"
+        if re.search(r"all three stop codons", stem, re.I):
+            done = True
+            for i, o in enumerate(q["options"]):
+                hit = sorted(set(codons_in(o))) == stops
+                if hit and i != q["answer"]:
+                    bad("codon-chart", "Q%d option %r is also exactly the "
+                        "table's stop set" % (n, o))
+                if not hit and i == q["answer"]:
+                    bad("codon-chart", "Q%d answer is %r, the table's stops "
+                        "are %s" % (n, o, ", ".join(stops)))
+
+        # "Which of these ends translation?", one codon per option
+        elif re.search(r"ends translation|which .{0,20}is a stop codon",
+                       stem, re.I):
+            done = True
+            halt = [o for o in q["options"]
+                    if norm.get(o.strip().upper().replace("T", "U")) == "*"]
+            if halt != [correct]:
+                bad("codon-chart", "Q%d: options the table stops on are %s, "
+                    "answer is %s" % (n, halt, correct))
+
+        # "Which codon is both the start signal and the codon for methionine?"
+        elif re.search(r"start (?:signal|codon)", stem, re.I):
+            done = True
+            start = page_start_codon()
+            want = named_aa(re.sub(r".*codon for", "", stem, flags=re.I | re.S))
+            if not start:
+                bad("codon-chart", "Q%d asks for the start codon but the page "
+                                   "badges none" % n)
+            else:
+                if correct.strip().upper().replace("T", "U") != start:
+                    bad("codon-chart", "Q%d answers %s, the page badges %s as "
+                        "START" % (n, correct, start))
+                if want and norm.get(start) != want:
+                    bad("codon-chart", "Q%d has the start codon giving %s, the "
+                        "table gives %s -> %s" % (n, three(want), start,
+                                                  three(norm.get(start))))
+
+        # "ACU, ACC, ACA and ACG all give threonine. Which base can change?"
+        elif re.search(r"which base can change", stem, re.I):
+            done = True
+            cods = codons_in(stem)
+            m = re.search(r"all give (\w+)", stem, re.I)
+            want = code_of.get(m.group(1).lower()) if m else None
+            got = sorted({norm.get(c) for c in cods})
+            if len(cods) < 2:
+                bad("codon-chart", "Q%d names %d codons, too few to show a "
+                    "wobble position" % (n, len(cods)))
+            elif len(got) != 1 or (want and got != [want]):
+                bad("codon-chart", "Q%d says %s all give %s, the table gives "
+                    "them %s" % (n, ", ".join(cods),
+                                 three(want) if want else "one amino acid",
+                                 ", ".join(three(g) for g in got)))
+            else:
+                ORD = ["the first base", "the second base", "the third base"]
+                varies = [i for i in range(3) if len({c[i] for c in cods}) > 1]
+                if len(varies) != 1:
+                    bad("codon-chart", "Q%d: %s vary at %d positions, so no "
+                        "single base is the answer"
+                        % (n, ", ".join(cods), len(varies)))
+                elif correct.strip().lower() != ORD[varies[0]]:
+                    bad("codon-chart", "Q%d answers %r, but %s differ only at "
+                        "%s" % (n, correct, ", ".join(cods), ORD[varies[0]]))
+
+        # "Which of these amino acids has six of them?"
+        elif re.search(r"has (one|two|three|four|five|six|\d+) of them",
+                       stem, re.I):
+            done = True
+            WORD = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+                    "six": 6}
+            w = re.search(r"has (one|two|three|four|five|six|\d+) of them",
+                          stem, re.I).group(1).lower()
+            want = WORD.get(w) or int(w)
+            hits = [o for o in q["options"]
+                    if len(family.get(named_aa(o) or "", [])) == want]
+            if hits != [correct]:
+                bad("codon-chart", "Q%d: options the table gives %d codons are "
+                    "%s, answer is %s" % (n, want, hits, correct))
+
+        # "A DNA coding-strand triplet reads TAC. Rewrite it as RNA."
+        elif re.search(r"DNA.{0,30}(?:triplet|codon).{0,20}reads\s+([ACGT]{3})",
+                       stem, re.I):
+            done = True
+            dna = re.search(
+                r"DNA.{0,30}(?:triplet|codon).{0,20}reads\s+([ACGT]{3})",
+                stem, re.I).group(1).upper()
+            rna = dna.replace("T", "U")
+            mo = re.search(r"([A-Za-z]+),\s*from\s+([ACGU]{3})", correct)
+            if not mo:
+                bad("codon-chart", "Q%d answer %r names no amino acid and "
+                    "codon to check" % (n, correct))
+            else:
+                if mo.group(2).upper() != rna:
+                    bad("codon-chart", "Q%d answer looks up %s, but DNA %s is "
+                        "RNA %s" % (n, mo.group(2), dna, rna))
+                if code_of.get(mo.group(1).lower()) != norm.get(rna):
+                    bad("codon-chart", "Q%d answer calls %s %s, the table says "
+                        "%s" % (n, rna, mo.group(1), three(norm.get(rna))))
+
+        # "reads CAG from 5-prime to 3-prime. Read backwards as GAC."
+        elif re.search(r"reads\s+([ACGU]{3})\s+from\s+5", stem, re.I):
+            done = True
+            fwd = re.search(r"reads\s+([ACGU]{3})\s+from\s+5",
+                            stem, re.I).group(1).upper()
+            mb = re.search(r"backwards as\s+([ACGU]{3})", stem, re.I)
+            if not mb:
+                bad("codon-chart", "Q%d reads %s backwards but names no "
+                    "reversed codon" % (n, fwd))
+            else:
+                rev = mb.group(1).upper()
+                if rev != fwd[::-1]:
+                    bad("codon-chart", "Q%d says %s backwards is %s, it is %s"
+                        % (n, fwd, rev, fwd[::-1]))
+                if named_aa(correct) != norm.get(rev):
+                    bad("codon-chart", "Q%d answers %s for %s, the table says "
+                        "%s" % (n, correct, rev, three(norm.get(rev))))
+
+        if not done:
+            bad("codon-chart",
+                "Q%d could not be verified against the data (source: %s)"
+                % (n, src[:60]))
 
 def check_nucleic(bank):
     """Recompute the A260 arithmetic from the factors the page actually uses."""
