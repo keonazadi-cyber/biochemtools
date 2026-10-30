@@ -71,6 +71,18 @@ def check_format(slug, bank):
             bad(slug, "answer index %d used %d times, cap is 3" % (k, v))
     if len(idx) < 3:
         bad(slug, "only %d distinct answer positions used" % len(idx))
+    # The whole point of the change is that the search result promises something
+    # the result itself cannot contain. A page that gains a test and does not say
+    # so in its title or description is carrying the cost and none of the benefit,
+    # and worse, it makes the experiment unreadable: a flat result there cannot
+    # tell "promising a test does not work" from "no test was promised".
+    # nucleic-acid-concentration-calculator shipped exactly that way, because the
+    # brief for it said to improve its calculator title rather than replace it.
+    PROMISE = ("test", "quiz", "question", "check yourself", "self-test")
+    blurb = (bank["title"] + " " + bank["description"]).lower()
+    if not any(w in blurb for w in PROMISE):
+        bad(bank["slug"], "has a self-test but neither the title nor the "
+                          "description promises one, so the click never happens")
     t, d = bank["title"], bank["description"]
     if len(t) > 60:
         bad(slug, "title is %d chars" % len(t))
