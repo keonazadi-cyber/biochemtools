@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Punnett Square Calculator &amp; Dihybrid Cross Solver</title>
-<meta name="description" content="Free Punnett square generator for monohybrid and dihybrid crosses. Enter two genotypes for the full square, the gametes, and genotype and phenotype ratios.">
+<title>Punnett Square Calculator + Dihybrid Cross Self-Test</title>
+<meta name="description" content="Build a Punnett square for a monohybrid or dihybrid cross, get the gametes and both ratios, then check yourself on six questions with worked answers.">
 <meta name="keywords" content="punnett square calculator, punnett square generator, punnett square maker, punnett square solver, dihybrid cross calculator, dihybrid cross solver, monohybrid cross, genotype phenotype ratio">
 <link rel="canonical" href="https://biochemtools.com/punnett-square-calculator.html">
 <meta property="og:title" content="Punnett Square Calculator: Monohybrid &amp; Dihybrid">
@@ -96,6 +96,38 @@
 <meta name="theme-color" content="#0e0c0a">
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/punnett-square-calculator.html","name":"Punnett Square Calculator & Dihybrid Cross Solver","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -113,6 +145,7 @@
 
 <header><h1>Punnett Square Calculator</h1><p>A Punnett square generator for monohybrid and dihybrid crosses. Enter two parent genotypes and get the full square, the gametes, and the genotype and phenotype ratios. Works as a dihybrid cross calculator too, up to two genes.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on gametes, genotype and phenotype ratios and test crosses, each answer checkable against the square and the worked examples above.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;With independent assortment, how many distinct gamete types does an AaBb parent make?&quot;,&quot;options&quot;:[&quot;Two, since there are two genes&quot;,&quot;Four, namely AB, Ab, aB, ab&quot;,&quot;Sixteen, the size of the grid&quot;,&quot;Three, as in the 3:1 ratio&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;One allele is taken from each gene independently, so a double heterozygote gives 2 x 2 = 4 gamete types, which is why the dihybrid grid is 4 by 4.&quot;},{&quot;q&quot;:&quot;Aa x Aa is crossed. What is the GENOTYPE ratio of the offspring?&quot;,&quot;options&quot;:[&quot;3 : 1, dominant over recessive&quot;,&quot;9 : 3 : 3 : 1 over four classes&quot;,&quot;1 : 2 : 1 for AA, Aa and aa&quot;,&quot;1 : 1, the test cross split&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The 3:1 figure is the phenotype ratio, because AA and Aa look alike, while the genotype ratio keeps them apart as 1:2:1.&quot;},{&quot;q&quot;:&quot;A plant showing the dominant trait is crossed with aa, and every offspring shows the dominant trait. What does that show?&quot;,&quot;options&quot;:[&quot;It was Aa, since aa adds no dominant allele&quot;,&quot;The two genes must be linked, not assorting&quot;,&quot;Nothing, a test cross cannot separate them&quot;,&quot;It was AA, no recessive offspring appear&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Crossing with aa makes each offspring&#x27;s phenotype report the unknown parent&#x27;s gamete, so one recessive offspring would prove Aa and none at all points to AA.&quot;},{&quot;q&quot;:&quot;In AaBb x AaBb, what fraction of offspring show both recessive traits?&quot;,&quot;options&quot;:[&quot;1/16, the one aabb box of 16&quot;,&quot;3/16, one of the middle classes&quot;,&quot;1/4, from one half times one half&quot;,&quot;9/16, the both-dominant class&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Each gene independently gives the recessive pair in a quarter of offspring, so both at once is a quarter of a quarter.&quot;},{&quot;q&quot;:&quot;Which cross gives a 1:1:1:1 phenotype ratio?&quot;,&quot;options&quot;:[&quot;AaBb x AaBb, both double heterozygotes&quot;,&quot;AaBb x aabb, a dihybrid test cross&quot;,&quot;Aa x Aa, a monohybrid between two Aa&quot;,&quot;AABb x Aabb, one parent homozygous&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;A 1:1:1:1 ratio needs one parent whose gametes are all recessive, so the offspring simply read out the other parent&#x27;s four gamete types.&quot;},{&quot;q&quot;:&quot;Two genes sit close together on the same chromosome. Why does a plain Punnett square mislead?&quot;,&quot;options&quot;:[&quot;The square assumes independent assortment&quot;,&quot;The square only works for one gene at a time&quot;,&quot;Dominance stops working when genes are close&quot;,&quot;You would need a 16-box grid instead of four&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;A Punnett square treats every gamete combination as equally likely, which is only true when the genes assort independently.&quot;}]"><div class="st-fallback"><details><summary>With independent assortment, how many distinct gamete types does an AaBb parent make?</summary><p class="st-ans">Four, namely AB, Ab, aB, ab</p><p class="st-exp">One allele is taken from each gene independently, so a double heterozygote gives 2 x 2 = 4 gamete types, which is why the dihybrid grid is 4 by 4.</p></details><details><summary>Aa x Aa is crossed. What is the GENOTYPE ratio of the offspring?</summary><p class="st-ans">1 : 2 : 1 for AA, Aa and aa</p><p class="st-exp">The 3:1 figure is the phenotype ratio, because AA and Aa look alike, while the genotype ratio keeps them apart as 1:2:1.</p></details><details><summary>A plant showing the dominant trait is crossed with aa, and every offspring shows the dominant trait. What does that show?</summary><p class="st-ans">It was AA, no recessive offspring appear</p><p class="st-exp">Crossing with aa makes each offspring&#x27;s phenotype report the unknown parent&#x27;s gamete, so one recessive offspring would prove Aa and none at all points to AA.</p></details><details><summary>In AaBb x AaBb, what fraction of offspring show both recessive traits?</summary><p class="st-ans">1/16, the one aabb box of 16</p><p class="st-exp">Each gene independently gives the recessive pair in a quarter of offspring, so both at once is a quarter of a quarter.</p></details><details><summary>Which cross gives a 1:1:1:1 phenotype ratio?</summary><p class="st-ans">AaBb x aabb, a dihybrid test cross</p><p class="st-exp">A 1:1:1:1 ratio needs one parent whose gametes are all recessive, so the offspring simply read out the other parent&#x27;s four gamete types.</p></details><details><summary>Two genes sit close together on the same chromosome. Why does a plain Punnett square mislead?</summary><p class="st-ans">The square assumes independent assortment</p><p class="st-exp">A Punnett square treats every gamete combination as equally likely, which is only true when the genes assort independently.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <div class="cross">
    <div><label for="p1">Parent 1 genotype</label> <input id="p1" value="AaBb" spellcheck="false"></div>
@@ -256,5 +289,6 @@ run();
 </script>
 <script src="/streak.js?v=f493fb7c" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

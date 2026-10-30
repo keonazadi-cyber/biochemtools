@@ -1,0 +1,80 @@
+{
+  "slug": "hardy-weinberg-calculator",
+  "title": "Hardy-Weinberg Calculator + Genotype Frequency Self-Test",
+  "description": "Work out allele and genotype frequencies with the Hardy-Weinberg equation, from p or from real counts, then take a six-question self-test on this page.",
+  "intro": "Six questions on the equation, the five assumptions and the chi-square test, each answer worked out with the same method the calculator uses above.",
+  "questions": [
+    {
+      "q": "Which of these is NOT one of the five Hardy-Weinberg assumptions?",
+      "options": [
+        "Mating is random across the population",
+        "Selection favours the dominant allele",
+        "No migration into or out of the population",
+        "The population is effectively infinite"
+      ],
+      "answer": 1,
+      "why": "All five assumptions say that nothing is shifting allele frequencies, so selection acting on the locus is a violation of equilibrium rather than a condition for it.",
+      "source": "FAQ, 'What does it mean if a population isn't in equilibrium?': the five listed assumptions are no mutation, random mating, no migration, no selection, infinite population size (no drift)."
+    },
+    {
+      "q": "Why does the heterozygote term carry a 2 in p squared + 2pq + q squared?",
+      "options": [
+        "A heterozygote forms two ways, A from either parent",
+        "Heterozygotes are always twice as common as either homozygote",
+        "It doubles q so the three frequencies add up to one",
+        "Two alleles exist at the locus, so every term doubles"
+      ],
+      "answer": 0,
+      "why": "The 2 counts the two parental orders that both give Aa, A from one parent or A from the other, so pq alone would count only half of the heterozygotes.",
+      "source": "Formula box and its worked line: at p = 0.6, Aa = 2(0.6)(0.4) = 0.48, while pq = 0.24 is one of the two pairings. Option 1 is refuted by the page's own example 1: at p = 0.8, Aa = 0.32 but AA = 0.64, so heterozygotes are not twice a homozygote."
+    },
+    {
+      "q": "A recessive disorder affects 1 person in 100. Under Hardy-Weinberg, what fraction of the population are carriers?",
+      "options": [
+        "0.01, the same as the affected fraction",
+        "0.10, the recessive allele frequency itself",
+        "0.18, a little under a fifth of people",
+        "0.81, the homozygous dominant fraction"
+      ],
+      "answer": 2,
+      "why": "A carrier is heterozygous, so the carrier fraction is the 2pq term, not q and not q squared.",
+      "source": "q squared = 1/100 = 0.01, so q = sqrt(0.01) = 0.1 and p = 1 - 0.1 = 0.9, giving 2pq = 2 x 0.9 x 0.1 = 0.18. Page method: 'the recessive phenotype frequency is q squared, so q = sqrt(aa frequency) and p = 1 - q', then Aa = 2pq. The 0.81 option is p squared = 0.9 x 0.9."
+    },
+    {
+      "q": "A sample of 200 is genotyped as 90 AA, 60 Aa, 50 aa. What is p?",
+      "options": [
+        "0.45, the AA fraction of all individuals",
+        "0.60, counting alleles over 400 total",
+        "0.75, the fraction showing the dominant trait",
+        "0.30, the heterozygote fraction of the sample"
+      ],
+      "answer": 1,
+      "why": "Allele frequencies count alleles, not people, so every heterozygote contributes one A to a pool of 2N alleles.",
+      "source": "Page formula p = (2 x AA + Aa) / (2N): (2 x 90 + 60) / 400 = 240/400 = 0.600. Distractors: 90/200 = 0.45 (AA fraction, which is p squared), (90 + 60)/200 = 0.75 (dominant phenotype), 60/200 = 0.30 (heterozygote fraction)."
+    },
+    {
+      "q": "Worked example 2 gets a chi-square of 20.0 from 300 AA, 150 Aa, 50 aa. What does that establish?",
+      "options": [
+        "The counts depart from equilibrium at df = 1",
+        "The population is in equilibrium, since 20 > 3.84",
+        "Natural selection is acting on this locus",
+        "p was computed wrong, since chi-square should be 0"
+      ],
+      "answer": 0,
+      "why": "A chi-square above 3.84 says the genotype counts do not fit Hardy-Weinberg, but it never names which assumption failed.",
+      "source": "Worked example 2: p = 750/1000 = 0.750, expected 281.25, 187.5, 31.25, so chi-square = (300-281.25)^2/281.25 + (150-187.5)^2/187.5 + (50-31.25)^2/31.25 = 1.25 + 7.5 + 11.25 = 20.0 > 3.84. The page notes the homozygote excess is 'not necessarily selection'."
+    },
+    {
+      "q": "A population at equilibrium has p = 0.3. What fraction is homozygous dominant?",
+      "options": [
+        "0.42, from the 2pq middle term",
+        "0.49, the q squared recessive share",
+        "0.30, the value of p itself here",
+        "0.09, just under one in eleven"
+      ],
+      "answer": 3,
+      "why": "p is an allele frequency and p squared is a genotype frequency, so the AA share is the square of p, never p itself.",
+      "source": "p = 0.3 so q = 1 - 0.3 = 0.7. p squared = 0.09, 2pq = 2(0.3)(0.7) = 0.42, q squared = 0.49, and 0.09 + 0.42 + 0.49 = 1.00, the page's built-in check. 1/11 = 0.0909, so 0.09 is just under one in eleven."
+    }
+  ]
+}

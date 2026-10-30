@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATP Yield Calculator: ATP per Glucose, Free</title>
-<meta name="description" content="Free ATP yield calculator. See total ATP per glucose from glycolysis, the TCA cycle, and oxidative phosphorylation, why textbooks say 30, 32, 36, or 38.">
+<title>ATP Yield Calculator: Work Out ATP per Glucose</title>
+<meta name="description" content="Pick your P/O ratio and shuttle, see the full accounting per glucose, then check yourself with six questions on the parts students lose marks on.">
 <meta name="keywords" content="atp yield per glucose, how many atp from glucose, cellular respiration atp calculator, 36 or 38 atp, 30 or 32 atp glucose, oxidative phosphorylation atp yield">
 <link rel="canonical" href="https://biochemtools.com/atp-yield-calculator.html">
 <meta property="og:title" content="ATP Yield Calculator: Why the Number Isn't Fixed">
@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://biochemtools.com/og-images/atp-yield-calculator.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://biochemtools.com/"},{"@type":"ListItem","position":2,"name":"Molecular biology","item":"https://biochemtools.com/#molecular-biology"},{"@type":"ListItem","position":3,"name":"ATP Yield Calculator","item":"https://biochemtools.com/atp-yield-calculator.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to calculate total ATP yield per glucose","step":[
-{"@type":"HowToStep","name":"Count substrate-level ATP","text":"2 ATP from glycolysis + 2 GTP from the TCA cycle (2 turns) = 4 ATP made directly, no oxygen or electron transport chain needed."},
+{"@type":"HowToStep","name":"Count substrate-level ATP","text":"2 ATP from glycolysis + 2 GTP from the TCA cycle (2 turns) = 4 ATP made directly, without the electron transport chain. Only the 2 from glycolysis are independent of oxygen; the cycle stalls without it."},
 {"@type":"HowToStep","name":"Count NADH and FADH2 produced","text":"Glycolysis: 2 NADH (cytosolic). Pyruvate dehydrogenase: 2 NADH. TCA cycle (2 turns): 6 NADH + 2 FADH2. Total: 10 NADH, 2 FADH2."},
 {"@type":"HowToStep","name":"Apply the P/O ratio","text":"Multiply mitochondrial NADH and FADH2 by their ATP yield per molecule (classic: 3 and 2; modern: 2.5 and 1.5), then add the cytosolic NADH using whichever shuttle applies."},
 {"@type":"HowToStep","name":"Add it all up","text":"Total ATP = substrate-level ATP + oxidative phosphorylation ATP from all NADH and FADH2."}]}
@@ -98,6 +98,38 @@
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/atp-yield-calculator.html","name":"ATP Yield Calculator — ATP per Glucose, Free","datePublished":"2026-07-21","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"},"image":"https://biochemtools.com/downloads/atp-yield-chart.png","primaryImageOfPage":{"@type":"ImageObject","contentUrl":"https://biochemtools.com/downloads/atp-yield-chart.png","url":"https://biochemtools.com/downloads/atp-yield-chart.png","width":1500,"height":1780,"caption":"Chart showing ATP yield per glucose: 4 ATP directly, 10 NADH and 2 FADH2, converting to 30 to 32 ATP total","license":"https://creativecommons.org/licenses/by/4.0/","acquireLicensePage":"https://biochemtools.com/charts.html","creditText":"BiochemTools","creator":{"@type":"Organization","name":"BiochemTools"}}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageObject","contentUrl":"https://biochemtools.com/downloads/atp-yield-chart.png","name":"ATP yield per glucose, 30 to 32 not 38","description":"Where the ATP from one glucose comes from, and why the modern figure is 30 to 32.","width":1500,"height":1780,"creditText":"biochemtools.com","license":"https://creativecommons.org/licenses/by/4.0/","acquireLicensePage":"https://biochemtools.com/charts.html","creator":{"@type":"Organization","name":"Biochemtools"},"isPartOf":{"@type":"WebPage","url":"https://biochemtools.com/atp-yield-calculator.html"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -115,6 +147,7 @@
 
 <header><h1>ATP Yield Calculator</h1><p>How many ATP does one glucose actually make? It depends which convention you use. This tool shows all four answers (30, 32, 36, or 38) and exactly why they differ, not just one memorized number.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on the accounting above, each answerable from the convention and shuttle that produced the number.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;Using the modern P/O ratios and the malate-aspartate shuttle, what is the total ATP per glucose?&quot;,&quot;options&quot;:[&quot;30 ATP&quot;,&quot;32 ATP&quot;,&quot;36 ATP&quot;,&quot;38 ATP&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;Modern ratios of 2.5 and 1.5 with the full-value shuttle give 32, while the older 3 and 2 ratios are what produce 38.&quot;},{&quot;q&quot;:&quot;The page counts 10 NADH per glucose. How many of them are made in the cytosol?&quot;,&quot;options&quot;:[&quot;2 of the 10&quot;,&quot;4 of the 10&quot;,&quot;6 of the 10&quot;,&quot;8 of the 10&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Only glycolysis makes NADH outside the mitochondrion, so 2 are cytosolic and the other 8 come from pyruvate dehydrogenase and the cycle inside it.&quot;},{&quot;q&quot;:&quot;Why do those 2 cytosolic NADH change the total depending on the tissue?&quot;,&quot;options&quot;:[&quot;Cytosolic NADH carries less energy than the mitochondrial kind&quot;,&quot;They are spent regenerating NAD+ before the chain can use them&quot;,&quot;NADH cannot cross the inner membrane, so a shuttle takes over&quot;,&quot;The cycle oxidizes them twice, once for each three-carbon half&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The NADH itself is identical, but it cannot cross the inner membrane, so the shuttle a tissue uses decides whether its electrons arrive worth a NADH or only a FADH2.&quot;},{&quot;q&quot;:&quot;With the classic P/O ratios of 3 and 2 and the glycerol-3-phosphate shuttle, what is the total?&quot;,&quot;options&quot;:[&quot;38 ATP&quot;,&quot;30 ATP&quot;,&quot;32 ATP&quot;,&quot;36 ATP&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Classic ratios alone give 38, and the glycerol-3-phosphate shuttle then drops the 2 cytosolic NADH to FADH2 value, costing 2 ATP and leaving 36.&quot;},{&quot;q&quot;:&quot;How much ATP per glucose comes from substrate-level phosphorylation rather than the chain?&quot;,&quot;options&quot;:[&quot;2 ATP&quot;,&quot;4 ATP&quot;,&quot;6 ATP&quot;,&quot;10 ATP&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;Glycolysis contributes 2 and the cycle&#x27;s GTP contributes 2, so 4 ATP are made directly and everything else comes from oxidative phosphorylation.&quot;},{&quot;q&quot;:&quot;In a muscle cell on modern ratios, blocking glycolysis entirely costs how much of its 30 ATP?&quot;,&quot;options&quot;:[&quot;2 of the 30&quot;,&quot;3 of the 30&quot;,&quot;5 of the 30&quot;,&quot;7 of the 30&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Glycolysis pays twice, 2 ATP directly plus 2 NADH worth 1.5 each through the glycerol-3-phosphate shuttle, so the loss is 5 rather than its own 2.&quot;}]"><div class="st-fallback"><details><summary>Using the modern P/O ratios and the malate-aspartate shuttle, what is the total ATP per glucose?</summary><p class="st-ans">32 ATP</p><p class="st-exp">Modern ratios of 2.5 and 1.5 with the full-value shuttle give 32, while the older 3 and 2 ratios are what produce 38.</p></details><details><summary>The page counts 10 NADH per glucose. How many of them are made in the cytosol?</summary><p class="st-ans">2 of the 10</p><p class="st-exp">Only glycolysis makes NADH outside the mitochondrion, so 2 are cytosolic and the other 8 come from pyruvate dehydrogenase and the cycle inside it.</p></details><details><summary>Why do those 2 cytosolic NADH change the total depending on the tissue?</summary><p class="st-ans">NADH cannot cross the inner membrane, so a shuttle takes over</p><p class="st-exp">The NADH itself is identical, but it cannot cross the inner membrane, so the shuttle a tissue uses decides whether its electrons arrive worth a NADH or only a FADH2.</p></details><details><summary>With the classic P/O ratios of 3 and 2 and the glycerol-3-phosphate shuttle, what is the total?</summary><p class="st-ans">36 ATP</p><p class="st-exp">Classic ratios alone give 38, and the glycerol-3-phosphate shuttle then drops the 2 cytosolic NADH to FADH2 value, costing 2 ATP and leaving 36.</p></details><details><summary>How much ATP per glucose comes from substrate-level phosphorylation rather than the chain?</summary><p class="st-ans">4 ATP</p><p class="st-exp">Glycolysis contributes 2 and the cycle&#x27;s GTP contributes 2, so 4 ATP are made directly and everything else comes from oxidative phosphorylation.</p></details><details><summary>In a muscle cell on modern ratios, blocking glycolysis entirely costs how much of its 30 ATP?</summary><p class="st-ans">5 of the 30</p><p class="st-exp">Glycolysis pays twice, 2 ATP directly plus 2 NADH worth 1.5 each through the glycerol-3-phosphate shuttle, so the loss is 5 rather than its own 2.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <label style="margin-top:0">P/O ratio convention</label>
   <div class="modes" id="conv">
@@ -145,7 +178,7 @@
  </div>
 
  <h2>How the total is actually built</h2>
- <p class="note">Every glucose makes 4 ATP directly (substrate-level phosphorylation: 2 from glycolysis, 2 from the TCA cycle's GTP) with no oxygen required. Everything else comes from oxidative phosphorylation: the 10 NADH and 2 FADH₂ produced along the way feed electrons into the electron transport chain, and the proton gradient that creates drives ATP synthase. How much ATP each NADH or FADH₂ is "worth", the P/O ratio, is where the textbook disagreement comes from.</p>
+ <p class="note">Every glucose makes 4 ATP directly (substrate-level phosphorylation: 2 from glycolysis, 2 from the TCA cycle&#x27;s GTP), meaning the chain never touches them. Only the 2 from glycolysis are made with no oxygen at all: the cycle&#x27;s GTP still needs the chain turning to keep NAD+ available, which is why the FAQ below says the cycle shuts down without oxygen. Everything else comes from oxidative phosphorylation: the 10 NADH and 2 FADH₂ produced along the way feed electrons into the electron transport chain, and the proton gradient that creates drives ATP synthase. How much ATP each NADH or FADH₂ is "worth", the P/O ratio, is where the textbook disagreement comes from.</p>
  <p class="note">2 of those 10 NADH are made in the cytosol during glycolysis, but NADH itself can't cross the inner mitochondrial membrane. A shuttle system moves the electrons across instead, and depending on which shuttle a tissue uses, those 2 NADH end up worth either a full NADH's worth of ATP (malate-aspartate shuttle) or only a FADH₂'s worth (glycerol-3-phosphate shuttle), which is the second source of disagreement.</p>
  <p class="note">Related tools: <a href="/glycolysis-pathway-explorer.html">Glycolysis pathway explorer</a> · <a href="/beta-oxidation-atp-calculator.html">Beta-oxidation ATP calculator</a> · <a href="/">all biochem tools</a>.</p>
 
@@ -293,5 +326,6 @@ document.querySelectorAll(".citebtn").forEach(function(b){
  });
 });
 </script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

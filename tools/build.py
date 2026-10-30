@@ -19,6 +19,10 @@ STEPS = [
     ("render_titration_png.py", "a real PNG per curve, for image search"),
     ("build_titration_pages.py", "the curve pages themselves"),
     ("prerender_chart_rows.py", "the chart's rows exist without JavaScript"),
+    # the self-test goes in before the decorations, because it injects at the
+    # top of <main> while they append at the bottom of it
+    ("build_selftest.py", "a test on the pages that rank but get no clicks"),
+    ("check_selftest.py", "every answer recomputed from the page's own data"),
     # things added on top of a finished page, so they must come after it
     ("add_feedback_line.py", "the ask line"),
     ("add_suggest_footer_link.py", "the footer link"),

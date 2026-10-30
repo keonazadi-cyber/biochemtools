@@ -1,0 +1,80 @@
+{
+  "slug": "how-many-atp-are-produced-in-glycolysis",
+  "title": "How Many ATP Are Produced in Glycolysis? Test Yourself",
+  "description": "Walk the four steps that spend or make ATP, then take a six question self-test on net versus gross, per glucose versus per pyruvate, and no oxygen.",
+  "intro": "Six questions on the parts of this tally that cost people marks, all answerable from the table above.",
+  "questions": [
+    {
+      "q": "What does one glucose net from glycolysis?",
+      "options": [
+        "2 ATP, 2 NADH, 2 pyruvate",
+        "4 ATP, 2 NADH, 2 pyruvate",
+        "2 ATP, 4 NADH, 1 pyruvate",
+        "4 ATP, 4 NADH, 2 pyruvate"
+      ],
+      "answer": 0,
+      "why": "Four ATP are made but two were already spent, so the net gain is 2 ATP alongside 2 NADH and 2 pyruvate.",
+      "source": "Answer box at the top: Net 2 ATP, four made and two spent, plus 2 NADH and 2 pyruvate."
+    },
+    {
+      "q": "Phosphoglycerate kinase is listed as +2 ATP at step 7. Why is it not +1?",
+      "options": [
+        "Pyruvate kinase later reverses one of the two ATP",
+        "Aldolase split the sugar, so the step runs twice",
+        "The enzyme phosphorylates ADP at two active sites",
+        "One ATP comes from step 7 and one from step 10"
+      ],
+      "answer": 1,
+      "why": "The step makes 1 ATP per three-carbon molecule, and glucose was already split into two of them at step 4, so it is +2 per glucose and +1 per pyruvate.",
+      "source": "Note under the step table: steps 7 and 10 show +2 because aldolase splits the six-carbon sugar at step 4, so everything after that happens twice per glucose."
+    },
+    {
+      "q": "Which two steps of glycolysis consume ATP?",
+      "options": [
+        "Steps 7 and 10, phosphoglycerate kinase and pyruvate kinase",
+        "Steps 1 and 7, hexokinase and phosphoglycerate kinase",
+        "Steps 1 and 3, hexokinase and phosphofructokinase-1",
+        "Steps 3 and 10, phosphofructokinase-1 and pyruvate kinase"
+      ],
+      "answer": 2,
+      "why": "The investment phase spends ATP at steps 1 and 3, while steps 7 and 10 are the payoff steps that make it.",
+      "source": "Step table rows 1 and 3: hexokinase -1 ATP, phosphofructokinase-1 -1 ATP."
+    },
+    {
+      "q": "With no oxygen present, what does glycolysis net per glucose?",
+      "options": [
+        "0 ATP, the pathway stalls at step 6 instead",
+        "1 ATP, because pyruvate kinase cannot run",
+        "4 ATP, since no NADH gets cashed in later",
+        "2 ATP, the same as it nets with oxygen"
+      ],
+      "answer": 3,
+      "why": "Glycolysis never uses oxygen, so the net stays 2 ATP and what changes is only the downstream fate of the pyruvate and NADH.",
+      "source": "Answer box and the section With oxygen versus without: glycolysis nets the same 2 ATP either way."
+    },
+    {
+      "q": "How is ATP actually made during glycolysis?",
+      "options": [
+        "A phosphate is handed from an intermediate to ADP",
+        "ATP synthase is turned by the proton gradient",
+        "Electrons travel down the chain and reduce oxygen",
+        "NADH is oxidized by complex I and the energy stored"
+      ],
+      "answer": 0,
+      "why": "This is substrate-level phosphorylation, a direct transfer onto ADP, which is why no gradient, chain or oxygen is involved.",
+      "source": "Section How that ATP is actually made: a phosphate is handed directly from a high-energy intermediate onto ADP, at steps 7 and 10."
+    },
+    {
+      "q": "What do the 2 ATP spent in the investment phase accomplish?",
+      "options": [
+        "They reduce NAD+ so the payoff phase keeps running",
+        "They pay to carry glucose across the membrane inward",
+        "They are handed back to pyruvate kinase at step 10",
+        "They add phosphate and trap the sugar inside"
+      ],
+      "answer": 3,
+      "why": "Phosphorylating the sugar puts a charge on it so it cannot cross back out of the cell, which is what the spent ATP buys.",
+      "source": "Section Why the net is 2 and not 4: hexokinase attaches a phosphate which traps glucose inside the cell because the charged molecule cannot cross the membrane back out."
+    }
+  ]
+}

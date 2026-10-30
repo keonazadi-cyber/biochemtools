@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amino Acid Chart: All 20 with pKa, pI &amp; Codes, Free</title>
-<meta name="description" content="All 20 amino acids with codes, class, pKa values, pI, molecular weight, hydropathy, and essential status. Filter, search, sort. Free and printable.">
+<title>Amino Acid Chart: Test Yourself on All 20 Codes and pKa</title>
+<meta name="description" content="All 20 amino acids with one and three letter codes, pKa, pI, mass and hydropathy, plus a seven question self test you can take on the page itself.">
 <meta name="keywords" content="amino acid chart, amino acid table, amino acid pka values, amino acid pi values, 20 amino acids list, one letter amino acid codes, essential amino acids, amino acid classification, amino acid properties chart">
 <link rel="canonical" href="https://biochemtools.com/amino-acid-chart.html">
 <meta property="og:title" content="Amino Acid Chart: All 20 with pKa, pI &amp; Codes">
@@ -116,6 +116,38 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://biochemtools.com/amino-acid-chart.html", "name": "Amino Acid Chart \u2014 All 20 with pKa, pI & Codes, Free", "datePublished": "2026-07-29", "dateModified": "2026-07-30", "inLanguage": "en", "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/", "logo": "https://biochemtools.com/favicon-512.png"}, "isPartOf": {"@type": "WebSite", "name": "BiochemTools", "url": "https://biochemtools.com/"}, "image": "https://biochemtools.com/downloads/amino-acid-chart.png", "primaryImageOfPage": {"@type": "ImageObject", "contentUrl": "https://biochemtools.com/downloads/amino-acid-chart.png", "url": "https://biochemtools.com/downloads/amino-acid-chart.png", "width": 1500, "height": 2200, "caption": "Printable amino acid chart: all 20 amino acids grouped by class, with one and three letter codes, pKa of the alpha-carboxyl, alpha-amino and side chain groups, isoelectric point, molecular weight, Kyte-Doolittle hydropathy and which are essential", "license": "https://creativecommons.org/licenses/by/4.0/", "acquireLicensePage": "https://biochemtools.com/charts.html", "creditText": "BiochemTools", "creator": {"@type": "Organization", "name": "BiochemTools"}}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dataset", "name": "Amino acid reference data: all 20 amino acids", "description": "Reference table of all 20 standard amino acids with one-letter and three-letter codes, side-chain class, alpha-carboxyl and alpha-amino pKa values, side-chain pKa where applicable, isoelectric point, molecular weight, Kyte-Doolittle hydropathy index, and essential status.", "url": "https://biochemtools.com/amino-acid-chart.html", "keywords": ["amino acids", "pKa", "isoelectric point", "pI", "hydropathy", "molecular weight", "biochemistry"], "variableMeasured": ["pKa", "isoelectric point", "molecular weight", "hydropathy index", "amino acid class"], "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": true, "creator": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}, "publisher": {"@type": "Organization", "name": "BiochemTools", "url": "https://biochemtools.com/"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ImageObject", "contentUrl": "https://biochemtools.com/downloads/amino-acid-structures-chart.png", "name": "The 20 amino acids, drawn at physiological pH", "description": "Every amino acid drawn as it exists at pH 7.4, grouped by side-chain class, with the seven ionizable side-chain pKa values.", "width": 1640, "height": 4254, "creditText": "biochemtools.com", "license": "https://creativecommons.org/licenses/by/4.0/", "acquireLicensePage": "https://biochemtools.com/charts.html", "creator": {"@type": "Organization", "name": "Biochemtools"}, "isPartOf": {"@type": "CollectionPage", "url": "https://biochemtools.com/charts.html"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -133,6 +165,7 @@
 
 <header><h1>Amino Acid Chart: All 20</h1><p>Every standard amino acid with its one- and three-letter codes, class, pKa values, isoelectric point, molecular weight, hydropathy, and essential status. Filter by class, search, and sort any column. Print-friendly.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Seven questions pulled straight from the chart below, so you can see what you actually remember instead of just looking it up again.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;Glutamine&#x27;s one-letter code is which of these?&quot;,&quot;options&quot;:[&quot;G&quot;,&quot;E&quot;,&quot;Q&quot;,&quot;N&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;G and E are already spoken for by glycine and glutamate, so glutamine and asparagine fall back to Q and N.&quot;},{&quot;q&quot;:&quot;Which of these has a side chain pKa listed in the chart?&quot;,&quot;options&quot;:[&quot;Glutamine&quot;,&quot;Threonine&quot;,&quot;Asparagine&quot;,&quot;Tyrosine&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;A pkr value only appears for side chains that actually gain or lose a proton, which the phenol does and the amides and alcohols do not.&quot;},{&quot;q&quot;:&quot;Of these four, which has the highest pI?&quot;,&quot;options&quot;:[&quot;His&quot;,&quot;Arg&quot;,&quot;Lys&quot;,&quot;Asp&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;pI follows the side chain charge, and the guanidinium group holds its proton to a far higher pH than an imidazole or an amine.&quot;},{&quot;q&quot;:&quot;Which set does the chart list as the Aromatic class?&quot;,&quot;options&quot;:[&quot;Phe, Trp, Tyr&quot;,&quot;Phe, Trp, His&quot;,&quot;Trp, Tyr, Ser&quot;,&quot;Phe, Tyr, Met&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;The class column goes by the side chain&#x27;s defining feature, so histidine is filed under its basic ring rather than with the aromatics.&quot;},{&quot;q&quot;:&quot;Which one does the chart mark as essential?&quot;,&quot;options&quot;:[&quot;Glycine&quot;,&quot;Proline&quot;,&quot;Leucine&quot;,&quot;Alanine&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The chart splits the 20 into nine essential, six conditional and five you make freely, so conditional is not a softer word for essential.&quot;},{&quot;q&quot;:&quot;Three of these sit in the Nonpolar class. Which one does not?&quot;,&quot;options&quot;:[&quot;Cys&quot;,&quot;Met&quot;,&quot;Pro&quot;,&quot;Val&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Both cysteine and methionine carry sulfur, but only the thiol ionizes, and that is what moves it out of the nonpolar group.&quot;},{&quot;q&quot;:&quot;Which of these scores as the most hydrophobic?&quot;,&quot;options&quot;:[&quot;Phe&quot;,&quot;Leu&quot;,&quot;Ile&quot;,&quot;Val&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;On the Kyte-Doolittle scale the branched aliphatic chains outscore an aromatic ring, so a big greasy-looking side chain is not automatically the top one.&quot;}]"><div class="st-fallback"><details><summary>Glutamine&#x27;s one-letter code is which of these?</summary><p class="st-ans">Q</p><p class="st-exp">G and E are already spoken for by glycine and glutamate, so glutamine and asparagine fall back to Q and N.</p></details><details><summary>Which of these has a side chain pKa listed in the chart?</summary><p class="st-ans">Tyrosine</p><p class="st-exp">A pkr value only appears for side chains that actually gain or lose a proton, which the phenol does and the amides and alcohols do not.</p></details><details><summary>Of these four, which has the highest pI?</summary><p class="st-ans">Arg</p><p class="st-exp">pI follows the side chain charge, and the guanidinium group holds its proton to a far higher pH than an imidazole or an amine.</p></details><details><summary>Which set does the chart list as the Aromatic class?</summary><p class="st-ans">Phe, Trp, Tyr</p><p class="st-exp">The class column goes by the side chain&#x27;s defining feature, so histidine is filed under its basic ring rather than with the aromatics.</p></details><details><summary>Which one does the chart mark as essential?</summary><p class="st-ans">Leucine</p><p class="st-exp">The chart splits the 20 into nine essential, six conditional and five you make freely, so conditional is not a softer word for essential.</p></details><details><summary>Three of these sit in the Nonpolar class. Which one does not?</summary><p class="st-ans">Cys</p><p class="st-exp">Both cysteine and methionine carry sulfur, but only the thiol ionizes, and that is what moves it out of the nonpolar group.</p></details><details><summary>Which of these scores as the most hydrophobic?</summary><p class="st-ans">Ile</p><p class="st-exp">On the Kyte-Doolittle scale the branched aliphatic chains outscore an aromatic ring, so a big greasy-looking side chain is not automatically the top one.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <div class="controls" id="filters">
    <button data-f="all" class="on">All 20</button>
@@ -460,5 +493,6 @@ document.querySelectorAll("#aatable th").forEach(th=>th.onclick=()=>{
 $("search").addEventListener("input",e=>{query=e.target.value.trim(); render();});
 render();
 </script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

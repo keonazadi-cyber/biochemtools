@@ -1,0 +1,92 @@
+{
+  "slug": "amino-acid-chart",
+  "title": "Amino Acid Chart: Test Yourself on All 20 Codes and pKa",
+  "description": "All 20 amino acids with one and three letter codes, pKa, pI, mass and hydropathy, plus a seven question self test you can take on the page itself.",
+  "intro": "Seven questions pulled straight from the chart below, so you can see what you actually remember instead of just looking it up again.",
+  "questions": [
+    {
+      "q": "Glutamine's one-letter code is which of these?",
+      "options": [
+        "G",
+        "E",
+        "Q",
+        "N"
+      ],
+      "answer": 2,
+      "why": "G and E are already spoken for by glycine and glutamate, so glutamine and asparagine fall back to Q and N.",
+      "source": "AA: Gln.c1 (Q); distractors Gly.c1, Glu.c1, Asn.c1"
+    },
+    {
+      "q": "Which of these has a side chain pKa listed in the chart?",
+      "options": [
+        "Glutamine",
+        "Threonine",
+        "Asparagine",
+        "Tyrosine"
+      ],
+      "answer": 3,
+      "why": "A pkr value only appears for side chains that actually gain or lose a proton, which the phenol does and the amides and alcohols do not.",
+      "source": "AA: Tyr.pkr = 10.07; Gln.pkr, Thr.pkr, Asn.pkr are all null"
+    },
+    {
+      "q": "Of these four, which has the highest pI?",
+      "options": [
+        "His",
+        "Arg",
+        "Lys",
+        "Asp"
+      ],
+      "answer": 1,
+      "why": "pI follows the side chain charge, and the guanidinium group holds its proton to a far higher pH than an imidazole or an amine.",
+      "source": "AA: compare pI across Arg, Lys, His, Asp"
+    },
+    {
+      "q": "Which set does the chart list as the Aromatic class?",
+      "options": [
+        "Phe, Trp, Tyr",
+        "Phe, Trp, His",
+        "Trp, Tyr, Ser",
+        "Phe, Tyr, Met"
+      ],
+      "answer": 0,
+      "why": "The class column goes by the side chain's defining feature, so histidine is filed under its basic ring rather than with the aromatics.",
+      "source": "AA: cls for Phe, Trp, Tyr = Aromatic; His = Basic, Ser = Polar, Met = Nonpolar"
+    },
+    {
+      "q": "Which one does the chart mark as essential?",
+      "options": [
+        "Glycine",
+        "Proline",
+        "Leucine",
+        "Alanine"
+      ],
+      "answer": 2,
+      "why": "The chart splits the 20 into nine essential, six conditional and five you make freely, so conditional is not a softer word for essential.",
+      "source": "AA: Leu.ess = Yes; Gly.ess and Pro.ess = Conditional, Ala.ess = No"
+    },
+    {
+      "q": "Three of these sit in the Nonpolar class. Which one does not?",
+      "options": [
+        "Cys",
+        "Met",
+        "Pro",
+        "Val"
+      ],
+      "answer": 0,
+      "why": "Both cysteine and methionine carry sulfur, but only the thiol ionizes, and that is what moves it out of the nonpolar group.",
+      "source": "AA: Cys.cls = Polar (pkr 8.18); Met.cls, Pro.cls, Val.cls = Nonpolar"
+    },
+    {
+      "q": "Which of these scores as the most hydrophobic?",
+      "options": [
+        "Phe",
+        "Leu",
+        "Ile",
+        "Val"
+      ],
+      "answer": 2,
+      "why": "On the Kyte-Doolittle scale the branched aliphatic chains outscore an aromatic ring, so a big greasy-looking side chain is not automatically the top one.",
+      "source": "AA: compare hyd across Ile, Val, Leu, Phe"
+    }
+  ]
+}

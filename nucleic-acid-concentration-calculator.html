@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DNA &amp; RNA Concentration Calculator (A260/A280), Free</title>
-<meta name="description" content="Free DNA/RNA concentration calculator from A260, with 260/280 and 260/230 purity ratios and what they mean. dsDNA, ssDNA, and RNA, every step shown.">
+<title>DNA &amp; RNA Concentration Calculator: A260 to ng/µL, Free</title>
+<meta name="description" content="Enter your A260 and get the concentration in ng/µL for dsDNA, ssDNA or RNA, plus the 260/280 and 260/230 purity ratios and what each one means.">
 <meta name="keywords" content="dna concentration calculator, a260 a280 ratio, nucleic acid quantification, 260 280 ratio meaning, rna concentration from absorbance, nanodrop concentration calculation, 260 230 ratio">
 <link rel="canonical" href="https://biochemtools.com/nucleic-acid-concentration-calculator.html">
 <meta property="og:title" content="DNA &amp; RNA Concentration Calculator (A260/A280)">
@@ -106,6 +106,38 @@
 <meta name="theme-color" content="#0e0c0a">
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/nucleic-acid-concentration-calculator.html","name":"DNA & RNA Concentration Calculator (A260/A280), Free","datePublished":"2026-07-24","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -123,6 +155,7 @@
 
 <header><h1>DNA &amp; RNA Concentration Calculator</h1><p>Turn a spectrophotometer or NanoDrop reading into concentration, and check the 260/280 and 260/230 purity ratios to see whether your prep is clean. Every step shown.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on the numbers a NanoDrop hands you: which factor goes with which nucleic acid, what each purity ratio catches, and where the dilution factor belongs.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;Which factor does this page use for RNA, and why is it not the dsDNA one?&quot;,&quot;options&quot;:[&quot;33 µg/mL, since RNA is single-stranded like ssDNA&quot;,&quot;40 µg/mL, since its bases are more exposed&quot;,&quot;50 µg/mL, the same factor used for dsDNA&quot;,&quot;20 µg/mL, because RNA absorbs at 230 nm&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;RNA converts at 40 rather than ssDNA&#x27;s 33 or dsDNA&#x27;s 50, so being single-stranded is not by itself what sets the factor.&quot;},{&quot;q&quot;:&quot;Which contamination does the 260/280 ratio flag, in the way this page splits the two ratios?&quot;,&quot;options&quot;:[&quot;Protein or phenol, which absorb at 280 nm&quot;,&quot;Guanidine salts, which absorb near 230 nm&quot;,&quot;Carbohydrates carried over from extraction&quot;,&quot;EDTA left behind in the elution buffer&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;260/280 is the protein and phenol check, while guanidine, carbohydrate and EDTA carryover shows up in 260/230 instead.&quot;},{&quot;q&quot;:&quot;An RNA prep reads 260/280 = 2.00, which the page calls clean, but its 260/230 is 1.40. Most likely cause?&quot;,&quot;options&quot;:[&quot;Protein carryover, which absorbs strongly at 230 nm&quot;,&quot;Nothing, since 1.40 is the target for this ratio&quot;,&quot;Guanidine salt, phenol or carbohydrate carryover&quot;,&quot;Too much RNA, so the reading ran past the range&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The two ratios catch different problems, so a prep can pass 260/280 and still show leftover extraction reagents in a low 260/230.&quot;},{&quot;q&quot;:&quot;You diluted the sample 1:20 before reading A260 = 0.300. How does the dilution factor enter?&quot;,&quot;options&quot;:[&quot;Divide the A260 by 20 before applying the factor&quot;,&quot;It does not enter, the reading self-corrects&quot;,&quot;Divide the final concentration by 20 at the end&quot;,&quot;Multiply A260 by the factor and then by 20&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;A260 describes the diluted sample, so the dilution factor multiplies the result to get back to the stock concentration.&quot;},{&quot;q&quot;:&quot;Take the worked example&#x27;s A260 = 0.400 at a 1:50 dilution, but the sample is RNA, not dsDNA. Concentration?&quot;,&quot;options&quot;:[&quot;660 ng/µL&quot;,&quot;1000 ng/µL&quot;,&quot;800 ng/µL&quot;,&quot;16 ng/µL&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Only the factor changes when the sample type changes, so swapping 50 for RNA&#x27;s 40 scales the same reading down by one fifth.&quot;},{&quot;q&quot;:&quot;Same worked example, A260 = 0.400, but A280 comes back 0.250. What is the 260/280 and how does the page read it?&quot;,&quot;options&quot;:[&quot;1.60, low, so protein or phenol shows&quot;,&quot;1.60, within the clean DNA band near 1.8&quot;,&quot;1.60, high, so RNA carryover is flagged&quot;,&quot;1.80, the ideal value for clean DNA prep&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;The ratio is A260 divided by A280, and 1.60 falls under the 1.7 floor this page uses for DNA, which points at protein or phenol.&quot;}]"><div class="st-fallback"><details><summary>Which factor does this page use for RNA, and why is it not the dsDNA one?</summary><p class="st-ans">40 µg/mL, since its bases are more exposed</p><p class="st-exp">RNA converts at 40 rather than ssDNA&#x27;s 33 or dsDNA&#x27;s 50, so being single-stranded is not by itself what sets the factor.</p></details><details><summary>Which contamination does the 260/280 ratio flag, in the way this page splits the two ratios?</summary><p class="st-ans">Protein or phenol, which absorb at 280 nm</p><p class="st-exp">260/280 is the protein and phenol check, while guanidine, carbohydrate and EDTA carryover shows up in 260/230 instead.</p></details><details><summary>An RNA prep reads 260/280 = 2.00, which the page calls clean, but its 260/230 is 1.40. Most likely cause?</summary><p class="st-ans">Guanidine salt, phenol or carbohydrate carryover</p><p class="st-exp">The two ratios catch different problems, so a prep can pass 260/280 and still show leftover extraction reagents in a low 260/230.</p></details><details><summary>You diluted the sample 1:20 before reading A260 = 0.300. How does the dilution factor enter?</summary><p class="st-ans">Multiply A260 by the factor and then by 20</p><p class="st-exp">A260 describes the diluted sample, so the dilution factor multiplies the result to get back to the stock concentration.</p></details><details><summary>Take the worked example&#x27;s A260 = 0.400 at a 1:50 dilution, but the sample is RNA, not dsDNA. Concentration?</summary><p class="st-ans">800 ng/µL</p><p class="st-exp">Only the factor changes when the sample type changes, so swapping 50 for RNA&#x27;s 40 scales the same reading down by one fifth.</p></details><details><summary>Same worked example, A260 = 0.400, but A280 comes back 0.250. What is the 260/280 and how does the page read it?</summary><p class="st-ans">1.60, low, so protein or phenol shows</p><p class="st-exp">The ratio is A260 divided by A280, and 1.60 falls under the 1.7 floor this page uses for DNA, which points at protein or phenol.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <label style="margin-bottom:.5rem">Sample type</label>
   <div class="modes" id="type">
@@ -311,5 +344,6 @@ document.querySelectorAll(".citebtn").forEach(function(b){
  });
 });
 </script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

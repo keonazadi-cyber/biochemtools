@@ -1,0 +1,57 @@
+{
+  "slug": "codon-chart",
+  "title": "Codon Chart: Test Yourself on All 64 Codons (RNA & DNA)",
+  "description": "All 64 RNA and DNA codons in one chart, with the start codon, the three stops and amino acid classes marked, plus a 7-question self-test on reading it.",
+  "intro": "Seven questions on the codons people misread most, each answered straight from the chart above with a one-line reason.",
+  "questions": [
+    {
+      "q": "Which of these RNA codons ends translation instead of adding an amino acid?",
+      "options": ["UGG", "UGU", "UAC", "UGA"],
+      "answer": 3,
+      "why": "UGA is a stop codon, while UGG differs from it by one base and codes tryptophan, so the two are easy to swap.",
+      "source": "table: UGA -> * (Stop), UGG -> W (Trp)"
+    },
+    {
+      "q": "Which set lists all three stop codons of the standard RNA code?",
+      "options": ["UAA, UAG, UGA", "UAA, UAG, UGG", "UAA, UGA, AUG", "UAG, UGA, UGC"],
+      "answer": 0,
+      "why": "Only UAA, UAG and UGA carry no amino acid; UGG is tryptophan, UGC is cysteine and AUG is the start codon.",
+      "source": "table: UAA -> * (Stop), UAG -> * (Stop), UGA -> * (Stop)"
+    },
+    {
+      "q": "Which RNA codon is both the start signal and the codon for methionine?",
+      "options": ["AUA", "AUG", "AUU", "GUG"],
+      "answer": 1,
+      "why": "AUG sets the reading frame at the beginning and still puts methionine into the chain wherever else it appears.",
+      "source": "table: AUG -> M (Met), marked Start on the chart"
+    },
+    {
+      "q": "The RNA codons ACU, ACC, ACA and ACG all give threonine. Which base can change without changing the amino acid?",
+      "options": ["the first base", "the second base", "the third base", "none of the three"],
+      "answer": 2,
+      "why": "Those four codons differ only at the third position, the wobble base, which is where most of the code's degeneracy sits.",
+      "source": "table: ACU -> T, ACC -> T, ACA -> T, ACG -> T (Thr)"
+    },
+    {
+      "q": "Counting RNA codons in the chart, which of these amino acids has six of them?",
+      "options": ["Leucine (Leu)", "Histidine (His)", "Glutamine (Gln)", "Methionine (Met)"],
+      "answer": 0,
+      "why": "Leucine, serine and arginine each have six codons, while methionine and tryptophan have only one, so a single change always alters them.",
+      "source": "table: UUA, UUG, CUU, CUC, CUA, CUG -> L (Leu); CAU, CAC -> H; CAA, CAG -> Q; AUG -> M"
+    },
+    {
+      "q": "A DNA coding-strand triplet reads TAC. Rewrite it as RNA and look it up: what does the chart give?",
+      "options": ["Stop, from UAA", "His, from CAC", "Tyr, from UAC", "Asn, from AAC"],
+      "answer": 2,
+      "why": "DNA's T becomes RNA's U, so TAC is the codon UAC, which is tyrosine, not the stop codon UAA.",
+      "source": "table: UAC -> Y (Tyr); UAA -> * (Stop); CAC -> H (His); AAC -> N (Asn)"
+    },
+    {
+      "q": "An mRNA codon reads CAG from 5-prime to 3-prime. Read backwards as GAC, which amino acid does the chart give?",
+      "options": ["Glutamine (Gln)", "Aspartate (Asp)", "Glutamate (Glu)", "Asparagine (Asn)"],
+      "answer": 1,
+      "why": "CAG is glutamine but GAC is aspartate, so reading a codon in the wrong direction lands on a different amino acid entirely.",
+      "source": "table: CAG -> Q (Gln), GAC -> D (Asp)"
+    }
+  ]
+}

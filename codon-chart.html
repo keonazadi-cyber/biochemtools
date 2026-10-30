@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codon Chart: Genetic Code Table (RNA &amp; DNA), Free</title>
-<meta name="description" content="All 64 codons colour-coded by amino acid class, start and stop marked. Switch RNA/DNA and click an amino acid to see its codons. Free genetic code table.">
+<title>Codon Chart: Test Yourself on All 64 Codons (RNA &amp; DNA)</title>
+<meta name="description" content="All 64 RNA and DNA codons in one chart, with the start codon, the three stops and amino acid classes marked, plus a 7-question self-test on reading it.">
 <meta name="keywords" content="codon chart, genetic code table, codon table, mrna codon chart, amino acid codons, start codon, stop codons, reverse translation, dna codon table, codon wheel alternative">
 <link rel="canonical" href="https://biochemtools.com/codon-chart.html">
 <meta property="og:title" content="Codon Chart: Genetic Code Table (RNA &amp; DNA)">
@@ -115,6 +115,38 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/codon-chart.html","name":"Codon Chart — Genetic Code Table (RNA & DNA), Free","datePublished":"2026-07-29","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"},"image":"https://biochemtools.com/downloads/genetic-code-chart.png","primaryImageOfPage":{"@type":"ImageObject","contentUrl":"https://biochemtools.com/downloads/genetic-code-chart.png","url":"https://biochemtools.com/downloads/genetic-code-chart.png","width":1480,"height":1496,"caption":"Printable chart of all 64 codons in the standard genetic code, grouped by first, second and third base and coloured by amino acid class","license":"https://creativecommons.org/licenses/by/4.0/","acquireLicensePage":"https://biochemtools.com/charts.html","creditText":"BiochemTools","creator":{"@type":"Organization","name":"BiochemTools"}}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Standard genetic code: all 64 codons","description":"The standard genetic code (NCBI translation table 1) giving the amino acid encoded by each of the 64 codons, in both RNA and DNA form, with start and stop codons marked and amino acids grouped by side-chain class.","url":"https://biochemtools.com/codon-chart.html","keywords":["genetic code","codon","codon table","translation","mRNA","amino acids"],"variableMeasured":["codon","amino acid","start codon","stop codon","amino acid class"],"license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"creator":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/"},"publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageObject","contentUrl":"https://biochemtools.com/downloads/genetic-code-chart.png","name":"The genetic code, all 64 codons","description":"Every codon in NCBI translation table 1, by first, second and third base, coloured by amino acid class.","width":1480,"height":1496,"creditText":"biochemtools.com","license":"https://creativecommons.org/licenses/by/4.0/","acquireLicensePage":"https://biochemtools.com/charts.html","creator":{"@type":"Organization","name":"Biochemtools"},"isPartOf":{"@type":"WebPage","url":"https://biochemtools.com/codon-chart.html"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -132,6 +164,7 @@
 
 <header><h1>Codon Chart: The Genetic Code</h1><p>All 64 codons in the standard table layout, colour-coded by amino acid class, with the start codon and all three stop codons marked. Switch between RNA and DNA, and click any amino acid to highlight every codon that codes for it.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Seven questions on the codons people misread most, each answered straight from the chart above with a one-line reason.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;Which of these RNA codons ends translation instead of adding an amino acid?&quot;,&quot;options&quot;:[&quot;UGG&quot;,&quot;UGU&quot;,&quot;UAC&quot;,&quot;UGA&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;UGA is a stop codon, while UGG differs from it by one base and codes tryptophan, so the two are easy to swap.&quot;},{&quot;q&quot;:&quot;Which set lists all three stop codons of the standard RNA code?&quot;,&quot;options&quot;:[&quot;UAA, UAG, UGA&quot;,&quot;UAA, UAG, UGG&quot;,&quot;UAA, UGA, AUG&quot;,&quot;UAG, UGA, UGC&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Only UAA, UAG and UGA carry no amino acid; UGG is tryptophan, UGC is cysteine and AUG is the start codon.&quot;},{&quot;q&quot;:&quot;Which RNA codon is both the start signal and the codon for methionine?&quot;,&quot;options&quot;:[&quot;AUA&quot;,&quot;AUG&quot;,&quot;AUU&quot;,&quot;GUG&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;AUG sets the reading frame at the beginning and still puts methionine into the chain wherever else it appears.&quot;},{&quot;q&quot;:&quot;The RNA codons ACU, ACC, ACA and ACG all give threonine. Which base can change without changing the amino acid?&quot;,&quot;options&quot;:[&quot;the first base&quot;,&quot;the second base&quot;,&quot;the third base&quot;,&quot;none of the three&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Those four codons differ only at the third position, the wobble base, which is where most of the code&#x27;s degeneracy sits.&quot;},{&quot;q&quot;:&quot;Counting RNA codons in the chart, which of these amino acids has six of them?&quot;,&quot;options&quot;:[&quot;Leucine (Leu)&quot;,&quot;Histidine (His)&quot;,&quot;Glutamine (Gln)&quot;,&quot;Methionine (Met)&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Leucine, serine and arginine each have six codons, while methionine and tryptophan have only one, so a single change always alters them.&quot;},{&quot;q&quot;:&quot;A DNA coding-strand triplet reads TAC. Rewrite it as RNA and look it up: what does the chart give?&quot;,&quot;options&quot;:[&quot;Stop, from UAA&quot;,&quot;His, from CAC&quot;,&quot;Tyr, from UAC&quot;,&quot;Asn, from AAC&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;DNA&#x27;s T becomes RNA&#x27;s U, so TAC is the codon UAC, which is tyrosine, not the stop codon UAA.&quot;},{&quot;q&quot;:&quot;An mRNA codon reads CAG from 5-prime to 3-prime. Read backwards as GAC, which amino acid does the chart give?&quot;,&quot;options&quot;:[&quot;Glutamine (Gln)&quot;,&quot;Aspartate (Asp)&quot;,&quot;Glutamate (Glu)&quot;,&quot;Asparagine (Asn)&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;CAG is glutamine but GAC is aspartate, so reading a codon in the wrong direction lands on a different amino acid entirely.&quot;}]"><div class="st-fallback"><details><summary>Which of these RNA codons ends translation instead of adding an amino acid?</summary><p class="st-ans">UGA</p><p class="st-exp">UGA is a stop codon, while UGG differs from it by one base and codes tryptophan, so the two are easy to swap.</p></details><details><summary>Which set lists all three stop codons of the standard RNA code?</summary><p class="st-ans">UAA, UAG, UGA</p><p class="st-exp">Only UAA, UAG and UGA carry no amino acid; UGG is tryptophan, UGC is cysteine and AUG is the start codon.</p></details><details><summary>Which RNA codon is both the start signal and the codon for methionine?</summary><p class="st-ans">AUG</p><p class="st-exp">AUG sets the reading frame at the beginning and still puts methionine into the chain wherever else it appears.</p></details><details><summary>The RNA codons ACU, ACC, ACA and ACG all give threonine. Which base can change without changing the amino acid?</summary><p class="st-ans">the third base</p><p class="st-exp">Those four codons differ only at the third position, the wobble base, which is where most of the code&#x27;s degeneracy sits.</p></details><details><summary>Counting RNA codons in the chart, which of these amino acids has six of them?</summary><p class="st-ans">Leucine (Leu)</p><p class="st-exp">Leucine, serine and arginine each have six codons, while methionine and tryptophan have only one, so a single change always alters them.</p></details><details><summary>A DNA coding-strand triplet reads TAC. Rewrite it as RNA and look it up: what does the chart give?</summary><p class="st-ans">Tyr, from UAC</p><p class="st-exp">DNA&#x27;s T becomes RNA&#x27;s U, so TAC is the codon UAC, which is tyrosine, not the stop codon UAA.</p></details><details><summary>An mRNA codon reads CAG from 5-prime to 3-prime. Read backwards as GAC, which amino acid does the chart give?</summary><p class="st-ans">Aspartate (Asp)</p><p class="st-exp">CAG is glutamine but GAC is aspartate, so reading a codon in the wrong direction lands on a different amino acid entirely.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <div class="controls">
    <button data-m="RNA" class="on" id="btnRNA">RNA (U)</button>
@@ -345,5 +378,6 @@ document.querySelectorAll(".citebtn").forEach(function(b){
  });
 });
 </script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

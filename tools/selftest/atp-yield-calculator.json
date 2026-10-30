@@ -1,0 +1,80 @@
+{
+  "slug": "atp-yield-calculator",
+  "title": "ATP Yield Calculator: Work Out ATP per Glucose",
+  "description": "Pick your P/O ratio and shuttle, see the full accounting per glucose, then check yourself with six questions on the parts students lose marks on.",
+  "intro": "Six questions on the accounting above, each answerable from the convention and shuttle that produced the number.",
+  "questions": [
+    {
+      "q": "Using the modern P/O ratios and the malate-aspartate shuttle, what is the total ATP per glucose?",
+      "options": [
+        "30 ATP",
+        "32 ATP",
+        "36 ATP",
+        "38 ATP"
+      ],
+      "answer": 1,
+      "why": "Modern ratios of 2.5 and 1.5 with the full-value shuttle give 32, while the older 3 and 2 ratios are what produce 38.",
+      "source": "Worked example, modern accounting with the malate-aspartate shuttle: 4 + 20 + 3 + 5 = 32 ATP."
+    },
+    {
+      "q": "The page counts 10 NADH per glucose. How many of them are made in the cytosol?",
+      "options": [
+        "2 of the 10",
+        "4 of the 10",
+        "6 of the 10",
+        "8 of the 10"
+      ],
+      "answer": 0,
+      "why": "Only glycolysis makes NADH outside the mitochondrion, so 2 are cytosolic and the other 8 come from pyruvate dehydrogenase and the cycle inside it.",
+      "source": "Stage table, Glycolysis row: 2 NADH marked (cytosolic); text says 2 of those 10 NADH are made in the cytosol during glycolysis."
+    },
+    {
+      "q": "Why do those 2 cytosolic NADH change the total depending on the tissue?",
+      "options": [
+        "Cytosolic NADH carries less energy than the mitochondrial kind",
+        "They are spent regenerating NAD+ before the chain can use them",
+        "NADH cannot cross the inner membrane, so a shuttle takes over",
+        "The cycle oxidizes them twice, once for each three-carbon half"
+      ],
+      "answer": 2,
+      "why": "The NADH itself is identical, but it cannot cross the inner membrane, so the shuttle a tissue uses decides whether its electrons arrive worth a NADH or only a FADH2.",
+      "source": "Section How the total is actually built: NADH itself can't cross the inner mitochondrial membrane, so a shuttle moves the electrons across instead."
+    },
+    {
+      "q": "With the classic P/O ratios of 3 and 2 and the glycerol-3-phosphate shuttle, what is the total?",
+      "options": [
+        "38 ATP",
+        "30 ATP",
+        "32 ATP",
+        "36 ATP"
+      ],
+      "answer": 3,
+      "why": "Classic ratios alone give 38, and the glycerol-3-phosphate shuttle then drops the 2 cytosolic NADH to FADH2 value, costing 2 ATP and leaving 36.",
+      "source": "Practice problem 1: 4 + 24 + 4 + 4 = 36 ATP."
+    },
+    {
+      "q": "How much ATP per glucose comes from substrate-level phosphorylation rather than the chain?",
+      "options": [
+        "2 ATP",
+        "4 ATP",
+        "6 ATP",
+        "10 ATP"
+      ],
+      "answer": 1,
+      "why": "Glycolysis contributes 2 and the cycle's GTP contributes 2, so 4 ATP are made directly and everything else comes from oxidative phosphorylation.",
+      "source": "Section How the total is actually built: every glucose makes 4 ATP directly, 2 from glycolysis and 2 from the TCA cycle's GTP; Total row, substrate-level 4."
+    },
+    {
+      "q": "In a muscle cell on modern ratios, blocking glycolysis entirely costs how much of its 30 ATP?",
+      "options": [
+        "2 of the 30",
+        "3 of the 30",
+        "5 of the 30",
+        "7 of the 30"
+      ],
+      "answer": 2,
+      "why": "Glycolysis pays twice, 2 ATP directly plus 2 NADH worth 1.5 each through the glycerol-3-phosphate shuttle, so the loss is 5 rather than its own 2.",
+      "source": "Practice problem 2: total lost = 2 + 3 = 5 ATP out of 30, not just 2."
+    }
+  ]
+}

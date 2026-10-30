@@ -1,0 +1,80 @@
+{
+  "slug": "nucleic-acid-concentration-calculator",
+  "title": "DNA & RNA Concentration Calculator: A260 to ng/µL, Free",
+  "description": "Enter your A260 and get the concentration in ng/µL for dsDNA, ssDNA or RNA, plus the 260/280 and 260/230 purity ratios and what each one means.",
+  "intro": "Six questions on the numbers a NanoDrop hands you: which factor goes with which nucleic acid, what each purity ratio catches, and where the dilution factor belongs.",
+  "questions": [
+    {
+      "q": "Which factor does this page use for RNA, and why is it not the dsDNA one?",
+      "options": [
+        "33 µg/mL, since RNA is single-stranded like ssDNA",
+        "40 µg/mL, since its bases are more exposed",
+        "50 µg/mL, the same factor used for dsDNA",
+        "20 µg/mL, because RNA absorbs at 230 nm"
+      ],
+      "answer": 1,
+      "why": "RNA converts at 40 rather than ssDNA's 33 or dsDNA's 50, so being single-stranded is not by itself what sets the factor.",
+      "source": "Page factors: FACTOR={dsDNA:50, ssDNA:33, RNA:40}, stated in 'How the numbers work' as 50 µg/mL dsDNA, 33 µg/mL ssDNA, 40 µg/mL RNA at A260 = 1.0, 1 cm path."
+    },
+    {
+      "q": "Which contamination does the 260/280 ratio flag, in the way this page splits the two ratios?",
+      "options": [
+        "Protein or phenol, which absorb at 280 nm",
+        "Guanidine salts, which absorb near 230 nm",
+        "Carbohydrates carried over from extraction",
+        "EDTA left behind in the elution buffer"
+      ],
+      "answer": 0,
+      "why": "260/280 is the protein and phenol check, while guanidine, carbohydrate and EDTA carryover shows up in 260/230 instead.",
+      "source": "Page ratio table: 260/280 low means 'Residual protein or phenol (they absorb at 280 nm)'; 260/230 low means 'Chaotropic salts (guanidine), phenol, carbohydrates, EDTA (absorb at 230 nm)'."
+    },
+    {
+      "q": "An RNA prep reads 260/280 = 2.00, which the page calls clean, but its 260/230 is 1.40. Most likely cause?",
+      "options": [
+        "Protein carryover, which absorbs strongly at 230 nm",
+        "Nothing, since 1.40 is the target for this ratio",
+        "Guanidine salt, phenol or carbohydrate carryover",
+        "Too much RNA, so the reading ran past the range"
+      ],
+      "answer": 2,
+      "why": "The two ratios catch different problems, so a prep can pass 260/280 and still show leftover extraction reagents in a low 260/230.",
+      "source": "Page: 260/230 clean is ~2.0 to 2.2, and the tool labels r<1.8 as 'low, salt, phenol, carbohydrate, or EDTA carryover'. 1.40 < 1.8, so it is flagged low."
+    },
+    {
+      "q": "You diluted the sample 1:20 before reading A260 = 0.300. How does the dilution factor enter?",
+      "options": [
+        "Divide the A260 by 20 before applying the factor",
+        "It does not enter, the reading self-corrects",
+        "Divide the final concentration by 20 at the end",
+        "Multiply A260 by the factor and then by 20"
+      ],
+      "answer": 3,
+      "why": "A260 describes the diluted sample, so the dilution factor multiplies the result to get back to the stock concentration.",
+      "source": "Page formula: conc = A260 × factor × dilution. Worked example does 0.400 × 50 × 50 = 1000 ng/µL, multiplying by the dilution rather than dividing."
+    },
+    {
+      "q": "Take the worked example's A260 = 0.400 at a 1:50 dilution, but the sample is RNA, not dsDNA. Concentration?",
+      "options": [
+        "660 ng/µL",
+        "1000 ng/µL",
+        "800 ng/µL",
+        "16 ng/µL"
+      ],
+      "answer": 2,
+      "why": "Only the factor changes when the sample type changes, so swapping 50 for RNA's 40 scales the same reading down by one fifth.",
+      "source": "0.400 × 40 × 50 = 800 ng/µL. Distractors: 0.400 × 50 × 50 = 1000 (dsDNA factor kept), 0.400 × 33 × 50 = 660 (ssDNA factor), 0.400 × 40 = 16 (dilution forgotten)."
+    },
+    {
+      "q": "Same worked example, A260 = 0.400, but A280 comes back 0.250. What is the 260/280 and how does the page read it?",
+      "options": [
+        "1.60, low, so protein or phenol shows",
+        "1.60, within the clean DNA band near 1.8",
+        "1.60, high, so RNA carryover is flagged",
+        "1.80, the ideal value for clean DNA prep"
+      ],
+      "answer": 0,
+      "why": "The ratio is A260 divided by A280, and 1.60 falls under the 1.7 floor this page uses for DNA, which points at protein or phenol.",
+      "source": "0.400 / 0.250 = 1.60. Page logic for DNA: clean if r >= 1.70 and r <= 1.95, otherwise r < 1.70 gives 'low, likely protein or phenol contamination' and r > 1.95 gives the RNA-carryover warning."
+    }
+  ]
+}

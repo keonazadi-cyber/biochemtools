@@ -1,0 +1,80 @@
+{
+  "slug": "punnett-square-calculator",
+  "title": "Punnett Square Calculator + Dihybrid Cross Self-Test",
+  "description": "Build a Punnett square for a monohybrid or dihybrid cross, get the gametes and both ratios, then check yourself on six questions with worked answers.",
+  "intro": "Six questions on gametes, genotype and phenotype ratios and test crosses, each answer checkable against the square and the worked examples above.",
+  "questions": [
+    {
+      "q": "With independent assortment, how many distinct gamete types does an AaBb parent make?",
+      "options": [
+        "Two, since there are two genes",
+        "Four, namely AB, Ab, aB, ab",
+        "Sixteen, the size of the grid",
+        "Three, as in the 3:1 ratio"
+      ],
+      "answer": 1,
+      "why": "One allele is taken from each gene independently, so a double heterozygote gives 2 x 2 = 4 gamete types, which is why the dihybrid grid is 4 by 4.",
+      "source": "'How a Punnett square works': 'A heterozygote for two genes (AaBb) makes four gametes: AB, Ab, aB, ab.' Arithmetic: 2 choices x 2 choices = 4, and 4 x 4 = the 16 boxes of worked example 1."
+    },
+    {
+      "q": "Aa x Aa is crossed. What is the GENOTYPE ratio of the offspring?",
+      "options": [
+        "3 : 1, dominant over recessive",
+        "9 : 3 : 3 : 1 over four classes",
+        "1 : 2 : 1 for AA, Aa and aa",
+        "1 : 1, the test cross split"
+      ],
+      "answer": 2,
+      "why": "The 3:1 figure is the phenotype ratio, because AA and Aa look alike, while the genotype ratio keeps them apart as 1:2:1.",
+      "source": "The four boxes of Aa x Aa are AA, Aa, Aa, aa, so genotypes are 1 : 2 : 1 and phenotypes group to 3 : 1. Page text: 'grouping boxes that show the same trait ... gives the phenotype ratio, which is where the classic 3:1 monohybrid ... ratios come from.'"
+    },
+    {
+      "q": "A plant showing the dominant trait is crossed with aa, and every offspring shows the dominant trait. What does that show?",
+      "options": [
+        "It was Aa, since aa adds no dominant allele",
+        "The two genes must be linked, not assorting",
+        "Nothing, a test cross cannot separate them",
+        "It was AA, no recessive offspring appear"
+      ],
+      "answer": 3,
+      "why": "Crossing with aa makes each offspring's phenotype report the unknown parent's gamete, so one recessive offspring would prove Aa and none at all points to AA.",
+      "source": "FAQ, 'What is a test cross and why does it matter?': 'All-dominant offspring means the unknown was AA; a roughly 1:1 split means it was Aa.' Worked example 2 shows the Aa case splitting 1 : 1."
+    },
+    {
+      "q": "In AaBb x AaBb, what fraction of offspring show both recessive traits?",
+      "options": [
+        "1/16, the one aabb box of 16",
+        "3/16, one of the middle classes",
+        "1/4, from one half times one half",
+        "9/16, the both-dominant class"
+      ],
+      "answer": 0,
+      "why": "Each gene independently gives the recessive pair in a quarter of offspring, so both at once is a quarter of a quarter.",
+      "source": "Worked example 1: 'aabb (both recessive) = 1/16', one box of the 16-box grid. Check by multiplying the single-gene odds: 1/4 x 1/4 = 1/16. The 1/4 option comes from using 1/2 x 1/2 instead."
+    },
+    {
+      "q": "Which cross gives a 1:1:1:1 phenotype ratio?",
+      "options": [
+        "AaBb x AaBb, both double heterozygotes",
+        "AaBb x aabb, a dihybrid test cross",
+        "Aa x Aa, a monohybrid between two Aa",
+        "AABb x Aabb, one parent homozygous"
+      ],
+      "answer": 1,
+      "why": "A 1:1:1:1 ratio needs one parent whose gametes are all recessive, so the offspring simply read out the other parent's four gamete types.",
+      "source": "Practice problem 1: AaBb x aabb gives 'Grid (4x1): AaBb, Aabb, aaBb, aabb, each occurring exactly once', genotype and phenotype ratio 1 : 1 : 1 : 1. AaBb x AaBb gives 9 : 3 : 3 : 1 (example 1) and Aa x Aa gives 3 : 1. AABb x Aabb fills with AABb, AAbb, AaBb, Aabb, which is 2 A_B_ : 2 A_bb, a 1 : 1 phenotype ratio."
+    },
+    {
+      "q": "Two genes sit close together on the same chromosome. Why does a plain Punnett square mislead?",
+      "options": [
+        "The square assumes independent assortment",
+        "The square only works for one gene at a time",
+        "Dominance stops working when genes are close",
+        "You would need a 16-box grid instead of four"
+      ],
+      "answer": 0,
+      "why": "A Punnett square treats every gamete combination as equally likely, which is only true when the genes assort independently.",
+      "source": "FAQ, 'Does this assume genes are on different chromosomes?': 'a standard Punnett square assumes independent assortment ... Genes physically close together are \"linked\" and need recombination frequency, not a simple Punnett square.'"
+    }
+  ]
+}

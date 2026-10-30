@@ -13,12 +13,12 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How Many ATP Are Produced in Glycolysis? Net 2, Gross 4</title>
+<title>How Many ATP Are Produced in Glycolysis? Test Yourself</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<meta name="description" content="Glycolysis nets 2 ATP per glucose: 4 made, 2 spent. The exact steps that use and make ATP, why the net is 2 not 4, and what changes without oxygen.">
+<meta name="description" content="Walk the four steps that spend or make ATP, then take a six question self-test on net versus gross, per glucose versus per pyruvate, and no oxygen.">
 <meta name="keywords" content="how many atp are produced in glycolysis, net atp glycolysis, glycolysis atp yield, why does glycolysis have a net gain of 2 atp, how much atp does glycolysis produce, atp made in glycolysis, substrate level phosphorylation">
 <link rel="canonical" href="https://biochemtools.com/how-many-atp-are-produced-in-glycolysis.html">
 <meta property="og:title" content="How Many ATP Are Produced in Glycolysis?">
@@ -94,6 +94,38 @@
  details p{margin:.7rem 0 .2rem;color:var(--muted)}
  .tblwrap{overflow-x:auto}
 </style>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -114,6 +146,7 @@
  <p>The short answer, then exactly which steps spend ATP and which ones make it.</p>
 </header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on the parts of this tally that cost people marks, all answerable from the table above.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;What does one glucose net from glycolysis?&quot;,&quot;options&quot;:[&quot;2 ATP, 2 NADH, 2 pyruvate&quot;,&quot;4 ATP, 2 NADH, 2 pyruvate&quot;,&quot;2 ATP, 4 NADH, 1 pyruvate&quot;,&quot;4 ATP, 4 NADH, 2 pyruvate&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Four ATP are made but two were already spent, so the net gain is 2 ATP alongside 2 NADH and 2 pyruvate.&quot;},{&quot;q&quot;:&quot;Phosphoglycerate kinase is listed as +2 ATP at step 7. Why is it not +1?&quot;,&quot;options&quot;:[&quot;Pyruvate kinase later reverses one of the two ATP&quot;,&quot;Aldolase split the sugar, so the step runs twice&quot;,&quot;The enzyme phosphorylates ADP at two active sites&quot;,&quot;One ATP comes from step 7 and one from step 10&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;The step makes 1 ATP per three-carbon molecule, and glucose was already split into two of them at step 4, so it is +2 per glucose and +1 per pyruvate.&quot;},{&quot;q&quot;:&quot;Which two steps of glycolysis consume ATP?&quot;,&quot;options&quot;:[&quot;Steps 7 and 10, phosphoglycerate kinase and pyruvate kinase&quot;,&quot;Steps 1 and 7, hexokinase and phosphoglycerate kinase&quot;,&quot;Steps 1 and 3, hexokinase and phosphofructokinase-1&quot;,&quot;Steps 3 and 10, phosphofructokinase-1 and pyruvate kinase&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The investment phase spends ATP at steps 1 and 3, while steps 7 and 10 are the payoff steps that make it.&quot;},{&quot;q&quot;:&quot;With no oxygen present, what does glycolysis net per glucose?&quot;,&quot;options&quot;:[&quot;0 ATP, the pathway stalls at step 6 instead&quot;,&quot;1 ATP, because pyruvate kinase cannot run&quot;,&quot;4 ATP, since no NADH gets cashed in later&quot;,&quot;2 ATP, the same as it nets with oxygen&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Glycolysis never uses oxygen, so the net stays 2 ATP and what changes is only the downstream fate of the pyruvate and NADH.&quot;},{&quot;q&quot;:&quot;How is ATP actually made during glycolysis?&quot;,&quot;options&quot;:[&quot;A phosphate is handed from an intermediate to ADP&quot;,&quot;ATP synthase is turned by the proton gradient&quot;,&quot;Electrons travel down the chain and reduce oxygen&quot;,&quot;NADH is oxidized by complex I and the energy stored&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;This is substrate-level phosphorylation, a direct transfer onto ADP, which is why no gradient, chain or oxygen is involved.&quot;},{&quot;q&quot;:&quot;What do the 2 ATP spent in the investment phase accomplish?&quot;,&quot;options&quot;:[&quot;They reduce NAD+ so the payoff phase keeps running&quot;,&quot;They pay to carry glucose across the membrane inward&quot;,&quot;They are handed back to pyruvate kinase at step 10&quot;,&quot;They add phosphate and trap the sugar inside&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Phosphorylating the sugar puts a charge on it so it cannot cross back out of the cell, which is what the spent ATP buys.&quot;}]"><div class="st-fallback"><details><summary>What does one glucose net from glycolysis?</summary><p class="st-ans">2 ATP, 2 NADH, 2 pyruvate</p><p class="st-exp">Four ATP are made but two were already spent, so the net gain is 2 ATP alongside 2 NADH and 2 pyruvate.</p></details><details><summary>Phosphoglycerate kinase is listed as +2 ATP at step 7. Why is it not +1?</summary><p class="st-ans">Aldolase split the sugar, so the step runs twice</p><p class="st-exp">The step makes 1 ATP per three-carbon molecule, and glucose was already split into two of them at step 4, so it is +2 per glucose and +1 per pyruvate.</p></details><details><summary>Which two steps of glycolysis consume ATP?</summary><p class="st-ans">Steps 1 and 3, hexokinase and phosphofructokinase-1</p><p class="st-exp">The investment phase spends ATP at steps 1 and 3, while steps 7 and 10 are the payoff steps that make it.</p></details><details><summary>With no oxygen present, what does glycolysis net per glucose?</summary><p class="st-ans">2 ATP, the same as it nets with oxygen</p><p class="st-exp">Glycolysis never uses oxygen, so the net stays 2 ATP and what changes is only the downstream fate of the pyruvate and NADH.</p></details><details><summary>How is ATP actually made during glycolysis?</summary><p class="st-ans">A phosphate is handed from an intermediate to ADP</p><p class="st-exp">This is substrate-level phosphorylation, a direct transfer onto ADP, which is why no gradient, chain or oxygen is involved.</p></details><details><summary>What do the 2 ATP spent in the investment phase accomplish?</summary><p class="st-ans">They add phosphate and trap the sugar inside</p><p class="st-exp">Phosphorylating the sugar puts a charge on it so it cannot cross back out of the cell, which is what the spent ATP buys.</p></details></div></div></section><!-- selftest:end -->
  <div class="answer">
   <p class="big">Net 2 ATP</p>
   <p><b>Four ATP are made and two are spent</b>, so one glucose nets 2 ATP. Glycolysis also produces <b>2 NADH</b> and <b>2 pyruvate</b>.</p>
@@ -171,5 +204,6 @@
 <!-- askline:end --></main>
 <footer>Free biochem study tool &middot; share it with your study group &middot; <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> &middot; <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> &middot; <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> &middot; <span style="opacity:.75">Updated August 4, 2026</span> <!-- suggestfoot:start --> &middot; <a href="/suggest.html" style="color:inherit;text-decoration:underline">Suggest a tool</a><!-- suggestfoot:end --></footer>
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>
