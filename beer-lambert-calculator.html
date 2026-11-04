@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Absorbance Formula Calculator (Beer-Lambert A = εbc)</title>
-<meta name="description" content="The absorbance formula A = εbc, solved for any variable. Calculate absorbance, convert absorbance to concentration, or find molar absorptivity.">
+<title>Absorbance Formula Calculator + Beer-Lambert Self-Test</title>
+<meta name="description" content="Solve the absorbance formula A = εbc for any variable and convert absorbance to transmittance, then test yourself on six questions built from this page.">
 <meta name="keywords" content="absorbance formula, absorbance equation, calculate absorbance, beer lambert law calculator, beers law calculator, absorbance to concentration, molar absorptivity calculator, absorbance to transmittance">
 <link rel="canonical" href="https://biochemtools.com/beer-lambert-calculator.html">
 <meta property="og:title" content="Absorbance Formula Calculator (Beer-Lambert A = εbc)">
@@ -89,6 +89,38 @@
 <meta name="theme-color" content="#0e0c0a">
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/beer-lambert-calculator.html","name":"Absorbance Formula Calculator (Beer-Lambert A = \u03b5bc)","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -106,6 +138,7 @@
 
 <header><h1>Absorbance Formula Calculator</h1><p>The absorbance formula is <b>A = &epsilon;bc</b>, the Beer-Lambert law. Solve it for any variable, calculate absorbance, convert absorbance to concentration, or find molar absorptivity, with every step shown.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on the formula above: which variable you are solving for, where path length goes, and why transmittance does not fall in a straight line.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;The tool&#x27;s defaults are A = 0.6, ε = 6000 M⁻¹cm⁻¹ and b = 1 cm. Solve for the concentration c.&quot;,&quot;options&quot;:[&quot;3600 M, from ε × b × A instead&quot;,&quot;1.00 × 10⁻⁴ µM, the wrong unit&quot;,&quot;1.00 × 10⁻⁴ M, that is 100 µM&quot;,&quot;0.600 M, taking c as A when b = 1&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Concentration is the one variable you divide for, c = A / (εb), so multiplying the three defaults together answers a different question entirely.&quot;},{&quot;q&quot;:&quot;What does this page give as the units of molar absorptivity ε?&quot;,&quot;options&quot;:[&quot;M⁻¹cm⁻¹, per molar per cm&quot;,&quot;M cm, molar times path length&quot;,&quot;None, ε is unitless like A&quot;,&quot;cm⁻¹ only, A has no units&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;ε is per molar per centimetre, which is exactly what cancels the M of concentration and the cm of path length and leaves absorbance with no units.&quot;},{&quot;q&quot;:&quot;You read a sample in a 0.5 cm microcuvette but leave b = 1 cm in the calculation. What happens to the concentration you report?&quot;,&quot;options&quot;:[&quot;Twice too high, b divides out&quot;,&quot;Nothing changes, b is unitless&quot;,&quot;Four times too low, b squares&quot;,&quot;Twice too low, A was halved&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Path length multiplies absorbance exactly as concentration does, so halving the cuvette halves the reading and a calculation still assuming 1 cm hands back half the real concentration.&quot;},{&quot;q&quot;:&quot;A reading of A = 0.6 works out to what percent transmittance?&quot;,&quot;options&quot;:[&quot;40%, reading 0.6 as the part absorbed&quot;,&quot;About 25%, from 100 × 10^(−0.6)&quot;,&quot;60%, reading A as a percentage&quot;,&quot;6%, moving A&#x27;s decimal point over&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;Transmittance falls logarithmically with absorbance, so A = 0.6 still lets about a quarter of the light through rather than the 40% you get by treating A as a straight fraction absorbed.&quot;},{&quot;q&quot;:&quot;A 0.0002 M solution reads A = 0.85 in a 1 cm cuvette. What is its molar absorptivity?&quot;,&quot;options&quot;:[&quot;4250 M cm, since ε is M times cm&quot;,&quot;0.00017, from A × b × c instead&quot;,&quot;4250 M⁻¹cm⁻¹, from A / (b × c)&quot;,&quot;425 M⁻¹cm⁻¹, with c read as 0.002&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Molar absorptivity is measured by dividing a known reading by path length and concentration, and its units have to come out reciprocal, so an answer in M cm is wrong before the arithmetic is checked.&quot;},{&quot;q&quot;:&quot;A spectrophotometer reads 10% transmittance. What absorbance is that, and why does this page single the value out?&quot;,&quot;options&quot;:[&quot;0.900, the fraction of light absorbed&quot;,&quot;1.000, right at the linearity edge&quot;,&quot;0.100, since 10% is one tenth of it&quot;,&quot;2.303, using ln rather than log base 10&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;Every unit of absorbance is a tenfold cut in transmitted light, so 10% through is exactly A = 1, which is the point the page says readings start pulling away from linearity.&quot;}]"><div class="st-fallback"><details><summary>The tool&#x27;s defaults are A = 0.6, ε = 6000 M⁻¹cm⁻¹ and b = 1 cm. Solve for the concentration c.</summary><p class="st-ans">1.00 × 10⁻⁴ M, that is 100 µM</p><p class="st-exp">Concentration is the one variable you divide for, c = A / (εb), so multiplying the three defaults together answers a different question entirely.</p></details><details><summary>What does this page give as the units of molar absorptivity ε?</summary><p class="st-ans">M⁻¹cm⁻¹, per molar per cm</p><p class="st-exp">ε is per molar per centimetre, which is exactly what cancels the M of concentration and the cm of path length and leaves absorbance with no units.</p></details><details><summary>You read a sample in a 0.5 cm microcuvette but leave b = 1 cm in the calculation. What happens to the concentration you report?</summary><p class="st-ans">Twice too low, A was halved</p><p class="st-exp">Path length multiplies absorbance exactly as concentration does, so halving the cuvette halves the reading and a calculation still assuming 1 cm hands back half the real concentration.</p></details><details><summary>A reading of A = 0.6 works out to what percent transmittance?</summary><p class="st-ans">About 25%, from 100 × 10^(−0.6)</p><p class="st-exp">Transmittance falls logarithmically with absorbance, so A = 0.6 still lets about a quarter of the light through rather than the 40% you get by treating A as a straight fraction absorbed.</p></details><details><summary>A 0.0002 M solution reads A = 0.85 in a 1 cm cuvette. What is its molar absorptivity?</summary><p class="st-ans">4250 M⁻¹cm⁻¹, from A / (b × c)</p><p class="st-exp">Molar absorptivity is measured by dividing a known reading by path length and concentration, and its units have to come out reciprocal, so an answer in M cm is wrong before the arithmetic is checked.</p></details><details><summary>A spectrophotometer reads 10% transmittance. What absorbance is that, and why does this page single the value out?</summary><p class="st-ans">1.000, right at the linearity edge</p><p class="st-exp">Every unit of absorbance is a tenfold cut in transmitted light, so 10% through is exactly A = 1, which is the point the page says readings start pulling away from linearity.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <label for="A">Solve for</label>
   <div class="modes" id="modes">
@@ -216,5 +249,6 @@ calc();fromA();
 </script>
 <script src="/streak.js?v=f493fb7c" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

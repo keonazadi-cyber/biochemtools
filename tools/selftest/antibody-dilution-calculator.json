@@ -1,0 +1,81 @@
+{
+ "slug": "antibody-dilution-calculator",
+ "title": "Antibody Dilution Calculator + 1:X Self-Test",
+ "description": "Work out the antibody and diluent volumes for any 1:X dilution or working concentration, then test yourself on six questions taken from this page.",
+ "intro": "Six questions on the dilutions above: what the number after the colon counts, where the diluent volume comes from, and when the volume is too small to pipette.",
+ "questions": [
+  {
+   "q": "The calculator opens at 1:1000 in a 5 mL final volume. What two volumes does it give?",
+   "options": [
+    "5 µL antibody and 4995 µL diluent",
+    "5 µL antibody and 5000 µL diluent",
+    "5 mL antibody and 4995 mL diluent",
+    "50 µL antibody and 4950 µL diluent"
+   ],
+   "answer": 0,
+   "why": "The factor divides the final volume to give the antibody, and the diluent is only what is left of that final volume, so the two have to add up to 5 mL rather than exceed it.",
+   "source": "Page defaults: ratio 1000, final volume 5 mL, so antibody = Vfinal / N = 5000 µL / 1000 = 5 µL and diluent = Vfinal − ab = 5000 − 5 = 4995 µL. The page FAQ states the same split: for 5 millilitres it is 5 microlitres of antibody plus 4995 microlitres. Computed by the page's calculator at runtime, not printed as static text.",
+   "derived": true
+  },
+  {
+   "q": "Under the convention this page uses, what does the 500 in 1:500 count?",
+   "options": [
+    "500 parts of buffer, plus one of stock",
+    "500 µL of stock in every millilitre",
+    "500 parts total, antibody included",
+    "500 as a percentage of the final mix"
+   ],
+   "answer": 2,
+   "why": "The number after the colon is the total parts, so 1:500 is one part antibody and 499 parts diluent, not one part added to 500 parts of buffer.",
+   "source": "Page section How antibody dilutions work: 'A dilution written as 1:500 means one part antibody in 500 parts total, not one part in 500 parts of diluent.' The FAQ repeats it: 1 part in 500 total, so 1 part antibody + 499 parts diluent."
+  },
+  {
+   "q": "A datasheet gives a 1 mg/mL stock and recommends a 2 µg/mL working concentration. What dilution factor is that?",
+   "options": [
+    "1:2, taking 1 over 2 as written",
+    "1:2000, multiplying 1000 by two",
+    "1:1000, the stock figure on its own",
+    "1:500, from 1000 µg/mL over 2"
+   ],
+   "answer": 3,
+   "why": "The factor is the stock divided by the working concentration in matching units, so the milligram stock has to be read as 1000 µg/mL before you divide.",
+   "source": "Page: 'A 1 mg/mL stock is 1000 µg/mL, so reaching 2 µg/mL needs 1000/2 = a 1:500 dilution.' The tool's concentration mode computes N = stock / work with the mg/mL option worth 1000. Recomputed: 1000 / 2 = 500."
+  },
+  {
+   "q": "You need 1:5000 in 200 µL and your pipette will not go below 1 µL. What does this page have you do?",
+   "options": [
+    "Pipette 0.04 µL and accept the error",
+    "Split it in two, 1:100 then 1:50",
+    "Use 1:2500 twice, factors add up",
+    "Scale to 2 mL so 0.4 µL works"
+   ],
+   "answer": 1,
+   "why": "Dilution factors multiply rather than add, so 1:100 followed by 1:50 reaches 1:5000 while keeping every volume above what a pipette can measure.",
+   "source": "Page section Why very high dilutions need two steps: '1:100  then  1:50  =  100 × 50  =  1:5000', for a 1:5000 in 200 µL that otherwise needs 0.04 µL. Recomputed: 200 / 5000 = 0.04, 100 × 50 = 5000, and 2000 / 5000 = 0.4, still under 1 µL."
+  },
+  {
+   "q": "In that two-step example, step 2 makes the 200 µL of 1:5000. What goes into it?",
+   "options": [
+    "4 µL of neat stock plus 196 µL buffer",
+    "200 µL of the 1:100 and 4 µL buffer",
+    "4 µL of the 1:100 plus 196 µL buffer",
+    "2 µL of the 1:100 plus 198 µL buffer"
+   ],
+   "answer": 2,
+   "why": "The second step dilutes the intermediate rather than the neat antibody, and the volume it needs is the final 200 µL divided by the second factor of 50.",
+   "source": "Page worked block: 'step 2   4 µL of that  + 196 µL diluent  → 200 µL of 1:5000'. Recomputed: 200 / 50 = 4 and 200 − 4 = 196."
+  },
+  {
+   "q": "Which range does the page's table give as the typical starting point for a Western blot primary?",
+   "options": [
+    "1:500 to 1:2000",
+    "1:2000 to 1:10000",
+    "1:50 to 1:200",
+    "1:200 to 1:1000"
+   ],
+   "answer": 0,
+   "why": "Primaries sit roughly ten times more concentrated than the HRP secondary on the same table, so reading the wrong row wastes antibody or gives no signal at all.",
+   "source": "Page table Typical starting dilutions: Western blot primary 1:500 to 1:2000, Western blot secondary (HRP) 1:2000 to 1:10000, flow cytometry 1:50 to 1:200, immunofluorescence 1:200 to 1:1000."
+  }
+ ]
+}

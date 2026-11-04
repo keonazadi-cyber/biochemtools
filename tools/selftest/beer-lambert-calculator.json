@@ -1,7 +1,7 @@
 {
   "slug": "beer-lambert-calculator",
-  "title": "Absorbance Formula Calculator + Beer-Lambert Test",
-  "description": "Solve the absorbance formula A = ebc for any variable and convert absorbance to transmittance, then test yourself on six questions built from this page.",
+  "title": "Absorbance Formula Calculator + Beer-Lambert Self-Test",
+  "description": "Solve the absorbance formula A = εbc for any variable and convert absorbance to transmittance, then test yourself on six questions built from this page.",
   "intro": "Six questions on the formula above: which variable you are solving for, where path length goes, and why transmittance does not fall in a straight line.",
   "questions": [
     {

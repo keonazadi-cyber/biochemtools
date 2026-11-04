@@ -45,7 +45,9 @@ Each page carries the curve as an image and as a drawn plot, the buffering regio
 Each of these carries questions drawn from that page's own data, with the answers rendered in the HTML, so they are readable without running JavaScript.
 
 - [Amino Acid Chart: Test Yourself on All 20 Codes and pKa](https://biochemtools.com/amino-acid-chart.html): 7 questions.
+- [Antibody Dilution Calculator + 1:X Self-Test](https://biochemtools.com/antibody-dilution-calculator.html): 6 questions.
 - [ATP Yield Calculator: Work Out ATP per Glucose](https://biochemtools.com/atp-yield-calculator.html): 6 questions.
+- [Absorbance Formula Calculator + Beer-Lambert Self-Test](https://biochemtools.com/beer-lambert-calculator.html): 6 questions.
 - [Blood Type Punnett Square Calculator + Self-Test](https://biochemtools.com/blood-type-punnett-square-calculator.html): 6 questions.
 - [Citric Acid Cycle Explorer: 8 Steps + Self-Test](https://biochemtools.com/citric-acid-cycle-explorer.html): 6 questions.
 - [Codon Chart: Test Yourself on All 64 Codons (RNA & DNA)](https://biochemtools.com/codon-chart.html): 7 questions.
@@ -68,9 +70,9 @@ Each of these carries questions drawn from that page's own data, with the answer
 
 - [Amino Acid Catabolism: Ketogenic vs. Glucogenic, Free](https://biochemtools.com/amino-acid-catabolism-explorer.html)
 - [Amino Acid One-Letter Code Quiz: All 20, Free](https://biochemtools.com/amino-acid-one-letter-code-quiz.html)
-- [Antibody Dilution Calculator with Pipetting Check](https://biochemtools.com/antibody-dilution-calculator.html)
+- [Antibody Dilution Calculator + 1:X Self-Test](https://biochemtools.com/antibody-dilution-calculator.html)
 - [ATP Yield Calculator: Work Out ATP per Glucose](https://biochemtools.com/atp-yield-calculator.html)
-- [Absorbance Formula Calculator (Beer-Lambert A = εbc)](https://biochemtools.com/beer-lambert-calculator.html)
+- [Absorbance Formula Calculator + Beer-Lambert Self-Test](https://biochemtools.com/beer-lambert-calculator.html)
 - [Beta-Oxidation ATP Calculator: Fatty Acid ATP Yield, Free](https://biochemtools.com/beta-oxidation-atp-calculator.html)
 - [Blood Type Inheritance Calculator (ABO + Rh), Free](https://biochemtools.com/blood-type-calculator.html)
 - [Blood Type Punnett Square Calculator + Self-Test](https://biochemtools.com/blood-type-punnett-square-calculator.html)

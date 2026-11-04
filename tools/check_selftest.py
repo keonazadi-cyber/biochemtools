@@ -447,12 +447,58 @@ def check_nucleic(bank):
                     % (n, f, sorted(fac.values())))
 
 
+def check_oxygen(bank):
+    """Recompute saturations from the page's own Hill parameters.
+
+    The generic number check cannot catch a wrong P50, because a wrong P50 is a
+    plausible number that may well appear somewhere on the page. This reads
+    CURVES and does the arithmetic.
+    """
+    h = (SITE / "oxygen-dissociation-curve-calculator.html").read_text()
+    m = re.search(r"CURVES\s*=\s*(\{[\s\S]*?\n\s*\})", h)
+    if not m:
+        bad("oxygen-dissociation-curve-calculator", "no CURVES object on the page")
+        return
+    cur = run_js(m.group(1))
+    if not cur:
+        bad("oxygen-dissociation-curve-calculator", "CURVES did not parse")
+        return
+    p50s = {k: v.get("p50") for k, v in cur.items() if isinstance(v, dict)}
+    for n, q in enumerate(bank["questions"], 1):
+        blob = " ".join([q["q"], q["why"], q.get("source", ""), *q["options"]])
+        # Tight on purpose. A loose gap matched "P50^n + pO" and then captured
+        # the 2 out of pO2, flagging a correct answer.
+        for val in set(re.findall(
+                r"P50\s*(?:is|of|=|:|at)?\s*([0-9]+(?:\.[0-9]+)?)", blob)):
+            if not any(abs(float(val) - p) < 0.05 for p in p50s.values() if p):
+                bad("oxygen-dissociation-curve-calculator",
+                    "Q%d names a P50 of %s; the page's are %s"
+                    % (n, val, sorted(v for v in p50s.values() if v)))
+        # "at pO2 = X, which curve is at 50%" must name the curve whose P50 is X
+        mm = re.search(r"pO2\s*=\s*([0-9.]+)", q["q"])
+        if mm and "50" in q["q"]:
+            want = float(mm.group(1))
+            hits = [k for k, p in p50s.items() if p and abs(p - want) < 0.05]
+            if hits and not any(h_.lower()[:3] in q["options"][q["answer"]].lower()
+                                for h_ in hits):
+                bad("oxygen-dissociation-curve-calculator",
+                    "Q%d: at pO2 %g the 50%% curve is %s, answer says %r"
+                    % (n, want, hits, q["options"][q["answer"]][:40]))
+
+
 def check_numbers_exist(slug, bank, page):
     """Weakest check, applied where nothing stronger exists: a number stated in
     the correct option must appear on the page, unless the question marks itself
     as derived. Catches an invented figure, which is the failure that matters."""
     h = page.read_text()
-    text = re.sub(r"<[^>]+>", " ", h)
+    # Strip script and style CONTENT before stripping tags. Removing tags alone
+    # kills attributes but leaves JSON-LD and inline CSS, where "23" turns up in
+    # datePublished "2026-07-23" and in a percent-encoded SVG fragment url(%23n).
+    # An agent proved this by setting a P50 to a plausible but wrong 23 mmHg and
+    # watching the check pass, so any two-digit error colliding with a date, a
+    # hex colour or a version string was invisible.
+    text = re.sub(r"<(script|style)\b[\s\S]*?</\1>", " ", h, flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
     for n, q in enumerate(bank["questions"], 1):
         if q.get("derived"):
             continue
@@ -478,6 +524,9 @@ def main():
             check_amino(bank)
         elif slug == "codon-chart":
             check_codon(bank)
+        elif slug == "oxygen-dissociation-curve-calculator":
+            check_oxygen(bank)
+            check_numbers_exist(slug, bank, page)
         elif slug == "nucleic-acid-concentration-calculator":
             check_nucleic(bank)
             check_numbers_exist(slug, bank, page)

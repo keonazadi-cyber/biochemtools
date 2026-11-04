@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Antibody Dilution Calculator with Pipetting Check</title>
-<meta name="description" content="How much antibody and diluent to mix for any 1:X dilution or working concentration, plus a warning when the volume is too small to pipette accurately.">
+<title>Antibody Dilution Calculator + 1:X Self-Test</title>
+<meta name="description" content="Work out the antibody and diluent volumes for any 1:X dilution or working concentration, then test yourself on six questions taken from this page.">
 <meta name="keywords" content="antibody dilution calculator, antibody dilution, 1:1000 dilution calculator, western blot antibody dilution, primary antibody dilution, secondary antibody dilution, working concentration calculator, serial dilution antibody">
 <link rel="canonical" href="https://biochemtools.com/antibody-dilution-calculator.html">
 <meta property="og:title" content="Antibody Dilution Calculator with Pipetting Check">
@@ -111,6 +111,38 @@
 <meta name="theme-color" content="#0e0c0a">
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/antibody-dilution-calculator.html","name":"Antibody Dilution Calculator with Pipetting Check","datePublished":"2026-07-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -128,6 +160,7 @@
 
 <header><h1>Antibody Dilution Calculator</h1><p>Get the exact volume of antibody and diluent to mix, from either a 1:X ratio or a target working concentration. It also checks whether the volume is actually pipettable and works out a two-step dilution when it is not.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on the dilutions above: what the number after the colon counts, where the diluent volume comes from, and when the volume is too small to pipette.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;The calculator opens at 1:1000 in a 5 mL final volume. What two volumes does it give?&quot;,&quot;options&quot;:[&quot;5 µL antibody and 4995 µL diluent&quot;,&quot;5 µL antibody and 5000 µL diluent&quot;,&quot;5 mL antibody and 4995 mL diluent&quot;,&quot;50 µL antibody and 4950 µL diluent&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;The factor divides the final volume to give the antibody, and the diluent is only what is left of that final volume, so the two have to add up to 5 mL rather than exceed it.&quot;},{&quot;q&quot;:&quot;Under the convention this page uses, what does the 500 in 1:500 count?&quot;,&quot;options&quot;:[&quot;500 parts of buffer, plus one of stock&quot;,&quot;500 µL of stock in every millilitre&quot;,&quot;500 parts total, antibody included&quot;,&quot;500 as a percentage of the final mix&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The number after the colon is the total parts, so 1:500 is one part antibody and 499 parts diluent, not one part added to 500 parts of buffer.&quot;},{&quot;q&quot;:&quot;A datasheet gives a 1 mg/mL stock and recommends a 2 µg/mL working concentration. What dilution factor is that?&quot;,&quot;options&quot;:[&quot;1:2, taking 1 over 2 as written&quot;,&quot;1:2000, multiplying 1000 by two&quot;,&quot;1:1000, the stock figure on its own&quot;,&quot;1:500, from 1000 µg/mL over 2&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;The factor is the stock divided by the working concentration in matching units, so the milligram stock has to be read as 1000 µg/mL before you divide.&quot;},{&quot;q&quot;:&quot;You need 1:5000 in 200 µL and your pipette will not go below 1 µL. What does this page have you do?&quot;,&quot;options&quot;:[&quot;Pipette 0.04 µL and accept the error&quot;,&quot;Split it in two, 1:100 then 1:50&quot;,&quot;Use 1:2500 twice, factors add up&quot;,&quot;Scale to 2 mL so 0.4 µL works&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;Dilution factors multiply rather than add, so 1:100 followed by 1:50 reaches 1:5000 while keeping every volume above what a pipette can measure.&quot;},{&quot;q&quot;:&quot;In that two-step example, step 2 makes the 200 µL of 1:5000. What goes into it?&quot;,&quot;options&quot;:[&quot;4 µL of neat stock plus 196 µL buffer&quot;,&quot;200 µL of the 1:100 and 4 µL buffer&quot;,&quot;4 µL of the 1:100 plus 196 µL buffer&quot;,&quot;2 µL of the 1:100 plus 198 µL buffer&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;The second step dilutes the intermediate rather than the neat antibody, and the volume it needs is the final 200 µL divided by the second factor of 50.&quot;},{&quot;q&quot;:&quot;Which range does the page&#x27;s table give as the typical starting point for a Western blot primary?&quot;,&quot;options&quot;:[&quot;1:500 to 1:2000&quot;,&quot;1:2000 to 1:10000&quot;,&quot;1:50 to 1:200&quot;,&quot;1:200 to 1:1000&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Primaries sit roughly ten times more concentrated than the HRP secondary on the same table, so reading the wrong row wastes antibody or gives no signal at all.&quot;}]"><div class="st-fallback"><details><summary>The calculator opens at 1:1000 in a 5 mL final volume. What two volumes does it give?</summary><p class="st-ans">5 µL antibody and 4995 µL diluent</p><p class="st-exp">The factor divides the final volume to give the antibody, and the diluent is only what is left of that final volume, so the two have to add up to 5 mL rather than exceed it.</p></details><details><summary>Under the convention this page uses, what does the 500 in 1:500 count?</summary><p class="st-ans">500 parts total, antibody included</p><p class="st-exp">The number after the colon is the total parts, so 1:500 is one part antibody and 499 parts diluent, not one part added to 500 parts of buffer.</p></details><details><summary>A datasheet gives a 1 mg/mL stock and recommends a 2 µg/mL working concentration. What dilution factor is that?</summary><p class="st-ans">1:500, from 1000 µg/mL over 2</p><p class="st-exp">The factor is the stock divided by the working concentration in matching units, so the milligram stock has to be read as 1000 µg/mL before you divide.</p></details><details><summary>You need 1:5000 in 200 µL and your pipette will not go below 1 µL. What does this page have you do?</summary><p class="st-ans">Split it in two, 1:100 then 1:50</p><p class="st-exp">Dilution factors multiply rather than add, so 1:100 followed by 1:50 reaches 1:5000 while keeping every volume above what a pipette can measure.</p></details><details><summary>In that two-step example, step 2 makes the 200 µL of 1:5000. What goes into it?</summary><p class="st-ans">4 µL of the 1:100 plus 196 µL buffer</p><p class="st-exp">The second step dilutes the intermediate rather than the neat antibody, and the volume it needs is the final 200 µL divided by the second factor of 50.</p></details><details><summary>Which range does the page&#x27;s table give as the typical starting point for a Western blot primary?</summary><p class="st-ans">1:500 to 1:2000</p><p class="st-exp">Primaries sit roughly ten times more concentrated than the HRP secondary on the same table, so reading the wrong row wastes antibody or gives no signal at all.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <div class="modes" id="mode">
    <button data-m="ratio" class="on">I have a 1:X ratio</button>
@@ -306,5 +339,6 @@ document.querySelectorAll("#presets button").forEach(b=>b.onclick=()=>{ $("ratio
 ["stockU","unit"].forEach(id=>$(id).addEventListener("change",calc));
 calc();
 </script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>
