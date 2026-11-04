@@ -1,0 +1,80 @@
+{
+  "slug": "beer-lambert-calculator",
+  "title": "Absorbance Formula Calculator + Beer-Lambert Test",
+  "description": "Solve the absorbance formula A = ebc for any variable and convert absorbance to transmittance, then test yourself on six questions built from this page.",
+  "intro": "Six questions on the formula above: which variable you are solving for, where path length goes, and why transmittance does not fall in a straight line.",
+  "questions": [
+    {
+      "q": "The tool's defaults are A = 0.6, ε = 6000 M⁻¹cm⁻¹ and b = 1 cm. Solve for the concentration c.",
+      "options": [
+        "3600 M, from ε × b × A instead",
+        "1.00 × 10⁻⁴ µM, the wrong unit",
+        "1.00 × 10⁻⁴ M, that is 100 µM",
+        "0.600 M, taking c as A when b = 1"
+      ],
+      "answer": 2,
+      "why": "Concentration is the one variable you divide for, c = A / (εb), so multiplying the three defaults together answers a different question entirely.",
+      "source": "Worked example 1 on the page: c = A / (ε × b) = 0.6 / (6000 × 1) = 0.0001 M = 1.00 × 10⁻⁴ M = 100 µM. Distractor 0 is 6000 × 1 × 0.6 = 3600."
+    },
+    {
+      "q": "What does this page give as the units of molar absorptivity ε?",
+      "options": [
+        "M⁻¹cm⁻¹, per molar per cm",
+        "M cm, molar times path length",
+        "None, ε is unitless like A",
+        "cm⁻¹ only, A has no units"
+      ],
+      "answer": 0,
+      "why": "ε is per molar per centimetre, which is exactly what cancels the M of concentration and the cm of path length and leaves absorbance with no units.",
+      "source": "Page FAQ: 'What are the units of molar absorptivity (ε)? M⁻¹cm⁻¹, per molar, per centimeter.' The formula block lists ε = molar absorptivity (M-1 cm-1) and A = absorbance (no units)."
+    },
+    {
+      "q": "You read a sample in a 0.5 cm microcuvette but leave b = 1 cm in the calculation. What happens to the concentration you report?",
+      "options": [
+        "Twice too high, b divides out",
+        "Nothing changes, b is unitless",
+        "Four times too low, b squares",
+        "Twice too low, A was halved"
+      ],
+      "answer": 3,
+      "why": "Path length multiplies absorbance exactly as concentration does, so halving the cuvette halves the reading and a calculation still assuming 1 cm hands back half the real concentration.",
+      "source": "Page formula block: b = path length (cm, usually 1 cm for a standard cuvette), and c = A / (εb). Using the page's NADH figures, A at 0.5 cm is 6220 × 0.5 × 50e-6 = 0.1555, and 0.1555 / (6220 × 1) = 2.5e-5 M, half of the true 5e-5 M."
+    },
+    {
+      "q": "A reading of A = 0.6 works out to what percent transmittance?",
+      "options": [
+        "40%, reading 0.6 as the part absorbed",
+        "About 25%, from 100 × 10^(−0.6)",
+        "60%, reading A as a percentage",
+        "6%, moving A's decimal point over"
+      ],
+      "answer": 1,
+      "why": "Transmittance falls logarithmically with absorbance, so A = 0.6 still lets about a quarter of the light through rather than the 40% you get by treating A as a straight fraction absorbed.",
+      "source": "Page converter, worked: %T = 100 × 10⁻⁰·⁶ = 25.12%, and the converter ships with A = 0.6 against %T = 25.1. Recomputed: 100 × 10^(−0.6) = 25.119."
+    },
+    {
+      "q": "A 0.0002 M solution reads A = 0.85 in a 1 cm cuvette. What is its molar absorptivity?",
+      "options": [
+        "4250 M cm, since ε is M times cm",
+        "0.00017, from A × b × c instead",
+        "4250 M⁻¹cm⁻¹, from A / (b × c)",
+        "425 M⁻¹cm⁻¹, with c read as 0.002"
+      ],
+      "answer": 2,
+      "why": "Molar absorptivity is measured by dividing a known reading by path length and concentration, and its units have to come out reciprocal, so an answer in M cm is wrong before the arithmetic is checked.",
+      "source": "Practice problem 1 on the page: ε = A / (b × c) = 0.85 / (1 × 0.0002) = 4250 M⁻¹cm⁻¹. Distractor 1 is 0.85 × 1 × 0.0002 = 0.00017; distractor 3 is 0.85 / (1 × 0.002) = 425."
+    },
+    {
+      "q": "A spectrophotometer reads 10% transmittance. What absorbance is that, and why does this page single the value out?",
+      "options": [
+        "0.900, the fraction of light absorbed",
+        "1.000, right at the linearity edge",
+        "0.100, since 10% is one tenth of it",
+        "2.303, using ln rather than log base 10"
+      ],
+      "answer": 1,
+      "why": "Every unit of absorbance is a tenfold cut in transmitted light, so 10% through is exactly A = 1, which is the point the page says readings start pulling away from linearity.",
+      "source": "Practice problem 2 on the page: A = −log₁₀(T) = −log₁₀(10/100) = −log₁₀(0.10) = 1.000, plus the FAQ line that above roughly A = 1 the reading deviates from strict linearity. Recomputed: −log10(0.1) = 1.0."
+    }
+  ]
+}

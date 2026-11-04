@@ -4,39 +4,123 @@
 
 Every calculator shows the formula, the substitution, and the intermediate steps. Every reference chart is generated from the same data as its interactive tool, and the build fails if the two disagree. Values are checked against an independent implementation before publishing.
 
-## Printable reference charts
+This file is generated from the site itself, so the figures below are the same ones the pages serve.
 
-- [All printable charts](https://biochemtools.com/charts.html): the full set, free to download and reuse in a class handout with no attribution required.
-- [The 20 amino acids, drawn](https://biochemtools.com/amino-acid-chart.html): every structure at physiological pH, grouped by side-chain class, with the seven ionizable side-chain pKa values. Structures verified for molecular formula, net charge at pH 7.4, and L-configuration at every stereocentre.
-- [The genetic code, all 64 codons](https://biochemtools.com/codon-chart.html): NCBI translation table 1, coloured by amino acid class, checked against an independently generated copy of the standard code.
-- [ATP yield per glucose](https://biochemtools.com/atp-yield-calculator.html): why the modern figure is 30 to 32 rather than the 36 to 38 older textbooks give.
-- [Glycolysis in 10 steps](https://biochemtools.com/glycolysis-pathway-explorer.html): each step with its enzyme, ATP and NADH yield, and the three irreversible steps.
-- [The four enzyme inhibition patterns](https://biochemtools.com/michaelis-menten-vs-lineweaver-burk.html): the effect of each on Km and Vmax and its Lineweaver-Burk signature.
-- [Which buffer for which pH](https://biochemtools.com/buffer-pka-table.html): 32 buffers on a pH axis, each spanning its useful range, with temperature-sensitive ones marked.
-- [Every biochem equation on one page](https://biochemtools.com/biochem-equation-sheet.html): 38 formulas across 8 topics, each labelled with what it is used for.
+## Amino acid titration curves, one page each
+
+Each page carries the curve as an image and as a drawn plot, the buffering regions, the equivalence points, and the isoelectric point worked out from the pKa values on that page.
+
+- [Alanine titration curve](https://biochemtools.com/alanine-titration-curve.html): pKa 2.34, 9.69, pI 6.01.
+- [Arginine titration curve](https://biochemtools.com/arginine-titration-curve.html): pKa 2.17, 9.04, 12.48, pI 10.76.
+- [Asparagine titration curve](https://biochemtools.com/asparagine-titration-curve.html): pKa 2.02, 8.80, pI 5.41.
+- [Aspartic acid titration curve](https://biochemtools.com/aspartic-acid-titration-curve.html): pKa 1.88, 3.65, 9.60, pI 2.77.
+- [Cysteine titration curve](https://biochemtools.com/cysteine-titration-curve.html): pKa 1.96, 8.18, 10.28, pI 5.07.
+- [Glutamic acid titration curve](https://biochemtools.com/glutamic-acid-titration-curve.html): pKa 2.19, 4.25, 9.67, pI 3.22.
+- [Glutamine titration curve](https://biochemtools.com/glutamine-titration-curve.html): pKa 2.17, 9.13, pI 5.65.
+- [Glycine titration curve](https://biochemtools.com/glycine-titration-curve.html): pKa 2.34, 9.60, pI 5.97.
+- [Histidine titration curve](https://biochemtools.com/histidine-titration-curve.html): pKa 1.82, 6.00, 9.17, pI 7.59.
+- [Isoleucine titration curve](https://biochemtools.com/isoleucine-titration-curve.html): pKa 2.36, 9.68, pI 6.02.
+- [Leucine titration curve](https://biochemtools.com/leucine-titration-curve.html): pKa 2.36, 9.60, pI 5.98.
+- [Lysine titration curve](https://biochemtools.com/lysine-titration-curve.html): pKa 2.18, 8.95, 10.53, pI 9.74.
+- [Methionine titration curve](https://biochemtools.com/methionine-titration-curve.html): pKa 2.28, 9.21, pI 5.74.
+- [Phenylalanine titration curve](https://biochemtools.com/phenylalanine-titration-curve.html): pKa 1.83, 9.13, pI 5.48.
+- [Proline titration curve](https://biochemtools.com/proline-titration-curve.html): pKa 1.99, 10.96, pI 6.48.
+- [Serine titration curve](https://biochemtools.com/serine-titration-curve.html): pKa 2.21, 9.15, pI 5.68.
+- [Threonine titration curve](https://biochemtools.com/threonine-titration-curve.html): pKa 2.11, 9.62, pI 5.87.
+- [Tryptophan titration curve](https://biochemtools.com/tryptophan-titration-curve.html): pKa 2.38, 9.39, pI 5.89.
+- [Tyrosine titration curve](https://biochemtools.com/tyrosine-titration-curve.html): pKa 2.20, 9.11, 10.07, pI 5.66.
+- [Valine titration curve](https://biochemtools.com/valine-titration-curve.html): pKa 2.32, 9.62, pI 5.97.
+- [Plot any amino acid yourself](https://biochemtools.com/amino-acid-titration-curve.html): all 20, with the pI worked out as you switch.
 
 ## Frequently cited reference values
 
-- Amino acid pKa, pI, molecular weight, hydropathy, and essential status: https://biochemtools.com/amino-acid-chart.html
-- The seven ionizable side chains in ascending pKa order are D 3.65, E 4.25, H 6.00, C 8.18, Y 10.07, K 10.53, R 12.48.
+- The 7 ionizable side chains, in ascending pKa order: D 3.65, E 4.25, H 6.00, C 8.18, Y 10.07, K 10.53, R 12.48.
+- Highest pI is Arginine at 10.76; lowest is Aspartate at 2.77.
+- Essential: His, Ile, Leu, Lys, Met, Phe, Thr, Trp, Val. Conditionally essential: Arg, Cys, Gln, Gly, Pro, Tyr. This site treats essential status as three-valued, not a yes or no flag.
+- Amino acid pKa, pI, molecular weight, hydropathy and essential status: https://biochemtools.com/amino-acid-chart.html
 - Buffer pKa values and temperature coefficients for 32 buffers: https://biochemtools.com/buffer-pka-table.html
-- ATP yield per glucose is 30 with the glycerol-3-phosphate shuttle and 32 with malate-aspartate, using 2.5 ATP per NADH and 1.5 per FADH2.
 
-## Calculators
+## Pages with a self-test
 
-- [Peptide charge and pI](https://biochemtools.com/peptide-charge-calculator.html)
-- [DNA melting temperature, nearest-neighbor](https://biochemtools.com/dna-melting-temperature-calculator.html): SantaLucia parameters with Owczarzy salt corrections, validated against Biopython.
-- [Enzyme kinetics simulator](https://biochemtools.com/enzyme-kinetics-simulator.html)
-- [Michaelis-Menten fitter](https://biochemtools.com/michaelis-menten-fitter.html)
-- [Henderson-Hasselbalch buffer calculator](https://biochemtools.com/henderson-hasselbalch-buffer-calculator.html)
-- [Protein molecular weight and extinction coefficient](https://biochemtools.com/protein-molecular-weight-calculator.html)
-- [Full tool index](https://biochemtools.com/)
+Each of these carries questions drawn from that page's own data, with the answers rendered in the HTML, so they are readable without running JavaScript.
 
-## Explainers
+- [Amino Acid Chart: Test Yourself on All 20 Codes and pKa](https://biochemtools.com/amino-acid-chart.html): 7 questions.
+- [ATP Yield Calculator: Work Out ATP per Glucose](https://biochemtools.com/atp-yield-calculator.html): 6 questions.
+- [Blood Type Punnett Square Calculator + Self-Test](https://biochemtools.com/blood-type-punnett-square-calculator.html): 6 questions.
+- [Citric Acid Cycle Explorer: 8 Steps + Self-Test](https://biochemtools.com/citric-acid-cycle-explorer.html): 6 questions.
+- [Codon Chart: Test Yourself on All 64 Codons (RNA & DNA)](https://biochemtools.com/codon-chart.html): 7 questions.
+- [Hardy-Weinberg Calculator + Genotype Frequency Self-Test](https://biochemtools.com/hardy-weinberg-calculator.html): 6 questions.
+- [How Many ATP Are Produced in Glycolysis? Test Yourself](https://biochemtools.com/how-many-atp-are-produced-in-glycolysis.html): 6 questions.
+- [DNA & RNA Concentration Calculator + A260 Self-Test](https://biochemtools.com/nucleic-acid-concentration-calculator.html): 6 questions.
+- [Oxygen Dissociation Curve Calculator + Self-Test](https://biochemtools.com/oxygen-dissociation-curve-calculator.html): 6 questions.
+- [Punnett Square Calculator + Dihybrid Cross Self-Test](https://biochemtools.com/punnett-square-calculator.html): 6 questions.
+- [Serial Dilution Calculator + 6-Question Self-Test](https://biochemtools.com/serial-dilution-calculator.html): 6 questions.
 
-- [How to calculate pI without a calculator](https://biochemtools.com/how-to-calculate-pi-without-a-calculator.html)
-- [The 3 MCAT buffer question types](https://biochemtools.com/mcat-buffer-questions-explained.html)
-- [OligoCalc: where it went, and a free alternative](https://biochemtools.com/oligocalc-alternative.html)
+## Printable reference charts
+
+- [Free Printable Biochemistry Charts, No Signup](https://biochemtools.com/charts.html)
+- [Amino Acid Chart: Test Yourself on All 20 Codes and pKa](https://biochemtools.com/amino-acid-chart.html)
+- [Codon Chart: Test Yourself on All 64 Codons (RNA & DNA)](https://biochemtools.com/codon-chart.html)
+- [Biochem & MCAT Equation Sheet: Every Formula, Free](https://biochemtools.com/biochem-equation-sheet.html)
+- [Buffer pKa Table: Pick a Buffer for Any pH, Free](https://biochemtools.com/buffer-pka-table.html)
+
+## Every other tool
+
+- [Amino Acid Catabolism: Ketogenic vs. Glucogenic, Free](https://biochemtools.com/amino-acid-catabolism-explorer.html)
+- [Amino Acid One-Letter Code Quiz: All 20, Free](https://biochemtools.com/amino-acid-one-letter-code-quiz.html)
+- [Antibody Dilution Calculator with Pipetting Check](https://biochemtools.com/antibody-dilution-calculator.html)
+- [ATP Yield Calculator: Work Out ATP per Glucose](https://biochemtools.com/atp-yield-calculator.html)
+- [Absorbance Formula Calculator (Beer-Lambert A = εbc)](https://biochemtools.com/beer-lambert-calculator.html)
+- [Beta-Oxidation ATP Calculator: Fatty Acid ATP Yield, Free](https://biochemtools.com/beta-oxidation-atp-calculator.html)
+- [Blood Type Inheritance Calculator (ABO + Rh), Free](https://biochemtools.com/blood-type-calculator.html)
+- [Blood Type Punnett Square Calculator + Self-Test](https://biochemtools.com/blood-type-punnett-square-calculator.html)
+- [Cardiac Output Calculator: HR × SV or Fick's Method, Free](https://biochemtools.com/cardiac-output-calculator.html)
+- [Chemical Equilibrium (Keq) Calculator: ICE Tables, Free](https://biochemtools.com/chemical-equilibrium-calculator.html)
+- [Chi-Square Genetic Ratio Calculator, Free](https://biochemtools.com/chi-square-genetics-calculator.html)
+- [Citric Acid Cycle Explorer: 8 Steps + Self-Test](https://biochemtools.com/citric-acid-cycle-explorer.html)
+- [Dihybrid Cross Calculator: 16-Box Punnett Square](https://biochemtools.com/dihybrid-cross-calculator.html)
+- [Dilution Calculator (C1V1 = C2V2 / M1V1 = M2V2)](https://biochemtools.com/dilution-calculator.html)
+- [DNA Melting Temperature Calculator (Nearest-Neighbor Tm)](https://biochemtools.com/dna-melting-temperature-calculator.html)
+- [DNA to Protein Translator (and DNA to mRNA Converter)](https://biochemtools.com/dna-to-protein-translation.html)
+- [Empirical Formula Calculator: and Molecular Formula, Free](https://biochemtools.com/empirical-formula-calculator.html)
+- [Enzyme Kinetics Simulator: Michaelis-Menten, Free](https://biochemtools.com/enzyme-kinetics-simulator.html)
+- [Eye Color Punnett Square (and Why It Is Wrong)](https://biochemtools.com/eye-color-punnett-square.html)
+- [Gene Expression Regulation Explorer: Lac Operon, Free](https://biochemtools.com/gene-expression-regulation-explorer.html)
+- [Gibbs Free Energy Calculator (ΔG=ΔH−TΔS): Free](https://biochemtools.com/gibbs-free-energy-calculator.html)
+- [Glycolysis Pathway Explorer: 10 Steps, Free](https://biochemtools.com/glycolysis-pathway-explorer.html)
+- [Hardy-Weinberg Calculator + Genotype Frequency Self-Test](https://biochemtools.com/hardy-weinberg-calculator.html)
+- [Henderson-Hasselbalch Buffer Calculator: Free](https://biochemtools.com/henderson-hasselbalch-buffer-calculator.html)
+- [How Many ATP Are Produced in Glycolysis? Test Yourself](https://biochemtools.com/how-many-atp-are-produced-in-glycolysis.html)
+- [How to Calculate Allele Frequency (With Worked Examples)](https://biochemtools.com/how-to-calculate-allele-frequency.html)
+- [How to Calculate pI Without a Calculator](https://biochemtools.com/how-to-calculate-pi-without-a-calculator.html)
+- [Ideal Gas Law Calculator (PV = nRT): Free](https://biochemtools.com/ideal-gas-law-calculator.html)
+- [Limiting Reagent Calculator: Find the Limiter, Free](https://biochemtools.com/limiting-reagent-calculator.html)
+- [The 3 MCAT Buffer Question Types, Explained](https://biochemtools.com/mcat-buffer-questions-explained.html)
+- [Membrane Transport: Diffusion vs. Active Transport, Free](https://biochemtools.com/membrane-transport-explorer.html)
+- [Michaelis-Menten Fitter: Get Km & Vmax, Free](https://biochemtools.com/michaelis-menten-fitter.html)
+- [Michaelis-Menten vs. Lineweaver-Burk: When to Use Each](https://biochemtools.com/michaelis-menten-vs-lineweaver-burk.html)
+- [Molarity to Grams & Molecular Weight Calculator](https://biochemtools.com/molarity-molar-mass-calculator.html)
+- [Nernst Equation Calculator: Cell Potential, Free](https://biochemtools.com/nernst-equation-calculator.html)
+- [DNA & RNA Concentration Calculator + A260 Self-Test](https://biochemtools.com/nucleic-acid-concentration-calculator.html)
+- [OligoCalc: Where It Went, and a Free Alternative](https://biochemtools.com/oligocalc-alternative.html)
+- [Osmotic Pressure & Osmolarity Calculator: Free](https://biochemtools.com/osmotic-pressure-calculator.html)
+- [Oxygen Dissociation Curve Calculator + Self-Test](https://biochemtools.com/oxygen-dissociation-curve-calculator.html)
+- [Peptide Charge & pI Calculator: Free Biochem Tool](https://biochemtools.com/peptide-charge-calculator.html)
+- [Percent Composition Calculator, Free](https://biochemtools.com/percent-composition-calculator.html)
+- [Percent Yield Calculator: Theoretical & Actual, Free](https://biochemtools.com/percent-yield-calculator.html)
+- [pH Calculator: Acids & Bases, Free](https://biochemtools.com/ph-calculator.html)
+- [Protein MW & Extinction Coefficient Calculator, Free](https://biochemtools.com/protein-molecular-weight-calculator.html)
+- [Punnett Square Calculator + Dihybrid Cross Self-Test](https://biochemtools.com/punnett-square-calculator.html)
+- [Punnett Square Practice Problems (Free Worksheet)](https://biochemtools.com/punnett-square-practice-problems.html)
+- [Amino Acid Quiz: Learn All 20, Free](https://biochemtools.com/quiz.html)
+- [Reaction Half-Life & Rate Law Calculator, Free](https://biochemtools.com/reaction-rate-half-life-calculator.html)
+- [Renal Clearance Calculator & GFR, Free](https://biochemtools.com/renal-clearance-calculator.html)
+- [Serial Dilution Calculator + 6-Question Self-Test](https://biochemtools.com/serial-dilution-calculator.html)
+- [n = PV / RT: Solving the Ideal Gas Law for Moles](https://biochemtools.com/solve-ideal-gas-law-for-moles.html)
+- [P = nRT / V: Solving the Ideal Gas Law for Pressure](https://biochemtools.com/solve-ideal-gas-law-for-pressure.html)
+- [T = PV / nR: Solving the Ideal Gas Law for Temperature](https://biochemtools.com/solve-ideal-gas-law-for-temperature.html)
+- [V = nRT / P: Solving the Ideal Gas Law for Volume](https://biochemtools.com/solve-ideal-gas-law-for-volume.html)
+- [X-Linked (Sex-Linked) Inheritance Calculator, Free](https://biochemtools.com/x-linked-inheritance-calculator.html)
 
 ## Notes for citation
 

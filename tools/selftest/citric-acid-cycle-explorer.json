@@ -1,0 +1,80 @@
+{
+  "slug": "citric-acid-cycle-explorer",
+  "title": "Citric Acid Cycle Explorer: 8 Steps + Self-Test",
+  "description": "Step through all 8 reactions of the citric acid cycle with a live NADH, FADH2 and GTP tally, then test yourself on six questions with worked answers.",
+  "intro": "Six questions on what one turn yields, which steps lose the CO2, and where the single GTP comes from, each answer checkable against the eight steps above.",
+  "questions": [
+    {
+      "q": "How many NADH does ONE turn of the cycle make, not one glucose?",
+      "options": [
+        "6 NADH, the number used per glucose",
+        "3 NADH, from steps 3, 4 and 8",
+        "4 NADH, counting the FADH2 as one",
+        "2 NADH, one for each CO2 released"
+      ],
+      "answer": 1,
+      "why": "Steps 3, 4 and 8 each reduce one NAD+, so a single turn gives 3 NADH, and the familiar 6 only shows up after both turns of a glucose.",
+      "source": "STEPS array in the page script: Isocitrate dehydrogenase nadh:1, alpha-Ketoglutarate dehydrogenase nadh:1, Malate dehydrogenase nadh:1, and all five other steps nadh:0, so the sum over one turn is 1 + 1 + 1 = 3. Worked example tally: 'Final (one turn): NADH = 3'. The page then doubles it for glucose: 'the cycle runs twice per original glucose, doubling everything to 6 NADH'."
+    },
+    {
+      "q": "Which two steps of the cycle release the CO2?",
+      "options": [
+        "Steps 1 and 2, citrate synthase and aconitase",
+        "Steps 5 and 6, where GTP and FADH2 appear",
+        "Steps 6 and 8, the last two oxidation steps",
+        "Steps 3 and 4, the two decarboxylations"
+      ],
+      "answer": 3,
+      "why": "Only the two oxidative decarboxylations lose a carbon, so the CO2 leaves at isocitrate dehydrogenase and alpha-ketoglutarate dehydrogenase.",
+      "source": "STEPS array: step 3 Isocitrate dehydrogenase co2:1, step 4 alpha-Ketoglutarate dehydrogenase co2:1, and the other six steps all co2:0. Worked example: 'Step 3 ... NADH +1, CO2 +1' and 'Step 4 ... NADH +1, CO2 +1', cumulative CO2: 2. Page note: 'Both carbons lost as CO2 (steps 3 and 4)'."
+    },
+    {
+      "q": "Which single step makes the cycle's only FADH2?",
+      "options": [
+        "Succinate to fumarate, step 6 of the cycle",
+        "Malate to oxaloacetate, by malate dehydrogenase",
+        "Isocitrate to alpha-ketoglutarate, step 3",
+        "Succinyl-CoA to succinate, step 5 of the cycle"
+      ],
+      "answer": 0,
+      "why": "Succinate dehydrogenase is the one cycle enzyme that doubles as Complex II, so its electrons land on FAD instead of NAD+.",
+      "source": "STEPS array: the step 'Succinate to Fumarate', enzyme Succinate dehydrogenase, carries fadh2:1 and every other step carries fadh2:0. Worked example: 'Step 6 Succinate dehydrogenase FADH2 +1'. FAQ: 'It's the only cycle enzyme embedded in the inner mitochondrial membrane, since it doubles as Complex II of the electron transport chain.' Malate dehydrogenase and isocitrate dehydrogenase both make NADH, not FADH2."
+    },
+    {
+      "q": "The cycle's only substrate-level phosphorylation happens at which enzyme?",
+      "options": [
+        "Citrate synthase, the committed first step",
+        "Isocitrate dehydrogenase, the slow step here",
+        "Succinyl-CoA synthetase, making one GTP",
+        "Succinate dehydrogenase, which is Complex II"
+      ],
+      "answer": 2,
+      "why": "This step phosphorylates directly, while every other molecule of ATP traceable to the cycle is made later from its electron carriers.",
+      "source": "STEPS array: the step 'Succinyl-CoA to Succinate', enzyme Succinyl-CoA synthetase, carries gtp:1 with the note 'Substrate-level phosphorylation, the only ATP/GTP made directly in the cycle.' Every other step carries gtp:0, so the sum over one turn is 1 GTP, matching the worked example line 'Step 5 Succinyl-CoA synthetase GTP +1'."
+    },
+    {
+      "q": "At 2.5 ATP per NADH and 1.5 per FADH2, what does one turn contribute?",
+      "options": [
+        "9 ATP, counting only the electron carriers",
+        "10 ATP, the carriers plus the GTP",
+        "20 ATP, which is the figure per glucose",
+        "12 ATP, the older textbook figure here"
+      ],
+      "answer": 1,
+      "why": "Three NADH at 2.5 and one FADH2 at 1.5 give 9 from the carriers, and the single GTP counts as one more ATP equivalent.",
+      "source": "Practice problem 2 answer: '3 NADH x 2.5 + 1 FADH2 x 1.5 = 7.5 + 1.5 = 9 ATP', then 'Substrate-level: 1 GTP = 1 ATP-equivalent', then 'Total per turn = 9 + 1 = 10 ATP'. Recompute: 3 x 2.5 = 7.5, 1 x 1.5 = 1.5, 7.5 + 1.5 + 1 = 10. The 20 figure is the same answer per glucose, 10 x 2 turns."
+    },
+    {
+      "q": "Which step does the page call the rate-limiting step of the cycle?",
+      "options": [
+        "Step 1, citrate synthase, the committed step",
+        "Step 4, alpha-ketoglutarate dehydrogenase",
+        "Step 3, isocitrate dehydrogenase",
+        "Step 6, succinate dehydrogenase, Complex II"
+      ],
+      "answer": 2,
+      "why": "Steps 1, 3 and 4 are all regulated, but only isocitrate dehydrogenase is the one the page labels rate-limiting.",
+      "source": "STEPS array step 3 note: 'Oxidative decarboxylation. First CO2 released. The rate-limiting step of the cycle.' FAQ: 'Citrate synthase (step 1), isocitrate dehydrogenase (step 3, rate-limiting), and alpha-ketoglutarate dehydrogenase (step 4)'. The reg:true flag sits on steps 1, 3 and 4, so all three are regulated and only step 3 carries the rate-limiting label."
+    }
+  ]
+}

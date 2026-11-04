@@ -13,12 +13,12 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blood Type Punnett Square Calculator (ABO + Rh)</title>
+<title>Blood Type Punnett Square Calculator + Self-Test</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<meta name="description" content="Pick two parent blood types and see every possible child type with the odds. Handles unknown genotypes, Rh factor, and shows the actual Punnett squares.">
+<meta name="description" content="Pick two parent blood types and see every child type with the odds, then test yourself on six questions with the square behind each answer.">
 <meta name="keywords" content="blood type punnett square, blood group punnett square, blood type calculator parents, ABO inheritance, can two type A parents have a type O child, Rh factor inheritance, codominance punnett square">
 <link rel="canonical" href="https://biochemtools.com/blood-type-punnett-square-calculator.html">
 <meta property="og:title" content="Blood Type Punnett Square Calculator">
@@ -107,6 +107,38 @@
  .flag{background:rgba(232,176,75,.12);border-left:3px solid var(--reg,#e8b04b);border-radius:0 8px 8px 0;padding:.7rem 1rem;margin:.8rem 0}
  @media(max-width:560px){.picker{grid-template-columns:1fr}}
 </style>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -127,6 +159,7 @@
  <p>Pick both parents' blood types and get every possible child type with the odds. A blood type does not pin down a genotype, so this works through every genotype the parents could have.</p>
 </header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on ABO genotypes, which parent pairs can and cannot make which child, and Rh as a separate gene, each answer checkable against the squares above.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;Both parents are type A. Can they have a type O child?&quot;,&quot;options&quot;:[&quot;No, an O child needs at least one type O parent&quot;,&quot;No, a type A parent cannot carry the O allele&quot;,&quot;Yes, two AO parents give OO one in four times&quot;,&quot;Only if one parent is secretly type AB&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Type A blood is either AA or AO, so two AO parents can each pass the O allele they were carrying silently.&quot;},{&quot;q&quot;:&quot;An AB parent and an O parent, standard alleles only. Which child types are possible?&quot;,&quot;options&quot;:[&quot;Type A or type B, never AB and never O&quot;,&quot;Type AB or type O, with nothing in between&quot;,&quot;All four types, each one in four odds&quot;,&quot;Only type AB, since AB is codominant&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;An AB parent passes either A or B while an OO parent can only pass O, so every child comes out AO or BO.&quot;},{&quot;q&quot;:&quot;Which parent pairing can produce all four blood types?&quot;,&quot;options&quot;:[&quot;An AB parent with another AB parent&quot;,&quot;A type O parent with another type O parent&quot;,&quot;An AB parent with a type O parent&quot;,&quot;A type A parent with a type B parent&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Only AO crossed with BO puts an A, a B and two O alleles into the same square, so AB, A, B and O are all reachable.&quot;},{&quot;q&quot;:&quot;A blood test gives the type. For which types does that also fix the genotype?&quot;,&quot;options&quot;:[&quot;Type A and type B, because both of those are dominant&quot;,&quot;Type AB and type O, the two unambiguous ones&quot;,&quot;Every type, a blood test reads the genotype&quot;,&quot;No type at all, genotypes need family trees&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;A and B both mask O, so type A could be AA or AO, while AB and O each have only one genotype that fits them.&quot;},{&quot;q&quot;:&quot;Both parents are Rh positive and both carry a hidden d. Odds of an Rh negative child?&quot;,&quot;options&quot;:[&quot;1 in 4, the one dd box of the four&quot;,&quot;Zero, Rh positive parents stay positive&quot;,&quot;1 in 2, since d is carried by both of them&quot;,&quot;3 in 4, matching the dominant ratio here&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Rh positive can be DD or Dd, and only a Dd by Dd cross leaves a dd box, which is one box out of four.&quot;},{&quot;q&quot;:&quot;Why is ABO called codominance rather than incomplete dominance?&quot;,&quot;options&quot;:[&quot;Because O is recessive to both A and B alleles&quot;,&quot;Because three alleles exist instead of just two&quot;,&quot;Because AB blood sits midway between A and B&quot;,&quot;Because AB cells show both antigens, no blend&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Codominance means both gene products appear in full, while incomplete dominance would give one intermediate phenotype instead.&quot;}]"><div class="st-fallback"><details><summary>Both parents are type A. Can they have a type O child?</summary><p class="st-ans">Yes, two AO parents give OO one in four times</p><p class="st-exp">Type A blood is either AA or AO, so two AO parents can each pass the O allele they were carrying silently.</p></details><details><summary>An AB parent and an O parent, standard alleles only. Which child types are possible?</summary><p class="st-ans">Type A or type B, never AB and never O</p><p class="st-exp">An AB parent passes either A or B while an OO parent can only pass O, so every child comes out AO or BO.</p></details><details><summary>Which parent pairing can produce all four blood types?</summary><p class="st-ans">A type A parent with a type B parent</p><p class="st-exp">Only AO crossed with BO puts an A, a B and two O alleles into the same square, so AB, A, B and O are all reachable.</p></details><details><summary>A blood test gives the type. For which types does that also fix the genotype?</summary><p class="st-ans">Type AB and type O, the two unambiguous ones</p><p class="st-exp">A and B both mask O, so type A could be AA or AO, while AB and O each have only one genotype that fits them.</p></details><details><summary>Both parents are Rh positive and both carry a hidden d. Odds of an Rh negative child?</summary><p class="st-ans">1 in 4, the one dd box of the four</p><p class="st-exp">Rh positive can be DD or Dd, and only a Dd by Dd cross leaves a dd box, which is one box out of four.</p></details><details><summary>Why is ABO called codominance rather than incomplete dominance?</summary><p class="st-ans">Because AB cells show both antigens, no blend</p><p class="st-exp">Codominance means both gene products appear in full, while incomplete dominance would give one intermediate phenotype instead.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <div class="picker">
    <div>
@@ -344,5 +377,6 @@ sync(); render();
 })();
 </script>
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script>
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>

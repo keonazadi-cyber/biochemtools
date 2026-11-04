@@ -21,12 +21,14 @@ STEPS = [
     ("prerender_chart_rows.py", "the chart's rows exist without JavaScript"),
     # the self-test goes in before the decorations, because it injects at the
     # top of <main> while they append at the bottom of it
+    ("balance_links.py", "a contextual link for the under-linked pages with demand"),
     ("build_selftest.py", "a test on the pages that rank but get no clicks"),
     ("check_selftest.py", "every answer recomputed from the page's own data"),
     # things added on top of a finished page, so they must come after it
     ("add_feedback_line.py", "the ask line"),
     ("add_suggest_footer_link.py", "the footer link"),
     # discovery and schema, which read the finished pages
+    ("build_llms.py", "llms.txt generated from the site, not hand-kept"),
     ("sitemap_images.py", "declare each image on the page that shows it"),
     ("normalize_schema.py", "each page claims its own image, and only its own identity"),
 ]

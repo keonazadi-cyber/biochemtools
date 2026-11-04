@@ -1,0 +1,80 @@
+{
+  "slug": "oxygen-dissociation-curve-calculator",
+  "title": "Oxygen Dissociation Curve Calculator + Self-Test",
+  "description": "Free oxygen dissociation curve calculator for myoglobin, adult and fetal hemoglobin, with P50 and the Bohr effect, plus six questions to test yourself.",
+  "intro": "Six questions on the direction students reverse most often: a right shift is lower affinity and a higher P50, never the other way round, plus what counts as the Bohr effect and what does not.",
+  "questions": [
+    {
+      "q": "An exercising muscle raises CO2 and lowers pH. What does that do to the hemoglobin curve?",
+      "options": [
+        "Right shift, lower affinity, higher P50",
+        "Right shift, higher affinity, lower P50",
+        "Left shift, higher affinity, lower P50",
+        "Left shift, lower affinity, and a higher P50"
+      ],
+      "answer": 0,
+      "why": "A right shift is a drop in oxygen affinity, which means P50 rises, and that is exactly what lets working tissue strip oxygen off hemoglobin.",
+      "source": "Page work block: 'Right shift (lower O2 affinity, easier unloading), tissue conditions: up CO2, down pH (more acidic) [Bohr effect]'. The Bohr paragraph says the same in words: 'the drop in hemoglobin's oxygen affinity as CO2 and H+ (falling pH) rise ... which shifts the curve to the right (higher P50)'. So right shift, lower affinity and higher P50 are one package, and options 1 and 3 each pair a direction with the wrong affinity."
+    },
+    {
+      "q": "This page calls two right-shifters separate modulators rather than the Bohr effect. Which pair?",
+      "options": [
+        "Rising CO2 and falling pH in tissue",
+        "Rising temperature and rising 2,3-BPG",
+        "Falling CO2 and rising pH in the lung",
+        "Rising pH and falling 2,3-BPG at altitude"
+      ],
+      "answer": 1,
+      "why": "CO2 and H+ are the Bohr effect itself, while temperature and 2,3-BPG right-shift the curve by the same T-state mechanism but are named separately.",
+      "source": "Bohr card: 'Rising temperature and 2,3-BPG (elevated at high altitude and in chronic hypoxia) right-shift the curve the same way, but they're usually named as separate modulators rather than part of the Bohr effect proper'. The work block tags up CO2 and down pH as [Bohr effect] and up Temperature and up 2,3-BPG as [separate right-shifters]. Options 2 and 3 are left-shifters, listed under 'Left shift ... lung conditions'."
+    },
+    {
+      "q": "Why does this page draw myoglobin as a hyperbola and adult hemoglobin as a sigmoid?",
+      "options": [
+        "Myoglobin has one site, so n = 1 and cannot cooperate",
+        "Hemoglobin has four sites, so its Hill n has to be 4",
+        "Myoglobin binds oxygen more tightly, which flattens it",
+        "Hemoglobin's higher P50 is what bends its curve into an S"
+      ],
+      "answer": 0,
+      "why": "The S-shape comes from subunits cooperating with each other, so a protein with a single binding site gives a plain hyperbola however tightly it binds.",
+      "source": "Page JS: CURVES.myo has n:1 and CURVES.adult has n:2.8, and the Hill equation with n = 1 is a hyperbola. 'Why the shapes are different': 'Myoglobin has just one subunit, no cooperativity (n = 1)'. The sources card refutes option 1 directly: 'n is an empirical measure of cooperativity, not a count of binding sites ... perfectly infinite cooperativity would give n = 4'. Myoglobin's tighter binding (P50 2.8 against 26.6) is listed as a separate fact from its shape."
+    },
+    {
+      "q": "Drag the slider to pO2 = 19 mmHg. Which curve reads exactly 50% saturation there?",
+      "options": [
+        "Adult hemoglobin, since its P50 is 26.6",
+        "Myoglobin, since its P50 is 2.8 mmHg",
+        "Fetal hemoglobin, whose P50 is 19 mmHg",
+        "All three, since 50% is where n drops out"
+      ],
+      "answer": 2,
+      "why": "P50 is defined as the pO2 that gives half saturation, so each curve passes through 50% at its own P50 and at no other pressure.",
+      "source": "Page JS: CURVES.fetal = {p50:19, n:2.8}. Feed pO2 = P50 into the page's own Hill equation, %Sat = 100 x pO2^n / (P50^n + pO2^n), and the two powers are identical: 100 x 19^2.8 / (19^2.8 + 19^2.8) = 100/2 = 50%. Adult reaches 50% only at its p50 of 26.6 and myoglobin only at 2.8, so at 19 mmHg adult is below half and myoglobin is far above it."
+    },
+    {
+      "q": "Why does fetal hemoglobin sit to the left of adult hemoglobin on this plot?",
+      "options": [
+        "It binds 2,3-BPG more weakly, so affinity is higher",
+        "It binds 2,3-BPG more tightly, so affinity is higher",
+        "Its P50 of 19 is higher, so it unloads oxygen sooner",
+        "It has a Hill coefficient of 1, so its curve is a hyperbola"
+      ],
+      "answer": 0,
+      "why": "2,3-BPG is what lowers hemoglobin's oxygen affinity, so binding it weakly leaves affinity high, which is a lower P50 and a left-shifted curve.",
+      "source": "FAQ: 'HbF binds 2,3-BPG more weakly than adult Hb, and weaker 2,3-BPG binding means higher O₂ affinity (lower P50).' Page JS: fetal p50 = 19 is below adult's 26.6, so 19 is the lower P50, not the higher one, and fetal n = 2.8, not 1, so its curve is still sigmoid."
+    },
+    {
+      "q": "CO poisoning cuts oxygen capacity and also left-shifts the curve. What does the left shift itself do?",
+      "options": [
+        "Raises P50, so tissues unload oxygen faster",
+        "Lowers the Hill coefficient toward 1 at every site",
+        "Leaves unloading unchanged, only capacity falls here",
+        "Holds the loaded oxygen more tightly at the tissues"
+      ],
+      "answer": 3,
+      "why": "A left shift is higher affinity, so whatever oxygen is still being carried is released less readily where the tissue needs it.",
+      "source": "FAQ, 'Why does CO poisoning shift the curve left too?': 'CO bound to one subunit also raises the remaining subunits' O2 affinity through the same cooperative mechanism, left-shifting the curve for whatever capacity remains, so what oxygen is loaded gets released less easily at the tissues.' The work block pairs left shift with 'higher O2 affinity, easier loading', so P50 falls rather than rises, which rules out option 0."
+    }
+  ]
+}

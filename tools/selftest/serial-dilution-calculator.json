@@ -1,0 +1,80 @@
+{
+  "slug": "serial-dilution-calculator",
+  "title": "Serial Dilution Calculator + 6-Question Self-Test",
+  "description": "Free serial dilution calculator: concentration and prep volumes for every tube in the series, then six questions to test that you can do it without the tool.",
+  "intro": "Six questions on the two things students swap most often here: the dilution factor per step against the total factor across steps, and the transfer volume against the tube's final volume.",
+  "questions": [
+    {
+      "q": "A 10-fold series runs out to tube 4. What is the total dilution in that tube?",
+      "options": [
+        "1 : 10,000, ten to the fourth",
+        "1 : 40, four ten-fold steps",
+        "1 : 10, the per-step factor",
+        "1 : 1,000, which is three steps"
+      ],
+      "answer": 0,
+      "why": "Each step multiplies the dilution already achieved, so four 10-fold steps give ten to the fourth rather than four times ten.",
+      "source": "Page text, 'How to make a serial dilution': 'The concentration in tube n is the stock divided by the dilution factor raised to the n'. Worked example 1's table lists tube 4 as total dilution 1 : 10,000. 10^4 = 10,000. Distractors: 4 x 10 = 40 (adding the steps), 10 (one step only), 10^3 = 1,000 (tube 3, off by one)."
+    },
+    {
+      "q": "You want 1000 µL in every tube of a 10-fold series. What goes into each tube?",
+      "options": [
+        "900 µL sample into 100 µL diluent",
+        "100 µL sample into 900 µL diluent",
+        "100 µL sample into 1000 µL diluent",
+        "1000 µL sample into 100 µL diluent"
+      ],
+      "answer": 1,
+      "why": "The transfer is the final volume divided by the factor and the diluent is whatever is left of that final volume, so the two have to add up to the volume you asked for.",
+      "source": "Page JS: const transfer = V/F, diluent = V - transfer. With V = 1000 and F = 10 that is transfer = 100 µL and diluent = 1000 - 100 = 900 µL, matching worked example 1's prep line: 'transfer = V/F = 1000/10 = 100 µL of sample from the previous tube into 1000 - 100 = 900 µL of fresh diluent'. The third option uses the final volume as the diluent volume, which would make the tube 1100 µL."
+    },
+    {
+      "q": "A stock at 1 x 10^5 is diluted 5-fold per step. What is the concentration in tube 3?",
+      "options": [
+        "4,000, which is tube 2's value",
+        "6,667, the stock over 5 + 5 + 5",
+        "800, the stock divided by 125",
+        "160, which is tube 4's value"
+      ],
+      "answer": 2,
+      "why": "Three 5-fold steps divide the stock by 5 cubed, so the step factors multiply to 125 instead of adding to 15.",
+      "source": "Practice problem 1 on the page: 'Tube 3: 1x10^5 / 5^3 = 1 : 125 -> 800'. The same answer block gives tube 2 = 4,000 and tube 4 = 160. 100,000 / (5 + 5 + 5) = 6,667 is the adding mistake."
+    },
+    {
+      "q": "A 5-fold step is followed by a 10-fold step. What is the total dilution, and does the order change it?",
+      "options": [
+        "1 : 15, and the order does not matter",
+        "1 : 50, only in that step order",
+        "1 : 15, and the order changes it",
+        "1 : 50, and order does not matter"
+      ],
+      "answer": 3,
+      "why": "Step factors multiply rather than add, and multiplication does not care about order, so 5 then 10 and 10 then 5 both give 50-fold.",
+      "source": "FAQ, 'Does the order matter if I use different folds per step?': 'No, total dilution after several steps is just the product of each step's factor, regardless of order.' The schema FAQ spells out the number: 'a 5-fold step followed by a 10-fold step gives 50-fold total'. 5 x 10 = 50, while 5 + 10 = 15 is the adding mistake."
+    },
+    {
+      "q": "Worked example 2 plates 100 µL from tube 6 of a 1 x 10^9 CFU/mL culture. How many colonies?",
+      "options": [
+        "1,000, the tube's CFU per mL",
+        "100, which lands mid-range",
+        "10, if the plate took 10 µL",
+        "30, the floor of the range"
+      ],
+      "answer": 1,
+      "why": "The plate receives 0.1 mL, so it holds a tenth of the tube's per-mL count rather than the per-mL number itself.",
+      "source": "Worked example 2 on the page: 'Tube 6 concentration = 1x10^9 / 10^6 = 1x10^3 CFU/mL = 1,000 CFU/mL. Colonies on a 100 µL (0.1 mL) plate from tube 6 = 1,000 x 0.1 = 100 colonies'. The page then says 100 'sits right in the middle of the 30-300 countable range'. Option 1 is the per-mL concentration with the plate volume never applied."
+    },
+    {
+      "q": "How does this page describe one step of a 10-fold series in parts?",
+      "options": [
+        "1 part sample into 9 parts diluent",
+        "1 part sample into 10 parts diluent",
+        "10 parts sample into 1 part diluent",
+        "9 parts sample into 1 part of diluent"
+      ],
+      "answer": 0,
+      "why": "A 10-fold step leaves the sample as one part in ten parts total, so the diluent is the other nine parts, not ten.",
+      "source": "Page text, 'How to make a serial dilution': 'For a 10-fold series you move 1 part sample into 9 parts diluent at each step.' The arithmetic agrees: transfer = V/F = 1000/10 = 100 µL into diluent = V - V/F = 900 µL, which is 1 part to 9 parts."
+    }
+  ]
+}

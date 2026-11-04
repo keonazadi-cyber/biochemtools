@@ -13,8 +13,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Serial Dilution Calculator: Free, Full Series</title>
-<meta name="description" content="Free serial dilution calculator. Get the concentration at every step plus exactly how much sample and diluent to add per tube.">
+<title>Serial Dilution Calculator + 6-Question Self-Test</title>
+<meta name="description" content="Free serial dilution calculator: concentration and prep volumes for every tube in the series, then six questions to test that you can do it without the tool.">
 <meta name="keywords" content="serial dilution calculator, dilution series, tenfold dilution, how to make a serial dilution, dilution factor, dilution table">
 <link rel="canonical" href="https://biochemtools.com/serial-dilution-calculator.html">
 <meta property="og:title" content="Serial Dilution Calculator: Full Series + Prep Steps">
@@ -91,6 +91,38 @@
 <meta name="theme-color" content="#0e0c0a">
 <link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://biochemtools.com/serial-dilution-calculator.html","name":"Serial Dilution Calculator \u2014 Free, Full Series","datePublished":"2026-06-30","dateModified":"2026-07-30","inLanguage":"en","publisher":{"@type":"Organization","name":"BiochemTools","url":"https://biochemtools.com/","logo":"https://biochemtools.com/favicon-512.png"},"isPartOf":{"@type":"WebSite","name":"BiochemTools","url":"https://biochemtools.com/"}}</script>
+<style>
+.selftest{border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:1.25rem;margin:1.5rem 0}
+.selftest>h2{margin:0 0 .35rem;font-size:1.05rem}
+.selftest>p.st-intro{margin:0 0 1rem;color:var(--muted);font-size:.92rem}
+.st-head{display:flex;justify-content:space-between;font-size:.82rem;
+  color:var(--muted);margin-bottom:.5rem}
+.st-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:1rem}
+.st-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.st-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.st-opts{display:grid;gap:.5rem}
+.st-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);
+  border-radius:8px;background:transparent;color:var(--txt);font:inherit;
+  font-size:.94rem;cursor:pointer}
+.st-opt:hover:enabled{border-color:var(--accent)}
+.st-opt:disabled{cursor:default;opacity:.75}
+.st-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.st-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.st-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);
+  min-height:1.2em}
+.st-why.is-right{color:var(--accent2)}
+.st-why.is-wrong{color:var(--txt)}
+.st-foot{margin-top:.9rem}
+.st-next{padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;
+  background:transparent;color:var(--accent);font:inherit;font-size:.9rem;
+  cursor:pointer}
+.st-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.94rem}
+.st-fallback .st-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .6rem}
+.st-fallback .st-exp{color:var(--muted);font-size:.88rem;margin:0 0 .8rem}
+@media (max-width:420px){.selftest{padding:1rem}.st-q{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div class="topnav">
@@ -108,6 +140,7 @@
 
 <header><h1>Serial Dilution Calculator</h1><p>Get the concentration at every step of your dilution series, plus exactly how much sample and diluent to add per tube.</p></header>
 <main>
+<!-- selftest:start --><section class="selftest"><h2>Before you scroll</h2><p class="st-intro">Six questions on the two things students swap most often here: the dilution factor per step against the total factor across steps, and the transfer volume against the tube&#x27;s final volume.</p><div class="st-live" data-selftest="[{&quot;q&quot;:&quot;A 10-fold series runs out to tube 4. What is the total dilution in that tube?&quot;,&quot;options&quot;:[&quot;1 : 10,000, ten to the fourth&quot;,&quot;1 : 40, four ten-fold steps&quot;,&quot;1 : 10, the per-step factor&quot;,&quot;1 : 1,000, which is three steps&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;Each step multiplies the dilution already achieved, so four 10-fold steps give ten to the fourth rather than four times ten.&quot;},{&quot;q&quot;:&quot;You want 1000 µL in every tube of a 10-fold series. What goes into each tube?&quot;,&quot;options&quot;:[&quot;900 µL sample into 100 µL diluent&quot;,&quot;100 µL sample into 900 µL diluent&quot;,&quot;100 µL sample into 1000 µL diluent&quot;,&quot;1000 µL sample into 100 µL diluent&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;The transfer is the final volume divided by the factor and the diluent is whatever is left of that final volume, so the two have to add up to the volume you asked for.&quot;},{&quot;q&quot;:&quot;A stock at 1 x 10^5 is diluted 5-fold per step. What is the concentration in tube 3?&quot;,&quot;options&quot;:[&quot;4,000, which is tube 2&#x27;s value&quot;,&quot;6,667, the stock over 5 + 5 + 5&quot;,&quot;800, the stock divided by 125&quot;,&quot;160, which is tube 4&#x27;s value&quot;],&quot;answer&quot;:2,&quot;why&quot;:&quot;Three 5-fold steps divide the stock by 5 cubed, so the step factors multiply to 125 instead of adding to 15.&quot;},{&quot;q&quot;:&quot;A 5-fold step is followed by a 10-fold step. What is the total dilution, and does the order change it?&quot;,&quot;options&quot;:[&quot;1 : 15, and the order does not matter&quot;,&quot;1 : 50, only in that step order&quot;,&quot;1 : 15, and the order changes it&quot;,&quot;1 : 50, and order does not matter&quot;],&quot;answer&quot;:3,&quot;why&quot;:&quot;Step factors multiply rather than add, and multiplication does not care about order, so 5 then 10 and 10 then 5 both give 50-fold.&quot;},{&quot;q&quot;:&quot;Worked example 2 plates 100 µL from tube 6 of a 1 x 10^9 CFU/mL culture. How many colonies?&quot;,&quot;options&quot;:[&quot;1,000, the tube&#x27;s CFU per mL&quot;,&quot;100, which lands mid-range&quot;,&quot;10, if the plate took 10 µL&quot;,&quot;30, the floor of the range&quot;],&quot;answer&quot;:1,&quot;why&quot;:&quot;The plate receives 0.1 mL, so it holds a tenth of the tube&#x27;s per-mL count rather than the per-mL number itself.&quot;},{&quot;q&quot;:&quot;How does this page describe one step of a 10-fold series in parts?&quot;,&quot;options&quot;:[&quot;1 part sample into 9 parts diluent&quot;,&quot;1 part sample into 10 parts diluent&quot;,&quot;10 parts sample into 1 part diluent&quot;,&quot;9 parts sample into 1 part of diluent&quot;],&quot;answer&quot;:0,&quot;why&quot;:&quot;A 10-fold step leaves the sample as one part in ten parts total, so the diluent is the other nine parts, not ten.&quot;}]"><div class="st-fallback"><details><summary>A 10-fold series runs out to tube 4. What is the total dilution in that tube?</summary><p class="st-ans">1 : 10,000, ten to the fourth</p><p class="st-exp">Each step multiplies the dilution already achieved, so four 10-fold steps give ten to the fourth rather than four times ten.</p></details><details><summary>You want 1000 µL in every tube of a 10-fold series. What goes into each tube?</summary><p class="st-ans">100 µL sample into 900 µL diluent</p><p class="st-exp">The transfer is the final volume divided by the factor and the diluent is whatever is left of that final volume, so the two have to add up to the volume you asked for.</p></details><details><summary>A stock at 1 x 10^5 is diluted 5-fold per step. What is the concentration in tube 3?</summary><p class="st-ans">800, the stock divided by 125</p><p class="st-exp">Three 5-fold steps divide the stock by 5 cubed, so the step factors multiply to 125 instead of adding to 15.</p></details><details><summary>A 5-fold step is followed by a 10-fold step. What is the total dilution, and does the order change it?</summary><p class="st-ans">1 : 50, and order does not matter</p><p class="st-exp">Step factors multiply rather than add, and multiplication does not care about order, so 5 then 10 and 10 then 5 both give 50-fold.</p></details><details><summary>Worked example 2 plates 100 µL from tube 6 of a 1 x 10^9 CFU/mL culture. How many colonies?</summary><p class="st-ans">100, which lands mid-range</p><p class="st-exp">The plate receives 0.1 mL, so it holds a tenth of the tube&#x27;s per-mL count rather than the per-mL number itself.</p></details><details><summary>How does this page describe one step of a 10-fold series in parts?</summary><p class="st-ans">1 part sample into 9 parts diluent</p><p class="st-exp">A 10-fold step leaves the sample as one part in ten parts total, so the diluent is the other nine parts, not ten.</p></details></div></div></section><!-- selftest:end -->
  <div class="card">
   <div class="fields">
    <div><label for="stock">Stock concentration</label> <input id="stock" type="number" step="any" value="1000000"></div>
@@ -189,5 +222,6 @@ calc();
 </script>
 <script src="/streak.js?v=f493fb7c" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- selftestjs:start --><script src="/selftest.js?v=3cdd0b61" defer></script><!-- selftestjs:end -->
 </body>
 </html>
