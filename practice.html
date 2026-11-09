@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E3NEEKFCPP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E3NEEKFCPP');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biochem Practice Questions: Easy, Medium, Hard</title>
+<meta name="description" content="Free biochem practice questions at three levels across seven subjects, with a mixed mode and practice tests. Every answer explained, progress kept in your browser.">
+<meta name="keywords" content="amino acid quiz, amino acids one letter code, biochemistry amino acids, MCAT amino acids, learn 20 amino acids, amino acid practice">
+<link rel="canonical" href="https://biochemtools.com/practice.html">
+<meta property="og:title" content="Amino Acid Quiz: Master All 20 Amino Acids Free">
+<meta property="og:description" content="Interactive quiz for the 20 standard amino acids. Built for biochem, MCAT, and pre-med students.">
+<meta property="og:image" content="https://biochemtools.com/og-images/quiz.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://biochemtools.com/og-images/quiz.png">
+<meta property="og:type" content="website">
+<!-- AdSense / Ezoic script slot goes here once approved -->
+
+
+<style>
+  :root{ --bg:#0e0c0a; --card:#171310; --line:#2c2620; --txt:#f4efe7; --muted:#a2968a; --accent:#e8b04b; --accent2:#6fb59f; --wrong:#e24b4a; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+  header{text-align:center;padding:3rem 1rem 1rem;position:relative;overflow:hidden}
+ header::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;max-width:130vw;height:380px;background:radial-gradient(ellipse at 40% 45%,rgba(232,176,75,.16),transparent 60%),radial-gradient(ellipse at 62% 55%,rgba(207,147,102,.13),transparent 62%),radial-gradient(ellipse at 50% 25%,rgba(111,181,159,.09),transparent 58%);pointer-events:none;z-index:0}
+ header>*{position:relative;z-index:1}
+  h1{font-size:1.9rem;font-weight:600;margin:0 0 .5rem}
+  header p{color:var(--muted);max-width:620px;margin:0 auto;font-size:1.05rem}
+  main{max-width:680px;margin:0 auto;padding:1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.75rem;margin:1.25rem 0;box-shadow:0 1px 2px rgba(0,0,0,.22);transition:box-shadow .18s}
+ .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+  .bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:1.25rem}
+  .fill{height:100%;background:var(--accent);width:0;transition:width .3s}
+  .stat{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;margin-bottom:.75rem}
+  .prompt{font-size:1.05rem;color:var(--muted);margin:0 0 .25rem}
+  .ask{font-size:1.8rem;font-weight:600;margin:0 0 1.5rem}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .opt{background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:1.1rem;padding:1rem;border-radius:12px;cursor:pointer;transition:.15s;font-weight:500}
+  .opt:hover:not(:disabled){border-color:var(--accent2)}
+  .opt.correct{background:rgba(232,176,75,.15);border-color:var(--accent);color:var(--accent)}
+  .opt.wrong{background:rgba(226,75,74,.15);border-color:var(--wrong);color:var(--wrong)}
+  .feedback{min-height:1.3em;margin-top:.85rem;font-weight:600;text-align:center}
+  .feedback.right{color:var(--accent)}.feedback.wrong{color:var(--wrong)}
+  .opt:disabled{cursor:default}
+  .next{width:100%;margin-top:1.25rem;background:var(--accent);color:#04342c;border:0;padding:1rem;font-size:1.05rem;font-weight:600;border-radius:12px;cursor:pointer}
+  .modes{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+  .mode{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:99px;cursor:pointer;font-size:.9rem}
+  .mode.active{border-color:var(--accent);color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:1rem}
+  th,td{text-align:left;padding:.55rem .5rem;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:500}
+  .tag{font-size:.78rem;padding:.15rem .5rem;border-radius:99px;background:var(--line);color:var(--muted)}
+  h2{font-size:1.35rem;margin:2.5rem 0 .5rem}
+  .seo{color:var(--muted)}
+  footer{text-align:center;color:var(--muted);padding:2rem 1rem;font-size:.85rem}
+
+ .topnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;background:rgba(15,17,21,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #2c2620}
+ .topnav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#f4efe7;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+ .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#e8b04b,#cf9366);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#17120c;flex-shrink:0}
+ .topnav-links{display:flex;align-items:center;gap:1.6rem}
+ .topnav-links a{color:#a2968a;text-decoration:none;font-size:.88rem;transition:color .15s}
+ .topnav-links a:hover{color:#f4efe7}
+ .topnav-links .navcta{background:#e8b04b;color:#17120c;padding:.5rem 1.05rem;border-radius:8px;font-weight:600;transition:transform .15s,box-shadow .15s}
+ .topnav-links .navcta:hover{color:#17120c;transform:translateY(-1px);box-shadow:0 6px 16px rgba(232,176,75,.3)}
+ @media(max-width:640px){.topnav-links a:not(.navcta){display:none}}
+
+ @media print{
+  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-color:#999!important}
+  body{background:#fff!important}
+  a{text-decoration:underline!important}
+  .topnav,#tool-streak-badge,#bct-share-btn,#recommended-slot,nav#sitenav,footer,.hero-glow::before,.hero-glow::after{display:none!important}
+  .tally{position:static!important}
+ }
+
+ /* --- direction D --- */
+ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+ .brand,h1,h2{font-family:Fraunces,Georgia,serif;font-weight:400}
+ .brand{font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;font-weight:600}
+ h1{letter-spacing:-.03em;font-weight:300}
+ h2{letter-spacing:-.015em}
+ .btn,.navcta{border-radius:100px!important}
+ @media print{body::after{display:none}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0c0a'/%3E%3Ctext x='32' y='44' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' fill='%23e8b04b' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0e0c0a">
+<link rel="manifest" href="/manifest.json">
+<style>
+.qwrap{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:1.25rem;margin:1.5rem 0}
+.q-head{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:.6rem;gap:1rem}
+.q-row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.6rem}
+.q-lab{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;min-width:4.5rem}
+.q-chip{padding:.5rem .8rem;min-height:44px;display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--txt);font:inherit;font-size:.86rem;cursor:pointer}
+.q-chip:hover{border-color:var(--accent)}
+.q-chip.on{border-color:var(--accent);color:var(--accent)}
+.q-frame{margin-left:auto;background:none;border:0;color:var(--muted);font:inherit;font-size:.78rem;text-decoration:underline;cursor:pointer}
+.q-go{margin-top:.6rem;padding:.6rem 1rem;border:1px solid var(--accent);border-radius:8px;background:transparent;color:var(--accent);font:inherit;font-size:.95rem;cursor:pointer}
+.q-go:disabled{opacity:.5;cursor:default}
+.q-hint{color:var(--muted);font-size:.85rem;line-height:1.5;margin:.6rem 0 0}
+.q-prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.q-progfill{height:100%;background:var(--accent);transition:width .25s ease}
+.q-q{margin:0 0 .9rem;font-size:1.02rem;line-height:1.45}
+.q-opts{display:grid;gap:.5rem}
+.q-opt{text-align:left;padding:.6rem .75rem;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--txt);font:inherit;font-size:.94rem;cursor:pointer}
+.q-opt:hover:enabled{border-color:var(--accent)}
+.q-opt:disabled{cursor:default;opacity:.75}
+.q-opt.is-right{border-color:var(--accent2);color:var(--accent2);opacity:1}
+.q-opt.is-wrong{border-color:var(--wrong);color:var(--wrong);opacity:1}
+.q-why{margin-top:.8rem;font-size:.9rem;line-height:1.5;color:var(--muted);min-height:1.2em}
+.q-why.is-right{color:var(--accent2)}
+.q-why.is-wrong{color:var(--txt)}
+.q-tool{color:var(--accent)}
+.q-next{margin-top:.9rem;padding:.5rem .9rem;border:1px solid var(--accent);border-radius:8px;background:transparent;color:var(--accent);font:inherit;cursor:pointer}
+.q-score{margin:.2rem 0 .3rem;font-size:1.6rem;color:var(--accent)}
+.q-missed{margin-top:1rem}
+.q-missed summary{cursor:pointer;padding:.45rem 0;font-size:.93rem}
+.q-ans{color:var(--accent2);font-size:.9rem;margin:.1rem 0 .3rem}
+.q-exp{color:var(--muted);font-size:.88rem;margin:0 0 .6rem}
+.q-mastery{margin-top:1.4rem;padding-top:1rem;border-top:1px solid var(--line)}
+.q-mastery h3{font-size:.95rem;margin:0 0 .7rem}
+.q-mrow{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem}
+.q-mname{font-size:.84rem;min-width:8.5rem;color:var(--muted)}
+.q-mbar{position:relative;flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.q-mmet{position:absolute;inset:0 auto 0 0;background:var(--line);filter:brightness(1.6)}
+.q-mfill{position:absolute;inset:0 auto 0 0;background:var(--accent2)}
+.q-mpct{font-size:.8rem;color:var(--muted);min-width:2.6rem;text-align:right}
+.q-fallback summary{cursor:pointer;padding:.45rem 0;font-size:.93rem}
+@media (max-width:460px){.qwrap{padding:1rem}.q-lab{min-width:100%}.q-mname{min-width:6.5rem;font-size:.8rem}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<h1>Biochem Practice Questions: Easy, Medium and Hard</h1>
+<p>Pick a level and a subject, or mix every subject together. Practice mode
+gives you the reason straight away; practice test mode holds it back until the
+end, the way the real thing does. Anything you miss comes back first next time.
+Free, no account, and your progress stays in your own browser.</p>
+</header>
+<!-- quiz:start --><section class="qwrap" data-quiz><div class="q-fallback"><details><summary>Which amino acid&#x27;s side chain is most useful for buffering near physiological pH (7.4)?</summary><p class="q-ans">Histidine</p><p class="q-exp">Histidine&#x27;s imidazole side chain has a pKa of about 6.0, closer to 7.4 than any other side chain, so it&#x27;s meaningfully both protonated and deprotonated near physiological pH.</p></details><details><summary>Tris shifts about -0.028 pH units per degree C. If you set a Tris buffer to pH 8.00 at 25 C, what is it in a 4 C cold room?</summary><p class="q-ans">About 8.6</p><p class="q-exp">Cooling by 21 degrees raises the pH by roughly 21 x 0.028, which is about 0.59 units. This is why Tris buffers should be adjusted at the temperature where they will be used.</p></details><details><summary>A researcher assays an enzyme with and without a new compound. Vmax is unchanged, but the apparent Km rises fourfold. The compound is most likely a:</summary><p class="q-ans">Competitive inhibitor</p><p class="q-exp">Only one mechanism can leave the ceiling in place: if saturating substrate still reaches the same maximum rate, the inhibitor must be losing the race for the active site at high [S]. Anything that touches the enzyme-substrate complex drags Vmax down with it.</p></details><details><summary>For a strong acid, [H⁺] equals:</summary><p class="q-ans">The starting concentration</p><p class="q-exp">Strong acids fully dissociate, so [H⁺] equals whatever concentration of acid you started with, no equilibrium calculation needed.</p></details><details><summary>A solution at pH 3 has how many times more [H⁺] than one at pH 5?</summary><p class="q-ans">100×</p><p class="q-exp">pH is a base-10 log scale, so each whole unit is a tenfold change in [H⁺]. Two units apart is 10², not 2, which is the mistake of reading the scale as linear.</p></details><details><summary>A student weighs 6.2 g of product where stoichiometry predicts 8.0 g, then discovers the balance has been reading 0.3 g high all day. What is the corrected percent yield?</summary><p class="q-ans">73.8%</p><p class="q-exp">The offset is on the measured mass, so subtract it from the recovered amount before dividing. Correcting the theoretical value instead, or adding rather than subtracting, both move the answer up when it should come down.</p></details><details><summary>Crossing Aa × Aa (one gene, complete dominance) gives what phenotype ratio?</summary><p class="q-ans">3:1</p><p class="q-exp">3 out of 4 offspring show the dominant phenotype (AA, Aa, Aa), 1 shows recessive (aa). The 1:2:1 trap is the genotype ratio, not the phenotype ratio.</p></details><details><summary>Under Hardy-Weinberg equilibrium with q = 0.3, what fraction of the population is heterozygous?</summary><p class="q-ans">0.42</p><p class="q-exp">Heterozygote frequency is the 2pq term. The 0.09 trap is q squared, the recessive homozygotes, and 0.49 is p squared.</p></details><details><summary>A pediatrician delivers a type O newborn. The mother is type A and the listed father is type AB, and he disputes paternity. What does the blood typing establish?</summary><p class="q-ans">AB passes A or B, so this man is excluded</p><p class="q-exp">An AB individual has no O allele to give, so every child of his carries A or B and shows it. Exclusion is the only thing ABO typing can do well: it never confirms paternity, because millions of men share any blood type.</p></details><details><summary>Textbooks give 30, 32, 36 or 38 ATP for one glucose&#x27;s total aerobic yield. That disagreement comes from two different values used for:</summary><p class="q-ans">The P/O ratio per NADH</p><p class="q-exp">Older courses use 3 ATP per NADH and 2 per FADH2, which lands on 36 or 38. Modern measured values of 2.5 and 1.5 land on 30 or 32, and the shuttle then picks between each pair.</p></details><details><summary>Why is the urea cycle usually costed at 4 ATP-equivalents rather than 3?</summary><p class="q-ans">Step 3 goes ATP to AMP</p><p class="q-exp">Carbamoyl phosphate synthetase I spends 2 ATP outright. Argininosuccinate synthetase spends only one ATP but breaks two high-energy bonds doing it, so it is counted as 2 rather than 1.</p></details><details><summary>A muscle cell switches to anaerobic conditions mid-contraction. Per glucose, what is its ATP yield now?</summary><p class="q-ans">2 ATP</p><p class="q-exp">Only glycolysis keeps paying, and it pays net, not gross: 4 made minus 2 invested. The cycle&#x27;s 2 GTP go too, because the cycle stalls once NAD+ stops coming back from the chain.</p></details><details><summary>What is the net ATP yield of glycolysis per glucose molecule?</summary><p class="q-ans">2</p><p class="q-exp">4 ATP are produced in the payoff phase, but 2 were invested early on, net 2 ATP, plus 2 NADH and 2 pyruvate.</p></details><details><summary>How many codons specify amino acids, out of 64 total?</summary><p class="q-ans">61</p><p class="q-exp">Three of the 64 are stop codons, so they come off the total. Answering 20 confuses the number of amino acids with the number of codons that encode them.</p></details><details><summary>An RNA prep reads 260/280 of 2.05 and 260/230 of 1.2. It looks clean by one measure and not the other. What is the most likely contaminant, and what does it do downstream?</summary><p class="q-ans">Guanidine or phenol, which inhibits the RT step</p><p class="q-exp">The two ratios watch different windows, so a prep can pass one and fail the other. Protein shows up at 280 nm, not 230, and a ratio that passes one check never clears the prep on its own.</p></details><details><summary>A solution is made hyperosmotic to plasma by adding urea. Is it hypertonic?</summary><p class="q-ans">No, urea crosses the membrane freely</p><p class="q-exp">Tonicity counts only the solutes a membrane blocks, so a permeant one raises the osmometer reading without holding water on either side. Treating osmolarity and tonicity as the same number is what makes this look hypertonic.</p></details><details><summary>Cardiac output is 5.4 L/min and heart rate is 72 bpm. What is the stroke volume?</summary><p class="q-ans">75 mL per beat</p><p class="q-exp">Rearranging the cardiac output formula puts output over rate, and the litres have to become millilitres before the division or the answer lands a thousand times too small. Multiplying the two instead gives a volume no ventricle holds.</p></details><details><summary>A climber at altitude has raised 2,3-BPG and a respiratory alkalosis from hyperventilating. These two push the oxygen curve in opposite directions. What is the effect at the tissues?</summary><p class="q-ans">The 2,3-BPG right shift wins, unloading is preserved</p><p class="q-exp">A right shift is lower affinity and a higher P50, and this page lists 2,3-BPG as a right-shifter separate from the Bohr effect proper. Loading happens at the lung&#x27;s high pressure and unloading at the tissue&#x27;s low one, so a shift can help at one end without undoing the other.</p></details><details><summary>What is the approximate molar mass of NaCl?</summary><p class="q-ans">58.4 g/mol</p><p class="q-exp">Sodium contributes about 23 and chlorine about 35.5, and the two atomic masses simply add. Picking 40 confuses the atomic mass of calcium for the whole salt.</p></details><details><summary>How many moles are in 500 mL of a 2 M solution?</summary><p class="q-ans">1 mol</p><p class="q-exp">Molarity counts moles per litre, so the volume has to be in litres before multiplying. Reading 500 mL as 500 L, or forgetting to convert at all, is what produces the other answers here.</p></details><details><summary>A protocol calls for 1:5000 antibody in 200 µL, but your smallest reliable pipette volume is 1 µL. What does this site&#x27;s calculator have you do?</summary><p class="q-ans">Two steps, 1:100 then 1:50, via 100 µL of 1:100</p><p class="q-exp">Dilution factors multiply, so splitting one impossible factor into two possible ones lands on the same final concentration with every volume above the pipette floor. Enlarging the final volume only helps if you then check the floor again, and at 1 mL the antibody is still only 0.2 µL.</p></details></div></section><!-- quiz:end -->
+<!-- askline:start -->
+ <p class="askline" style="margin:2.5rem 0 0;padding-top:1.4rem;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem">Something missing from this tool, or a number that looks wrong? <a href="/suggest.html#from=practice.html">Tell me</a> and it gets read.</p>
+<!-- askline:end --></main>
+<nav id="sitenav" style="max-width:820px;margin:2rem auto 0;padding:2rem 1rem 0;border-top:1px solid #2c2620"><div style="color:#a2968a;font-size:.85rem;margin-bottom:1.25rem">All 52 free biochem tools, <a href="/" style="color:#e8b04b;text-decoration:none">home</a> · <a href="/daily-question.html" style="color:#cf9366;text-decoration:none">question of the day</a></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem"><div><div style="font-size:.75rem;color:#cf9366;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Biochemistry</div><a href="/peptide-charge-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Peptide charge & pI</a><a href="/enzyme-kinetics-simulator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Enzyme kinetics</a><a href="/michaelis-menten-fitter.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Michaelis-Menten fitter</a><a href="/amino-acid-titration-curve.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid titration curve</a><span style="display:block;color:#f4efe7;font-size:.88rem;padding:.18rem 0">Amino acid quiz</span><a href="/amino-acid-catabolism-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Amino acid catabolism explorer</a></div><div><div style="font-size:.75rem;color:#cf9366;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Molecular biology</div><a href="/codon-chart.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Codon chart (genetic code)</a><a href="/dna-to-protein-translation.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA → protein translation</a><a href="/dna-melting-temperature-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA melting temp & GC</a><a href="/nucleic-acid-concentration-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">DNA &amp; RNA concentration (A260)</a><a href="/glycolysis-pathway-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Glycolysis explorer</a><a href="/atp-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">ATP yield calculator</a><a href="/citric-acid-cycle-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Citric acid cycle explorer</a><a href="/beta-oxidation-atp-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beta-oxidation ATP calculator</a><a href="/gene-expression-regulation-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gene expression regulation explorer</a></div><div><div style="font-size:.75rem;color:#cf9366;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Genetics</div><a href="/punnett-square-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Punnett square</a><a href="/blood-type-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Blood type inheritance</a><a href="/x-linked-inheritance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">X-linked inheritance</a><a href="/chi-square-genetics-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chi-square genetic ratio</a><a href="/hardy-weinberg-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Hardy-Weinberg</a></div><div><div style="font-size:.75rem;color:#cf9366;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Chemistry</div><a href="/ph-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">pH calculator</a><a href="/henderson-hasselbalch-buffer-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Buffer calculator</a><a href="/acid-base-titration-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Acid-base titration curve</a><a href="/gibbs-free-energy-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Gibbs free energy</a><a href="/nernst-equation-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Nernst equation</a><a href="/beer-lambert-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Beer-Lambert</a><a href="/ideal-gas-law-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Ideal gas law</a><a href="/chemical-equilibrium-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Chemical equilibrium (Keq) calculator</a><a href="/percent-yield-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent yield calculator</a><a href="/percent-composition-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Percent composition calculator</a><a href="/limiting-reagent-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Limiting reagent calculator</a><a href="/empirical-formula-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Empirical formula calculator</a></div><div><div style="font-size:.75rem;color:#cf9366;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Solutions & lab prep</div><a href="/molarity-molar-mass-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Molar mass & molarity</a><a href="/dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Dilution (C1V1)</a><a href="/serial-dilution-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Serial dilution</a></div><div><div style="font-size:.75rem;color:#cf9366;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Physiology</div><a href="/osmotic-pressure-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Osmotic pressure & tonicity</a><a href="/cardiac-output-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Cardiac output</a><a href="/renal-clearance-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Renal clearance</a><a href="/membrane-transport-explorer.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Membrane transport explorer</a><a href="/oxygen-dissociation-curve-calculator.html" style="display:block;color:#8fb8e8;text-decoration:none;font-size:.88rem;padding:.18rem 0">Oxygen-hemoglobin dissociation curve</a></div></div></nav>
+<footer>Free amino acid study tool · share it with your study group · <a href="/about.html" style="color:inherit;text-decoration:underline">About</a> · <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="/contact.html" style="color:inherit;text-decoration:underline">Contact</a> · <span style="opacity:.75">Updated July 30, 2026</span> <!-- suggestfoot:start --> &middot; <a href="/suggest.html" style="color:inherit;text-decoration:underline">Suggest a tool</a><!-- suggestfoot:end --></footer>
+<script>
+const AA=[
+ {n:"Glycine",t:"Gly",l:"G",c:"Nonpolar",ch:"Neutral"},
+ {n:"Alanine",t:"Ala",l:"A",c:"Nonpolar",ch:"Neutral"},
+ {n:"Valine",t:"Val",l:"V",c:"Nonpolar",ch:"Neutral"},
+ {n:"Leucine",t:"Leu",l:"L",c:"Nonpolar",ch:"Neutral"},
+ {n:"Isoleucine",t:"Ile",l:"I",c:"Nonpolar",ch:"Neutral"},
+ {n:"Proline",t:"Pro",l:"P",c:"Nonpolar",ch:"Neutral"},
+ {n:"Methionine",t:"Met",l:"M",c:"Nonpolar",ch:"Neutral"},
+ {n:"Phenylalanine",t:"Phe",l:"F",c:"Aromatic",ch:"Neutral"},
+ {n:"Tryptophan",t:"Trp",l:"W",c:"Aromatic",ch:"Neutral"},
+ {n:"Tyrosine",t:"Tyr",l:"Y",c:"Aromatic",ch:"Neutral"},
+ {n:"Serine",t:"Ser",l:"S",c:"Polar",ch:"Neutral"},
+ {n:"Threonine",t:"Thr",l:"T",c:"Polar",ch:"Neutral"},
+ {n:"Cysteine",t:"Cys",l:"C",c:"Polar",ch:"Neutral"},
+ {n:"Asparagine",t:"Asn",l:"N",c:"Polar",ch:"Neutral"},
+ {n:"Glutamine",t:"Gln",l:"Q",c:"Polar",ch:"Neutral"},
+ {n:"Lysine",t:"Lys",l:"K",c:"Basic",ch:"Positive"},
+ {n:"Arginine",t:"Arg",l:"R",c:"Basic",ch:"Positive"},
+ {n:"Histidine",t:"His",l:"H",c:"Basic",ch:"Positive*"},
+ {n:"Aspartate",t:"Asp",l:"D",c:"Acidic",ch:"Negative"},
+ {n:"Glutamate",t:"Glu",l:"E",c:"Acidic",ch:"Negative"}
+];
+let mode="letter",q=0,score=0,total=10,order=[];
+const key={letter:"l",three:"t",class:"c"};
+const promptText={letter:"What is the one-letter code for",three:"What is the three-letter code for",class:"What class does this belong to"};
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1])}
+function buildRef(){const tb=document.querySelector("#ref tbody");tb.innerHTML=AA.map(a=>`<tr><td>${a.n}</td><td>${a.t}</td><td><b style="color:var(--accent)">${a.l}</b></td><td><span class="tag">${a.c}</span></td><td>${a.ch}</td></tr>`).join("")}
+function start(){q=0;score=0;order=shuffle([...AA]).slice(0,total);render()}
+function render(){
+ const a=order[q],f=key[mode];
+ document.getElementById("count").textContent=`Question ${q+1} of ${total}`;
+ document.getElementById("score").textContent=`Score: ${score}`;
+ document.getElementById("fill").style.width=(q/total*100)+"%";
+ document.getElementById("prompt").textContent=promptText[mode];
+ document.getElementById("ask").textContent=mode==="class"?a.n+"?":a.n+"?";
+ const correct=a[f];
+ let pool=[...new Set(AA.map(x=>x[f]))].filter(v=>v!==correct);
+ let opts=shuffle([correct,...shuffle(pool).slice(0,3)]);
+ const box=document.getElementById("opts");box.innerHTML="";
+ const fb=document.getElementById("feedback");if(fb){fb.textContent="";fb.className="feedback";}
+ opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o;b.onclick=()=>pick(b,o,correct);box.appendChild(b)});
+ document.getElementById("next").style.display="none";
+}
+function pick(btn,val,correct){
+ let correctBtn=null;
+ document.querySelectorAll(".opt").forEach(b=>{b.disabled=true;if(b.textContent===correct){b.classList.add("correct");correctBtn=b;}});
+ const right=(val===correct);
+ if(right){score++;document.getElementById("score").textContent=`Score: ${score}`}
+ else btn.classList.add("wrong");
+ // non-color visual markers (decorative, the feedback line below announces the result)
+ if(correctBtn)correctBtn.insertAdjacentHTML("beforeend",' <span aria-hidden="true">✓</span>');
+ if(!right)btn.insertAdjacentHTML("beforeend",' <span aria-hidden="true">✗</span>');
+ const fb=document.getElementById("feedback");
+ fb.className="feedback "+(right?"right":"wrong");
+ fb.textContent=right?"Correct!":`Incorrect, the correct answer is ${correct}.`;
+ const n=document.getElementById("next");n.style.display="block";
+ n.textContent=q+1>=total?"See results":"Next question";
+}
+document.getElementById("next").onclick=()=>{
+ q++;
+ if(q>=total){
+  let bestLine="";
+  if(window.BCT){
+   window.BCT.recordQuizCompletion(score,total);
+   const best=window.BCT.quizBest();
+   // Only mention a streak once it is worth mentioning. This printed "0-day streak"
+    // when storage was fresh, and a 1-day streak is just today, which nobody earned.
+    const st=window.BCT.currentStreak();
+    const streakBit = st>1 ? ` &middot; ${st}-day streak` : "";
+    bestLine=`<p style="color:var(--muted);font-size:.85rem">Best score: ${best}/${total}${score>best?", new best!":""}${streakBit}</p>`;
+  }
+  document.getElementById("opts").innerHTML=`<div style="grid-column:1/3;text-align:center;padding:1rem"><div style="font-size:2.5rem;font-weight:600;color:var(--accent)">${score}/${total}</div><p style="color:var(--muted)">${score===total?"Perfect, you've got these down.":score>=7?"Solid. Run it again to lock in the misses.":"Keep going, repetition is the whole game."}</p>${bestLine}</div>`;
+  document.getElementById("prompt").textContent="";document.getElementById("ask").textContent="Quiz complete";
+  document.getElementById("fill").style.width="100%";
+  const n=document.getElementById("next");n.textContent="Try again";n.onclick=()=>{location.reload()};
+ } else render();
+};
+document.querySelectorAll(".mode").forEach(m=>m.onclick=()=>{
+ document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));
+ m.classList.add("active");mode=m.dataset.mode;start();
+});
+buildRef();start();
+</script>
+<script src="/streak.js?v=f493fb7c" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "101e4b9cdbae4363953f0ae30fae9a04"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- quizjs:start --><script src="/quiz-engine.js?v=2428e12a" defer></script><script src="/quiz-ui.js?v=2428e12a" defer></script><!-- quizjs:end -->
+</body>
+</html>

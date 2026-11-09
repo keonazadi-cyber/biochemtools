@@ -1,0 +1,668 @@
+{
+ "subject": "Chemistry",
+ "questions": [
+  {
+   "id": "chem-001",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "For a strong acid, [H⁺] equals:",
+   "choices": [
+    "The acid's Ka value",
+    "The starting concentration",
+    "Half the acid concentration",
+    "The acid's pKa value"
+   ],
+   "correct": 1,
+   "explain": "Strong acids fully dissociate, so [H⁺] equals whatever concentration of acid you started with, no equilibrium calculation needed.",
+   "tool": "ph-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "ph-calculator.html worked example 1: 0.1 M strong acid gives [H+] = C = 0.1 M, pH = -log(0.1) = 1.00"
+  },
+  {
+   "id": "chem-002",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "A buffer resists pH change best within about what range of its pKa?",
+   "choices": [
+    "± 0.1",
+    "± 1",
+    "± 3",
+    "± 5"
+   ],
+   "correct": 1,
+   "explain": "Outside roughly pKa ± 1, one form of the buffer vastly outnumbers the other, leaving too little of the minority form to absorb added acid or base.",
+   "tool": "buffer-pka-table.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "buffer-pka-table.html: a buffer's useful range is quoted as pKa plus or minus 1 pH unit"
+  },
+  {
+   "id": "chem-003",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "A reaction with negative ΔH and negative ΔS is spontaneous:",
+   "choices": [
+    "At low temperatures only",
+    "At all temperatures",
+    "At high temperatures only",
+    "At no temperature"
+   ],
+   "correct": 0,
+   "explain": "ΔG = ΔH − TΔS. With both ΔH and ΔS negative, low T keeps the favorable enthalpy term dominant; push T high enough and the entropy penalty takes over, flipping the reaction non-spontaneous.",
+   "tool": "gibbs-free-energy-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "gibbs-free-energy-calculator.html worked example 1: dH = -40 kJ/mol, dS = -100 J/mol.K is spontaneous below the 400 K crossover and not above it"
+  },
+  {
+   "id": "chem-004",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "At electrochemical equilibrium, the cell potential E equals:",
+   "choices": [
+    "E°",
+    "Infinity",
+    "RT/nF",
+    "0"
+   ],
+   "correct": 3,
+   "explain": "At equilibrium Q = K and there is no net driving force left to push electrons, so E = 0, the same reason a fully discharged battery reads 0 V.",
+   "tool": "nernst-equation-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "nernst-equation-calculator.html FAQ: 'What does it mean physically when E = 0?' states the cell is at equilibrium with Q = K"
+  },
+  {
+   "id": "chem-005",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "At STP (0°C, 1 atm), one mole of an ideal gas occupies approximately:",
+   "choices": [
+    "1 L",
+    "22.4 L",
+    "100 L",
+    "6.02×10²³ L"
+   ],
+   "correct": 1,
+   "explain": "This falls straight out of PV = nRT with n = 1, T = 273.15 K and P = 1 atm, so it is one case of the gas law rather than a separate rule to memorise.",
+   "tool": "ideal-gas-law-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "ideal-gas-law-calculator.html worked example 1: n=1, V=22.4 L, T=273.15 K gives P = 1.0007 atm, confirming 22.4 L/mol at STP"
+  },
+  {
+   "id": "chem-006",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "In A = εbc, if the path length b doubles and everything else stays constant, absorbance A:",
+   "choices": [
+    "Doubles",
+    "Halves",
+    "Stays the same",
+    "Quadruples"
+   ],
+   "correct": 0,
+   "explain": "A is directly proportional to b, so the relationship is linear in path length, which is why a 0.5 cm cuvette halves the reading for the same sample.",
+   "tool": "beer-lambert-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "beer-lambert-calculator.html: 'A = ebc', A is directly proportional to b"
+  },
+  {
+   "id": "chem-007",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "A negative ΔG indicates a reaction is:",
+   "choices": [
+    "At equilibrium",
+    "Non-spontaneous",
+    "Endothermic",
+    "Spontaneous"
+   ],
+   "correct": 3,
+   "explain": "ΔG < 0 means the reaction releases free energy and proceeds as written under those conditions. Sign of ΔH alone does not decide it, since a heat-absorbing reaction can still run if ΔS is large enough.",
+   "tool": "gibbs-free-energy-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "gibbs-free-energy-calculator.html: 'If dG is negative the reaction is spontaneous (exergonic)'"
+  },
+  {
+   "id": "chem-008",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "A solution at pH 3 has how many times more [H⁺] than one at pH 5?",
+   "choices": [
+    "2×",
+    "20×",
+    "100×",
+    "1000×"
+   ],
+   "correct": 2,
+   "explain": "pH is a base-10 log scale, so each whole unit is a tenfold change in [H⁺]. Two units apart is 10², not 2, which is the mistake of reading the scale as linear.",
+   "tool": "ph-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "pH = -log[H+] from ph-calculator.html, so [H+] = 10^-pH; 10^-3 / 10^-5 = 10^2 = 100"
+  },
+  {
+   "id": "chem-009",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "An absorbance of 0 corresponds to what percent transmittance?",
+   "choices": [
+    "0%",
+    "50%",
+    "100%",
+    "Undefined"
+   ],
+   "correct": 2,
+   "explain": "Zero absorbance means nothing was absorbed, so all the light made it through. Reading 0 as 'no light' inverts the scale.",
+   "tool": "beer-lambert-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "beer-lambert-calculator.html FAQ: '%T = 100 x 10^(-A)', so A = 0 gives 100 x 10^0 = 100%"
+  },
+  {
+   "id": "chem-010",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "A concentration cell can produce nonzero voltage even with E° = 0 because:",
+   "choices": [
+    "The half-cells differ in concentration",
+    "The electrodes are made of different metals",
+    "No current flows through the circuit",
+    "The temperature is held perfectly constant"
+   ],
+   "correct": 0,
+   "explain": "The same electrode reaction on both sides forces E° = 0 by definition, but unequal concentrations make Q ≠ 1, and the −(RT/nF)lnQ term alone produces a real voltage.",
+   "tool": "nernst-equation-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "nernst-equation-calculator.html worked example 2: two Cu2+/Cu half-cells at 1.0 M and 0.001 M, E° = 0, E = +0.0887 V"
+  },
+  {
+   "id": "chem-011",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "What does the Henderson-Hasselbalch equation relate?",
+   "choices": [
+    "Concentration to total solution volume",
+    "pH to pKa and the base/acid ratio",
+    "Ka to the ion product of water",
+    "pH to the solution temperature"
+   ],
+   "correct": 1,
+   "explain": "pH = pKa + log([A⁻]/[HA]). When acid and conjugate base are equal the log term is zero, so pH equals pKa, which is also where buffering is strongest.",
+   "tool": "henderson-hasselbalch-buffer-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "henderson-hasselbalch-buffer-calculator.html states pH = pKa + log([A-]/[HA])"
+  },
+  {
+   "id": "chem-012",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "In C1V1 = C2V2, what is being held constant?",
+   "choices": [
+    "Total volume",
+    "Concentration",
+    "Temperature",
+    "Solute moles"
+   ],
+   "correct": 3,
+   "explain": "Dilution adds solvent without adding solute, so the amount of solute is unchanged. That conservation is the entire basis of the equation, and it is why volume and concentration both move.",
+   "tool": "dilution-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "dilution-calculator.html: C1V1 = C2V2 holds because moles of solute are conserved on dilution"
+  },
+  {
+   "id": "chem-013",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "A solution goes from pH 5 to pH 3. The hydrogen ion concentration changes how?",
+   "choices": [
+    "2x higher",
+    "100x lower",
+    "Unchanged",
+    "100x higher"
+   ],
+   "correct": 3,
+   "explain": "pH is a base-10 logarithm, so each unit is a tenfold change, and a falling pH means rising acidity. Reading the drop as a decrease in [H⁺] gets the direction backwards.",
+   "tool": "ph-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "pH = -log[H+] from ph-calculator.html; 10^-3 / 10^-5 = 100 times higher"
+  },
+  {
+   "id": "chem-014",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "In Beer-Lambert, absorbance is proportional to which pair?",
+   "choices": [
+    "Wavelength and sample volume",
+    "Concentration and sample temperature",
+    "Concentration and path length",
+    "Path length and wavelength"
+   ],
+   "correct": 2,
+   "explain": "A = ε × b × c. Wavelength fixes ε rather than entering the product, and temperature does not appear at all, so neither belongs in the pair.",
+   "tool": "beer-lambert-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "beer-lambert-calculator.html: 'A = ebc', where b is path length and c is molar concentration"
+  },
+  {
+   "id": "chem-015",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "What does a very large equilibrium constant K tell you?",
+   "choices": [
+    "Products dominate at equilibrium",
+    "The reaction reaches equilibrium fast",
+    "Reactants dominate at equilibrium",
+    "The reaction is strongly exothermic"
+   ],
+   "correct": 0,
+   "explain": "K describes position, not speed. A reaction can have an enormous K and still be immeasurably slow without a catalyst, which is exactly why enzymes are necessary.",
+   "tool": "chemical-equilibrium-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "chemical-equilibrium-calculator.html FAQ: 'Does a large Keq mean the reaction happens fast? No, Keq is purely thermodynamic'"
+  },
+  {
+   "id": "chem-016",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "Which reagent determines how much product a reaction can make?",
+   "choices": [
+    "The most concentrated one",
+    "The reaction solvent",
+    "The added catalyst",
+    "The limiting reagent"
+   ],
+   "correct": 3,
+   "explain": "Whichever reactant runs out first caps the yield, and it is found by comparing moles divided by coefficient, never by raw mass. Everything else is left over in excess.",
+   "tool": "limiting-reagent-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "limiting-reagent-calculator.html FAQ: 'The reactant that runs out first. It caps how much product can form'"
+  },
+  {
+   "id": "chem-017",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "In PV = nRT, what happens to volume if temperature doubles at fixed pressure?",
+   "choices": [
+    "It halves",
+    "It quadruples",
+    "It doubles",
+    "No change"
+   ],
+   "correct": 2,
+   "explain": "At fixed pressure and amount, volume is directly proportional to absolute temperature. The temperature must be in kelvin, since doubling 20°C is not doubling T.",
+   "tool": "ideal-gas-law-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "ideal-gas-law-calculator.html: V = nRT/P, so V is directly proportional to T in kelvin at fixed n and P"
+  },
+  {
+   "id": "chem-018",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "Molarity is defined as what?",
+   "choices": [
+    "Moles of solute per kilogram of solvent",
+    "Moles of solute per litre of solution",
+    "Moles of solute per litre of solvent",
+    "Grams of solute per litre of solution"
+   ],
+   "correct": 1,
+   "explain": "It is per litre of final solution, not of solvent. Dissolving solute changes the total volume, which is why you top the flask up to the mark instead of adding a litre of water.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "molarity-molar-mass-calculator.html defines molarity as moles of solute per litre of solution"
+  },
+  {
+   "id": "chem-019",
+   "subject": "Chemistry",
+   "type": "recall",
+   "q": "Percent yield compares which two quantities?",
+   "choices": [
+    "Theoretical over actual yield",
+    "Actual over theoretical yield",
+    "Product mass over reactant mass",
+    "Recovered moles over total grams"
+   ],
+   "correct": 1,
+   "explain": "Actual divided by theoretical, times 100. Flipping the ratio turns every normal result into a number above 100, which is the giveaway that the division went the wrong way.",
+   "tool": "percent-yield-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "percent-yield-calculator.html worked example step 4: '% yield = 30 / 34.04 x 100 = 88.1%'"
+  },
+  {
+   "id": "chem-020",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "A rigid 0.500 L vessel holds 2.00 mol of gas at 300 K. What is the pressure in atm?",
+   "choices": [
+    "12.3 atm",
+    "24.6 atm",
+    "49.2 atm",
+    "98.5 atm"
+   ],
+   "correct": 3,
+   "explain": "Rearrange PV = nRT to P = nRT/V. Dividing by the volume is the step people drop, which leaves the answer short by exactly the factor V.",
+   "tool": "ideal-gas-law-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "P = nRT/V with R = 0.08206 L.atm/mol.K from ideal-gas-law-calculator.html: (2.00 x 0.08206 x 300) / 0.500 = 49.236 / 0.500 = 98.5 atm"
+  },
+  {
+   "id": "chem-021",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "What is the pH of a 0.010 M strong base solution at 25°C?",
+   "choices": [
+    "2.00",
+    "7.00",
+    "11.00",
+    "12.00"
+   ],
+   "correct": 3,
+   "explain": "A strong base gives [OH⁻] equal to its concentration, so you find pOH first and then subtract from 14. Taking the log of the concentration straight away gives the pOH, not the pH.",
+   "tool": "ph-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "ph-calculator.html practice problem 2 method: pOH = -log(0.010) = 2.00, pH = 14 - 2.00 = 12.00"
+  },
+  {
+   "id": "chem-022",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "A sample reads A = 0.90 in a 1 cm cuvette, and ε = 4500 M⁻¹cm⁻¹. What is the concentration?",
+   "choices": [
+    "50 µM",
+    "100 µM",
+    "200 µM",
+    "400 µM"
+   ],
+   "correct": 2,
+   "explain": "Rearrange A = εbc to c = A/(εb). With b = 1 cm the path length drops out, so the only arithmetic left is one division.",
+   "tool": "beer-lambert-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "c = A/(eb) from beer-lambert-calculator.html worked example 1: 0.90 / (4500 x 1) = 2.0 x 10^-4 M = 200 uM"
+  },
+  {
+   "id": "chem-023",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "A first-order reaction has k = 0.0693 s⁻¹. What is its half-life?",
+   "choices": [
+    "0.1 s",
+    "1 s",
+    "10 s",
+    "100 s"
+   ],
+   "correct": 2,
+   "explain": "For first order the half-life is ln2/k and carries no concentration term, which is why each successive half-life takes the same time.",
+   "tool": "reaction-rate-half-life-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "reaction-rate-half-life-calculator.html table, first order: t1/2 = 0.693/k = 0.693 / 0.0693 = 10 s"
+  },
+  {
+   "id": "chem-024",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "In water, H₂O, what percent of the mass is oxygen? (H = 1.008, O = 15.999)",
+   "choices": [
+    "11.2%",
+    "50.0%",
+    "66.7%",
+    "88.8%"
+   ],
+   "correct": 3,
+   "explain": "Mass percent weights each element by its atomic mass, not its atom count. Two hydrogens outnumber the one oxygen but weigh about a sixteenth as much each.",
+   "tool": "percent-composition-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "percent-composition-calculator.html states oxygen dominates water at 88.8%: 15.999 / (2 x 1.008 + 15.999) x 100 = 15.999 / 18.015 x 100 = 88.8%"
+  },
+  {
+   "id": "chem-025",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "For 2 Al + 3 Cl₂ → 2 AlCl₃ you have 0.400 mol Al and 0.450 mol Cl₂. Which is limiting?",
+   "choices": [
+    "Al",
+    "Both at once",
+    "Neither one",
+    "Cl₂"
+   ],
+   "correct": 3,
+   "explain": "Compare moles divided by coefficient, since reactants are consumed in the coefficient ratio. The reactant with more moles can still run out first.",
+   "tool": "limiting-reagent-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "limiting-reagent-calculator.html step 2 method: Al 0.400/2 = 0.200, Cl2 0.450/3 = 0.150; the smaller value is limiting, so Cl2"
+  },
+  {
+   "id": "chem-026",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "A reaction has a theoretical yield of 25.0 g and you recover 20.0 g. What is the percent yield?",
+   "choices": [
+    "20.0%",
+    "80.0%",
+    "100.0%",
+    "125.0%"
+   ],
+   "correct": 1,
+   "explain": "Actual over theoretical, times 100. Dividing the other way gives a number above 100, which is impossible for a genuine yield.",
+   "tool": "percent-yield-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "percent-yield-calculator.html: % yield = actual / theoretical x 100 = 20.0 / 25.0 x 100 = 80.0%"
+  },
+  {
+   "id": "chem-027",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "A cell has E° = 0.400 V, n = 1 and Q = 0.00100 at 25°C. What is E?",
+   "choices": [
+    "0.222 V",
+    "0.400 V",
+    "0.578 V",
+    "0.756 V"
+   ],
+   "correct": 2,
+   "explain": "The Nernst correction subtracts (0.0592/n)logQ at 25°C, so a Q below 1 makes the log negative and pushes E above E°. Dropping the minus sign moves the answer the wrong way.",
+   "tool": "nernst-equation-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "nernst-equation-calculator.html 25C shortcut E = E° - (0.0592/n)logQ: 0.400 - (0.0592/1)(-3) = 0.400 + 0.1776 = 0.578 V"
+  },
+  {
+   "id": "chem-028",
+   "subject": "Chemistry",
+   "type": "apply",
+   "q": "For A ⇌ B + C with [A]₀ = 1.00 M and Keq = 0.100, what is x at equilibrium?",
+   "choices": [
+    "0.100 M",
+    "0.270 M",
+    "0.316 M",
+    "0.500 M"
+   ],
+   "correct": 1,
+   "explain": "Keq = x²/([A]₀ − x) is a quadratic, so solve it rather than assuming the denominator is still [A]₀. Here the shortcut √(Keq·[A]₀) is off by a sixth, because x is not small next to 1.00 M.",
+   "tool": "chemical-equilibrium-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "chemical-equilibrium-calculator.html practice problem 1: x = (-0.100 + sqrt(0.0100 + 0.400))/2 = 0.270 M, check (0.270)^2/0.730 = 0.0999"
+  },
+  {
+   "id": "chem-029",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A student weighs 6.2 g of product where stoichiometry predicts 8.0 g, then discovers the balance has been reading 0.3 g high all day. What is the corrected percent yield?",
+   "choices": [
+    "73.8%",
+    "74.7%",
+    "77.5%",
+    "81.3%"
+   ],
+   "correct": 0,
+   "explain": "The offset is on the measured mass, so subtract it from the recovered amount before dividing. Correcting the theoretical value instead, or adding rather than subtracting, both move the answer up when it should come down.",
+   "tool": "percent-yield-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "percent-yield-calculator.html: % yield = actual/theoretical x 100; corrected actual = 6.2 - 0.3 = 5.9 g, so 5.9/8.0 x 100 = 73.8%. Uncorrected 6.2/8.0 = 77.5%, added 6.5/8.0 = 81.3%, theoretical corrected 6.2/8.3 = 74.7%"
+  },
+  {
+   "id": "chem-030",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A technician fills a rigid 2.00 L cylinder with 0.500 mol of gas and records the temperature as 27°C. What pressure should the gauge read?",
+   "choices": [
+    "0.55 atm",
+    "5.60 atm",
+    "6.16 atm",
+    "12.32 atm"
+   ],
+   "correct": 2,
+   "explain": "PV = nRT only holds with temperature measured from absolute zero, so convert to kelvin by adding 273.15 before dividing by the volume. Using the Celsius number, or rounding the conversion to 273, both shift the result.",
+   "tool": "ideal-gas-law-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "ideal-gas-law-calculator.html: P = nRT/V, R = 0.08206, T = 27 + 273.15 = 300.15 K. (0.500 x 0.08206 x 300.15)/2.00 = 12.315/2.00 = 6.16 atm. Celsius gives 0.55 atm, 273.15 K gives 5.60 atm, skipping /V gives 12.32 atm"
+  },
+  {
+   "id": "chem-031",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "An exothermic gas synthesis sits at equilibrium. A technician raises the temperature to speed it up and is surprised the product yield falls. What explains it?",
+   "choices": [
+    "Heat behaves as a product, so adding it shifts the system left",
+    "Higher temperature always slows down the forward reaction step",
+    "The higher temperature destroys the catalyst and halts the reaction",
+    "Raising the temperature lowers Keq for every reaction, either way"
+   ],
+   "correct": 0,
+   "explain": "Temperature is the one stress that changes Keq itself, and for a heat-releasing reaction more heat pushes the balance back toward reactants. The rate does rise, which is why the yield drop surprises people.",
+   "tool": "chemical-equilibrium-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "chemical-equilibrium-calculator.html FAQ: 'Every Le Chatelier stress works by instantly moving Q away from K'; for an exothermic reaction heat is on the product side, so added heat shifts the system toward reactants"
+  },
+  {
+   "id": "chem-032",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A student measures pH 1.00 for 0.10 M hydrochloric acid and assumes 0.10 M acetic acid (pKa 4.76) will read the same. What pH does the acetic acid actually give?",
+   "choices": [
+    "1.00",
+    "2.88",
+    "4.76",
+    "5.76"
+   ],
+   "correct": 1,
+   "explain": "A weak acid only partly dissociates, so [H⁺] is far below the total acid concentration and you must solve the equilibrium. Quoting the pKa, or forgetting to halve in the shortcut, both land far from the real reading.",
+   "tool": "ph-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "ph-calculator.html worked example 2: 0.1 M acetic acid, pKa 4.76, exact quadratic x = 1.310 x 10^-3 M, pH = 2.88. Treating it as strong gives 1.00, quoting pKa gives 4.76, skipping the halving gives 4.76 + 1 = 5.76"
+  },
+  {
+   "id": "chem-033",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A cell with E° = 0.80 V and n = 1 runs at 25°C until products build up to Q = 1000. A student reports E = 0.98 V. What is E actually?",
+   "choices": [
+    "0.62 V",
+    "0.71 V",
+    "0.80 V",
+    "0.98 V"
+   ],
+   "correct": 0,
+   "explain": "Products accumulating raise Q above 1, the log goes positive, and the Nernst term is subtracted, so the potential must fall below E°. Reporting a rise means the sign of the correction was flipped.",
+   "tool": "nernst-equation-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "nernst-equation-calculator.html 25C shortcut E = E° - (0.0592/n)logQ: 0.80 - (0.0592/1)(3) = 0.80 - 0.1776 = 0.62 V. The page's practice problem 1 gives 0.9775 V for the same cell at Q = 0.001, which is the sign-flip answer; using n = 2 gives 0.71 V"
+  },
+  {
+   "id": "chem-034",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A drug level falls from 80 mg/L to 40 mg/L in 3 hours, then from 40 mg/L to 20 mg/L over the next 3 hours. Starting at 80 mg/L, how long until it reaches 5 mg/L?",
+   "choices": [
+    "6 hours",
+    "9 hours",
+    "12 hours",
+    "15 hours"
+   ],
+   "correct": 2,
+   "explain": "A half-life that stays the same across successive halvings is the signature of first order, so you can simply count halvings. Stopping at 10 mg/L is the usual slip, since that is only three of them.",
+   "tool": "reaction-rate-half-life-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "reaction-rate-half-life-calculator.html: only the first-order half-life is constant (0.693/k, no concentration term). 80 to 40 to 20 to 10 to 5 is 4 half-lives of 3 h = 12 hours"
+  },
+  {
+   "id": "chem-035",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A sample reads A = 0.45 in a 0.50 cm cuvette with ε = 6000 M⁻¹cm⁻¹. A student assumes the usual 1 cm path. What is the true concentration?",
+   "choices": [
+    "37.5 µM",
+    "75 µM",
+    "150 µM",
+    "300 µM"
+   ],
+   "correct": 2,
+   "explain": "Path length sits in the denominator of c = A/(εb), so a shorter cuvette means the real concentration is higher than the 1 cm assumption suggests. Multiplying by 0.50 instead of dividing moves it the wrong way.",
+   "tool": "beer-lambert-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "c = A/(eb) from beer-lambert-calculator.html: 0.45/(6000 x 0.50) = 1.5 x 10^-4 M = 150 uM. Assuming b = 1 gives 75 uM; multiplying by 0.50 gives 37.5 uM"
+  },
+  {
+   "id": "chem-036",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A compound is 82.7% carbon and 17.3% hydrogen by mass, with a molar mass of 58.12 g/mol. A student reports the simplest ratio as the answer. What is the molecular formula?",
+   "choices": [
+    "CH₂",
+    "C₂H₅",
+    "C₄H₁₀",
+    "C₄H₈"
+   ],
+   "correct": 2,
+   "explain": "The simplest ratio only fixes proportions, so you must divide the real molar mass by the empirical formula mass and scale every subscript. Rounding a 2.49 ratio down to 2 instead of clearing the half also breaks the formula.",
+   "tool": "empirical-formula-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "empirical-formula-calculator.html practice problem 1: C 82.7/12.011 = 6.885, H 17.3/1.008 = 17.16, ratio 1 to 2.49, x2 gives C2H5 (29.06 g/mol), n = 58.12/29.06 = 2, so C4H10"
+  },
+  {
+   "id": "chem-037",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "28 g of N₂ (28.014 g/mol) reacts with 10 g of H₂ (2.016 g/mol) in N₂ + 3 H₂ → 2 NH₃, and 30 g of ammonia is recovered. A student calls H₂ limiting because 10 g is the smaller mass. What is the real percent yield?",
+   "choices": [
+    "53.3%",
+    "88.1%",
+    "107.1%",
+    "176.3%"
+   ],
+   "correct": 1,
+   "explain": "Mass never identifies the limiting reactant, moles divided by coefficient does, and here the lighter reagent is in excess. Carrying the wrong limiting reagent inflates the theoretical yield and so deflates the percentage.",
+   "tool": "percent-yield-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "limiting-reagent-calculator.html Haber example: N2 0.9995/1 = 0.9995 vs H2 4.960/3 = 1.653, so N2 is limiting. percent-yield-calculator.html worked example: theoretical NH3 = 1.999 x 17.031 = 34.04 g, 30/34.04 x 100 = 88.1%. Assuming H2 limiting gives 4.960 x 2/3 x 17.031 = 56.3 g and 53.3%"
+  },
+  {
+   "id": "chem-038",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A reaction has ΔH = −40 kJ/mol and ΔS = −100 J/mol·K. A chemist running it at 450 K cannot get it to proceed. Above what temperature does it stop being spontaneous?",
+   "choices": [
+    "0.4 K",
+    "126.9 K",
+    "400 K",
+    "4000 K"
+   ],
+   "correct": 2,
+   "explain": "The crossover sits at T = ΔH/ΔS, and the two must share units, so convert the entropy from joules to kilojoules first. Leaving it in joules shrinks the answer by a factor of a thousand.",
+   "tool": "gibbs-free-energy-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "gibbs-free-energy-calculator.html worked example 1: crossover T = dH/dS = (-40)/(-0.100) = 400.0 K, which the page also quotes as 126.9 C. Leaving dS in J/mol.K gives 0.4 K"
+  },
+  {
+   "id": "chem-039",
+   "subject": "Chemistry",
+   "type": "exam",
+   "q": "A technician finds Q = 4 in a vessel whose Keq is 25 and concludes there is too much product. What is actually true of the system?",
+   "choices": [
+    "Q sits below K, so the reaction runs forward",
+    "Q sits above K, so the reaction must run backward",
+    "Q already equals K, so the system is fully at rest",
+    "Q and K cannot be compared within a single vessel"
+   ],
+   "correct": 0,
+   "explain": "Q and K use the same expression at different moments, so the comparison alone gives the direction: a Q under K means products are still too scarce. Adding more product here would push the system further from balance.",
+   "tool": "chemical-equilibrium-calculator.html",
+   "origin": "written 2026-11-09 against the site's own calculator pages",
+   "source": "chemical-equilibrium-calculator.html: 'when Q < K, ln(Q/K) is negative, so dG < 0 and the forward reaction is spontaneous right now'; Q = 4 is below Keq = 25"
+  }
+ ]
+}

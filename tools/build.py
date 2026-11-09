@@ -21,6 +21,8 @@ STEPS = [
     ("prerender_chart_rows.py", "the chart's rows exist without JavaScript"),
     # the self-test goes in before the decorations, because it injects at the
     # top of <main> while they append at the bottom of it
+    ("check_questions.py", "every question in the shared bank, checked"),
+    ("build_quiz.py", "the training log: levels, subjects, mixed, practice tests"),
     ("balance_links.py", "a contextual link for the under-linked pages with demand"),
     ("build_selftest.py", "a test on the pages that rank but get no clicks"),
     ("check_selftest.py", "every answer recomputed from the page's own data"),

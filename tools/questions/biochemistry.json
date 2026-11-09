@@ -1,0 +1,634 @@
+{
+ "subject": "Biochemistry",
+ "questions": [
+  {
+   "id": "bioc-001",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Which amino acid's side chain is most useful for buffering near physiological pH (7.4)?",
+   "choices": [
+    "Histidine",
+    "Lysine",
+    "Serine",
+    "Glycine"
+   ],
+   "correct": 0,
+   "explain": "Histidine's imidazole side chain has a pKa of about 6.0, closer to 7.4 than any other side chain, so it's meaningfully both protonated and deprotonated near physiological pH.",
+   "tool": "amino-acid-chart",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "amino-acid-chart.html AA table: His pkr 6.0, the only side chain pKa within about 1.5 units of 7.4 (next nearest is Cys at 8.18)."
+  },
+  {
+   "id": "bioc-002",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "A competitive enzyme inhibitor primarily:",
+   "choices": [
+    "Lowers Vmax, leaves Km alone",
+    "Lowers both Km and Vmax",
+    "Raises Km and lowers Vmax",
+    "Raises Km, Vmax unchanged"
+   ],
+   "correct": 3,
+   "explain": "Competitive inhibitors compete with substrate for the active site, enough substrate can still out-compete the inhibitor, so Vmax is reachable, just at a higher apparent Km.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "michaelis-menten-vs-lineweaver-burk.html table: competitive at r = 1 gives Km(app) 50.0 from 25.0 and Vmax(app) 100.0 from 100.0. The three distractors are the uncompetitive, noncompetitive and mixed signatures from the same alpha/alpha-prime model."
+  },
+  {
+   "id": "bioc-003",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "The isoelectric point (pI) of a peptide is the pH at which its net charge is:",
+   "choices": [
+    "Exactly zero",
+    "Maximally positive",
+    "Maximally negative",
+    "Equal to its pKa"
+   ],
+   "correct": 0,
+   "explain": "pI is defined as the pH where positive and negative charges on the molecule exactly balance, so neither the acidic nor the basic groups win, and the molecule stops moving in an electric field.",
+   "tool": "amino-acid-titration-curve",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "peptide-charge-calculator.html pI(): bisects for the pH where the summed group charge crosses 0."
+  },
+  {
+   "id": "bioc-004",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Km represents the substrate concentration at which reaction velocity equals:",
+   "choices": [
+    "Vmax",
+    "Half of Vmax",
+    "Zero",
+    "Twice Vmax"
+   ],
+   "correct": 1,
+   "explain": "By definition, when [S] = Km, v = Vmax/2, Km is a measure of apparent affinity, not a rate itself.",
+   "tool": "enzyme-kinetics-simulator",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "v = Vmax[S]/(Km+[S]) with [S] = Km gives v = Vmax/2. Checked at the simulator's defaults: Vmax 100, Km 25, [S] 25 gives v = 50.00."
+  },
+  {
+   "id": "bioc-005",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Which of these amino acids has an acidic side chain?",
+   "choices": [
+    "Lysine",
+    "Aspartate",
+    "Serine",
+    "Leucine"
+   ],
+   "correct": 1,
+   "explain": "Aspartate's side chain is a carboxylic acid, deprotonated (negatively charged) at physiological pH, one of only two acidic standard amino acids, along with glutamate.",
+   "tool": "amino-acid-chart",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "amino-acid-chart.html AA table cls field: Asp and Glu are the only two marked Acidic. Lys is Basic, Ser is Polar, Leu is Nonpolar."
+  },
+  {
+   "id": "bioc-006",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Which one-letter code corresponds to Tryptophan?",
+   "choices": [
+    "T",
+    "W",
+    "Y",
+    "F"
+   ],
+   "correct": 1,
+   "explain": "T was already taken by Threonine, so Tryptophan got W instead, one of the nine amino acids whose code doesn't match its first letter.",
+   "tool": "amino-acid-chart",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "amino-acid-chart.html AA table: c1 W is Trp, T is Thr, Y is Tyr, F is Phe."
+  },
+  {
+   "id": "bioc-007",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Which two amino acids are the only purely ketogenic ones?",
+   "choices": [
+    "Lysine and threonine",
+    "Leucine and isoleucine",
+    "Leucine and lysine",
+    "Phenylalanine and tyrosine"
+   ],
+   "correct": 2,
+   "explain": "Only leucine and lysine cannot contribute any carbon to glucose. Both begin with L, which is the whole mnemonic. Every other amino acid is glucogenic or both.",
+   "tool": "amino-acid-catabolism-explorer",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "amino-acid-catabolism-explorer.html classifies Leu and Lys as ketogenic only; Ile, Phe and Tyr are listed as both, Thr as glucogenic."
+  },
+  {
+   "id": "bioc-008",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Which level of protein structure is held together by peptide bonds?",
+   "choices": [
+    "Secondary",
+    "Quaternary",
+    "Primary",
+    "Tertiary"
+   ],
+   "correct": 2,
+   "explain": "Primary structure is the covalent sequence itself. Secondary structure comes from backbone hydrogen bonds, tertiary from side chain interactions, and quaternary from separate subunits assembling.",
+   "tool": "protein-molecular-weight-calculator",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "protein-molecular-weight-calculator.html: the MW is the sum of residue masses plus one water, because one water leaves at every peptide bond that joins the sequence."
+  },
+  {
+   "id": "bioc-010",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "At what pH is the net charge on an amino acid zero?",
+   "choices": [
+    "At whichever pKa is lowest",
+    "At pH 7.0, the neutral point",
+    "At physiological pH, 7.4",
+    "At its isoelectric point"
+   ],
+   "correct": 3,
+   "explain": "The pH where positive and negative charges balance is a property of that molecule's own set of ionizable groups. It is not generally 7, and it is not the same as any single pKa.",
+   "tool": "amino-acid-titration-curve",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "amino-acid-chart.html AA table: pI runs from 2.77 (Asp) to 10.76 (Arg), and only Gly and Val sit near 5.97, so a fixed pH 7.0 or 7.4 answer is wrong for all 20."
+  },
+  {
+   "id": "bioc-011",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "On a Lineweaver-Burk plot, what does the y-intercept give you?",
+   "choices": [
+    "-1/Km",
+    "1/Km",
+    "1/Vmax",
+    "Km/Vmax"
+   ],
+   "correct": 2,
+   "explain": "The double reciprocal plot puts 1/Vmax at the y-intercept and -1/Km at the x-intercept. That is the whole reason it was used before nonlinear fitting was easy.",
+   "tool": "michaelis-menten-fitter",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "michaelis-menten-vs-lineweaver-burk.html worked fit: intercept 0.01038 gives Vmax = 1/0.01038 = 96.3, and slope 0.0187 is Km/Vmax."
+  },
+  {
+   "id": "bioc-012",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Which inhibition type lowers both Km and Vmax?",
+   "choices": [
+    "Competitive",
+    "None of these",
+    "Noncompetitive",
+    "Uncompetitive"
+   ],
+   "correct": 3,
+   "explain": "An uncompetitive inhibitor binds only the enzyme-substrate complex. Removing ES pulls the binding equilibrium forward, which lowers apparent Km while also capping Vmax.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "tools/charts/make_inhibition_guide.py, alpha = 1 and alpha-prime = 3 at r = 2: Km(app) 8.33 from 25 and Vmax(app) 33.33 from 100, both down. Competitive leaves Vmax alone and noncompetitive leaves Km alone."
+  },
+  {
+   "id": "bioc-013",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "kcat/Km is best described as a measure of what?",
+   "choices": [
+    "Maximum velocity",
+    "Catalytic efficiency",
+    "Enzyme concentration",
+    "Binding affinity alone"
+   ],
+   "correct": 1,
+   "explain": "kcat/Km combines how fast the enzyme turns over with how well it captures substrate, which is why it is the number used to compare enzymes against each other.",
+   "tool": "enzyme-kinetics-simulator",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "enzyme-kinetics-simulator.html names kcat/Km the specificity constant and states that the higher kcat/Km wins at low, competing substrate concentrations, regardless of Km alone."
+  },
+  {
+   "id": "bioc-014",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "A protein is at a pH above its pI. What is its net charge?",
+   "choices": [
+    "Net negative charge",
+    "Net positive charge",
+    "Zero net charge",
+    "Charge cannot be known"
+   ],
+   "correct": 0,
+   "explain": "Above the pI there are more deprotonated acidic groups than protonated basic ones, which is what makes a protein bind an anion exchange column rather than a cation one.",
+   "tool": "peptide-charge-calculator",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "peptide-charge-calculator.html gCharge(): raising pH past a group's pKa sheds a proton, so acids go to -1 and bases go to 0. Checked with GK (pI 9.77): net is +0.98 at pH 9.0 and -0.76 at pH 13.0."
+  },
+  {
+   "id": "bioc-015",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "How many of the 20 standard amino acids have an ionizable side chain?",
+   "choices": [
+    "9",
+    "12",
+    "7",
+    "5"
+   ],
+   "correct": 2,
+   "explain": "Seven: aspartate, glutamate, histidine, cysteine, tyrosine, lysine and arginine. In pKa order they spell DEHCYKR, and they are the only ones that change a protein's charge.",
+   "tool": "amino-acid-chart",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "amino-acid-chart.html AA table: exactly 7 of 20 entries carry a non-null pkr (R, D, C, E, H, K, Y). Counted by parsing the array, not from memory."
+  },
+  {
+   "id": "bioc-016",
+   "subject": "Biochemistry",
+   "type": "recall",
+   "q": "Noncompetitive inhibition affects Vmax and Km how?",
+   "choices": [
+    "Vmax unchanged, Km rises",
+    "Both Vmax and Km decrease",
+    "Vmax and Km both increase",
+    "Vmax falls, Km unchanged"
+   ],
+   "correct": 3,
+   "explain": "A pure noncompetitive inhibitor binds enzyme and enzyme-substrate complex equally well, so it removes functional enzyme without changing how tightly substrate binds.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "tools/charts/make_inhibition_guide.py with alpha = alpha-prime = 3: Km(app) = 25 x 3/3 = 25 (unchanged), Vmax(app) = 100/3 = 33.33 (down). The first option is the competitive signature."
+  },
+  {
+   "id": "bioc-009",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "Tris shifts about -0.028 pH units per degree C. If you set a Tris buffer to pH 8.00 at 25 C, what is it in a 4 C cold room?",
+   "choices": [
+    "About 8.6",
+    "Still 8.0",
+    "About 7.4",
+    "About 8.1"
+   ],
+   "correct": 0,
+   "explain": "Cooling by 21 degrees raises the pH by roughly 21 x 0.028, which is about 0.59 units. This is why Tris buffers should be adjusted at the temperature where they will be used.",
+   "tool": "buffer-pka-table",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "buffer-pka-table.html BUF entry Tris: pKa 8.06, dpKa/dT -0.028. pkaAt(8.00, -0.028, 4) = 8.00 + (-0.028)(4 - 25) = 8.00 + 0.588 = 8.588. The 7.4 option is the same shift with the sign flipped."
+  },
+  {
+   "id": "bioc-017",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "A peptide has 2 Asp, 1 Lys, a free N terminus and a free C terminus, and no other ionizable groups. What is its approximate net charge at pH 7.0?",
+   "choices": [
+    "About -2",
+    "About -1",
+    "About 0",
+    "About +1"
+   ],
+   "correct": 1,
+   "explain": "Count groups, not residues. The two Asp side chains and the C terminus are each about -1 at pH 7, while the N terminus and the Lys side chain are each about +1, so three negatives against two positives leaves one net negative.",
+   "tool": "peptide-charge-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "peptide-charge-calculator.html model (N term 9.0 base, C term 3.1 acid, Asp 3.65 acid, Lys 10.53 base). Charges at pH 7.0: N term +0.990, Lys +0.9997, Asp -0.9996 twice, C term -0.9999. Sum -1.0092, so about -1."
+  },
+  {
+   "id": "bioc-018",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "A dipeptide has a free N terminus (pKa 9.0), a free C terminus (pKa 3.1) and one Lysine side chain (pKa 10.53). What is its approximate pI?",
+   "choices": [
+    "About 6.1",
+    "About 7.0",
+    "About 9.8",
+    "About 11.5"
+   ],
+   "correct": 2,
+   "explain": "Two bases against one acid means the molecule is still positive at neutral pH, so the zero crossing has to sit high, between the two pKa values that bracket it. Averaging the two lowest pKa values is the usual mistake and lands near 6.",
+   "tool": "how-to-calculate-pi-without-a-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "Running charge: below 3.1 is +2, from 3.1 to 9.0 is +1, from 9.0 to 10.53 is 0, above 10.53 is -1. pI = (9.0 + 10.53)/2 = 9.765. The peptide-charge-calculator.html bisection on the same groups returns 9.765. (3.1 + 9.0)/2 = 6.05 is the distractor."
+  },
+  {
+   "id": "bioc-019",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "HEPES has a pKa of 7.55 at 25 C and a temperature coefficient of -0.014 per degree C. What is its pKa at 4 C?",
+   "choices": [
+    "About 7.84",
+    "About 7.55",
+    "About 7.26",
+    "About 8.14"
+   ],
+   "correct": 0,
+   "explain": "A negative coefficient means the pKa falls as temperature rises, so cooling pushes it up. HEPES moves half as much as Tris per degree, which is one reason it is preferred for work done on ice.",
+   "tool": "buffer-pka-table",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "buffer-pka-table.html BUF entry HEPES: pKa 7.55, dpKa/dT -0.014. pkaAt = 7.55 + (-0.014)(4 - 25) = 7.55 + 0.294 = 7.844. The 7.26 option is the sign flipped; 8.14 is Tris's -0.028 coefficient used by mistake."
+  },
+  {
+   "id": "bioc-020",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "You need a buffer at pH 8.20 from a weak acid whose pKa is 7.20. What ratio of conjugate base to acid does Henderson-Hasselbalch call for?",
+   "choices": [
+    "1 to 10",
+    "1 to 1",
+    "100 to 1",
+    "10 to 1"
+   ],
+   "correct": 3,
+   "explain": "Each whole pH unit above the pKa multiplies the base-to-acid ratio by ten, because the relationship is logarithmic. Sitting one unit above the pKa also means the buffer is near the edge of its useful range.",
+   "tool": "henderson-hasselbalch-buffer-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "henderson-hasselbalch-buffer-calculator.html: ratio [A-]/[HA] = 10^(pH - pKa) = 10^(8.20 - 7.20) = 10.0, so 10 to 1. The 1 to 10 option is the ratio inverted, 100 to 1 is two pH units instead of one."
+  },
+  {
+   "id": "bioc-021",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "An acetate buffer has a pKa of 4.76. At pH 5.76, what fraction of the total buffer is in the acetate (conjugate base) form?",
+   "choices": [
+    "About 91%",
+    "About 9%",
+    "About 50%",
+    "About 99%"
+   ],
+   "correct": 0,
+   "explain": "Turn the ratio into a fraction before answering: a 10 to 1 ratio is ten parts out of eleven, not ten percent. Half and half only happens when the pH equals the pKa.",
+   "tool": "henderson-hasselbalch-buffer-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "buffer-pka-table.html gives acetate pKa 4.76. ratio = 10^(5.76 - 4.76) = 10.0; fraction A- = ratio/(1 + ratio) = 10/11 = 0.9091, so about 91%. The 9% option is the acid fraction, 1/11."
+  },
+  {
+   "id": "bioc-022",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "Glycine's residue mass is 57.05 Da and a water is 18.02 Da. What is the molecular weight of the tripeptide Gly-Gly-Gly?",
+   "choices": [
+    "171.2 Da",
+    "189.2 Da",
+    "207.2 Da",
+    "225.2 Da"
+   ],
+   "correct": 1,
+   "explain": "A chain of n residues loses n-1 waters forming its peptide bonds, so you add exactly one water back for the two free ends, no matter how long the chain is. Summing free amino acid masses instead double counts two whole waters.",
+   "tool": "protein-molecular-weight-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "protein-molecular-weight-calculator.html RES['G'] = 57.0519, WATER = 18.01528. 3 x 57.0519 + 18.01528 = 189.17 Da. 171.16 is the residues with no water; 225.21 is 3 x the free glycine mass 75.07 from amino-acid-chart.html."
+  },
+  {
+   "id": "bioc-023",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "The histidine side chain has a pKa of 6.0. What fraction of it is protonated at pH 7.0?",
+   "choices": [
+    "About 50%",
+    "About 91%",
+    "About 9%",
+    "About 1%"
+   ],
+   "correct": 2,
+   "explain": "A base one full pH unit above its pKa is roughly one part in eleven protonated, which is why histidine is called basic but carries almost no charge in the cytosol. Half protonated would require the pH to equal the pKa.",
+   "tool": "amino-acid-titration-curve",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "peptide-charge-calculator.html gCharge for a base: 1/(1 + 10^(pH - pKa)) = 1/(1 + 10^1) = 0.0909. The same page's worked DKHEYR table lists His at +0.09 at pH 7.0. His pKa 6.0 is the pkr in amino-acid-chart.html."
+  },
+  {
+   "id": "bioc-024",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "An enzyme has Vmax = 100 µM/min and Km = 25 µM. What is the initial velocity at [S] = 75 µM?",
+   "choices": [
+    "25 µM/min",
+    "50 µM/min",
+    "100 µM/min",
+    "75 µM/min"
+   ],
+   "correct": 3,
+   "explain": "Three times Km does not mean three quarters of nothing: substituting into the hyperbola gives [S]/(Km+[S]) = 0.75 of Vmax. Reading Vmax straight off the plot is the usual error, since the curve only approaches it.",
+   "tool": "enzyme-kinetics-simulator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "v = Vmax[S]/(Km + [S]) = 100 x 75/(25 + 75) = 7500/100 = 75 µM/min. Baseline Km 25 and Vmax 100 are the enzyme-kinetics-simulator.html defaults."
+  },
+  {
+   "id": "bioc-025",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "A Lineweaver-Burk fit gives a y-intercept of 0.0100 and a slope of 0.250. What are Vmax and Km?",
+   "choices": [
+    "Vmax 100, Km 25",
+    "Vmax 25, Km 100",
+    "Vmax 100, Km 0.25",
+    "Vmax 0.01, Km 25"
+   ],
+   "correct": 0,
+   "explain": "Take the reciprocal of the intercept first, then multiply the slope by that Vmax. Reading the slope as Km directly is the common slip, since the slope is really Km divided by Vmax.",
+   "tool": "michaelis-menten-fitter",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "michaelis-menten-vs-lineweaver-burk.html baseline row: LB slope 0.250 and y-int 0.0100 for Km 25, Vmax 100. Vmax = 1/0.0100 = 100; Km = slope x Vmax = 0.250 x 100 = 25."
+  },
+  {
+   "id": "bioc-026",
+   "subject": "Biochemistry",
+   "type": "apply",
+   "q": "A reaction has a standard free energy change of +15.0 kJ/mol. Coupled to ATP hydrolysis at -30.5 kJ/mol, what is the overall standard free energy change?",
+   "choices": [
+    "+15.5 kJ/mol",
+    "-45.5 kJ/mol",
+    "+45.5 kJ/mol",
+    "-15.5 kJ/mol"
+   ],
+   "correct": 3,
+   "explain": "Free energies of coupled steps add, they do not multiply or cancel to the larger one's full value, so the uphill step is paid for and some driving force is left over. Flipping the sign of the hydrolysis term is the usual slip.",
+   "tool": "gibbs-free-energy-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "gibbs-free-energy-calculator.html worked example 2 uses dG standard prime = -30.5 kJ/mol for ATP hydrolysis. 15.0 + (-30.5) = -15.5 kJ/mol. The -45.5 option adds the magnitudes instead of summing the signed values."
+  },
+  {
+   "id": "bioc-027",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "A researcher assays an enzyme with and without a new compound. Vmax is unchanged, but the apparent Km rises fourfold. The compound is most likely a:",
+   "choices": [
+    "Noncompetitive inhibitor",
+    "Uncompetitive inhibitor",
+    "Competitive inhibitor",
+    "Mixed inhibitor favoring ES"
+   ],
+   "correct": 2,
+   "explain": "Only one mechanism can leave the ceiling in place: if saturating substrate still reaches the same maximum rate, the inhibitor must be losing the race for the active site at high [S]. Anything that touches the enzyme-substrate complex drags Vmax down with it.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "Km(app) = Km x alpha/alpha-prime and Vmax(app) = Vmax/alpha-prime (tools/charts/make_inhibition_guide.py). Vmax unchanged forces alpha-prime = 1, which only competitive allows; alpha = 4 then gives the fourfold Km. Uncompetitive gives 8.33 and 33.33 from 25 and 100, noncompetitive 25 and 33.33, mixed favoring ES 16.67 and 33.33."
+  },
+  {
+   "id": "bioc-028",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "On a Lineweaver-Burk plot, a student's inhibited line is steeper than the control but crosses the x-axis at exactly the same point. Which inhibitor was added?",
+   "choices": [
+    "A noncompetitive inhibitor",
+    "A competitive inhibitor",
+    "An uncompetitive inhibitor",
+    "A mixed inhibitor favoring E"
+   ],
+   "correct": 0,
+   "explain": "The x-intercept is -1/Km, so a shared x-intercept means apparent Km never moved and the steeper slope must come from a smaller Vmax. Competitive inhibition is the one that shares the y-intercept instead, which is the single most common mix-up on this plot.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "At r = 2: noncompetitive x-int -0.0400, identical to baseline -0.0400, slope 0.750 vs 0.250. Competitive x-int moves to -0.0133, uncompetitive to -0.1200, mixed favoring free enzyme to -0.0267 (tools/charts/make_inhibition_guide.py)."
+  },
+  {
+   "id": "bioc-029",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "Adding a compound drops both apparent Km and apparent Vmax to one third of their control values, and the Lineweaver-Burk line stays parallel to the control. What kind of inhibition is this?",
+   "choices": [
+    "Competitive inhibition",
+    "Uncompetitive inhibition",
+    "Noncompetitive inhibition",
+    "Mixed, favoring free enzyme"
+   ],
+   "correct": 1,
+   "explain": "Parallel lines mean the slope Km/Vmax did not change, which only happens when Km and Vmax fall by the same factor. An inhibitor that can only bind the enzyme-substrate complex pulls substrate binding forward while capping turnover, so both numbers drop together.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "michaelis-menten-vs-lineweaver-burk.html practice answer, r = 2: alpha 1, alpha-prime 3, Km(app) 8.33 (25/3), Vmax(app) 33.33 (100/3), slope 0.250 unchanged. Noncompetitive at the same r keeps Km at 25 and takes slope to 0.750."
+  },
+  {
+   "id": "bioc-030",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "An inhibitor raises an enzyme's apparent Km and lowers its apparent Vmax at the same time, and the two Lineweaver-Burk lines meet above the x-axis rather than on either axis. What does that pattern indicate?",
+   "choices": [
+    "Pure competitive inhibition",
+    "Pure noncompetitive binding",
+    "Mixed, favoring free enzyme",
+    "Uncompetitive, binds ES only"
+   ],
+   "correct": 2,
+   "explain": "Km up and Vmax down at once cannot come from any of the three pure cases: competitive leaves Vmax alone, pure noncompetitive leaves Km alone, and uncompetitive lowers Km. It takes an inhibitor that binds free enzyme more tightly than the complex.",
+   "tool": "michaelis-menten-vs-lineweaver-burk",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "tools/charts/make_inhibition_guide.py, Mixed (prefers E) at r = 2: alpha 3, alpha-prime 2, Km(app) 37.50 (up from 25), Vmax(app) 50.00 (down from 100), and the chart's own row reads 'meet off both axes, above the x-axis'. The generator asserts this direction rather than assuming it."
+  },
+  {
+   "id": "bioc-031",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "A protocol must hold pH 7.20 while the sample sits in a 4 C cold room, and you will titrate the buffer at the bench at 25 C. Which of these buffers holds the target best in the cold?",
+   "choices": [
+    "MOPS, pKa 7.20 at 25 C",
+    "Tris, pKa 8.06 at 25 C",
+    "Imidazole, pKa 7.00",
+    "Phosphate, pKa2 7.20"
+   ],
+   "correct": 3,
+   "explain": "Matching the pKa to the target is only half the job: the temperature coefficient decides how far the buffer walks away once it is cold. Picking on pKa alone is what puts a cold room assay out of spec.",
+   "tool": "buffer-pka-table",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "buffer-pka-table.html pkaAt(pKa, dt, 4). Phosphate pKa2 7.20, dt -0.0028, goes to 7.259 (off by 0.059). MOPS 7.20, -0.0110 goes to 7.431 (0.231). Imidazole 7.00, -0.0200 goes to 7.420 (0.220). Tris 8.06, -0.0280 goes to 8.648 (1.448)."
+  },
+  {
+   "id": "bioc-032",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "A short peptide has a free N terminus, a free C terminus and three basic side chains (two Lys, one Arg), and no acidic side chains. You load it onto an ion exchange column in a pH 8.0 buffer. What happens?",
+   "choices": [
+    "Flows through both resins",
+    "Binds a cation exchanger",
+    "Carries no net charge here",
+    "Binds an anion exchanger"
+   ],
+   "correct": 1,
+   "explain": "Work out the sign of the net charge at the running pH, then remember the resin is named for the ion it captures, not the charge it carries. Three basic groups against a single carboxylate leaves the peptide strongly positive well above pH 7, so it sticks to the negatively charged resin.",
+   "tool": "peptide-charge-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "peptide-charge-calculator.html model on KKR at pH 8.0: N term +0.909, Lys +0.997 twice, Arg +1.000, C term -1.000, sum +2.903. Its pI by bisection is 11.5, far above 8.0, so the peptide is a cation here."
+  },
+  {
+   "id": "bioc-033",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "A student must find the pI of a peptide with a free C terminus (3.1), a free N terminus (9.0), one Lys (10.53) and one Arg (12.48). Which two pKa values should be averaged?",
+   "choices": [
+    "Average all four pKa values",
+    "Average 3.1 and 9.0",
+    "Average 10.53 and 12.48",
+    "Average 9.0 and 10.53"
+   ],
+   "correct": 2,
+   "explain": "The right pair is the one that brackets the pH where the running net charge passes through zero, and with three bases against one acid that crossing sits at the top of the list, not in the middle. Reaching for the two middle values is the single most common way this calculation goes wrong.",
+   "tool": "how-to-calculate-pi-without-a-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "Running charge: below 3.1 is +3, 3.1 to 9.0 is +2, 9.0 to 10.53 is +1, 10.53 to 12.48 is 0, above 12.48 is -1. So pI = (10.53 + 12.48)/2 = 11.50, and the peptide-charge-calculator.html bisection on the same groups gives 11.51."
+  },
+  {
+   "id": "bioc-034",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "A student computes the net charge of the dipeptide Asp-Tyr at pH 7.0. Counting the Asp side chain, the tyrosine hydroxyl and the C terminus as negative and the N terminus as positive, they report about -2. What is the real answer?",
+   "choices": [
+    "About 0",
+    "About -2",
+    "About +1",
+    "About -1"
+   ],
+   "correct": 3,
+   "explain": "An acidic group is only negative once the pH climbs past its pKa, and tyrosine's phenol sits near 10, so at pH 7 it is still protonated and contributes nothing. Counting every acidic group as a full negative charge regardless of pH is what produces the extra unit.",
+   "tool": "peptide-charge-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "peptide-charge-calculator.html model at pH 7.0: N term +0.990, Asp -0.9996, Tyr (pKa 10.07) -0.0009, C term -0.9999, sum -1.0102. The same page's worked table lists Tyr at 0.00 at pH 7.0."
+  },
+  {
+   "id": "bioc-035",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "Enzyme A has kcat = 100 per second and Km = 10 µM. Enzyme B has kcat = 1000 per second and Km = 500 µM. At the low substrate concentrations found in the cell, which enzyme processes substrate faster, and why?",
+   "choices": [
+    "B, because kcat is higher",
+    "A, because kcat/Km is higher",
+    "Equal, Km cancels out here",
+    "B, because its Vmax is larger"
+   ],
+   "correct": 1,
+   "explain": "Below saturation the rate depends on how fast the enzyme captures substrate as well as how fast it turns it over, so the ratio of the two constants is what to compare. Turnover number alone only decides the winner when both enzymes are saturated.",
+   "tool": "enzyme-kinetics-simulator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "kcat/Km for A = 100/10 = 10 per µM per second; for B = 1000/500 = 2. A is 5 times more efficient. enzyme-kinetics-simulator.html states that the higher kcat/Km is processed faster when substrates compete at low concentration."
+  },
+  {
+   "id": "bioc-036",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "A cellular reaction has a standard free energy change of +4.0 kJ/mol at pH 7. The cell holds the reaction quotient Q at about 0.01 and runs at 37 C. Is the reaction spontaneous as it actually sits in the cell?",
+   "choices": [
+    "Yes, dG is about -7.9 kJ/mol",
+    "No, dG is about +15.9 kJ/mol",
+    "No, the standard value is positive",
+    "Yes, but only above body heat"
+   ],
+   "correct": 0,
+   "explain": "The standard value assumes every species at 1 M, which no cell does. Keeping products scarce makes Q small and the logarithm negative, which pulls the real free energy change down, often far enough to flip the sign.",
+   "tool": "gibbs-free-energy-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "gibbs-free-energy-calculator.html: R = 0.008314 kJ/mol K, T = 37 + 273.15 = 310.15 K, RT ln(0.01) = 2.5786 x (-4.6052) = -11.875. dG = 4.0 + (-11.875) = -7.87 kJ/mol. Adding instead of subtracting the term gives the +15.9 distractor."
+  },
+  {
+   "id": "bioc-037",
+   "subject": "Biochemistry",
+   "type": "exam",
+   "q": "Lowering the salt concentration makes a purified enzyme fall apart into four identical pieces, and each piece still folds correctly and shows partial activity. Which level of structure was lost?",
+   "choices": [
+    "Primary",
+    "Secondary",
+    "Tertiary",
+    "Quaternary"
+   ],
+   "correct": 3,
+   "explain": "Separate polypeptide chains held together by noncovalent contacts are the only level that can come apart while each chain keeps its own fold and function. Losing the fold itself, or the sequence, would leave nothing active behind.",
+   "tool": "protein-molecular-weight-calculator",
+   "origin": "written 2026-11-09 for the three level bank",
+   "source": "protein-molecular-weight-calculator.html computes the mass of one chain from its sequence plus one water, so a four subunit assembly weighs four times that; the subunits stay intact here because only the contacts between chains were disrupted."
+  }
+ ]
+}

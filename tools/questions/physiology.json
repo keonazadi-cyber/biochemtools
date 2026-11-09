@@ -1,0 +1,583 @@
+{
+ "subject": "Physiology",
+ "questions": [
+  {
+   "id": "phys-001",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "A solution is made hyperosmotic to plasma by adding urea. Is it hypertonic?",
+   "choices": [
+    "Yes, higher osmolarity is hypertonic",
+    "Yes, urea counts as a dissolved solute",
+    "No, urea crosses the membrane freely",
+    "Only above a urea level of 0.3 Osm"
+   ],
+   "correct": 2,
+   "explain": "Tonicity counts only the solutes a membrane blocks, so a permeant one raises the osmometer reading without holding water on either side. Treating osmolarity and tonicity as the same number is what makes this look hypertonic.",
+   "tool": "osmotic-pressure-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "osmotic-pressure-calculator.html, section 'Osmolarity isn't the same thing as tonicity': urea has a reflection coefficient of about 0, so it adds osmolarity but almost no effective tonicity."
+  },
+  {
+   "id": "phys-002",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "Cardiac output is calculated as:",
+   "choices": [
+    "Heart rate divided by stroke volume",
+    "Heart rate times stroke volume",
+    "Heart rate minus stroke volume",
+    "Ejection fraction times heart rate"
+   ],
+   "correct": 1,
+   "explain": "Beats per minute multiplied by the volume ejected per beat gives a volume per minute, which is the only combination whose units come out as mL/min. Dividing or subtracting leaves a number with no physical meaning.",
+   "tool": "cardiac-output-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "cardiac-output-calculator.html, HR x SV mode: CO = HR x SV, with the page's default 72 x 70 = 5040 mL/min."
+  },
+  {
+   "id": "phys-003",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "Renal clearance of a substance equals (urine concentration x urine flow rate) divided by:",
+   "choices": [
+    "Glomerular filtration rate",
+    "Plasma concentration",
+    "Filtration fraction",
+    "Body surface area"
+   ],
+   "correct": 1,
+   "explain": "Clearance is the volume of plasma that would have to be stripped completely clean each minute to account for the amount appearing in the urine. Dividing by GFR instead gives a dimensionless ratio, not a volume per minute.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "renal-clearance-calculator.html, clearance field label: Cx = (Ux x V) / Px, with the page's defaults (125 x 1)/1 = 125 mL/min."
+  },
+  {
+   "id": "phys-004",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "What does ejection fraction measure?",
+   "choices": [
+    "The share of filled volume ejected",
+    "Heart rate times stroke volume",
+    "Total blood volume pumped each minute",
+    "Mean pressure divided by resistance"
+   ],
+   "correct": 0,
+   "explain": "It is a ratio describing pump performance, not a flow, so it carries no volume per minute. Normal sits around 55 to 70 percent, and a low value alongside normal filling points at contractility rather than output.",
+   "tool": "cardiac-output-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "cardiac-output-calculator.html: 'Ejection fraction (EF) = SV / EDV ... A normal EF is roughly 55-70%'."
+  },
+  {
+   "id": "phys-005",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "A right shift of the oxygen dissociation curve means what?",
+   "choices": [
+    "Total carrying capacity falls",
+    "Oxygen is released more readily",
+    "Oxygen is bound more tightly at the heme",
+    "Oxygen affinity rises and P50 falls"
+   ],
+   "correct": 1,
+   "explain": "A right shift is a drop in affinity, so P50 goes up, which is exactly what hard-working tissue needs. Students reverse it because the shift is read as 'more', but the curve's position tracks affinity, not how much oxygen the blood can carry.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "oxygen-dissociation-curve-calculator.html, Bohr effect block: 'Right shift (lower O2 affinity, easier unloading), tissue conditions'."
+  },
+  {
+   "id": "phys-006",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "Which substance is used to estimate glomerular filtration rate because it is filtered but neither secreted nor reabsorbed?",
+   "choices": [
+    "Urea",
+    "Glucose",
+    "Inulin",
+    "Sodium"
+   ],
+   "correct": 2,
+   "explain": "Only a substance the tubule leaves completely alone lets the amount in urine report the filtered amount directly. Creatinine is the practical clinical stand-in, but it is slightly secreted, so its clearance runs a little above true GFR.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "renal-clearance-calculator.html FAQ 'Why inulin for GFR specifically?': freely filtered, never reabsorbed or secreted, so its clearance equals GFR."
+  },
+  {
+   "id": "phys-007",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "Why does urea contribute little to effective osmolarity across a cell membrane?",
+   "choices": [
+    "It crosses the membrane freely",
+    "It is not osmotically active",
+    "It carries no net electrical charge",
+    "Its molecules are too large to cross"
+   ],
+   "correct": 0,
+   "explain": "A solute that equilibrates on both sides can never stay concentrated on one, so it holds no water there. Being uncharged is not the reason: glucose is uncharged too and still counts in full.",
+   "tool": "osmotic-pressure-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "osmotic-pressure-calculator.html: 'Cell membranes are meaningfully permeable to it', reflection coefficient about 0 in the tool's own urea warning."
+  },
+  {
+   "id": "phys-008",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "The Bohr effect describes what?",
+   "choices": [
+    "Oxygen binding raises the blood pH",
+    "Rising temperature lowers affinity",
+    "CO2 and acid lower oxygen affinity",
+    "Hemoglobin binds CO2 at the heme iron"
+   ],
+   "correct": 2,
+   "explain": "This page keeps temperature and 2,3-BPG as separate right-shifters, so naming one of those is the usual slip. The real pair binds away from the heme iron and stabilizes the low-affinity T state.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "oxygen-dissociation-curve-calculator.html: 'the Bohr effect is the drop in hemoglobin's oxygen affinity as CO2 and H+ (falling pH) rise', with temperature and 2,3-BPG listed as separate right-shifters."
+  },
+  {
+   "id": "phys-009",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "Of the three curves this page plots, which one is drawn with no cooperativity at all?",
+   "choices": [
+    "Adult Hb, with n = 2.8",
+    "Both fetal and adult Hb",
+    "Fetal Hb, with n = 2.8",
+    "Myoglobin, with n = 1"
+   ],
+   "correct": 3,
+   "explain": "A Hill coefficient of 1 means binding at one site cannot change any other, which is what a single subunit forces. The S shape of the other two comes from subunits cooperating, not from binding oxygen more tightly.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html CURVES: myo {p50:2.8, n:1}, adult {p50:26.6, n:2.8}, fetal {p50:19, n:2.8}."
+  },
+  {
+   "id": "phys-010",
+   "subject": "Physiology",
+   "type": "recall",
+   "q": "Of the passive mechanisms on this page, which one saturates?",
+   "choices": [
+    "Simple diffusion through lipid",
+    "Carrier facilitated diffusion",
+    "Channel facilitated diffusion",
+    "Any passive transport mechanism"
+   ],
+   "correct": 1,
+   "explain": "A carrier changes shape once per molecule, so its cycle time sets a ceiling exactly as an enzyme's does. A channel is an open pore with no per-molecule cycle, so its flux keeps climbing with the gradient.",
+   "tool": "membrane-transport-explorer.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "membrane-transport-explorer.html MODES: carrier is 'Yes (Michaelis-Menten-like)' for saturable, channel is 'No (not physiologically)', simple diffusion is 'No'."
+  },
+  {
+   "id": "phys-011",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "Cardiac output is 5.4 L/min and heart rate is 72 bpm. What is the stroke volume?",
+   "choices": [
+    "75 mL per beat",
+    "0.075 mL per beat",
+    "13.3 mL per beat",
+    "389 mL per beat"
+   ],
+   "correct": 0,
+   "explain": "Rearranging the cardiac output formula puts output over rate, and the litres have to become millilitres before the division or the answer lands a thousand times too small. Multiplying the two instead gives a volume no ventricle holds.",
+   "tool": "cardiac-output-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "cardiac-output-calculator.html, CO = HR x SV rearranged: SV = CO / HR = 5400 mL/min / 72 beats/min = 75 mL per beat."
+  },
+  {
+   "id": "phys-012",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "A ventricle fills to 150 mL and empties down to 60 mL. What is its ejection fraction?",
+   "choices": [
+    "40 percent",
+    "90 percent",
+    "60 percent",
+    "167 percent"
+   ],
+   "correct": 2,
+   "explain": "The stroke volume has to come first, as the difference between the filled and the emptied volume, and only then does it go over the filled volume. Dividing by the 60 mL left behind instead of the 150 mL filled is the usual slip.",
+   "tool": "cardiac-output-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "cardiac-output-calculator.html: SV = EDV - ESV = 150 - 60 = 90 mL; EF = SV/EDV = 90/150 = 0.60 = 60%."
+  },
+  {
+   "id": "phys-013",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "Oxygen consumption is 300 mL/min, arterial oxygen content is 200 mL/L and venous content is 140 mL/L. What is the cardiac output by Fick?",
+   "choices": [
+    "1.5 L/min",
+    "60 L/min",
+    "0.88 L/min",
+    "5.0 L/min"
+   ],
+   "correct": 3,
+   "explain": "The arteriovenous difference is how much oxygen one litre of blood hands over on a single pass, so total consumption over that per-litre delivery gives litres per minute. Adding the two contents instead of subtracting them is the common error.",
+   "tool": "cardiac-output-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "cardiac-output-calculator.html Fick mode: CO = VO2 / (CaO2 - CvO2) = 300 / (200 - 140) = 300/60 = 5.0 L/min."
+  },
+  {
+   "id": "phys-014",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "Urine concentration is 50 mg/mL, urine flow is 2 mL/min and plasma concentration is 0.8 mg/mL. What is the clearance?",
+   "choices": [
+    "80 mL/min",
+    "125 mL/min",
+    "25 mL/min",
+    "100 mL/min"
+   ],
+   "correct": 1,
+   "explain": "Dividing by the plasma concentration is what turns an excretion rate into a volume of plasma cleared, so a plasma value below 1 mg/mL has to push the answer above the raw excretion rate. Multiplying by it drags the answer the wrong way.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "renal-clearance-calculator.html: Cx = (Ux x V) / Px = (50 x 2) / 0.8 = 100 / 0.8 = 125 mL/min."
+  },
+  {
+   "id": "phys-015",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "PAH urine concentration is 20 mg/mL, urine flow is 1.5 mL/min and plasma PAH is 0.05 mg/mL. What is the clearance, and what does it estimate?",
+   "choices": [
+    "30 mL/min, renal plasma flow",
+    "600 mL/min, glomerular filtration",
+    "0.6 mL/min, renal plasma flow",
+    "600 mL/min, renal plasma flow"
+   ],
+   "correct": 3,
+   "explain": "A plasma concentration in hundredths means the division multiplies the excretion rate by twenty, so dropping that step lands two orders of magnitude low. Filtration alone could not clear this much, which is the clue to which quantity the number reports.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "renal-clearance-calculator.html: Cx = (20 x 1.5) / 0.05 = 30 / 0.05 = 600 mL/min, and the page's FAQ gives PAH clearance as an estimate of renal plasma flow."
+  },
+  {
+   "id": "phys-016",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "GFR is 120 mL/min and renal plasma flow is 600 mL/min. What is the filtration fraction?",
+   "choices": [
+    "20 percent",
+    "5 percent",
+    "80 percent",
+    "500 percent"
+   ],
+   "correct": 0,
+   "explain": "Filtration fraction is the share of plasma arriving at the glomerulus that actually becomes filtrate, about a fifth, with the rest carrying on to the peritubular capillaries. Flipping the ratio gives plasma flow per unit of filtrate, which is not a fraction.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "renal-clearance-calculator.html: FF = GFR / RPF = 120 / 600 = 0.20 = 20%, matching the page's stated normal of about 20%."
+  },
+  {
+   "id": "phys-017",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "What is the osmolarity of 0.2 M NaCl, and how does it compare with blood?",
+   "choices": [
+    "0.20 Osm, hypotonic to blood",
+    "0.40 Osm, hypertonic to blood",
+    "0.40 Osm, hypotonic to blood",
+    "0.20 Osm, which is isotonic to blood"
+   ],
+   "correct": 1,
+   "explain": "Osmolarity counts particles, so a salt that splits in two doubles the molarity before any comparison with blood's reference 0.30 Osm. Skipping the van't Hoff factor is what makes a concentrated saline look dilute.",
+   "tool": "osmotic-pressure-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "osmotic-pressure-calculator.html: osmolarity = i x M = 2 x 0.2 = 0.40 Osm; the tool calls anything above 1.05 x 0.30 Osm hypertonic to blood."
+  },
+  {
+   "id": "phys-018",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "Take 0.1 M CaCl2 at 37 degrees C. What are its osmolarity and osmotic pressure?",
+   "choices": [
+    "0.30 Osm and 2.55 atm",
+    "0.10 Osm and 2.55 atm",
+    "0.30 Osm and 7.64 atm",
+    "0.90 Osm and 22.9 atm"
+   ],
+   "correct": 2,
+   "explain": "The particle count enters both lines, the osmolarity and the pressure, and the temperature has to be absolute before it multiplies anything. Leaving the factor out of the pressure line yields exactly a third of the right figure.",
+   "tool": "osmotic-pressure-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "osmotic-pressure-calculator.html: osmolarity = i x M = 3 x 0.1 = 0.30 Osm; pi = iMRT = 3 x 0.1 x 0.08206 x 310.15 K = 7.635 atm."
+  },
+  {
+   "id": "phys-019",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "Myoglobin has a P50 of 2.8 mmHg and a Hill coefficient of 1. What is its saturation at a pO2 of 8.4 mmHg?",
+   "choices": [
+    "25 percent",
+    "50 percent",
+    "33 percent",
+    "75 percent"
+   ],
+   "correct": 3,
+   "explain": "With a Hill coefficient of 1 the equation collapses to the pressure over the pressure plus P50, so three times the P50 gives three quarters saturation. Reading 50 percent at any pressure other than the P50 itself is the usual mistake.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html sat(): 100 x 8.4^1 / (2.8^1 + 8.4^1) = 840 / 11.2 = 75.0%."
+  },
+  {
+   "id": "phys-020",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "At the placenta maternal and fetal blood both sit at a pO2 of 19 mmHg. Using this page's curves, what are the two saturations?",
+   "choices": [
+    "Fetal 50%, adult 28%",
+    "Fetal 28%, adult 50%",
+    "Fetal 50%, adult 72%",
+    "Both are at about 50%"
+   ],
+   "correct": 0,
+   "explain": "Each curve passes through half saturation at its own P50 and nowhere else, so the protein with the lower P50 sits higher at any shared pressure. That gap is the whole reason oxygen moves from mother to fetus.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html CURVES and sat(): fetal p50=19 n=2.8 gives 50.0% at pO2 19; adult p50=26.6 n=2.8 gives 100 x 19^2.8/(26.6^2.8 + 19^2.8) = 28.0%."
+  },
+  {
+   "id": "phys-021",
+   "subject": "Physiology",
+   "type": "apply",
+   "q": "A cell hydrolyzes 30 ATP through its Na/K-ATPase. How many ions move, and what happens to charge?",
+   "choices": [
+    "60 Na out, 90 K in, net +30 out",
+    "90 Na out, 60 K in, no net charge",
+    "90 Na out, 60 K in, net +30 out",
+    "90 Na in, 60 K out, net +30 in"
+   ],
+   "correct": 2,
+   "explain": "The ratio per ATP is fixed at three one way and two the other, which is precisely why the charge does not balance and the pump counts as electrogenic. Reversing the directions would destroy the gradients every secondary transporter spends.",
+   "tool": "membrane-transport-explorer.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "membrane-transport-explorer.html: 'Per cycle: 3 Na+ pumped OUT, 2 K+ pumped IN, 1 ATP hydrolyzed', so 30 ATP moves 90 Na out and 60 K in, net +30 charges out."
+  },
+  {
+   "id": "phys-022",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "A climber at altitude has raised 2,3-BPG and a respiratory alkalosis from hyperventilating. These two push the oxygen curve in opposite directions. What is the effect at the tissues?",
+   "choices": [
+    "Both shifts are Bohr effects, so they cancel at every pO2",
+    "The 2,3-BPG right shift wins, unloading is preserved",
+    "The alkalosis right shifts it, so unloading improves",
+    "The left shift hits loading and unloading alike, both fall"
+   ],
+   "correct": 1,
+   "explain": "A right shift is lower affinity and a higher P50, and this page lists 2,3-BPG as a right-shifter separate from the Bohr effect proper. Loading happens at the lung's high pressure and unloading at the tissue's low one, so a shift can help at one end without undoing the other.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html shift block: '↑ Temperature ↑ 2,3-BPG [separate right-shifters]' under 'Right shift (lower O2 affinity, easier unloading)', and the page notes 2,3-BPG is elevated at high altitude, while rising pH is listed as a left shift."
+  },
+  {
+   "id": "phys-023",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "Two patients lose half their usable oxygen capacity, one to carbon monoxide and one to anemia. Why is the carbon monoxide patient worse off at the tissues?",
+   "choices": [
+    "Anemia left shifts too, so the two cases behave alike",
+    "CO lowers the number of free heme sites and nothing else",
+    "CO left shifts the rest, so oxygen is held tightly",
+    "CO right shifts the rest, so oxygen is dumped far too early"
+   ],
+   "correct": 2,
+   "explain": "A left shift is higher affinity, so whatever oxygen is still aboard comes off less readily where it is needed, which is the part losing red cells does not do. The bound gas also raises the remaining subunits' affinity through the same cooperativity that normally helps.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html FAQ 'Why does CO poisoning shift the curve left too?': CO binds the heme site with about 200x the affinity and raises the remaining subunits' O2 affinity, left-shifting the curve."
+  },
+  {
+   "id": "phys-024",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "At the placenta maternal and fetal blood sit at the same pO2, yet fetal blood ends up more saturated. What explains it?",
+   "choices": [
+    "HbF binds 2,3-BPG more tightly, which raises affinity",
+    "HbF binds 2,3-BPG weakly, so affinity stays high",
+    "HbF has the higher P50, which means tighter binding",
+    "Fetal blood simply sits at a higher pO2 than maternal"
+   ],
+   "correct": 1,
+   "explain": "2,3-BPG is the molecule that lowers hemoglobin's affinity, so binding it poorly leaves affinity high, which reads as a lower P50 and a leftward curve. A higher P50 would mean the opposite, oxygen given up sooner.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html FAQ on fetal hemoglobin, plus CURVES: fetal p50=19 against adult p50=26.6."
+  },
+  {
+   "id": "phys-025",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "During a sprint, muscle pO2 falls while local CO2 and acid rise. What does the curve shift add on top of the lower pressure?",
+   "choices": [
+    "The shift raises total capacity, so more oxygen arrives",
+    "At that pO2 the curve holds more, so less unloads",
+    "The shift only matters in the lung, not in the muscle",
+    "At that pO2 the curve holds less, so more unloads"
+   ],
+   "correct": 3,
+   "explain": "Where the curve sits decides how much oxygen is held at a given pressure, while capacity is set by how much hemoglobin is present. Lower affinity at the tissue end means a bigger fall in saturation across the same drop in pressure.",
+   "tool": "oxygen-dissociation-curve-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "oxygen-dissociation-curve-calculator.html shift block: '↑ CO2 ↓ pH (more acidic) [Bohr effect]' under 'Right shift (lower O2 affinity, easier unloading), tissue conditions'."
+  },
+  {
+   "id": "phys-026",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "A patient with bilateral renal artery stenosis starts an ACE inhibitor and the GFR falls. What happened at the arterioles?",
+   "choices": [
+    "The afferent arteriole constricted, so RPF and GFR both fell",
+    "The efferent dilated, RPF rose while GFR and FF fell",
+    "The efferent constricted, so GFR rose and RPF fell",
+    "Both arterioles dilated, so GFR and FF rose together"
+   ],
+   "correct": 1,
+   "explain": "Angiotensin II normally holds the downstream arteriole tight, propping glomerular pressure up when perfusion is poor, so removing it lets blood leave the glomerulus more easily. Filtration fraction is GFR over plasma flow, so it falls when one drops and the other rises.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "renal-clearance-calculator.html FAQ 'Why can ACE inhibitors worsen kidney function in some patients?': the efferent arteriole dilates, RPF rises, GFR falls, and filtration fraction drops with it."
+  },
+  {
+   "id": "phys-027",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "A lab infuses PAH hard enough to raise plasma PAH well above normal, then computes renal plasma flow from its clearance. What goes wrong?",
+   "choices": [
+    "Secretion saturates, so clearance now reads low",
+    "Secretion saturates, so clearance reads too high",
+    "Filtration saturates, so clearance now equals GFR",
+    "Nothing, the estimate holds at any concentration"
+   ],
+   "correct": 0,
+   "explain": "The transporters that strip this marker from plasma have a transport maximum, so past it a smaller share leaves per pass and the clearance stops tracking the whole plasma flow. Real measurements are made at deliberately low concentrations for that reason.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "renal-clearance-calculator.html PAH caveat: push plasma PAH high enough and the secretion transporters saturate, so 'clearance starts to underestimate true RPF'."
+  },
+  {
+   "id": "phys-028",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "A substance clears at 150 mL/min in a patient whose inulin clearance is 125 mL/min. What must its tubular handling include?",
+   "choices": [
+    "Net reabsorption, since clearance sits above GFR",
+    "Net secretion on top of what filtration delivers",
+    "Filtration alone, since 150 is a normal figure",
+    "Neither, the clearance cannot exceed the GFR here"
+   ],
+   "correct": 1,
+   "explain": "Filtration on its own can deliver no more than the filtered load, so clearing more plasma than the filtration rate means the tubule is adding to the urine. A clearance below that rate is the reabsorption case, which is why slightly secreted creatinine reads a little high.",
+   "tool": "renal-clearance-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "renal-clearance-calculator.html FAQ 'What does clearance above or below GFR mean?', with the page's worked inulin clearance of 125 mL/min as the GFR."
+  },
+  {
+   "id": "phys-029",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "An echo shows an end-diastolic volume of 140 mL with an ejection fraction of 35 percent. What is the stroke volume, and what does the pair point at?",
+   "choices": [
+    "49 mL, and reduced contractility",
+    "49 mL, and inadequate preload",
+    "400 mL, and reduced contractility",
+    "91 mL, and inadequate preload"
+   ],
+   "correct": 0,
+   "explain": "A filling volume in the normal to high range rules the stretch out as the limit, so a small ejected share has to come from the force of contraction. The volume follows from the fraction times the filled volume, never from subtracting one from the other.",
+   "tool": "cardiac-output-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "cardiac-output-calculator.html practice problem 3: SV = EF x EDV = 0.35 x 140 = 49 mL, with the page noting that a low EF despite normal filling points specifically to reduced contractility."
+  },
+  {
+   "id": "phys-030",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "A patient receives a solution made iso-osmotic to plasma with urea alone. What happens to the red cells?",
+   "choices": [
+    "They swell, effective tonicity is near zero",
+    "They hold steady, since iso-osmotic means isotonic",
+    "They shrink, urea pulls water out of them",
+    "They swell, since urea cannot cross at all"
+   ],
+   "correct": 0,
+   "explain": "Water follows only the solutes a membrane holds back, so a freely permeant one equilibrates and leaves the cell facing something close to plain water. The reflection coefficient, not the osmometer reading, is what predicts the movement.",
+   "tool": "osmotic-pressure-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "osmotic-pressure-calculator.html: 'A solution that's iso-osmotic to blood using urea alone still lets water move freely', and the tool's urea warning gives a reflection coefficient of about 0."
+  },
+  {
+   "id": "phys-031",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "In liver failure plasma albumin falls and fluid collects in the tissues. Why does albumin matter at the capillary wall when sodium does not?",
+   "choices": [
+    "Sodium crosses the capillary wall, albumin cannot",
+    "Sodium is not an osmotically active particle at all",
+    "Albumin adds far more to total plasma osmolarity",
+    "Albumin is the only charged solute in the plasma"
+   ],
+   "correct": 0,
+   "explain": "Effective osmotic pressure at any barrier counts only what that barrier stops, and a leaky capillary stops protein but not small ions. Protein is a tiny slice of total osmolarity yet nearly all of the inward pull that balances hydrostatic pressure.",
+   "tool": "osmotic-pressure-calculator.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "osmotic-pressure-calculator.html: 'Capillary walls are leaky to small solutes, ions, glucose, and urea all cross fairly freely there', while trapped plasma protein gives oncotic pressure."
+  },
+  {
+   "id": "phys-032",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "A drug blocks the Na/K-ATPase, and the cell's Na/Ca exchanger begins to fail although the drug never touches it. Why?",
+   "choices": [
+    "The exchanger hydrolyzes ATP too, so it stalls",
+    "Antiport needs the pump as a physical partner",
+    "Blocking the pump reverses the voltage instantly",
+    "It runs on the Na gradient the pump maintains"
+   ],
+   "correct": 3,
+   "explain": "Secondary active transport spends an ion gradient rather than ATP, so its energy is one step removed from the pump, not absent. Let that gradient run down and the exchange it powers runs down with it.",
+   "tool": "membrane-transport-explorer.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "membrane-transport-explorer.html: secondary active transporters such as the Na+/Ca2+ exchanger spend the gradients the Na+/K+-ATPase builds, 'no ATP touches them directly'."
+  },
+  {
+   "id": "phys-033",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "Glucose uptake into a cell climbs as outside glucose rises, then plateaus, and no ATP is involved. Which mechanism fits?",
+   "choices": [
+    "Simple diffusion through the bilayer",
+    "Facilitated diffusion by a channel",
+    "Primary active transport by a pump",
+    "Facilitated diffusion by a carrier"
+   ],
+   "correct": 3,
+   "explain": "A plateau means something along the path has a cycle time, which a per-molecule shape change creates and an open pore does not. No ATP and movement down the gradient rule the pumps out, even though pumps saturate too.",
+   "tool": "membrane-transport-explorer.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "membrane-transport-explorer.html MODES: the carrier entry is 'None (passive)', 'Down gradient', 'Yes (Michaelis-Menten-like)' with GLUT as its example, while the channel entry is 'No (not physiologically)' for saturation."
+  },
+  {
+   "id": "phys-034",
+   "subject": "Physiology",
+   "type": "exam",
+   "q": "An ion moves into a cell against its concentration gradient with no pump and no co-transported solute. How?",
+   "choices": [
+    "The membrane voltage pulls it, so net force is inward",
+    "It cannot happen without a pump, the case is impossible",
+    "Water flow carries it along by osmosis",
+    "Concentration alone sets direction for every solute"
+   ],
+   "correct": 0,
+   "explain": "A charged solute answers to its concentration gradient and the electrical field together, which is why every ion has an equilibrium potential of its own. Only uncharged solutes such as glucose have concentration as the whole story.",
+   "tool": "membrane-transport-explorer.html",
+   "origin": "written 2026-11-09 from this site's own physiology pages",
+   "source": "membrane-transport-explorer.html: 'an ion follows its electrochemical gradient, the combination of its concentration gradient and the membrane voltage, not concentration alone'."
+  }
+ ]
+}

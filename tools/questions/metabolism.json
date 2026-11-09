@@ -1,0 +1,617 @@
+{
+ "subject": "Metabolism",
+ "questions": [
+  {
+   "id": "meta-001",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Textbooks give 30, 32, 36 or 38 ATP for one glucose's total aerobic yield. That disagreement comes from two different values used for:",
+   "choices": [
+    "The count of pyruvate made",
+    "The P/O ratio per NADH",
+    "How much CO2 is released",
+    "The glucose starting amount"
+   ],
+   "correct": 1,
+   "explain": "Older courses use 3 ATP per NADH and 2 per FADH2, which lands on 36 or 38. Modern measured values of 2.5 and 1.5 land on 30 or 32, and the shuttle then picks between each pair.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "atp-yield-calculator.html line 154: buttons are Modern (2.5 / 1.5) and Classic (3.0 / 2.0); the JS sets nadhRatio and fadh2Ratio from that choice."
+  },
+  {
+   "id": "meta-002",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "One full turn of the citric acid cycle (per acetyl-CoA) produces how many NADH?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "correct": 2,
+   "explain": "Three steps make it: isocitrate dehydrogenase, alpha-ketoglutarate dehydrogenase and malate dehydrogenase. People guess 4 by counting succinate dehydrogenase, but that step makes FADH2 instead.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "citric-acid-cycle-explorer.html STEPS array: nadh is 1 at isocitrate dehydrogenase, alpha-ketoglutarate dehydrogenase and malate dehydrogenase, 0 elsewhere, so the turn totals 3 NADH."
+  },
+  {
+   "id": "meta-003",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Where in the cell does glycolysis take place?",
+   "choices": [
+    "Nucleus",
+    "Matrix",
+    "Inner membrane",
+    "Cytosol"
+   ],
+   "correct": 3,
+   "explain": "All ten steps run outside the mitochondrion, which is why a mature red blood cell with no mitochondria at all can still break down glucose for energy.",
+   "tool": "glycolysis-pathway-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "how-many-atp-are-produced-in-glycolysis.html line 179 and glycolysis-pathway-explorer.html: the pathway is cytosolic, with pyruvate only entering the mitochondrion afterwards if oxygen is present."
+  },
+  {
+   "id": "meta-004",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Which molecule directly links glycolysis to the citric acid cycle?",
+   "choices": [
+    "Acetyl-CoA",
+    "Oxaloacetate",
+    "Pyruvate",
+    "Citrate"
+   ],
+   "correct": 0,
+   "explain": "Pyruvate is where glycolysis stops, but the cycle cannot accept it until pyruvate dehydrogenase strips a carbon off as CO2. That decarboxylation is irreversible, which is why fat can never become glucose.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "citric-acid-cycle-explorer.html STEPS step 1: the cycle's entry reaction is Acetyl-CoA + Oxaloacetate to Citrate, so acetyl-CoA is the molecule handed across."
+  },
+  {
+   "id": "meta-005",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "How much ATP or GTP is made directly in one turn of the citric acid cycle?",
+   "choices": [
+    "3 ATP",
+    "1 GTP",
+    "12 ATP",
+    "None"
+   ],
+   "correct": 1,
+   "explain": "Only succinyl-CoA synthetase phosphorylates anything at the substrate level. The old figure of 12 counts the NADH and FADH2 as if they were already ATP, which they are not until the chain cashes them in.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "citric-acid-cycle-explorer.html STEPS array: gtp is 1 at succinyl-CoA synthetase and 0 at the other seven steps."
+  },
+  {
+   "id": "meta-006",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Which citric acid cycle enzyme is also part of the electron transport chain?",
+   "choices": [
+    "Isocitrate dehydrogenase",
+    "Malate dehydrogenase",
+    "Succinate dehydrogenase",
+    "Citrate synthase"
+   ],
+   "correct": 2,
+   "explain": "It is Complex II, bolted into the inner membrane. Every other cycle enzyme floats free in the matrix and hands its electrons to a soluble carrier rather than straight into the chain.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "citric-acid-cycle-explorer.html STEPS, succinate dehydrogenase note: embedded in the inner mitochondrial membrane and also Complex II of the electron transport chain."
+  },
+  {
+   "id": "meta-007",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Complete oxidation of one glucose yields roughly how much ATP by modern counts?",
+   "choices": [
+    "36 to 38",
+    "2",
+    "24",
+    "30 to 32"
+   ],
+   "correct": 3,
+   "explain": "The modern range comes from measured P/O ratios of 2.5 and 1.5 instead of the older whole numbers. The 36 to 38 figure is not wrong, it is just the older convention, so always say which one you are using.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "atp-yield-calculator.html line 199: modern ratios give 32 with the malate-aspartate shuttle and 30 with the glycerol-3-phosphate shuttle."
+  },
+  {
+   "id": "meta-008",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "How many nitrogen atoms does one turn of the urea cycle dispose of?",
+   "choices": [
+    "2",
+    "1",
+    "3",
+    "4"
+   ],
+   "correct": 0,
+   "explain": "One arrives as free ammonia at step 1 and the second comes from aspartate at step 3. The aspartate nitrogen is the one most people miss, because it looks like a carbon donor.",
+   "tool": "amino-acid-catabolism-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "amino-acid-catabolism-explorer.html net box: nitrogen in is 1 from NH4+ at step 1 plus 1 from aspartate at step 3, disposed of as 1 urea."
+  },
+  {
+   "id": "meta-010",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Glycolysis nets how much ATP when no oxygen is available?",
+   "choices": [
+    "1",
+    "0",
+    "The same 2",
+    "30 to 32"
+   ],
+   "correct": 2,
+   "explain": "No step in the pathway touches oxygen, so the yield cannot change. What changes is downstream: pyruvate becomes lactate or ethanol purely to hand NAD+ back, or the pathway stalls at step 6.",
+   "tool": "how-many-atp-are-produced-in-glycolysis.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "how-many-atp-are-produced-in-glycolysis.html line 178: glycolysis nets the same 2 ATP either way, and line 179: without oxygen those 2 ATP are the entire yield."
+  },
+  {
+   "id": "meta-011",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Beta oxidation of a fatty acid produces which pair per round?",
+   "choices": [
+    "2 NADH, no FADH2",
+    "1 ATP, 1 NADH",
+    "2 FADH2, no NADH",
+    "1 NADH, 1 FADH2"
+   ],
+   "correct": 3,
+   "explain": "Each round shortens the chain by two carbons and also releases one acetyl-CoA. No ATP is made in the round itself, so the whole yield arrives later through the chain and the cycle.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "beta-oxidation-atp-calculator.html line 30: each cycle of beta oxidation produces 1 FADH2 and 1 NADH and releases one acetyl-CoA."
+  },
+  {
+   "id": "meta-012",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "The 2 CO2 released per turn of the citric acid cycle come from where?",
+   "choices": [
+    "Two decarboxylation steps",
+    "The electron transport chain",
+    "Acetyl-CoA, in one step",
+    "Oxygen reduced at complex IV"
+   ],
+   "correct": 0,
+   "explain": "Isocitrate dehydrogenase releases the first carbon and alpha-ketoglutarate dehydrogenase the second, each while reducing NAD+. The chain releases no carbon at all, it only reduces oxygen to water.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "citric-acid-cycle-explorer.html STEPS array: co2 is 1 at isocitrate dehydrogenase and 1 at alpha-ketoglutarate dehydrogenase, 0 at every other step."
+  },
+  {
+   "id": "meta-013",
+   "subject": "Metabolism",
+   "type": "recall",
+   "q": "Which citric acid cycle enzyme catalyzes the committed, regulated condensation that opens the turn?",
+   "choices": [
+    "Succinate dehydrogenase",
+    "Citrate synthase",
+    "Isocitrate dehydrogenase",
+    "Malate dehydrogenase"
+   ],
+   "correct": 1,
+   "explain": "It joins the two-carbon acetyl group to four-carbon oxaloacetate, so once it fires the carbon is in the cycle. Isocitrate dehydrogenase is also regulated, but it is the rate limiting step, not the committing one.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "citric-acid-cycle-explorer.html STEPS step 1: Acetyl-CoA + Oxaloacetate to Citrate, citrate synthase, reg true, noted as the committed, regulated step."
+  },
+  {
+   "id": "meta-009",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "Why is the urea cycle usually costed at 4 ATP-equivalents rather than 3?",
+   "choices": [
+    "The cycle has to run twice",
+    "Step 3 goes ATP to AMP",
+    "Arginase also spends ATP",
+    "Two steps each use 2 ATP"
+   ],
+   "correct": 1,
+   "explain": "Carbamoyl phosphate synthetase I spends 2 ATP outright. Argininosuccinate synthetase spends only one ATP but breaks two high-energy bonds doing it, so it is counted as 2 rather than 1.",
+   "tool": "amino-acid-catabolism-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09, repaired same day",
+   "source": "amino-acid-catabolism-explorer.html ATP cost box: 2 (step 1) + 2 (step 3, ATP to AMP + PPi) = 4 ATP-equivalents per turn."
+  },
+  {
+   "id": "meta-014",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "A liver cell uses the malate-aspartate shuttle. On modern P/O ratios of 2.5 and 1.5, what is its total ATP per glucose?",
+   "choices": [
+    "30 ATP",
+    "36 ATP",
+    "32 ATP",
+    "38 ATP"
+   ],
+   "correct": 2,
+   "explain": "The shuttle decides what the 2 cytosolic NADH are worth, and malate-aspartate delivers them at full NADH value. Students who answer 38 have used the classic ratios by mistake.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html JS: SUBSTRATE 4 + MITO_NADH 8 x 2.5 = 20 + TCA_FADH2 2 x 1.5 = 3 + GLYC_NADH 2 x 2.5 = 5. Total 4 + 20 + 3 + 5 = 32."
+  },
+  {
+   "id": "meta-015",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "Classic P/O ratios of 3.0 and 2.0 with the glycerol-3-phosphate shuttle give what total per glucose?",
+   "choices": [
+    "30 ATP",
+    "32 ATP",
+    "38 ATP",
+    "36 ATP"
+   ],
+   "correct": 3,
+   "explain": "Classic ratios on their own give 38. The glycerol-3-phosphate shuttle then downgrades the 2 cytosolic NADH to FADH2 value, costing 2 ATP, which is why 38 is the trap here.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html JS with conv classic, shuttle g3p: 4 + 8 x 3.0 = 24 + 2 x 2.0 = 4 + 2 x 2.0 = 4. Total 4 + 24 + 4 + 4 = 36."
+  },
+  {
+   "id": "meta-016",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "Of the ATP made per glucose, how much comes from substrate-level phosphorylation rather than from the chain?",
+   "choices": [
+    "4 ATP",
+    "2 ATP",
+    "6 ATP",
+    "10 ATP"
+   ],
+   "correct": 0,
+   "explain": "Glycolysis hands over 2 and the cycle's GTP hands over 2 more, since the cycle turns twice per glucose. Answering 2 counts only glycolysis and forgets succinyl-CoA synthetase.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html JS: SUBSTRATE = 4, described on line 181 as 2 from glycolysis plus 2 from the TCA cycle's GTP."
+  },
+  {
+   "id": "meta-017",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "The ATP yield page counts 10 NADH per glucose. How many of those 10 are made inside the mitochondrion?",
+   "choices": [
+    "2",
+    "8",
+    "6",
+    "10"
+   ],
+   "correct": 1,
+   "explain": "Only glycolysis makes NADH outside, and it makes 2. The rest come from pyruvate dehydrogenase and the cycle, which is why only 2 of the 10 ever need a shuttle.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html JS line 281: MITO_NADH = 8 and GLYC_NADH = 2, summing to the 10 NADH per glucose."
+  },
+  {
+   "id": "meta-018",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "Palmitate has 16 carbons. How many rounds of beta oxidation does breaking it down completely take?",
+   "choices": [
+    "6",
+    "8",
+    "7",
+    "16"
+   ],
+   "correct": 2,
+   "explain": "The count is n/2 minus 1, not n/2, because the last round splits a four-carbon piece into two acetyl-CoA at once. Answering 8 is the classic off-by-one here.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "beta-oxidation-atp-calculator.html JS line 226: cycles = n/2 - 1, so 16/2 - 1 = 7, matching the worked palmitate example on line 158."
+  },
+  {
+   "id": "meta-019",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "A 12-carbon saturated fatty acid is fully oxidized. How many acetyl-CoA, and how many rounds of beta oxidation?",
+   "choices": [
+    "5 acetyl-CoA, 6 rounds",
+    "6 acetyl-CoA, 6 rounds",
+    "12 acetyl-CoA, 5 rounds",
+    "6 acetyl-CoA, 5 rounds"
+   ],
+   "correct": 3,
+   "explain": "Acetyl-CoA count is n/2 and the round count is one fewer, so the two numbers never match. A 12 in the first slot comes from counting carbons rather than two-carbon units.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "beta-oxidation-atp-calculator.html JS lines 226 to 227: cycles = 12/2 - 1 = 5 and acetylCoA = 12/2 = 6."
+  },
+  {
+   "id": "meta-020",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "A 12-carbon fatty acid gives 23 NADH, 11 FADH2 and 6 GTP. On modern ratios, with activation paid, what is its total?",
+   "choices": [
+    "78 ATP",
+    "74 ATP",
+    "80 ATP",
+    "84 ATP"
+   ],
+   "correct": 0,
+   "explain": "Take 23 at 2.5 and 11 at 1.5, add the GTP, then subtract the 2 ATP activation cost that is paid once per fatty acid no matter its length. Skipping that subtraction gives 80.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "beta-oxidation-atp-calculator.html JS lines 229 to 232 with n=12: 23 x 2.5 = 57.5, 11 x 1.5 = 16.5, 57.5 + 16.5 = 74, + 6 GTP = 80, - 2 activation = 78."
+  },
+  {
+   "id": "meta-021",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "A liver disposes of 10 nitrogen atoms as urea. How many ATP-equivalents does that cost, and how many urea form?",
+   "choices": [
+    "10 ATP, 5 urea",
+    "20 ATP, 5 urea",
+    "20 ATP, 10 urea",
+    "40 ATP, 10 urea"
+   ],
+   "correct": 1,
+   "explain": "Each turn buries 2 nitrogen atoms in 1 urea for 4 ATP-equivalents, so 10 nitrogens is 5 turns. Answering 10 urea treats one nitrogen per molecule, but urea carries two.",
+   "tool": "amino-acid-catabolism-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "amino-acid-catabolism-explorer.html net box: 2 nitrogen atoms as 1 urea for 4 ATP per turn, so 10 N is 5 turns, 5 urea and 5 x 4 = 20 ATP-equivalents."
+  },
+  {
+   "id": "meta-022",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "One glucose sends 2 acetyl-CoA through the citric acid cycle. What does that come to in total?",
+   "choices": [
+    "3 NADH, 1 FADH2, 1 GTP",
+    "8 NADH, 2 FADH2, 2 GTP",
+    "6 NADH, 2 FADH2, 2 GTP",
+    "6 NADH, 4 FADH2, 2 GTP"
+   ],
+   "correct": 2,
+   "explain": "Per turn the cycle gives 3 NADH, 1 FADH2 and 1 GTP, and one glucose makes two acetyl-CoA, so double everything. The 8 NADH figure belongs to the whole glucose, pyruvate dehydrogenase included.",
+   "tool": "citric-acid-cycle-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "citric-acid-cycle-explorer.html STEPS array sums to 3 NADH, 1 FADH2, 1 GTP per turn; doubled gives 6 NADH, 2 FADH2, 2 GTP."
+  },
+  {
+   "id": "meta-023",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "Glycolysis makes 2 ATP at step 7 and 2 at step 10, and spends 1 each at steps 1 and 3. What are the gross and the net?",
+   "choices": [
+    "Gross 2, net 2",
+    "Gross 4, net 4",
+    "Gross 6, net 4",
+    "Gross 4, net 2"
+   ],
+   "correct": 3,
+   "explain": "Four are made and two were already spent priming the sugar, so the cell finishes two ahead. A question asking what the cell gains wants the net, which is where the 4 answer loses marks.",
+   "tool": "how-many-atp-are-produced-in-glycolysis.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "how-many-atp-are-produced-in-glycolysis.html ATP table: -1 ATP at hexokinase, -1 at PFK-1, +2 at phosphoglycerate kinase, +2 at pyruvate kinase, net +2 per glucose."
+  },
+  {
+   "id": "meta-024",
+   "subject": "Metabolism",
+   "type": "apply",
+   "q": "Leucine, valine and isoleucine are the three branched-chain amino acids. Which classification does each one get?",
+   "choices": [
+    "Leu keto, Val gluco, Ile both",
+    "Leu both, Val keto, Ile gluco",
+    "All three are purely ketogenic",
+    "All three are purely glucogenic"
+   ],
+   "correct": 0,
+   "explain": "Branched-chain does not mean one category. Valine's skeleton lands on succinyl-CoA so it can make glucose, while isoleucine splits into two skeletons and counts as both.",
+   "tool": "amino-acid-catabolism-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "amino-acid-catabolism-explorer.html AA array: Leucine keto (Acetyl-CoA + Acetoacetate), Valine gluco (Succinyl-CoA), Isoleucine both (Succinyl-CoA + Acetyl-CoA)."
+  },
+  {
+   "id": "meta-025",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A muscle cell switches to anaerobic conditions mid-contraction. Per glucose, what is its ATP yield now?",
+   "choices": [
+    "4 ATP",
+    "2 ATP",
+    "30 ATP",
+    "38 ATP"
+   ],
+   "correct": 1,
+   "explain": "Only glycolysis keeps paying, and it pays net, not gross: 4 made minus 2 invested. The cycle's 2 GTP go too, because the cycle stalls once NAD+ stops coming back from the chain.",
+   "tool": "how-many-atp-are-produced-in-glycolysis.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "how-many-atp-are-produced-in-glycolysis.html line 179: those 2 ATP are the entire yield without oxygen. atp-yield-calculator.html line 181: only glycolysis's 2 substrate-level ATP are made with no oxygen at all."
+  },
+  {
+   "id": "meta-026",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A student reasons that anaerobic yield is the 30 ATP total minus the chain's 26, leaving 4. Where does that break?",
+   "choices": [
+    "The chain actually gives 28 of the 30 ATP",
+    "Glycolysis nets 4 ATP, so 4 is right",
+    "The cycle's 2 GTP stop without the chain",
+    "Substrate-level steps need oxygen too"
+   ],
+   "correct": 2,
+   "explain": "Subtracting the chain leaves the 4 substrate-level ATP on paper, but 2 of those are the cycle's GTP, and the cycle cannot turn without NAD+ coming back. Only glycolysis is genuinely oxygen independent.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html line 181: the cycle's GTP still needs the chain turning to keep NAD+ available, so the cycle shuts down without oxygen. 30 total minus SUBSTRATE 4 leaves 26 from the chain."
+  },
+  {
+   "id": "meta-027",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A muscle cell on the glycerol-3-phosphate shuttle totals 30 ATP per glucose. How much of that 30 does glycolysis itself account for?",
+   "choices": [
+    "2 of the 30",
+    "7 of the 30",
+    "9 of the 30",
+    "5 of the 30"
+   ],
+   "correct": 3,
+   "explain": "Glycolysis pays twice: directly, and again through the 2 NADH it hands to the shuttle. Answering 2 counts only the substrate-level ATP and ignores what those cytosolic NADH are worth.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html worked problem 2: 2 substrate-level ATP plus GLYC_NADH 2 x 1.5 = 3 on the glycerol-3-phosphate shuttle, so 2 + 3 = 5 of the 30."
+  },
+  {
+   "id": "meta-028",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "The same glucose yields 32 ATP in a liver cell and 30 in a muscle cell on identical P/O ratios. What accounts for the gap?",
+   "choices": [
+    "Liver's shuttle delivers its 2 NADH at full value",
+    "Liver makes two extra GTP in the cycle per glucose",
+    "Muscle runs the cycle once rather than twice",
+    "Muscle spends 2 ATP making lactate instead"
+   ],
+   "correct": 0,
+   "explain": "The NADH is identical in both cells, but it cannot cross the inner membrane, so the tissue's shuttle decides whether its electrons arrive worth 2.5 or 1.5 ATP each. Two NADH at a 1 ATP difference is the whole 2 ATP gap.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html JS line 285: glycRatio is nadhRatio (2.5) for malate-aspartate and fadh2Ratio (1.5) for glycerol-3-phosphate, so GLYC_NADH 2 x 1.0 = 2 ATP of difference."
+  },
+  {
+   "id": "meta-029",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "Cyanide blocks complex IV in a cell oxidizing glucose. Why does the citric acid cycle stop, when none of its own enzymes are inhibited?",
+   "choices": [
+    "Complex IV is the source of the cycle's GTP",
+    "NAD+ is no longer regenerated for it",
+    "The cycle's own enzymes need oxygen directly",
+    "Oxaloacetate gets consumed by complex IV"
+   ],
+   "correct": 1,
+   "explain": "Three of the eight steps need NAD+ as the electron acceptor, and the only thing that strips electrons back off NADH is the chain. Block the chain and the cycle runs out of acceptor, not out of enzyme.",
+   "tool": "atp-yield-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "atp-yield-calculator.html line 181: the cycle's GTP still needs the chain turning to keep NAD+ available, which is why the cycle shuts down without oxygen. citric-acid-cycle-explorer.html STEPS: 3 of 8 steps reduce NAD+."
+  },
+  {
+   "id": "meta-030",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A patient on a long fast is making glucose from amino acids. Why can leucine and lysine contribute none of it?",
+   "choices": [
+    "Both are essential, so the body cannot use them",
+    "Their nitrogen is locked into urea beforehand",
+    "Pyruvate dehydrogenase cannot run backward",
+    "They are burned in the cycle before entry"
+   ],
+   "correct": 2,
+   "explain": "Their skeletons land on acetyl-CoA and acetoacetyl-CoA, and there is no human enzyme that walks acetyl-CoA back up to pyruvate. Those carbons can still be burned for energy, they just cannot become sugar.",
+   "tool": "amino-acid-catabolism-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "amino-acid-catabolism-explorer.html AA array: Leucine and Lysine are the only keto entries. FAQ: pyruvate dehydrogenase is irreversible in humans, so an acetyl-CoA skeleton can never net contribute to new glucose."
+  },
+  {
+   "id": "meta-031",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A newborn has high blood ammonia, yet every urea cycle enzyme assays normal. Which defect fits that picture?",
+   "choices": [
+    "Arginase is missing from the cytosol",
+    "Ornithine cannot re-enter the matrix",
+    "Aspartate never reaches step three",
+    "CPS1 has no N-acetylglutamate"
+   ],
+   "correct": 3,
+   "explain": "The cycle needs an activator as well as enzymes: without N-acetylglutamate, CPS1 will not fire even though it is present and intact. Picking a missing enzyme contradicts the normal assays in the stem.",
+   "tool": "amino-acid-catabolism-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "amino-acid-catabolism-explorer.html regulation note: NAG is an obligate allosteric activator of CPS1, and NAGS deficiency causes hyperammonemia even though every urea-cycle enzyme itself is intact."
+  },
+  {
+   "id": "meta-032",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "After days of fasting a liver is flooded with acetyl-CoA from beta oxidation, but exports ketone bodies instead of burning it all. Why?",
+   "choices": [
+    "Oxaloacetate has been pulled into gluconeogenesis",
+    "Acetyl-CoA cannot cross into the matrix when fasting",
+    "Beta oxidation stops producing any NADH by then",
+    "The cycle's enzymes are switched off while fasting"
+   ],
+   "correct": 0,
+   "explain": "Acetyl-CoA can only enter the cycle by condensing with oxaloacetate, and fasting spends that oxaloacetate making glucose instead. The cycle is not switched off, it is short of its partner.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "beta-oxidation-atp-calculator.html FAQ on ketone bodies: oxaloacetate gets diverted into gluconeogenesis, leaving too little to condense with the acetyl-CoA pouring in from beta oxidation."
+  },
+  {
+   "id": "meta-033",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "Palmitate gives 106 ATP from 16 carbons and glucose 32 from 6. A student says fat is 3.3 times better per carbon. Fix it.",
+   "choices": [
+    "About 3.3 times, from 106 over 32",
+    "About 24% more, 6.6 against 5.3",
+    "About 2 times, as stored per gram",
+    "Equal, once activation is counted"
+   ],
+   "correct": 1,
+   "explain": "Dividing 106 by 32 compares whole molecules, not carbons, and palmitate brings nearly three times as many carbons to the comparison. Divide each total by its own carbon count first.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "beta-oxidation-atp-calculator.html worked problem 2: palmitate 106 / 16 = 6.6 ATP per carbon, glucose 32 / 6 = 5.3 ATP per carbon, about 24% more per carbon."
+  },
+  {
+   "id": "meta-034",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A student computes a 14-carbon fatty acid at 94 ATP on modern ratios, but the calculator gives 92. What was most likely forgotten?",
+   "choices": [
+    "One of the six beta oxidation rounds",
+    "The 7 GTP from the seven cycle turns",
+    "The 2 ATP activation cost",
+    "That FADH2 is worth 1.5 and not 2.5"
+   ],
+   "correct": 2,
+   "explain": "Every other term checks out at 94, so the missing 2 is the one-off charge for attaching coenzyme A before any of this starts. Dropping a round or a GTP would be off by much more than 2.",
+   "tool": "beta-oxidation-atp-calculator.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "beta-oxidation-atp-calculator.html worked problem 1 with n=14: 27 NADH x 2.5 = 67.5, 13 FADH2 x 1.5 = 19.5, plus 7 GTP = 94, minus 2 activation = 92."
+  },
+  {
+   "id": "meta-035",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A cell with plenty of ATP and citrate slows glucose breakdown. Which glycolytic step is the brake, and why is it not step 1?",
+   "choices": [
+    "Hexokinase, the first ATP spent here",
+    "Pyruvate kinase, the final step of ten",
+    "Aldolase, where the six-carbon splits",
+    "PFK-1, since G6P has other fates"
+   ],
+   "correct": 3,
+   "explain": "Step 1 only traps the sugar as glucose-6-phosphate, which can still go to glycogen or the pentose phosphate pathway. The first step committed to glycolysis alone is the one worth regulating.",
+   "tool": "glycolysis-pathway-explorer.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "glycolysis-pathway-explorer.html STEPS: PFK-1 is flagged reg and irr and noted as the committed step and main regulatory point, while hexokinase is noted only as trapping glucose in the cell."
+  },
+  {
+   "id": "meta-036",
+   "subject": "Metabolism",
+   "type": "exam",
+   "q": "A mature red blood cell has no mitochondria. Per glucose, what does it get, and what must it do with its NADH?",
+   "choices": [
+    "2 ATP, pyruvate to lactate",
+    "4 ATP, pyruvate to lactate",
+    "2 ATP, NADH into complex I",
+    "30 ATP, shuttle run backward"
+   ],
+   "correct": 0,
+   "explain": "With no mitochondrion there is no chain and no cycle, so the cell lives on the net from glycolysis and has to dump its electrons onto pyruvate to get NAD+ back. A shuttle needs a mitochondrion to shuttle into.",
+   "tool": "how-many-atp-are-produced-in-glycolysis.html",
+   "origin": "written 2026-11-09 for the metabolism rebuild",
+   "source": "how-many-atp-are-produced-in-glycolysis.html line 179: NAD+ has to come back or glycolysis stalls at step 6, so pyruvate becomes lactate purely to regenerate it, and those 2 ATP are the entire yield."
+  }
+ ]
+}

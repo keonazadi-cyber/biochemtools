@@ -1,0 +1,515 @@
+{
+ "subject": "Genetics",
+ "questions": [
+  {
+   "id": "gene-001",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "Crossing Aa × Aa (one gene, complete dominance) gives what phenotype ratio?",
+   "choices": [
+    "1:1",
+    "3:1",
+    "9:3:3:1",
+    "1:2:1"
+   ],
+   "correct": 1,
+   "explain": "3 out of 4 offspring show the dominant phenotype (AA, Aa, Aa), 1 shows recessive (aa). The 1:2:1 trap is the genotype ratio, not the phenotype ratio.",
+   "tool": "punnett-square-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "punnett-square-calculator.html, punnett('Aa','Aa') gives phe {A_:3, aa:1}, so 3:1."
+  },
+  {
+   "id": "gene-002",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "Under Hardy-Weinberg equilibrium with q = 0.3, what fraction of the population is heterozygous?",
+   "choices": [
+    "0.09",
+    "0.49",
+    "0.42",
+    "0.70"
+   ],
+   "correct": 2,
+   "explain": "Heterozygote frequency is the 2pq term. The 0.09 trap is q squared, the recessive homozygotes, and 0.49 is p squared.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "hardy-weinberg-calculator.html, bars(p,q) with p = 1 - 0.3 = 0.7: het = 2 x 0.7 x 0.3 = 0.42."
+  },
+  {
+   "id": "gene-003",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "A test cross breeds an unknown-genotype individual with:",
+   "choices": [
+    "An unknown-genotype mate",
+    "A homozygous recessive",
+    "A homozygous dominant mate",
+    "A known heterozygote mate"
+   ],
+   "correct": 1,
+   "explain": "Only a recessive partner contributes nothing dominant, so every offspring phenotype reads the unknown parent's gametes directly. All-dominant offspring means AA, a roughly 1:1 split means Aa.",
+   "tool": "punnett-square-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "punnett-square-calculator.html, punnett('Aa','aa') gives phe {A_:1, aa:1} (1:1) while punnett('AA','aa') gives phe {A_:2} (all dominant)."
+  },
+  {
+   "id": "gene-004",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "Which of these is NOT one of the five Hardy-Weinberg equilibrium assumptions?",
+   "choices": [
+    "Mating happens at random",
+    "Selection favours an allele",
+    "No new mutation at the locus",
+    "No migration into the group"
+   ],
+   "correct": 1,
+   "explain": "Equilibrium requires that nothing changes allele frequencies, so the model assumes selection is absent. Active selection is one of the forces that pushes a population off the p squared, 2pq, q squared curve.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "hardy-weinberg-calculator.html assumptions section: random mating, no mutation, no migration, no selection, large population."
+  },
+  {
+   "id": "gene-005",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "Two type A parents have a type O child. Is that possible?",
+   "choices": [
+    "Yes, if both are AO",
+    "No, it is impossible",
+    "Only with a mutation",
+    "Only if one is AB"
+   ],
+   "correct": 0,
+   "explain": "A blood test reports the phenotype, which cannot tell AA from AO. Reading a phenotype as if it were the genotype is the error behind most paternity confusion.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "blood-type-punnett-square-calculator.html, GENO.A = ['AA','AO']; tally(cross('AO','AO')) gives {A:3, O:1}, so 1 in 4."
+  },
+  {
+   "id": "gene-006",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "An AB parent and an O parent can have which blood types of child?",
+   "choices": [
+    "A, B, AB or O",
+    "AB or O only",
+    "O only",
+    "A or B only"
+   ],
+   "correct": 3,
+   "explain": "The AB parent always passes A or B and the O parent always passes O, so every child is AO or BO. This is the one cross where neither parent's own type can appear in the child.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "blood-type-punnett-square-calculator.html, tally(cross('AB','OO')) gives {A:2, B:2}."
+  },
+  {
+   "id": "gene-007",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "In Hardy-Weinberg, what does 2pq represent?",
+   "choices": [
+    "The heterozygote frequency",
+    "The dominant allele frequency",
+    "Recessive homozygote frequency",
+    "The per-generation mutation rate"
+   ],
+   "correct": 0,
+   "explain": "The factor of two is there because a heterozygote can be assembled two ways, a dominant egg with a recessive sperm or the reverse. Dropping it is the single most common Hardy-Weinberg slip.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "hardy-weinberg-calculator.html, bars() labels p*p as AA, 2*p*q as Aa and q*q as aa."
+  },
+  {
+   "id": "gene-008",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "If q equals 0.1 for a recessive allele, what fraction of the population are carriers?",
+   "choices": [
+    "0.18",
+    "0.01",
+    "0.10",
+    "0.81"
+   ],
+   "correct": 0,
+   "explain": "Carriers are the heterozygotes, so this is the 2pq term. Note that carriers outnumber affected individuals eighteen to one here, which is why rare recessive alleles persist.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "hardy-weinberg-calculator.html, bars(0.9, 0.1): het = 2 x 0.9 x 0.1 = 0.18, q squared = 0.01."
+  },
+  {
+   "id": "gene-009",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "Why are X-linked recessive conditions more common in males?",
+   "choices": [
+    "The Y carries the allele",
+    "Males have only one X",
+    "Females are immune",
+    "Males mutate more"
+   ],
+   "correct": 1,
+   "explain": "With a single X there is no second copy to mask a recessive allele, so one hit is enough. A female needs the allele on both X chromosomes, which is far rarer.",
+   "tool": "x-linked-inheritance-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "x-linked-inheritance-calculator.html, maleStatus(a) returns affected on a single h, while femaleStatus needs h === 2 in recessive mode."
+  },
+  {
+   "id": "gene-010",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "A dihybrid cross AaBb x AaBb gives which phenotype ratio?",
+   "choices": [
+    "1:2:1",
+    "1:1:1:1",
+    "9:3:3:1",
+    "3:1"
+   ],
+   "correct": 2,
+   "explain": "That ratio assumes the two genes assort independently. Linked genes on the same chromosome distort it toward the parental combinations, which is how linkage was discovered.",
+   "tool": "dihybrid-cross-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "dihybrid-cross-calculator.html, dihybrid('AaBb','AaBb') gives phenos {A_B:9, A_b:3, a_B:3, a_b:1} over 16 boxes."
+  },
+  {
+   "id": "gene-011",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "What does a chi-square goodness of fit test compare?",
+   "choices": [
+    "Two allele frequencies to each other",
+    "Observed counts to expected counts",
+    "A genotype ratio to a phenotype ratio",
+    "One generation's counts to the next"
+   ],
+   "correct": 1,
+   "explain": "The test asks whether a deviation from a predicted ratio is bigger than sampling noise. It needs raw counts, not percentages, because the sample size is what decides whether a gap matters.",
+   "tool": "chi-square-genetics-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "chi-square-genetics-calculator.html, calc(): e = ratio[i]/rsum*total and chi2 sums (obs - e) squared over e."
+  },
+  {
+   "id": "gene-012",
+   "subject": "Genetics",
+   "type": "recall",
+   "q": "Which genotypes give an Rh positive phenotype?",
+   "choices": [
+    "DD or Dd",
+    "dd only",
+    "Dd only",
+    "DD only"
+   ],
+   "correct": 0,
+   "explain": "D is dominant, so one copy is enough to put the antigen on the red cell. That is why two Rh positive parents can still have an Rh negative child, if both are carriers.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "blood-type-punnett-square-calculator.html, RHG = {'+':['DD','Dd'], '-':['dd']}."
+  },
+  {
+   "id": "gene-013",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "A recessive disorder affects 1 in 400 people. Under Hardy-Weinberg, what fraction of the population are carriers?",
+   "choices": [
+    "0.0025",
+    "0.0500",
+    "0.0950",
+    "0.9025"
+   ],
+   "correct": 2,
+   "explain": "Affected people are the q squared class, so take a square root first to get the allele frequency, then build the heterozygote term. Answering 0.05 stops at the allele frequency instead of the carrier frequency.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "q squared = 1/400 = 0.0025, so q = 0.05 and p = 0.95. hardy-weinberg-calculator.html bars(0.95, 0.05): het = 2 x 0.95 x 0.05 = 0.095, p squared = 0.9025."
+  },
+  {
+   "id": "gene-014",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "A population of 500 is genotyped as 320 AA, 160 Aa and 20 aa. What is the frequency of the A allele?",
+   "choices": [
+    "0.64",
+    "0.80",
+    "0.20",
+    "0.90"
+   ],
+   "correct": 1,
+   "explain": "Count alleles, not people: every homozygote contributes two copies and every heterozygote one. Answering 0.64 reports the AA genotype frequency, which is p squared rather than p.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "hardy-weinberg-calculator.html counts mode: p = (2 x 320 + 160)/(2 x 500) = 800/1000 = 0.80, and q = 0.20. Chi-square comes out at 0, so this population sits at equilibrium."
+  },
+  {
+   "id": "gene-015",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "Counting 180 AA, 120 Aa and 100 aa individuals, what is q by direct allele counting?",
+   "choices": [
+    "0.40",
+    "0.50",
+    "0.25",
+    "0.60"
+   ],
+   "correct": 0,
+   "explain": "Direct counting needs no equilibrium assumption, which is the point of doing it when all three genotypes are visible. The 0.50 trap is the square root of aa over N, a shortcut that is only valid at equilibrium.",
+   "tool": "how-to-calculate-allele-frequency.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "how-to-calculate-allele-frequency.html calc(400 total): q = (2 x 100 + 120)/(2 x 400) = 320/800 = 0.40, p = (2 x 180 + 120)/800 = 0.60. Its shortcut field gives sqrt(100/400) = 0.50."
+  },
+  {
+   "id": "gene-016",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "In an AaBb x AaBb dihybrid cross, what fraction of the 16 boxes are aabb?",
+   "choices": [
+    "3/16",
+    "1/4",
+    "9/16",
+    "1/16"
+   ],
+   "correct": 3,
+   "explain": "Each parent makes an ab gamete one time in four, and the two events are independent, so multiply the two quarters. Answering 1/4 multiplies nothing and treats the two genes as one.",
+   "tool": "dihybrid-cross-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "dihybrid-cross-calculator.html, dihybrid('AaBb','AaBb') genos: aabb appears 1 time in n = 16 boxes."
+  },
+  {
+   "id": "gene-017",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "A type AB parent and a type O parent. What percent of their children are expected to be type A?",
+   "choices": [
+    "25 percent",
+    "50 percent",
+    "0 percent",
+    "75 percent"
+   ],
+   "correct": 1,
+   "explain": "The O parent can only pass O, so the child's type is decided entirely by which allele the AB parent sends. Half the children get A and half get B, and no child is AB or O.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "blood-type-punnett-square-calculator.html, tally(cross('AB','OO')) gives {A:2, B:2} out of 4 boxes, so 50 percent type A."
+  },
+  {
+   "id": "gene-018",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "An AO parent and a BO parent. What is the chance of a type O child?",
+   "choices": [
+    "25 percent",
+    "0 percent",
+    "50 percent",
+    "75 percent"
+   ],
+   "correct": 0,
+   "explain": "Only the box where both parents happen to send their O allele gives OO, and each sends O half the time. This is the cross where all four blood types are possible from one pairing.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "blood-type-punnett-square-calculator.html, tally(cross('AO','BO')) gives {AB:1, A:1, B:1, O:1}, so 1 in 4 is type O."
+  },
+  {
+   "id": "gene-019",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "A carrier mother and an unaffected father, X-linked recessive trait. What fraction of all their children are expected to be affected?",
+   "choices": [
+    "50 percent",
+    "0 percent",
+    "25 percent",
+    "75 percent"
+   ],
+   "correct": 2,
+   "explain": "Half the sons are affected, but sons are only half the children, so the two halves multiply. Answering 50 percent quotes the risk within the sons and forgets to scale it to all children.",
+   "tool": "x-linked-inheritance-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "x-linked-inheritance-calculator.html, mother Hh x father HY in recessive mode: sons 50 percent affected, daughters 50 percent carrier, so of all children 25 percent are affected sons."
+  },
+  {
+   "id": "gene-020",
+   "subject": "Genetics",
+   "type": "apply",
+   "q": "A monohybrid cross gives 84 tall and 36 short plants. Tested against 3:1, what is the chi-square value?",
+   "choices": [
+    "0.40",
+    "1.20",
+    "3.84",
+    "1.60"
+   ],
+   "correct": 3,
+   "explain": "Work out each expected count from the total first, then add one squared-difference term per class. The 3.84 trap is the critical value you compare against, not the statistic itself.",
+   "tool": "chi-square-genetics-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "chi-square-genetics-calculator.html, obs [84,36] against ratio [3,1]: expected 90 and 30, terms (84-90)^2/90 = 0.40 and (36-30)^2/30 = 1.20, chi2 = 1.60 with df = 1."
+  },
+  {
+   "id": "gene-021",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A pediatrician delivers a type O newborn. The mother is type A and the listed father is type AB, and he disputes paternity. What does the blood typing establish?",
+   "choices": [
+    "AB passes A or B, so this man is excluded",
+    "He could still be the father if he is AO",
+    "Blood type can never exclude a father here",
+    "The typing proves he is the father"
+   ],
+   "correct": 0,
+   "explain": "An AB individual has no O allele to give, so every child of his carries A or B and shows it. Exclusion is the only thing ABO typing can do well: it never confirms paternity, because millions of men share any blood type.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "blood-type-punnett-square-calculator.html, GENO.AB = ['AB'] so the only pairings are AB x AA giving {A:2, AB:2} and AB x AO giving {A:2, AB:1, B:1}. No type O child appears in either."
+  },
+  {
+   "id": "gene-022",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "An Rh negative mother and an Rh positive father have an Rh positive first child. What can you say about the second child?",
+   "choices": [
+    "The second child must also be Rh positive",
+    "The chance drops because one was positive",
+    "The father must be DD, so every child is positive",
+    "The chance of Rh positive is 50 to 100 percent"
+   ],
+   "correct": 3,
+   "explain": "Rh positive covers both DD and Dd, and the first child being positive does not tell you which the father is, so the honest answer is a range. Each conception is independent, so no earlier child shifts the odds.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "blood-type-punnett-square-calculator.html, rhOdds('-','+') returns {lo:0.5, hi:1, exact:false}: dd x DD gives 4 of 4 positive, dd x Dd gives 2 of 4."
+  },
+  {
+   "id": "gene-023",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A population of 500 has 400 AA, 50 Aa and 50 aa. A student takes the square root of 50/500 and reports q = 0.32, but counting alleles gives q = 0.15. Why do they disagree?",
+   "choices": [
+    "The student should have used the 2pq term instead",
+    "Counting only works on very large samples",
+    "The square root shortcut assumes equilibrium",
+    "Both are right, they just round differently"
+   ],
+   "correct": 2,
+   "explain": "Taking the root of the recessive frequency only recovers q when the genotypes already sit on the p squared, 2pq, q squared curve. Here they do not, so counting alleles is the answer and the gap between the two numbers is the evidence.",
+   "tool": "how-to-calculate-allele-frequency.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "how-to-calculate-allele-frequency.html calc(400,50,50): q = (2 x 50 + 50)/1000 = 0.15, shortcut = sqrt(50/500) = 0.316, chi-square 184.7 against a critical 3.84, so this population is far off equilibrium."
+  },
+  {
+   "id": "gene-024",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A tall plant of unknown genotype is crossed with a short plant. The 50 offspring are 28 tall and 22 short, and chi-square against 1:1 is 0.72 with df 1. What does this support?",
+   "choices": [
+    "The tall parent was homozygous dominant",
+    "The data reject Mendelian inheritance here",
+    "The cross was really a 3:1 monohybrid",
+    "The tall parent was heterozygous"
+   ],
+   "correct": 3,
+   "explain": "A homozygous dominant parent crossed to a recessive gives no short offspring at all, so 22 of them rules it out immediately. A chi-square of 0.72 is well under the 3.84 cutoff, so the 28 to 22 wobble is just sampling noise.",
+   "tool": "chi-square-genetics-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "punnett-square-calculator.html: punnett('Tt','tt') gives phe {T_:1, tt:1} while punnett('TT','tt') gives phe {T_:2}. chi-square-genetics-calculator.html on obs [28,22] against [1,1]: expected 25 each, chi2 = 0.36 + 0.36 = 0.72, df = 1."
+  },
+  {
+   "id": "gene-025",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A dihybrid cross gives 99, 27, 27 and 7 offspring in the four classes. Chi-square against 9:3:3:1 is 2.40. What is the right conclusion?",
+   "choices": [
+    "The df is 4, so the test cannot be read",
+    "Reject 9:3:3:1, chi-square is not zero",
+    "Independent assortment is now proven",
+    "The data are consistent with 9:3:3:1"
+   ],
+   "correct": 3,
+   "explain": "Degrees of freedom are one fewer than the number of classes, so df is 3 and the cutoff is 7.81. Failing to reject a ratio is not the same as proving it, since the test can only ever say the data are compatible.",
+   "tool": "chi-square-genetics-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "chi-square-genetics-calculator.html, obs [99,27,27,7] against ratio [9,3,3,1]: total 160, expected 90, 30, 30, 10, terms 0.90 + 0.30 + 0.30 + 0.90 = 2.40 with df = 3 and p = 0.494."
+  },
+  {
+   "id": "gene-026",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A colorblind man and a woman with normal vision and no family history of colorblindness have a colorblind son. Where did the son's allele come from?",
+   "choices": [
+    "From his father's X chromosome",
+    "From his father's Y chromosome",
+    "From his mother, who is a carrier",
+    "From a brand new mutation in his father"
+   ],
+   "correct": 2,
+   "explain": "A son takes his Y from his father and his only X from his mother, so a father can never pass an X-linked allele to a son. No family history just means the carrier mothers before her happened to have no affected sons.",
+   "tool": "x-linked-inheritance-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "x-linked-inheritance-calculator.html: mother HH x father hY gives sons 100 percent unaffected and daughters 100 percent carrier, while mother Hh x father hY gives 25 percent affected sons. A colorblind son requires an h from the mother."
+  },
+  {
+   "id": "gene-027",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A type O baby is born to a type A mother and a type B father, and the ward suspects a sample mix-up. What is the right conclusion?",
+   "choices": [
+    "A type A and type B couple cannot do this at all",
+    "Both parents carry O, so 1 in 4 is type O",
+    "The baby must carry a new mutation",
+    "One parent is really type AB, not A or B"
+   ],
+   "correct": 1,
+   "explain": "A and B are each dominant over O, so an AO parent and a BO parent look like plain A and B while both still carry a hidden O. This is the one parental pairing that can produce all four blood types.",
+   "tool": "blood-type-punnett-square-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "blood-type-punnett-square-calculator.html, tally(cross('AO','BO')) gives {AB:1, A:1, B:1, O:1}, so a type O child is expected 1 time in 4."
+  },
+  {
+   "id": "gene-028",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A population of 200 has 90 AA, 20 Aa and 90 aa. Chi-square against Hardy-Weinberg is 128 with df 1. What does that let you say?",
+   "choices": [
+    "Natural selection is acting on this locus",
+    "The allele frequencies were computed wrong",
+    "It returns to equilibrium next generation",
+    "At least one assumption is being violated"
+   ],
+   "correct": 3,
+   "explain": "The test only detects that the genotypes are off the predicted curve, never which of the five assumptions failed. A heterozygote shortfall this large usually points at non-random mating or two subpopulations sampled as one.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "hardy-weinberg-calculator.html counts mode: p = (2 x 90 + 20)/400 = 0.50, expected 50 AA, 100 Aa, 50 aa against observed 90, 20, 90, so chi2 = 32 + 64 + 32 = 128 with a critical value of 3.84."
+  },
+  {
+   "id": "gene-029",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "A dihybrid test cross AaBb x aabb should give 1:1:1:1, but 100 offspring come out 45, 5, 5 and 45. Chi-square is 64 with df 3. What explains it?",
+   "choices": [
+    "One of the two genes is X-linked",
+    "One gene is incompletely dominant",
+    "The two genes sit on one chromosome",
+    "A sample of 100 offspring is too small"
+   ],
+   "correct": 2,
+   "explain": "The excess sits in the two parental combinations and the shortfall in the two recombinants, which is the signature of genes travelling together. A larger sample would only make the deviation more significant, not less.",
+   "tool": "dihybrid-cross-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "dihybrid-cross-calculator.html, dihybrid('AaBb','aabb') gives phenos {A_B:1, A_b:1, a_B:1, a_b:1}, a 1:1:1:1 expectation. chi-square-genetics-calculator.html on obs [45,5,5,45] against [1,1,1,1]: expected 25 each, four terms of 16, chi2 = 64 with df = 3."
+  },
+  {
+   "id": "gene-030",
+   "subject": "Genetics",
+   "type": "exam",
+   "q": "In a sample of 100 people, 84 show the dominant phenotype and 16 the recessive. A student reports p = 0.84. What is p actually?",
+   "choices": [
+    "0.84",
+    "0.36",
+    "0.60",
+    "0.40"
+   ],
+   "correct": 2,
+   "explain": "The 84 percent lumps homozygous dominants together with heterozygotes, so it is p squared plus 2pq, not p. Start from the recessive class instead, because that is the only group whose genotype the phenotype reveals.",
+   "tool": "hardy-weinberg-calculator.html",
+   "origin": "written 2026-11-09 for the recall/apply/exam rebuild",
+   "source": "q squared = 16/100 = 0.16, so q = 0.40 and p = 0.60. hardy-weinberg-calculator.html bars(0.6, 0.4) gives p squared = 0.36 and 2pq = 0.48, and 0.36 + 0.48 = 0.84, matching the observed dominant phenotype share."
+  }
+ ]
+}

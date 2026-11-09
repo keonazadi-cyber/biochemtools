@@ -1,0 +1,532 @@
+{
+ "subject": "Molecular biology",
+ "questions": [
+  {
+   "id": "mole-001",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "What is the net ATP yield of glycolysis per glucose molecule?",
+   "choices": [
+    "4",
+    "2",
+    "6",
+    "0"
+   ],
+   "correct": 1,
+   "explain": "4 ATP are produced in the payoff phase, but 2 were invested early on, net 2 ATP, plus 2 NADH and 2 pyruvate.",
+   "tool": "how-many-atp-are-produced-in-glycolysis.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "how-many-atp-are-produced-in-glycolysis.html: 4 produced minus 2 invested = net 2 ATP."
+  },
+  {
+   "id": "mole-002",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "Which mRNA codon signals the start of translation?",
+   "choices": [
+    "UAA",
+    "UGA",
+    "AUG",
+    "UAG"
+   ],
+   "correct": 2,
+   "explain": "AUG codes for methionine and is recognized by the initiator tRNA to begin translation, the other three are stop codons.",
+   "tool": "codon-chart.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "codon-chart.html CODON: AUG = M, while UAA, UAG and UGA all map to '*'."
+  },
+  {
+   "id": "mole-003",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "Which of these is NOT a stop codon?",
+   "choices": [
+    "UAA",
+    "UAG",
+    "UGA",
+    "AUG"
+   ],
+   "correct": 3,
+   "explain": "UAA, UAG and UGA all signal stop. AUG codes for methionine and doubles as the start codon.",
+   "tool": "codon-chart.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "codon-chart.html CODON: the only '*' entries are UAA, UAG, UGA. AUG = M."
+  },
+  {
+   "id": "mole-004",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "Which factor increases a DNA primer's melting temperature (Tm)?",
+   "choices": [
+    "Higher GC content",
+    "Higher AT content",
+    "A shorter primer",
+    "Less salt in buffer"
+   ],
+   "correct": 0,
+   "explain": "A G to C pair holds three hydrogen bonds against two for A to T, so more energy is needed to pull the strands apart. Shortening the primer or dropping the salt both push Tm down, not up.",
+   "tool": "dna-melting-temperature-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "dna-melting-temperature-calculator.html: Tm = 2(A+T) + 4(G+C) weights GC double, and the long formula adds 41(G+C-16.4)/N."
+  },
+  {
+   "id": "mole-005",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "Which enzyme catalyzes the committed, rate-limiting step of glycolysis?",
+   "choices": [
+    "Hexokinase",
+    "PFK-1",
+    "Aldolase",
+    "Enolase"
+   ],
+   "correct": 1,
+   "explain": "This is the first irreversible step unique to glycolysis. Hexokinase comes earlier but its product can still be routed to glycogen or the pentose phosphate pathway, so it is not the commitment point.",
+   "tool": "glycolysis-pathway-explorer.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "glycolysis-pathway-explorer.html marks phosphofructokinase-1 as the committed, rate-limiting step."
+  },
+  {
+   "id": "mole-007",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "Which amino acid does the start codon AUG specify?",
+   "choices": [
+    "Alanine",
+    "Valine",
+    "Leucine",
+    "Methionine"
+   ],
+   "correct": 3,
+   "explain": "The start codon is not a separate signal bolted onto the code, it is a normal codon that also recruits the initiator tRNA. In bacteria that first residue is formylated, but the codon is unchanged.",
+   "tool": "codon-chart.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "codon-chart.html CODON: AUG = M, and INFO maps M to Met/Methionine."
+  },
+  {
+   "id": "mole-008",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "DNA polymerase can only add nucleotides in which direction?",
+   "choices": [
+    "3' to 5' only",
+    "Either direction",
+    "5' to 3' only",
+    "Set by template"
+   ],
+   "correct": 2,
+   "explain": "The enzyme needs a free 3' hydroxyl to attack the incoming nucleotide, so the template never changes the direction. That one constraint is why the lagging strand has to be built in Okazaki fragments.",
+   "tool": "dna-to-protein-translation.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "dna-to-protein-translation.html reads the coding strand 5' to 3', the direction of synthesis."
+  },
+  {
+   "id": "mole-009",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "A 260/280 ratio near 1.8 suggests what?",
+   "choices": [
+    "Reasonably pure DNA",
+    "Protein contamination",
+    "RNA contamination",
+    "Phenol contamination"
+   ],
+   "correct": 0,
+   "explain": "About 1.8 is the usual target for DNA and about 2.0 for RNA. Protein and phenol both absorb at 280 nm, so they pull the ratio down rather than leaving it at target.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "nucleic-acid-concentration-calculator.html: for dsDNA the target is 1.8 and the low flag fires below 1.7."
+  },
+  {
+   "id": "mole-010",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "The genetic code is described as degenerate because what?",
+   "choices": [
+    "The code is read in overlapping triplets",
+    "Several codons can mean one amino acid",
+    "A codon can mean two amino acids",
+    "Three codons specify nothing at all"
+   ],
+   "correct": 1,
+   "explain": "61 coding codons have to cover 20 amino acids, so most amino acids get more than one. Degeneracy sits mostly in the third base, which is why third position changes are often silent. The three stop codons are a separate fact, not what degenerate means.",
+   "tool": "codon-chart.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "codon-chart.html CODON: Leu, Ser and Arg have 6 codons each, Met and Trp have 1, and 61 of the 64 entries are amino acids."
+  },
+  {
+   "id": "mole-011",
+   "subject": "Molecular biology",
+   "type": "recall",
+   "q": "Translating a DNA coding strand to protein, what replaces thymine?",
+   "choices": [
+    "Adenine",
+    "Guanine",
+    "Cytosine",
+    "Uracil"
+   ],
+   "correct": 3,
+   "explain": "RNA carries this base in place of thymine. The mRNA otherwise matches the coding strand, which is why you can read protein straight off it once you know the frame.",
+   "tool": "dna-to-protein-translation.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "dna-to-protein-translation.html transcription step: replace every T with U."
+  },
+  {
+   "id": "mole-006",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "How many codons specify amino acids, out of 64 total?",
+   "choices": [
+    "64",
+    "20",
+    "61",
+    "60"
+   ],
+   "correct": 2,
+   "explain": "Three of the 64 are stop codons, so they come off the total. Answering 20 confuses the number of amino acids with the number of codons that encode them.",
+   "tool": "codon-chart.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "codon-chart.html CODON has 64 entries, 3 of them '*' (UAA, UAG, UGA), so 64 - 3 = 61."
+  },
+  {
+   "id": "mole-012",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "A dsDNA sample was diluted 1:20 before reading, and the A260 comes back 0.300. What is the concentration of the undiluted stock?",
+   "choices": [
+    "300 ng/uL",
+    "240 ng/uL",
+    "198 ng/uL",
+    "15 ng/uL"
+   ],
+   "correct": 0,
+   "explain": "The A260 describes what is in the cuvette, so the dilution factor multiplies back up to the stock. Leaving it out is the most common slip here and costs you a factor of 20.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "nucleic-acid-concentration-calculator.html FACTOR.dsDNA = 50: 0.300 x 50 x 20 = 300 ng/uL. Distractors are the RNA factor (0.300 x 40 x 20 = 240), the ssDNA factor (0.300 x 33 x 20 = 198) and forgetting the dilution (0.300 x 50 = 15)."
+  },
+  {
+   "id": "mole-013",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "An RNA sample was diluted 1:100 and reads A260 = 0.250. What is the stock concentration?",
+   "choices": [
+    "1250 ng/uL",
+    "1000 ng/uL",
+    "825 ng/uL",
+    "10 ng/uL"
+   ],
+   "correct": 1,
+   "explain": "RNA converts at a different factor from DNA because its bases are more exposed and absorb more per microgram. Reaching for 50 is a DNA habit and reads 25 percent high.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "nucleic-acid-concentration-calculator.html FACTOR.RNA = 40: 0.250 x 40 x 100 = 1000 ng/uL. Distractors: dsDNA 50 gives 1250, ssDNA 33 gives 825, no dilution gives 10."
+  },
+  {
+   "id": "mole-014",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "An oligo (single-stranded DNA) is read undiluted and gives A260 = 0.600. What is its concentration?",
+   "choices": [
+    "30.0 ng/uL",
+    "24.0 ng/uL",
+    "19.8 ng/uL",
+    "60.0 ng/uL"
+   ],
+   "correct": 2,
+   "explain": "Single-stranded DNA takes the lowest of the three factors, so the same absorbance means less material than it would for duplex DNA. Using the dsDNA number here overstates an oligo stock by about half.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "nucleic-acid-concentration-calculator.html FACTOR.ssDNA = 33: 0.600 x 33 x 1 = 19.8 ng/uL. Distractors: dsDNA 50 gives 30.0, RNA 40 gives 24.0."
+  },
+  {
+   "id": "mole-015",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "A 10-base oligo contains 4 G or C bases and 6 A or T bases. What is its Tm by the Wallace rule?",
+   "choices": [
+    "32 C",
+    "40 C",
+    "20 C",
+    "28 C"
+   ],
+   "correct": 3,
+   "explain": "The rule weights each GC pair at 4 degrees and each AT pair at 2, because the GC pair holds one more hydrogen bond. Swapping the two coefficients is the usual arithmetic error.",
+   "tool": "dna-melting-temperature-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "dna-melting-temperature-calculator.html uses Tm = 2(A+T) + 4(G+C) at 14 nt or fewer: 2 x 6 + 4 x 4 = 28 C. Swapped coefficients give 32, all fours give 40, all twos give 20."
+  },
+  {
+   "id": "mole-016",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "A 24-base primer contains 6 G and 9 C. What is its GC content?",
+   "choices": [
+    "62.5 percent",
+    "37.5 percent",
+    "25.0 percent",
+    "60.0 percent"
+   ],
+   "correct": 0,
+   "explain": "GC content is the G and C count over the full length, so both bases are counted together. 37.5 percent is the AT content, the complement of the right answer rather than the answer.",
+   "tool": "dna-melting-temperature-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "dna-melting-temperature-calculator.html computes GC% = (G+C)/N x 100: (6+9)/24 = 15/24 = 62.5 percent. AT is 9/24 = 37.5 percent, and G alone is 6/24 = 25.0 percent."
+  },
+  {
+   "id": "mole-017",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "A 30-base primer has 15 G or C bases. What is its Tm by the long-sequence formula on this page?",
+   "choices": [
+    "66.8 C",
+    "63.0 C",
+    "90 C",
+    "50.0 C"
+   ],
+   "correct": 1,
+   "explain": "Above 14 bases the Wallace rule runs far too hot, which is why the page switches formulas by length. Note that the GC term is subtracted here, since 15 sits below the 16.4 constant.",
+   "tool": "dna-melting-temperature-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "dna-melting-temperature-calculator.html: Tm = 64.9 + 41(G+C-16.4)/N = 64.9 + 41(15-16.4)/30 = 64.9 - 1.91 = 63.0 C. Flipping that sign gives 66.8, Wallace misapplied gives 2(15) + 4(15) = 90, and 50.0 is just the GC percent."
+  },
+  {
+   "id": "mole-018",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "An open reading frame is 300 nucleotides long, counting its stop codon. How many amino acids are in the finished protein?",
+   "choices": [
+    "100",
+    "300",
+    "99",
+    "97"
+   ],
+   "correct": 2,
+   "explain": "Divide by three to get codons, then drop the stop codon, which carries no amino acid of its own. Answering 100 counts the stop as a residue.",
+   "tool": "codon-chart.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "codon-chart.html: codons are 3 bases and UAA, UAG, UGA map to '*', no amino acid. 300/3 = 100 codons, minus the stop = 99 residues."
+  },
+  {
+   "id": "mole-019",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "Reading the DNA coding strand ATGCATTGG in frame 1, which peptide do you get?",
+   "choices": [
+    "Met-Gln-Trp",
+    "Met-His-Cys",
+    "Met-Asp-Trp",
+    "Met-His-Trp"
+   ],
+   "correct": 3,
+   "explain": "Transcribe by swapping T for U, then cut into threes before looking anything up. Most errors here come from misreading the third base of the middle codon, which is where the code is most degenerate.",
+   "tool": "dna-to-protein-translation.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "codon-chart.html CODON lookups on AUG CAU UGG give M, H, W. CAA would give Gln, UGU or UGC Cys, GAU Asp."
+  },
+  {
+   "id": "mole-020",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "A coding strand reads 5'-ATGCCGTTAC-3'. What is its reverse complement?",
+   "choices": [
+    "GTAACGGCAT",
+    "TACGGCAATG",
+    "CATTGCCGTA",
+    "GUAACGGCAU"
+   ],
+   "correct": 0,
+   "explain": "Two steps have to both happen: pair every base, then read the new strand back to front. Complementing without reversing is the single most common mistake when designing a reverse primer.",
+   "tool": "dna-melting-temperature-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "dna-melting-temperature-calculator.html builds it as seq.split('').reverse().map(COMP): ATGCCGTTAC gives GTAACGGCAT. Complement only gives TACGGCAATG, reverse only gives CATTGCCGTA."
+  },
+  {
+   "id": "mole-021",
+   "subject": "Molecular biology",
+   "type": "apply",
+   "q": "A DNA prep reads A260 = 0.360 and A280 = 0.200. What is the 260/280 ratio, and how does the calculator read it?",
+   "choices": [
+    "1.80, too low for DNA",
+    "1.80, clean for DNA",
+    "0.56, clean for DNA",
+    "1.80, RNA carryover"
+   ],
+   "correct": 1,
+   "explain": "The ratio is A260 over A280, in that order, and 1.8 is the DNA target rather than a warning. Dividing the other way gives a number below 1 that cannot be compared to any of the published bands.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "nucleic-acid-concentration-calculator.html computes r = A260/A280 = 0.360/0.200 = 1.80; for dsDNA the target is 1.8, low fires under 1.7 and RNA carryover only above 1.95. Inverted gives 0.56."
+  },
+  {
+   "id": "mole-022",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "An RNA prep reads 260/280 of 2.05 and 260/230 of 1.2. It looks clean by one measure and not the other. What is the most likely contaminant, and what does it do downstream?",
+   "choices": [
+    "Protein carryover, which the low 260/230 is reporting",
+    "Nothing, because 2.05 already reads as clean",
+    "Guanidine or phenol, which inhibits the RT step",
+    "Genomic DNA, flagged by the 260/280 reading"
+   ],
+   "correct": 2,
+   "explain": "The two ratios watch different windows, so a prep can pass one and fail the other. Protein shows up at 280 nm, not 230, and a ratio that passes one check never clears the prep on its own.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "nucleic-acid-concentration-calculator.html: 260/280 is the protein and phenol check with an RNA target of 2.0 (clean to 2.15), while 260/230 below 1.8 flags guanidine, phenol, carbohydrate or EDTA carryover."
+  },
+  {
+   "id": "mole-023",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "A dsDNA sample is diluted 1:50 and reads A260 = 0.400. The student writes down 20 ng/uL. What went wrong, and what is the real stock concentration?",
+   "choices": [
+    "The RNA factor was used, so it is 800 ng/uL",
+    "Nothing went wrong, 20 ng/uL is the stock value",
+    "The dilution was divided in, so it is 0.4 ng/uL",
+    "The dilution was left out, so it is 1000 ng/uL"
+   ],
+   "correct": 3,
+   "explain": "The reading belongs to the cuvette, not the tube on ice, so the dilution factor multiplies rather than divides. 20 is exactly the cuvette concentration, which is why the mistake looks like a plausible answer.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "nucleic-acid-concentration-calculator.html worked example: 0.400 x 50 x 50 = 1000 ng/uL. The RNA factor gives 0.400 x 40 x 50 = 800, no dilution gives 20, dividing gives 0.400 x 50/50 = 0.4."
+  },
+  {
+   "id": "mole-024",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "Two 20-base primers go into the same PCR, one at 60 percent GC and one at 40 percent GC. The reaction gives faint product plus extra bands. Using the long-sequence formula, what explains it?",
+   "choices": [
+    "Their Tm values sit about 8 C apart, 56 and 48",
+    "Both are 20 bases, so their Tm values match",
+    "The GC-rich primer is the weaker binder here",
+    "GC content moves the yield only, never the Tm value"
+   ],
+   "correct": 0,
+   "explain": "One annealing temperature has to serve both primers, so a gap this wide leaves one primer binding loosely and seeding mispriming. Equal length does not mean equal Tm, because the formula is driven by the GC count.",
+   "tool": "dna-melting-temperature-calculator.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "dna-melting-temperature-calculator.html: Tm = 64.9 + 41(G+C-16.4)/N gives 64.9 + 41(12-16.4)/20 = 55.9 C at 60 percent GC and 64.9 + 41(8-16.4)/20 = 47.7 C at 40 percent GC, a gap of 8.2 C."
+  },
+  {
+   "id": "mole-025",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "A point mutation changes an mRNA codon from GAA to GAG. What is the consequence for the protein?",
+   "choices": [
+    "Glutamate is replaced by aspartate there",
+    "None, since both codons call for glutamate",
+    "The chain stops early at that codon instead",
+    "Every codon after it shifts out of register"
+   ],
+   "correct": 1,
+   "explain": "Third position changes often land on a synonym, which is where the code's degeneracy lives. A frameshift needs a base added or lost, not swapped, so a one for one substitution never shifts the frame.",
+   "tool": "codon-chart.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "codon-chart.html CODON: GAA = E and GAG = E, both glutamate. GAU/GAC would be D, and no stop codon starts with GA."
+  },
+  {
+   "id": "mole-026",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "A single base change turns the codon UAU into UAA partway through a transcript. What happens to the protein?",
+   "choices": [
+    "Tyrosine is swapped for another aromatic residue",
+    "Nothing, third position changes are silent",
+    "Translation ends there, giving a short chain",
+    "The reading frame shifts from that point on"
+   ],
+   "correct": 2,
+   "explain": "This is the case where a third position change is not harmless, because it lands on a stop rather than a synonym. Treating all third position changes as silent is the trap, and the chain is truncated, not merely altered.",
+   "tool": "codon-chart.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "codon-chart.html CODON: UAU = Y (tyrosine) and UAA = '*', a stop codon."
+  },
+  {
+   "id": "mole-027",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "One extra base is inserted just after the start codon of an mRNA. What does the ribosome produce?",
+   "choices": [
+    "The same protein with one extra residue added",
+    "The same protein, since the code is degenerate",
+    "A protein changed only where the base was inserted",
+    "A garbled chain that usually hits an early stop"
+   ],
+   "correct": 3,
+   "explain": "Codons are read in non-overlapping threes, so one extra base regroups every base downstream into different codons. The damage is not local, and a stop codon usually turns up by chance within a few dozen codons.",
+   "tool": "dna-to-protein-translation.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "dna-to-protein-translation.html: codons are non-overlapping triplets and shifting the start by one base regroups every downstream base, which is what the frame buttons demonstrate."
+  },
+  {
+   "id": "mole-028",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "E. coli is grown with both glucose and lactose present. What does the lac operon do, and why?",
+   "choices": [
+    "Basal transcription only, since CAP is inactive",
+    "Maximum transcription, since lactose is available",
+    "Fully off, since glucose blocks the operator",
+    "Fully off, since the repressor cannot come off"
+   ],
+   "correct": 0,
+   "explain": "Two switches have to agree: lactose takes the repressor off the operator, and low glucose raises cAMP so CAP can help polymerase bind. Glucose never touches the operator, it works through cAMP, so the operon is leaky rather than shut.",
+   "tool": "gene-expression-regulation-explorer.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "gene-expression-regulation-explorer.html: repOff = lactose present, capOn = glucose absent. repOff and not capOn gives the 'ON (low)' basal state."
+  },
+  {
+   "id": "mole-029",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "A mutant trp repressor still binds the operator but can no longer bind tryptophan. What is the phenotype?",
+   "choices": [
+    "The operon stays off whatever the tryptophan level",
+    "The operon stays on even with tryptophan around",
+    "The operon now needs an inducer, the way lac does",
+    "No change, since trp control is positive control"
+   ],
+   "correct": 1,
+   "explain": "Tryptophan is a corepressor: it has to bind the repressor to switch the operon off, so a repressor deaf to it can never be activated. The cell keeps making tryptophan it does not need, which is the mirror image of a lac repressor mutant.",
+   "tool": "gene-expression-regulation-explorer.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "gene-expression-regulation-explorer.html lac vs trp table: tryptophan is the corepressor and it activates the repressor, turning the operon OFF."
+  },
+  {
+   "id": "mole-030",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "A cya mutant that cannot make cAMP is grown with lactose and no glucose. What does the lac operon do?",
+   "choices": [
+    "Only basal transcription, because CAP cannot form",
+    "Maximum transcription, because the lactose is there",
+    "Nothing at all, because the repressor stays bound",
+    "Maximum transcription, because glucose is absent"
+   ],
+   "correct": 0,
+   "explain": "Positive control runs through CAP bound to cAMP, so no cAMP means no CAP no matter how low glucose is. The repressor is still off the operator, which is why some transcription happens rather than none.",
+   "tool": "gene-expression-regulation-explorer.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "gene-expression-regulation-explorer.html: capOn requires glucose absent so that cAMP rises and CAP can act, and maximum output needs repressor off AND CAP on."
+  },
+  {
+   "id": "mole-031",
+   "subject": "Molecular biology",
+   "type": "exam",
+   "q": "Deleting a sequence 10 kb upstream of a human gene cuts expression twentyfold, yet transcription still starts at the same base. What was deleted?",
+   "choices": [
+    "The promoter, where polymerase II assembles",
+    "An operator, as found in a bacterial operon",
+    "An enhancer, which raises the rate of initiation",
+    "A silencer, so expression should have risen instead"
+   ],
+   "correct": 2,
+   "explain": "Start site unchanged but output down is the signature of a distance element that boosts rate rather than positioning polymerase. Lose the promoter and transcription would not start at that base at all, and losing a repressive element would raise expression.",
+   "tool": "gene-expression-regulation-explorer.html",
+   "origin": "written 2026-11-09 against the site's own pages",
+   "source": "gene-expression-regulation-explorer.html: a promoter sits immediately upstream and is where polymerase II and general factors assemble, while an enhancer can be thousands of bases away and boosts the rate rather than being required to start."
+  }
+ ]
+}

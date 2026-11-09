@@ -111,6 +111,7 @@ Each of these carries questions drawn from that page's own data, with the answer
 - [Percent Composition Calculator, Free](https://biochemtools.com/percent-composition-calculator.html)
 - [Percent Yield Calculator: Theoretical & Actual, Free](https://biochemtools.com/percent-yield-calculator.html)
 - [pH Calculator: Acids & Bases, Free](https://biochemtools.com/ph-calculator.html)
+- [Biochem Practice Questions: Easy, Medium, Hard](https://biochemtools.com/practice.html)
 - [Protein MW & Extinction Coefficient Calculator, Free](https://biochemtools.com/protein-molecular-weight-calculator.html)
 - [Punnett Square Calculator + Dihybrid Cross Self-Test](https://biochemtools.com/punnett-square-calculator.html)
 - [Punnett Square Practice Problems (Free Worksheet)](https://biochemtools.com/punnett-square-practice-problems.html)

@@ -1,0 +1,634 @@
+{
+ "subject": "Solutions",
+ "questions": [
+  {
+   "id": "solu-004",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "What is the approximate molar mass of NaCl?",
+   "choices": [
+    "100 g/mol",
+    "58.4 g/mol",
+    "40 g/mol",
+    "78 g/mol"
+   ],
+   "correct": 1,
+   "explain": "Sodium contributes about 23 and chlorine about 35.5, and the two atomic masses simply add. Picking 40 confuses the atomic mass of calcium for the whole salt.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "molarity-molar-mass-calculator.html atomic mass table: Na 22.990 + Cl 35.45 = 58.440 g/mol."
+  },
+  {
+   "id": "solu-005",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "A 1:200 antibody dilution, in the convention this site uses, means one part antibody in how much?",
+   "choices": [
+    "200 parts total, antibody included",
+    "200 parts diluent, plus the antibody",
+    "200 parts antibody per part diluent",
+    "201 parts diluent, rounded to 200"
+   ],
+   "correct": 0,
+   "explain": "The number after the colon counts total parts, so the diluent is one part less than it. Reading it as parts of buffer added gives 201 total parts and a slightly weaker dilution than the protocol wanted.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody-dilution-calculator.html: 'A dilution written as 1:500 means one part antibody in 500 parts total, not one part in 500 parts of diluent.' Same convention at 1:200."
+  },
+  {
+   "id": "solu-006",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "Which quantity does the serial dilution calculator divide the stock by to get the concentration in tube n?",
+   "choices": [
+    "The volume per tube divided by n",
+    "The dilution factor raised to n",
+    "The dilution factor times n",
+    "The number of tubes in the series"
+   ],
+   "correct": 1,
+   "explain": "Every step divides by the same factor again, so the factors multiply down the series. Multiplying the factor by the tube number instead treats repeated division as addition.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html: 'The concentration in tube n is the stock divided by the dilution factor raised to the n.'"
+  },
+  {
+   "id": "solu-007",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "In a serial dilution, what does this site's calculator use for the transfer volume per tube?",
+   "choices": [
+    "Final volume minus the factor",
+    "Stock volume divided by the tube count",
+    "Final volume divided by the factor",
+    "Final volume multiplied by the factor"
+   ],
+   "correct": 2,
+   "explain": "The transfer is what moves forward from the previous tube, and the diluent makes up the rest of that same tube volume. Multiplying by the factor would call for more liquid than the tube holds.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html script: transfer = V/F, diluent = V - transfer; prose says 'transfer V/F of sample into V minus V/F of diluent'."
+  },
+  {
+   "id": "solu-008",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "A 10-fold serial dilution step is described on this site as what mix of parts?",
+   "choices": [
+    "1 part sample into 10 parts diluent",
+    "10 parts sample into 1 part diluent",
+    "9 parts sample into 1 part diluent",
+    "1 part sample into 9 parts diluent"
+   ],
+   "correct": 3,
+   "explain": "A 10-fold step leaves the sample as one part in ten parts total, so the other nine parts are diluent. Adding ten parts of diluent would make it an 11-fold step.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html: 'For a 10-fold series you move 1 part sample into 9 parts diluent at each step.'"
+  },
+  {
+   "id": "solu-009",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "What is the molar mass of glucose, C6H12O6, on this site's molar mass calculator?",
+   "choices": [
+    "180.16 g/mol",
+    "150.13 g/mol",
+    "194.19 g/mol",
+    "162.14 g/mol"
+   ],
+   "correct": 0,
+   "explain": "Six carbons near 12, twelve hydrogens near 1 and six oxygens near 16 add to it, so the carbons and oxygens carry nearly all the mass. 194.19 is caffeine, a different worked example on the same page.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "molarity-molar-mass-calculator.html worked example 1: C 6x12.011 = 72.066, H 12x1.008 = 12.096, O 6x15.999 = 95.994, total 180.156 which the page rounds to 180.16 g/mol."
+  },
+  {
+   "id": "solu-010",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "Which conversion factor does this site use for double-stranded DNA at an A260 of 1.0?",
+   "choices": [
+    "20 µg/mL",
+    "50 µg/mL",
+    "33 µg/mL",
+    "40 µg/mL"
+   ],
+   "correct": 1,
+   "explain": "Stacked bases in a duplex are partly hidden, so more of it is needed to reach a given absorbance. The other two values on that table belong to single-stranded DNA and to RNA.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "nucleic-acid-concentration-calculator.html script: FACTOR={dsDNA:50, ssDNA:33, RNA:40} in µg/mL per A260 unit at a 1 cm path length."
+  },
+  {
+   "id": "solu-011",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "After measuring V1 of stock, how much solvent does the dilution calculator tell you to add?",
+   "choices": [
+    "V1 minus V2",
+    "V2 times V1",
+    "V2 minus V1",
+    "V2 plus V1"
+   ],
+   "correct": 2,
+   "explain": "The stock already supplies part of the final volume, so only the remainder is solvent. Adding a full final volume on top of the stock overshoots the target volume and leaves the solution too weak.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "dilution-calculator.html: 'The amount of solvent to add is simply V2 minus V1', and the script prints 'Solvent to add = V2 - V1'."
+  },
+  {
+   "id": "solu-012",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "On this site's molar mass calculator, what is the standard sequence for turning a target molarity into grams?",
+   "choices": [
+    "Grams first, then moles",
+    "Litres first, then percent",
+    "Molar mass last, then moles",
+    "Moles first, then grams"
+   ],
+   "correct": 3,
+   "explain": "Molarity is defined as moles per litre, so getting moles from molarity and volume mirrors the definition and is easy to sanity check. The mass can only be worked out once the number of moles is fixed.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "molarity-molar-mass-calculator.html HowTo steps and FAQ: 'moles = molarity x volume in liters' then 'grams = moles x molar mass'."
+  },
+  {
+   "id": "solu-013",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "Why does using the anhydrous molar mass for a hydrated salt go wrong?",
+   "choices": [
+    "It underestimates the grams needed",
+    "It overestimates the grams needed",
+    "It changes the final volume needed",
+    "It makes the solution too concentrated"
+   ],
+   "correct": 0,
+   "explain": "A hydrate carries water inside the crystal, so its molar mass is higher and more of it has to go on the balance. Weighing too little salt can only leave the solution weaker than intended.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "molarity-molar-mass-calculator.html FAQ: 'Using the anhydrous mass for a hydrated salt underestimates the grams needed.'"
+  },
+  {
+   "id": "solu-014",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "Does C1V1 = C2V2 work with percent concentrations instead of molarity?",
+   "choices": [
+    "Only after converting percent to molarity",
+    "Yes, with the same unit on both sides",
+    "No, the equation needs molar units",
+    "Only for volume percent, not weight"
+   ],
+   "correct": 1,
+   "explain": "The equation only says the amount of solute does not change while solvent is added, which is true whatever unit tracks that amount. What breaks it is using different units across the equals sign.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "dilution-calculator.html FAQ: 'It holds for any concentration unit as long as it's used consistently: percent (w/v or v/v), mg/mL, ng/µL, or normality.'"
+  },
+  {
+   "id": "solu-015",
+   "subject": "Solutions",
+   "type": "recall",
+   "q": "A datasheet gives a working concentration rather than a ratio. What does the antibody page tell you to do first?",
+   "choices": [
+    "Weigh the antibody into the buffer",
+    "Read the ratio off the blot itself",
+    "Divide stock by working concentration",
+    "Multiply the stock by the final volume"
+   ],
+   "correct": 2,
+   "explain": "That division gives the dilution factor, after which the calculation is identical to a ratio, but only if both numbers are in matching units. Multiplying the two instead inflates the factor enormously.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody-dilution-calculator.html: 'divide the stock concentration by the working concentration, in matching units. A 1 mg/mL stock is 1000 µg/mL, so reaching 2 µg/mL needs 1000/2 = a 1:500 dilution.'"
+  },
+  {
+   "id": "solu-001",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "How many moles are in 500 mL of a 2 M solution?",
+   "choices": [
+    "1 mol",
+    "0.5 mol",
+    "2 mol",
+    "4 mol"
+   ],
+   "correct": 0,
+   "explain": "Molarity counts moles per litre, so the volume has to be in litres before multiplying. Reading 500 mL as 500 L, or forgetting to convert at all, is what produces the other answers here.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "moles = molarity x volume in litres = 2 x 0.500 = 1 mol, the relationship the page's script uses (mol = M*V)."
+  },
+  {
+   "id": "solu-002",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "Diluting 10 mL of a 5 M stock up to a final volume of 50 mL gives a concentration of:",
+   "choices": [
+    "5 M",
+    "1 M",
+    "0.5 M",
+    "2 M"
+   ],
+   "correct": 1,
+   "explain": "The solute count does not change, so the concentration falls by the same factor the volume rose, here five. Dividing by the solvent added rather than by the final volume gives the wrong factor.",
+   "tool": "dilution-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "C1V1 = C2V2, so C2 = C1V1/V2 = (5 x 10)/50 = 1 M. Same rearrangement the page's script uses for C2."
+  },
+  {
+   "id": "solu-003",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "In a 10-fold serial dilution starting at 10⁶, what's the concentration in tube 3?",
+   "choices": [
+    "10³",
+    "10⁴",
+    "10⁵",
+    "10⁶"
+   ],
+   "correct": 0,
+   "explain": "Each tube divides the one before it by the fold again, so three steps cut three powers of ten. Counting the stock itself as tube 1 leaves the answer one tube short.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "daily-question bank, migrated 2026-11-09",
+   "source": "serial-dilution-calculator.html worked example 1 starts at 1,000,000 with a 10-fold factor and lists tube 3 as 1,000, matching stock / F^n = 10^6 / 10^3."
+  },
+  {
+   "id": "solu-016",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "You need 1:200 antibody in 2 mL of final volume. What two volumes do you mix?",
+   "choices": [
+    "10 µL antibody into 2000 µL diluent",
+    "20 µL antibody, 1980 µL diluent",
+    "4 µL antibody, 1996 µL diluent",
+    "10 µL antibody, 1990 µL diluent"
+   ],
+   "correct": 3,
+   "explain": "The factor divides the final volume to give the antibody, and the diluent is only what is left of that volume, so the two must add to the volume asked for. Adding a full 2000 µL of buffer on top gives 2010 µL and a 1:201 dilution.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody = Vfinal/X = 2000/200 = 10 µL; diluent = 2000 - 10 = 1990 µL. Same arithmetic as the page's '5000 µL / 500 = 10 µL of antibody plus 4990 µL of diluent'."
+  },
+  {
+   "id": "solu-017",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "A 1 mg/mL antibody stock and a 2.5 µg/mL working concentration. What dilution factor is that?",
+   "choices": [
+    "1:400",
+    "1:250",
+    "1:2.5",
+    "1:4000"
+   ],
+   "correct": 0,
+   "explain": "Put the stock into the same units as the working concentration before dividing, so milligrams per mL become micrograms per mL. Dividing 1 by 2.5 straight off the label is a thousandfold out.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "Page rule: factor = stock / working in matching units. 1 mg/mL = 1000 µg/mL, so 1000/2.5 = 400, giving 1:400."
+  },
+  {
+   "id": "solu-018",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "A 50-fold serial dilution runs with 500 µL in every tube. What goes into each tube?",
+   "choices": [
+    "10 µL sample into 450 µL diluent",
+    "10 µL sample, 490 µL diluent",
+    "10 µL sample, 500 µL diluent",
+    "25 µL sample, 475 µL diluent"
+   ],
+   "correct": 1,
+   "explain": "The transfer is the tube volume over the fold and the diluent is the rest of that same volume, so the pair has to add to the volume you chose. A full tube of diluent on top of the transfer overfills the tube and changes the factor.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "transfer = V/F = 500/50 = 10 µL; diluent = V - transfer = 500 - 10 = 490 µL, the page's per tube prep rule."
+  },
+  {
+   "id": "solu-019",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "A stock at 2 x 10^5 cells/mL is diluted 5-fold per step. What is the concentration in tube 3?",
+   "choices": [
+    "13,333 cells/mL",
+    "40,000 cells/mL",
+    "1,600 cells/mL",
+    "8,000 cells/mL"
+   ],
+   "correct": 2,
+   "explain": "Three 5-fold steps divide by 5 cubed, which is 125, because step factors multiply rather than add. Stopping at 5 squared lands one tube short of the one asked about.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "tube n = stock / F^n = 200,000 / 5^3 = 200,000/125 = 1,600 cells/mL. The page's own practice problem does 1x10^5 / 5^3 = 800 the same way."
+  },
+  {
+   "id": "solu-020",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "How many grams of NaCl do you weigh out for 250 mL of a 2 M solution?",
+   "choices": [
+    "14.61 g",
+    "116.9 g",
+    "58.44 g",
+    "29.22 g"
+   ],
+   "correct": 3,
+   "explain": "Moles come first from molarity times litres, then grams from moles times molar mass. Skipping the volume step gives the mass for a full litre, four times what this flask needs.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "NaCl molar mass from the page's atomic table = 22.990 + 35.45 = 58.44 g/mol. moles = 2 x 0.250 L = 0.5 mol; grams = 0.5 x 58.44 = 29.22 g."
+  },
+  {
+   "id": "solu-021",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "You have 15 mL of a 4 M stock and want it at 0.5 M. What final volume do you dilute it to?",
+   "choices": [
+    "120 mL",
+    "105 mL",
+    "60 mL",
+    "1.875 mL"
+   ],
+   "correct": 0,
+   "explain": "Rearranged for the final volume, the equation gives V2 = C1V1 / C2, and the solvent added is that answer minus the stock you started with. Inverting the ratio shrinks the volume instead of growing it.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "dilution-calculator.html practice problem 1 uses the same form: V2 = C1V1/C2 = (3x20)/0.5 = 120 mL. Here (4 x 15)/0.5 = 60/0.5 = 120 mL."
+  },
+  {
+   "id": "solu-022",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "A dsDNA sample reads A260 = 0.200 after a 1:100 dilution. What is the stock concentration?",
+   "choices": [
+    "100 ng/µL",
+    "1,000 ng/µL",
+    "10 ng/µL",
+    "800 ng/µL"
+   ],
+   "correct": 1,
+   "explain": "The reading describes what sits in the cuvette, so the dilution factor multiplies back up to the stock. Leaving that factor out is the single most common quantification mistake on this page.",
+   "tool": "nucleic-acid-concentration-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "nucleic-acid-concentration-calculator.html FAQ: 'a 1:100 dilution reading A260 = 0.2 gives 0.2 x 50 x 100 = 1000 µg/mL for dsDNA', and the page states 1 µg/mL = 1 ng/µL."
+  },
+  {
+   "id": "solu-023",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "From a 10 percent weight per volume glucose stock, how do you make 200 mL at 2 percent?",
+   "choices": [
+    "20 mL stock, 180 mL water",
+    "40 mL stock topped up by 200 mL",
+    "40 mL stock, 160 mL water",
+    "40 mL stock, 200 mL water"
+   ],
+   "correct": 2,
+   "explain": "Percent behaves like any other concentration unit in the equation as long as both sides use it, and the water to add is the final volume minus the stock volume. Adding the full 200 mL on top makes 240 mL of something weaker.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "dilution-calculator.html FAQ confirms percent w/v is valid in C1V1 = C2V2. V1 = C2V2/C1 = (2 x 200)/10 = 40 mL; solvent = 200 - 40 = 160 mL."
+  },
+  {
+   "id": "solu-024",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "A 1 percent weight per volume solution is 1 g in 100 mL. Expressed as milligrams per litre, what is it?",
+   "choices": [
+    "1,000 mg/L",
+    "100 mg/L",
+    "1,000,000 mg/L",
+    "10,000 mg/L"
+   ],
+   "correct": 3,
+   "explain": "Two separate conversions stack here: scaling 100 mL up to a litre multiplies by ten, and grams to milligrams multiplies by a thousand. Doing only one of the two is the usual slip.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "Unit arithmetic only, no site constant needed: 1 g/100 mL x 10 = 10 g/L, then 10 g/L x 1000 mg per g = 10,000 mg/L."
+  },
+  {
+   "id": "solu-025",
+   "subject": "Solutions",
+   "type": "apply",
+   "q": "Taking 1 ppm as 1 mg per litre, how many milligrams of solute are in 250 mL of a 20 ppm solution?",
+   "choices": [
+    "5 mg",
+    "20 mg",
+    "80 mg",
+    "0.08 mg"
+   ],
+   "correct": 0,
+   "explain": "Scale the per litre figure by the fraction of a litre actually in the flask, which is a quarter here. Quoting the per litre number as the mass in the flask overstates it fourfold.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "The stem supplies the ppm definition, so only arithmetic is needed: 20 mg/L x 0.250 L = 5 mg. This site has no ppm page, which is why the definition is stated in the stem rather than assumed."
+  },
+  {
+   "id": "solu-026",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A protocol calls for 1:5000 antibody in 200 µL, but your smallest reliable pipette volume is 1 µL. What does this site's calculator have you do?",
+   "choices": [
+    "One 1:5000 step out of a 1:10 pre-dilution",
+    "Two steps, 1:100 then 1:50, via 100 µL of 1:100",
+    "Pipette the 0.04 µL of neat antibody and mix well",
+    "Scale the final volume up to 1 mL and keep one step"
+   ],
+   "correct": 1,
+   "explain": "Dilution factors multiply, so splitting one impossible factor into two possible ones lands on the same final concentration with every volume above the pipette floor. Enlarging the final volume only helps if you then check the floor again, and at 1 mL the antibody is still only 0.2 µL.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody-dilution-calculator.html: direct volume is 200/5000 = 0.04 µL; the page splits it as '1:100 then 1:50 = 100 x 50 = 1:5000', step 1 giving 100 µL of 1:100. Scaling to 1 mL gives 1000/5000 = 0.2 µL, still under the 1 µL floor."
+  },
+  {
+   "id": "solu-027",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "You have 100 µL of a 1:100 antibody intermediate and need 200 µL at 1:5000. What does the second step take?",
+   "choices": [
+    "2 µL of the 1:100, plus 198 µL buffer",
+    "40 µL of the 1:100, plus 160 µL buffer",
+    "4 µL of the 1:100, plus 196 µL buffer",
+    "4 µL of neat antibody, plus 196 µL buffer"
+   ],
+   "correct": 2,
+   "explain": "The factor still owed is 5000 over 100, so the second step is a 1:50 dilution of the intermediate rather than of the neat stock. Going back to the undiluted antibody for this step would leave the tube at 1:50 overall, a hundredfold too strong.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody-dilution-calculator.html worked split: 'step 2, 4 µL of that + 196 µL diluent gives 200 µL of 1:5000'. Script logic: ab2 = Vfinal/second factor = 200/50 = 4 µL, d2 = 200 - 4 = 196 µL."
+  },
+  {
+   "id": "solu-028",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A labmate makes a 1:100 antibody by pipetting 10 µL of stock into 1000 µL of buffer. By this site's convention, what has she actually made?",
+   "choices": [
+    "1:100 exactly, the convention agrees",
+    "1:110, about 10 percent too dilute",
+    "1:1000, since only the buffer counts",
+    "1:101, about 1 percent too dilute"
+   ],
+   "correct": 3,
+   "explain": "The number after the colon counts total parts, so the intended tube is 10 µL brought up to 1000 µL, not 10 µL added to 1000 µL. The gap is negligible at high factors but grows fast as the factor falls, since 1 part into 2 parts is a 1:3 dilution.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "Page convention: 1:X is one part in X total, antibody = Vfinal/X. 10 µL into 1000 µL makes 1010 µL total, so the real factor is 1010/10 = 101."
+  },
+  {
+   "id": "solu-029",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A culture at 1 x 10^9 CFU/mL runs through a 10-fold series and 100 µL from tube 6 is plated. How many colonies, and is that countable?",
+   "choices": [
+    "100 colonies, inside 30 to 300",
+    "1,000 colonies, too many to count",
+    "10 colonies, below the countable floor",
+    "100 colonies, below the countable floor"
+   ],
+   "correct": 0,
+   "explain": "Tube 6 sits six powers of ten below the stock, and the plate receives only a tenth of a millilitre of it, so the per millilitre figure has to be scaled down once more. Plating the tube and reporting its per millilitre count is the usual error.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html worked example 2: tube 6 = 1x10^9 / 10^6 = 1,000 CFU/mL; colonies on a 100 µL (0.1 mL) plate = 1,000 x 0.1 = 100, inside the page's stated 30 to 300 countable range."
+  },
+  {
+   "id": "solu-030",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "You need a million-fold dilution of a culture. Why does the serial dilution page say to do it in six 10-fold steps instead of one?",
+   "choices": [
+    "A single step changes the unit of concentration",
+    "A single step needs an unmeasurable volume",
+    "A single step would overflow the tube it is in",
+    "Repeated steps mix the sample more thoroughly"
+   ],
+   "correct": 1,
+   "explain": "Cutting a millionfold in one move calls for a fraction of a nanolitre of stock, which no pipette delivers, while repeated larger transfers reach the same total factor accurately. Mixing between steps matters for accuracy but is not the reason the series exists.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html FAQ: 'Diluting a million-fold in one step means pipetting an immeasurably small volume of stock. Repeated, larger, accurate transfers reach the same overall dilution using volumes a standard pipette can actually measure.'"
+  },
+  {
+   "id": "solu-031",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A protocol runs a 5-fold step and then a 20-fold step. A labmate insists doing the 20-fold first changes the result. What is true?",
+   "choices": [
+    "1:100 one way and 1:25 the other",
+    "1:4 either way, since the factors divide",
+    "1:100 either way, order does not matter",
+    "1:25 either way, since factors add"
+   ],
+   "correct": 2,
+   "explain": "Step factors multiply, and multiplication does not care which order the steps run in, so both sequences land on the same total. Adding the two factors instead is the most common error, and it happens to give the number in one of the other options.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html FAQ: 'the total dilution after several unequal steps is just the product of each step's factor ... regardless of order.' Here 5 x 20 = 100, while 5 + 20 = 25."
+  },
+  {
+   "id": "solu-032",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "You mix 100 mL of 0.2 M NaCl with 300 mL of 0.6 M NaCl. A labmate reaches for C1V1 = C2V2. What is the real answer?",
+   "choices": [
+    "0.8 M, by adding the two molarities",
+    "0.4 M, the average of the two",
+    "0.45 M, treating 100 mL as solvent",
+    "0.5 M, by a mass balance instead"
+   ],
+   "correct": 3,
+   "explain": "That equation assumes whatever you add carries no solute, which fails when both solutions do, so the salt from each has to be totted up over the combined volume. A plain average ignores the unequal volumes, and calling the weaker solution solvent throws away the salt it brings.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "dilution-calculator.html FAQ: 'you need a mass balance instead: C1V1 + C2V2 = C3(V1+V2)'. Here (0.2 x 100 + 0.6 x 300)/400 = (20 + 180)/400 = 0.5 M. The average is 0.4 M and 0.6 x 300/400 = 0.45 M."
+  },
+  {
+   "id": "solu-033",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A student needs 500 mL of 50 mM buffer from a 2 M stock and writes V1 = (50 x 500)/2 = 12,500 mL. What went wrong, and what is V1?",
+   "choices": [
+    "Units mismatched, V1 is 12.5 mL",
+    "Nothing is wrong, V1 really is that large",
+    "Volume mismatched, V1 is 0.0125 mL",
+    "Units mismatched, V1 is 1,250 mL"
+   ],
+   "correct": 0,
+   "explain": "Both sides of the equation have to carry the same concentration unit, so the millimolar target becomes 0.05 M before anything is divided. Mixing molar with millimolar throws the answer out by exactly a thousand, which is why the result came out larger than the flask.",
+   "tool": "dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "dilution-calculator.html FAQ: 'Mixing M with mM gives an answer off by 1000x.' V1 = C2V2/C1 = (0.05 x 500)/2 = 12.5 mL, so the student's 12,500 mL is 1000 times too large."
+  },
+  {
+   "id": "solu-034",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A recipe wants 100 mL of 0.1 M calcium chloride, but the bottle is the dihydrate and you weigh using the anhydrous molar mass. What do you end up with?",
+   "choices": [
+    "About 0.075 M, too concentrated",
+    "About 0.075 M, too dilute",
+    "About 0.133 M, too concentrated",
+    "Exactly 0.1 M, since mass is mass"
+   ],
+   "correct": 1,
+   "explain": "Crystal water adds to the molar mass without adding any salt, so a mass worked out from the anhydrous formula holds fewer moles of salt than the recipe wants. Fewer moles in the same flask can only mean a weaker solution.",
+   "tool": "molarity-molar-mass-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "Atomic masses from the page: Ca 40.078, Cl 35.45, H 1.008, O 15.999. CaCl2 = 110.978; the dihydrate = 110.978 + 2(18.015) = 147.008. Weighing 0.1 x 0.100 x 110.978 = 1.1098 g of the dihydrate, and 1.1098/147.008 = 0.007549 mol in 0.100 L = 0.0755 M, about 75 percent of target."
+  },
+  {
+   "id": "solu-035",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A primary antibody datasheet lists a 0.5 mg/mL stock and a 1 µg/mL working concentration. What factor is that, and where does the site's table put it?",
+   "choices": [
+    "1:2, from dividing 0.5 by 1 directly",
+    "1:5000, which the table calls secondary",
+    "1:500, concentrated end for a primary",
+    "1:500, the dilute end for a primary"
+   ],
+   "correct": 2,
+   "explain": "The factor is stock over working concentration once both are in the same units, so the milligram label has to become 500 micrograms per mL first. The page's primary band runs from 1:500 to 1:2000, and the secondary band starts where this one ends.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody-dilution-calculator.html: factor = stock/working in matching units, so 0.5 mg/mL = 500 µg/mL and 500/1 = 500. Its table lists Western blot primary 1:500 to 1:2000 and secondary (HRP) 1:2000 to 1:10000."
+  },
+  {
+   "id": "solu-036",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "You ask for 1:1000 in 1 mL and tell the calculator your smallest reliable volume is 1 µL. It flags the result rather than clearing it. Why?",
+   "choices": [
+    "It is below the limit you entered",
+    "1 mL is too small a final volume",
+    "A 1:1000 factor always needs two steps",
+    "It is borderline, not below the limit"
+   ],
+   "correct": 3,
+   "explain": "The antibody volume lands exactly on the floor rather than under it, and the page warns whenever that volume is within twice the floor, where percentage error is worst. Choosing a larger final volume moves it clear without changing the concentration.",
+   "tool": "antibody-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "antibody-dilution-calculator.html script: antibody = 1000 µL / 1000 = 1.00 µL. The 'Too small to pipette' branch needs ab < minp, and 1 < 1 is false, so the 'Borderline' branch fires on ab < minp*2, since 1 < 2."
+  },
+  {
+   "id": "solu-037",
+   "subject": "Solutions",
+   "type": "exam",
+   "q": "A tech sets a 4-fold series at 800 µL per tube, then pipettes 200 µL of sample into 800 µL of diluent. What is wrong with that tube?",
+   "choices": [
+    "It holds 1000 µL and is a 5-fold step",
+    "The transfer should have been 160 µL",
+    "Nothing, that is a 4-fold step at 800 µL",
+    "The diluent should have been 1000 µL"
+   ],
+   "correct": 0,
+   "explain": "Transfer and diluent have to add up to the tube volume you chose, so the diluent is that volume minus the transfer. A full tube of diluent on top of a correct transfer quietly turns the step into a 5-fold one, and the error compounds down the whole series.",
+   "tool": "serial-dilution-calculator.html",
+   "origin": "written 2026-11-09 from the site's own calculator pages",
+   "source": "serial-dilution-calculator.html: transfer = V/F = 800/4 = 200 µL and diluent = V - transfer = 800 - 200 = 600 µL. Putting 200 into 800 makes 1000 µL total, so the real factor is 1000/200 = 5."
+  }
+ ]
+}
