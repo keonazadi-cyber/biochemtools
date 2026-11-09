@@ -118,7 +118,7 @@
    "explain": "Only leucine and lysine cannot contribute any carbon to glucose. Both begin with L, which is the whole mnemonic. Every other amino acid is glucogenic or both.",
    "tool": "amino-acid-catabolism-explorer",
    "origin": "daily-question bank, migrated 2026-11-09",
-   "source": "amino-acid-catabolism-explorer.html classifies Leu and Lys as ketogenic only; Ile, Phe and Tyr are listed as both, Thr as glucogenic."
+   "source": "amino-acid-catabolism-explorer.html data array: Leu and Lys are the only two rows tagged 'keto'. Ile, Thr and Phe are tagged 'both', and the page's own FAQ states leucine and lysine are the only purely ketogenic ones."
   },
   {
    "id": "bioc-008",

@@ -16,6 +16,7 @@ import collections, hashlib, html as H, json, pathlib, re, sys
 SITE = pathlib.Path(__file__).resolve().parent.parent
 BANKS = SITE / "tools" / "questions"
 START, END = "<!-- quiz:start -->", "<!-- quiz:end -->"
+DSTART, DEND = "<!-- daily:start -->", "<!-- daily:end -->"
 JS_START, JS_END = "<!-- quizjs:start -->", "<!-- quizjs:end -->"
 
 CSS = """<style>
@@ -188,6 +189,27 @@ def main():
     if qh != before:
         qp.write_text(qh)
         print("  quiz.html: engine removed, link to practice.html added")
+
+
+    # daily-question.html carried its own inline copy of the 80 questions, which
+    # is how the two systems drifted apart: the quiz could not see them and this
+    # page had no notion of difficulty. Same bank now, with a level picker.
+    dq = SITE / "daily-question.html"
+    dh = dbefore = dq.read_text()
+    dh = re.sub(r"\s*" + re.escape(DSTART) + r"[\s\S]*?" + re.escape(DEND), "", dh)
+    dh = re.sub(r"\s*" + re.escape(JS_START) + r"[\s\S]*?" + re.escape(JS_END), "", dh)
+    dh = re.sub(r"\s*<style>\s*\.qwrap\{[\s\S]*?</style>", "", dh)
+    dblock = (DSTART + '<section class="qwrap" data-daily>'
+              + fallback(bank[:3]) + "</section>" + DEND)
+    dm = re.search(r'<div class="card" id="qcard">', dh)
+    if dm:
+        dh = dh[:dm.start()] + dblock + "\n" + dh[dm.start():]
+        dh = dh.replace("</head>", CSS + "\n</head>", 1)
+        if tag not in dh:
+            dh = dh.replace("</body>", tag + "\n</body>", 1)
+        if dh != dbefore:
+            dq.write_text(dh)
+            print("  daily question now draws from the shared bank, with levels")
 
     wrote = 0
     for page in ("practice.html",):

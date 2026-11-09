@@ -231,3 +231,97 @@
     root.appendChild(masteryGrid());
   }
 })();
+
+/* The daily question, drawing from the same shared bank.
+ *
+ * It used to carry its own inline 80-question copy, which is how the two
+ * systems drifted apart: the quiz could not see these questions and this page
+ * could not see a difficulty. Same bank now, with a level you pick.
+ *
+ * The question is seeded by the date, so everyone on a given level gets the
+ * same one on a given day and it does not reshuffle when you reload. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-daily]");
+  if (!root || !window.BCTQuiz) return;
+  var Q = window.BCTQuiz, BANK = [];
+  var lvl = "all", answered = false;
+
+  fetch("/questions.json").then(function (r) { return r.json(); }).then(function (d) {
+    BANK = d.questions || [];
+    root.innerHTML = "";
+    render();
+  }).catch(function () { /* the build-time fallback stays */ });
+
+  function el(t, c, x) {
+    var e = document.createElement(t);
+    if (c) e.className = c;
+    if (x != null) e.textContent = x;
+    return e;
+  }
+  function daySeed() {
+    var d = new Date(), s = d.getUTCFullYear() * 1000 + d.getUTCMonth() * 40 + d.getUTCDate();
+    return s;
+  }
+  function todaysQuestion() {
+    var pool = BANK.filter(function (q) { return lvl === "all" || q.type === lvl; });
+    if (!pool.length) return null;
+    return pool[daySeed() % pool.length];
+  }
+
+  function render() {
+    answered = false;
+    root.innerHTML = "";
+    var F = Q.frame(), q = todaysQuestion();
+
+    var row = el("div", "q-row");
+    row.appendChild(el("span", "q-lab", "Level"));
+    ["all"].concat(Q.ORDER).forEach(function (t) {
+      var b = el("button", "q-chip" + (lvl === t ? " on" : ""),
+                 t === "all" ? "Any" : F[t]);
+      b.type = "button";
+      b.addEventListener("click", function () { lvl = t; render(); });
+      row.appendChild(b);
+    });
+    root.appendChild(row);
+
+    if (!q) { root.appendChild(el("p", "q-hint", "No question at that level yet.")); return; }
+
+    var head = el("div", "q-head");
+    head.appendChild(el("span", "q-streak",
+      Q.streak() ? Q.streak() + " day streak" : "Start a streak today"));
+    head.appendChild(el("span", "q-owed", q.subject + " · " + F[q.type]));
+    root.appendChild(head);
+
+    root.appendChild(el("p", "q-q", q.q));
+    var opts = el("div", "q-opts");
+    q.choices.forEach(function (c, i) {
+      var b = el("button", "q-opt", c);
+      b.type = "button";
+      b.addEventListener("click", function () { answer(q, i, b, opts); });
+      opts.appendChild(b);
+    });
+    root.appendChild(opts);
+    root.appendChild(el("div", "q-why"));
+  }
+
+  function answer(q, i, btn, opts) {
+    if (answered) return;
+    answered = true;
+    var right = i === q.correct;
+    Q.record(q, right);
+    Q.markDay();
+    var bs = opts.querySelectorAll(".q-opt");
+    for (var k = 0; k < bs.length; k++) bs[k].disabled = true;
+    bs[q.correct].classList.add("is-right");
+    if (!right) btn.classList.add("is-wrong");
+    var why = root.querySelector(".q-why");
+    why.textContent = (right ? "Yes. " : "No. ") + q.explain;
+    why.className = "q-why " + (right ? "is-right" : "is-wrong");
+    var more = el("p", "q-hint", "");
+    var a = el("a", "q-tool", "Want more than one? Practice questions at three levels.");
+    a.href = "/practice.html";
+    more.appendChild(a);
+    root.appendChild(more);
+  }
+})();
