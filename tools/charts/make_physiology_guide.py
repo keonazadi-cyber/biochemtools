@@ -132,6 +132,16 @@ def unit(src, field):
     return plain(m.group(1))
 
 
+def named(src, field):
+    """The words beside a symbol on its own input label."""
+    m = re.search(r'label for="%s">([^<(]*)\(' % field, src)
+    assert m, "label text for %s not found" % field
+    txt = plain(m.group(1))
+    txt = txt.split(", ", 1)[1] if ", " in txt else txt
+    # Lower the leading capital of an ordinary word, never of O2, VO2 or GFR.
+    return txt[0].lower() + txt[1:] if len(txt) > 1 and txt[1].islower() else txt
+
+
 HR_U, SV_U = unit(co, "hr"), unit(co, "sv")
 VO2_U, CAO2_U, CVO2_U = unit(co, "vo2"), unit(co, "cao2"), unit(co, "cvo2")
 assert (HR_U, SV_U) == ("beats/min", "mL/beat"), (HR_U, SV_U)
@@ -140,6 +150,9 @@ assert "CO = HR × SV = ${hr} × ${sv}" in co, "CO formula changed"
 assert "CO = VO₂ / (CaO₂ − CvO₂) = ${vo2} / (${cao2} − ${cvo2})" in co, \
     "Fick formula changed"
 assert "giving CO ≈ 5 L/min" in co, "resting cardiac output changed"
+EDV_NAME = re.search(r"its (end-diastolic volume) \(EDV\)", co)
+assert EDV_NAME, "EDV expansion not found on the cardiac page"
+EDV_NAME = EDV_NAME.group(1)
 
 ef = re.search(r"EF = SV / EDV = (\d+) / (\d+) = [\d.]+ = ([\d.]+)%", co)
 assert ef and ef.groups() == ("70", "120", "58.3"), ef and ef.groups()
@@ -150,6 +163,10 @@ EF_RANGE = EF_RANGE.group(1)
 rc = page("renal-clearance-calculator.html")
 UX_U, V_U, PX_U = unit(rc, "ux"), unit(rc, "v"), unit(rc, "px")
 assert (UX_U, V_U, PX_U) == ("mg/mL", "mL/min", "mg/mL"), (UX_U, V_U, PX_U)
+GFR_NAME = re.search(r"GFR \((glomerular filtration rate)\)", rc)
+RPF_NAME = re.search(r"RPF \((renal plasma flow)\)", rc)
+assert GFR_NAME and RPF_NAME, "GFR/RPF expansions not found on the renal page"
+GFR_NAME, RPF_NAME = GFR_NAME.group(1), RPF_NAME.group(1)
 assert "Cx = (Ux × V) / Px = (${ux} × ${v}) / ${px}" in rc, "clearance formula changed"
 assert "FF = GFR / RPF = ${gfr} / ${rpf}" in rc, "filtration fraction formula changed"
 nv = re.search(r"Normal values: GFR ≈ ([\d]+) mL/min[^,]*, RPF ≈ ([\d-]+) mL/min, "
@@ -160,18 +177,25 @@ assert (GFR_N, RPF_N, FF_N) == ("125", "600-700", "20"), nv.groups()
 
 EQUATIONS = [
     ("Cardiac output", "CO = HR × SV",
+     "HR %s · SV %s" % (named(co, "hr"), named(co, "sv")),
      "%s × %s = mL/min. Divide by 1000 for L/min, about 5 L/min at rest."
      % (HR_U, SV_U)),
     ("Cardiac output, Fick", "CO = VO2 / (CaO2 − CvO2)",
+     "VO2 %s · CaO2 %s · CvO2 %s"
+     % (named(co, "vo2"), named(co, "cao2"), named(co, "cvo2")),
      "%s divided by %s = L/min. The same quantity, through oxygen delivery."
      % (VO2_U, CAO2_U)),
     ("Ejection fraction", "EF = SV / EDV",
+     "SV %s · EDV %s" % (named(co, "sv"), EDV_NAME),
      "A fraction, no units. %s / %s = %s%%, normal %s."
      % (ef.group(1), ef.group(2), ef.group(3), EF_RANGE)),
     ("Renal clearance", "Cx = (Ux × V) / Px",
+     "Ux %s · V %s · Px %s"
+     % (named(rc, "ux"), named(rc, "v"), named(rc, "px")),
      "(%s × %s) / %s = mL/min. Inulin clearance is GFR, about %s mL/min."
      % (UX_U, V_U, PX_U, GFR_N)),
     ("Filtration fraction", "FF = GFR / RPF",
+     "GFR %s · RPF %s" % (GFR_NAME, RPF_NAME),
      "A fraction, no units. About %s%%, RPF about %s mL/min from PAH."
      % (FF_N, RPF_N)),
 ]
@@ -278,7 +302,7 @@ def dashed(d, a, b, colour, dash=11, gap=8, width=3):
 
 
 def draw():
-    H = 2500
+    H = 2900
     img = Image.new("RGB", (W, H), P["BG"])
     d = ImageDraw.Draw(img)
     T = chartkit.safe_text
@@ -472,13 +496,16 @@ def draw():
     band("The equations, with their units")
     NOTE_X = M + 740
     NOTE_W = (W - M) - NOTE_X
-    for name, formula, note in EQUATIONS:
+    for name, formula, gloss, note in EQUATIONS:
         T(d, (M, y), name, F["label"], P["WHITE"])
         T(d, (M + 330, y), formula, F["body"], P["WHITE"])
+        gy = y + 32
+        for line in wrap(d, gloss, F["small"], NOTE_X - (M + 330) - 30):
+            T(d, (M + 330, gy), line, F["small"], P["DIM"]); gy += 24
         yy = y
         for line in wrap(d, note, F["body"], NOTE_W):
             T(d, (NOTE_X, yy), line, F["body"], P["GRAY"]); yy += 30
-        y = max(y + 40, yy + 10)
+        y = max(y + 40, yy + 10, gy + 8)
     y += 18
 
     # ---------------- tonicity -------------------------------------------
