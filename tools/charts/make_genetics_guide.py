@@ -204,19 +204,22 @@ assert "a son needs one mutant allele to be affected, a daughter needs two" in X
 # --- what goes on the page --------------------------------------------------
 DOM, REC = P["BLUE"], P["PURPLE"]
 
+MONO, DI = (140, 58, "big", "head"), (88, 58, "label", "label")
+
 CROSSES = [
-    ("AaxAa", "Aa × Aa", 104, 58,
+    ("AaxAa", "Aa × Aa", MONO,
      ["genotype   %s   (AA : Aa : aa)" % " : ".join(
          str(r) for _, r, _ in sorted(SQ["AaxAa"]["geno"], key=lambda t: t[0] != "AA")),
       "phenotype  %s   AA and Aa alike" % ratio_str(SQ["AaxAa"]["pheno"])]),
-    ("Aaxaa", "Aa × aa", 104, 58,
-     ["genotype %s, phenotype %s" % (ratio_str(SQ["Aaxaa"]["geno"]),
-                                     ratio_str(SQ["Aaxaa"]["pheno"])),
+    ("Aaxaa", "Aa × aa", MONO,
+     ["genotype %s" % ratio_str(SQ["Aaxaa"]["geno"]),
+      "phenotype %s" % ratio_str(SQ["Aaxaa"]["pheno"]),
       "test cross: unknown was Aa"]),
-    ("AAxaa", "AA × aa", 104, 58,
+    ("AAxaa", "AA × aa", MONO,
      ["every child %s" % classes(SQ["AAxaa"]["pheno"]),
+      "no recessive child at all",
       "test cross: unknown was AA"]),
-    ("AaBbxAaBb", "AaBb × AaBb", 88, 58,
+    ("AaBbxAaBb", "AaBb × AaBb", DI,
      ["phenotype  %s   over %d boxes" % (ratio_str(SQ["AaBbxAaBb"]["pheno"]),
                                          SQ["AaBbxAaBb"]["total"]),
       "%d distinct genotypes, AaBb in %d boxes" % (len(SQ["AaBbxAaBb"]["geno"]),
@@ -272,55 +275,68 @@ def draw():
         T(d, (M, y), title, F["head"], P["AMBER"])
         y += 42
 
-    def punnett(x, y0, top, side, rows, cell, hdr):
+    def centred(s, font, box_x, box_w, box_y, box_h):
+        """Centre a string in a cell, using the font's own height, not a guess."""
+        bb = d.textbbox((0, 0), s, font=font)
+        return (box_x + (box_w - (bb[2] - bb[0])) / 2 - bb[0],
+                box_y + (box_h - (bb[3] - bb[1])) / 2 - bb[1])
+
+    def punnett(x, y0, top, side, rows, cell, hdr, cf, hf):
         """One square, drawn with rectangles. Returns its width and height."""
+        # The corner is empty but it is drawn: without it the 1 x 1 test-cross
+        # square reads as three loose boxes rather than a grid.
+        d.rectangle([x, y0, x + hdr, y0 + hdr], fill=P["BAND"], outline=P["LINE"])
         for j, g in enumerate(top):
             cx = x + hdr + j * cell
             d.rectangle([cx, y0, cx + cell, y0 + hdr], fill=P["BAND"],
                         outline=P["LINE"])
-            T(d, (cx + (cell - d.textlength(g, font=F["label"])) / 2, y0 + 16),
-              g, F["label"], P["GRAY"])
+            T(d, centred(g, hf, cx, cell, y0, hdr), g, hf, P["GRAY"])
         for i, g in enumerate(side):
             cy = y0 + hdr + i * cell
             d.rectangle([x, cy, x + hdr, cy + cell], fill=P["BAND"],
                         outline=P["LINE"])
-            T(d, (x + (hdr - d.textlength(g, font=F["label"])) / 2,
-                  cy + (cell - 24) / 2), g, F["label"], P["GRAY"])
+            T(d, centred(g, hf, x, hdr, cy, cell), g, hf, P["GRAY"])
         for i, row in enumerate(rows):
             for j, (gt, dom) in enumerate(row):
                 cx, cy = x + hdr + j * cell, y0 + hdr + i * cell
                 d.rectangle([cx, cy, cx + cell, cy + cell], fill=P["CHIP"],
                             outline=P["LINE"])
-                w = d.textlength(gt, font=F["label"])
-                assert w < cell - 8, "genotype %r does not fit a %dpx cell" % (gt, cell)
-                T(d, (cx + (cell - w) / 2, cy + (cell - 24) / 2), gt,
-                  F["label"], DOM if dom else REC)
+                w = d.textlength(gt, font=cf)
+                assert w < cell - 10, \
+                    "genotype %r does not fit a %dpx cell" % (gt, cell)
+                T(d, centred(gt, cf, cx, cell, cy, cell), gt, cf,
+                  DOM if dom else REC)
         return hdr + len(top) * cell, hdr + len(rows) * cell
 
     # --- the crosses, the visual anchor ---
     band("The crosses that matter")
-    widths = [58 + len(SQ[k]["top"]) * c for k, _, c, _, _ in
-              [(k, lb, c, h, cap) for k, lb, c, h, cap in CROSSES]]
+    widths = [h + len(SQ[k]["top"]) * c for k, _, (c, h, _, _), _ in CROSSES]
+    heights = [h + len(SQ[k]["rows"]) * c for k, _, (c, h, _, _), _ in CROSSES]
     gap = (CW - sum(widths)) / (len(CROSSES) - 1)
     assert gap > 40, "the four squares do not fit on one row"
-    tall = max(58 + len(SQ[k]["rows"]) * c for k, _, c, _, _ in CROSSES)
+    tall = max(heights)
     xs, x = [], float(M)
     for wid in widths:
         xs.append(x)
         x += wid + gap
     label_y, grid_y = y, y + 38
-    for (key, lab, cell, hdr, caption), x0, wid in zip(CROSSES, xs, widths):
-        limit = wid + gap - 24
+    cap_lines = max(len(c) for _, _, _, c in CROSSES)
+    for i, ((key, lab, (cell, hdr, cfk, hfk), caption), x0) in \
+            enumerate(zip(CROSSES, xs)):
+        # a block may use the gap beside it, never its neighbour's column
+        limit = (W - M - x0) if i == len(xs) - 1 else (xs[i + 1] - 24 - x0)
         fits(lab, F["head"], limit, "cross label %r" % lab)
         T(d, (x0, label_y), lab, F["head"], P["WHITE"])
-        punnett(x0, grid_y, SQ[key]["top"], SQ[key]["side"], SQ[key]["rows"],
-                cell, hdr)
+        # shorter squares sit centred in the row, so the row reads as one band
+        top_y = grid_y + (tall - heights[i]) / 2
+        punnett(x0, top_y, SQ[key]["top"], SQ[key]["side"], SQ[key]["rows"],
+                cell, hdr, F[cfk], F[hfk])
         cy = grid_y + tall + 16
         for line in caption:
             fits(line, F["small"], limit, "caption under %r" % lab)
             T(d, (x0, cy), line, F["small"], P["GRAY"])
             cy += 28
-    y = grid_y + tall + 16 + 28 * 2 + 10
+    y = grid_y + tall + 16 + 28 * cap_lines + 10
     T(d, (M, y), "A homozygous parent makes one kind of gamete, so its column "
                  "collapses: Aa × aa is a 2 × 1 grid, not 2 × 2.",
       F["body"], P["GRAY"])
@@ -390,8 +406,8 @@ def draw():
 
     cw_, ch_, hw_, hh_ = 300, 104, 136, 58
     gx, gy = M, y
-    T(d, (gx + 16, gy + 14), "mother", F["small"], P["DIM"])
     d.rectangle([gx, gy, gx + hw_, gy + hh_], fill=P["BAND"], outline=P["LINE"])
+    T(d, (gx + 20, gy + 18), "mother", F["small"], P["DIM"])   # after the fill
     for j, (head, who) in enumerate([("X" + XLR["dX"], "to daughters"),
                                      ("Y", "to sons")]):
         cx = gx + hw_ + j * cw_
@@ -421,12 +437,28 @@ def draw():
     y = gy + hh_ + 2 * ch_
     tx = gx + hw_ + 2 * cw_ + 40
     ty = gy + 6
+    def split_line(label, statuses):
+        """Say the split in words, counted off the generated children."""
+        plural = {"carrier": "carriers"}
+        seen, parts = [], []
+        for s in statuses:
+            if s not in seen:
+                seen.append(s)
+        for s in seen:
+            n = statuses.count(s)
+            share = ("all" if n == len(statuses)
+                     else "half" if n * 2 == len(statuses)
+                     else "%d of %d" % (n, len(statuses)))
+            parts.append("%s %s" % (share, plural.get(s, s)))
+        return "%s: %s." % (label, ", ".join(parts))
+
     for line, col in [
-            ("Of the daughters: half carriers, half neither.", P["GRAY"]),
-            ("Of the sons: half affected, half unaffected.", P["GRAY"]),
+            (split_line("Daughters", [x["status"] for x in XLR["daughters"]]),
+             P["GRAY"]),
+            (split_line("Sons", [x["status"] for x in XLR["sons"]]), P["GRAY"]),
             ("No daughter is affected here, because she would", P["GRAY"]),
             ("need the mutant allele from both parents.", P["GRAY"]),
-            ("A son has one X, so one mutant allele shows.", DOM),
+            ("A son has one X, so one mutant allele shows.", REC),
             ("The father gives his X only to daughters, so an", P["GRAY"]),
             ("X-linked trait never passes father to son.", P["GRAY"])]:
         fits(line, F["body"], W - M - tx, "X-linked note")
@@ -435,17 +467,23 @@ def draw():
     y = max(y, ty) + 24
 
     # --- common mistakes ---
-    d.rounded_rectangle([M, y, W - M, y + 44 + len(MISTAKES) * 56], radius=14,
+    # The first cut drew the panel 44 + 56n tall and the last line of body text
+    # came out sitting ON the bottom border, struck through. The height is now
+    # derived from the rows and asserted against the lowest baseline.
+    panel_h = len(MISTAKES) * 62 + 76
+    d.rounded_rectangle([M, y, W - M, y + panel_h], radius=14,
                         fill=P["CARD"], outline=P["RED"])
-    my = y + 20
+    my = y + 22
     T(d, (M + 24, my), "WHERE THE MARKS GO", F["label"], P["RED"])
-    my += 36
+    my += 40
     for head, body in MISTAKES:
         T(d, (M + 24, my), head, F["label"], P["RED"])
-        T(d, (M + 24, my + 28), body, F["body"], P["GRAY"])
+        T(d, (M + 24, my + 30), body, F["body"], P["GRAY"])
         fits(body, F["body"], CW - 48, "mistake body")
-        my += 56
-    y = y + 44 + len(MISTAKES) * 56 + 32
+        my += 62
+    assert my - 62 + 30 + chartkit.SCALE["s"] <= y + panel_h - 12, \
+        "the last mistake line runs into the panel border"
+    y = y + panel_h + 32
 
     chartkit.legend(d, M, y, [("Dominant phenotype or allele", DOM),
                               ("Recessive phenotype or allele", REC),

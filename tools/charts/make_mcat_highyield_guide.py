@@ -238,9 +238,11 @@ assert re.search(r"same y-intercept as the baseline", MM), "page prose on compet
 assert re.search(r"keeps the exact same x-intercept", MM), "page prose on noncompetitive changed"
 assert re.search(r"parallel to the baseline \(same slope\)", MM), "page prose on uncompetitive changed"
 
-SIGN = {("same", "down", "down"): "lines meet on the y-axis",
-        ("down", "down", "same"): "lines meet on the x-axis",
-        ("same", "up", "up"): "parallel lines, shifted up"}
+# keyed on (slope, y-intercept, x-intercept); the feature that did NOT move is
+# the tell, so the key is derived rather than the phrase being chosen by name.
+SIGN = {("up", "same", "up"): "lines meet on the y-axis",
+        ("up", "up", "same"): "lines meet on the x-axis",
+        ("same", "up", "down"): "parallel lines, shifted up"}
 
 
 def signature(e):
@@ -352,6 +354,37 @@ def draw():
                 % (txt, x + w, lim))
             T(d, (x, yy), txt, f, c)
 
+    def wrap(s, font, width=None):
+        """Break a line to the content width, and prove every piece fits.
+
+        The first pass drew notes as single calls and three of them ran off the
+        right edge, which no assert caught because only table cells were
+        guarded. Every running line goes through here now.
+        """
+        width = (W - 2 * M) if width is None else width
+        words, lines, cur = s.split(), [], ""
+        for word in words:
+            trial = (cur + " " + word).strip()
+            if d.textlength(trial, font=font) <= width:
+                cur = trial
+            else:
+                assert cur, "a single word is wider than the page: %r" % word
+                lines.append(cur)
+                cur = word
+        if cur:
+            lines.append(cur)
+        for ln in lines:
+            assert d.textlength(ln, font=font) <= width, \
+                "line still overruns the margin: %r" % ln
+        return lines
+
+    def note(text, colour, font=None, lead=34):
+        nonlocal y
+        font = font or F["body"]
+        for ln in wrap(text, font):
+            T(d, (M, y), ln, font, colour)
+            y += lead
+
     def band(title, lead=None):
         nonlocal y
         d.rectangle([M, y, W - M, y + 2], fill=P["LINE"])
@@ -387,30 +420,44 @@ def draw():
     assert M + d.textlength(cap_a, font=F["small"]) < ax(first) - 40, \
         "the acidic caption runs into the first marker"
     T(d, (M, y), cap_a, F["small"], P["DIM"])
-    T(d, (M, bot_y + 78), cap_b, F["small"], P["DIM"])
+    T(d, (M, bot_y + 102), cap_b, F["small"], P["DIM"])
 
     # the pH 7.4 reference, drawn first so markers sit on top of it
     x74 = ax(PH_BODY)
-    for seg in range(int(y + 26), int(bot_y + 72), 12):
-        d.line([x74, seg, x74, seg + 6], fill=P["LINE"], width=2)
+    for seg in range(int(y + 26), int(bot_y + 96), 12):
+        # in LINE this reference was almost invisible on the dark theme, and a
+        # body-pH marker nobody can see is not a marker
+        d.line([x74, seg, x74, seg + 6], fill=P["DIM"], width=2)
     lab74 = "pH 7.4"
     w74 = d.textlength(lab74, font=F["small"])
-    T(d, (x74 - w74 / 2, bot_y + 78), lab74, F["small"], P["GRAY"])
+    assert x74 - w74 / 2 > M + d.textlength(cap_b, font=F["small"]) + 24, \
+        "the pH 7.4 label runs into the basic caption"
+    T(d, (x74 - w74 / 2, bot_y + 102), lab74, F["small"], P["GRAY"])
 
     d.line([M, axis_y, W - M, axis_y], fill=P["LINE"], width=2)
+    # A basic side chain's stem runs down through the scale labels, and His sits
+    # exactly on the 6 tick, so that label was drawn struck through. A tick whose
+    # label a stem would hit is left unlabelled; the marker prints its own value
+    # directly beneath, so nothing is lost.
+    stems = [ax(a["pkr"]) for a in IONS if CHAR[a["c3"]] == "basic"]
+    skipped = 0
     for tick in range(0, 15, 2):
         x = ax(tick)
         d.line([x, axis_y - 5, x, axis_y + 5], fill=P["LINE"], width=2)
         lt = str(tick)
-        T(d, (x - d.textlength(lt, font=F["small"]) / 2, axis_y + 10), lt,
-          F["small"], P["DIM"])
+        half = d.textlength(lt, font=F["small"]) / 2
+        if any(abs(sx - x) < half + 8 for sx in stems):
+            skipped += 1
+            continue
+        T(d, (x - half, axis_y + 10), lt, F["small"], P["DIM"])
+    assert skipped <= 1, "%d scale labels had to be dropped; the line is too crowded" % skipped
 
     placed = {"up": [], "down": []}
     for a in IONS:
         x = ax(a["pkr"])
         acidic = CHAR[a["c3"]] == "acidic"
         side = "up" if acidic else "down"
-        code, val = a["c1"], ("%.2f" % a["pkr"]).rstrip("0").rstrip(".")
+        code, val = a["c1"], "%.2f" % a["pkr"]      # same precision as the table below
         bw = max(d.textlength(code, font=F["label"]), d.textlength(val, font=F["small"]))
         left = x - bw / 2
         for prev in placed[side]:
@@ -426,15 +473,18 @@ def draw():
             T(d, (x - d.textlength(val, font=F["small"]) / 2, top_y - 26), val,
               F["small"], P["BLUE"])
         else:
-            d.line([x, axis_y + 2, x, bot_y + 40], fill=P["BLUE"], width=2)
+            # The stem stops ABOVE the code, and the code sits a full line above
+            # the value. Drawing the two at one y printed them on top of each
+            # other, so K read as "10K53" and R as "12R48".
+            d.line([x, axis_y + 2, x, bot_y + 30], fill=P["BLUE"], width=2)
             d.ellipse([x - 5, axis_y - 5, x + 5, axis_y + 5], fill=P["BLUE"])
-            T(d, (x - d.textlength(code, font=F["label"]) / 2, bot_y + 44), code,
+            T(d, (x - d.textlength(code, font=F["label"]) / 2, bot_y + 36), code,
               F["label"], P["WHITE"])
-            T(d, (x - d.textlength(val, font=F["small"]) / 2, bot_y + 74 - 30), val,
+            T(d, (x - d.textlength(val, font=F["small"]) / 2, bot_y + 68), val,
               F["small"], P["BLUE"])
-    y = bot_y + 118
+    y = bot_y + 148
 
-    X1 = [M, M + 330, M + 470, M + 760, M + 900]
+    X1 = [M, M + 330, M + 450, M + 790, M + 920]
     cells([(X1[0], "Side chain", F["label"], P["GRAY"]),
            (X1[1], "pKa", F["label"], P["GRAY"]),
            (X1[2], "at pH 7.4", F["label"], P["GRAY"]),
@@ -443,8 +493,12 @@ def draw():
     y += 34
     for a in IONS:
         sign, frac = charge_at(a)
-        state = ("%s, %d%% of it" % (sign, round(frac * 100)) if frac >= 0.005
-                 else "%s on paper, under 1%%" % sign)
+        if frac >= 0.99:
+            state = "%s, nearly all of it" % sign
+        elif frac >= 0.01:
+            state = "%s, %d%% of it" % (sign, round(frac * 100))
+        else:
+            state = "%s, under 1%%" % sign
         pull = ("pulls pI down, below the backbone's own"
                 if CHAR[a["c3"]] == "acidic" else
                 "pulls pI up, above the backbone's own")
@@ -455,14 +509,13 @@ def draw():
                (X1[4], pull, F["body"], P["GRAY"])], y)
         y += ROW
     y += 6
-    T(d, (M, y), "His is the one that matters at body pH: its pKa of %.1f sits closest "
-                 "to 7.4, so it is the side chain that can give or take a proton there."
-      % next(a["pkr"] for a in IONS if a["c3"] == "His"), F["body"], P["GRAY"])
-    y += 34
-    T(d, (M, y), "Cys and Tyr are ionizable too, and they are the ones people forget: "
-                 "both still end up with a pI near 6 (%.2f and %.2f)."
-      % (NEAR_ION[0]["pI"], NEAR_ION[1]["pI"]), F["body"], P["RED"])
-    y += 56
+    note("His is the one that matters at body pH: its pKa of %.1f sits closest to 7.4, "
+         "so it is the side chain that can give or take a proton there."
+         % next(a["pkr"] for a in IONS if a["c3"] == "His"), P["GRAY"])
+    note("Cys and Tyr are ionizable too, and they are the ones people forget: both "
+         "still end up with a pI near 6 (%.2f and %.2f)."
+         % (NEAR_ION[0]["pI"], NEAR_ION[1]["pI"]), P["RED"])
+    y += 22
 
     # ---- 2. inhibition ------------------------------------------------
     band("Enzyme inhibition, the four patterns", "Km(app) = (alpha/alpha') Km,   "
@@ -488,15 +541,13 @@ def draw():
                (X2[4], BINDS[label], F["body"], P["GRAY"])], y)
         y += ROW
     y += 6
-    T(d, (M, y), "Worked at the site's own baseline: Km %g, Vmax %g, r = [I]/Ki = %g. "
-                 "Competitive doubles Km to %g; noncompetitive halves Vmax to %g."
-      % (KM, VMAX, R, EFF["Competitive"]["kmv"], EFF["Noncompetitive"]["vmaxv"]),
-      F["body"], P["GRAY"])
-    y += 34
-    T(d, (M, y), "The trap: competitive is the SHARED y-intercept, noncompetitive the "
-                 "shared x-intercept. Swapping those two is the usual lost point.",
-      F["body"], P["RED"])
-    y += 56
+    note("Worked at the site's own baseline: Km %g, Vmax %g, r = [I]/Ki = %g. "
+         "Competitive doubles Km to %g; noncompetitive halves Vmax to %g."
+         % (KM, VMAX, R, EFF["Competitive"]["kmv"], EFF["Noncompetitive"]["vmaxv"]),
+         P["GRAY"])
+    note("The trap: competitive is the SHARED y-intercept, noncompetitive the shared "
+         "x-intercept. Swapping those two is the usual lost point.", P["RED"])
+    y += 22
 
     # ---- 3. ATP -------------------------------------------------------
     band("ATP per glucose", "why the answer is 30 to 32, not 36 to 38")
@@ -519,21 +570,18 @@ def draw():
             "the breakdown does not fit its card: %r" % sumline
         T(d, (x + 14, y + 128), sumline, F["small"], P["GREEN"])
     y += card_h + 18
-    T(d, (M, y), "Each total is substrate-level + mitochondrial NADH + FADH2 + cytosolic "
-                 "NADH: %d direct, %d NADH inside, %d FADH2, %d NADH in the cytosol."
-      % (C["SUBSTRATE"], C["MITO_NADH"], C["TCA_FADH2"], C["GLYC_NADH"]),
-      F["body"], P["GRAY"])
-    y += 34
-    T(d, (M, y), "The P/O ratio is the whole argument: %g and %g measured, %g and %g in "
-                 "older books. The shuttle picks the lower or upper number in each pair."
-      % (RATIOS["Modern"][0], RATIOS["Modern"][1],
-         RATIOS["Classic"][0], RATIOS["Classic"][1]), F["body"], P["GRAY"])
-    y += 34
-    T(d, (M, y), "The trap: of the %d substrate-level ATP, only glycolysis's %d are "
-                 "truly oxygen independent. The cycle's %d GTP still need the chain "
-                 "turning to regenerate NAD+, so they stall without oxygen too."
-      % (C["SUBSTRATE"], ANAEROBIC, C["SUBSTRATE"] - ANAEROBIC), F["body"], P["RED"])
-    y += 56
+    note("Each total is substrate-level + mitochondrial NADH + FADH2 + cytosolic NADH: "
+         "%d direct, %d NADH inside, %d FADH2, %d NADH in the cytosol."
+         % (C["SUBSTRATE"], C["MITO_NADH"], C["TCA_FADH2"], C["GLYC_NADH"]), P["GRAY"])
+    note("The P/O ratio is the whole argument: %g and %g measured, %g and %g in older "
+         "books. The shuttle picks the lower or upper number in each pair."
+         % (RATIOS["Modern"][0], RATIOS["Modern"][1],
+            RATIOS["Classic"][0], RATIOS["Classic"][1]), P["GRAY"])
+    note("The trap: of the %d substrate-level ATP, only glycolysis's %d are truly "
+         "oxygen independent. The cycle's %d GTP still need the chain turning to "
+         "regenerate NAD+, so they stall without oxygen too."
+         % (C["SUBSTRATE"], ANAEROBIC, C["SUBSTRATE"] - ANAEROBIC), P["RED"])
+    y += 22
 
     # ---- 4. Henderson-Hasselbalch -------------------------------------
     band("Henderson-Hasselbalch", "and the one-unit rule")
@@ -558,15 +606,12 @@ def draw():
                (X4[3], "good" if abs(delta) <= UNIT else "weak", F["body"], P["GRAY"])], y)
         y += ROW
     y += 6
-    T(d, (M, y), "A buffer works within about %d pH unit of its pKa. One unit out, the "
-                 "minority form is already down to %.0f%%, and that minority is the only "
-                 "thing absorbing what you add."
-      % (UNIT, min(BUF[0][2], BUF[0][3]) * 100), F["body"], P["GRAY"])
-    y += 34
-    T(d, (M, y), "The trap: pick the buffer whose pKa is nearest the target pH, not the "
-                 "one whose name sounds physiological. Equal forms means pH = pKa exactly.",
-      F["body"], P["RED"])
-    y += 56
+    note("A buffer works within about %d pH unit of its pKa. One unit out, the minority "
+         "form is already down to %.0f%%, and that minority is the only thing absorbing "
+         "what you add." % (UNIT, min(BUF[0][2], BUF[0][3]) * 100), P["GRAY"])
+    note("The trap: pick the buffer whose pKa is nearest the target pH, not the one "
+         "whose name sounds physiological. Equal forms means pH = pKa exactly.", P["RED"])
+    y += 22
 
     # ---- 5. pI far from 6 ---------------------------------------------
     band("The amino acids whose pI is nowhere near 6",
@@ -589,23 +634,22 @@ def draw():
                (X5[3], why, U["body"], P["GRAY"])], y)
         y += ROW
     y += 6
-    T(d, (M, y), "pI is the average of the two pKa values either side of the neutral "
-                 "form, so a third ionizable group drags it toward that group's own pKa.",
-      F["body"], P["GREEN"])
-    y += 34
-    T(d, (M, y), "The trap: at a pH above its pI a residue is net negative, below it net "
-                 "positive. %d of the 20 sit more than 1.5 units off 6; the rest cluster "
-                 "there and tell you nothing." % len(FAR), F["body"], P["RED"])
-    y += 56
+    note("pI is the average of the two pKa values either side of the neutral form, so a "
+         "third ionizable group drags it toward that group's own pKa.", P["GREEN"])
+    note("The trap: at a pH above its pI a residue is net negative, below it net "
+         "positive. %d of the 20 sit more than 1.5 units off 6; the rest cluster there "
+         "and tell you nothing." % len(FAR), P["RED"])
+    y += 22
 
     y = chartkit.legend(d, M, y, [("Formula", P["GREEN"]), ("Value", P["BLUE"]),
                                   ("The trap", P["RED"])], P, F)
     y += 10
-    y = chartkit.footer(d, W, H, y, P, F,
-                        note="Every number read from the site's own calculators at "
-                             "build time: amino-acid-chart, michaelis-menten-vs-"
-                             "lineweaver-burk, atp-yield-calculator, "
-                             "henderson-hasselbalch-buffer-calculator.")
+    # The footer note is drawn on one line by the kit, so it has to fit on one.
+    fnote = ("Every value read from the site's own tool pages at build time, and the "
+             "build fails if one of them changes.")
+    assert d.textlength(fnote, font=F["small"]) <= W - 2 * M, \
+        "the footer note is too long for one line and would be clipped"
+    y = chartkit.footer(d, W, H, y, P, F, note=fnote)
 
     img = chartkit.fit(img, y, d=d)
     out = _os.path.join(BUILD_DIR, "mcat-highyield-guide%s.png" % suffix())
