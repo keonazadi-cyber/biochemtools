@@ -52,6 +52,21 @@ assert len(AA) == 20, "expected all 20 amino acids, got %d" % len(AA)
 chart = open(_os.path.join(SITE, "amino-acid-chart.html"), encoding="utf-8").read()
 m2 = re.search(r"const\s+AA\s*=\s*(\[[\s\S]*?\]);", chart)
 BOOK = {r["c3"]: float(r["pI"]) for r in run_js(m2.group(1))}
+# Every pKa the curve is DRAWN from, checked against the chart page's own
+# columns. The pI check below is not enough on its own: a side chain that does
+# not set the pI can be a whole unit wrong and the pI still lands, which is
+# exactly what happened to tyrosine (10.07 -> 9.07 moved its solved pI by 0.025,
+# inside the 0.04 tolerance, while the third buffering region moved visibly).
+# Found by tools/charts/break_guards.py.
+PKAS = {r["c3"]: sorted(float(v) for v in (r["pk1"], r["pk2"], r["pkr"])
+                        if v is not None)
+        for r in run_js(m2.group(1))}
+for _code, _gs in AA.items():
+    _drawn = sorted(round(float(g["pka"]), 2) for g in _gs)
+    _book = [round(v, 2) for v in PKAS[_code]]
+    assert _drawn == _book, (
+        "%s is drawn from pKa %s but the chart page publishes %s"
+        % (_code, _drawn, _book))
 
 
 def charge(gs, pH):
