@@ -10,6 +10,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.join(HERE, "build")
 SITE = os.path.join(HERE, "..", "..", "downloads")
 MAP = {
+    # Solutions was the only practice subject with no chart at all.
+    "dilution-chart": "dilution-guide",
     "amino-acid-catabolism-chart": "catabolism-guide",
     # The full properties table. make_aa_guide.py has always built it, but it was
     # never in this mapping, so it never reached /downloads and the page targeting
