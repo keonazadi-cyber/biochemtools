@@ -4,12 +4,15 @@
 The mapping used to live only in whoever's head ran the copy, which is how the
 dark genetic-code chart ended up a palette revision behind its light twin.
 """
-import os, shutil, sys
+import os, re, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.join(HERE, "build")
 SITE = os.path.join(HERE, "..", "..", "downloads")
 MAP = {
+    # All 20 curves on one sheet: the printable form of the
+    # best-ranking cluster on the site (Google 3.3 to 5.2).
+    "titration-curves-chart": "curves-guide",
     # Solutions was the only practice subject with no chart at all.
     "dilution-chart": "dilution-guide",
     "amino-acid-catabolism-chart": "catabolism-guide",
@@ -30,11 +33,44 @@ MAP = {
     "urea-cycle-chart": "urea-guide",
 }
 
+def _generators():
+    """Map each build name to the generator that writes it.
+
+    Resolved by reading what each script actually saves, never by guessing the
+    filename from the chart name: amino-acid-guide is written by make_aa_guide.py,
+    and a name-derived guess silently resolved NOTHING for all 15 charts, so the
+    check passed while protecting nothing. An unresolved name is a hard failure.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    found = {}
+    for f in sorted(os.listdir(here)):
+        if not (f.startswith("make_") and f.endswith(".py")):
+            continue
+        src = open(os.path.join(here, f)).read()
+        for name in re.findall(r'["\']/?([a-z0-9-]+)(?:%s)?\.png["\']', src):
+            found[name] = os.path.join(here, f)
+    missing = [b for b in MAP.values() if b not in found]
+    assert not missing, ("no generator found for: %s. Every chart in MAP must be "
+                         "traceable to the script that writes it." % ", ".join(missing))
+    return found
+
+
+GENERATOR = _generators()
+
+
 changed = []
 for public, built in sorted(MAP.items()):
     for suf in ("", "-light"):
         src, dst = os.path.join(BUILD, built + suf + ".png"), os.path.join(SITE, public + suf + ".png")
         assert os.path.exists(src), "missing build output: " + src
+        gen = GENERATOR[built]
+        assert os.path.getmtime(src) >= os.path.getmtime(gen), (
+            "%s is older than %s. The two themes come from two runs of one\n"
+            "generator, so a rerun without --light leaves a stale twin. That\n"
+            "shipped once already and 'the file exists' did not catch it.\n"
+            "Rerun:  python3 %s && python3 %s --light"
+            % (os.path.basename(src), os.path.basename(gen),
+               os.path.basename(gen), os.path.basename(gen)))
         same = os.path.exists(dst) and open(src, "rb").read() == open(dst, "rb").read()
         if not same:
             shutil.copy2(src, dst)
