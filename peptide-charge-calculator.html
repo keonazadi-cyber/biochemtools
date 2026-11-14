@@ -280,7 +280,7 @@ function parse(){
  const w=document.getElementById("warn");
  if(bad.length){w.style.display="block";w.textContent="Ignored invalid letters: "+[...new Set(bad)].join(", ");}else w.style.display="none";
  G=groups(seq);
- update();drawCurve();
+ drawCurve();   // creates ctx, then calls update()
 }
 function update(){
  const pH=parseFloat(document.getElementById("ph").value);
