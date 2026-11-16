@@ -1,0 +1,222 @@
+{
+ "biochemistry": [
+  [
+   "biochem-equation-sheet.html",
+   "Biochem & MCAT equation sheet"
+  ],
+  [
+   "amino-acid-chart.html",
+   "Amino acid chart (all 20)"
+  ],
+  [
+   "peptide-charge-calculator.html",
+   "Peptide charge & pI calculator"
+  ],
+  [
+   "protein-molecular-weight-calculator.html",
+   "Protein MW & extinction coefficient"
+  ],
+  [
+   "enzyme-kinetics-simulator.html",
+   "Enzyme kinetics simulator"
+  ],
+  [
+   "michaelis-menten-fitter.html",
+   "Michaelis-Menten fitter"
+  ],
+  [
+   "amino-acid-titration-curve.html",
+   "Amino acid titration curve"
+  ],
+  [
+   "quiz.html",
+   "Amino acid quiz"
+  ],
+  [
+   "amino-acid-catabolism-explorer.html",
+   "Amino acid catabolism explorer"
+  ]
+ ],
+ "molecular-biology": [
+  [
+   "codon-chart.html",
+   "Codon chart (genetic code)"
+  ],
+  [
+   "dna-to-protein-translation.html",
+   "DNA \u2192 protein translation"
+  ],
+  [
+   "dna-melting-temperature-calculator.html",
+   "DNA melting temp & GC"
+  ],
+  [
+   "nucleic-acid-concentration-calculator.html",
+   "DNA & RNA concentration (A260)"
+  ],
+  [
+   "glycolysis-pathway-explorer.html",
+   "Glycolysis pathway explorer"
+  ],
+  [
+   "how-many-atp-are-produced-in-glycolysis.html",
+   "How many ATP does glycolysis make?"
+  ],
+  [
+   "atp-yield-calculator.html",
+   "ATP yield calculator"
+  ],
+  [
+   "citric-acid-cycle-explorer.html",
+   "Citric acid cycle explorer"
+  ],
+  [
+   "beta-oxidation-atp-calculator.html",
+   "Beta-oxidation ATP calculator"
+  ],
+  [
+   "gene-expression-regulation-explorer.html",
+   "Gene expression regulation explorer"
+  ]
+ ],
+ "genetics": [
+  [
+   "punnett-square-calculator.html",
+   "Punnett square solver"
+  ],
+  [
+   "punnett-square-practice-problems.html",
+   "Punnett square practice problems"
+  ],
+  [
+   "eye-color-punnett-square.html",
+   "Eye color Punnett square"
+  ],
+  [
+   "dihybrid-cross-calculator.html",
+   "Dihybrid cross calculator"
+  ],
+  [
+   "blood-type-punnett-square-calculator.html",
+   "Blood type Punnett square"
+  ],
+  [
+   "blood-type-calculator.html",
+   "Blood type inheritance"
+  ],
+  [
+   "x-linked-inheritance-calculator.html",
+   "X-linked inheritance"
+  ],
+  [
+   "chi-square-genetics-calculator.html",
+   "Chi-square genetic ratio"
+  ],
+  [
+   "hardy-weinberg-calculator.html",
+   "Hardy-Weinberg calculator"
+  ],
+  [
+   "how-to-calculate-allele-frequency.html",
+   "How to calculate allele frequency"
+  ]
+ ],
+ "chemistry": [
+  [
+   "ph-calculator.html",
+   "pH calculator"
+  ],
+  [
+   "henderson-hasselbalch-buffer-calculator.html",
+   "Buffer calculator"
+  ],
+  [
+   "acid-base-titration-curve-calculator.html",
+   "Acid-base titration curve"
+  ],
+  [
+   "gibbs-free-energy-calculator.html",
+   "Gibbs free energy"
+  ],
+  [
+   "nernst-equation-calculator.html",
+   "Nernst equation"
+  ],
+  [
+   "beer-lambert-calculator.html",
+   "Beer-Lambert calculator"
+  ],
+  [
+   "ideal-gas-law-calculator.html",
+   "Ideal gas law (PV = nRT)"
+  ],
+  [
+   "chemical-equilibrium-calculator.html",
+   "Chemical equilibrium (Keq)"
+  ],
+  [
+   "reaction-rate-half-life-calculator.html",
+   "Reaction half-life & rate law"
+  ],
+  [
+   "percent-yield-calculator.html",
+   "Percent yield calculator"
+  ],
+  [
+   "percent-composition-calculator.html",
+   "Percent composition"
+  ],
+  [
+   "limiting-reagent-calculator.html",
+   "Limiting reagent calculator"
+  ],
+  [
+   "empirical-formula-calculator.html",
+   "Empirical formula calculator"
+  ]
+ ],
+ "solutions": [
+  [
+   "antibody-dilution-calculator.html",
+   "Antibody dilution calculator"
+  ],
+  [
+   "buffer-pka-table.html",
+   "Buffer pKa table"
+  ],
+  [
+   "molarity-molar-mass-calculator.html",
+   "Molar mass & molarity"
+  ],
+  [
+   "dilution-calculator.html",
+   "Dilution calculator (C\u2081V\u2081 = C\u2082V\u2082)"
+  ],
+  [
+   "serial-dilution-calculator.html",
+   "Serial dilution calculator"
+  ]
+ ],
+ "physiology": [
+  [
+   "osmotic-pressure-calculator.html",
+   "Osmotic pressure & tonicity"
+  ],
+  [
+   "cardiac-output-calculator.html",
+   "Cardiac output calculator"
+  ],
+  [
+   "renal-clearance-calculator.html",
+   "Renal clearance calculator"
+  ],
+  [
+   "membrane-transport-explorer.html",
+   "Membrane transport explorer"
+  ],
+  [
+   "oxygen-dissociation-curve-calculator.html",
+   "Oxygen-hemoglobin dissociation curve"
+  ]
+ ]
+}
