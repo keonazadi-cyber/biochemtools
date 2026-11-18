@@ -160,6 +160,11 @@ def page(f, headsrc, navsrc):
                    % (sym, rhs.replace(" ", ""), word, sym.lower(), word)), h, count=1)
     h = re.sub(r'<link rel="canonical" href="[^"]*"',
                '<link rel="canonical" href="https://biochemtools.com/%s"' % f["slug"], h, count=1)
+    # Google only, same reason as the titration pages: four pages off one template.
+    # Bing is not named. To undo, delete these lines and rebuild.
+    assert 'name="googlebot"' not in h
+    h = h.replace('<link rel="canonical"',
+                  '<meta name="googlebot" content="noindex,follow">\n<link rel="canonical"', 1)
     h = re.sub(r'<meta property="og:title" content="[^"]*"',
                '<meta property="og:title" content="%s"' % html.escape(title), h, count=1)
     h = re.sub(r'<meta property="og:description" content="[^"]*"',
