@@ -259,6 +259,14 @@ def page(code, gs, headsrc, navsrc, siblings):
                '<meta name="description" content="%s"' % esc(desc), h, count=1)
     h = re.sub(r'<link rel="canonical" href="[^"]*"',
                '<link rel="canonical" href="https://biochemtools.com/%s"' % slug, h, count=1)
+    # Google only. After the November 2026 core update the whole domain was
+    # demoted on Google, and these 20 pages off one template (102 pairs sharing
+    # over half their unique text) are the one thing on the site that looks
+    # mass-produced. Bing ranks them first, so this names googlebot and nothing
+    # else. To undo: delete this block and rebuild.
+    assert 'name="googlebot"' not in h, "googlebot tag already present in the cloned head"
+    h = h.replace('<link rel="canonical"',
+                  '<meta name="googlebot" content="noindex,follow">\n<link rel="canonical"', 1)
     h = re.sub(r'<meta property="og:title" content="[^"]*"',
                '<meta property="og:title" content="%s"' % esc(title), h, count=1)
     h = re.sub(r'<meta property="og:description" content="[^"]*"',
